@@ -9,11 +9,18 @@
 /* Begin PBXBuildFile section */
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
-		838071CE24C608F5008BAA2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CD24C608F5008BAA2C /* ViewController.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
 		838071D324C608FA008BAA2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838071D224C608FA008BAA2C /* Assets.xcassets */; };
 		838071D624C608FA008BAA2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071D424C608FA008BAA2C /* LaunchScreen.storyboard */; };
 		838071DE24C60BA4008BAA2C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838071DD24C60BA4008BAA2C /* GoogleService-Info.plist */; };
+		838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071DF24C613FA008BAA2C /* LoginViewController.swift */; };
+		838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071E424C61A6F008BAA2C /* SelectLoginViewController.swift */; };
+		838071E824C627E0008BAA2C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071E724C627E0008BAA2C /* User.swift */; };
+		838071EA24C6299D008BAA2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071E924C6299D008BAA2C /* Constants.swift */; };
+		838071EC24C62F52008BAA2C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071EB24C62F52008BAA2C /* RegisterViewController.swift */; };
+		838071EE24C6338E008BAA2C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071ED24C6338E008BAA2C /* Extension.swift */; };
+		838071F024C64D16008BAA2C /* VerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071EF24C64D16008BAA2C /* VerifiedViewController.swift */; };
+		838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F124C66651008BAA2C /* ResetPasswordViewController.swift */; };
 		BEA72603F135CFE06F286361 /* Pods_DatingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,12 +30,19 @@
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		838071CD24C608F5008BAA2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		838071D024C608F5008BAA2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		838071D224C608FA008BAA2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		838071D524C608FA008BAA2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		838071D724C608FA008BAA2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		838071DD24C60BA4008BAA2C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		838071DF24C613FA008BAA2C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		838071E424C61A6F008BAA2C /* SelectLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLoginViewController.swift; sourceTree = "<group>"; };
+		838071E724C627E0008BAA2C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		838071E924C6299D008BAA2C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		838071EB24C62F52008BAA2C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		838071ED24C6338E008BAA2C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		838071EF24C64D16008BAA2C /* VerifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedViewController.swift; sourceTree = "<group>"; };
+		838071F124C66651008BAA2C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A8E80E13719AC776BE4305A8 /* Pods-DatingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.release.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,16 +87,63 @@
 		838071C824C608F5008BAA2C /* DatingApp */ = {
 			isa = PBXGroup;
 			children = (
+				838071E224C61417008BAA2C /* Model */,
+				838071E324C6141C008BAA2C /* View */,
+				838071E124C61404008BAA2C /* Controller */,
+				838071E624C627C4008BAA2C /* API */,
 				838071C924C608F5008BAA2C /* AppDelegate.swift */,
 				838071CB24C608F5008BAA2C /* SceneDelegate.swift */,
-				838071CD24C608F5008BAA2C /* ViewController.swift */,
 				838071CF24C608F5008BAA2C /* Main.storyboard */,
 				838071D224C608FA008BAA2C /* Assets.xcassets */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
 				838071D724C608FA008BAA2C /* Info.plist */,
 				838071DD24C60BA4008BAA2C /* GoogleService-Info.plist */,
+				838071E924C6299D008BAA2C /* Constants.swift */,
+				838071ED24C6338E008BAA2C /* Extension.swift */,
 			);
 			path = DatingApp;
+			sourceTree = "<group>";
+		};
+		838071E124C61404008BAA2C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				838071F324C66BAC008BAA2C /* Aurthentication */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		838071E224C61417008BAA2C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				838071E724C627E0008BAA2C /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		838071E324C6141C008BAA2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		838071E624C627C4008BAA2C /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		838071F324C66BAC008BAA2C /* Aurthentication */ = {
+			isa = PBXGroup;
+			children = (
+				838071E424C61A6F008BAA2C /* SelectLoginViewController.swift */,
+				838071DF24C613FA008BAA2C /* LoginViewController.swift */,
+				838071EB24C62F52008BAA2C /* RegisterViewController.swift */,
+				838071EF24C64D16008BAA2C /* VerifiedViewController.swift */,
+				838071F124C66651008BAA2C /* ResetPasswordViewController.swift */,
+			);
+			path = Aurthentication;
 			sourceTree = "<group>";
 		};
 		F0A321C1752DD509E2A96CD9 /* Pods */ = {
@@ -228,9 +289,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				838071CE24C608F5008BAA2C /* ViewController.swift in Sources */,
+				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
+				838071EC24C62F52008BAA2C /* RegisterViewController.swift in Sources */,
+				838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */,
+				838071E824C627E0008BAA2C /* User.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
+				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
+				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
+				838071F024C64D16008BAA2C /* VerifiedViewController.swift in Sources */,
+				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -397,6 +466,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
