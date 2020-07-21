@@ -12,6 +12,8 @@ class EnterGenderViewController: UIViewController {
     
     // MARK: - Properties
     
+    
+    @IBOutlet weak var requiredLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nextButton: UIButton!
@@ -44,6 +46,7 @@ class EnterGenderViewController: UIViewController {
             nextButton.isEnabled = false
             saveUserGender()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "性別を選択してください。"
             hud.show(in: self.view)
             hudError()
@@ -84,6 +87,8 @@ class EnterGenderViewController: UIViewController {
         pickerView.dataSource = self
         
         genderLabel.text = "-"
+        requiredLabel.layer.borderWidth = 1
+        requiredLabel.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         descriptionLabel.text = "性別を選択してください。"
         nextButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2

@@ -12,6 +12,7 @@ class EnterProfileImageViewController: UIViewController {
     
     // MARK: - Properties
     
+    @IBOutlet weak var anyLabel: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -42,6 +43,7 @@ class EnterProfileImageViewController: UIViewController {
     @IBAction func nextButtonPressed(_ sender: Any) {
         
         if profileImage == nil {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "プロフィール画像を設定してください。"
             hud.show(in: self.view)
             hudError()
@@ -94,7 +96,9 @@ class EnterProfileImageViewController: UIViewController {
     private func setupUI() {
         
         picker.delegate = self
-        descriptionLabel.text = "プロフィール画像を設定してください。\nあとで設定することもできます。"
+        anyLabel.layer.borderWidth = 1
+        anyLabel.layer.borderColor = UIColor.systemGray3.cgColor
+        descriptionLabel.text = "プロフィール画像を設定してください。\nあとで設定する場合はスキップを押してください。"
         nextButton.layer.cornerRadius = 50 / 2
         skipButton.layer.cornerRadius = 50 / 2
         skipButton.layer.borderWidth = 1

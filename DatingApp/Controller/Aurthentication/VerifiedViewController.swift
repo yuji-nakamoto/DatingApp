@@ -42,6 +42,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             loginButton.isEnabled = false
             loginUser()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
             hudError()
@@ -83,6 +84,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     
                     self.toEnterNameVC()
                 } else {
+                    generator.notificationOccurred(.error)
                     hud.textLabel.text = "認証メールを確認してください。"
                     hud.show(in: self.view)
                     hudError()
@@ -100,7 +102,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 
     private func setupUI() {
         
-        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。"
+        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n認証がお済みであればメールアドレス、パスワードを入力しログインに進んでください。"
         loginButton.layer.cornerRadius = 50 / 2
         resendButton.layer.cornerRadius = 50 / 2
         resendButton.layer.borderWidth = 1

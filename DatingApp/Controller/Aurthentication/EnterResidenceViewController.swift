@@ -15,7 +15,7 @@ class EnterResidenceViewController: UIViewController {
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    
+    @IBOutlet weak var requiredLabel: UILabel!
     
     private var user: User!
     private var dataArray = ["-", "海外", "北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島", "茨城", "栃木", "群馬", "埼玉", "千葉", "東京", "神奈川", "新潟", "富山", "石川", "福井", "山梨", "長野", "岐阜", "静岡", "愛知", "三重", "滋賀", "京都", "大阪", "兵庫", "奈良", "和歌山", "鳥取", "島根", "岡山", "広島", "山口", "徳島", "香川", "愛媛", "高知", "福岡", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄"]
@@ -43,6 +43,7 @@ class EnterResidenceViewController: UIViewController {
             nextButton.isEnabled = false
             saveUserProfession()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "居住地を選択してください。"
             hud.show(in: self.view)
             hudError()
@@ -82,6 +83,8 @@ class EnterResidenceViewController: UIViewController {
         pickerView.dataSource = self
         
         residenceLabel.text = "-"
+        requiredLabel.layer.borderWidth = 1
+        requiredLabel.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         descriptionLabel.text = "居住地を選択してください。\nあとで変更することもできます。"
         nextButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2
@@ -94,6 +97,7 @@ class EnterResidenceViewController: UIViewController {
     private func toTabBerVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
             UserDefaults.standard.set(true, forKey: RCOMPLETION)
             UserDefaults.standard.synchronize()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

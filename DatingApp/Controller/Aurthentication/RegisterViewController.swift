@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-        
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -49,6 +49,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             
             createUser()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
             hudError()
@@ -62,6 +63,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.startAnimating()
         User.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
             if error != nil {
+                generator.notificationOccurred(.error)
                 hud.textLabel.text = error!.localizedDescription
                 hud.show(in: self.view)
                 hudError()

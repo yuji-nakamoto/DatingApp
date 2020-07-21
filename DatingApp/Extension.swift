@@ -12,6 +12,8 @@ import JGProgressHUD
 // MARK : - JGProgressHUD
 
 public var hud = JGProgressHUD(style: .dark)
+public let generator = UINotificationFeedbackGenerator()
+
 
 public func hudError() {
     

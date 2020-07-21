@@ -12,6 +12,7 @@ class EnterProfessionViewController: UIViewController {
     
     // MARK: - Properties
     
+    @IBOutlet weak var anyLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nextButton: UIButton!
@@ -45,6 +46,7 @@ class EnterProfessionViewController: UIViewController {
             nextButton.isEnabled = false
             saveUserProfession()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "職業を選択してください。"
             hud.show(in: self.view)
             hudError()
@@ -83,7 +85,9 @@ class EnterProfessionViewController: UIViewController {
         pickerView.dataSource = self
         
         professionLabel.text = "選択しない"
-        descriptionLabel.text = "職業を選択してください。\nあとで選択することもできます。"
+        descriptionLabel.text = "職業を選択してください。\nあとで選択する場合はスキップを押してください。"
+        anyLabel.layer.borderWidth = 1
+        anyLabel.layer.borderColor = UIColor.systemGray3.cgColor
         nextButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1

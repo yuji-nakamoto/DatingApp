@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EnterNameViewController: UIViewController, UITextFieldDelegate {
+class EnterNameViewController: UIViewController {
     
     // MARK: - Properties
 
@@ -16,6 +16,7 @@ class EnterNameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var requiredLabel: UILabel!
     
     private var user: User!
     
@@ -31,6 +32,7 @@ class EnterNameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         nextButton.isEnabled = true
+        nameTextField.becomeFirstResponder()
     }
     
     // MARK: - Actions
@@ -42,6 +44,7 @@ class EnterNameViewController: UIViewController, UITextFieldDelegate {
             nextButton.isEnabled = false
             saveUserName()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "名前を入力してください。"
             hud.show(in: self.view)
             hudError()
@@ -75,27 +78,19 @@ class EnterNameViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Helpers
     
     private func setupUI() {
-        
-        UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
-        
+                
+        nameTextField.becomeFirstResponder()
         nameLabel.text = "-"
+        requiredLabel.layer.borderWidth = 1
+        requiredLabel.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         descriptionLabel.text = "名前を入力してください。"
         nextButton.layer.cornerRadius = 50 / 2
         
-        nameTextField.delegate = self
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     @objc func textFieldDidChange() {
         nameLabel.text = nameTextField.text
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
     }
     
     private func textFieldHaveText() -> Bool {

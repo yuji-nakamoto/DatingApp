@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+        
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Actions
     
     @IBAction func dismissButtonPressed(_ sender: Any) {
-        toSelectLoginVC()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -45,6 +45,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             loginButton.isEnabled = false
             loginUser()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
             hudError()
@@ -66,6 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     hudSuccess()
                     self.toTabBerVC()
                 } else {
+                    generator.notificationOccurred(.error)
                     hud.textLabel.text = "認証メールを確認してください。"
                     hud.show(in: self.view)
                     hudError()
@@ -107,13 +109,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Navigation
-    
-    private func toSelectLoginVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
-        self.present(toSelectLoginVC, animated: true, completion: nil)
-    }
     
     private func toTabBerVC() {
         

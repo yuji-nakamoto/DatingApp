@@ -15,7 +15,7 @@ class User {
     var username: String!
     var email: String!
     var profileImageUrls: [String]!
-    var age: Int!
+    var age: String!
     var selfIntro: String!
     var residence: String!
     var profession: String!
@@ -29,7 +29,7 @@ class User {
         username = dict[USERNAME] as? String ?? ""
         email = dict[EMAIL] as? String ?? ""
         profileImageUrls = dict[PROFILEIMAGEURLS] as? [String]  ?? []
-        age = dict[AGE] as? Int ?? 0
+        age = dict[AGE] as? String ?? ""
         gender = dict[GENDER] as? String ?? ""
         residence = dict[RESIDENCE] as? String ?? ""
         profession = dict[PROFESSION] as? String ?? ""

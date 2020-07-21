@@ -35,6 +35,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             sendButton.isEnabled = false
             resetPassword()
         } else {
+            generator.notificationOccurred(.error)
             hud.textLabel.text = "メールアドレスを入力してください。"
             hud.show(in: self.view)
             hudError()
@@ -52,6 +53,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         User.resetPassword(email: emailTextField.text!) { (error) in
             
             if error != nil {
+                generator.notificationOccurred(.error)
                 hud.textLabel.text = error!.localizedDescription
                 hud.show(in: self.view)
                 hudError()
