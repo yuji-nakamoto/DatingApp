@@ -32,6 +32,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         if textFieldHaveText() {
             
+            sendButton.isEnabled = false
             resetPassword()
         } else {
             hud.textLabel.text = "メールアドレスを入力してください。"
@@ -69,9 +70,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         
         descriptionLabel.text = "メールに記載しているURLを開いて、新しいパスワードを登録してください。"
+        sendButton.isEnabled = true
         sendButton.layer.cornerRadius = 50 / 2
-        sendButton.layer.borderWidth = 1
-        sendButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor

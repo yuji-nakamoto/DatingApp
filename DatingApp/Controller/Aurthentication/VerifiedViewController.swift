@@ -28,12 +28,18 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         setupUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loginButton.isEnabled = true
+    }
+    
     // MARK: - Actions
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         
         if textFieldHaveText() {
             
+            loginButton.isEnabled = false
             loginUser()
         } else {
             hud.textLabel.text = "入力欄を全て埋めてください。"
@@ -56,7 +62,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Helpers
+    // MARK: - User
     
     private func loginUser() {
         
@@ -69,6 +75,13 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     hud.textLabel.text = "メールの認証に成功しました。"
                     hud.show(in: self.view)
                     hudSuccess()
+                    let user = User()
+                    user.uid = User.currentUserId()
+                    user.email = self.emailTextField.text
+                    
+                    saveUserToFirestore(user)
+                    
+                    self.toEnterNameVC()
                 } else {
                     hud.textLabel.text = "認証メールを確認してください。"
                     hud.show(in: self.view)
@@ -83,12 +96,12 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - Helpers
+
     private func setupUI() {
         
         descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。"
         loginButton.layer.cornerRadius = 50 / 2
-        loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         resendButton.layer.cornerRadius = 50 / 2
         resendButton.layer.borderWidth = 1
         resendButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
@@ -112,4 +125,16 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         return (emailTextField.text != "" && passwordTextField.text != "")
     }
+    
+    // MARK: - Navigation
+
+    private func toEnterNameVC() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
+            self.present(toEnterNameVC, animated: true, completion: nil)
+        }
+    }
+    
 }

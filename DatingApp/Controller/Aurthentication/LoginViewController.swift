@@ -23,21 +23,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loginButton.isEnabled = true
     }
     
     // MARK: - Actions
     
     @IBAction func dismissButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        toSelectLoginVC()
     }
-    
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         
         if textFieldHaveText() {
             
+            loginButton.isEnabled = false
             loginUser()
         } else {
             hud.textLabel.text = "入力欄を全て埋めてください。"
@@ -46,7 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: - Helpers
+    // MARK: - User
     
     private func loginUser() {
         
@@ -56,9 +61,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if error == nil {
                 
                 if isEmailVerified {
-                    hud.textLabel.text = "メールの認証に成功しました。"
+                    hud.textLabel.text = "ログインに成功しました。"
                     hud.show(in: self.view)
                     hudSuccess()
+                    self.toTabBerVC()
                 } else {
                     hud.textLabel.text = "認証メールを確認してください。"
                     hud.show(in: self.view)
@@ -73,12 +79,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - Helpers
+    
     private func setupUI() {
         
         descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
         loginButton.layer.cornerRadius = 50 / 2
-        loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
@@ -98,6 +104,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func textFieldHaveText() -> Bool {
         
         return (emailTextField.text != "" && passwordTextField.text != "")
+    }
+    
+    // MARK: - Navigation
+    
+    private func toSelectLoginVC() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
+        self.present(toSelectLoginVC, animated: true, completion: nil)
+    }
+    
+    private func toTabBerVC() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            UserDefaults.standard.set(true, forKey: RCOMPLETION)
+            UserDefaults.standard.synchronize()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
+            self.present(toTabBerVC, animated: true, completion: nil)
+        }
     }
     
 }

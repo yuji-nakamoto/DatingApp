@@ -24,4 +24,3 @@ public func hudSuccess() {
     hud.indicatorView = JGProgressHUDSuccessIndicatorView()
     hud.dismiss(afterDelay: 2.0)
 }
-

@@ -20,9 +20,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    private let jgHud = JGProgressHUD(style: .dark)
-    
+        
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -34,6 +32,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        doneButton.isEnabled = true
         setupUI()
     }
     
@@ -56,11 +55,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func resendButtonPressed(_ sender: Any) {
-    }
-    
-    
-    // MARK: - Helpers
+    // MARK: - User
     
     private func createUser() {
         
@@ -77,7 +72,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             hud.textLabel.text = "認証確認のメールを送りました。\nメールを認証しログインしてください。"
             hud.show(in: self.view)
             hudSuccess()
-            UserDefaults.standard.set(true, forKey: "toVerifiedVC")
+            UserDefaults.standard.set(true, forKey: TO_VERIFIED_VC)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.view.endEditing(true)
                 self.toVerifiedVC()
@@ -85,9 +80,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - Helpers
+    
     private func setupUI() {
         
-        if UserDefaults.standard.object(forKey: "toVerifiedVC") != nil {
+        if UserDefaults.standard.object(forKey: TO_VERIFIED_VC) != nil {
             resendButton.isHidden = false
         } else {
             resendButton.isHidden = true
@@ -95,8 +92,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         descriptionLabel.text = "メールアドレスとパスワードを\n入力してください。"
         doneButton.layer.cornerRadius = 50 / 2
-        doneButton.layer.borderWidth = 1
-        doneButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
@@ -121,13 +116,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return (emailTextField.text != "" && passwordTextField.text != "")
     }
     
+    // MARK: - Navigation
+
     private func toVerifiedVC() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let verifiedVC = storyboard.instantiateViewController(withIdentifier: "VerifiedVC")
         self.present(verifiedVC, animated: true, completion: nil)
     }
-    
-    
     
 }

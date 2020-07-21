@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>アルバムの使用を続けるには許可をして下さい。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>カメラの使用を続けるには許可をして下さい。</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-4750883229624981~2361119703</string>
 	<key>NSAppTransportSecurity</key>
