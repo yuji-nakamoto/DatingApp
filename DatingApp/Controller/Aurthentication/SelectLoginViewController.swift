@@ -47,10 +47,10 @@ class SelectLoginViewController: UIViewController {
         googleButton.layer.cornerRadius = 50 / 2
         mailButton.layer.cornerRadius = 50 / 2
         mailButton.layer.borderWidth = 1
-        mailButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        mailButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         registertButton.layer.cornerRadius = 50 / 2
         registertButton.layer.borderWidth = 1
-        registertButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        registertButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }
     
     // MARK: - Navigation

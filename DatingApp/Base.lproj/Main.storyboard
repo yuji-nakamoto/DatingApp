@@ -34,7 +34,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TU8-VO-9jh">
                                 <rect key="frame" x="40" y="322.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NmK-Tw-ygr"/>
                                 </constraints>
@@ -50,7 +50,7 @@
                                 <rect key="frame" x="140" y="387.5" width="234" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="パスワードをお忘れですか？">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <segue destination="xJN-vF-iKn" kind="presentation" id="I5d-Mn-j0A"/>
@@ -64,7 +64,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="他の方法でログイン">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="dismissButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rua-cC-5Zd"/>
@@ -215,7 +215,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1h-s6-ONF">
                                 <rect key="frame" x="40" y="267.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="rEd-1C-agG"/>
                                 </constraints>
@@ -236,7 +236,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="xJN-vF-iKn" eventType="touchUpInside" id="ahI-qc-S60"/>
@@ -311,7 +311,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Uk-s3-oX4">
                                 <rect key="frame" x="40" y="322.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="q8b-yP-hFt"/>
                                 </constraints>
@@ -331,13 +331,13 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="他の方法でログイン">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="dismissButtonPressed:" destination="kH0-a1-L0Q" eventType="touchUpInside" id="0id-Fx-rqp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aq3-aT-nHb">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aq3-aT-nHb">
                                 <rect key="frame" x="40" y="387.5" width="334" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -345,7 +345,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="ログイン画面へ">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="resendButtonPressed:" destination="XfD-KT-vA6" eventType="touchUpInside" id="Cny-Zs-SFe"/>
@@ -418,7 +418,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-FC-pua">
                                 <rect key="frame" x="40" y="322.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="i8C-YK-kaW"/>
                                 </constraints>
@@ -439,7 +439,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="XfD-KT-vA6" eventType="touchUpInside" id="Pi9-y4-ybf"/>
@@ -453,7 +453,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="認証メールを再送信する">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kuk-rg-0LB"/>
@@ -483,7 +483,7 @@
                                 <rect key="frame" x="140" y="452.5" width="234" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="パスワードをお忘れですか？">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <segue destination="xJN-vF-iKn" kind="presentation" id="p2a-Jj-oo5"/>
@@ -564,7 +564,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc2-9h-3FS">
                                 <rect key="frame" x="40" y="315.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ko4-zD-Kl8"/>
                                 </constraints>
@@ -585,30 +585,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 必須 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aY-se-Fqk">
-                                <rect key="frame" x="274.5" y="273" width="33.5" height="17"/>
+                                <rect key="frame" x="337.5" y="273" width="36.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="original_blue"/>
+                                <color key="textColor" name="original_green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="J5I-DE-X2A" firstAttribute="trailing" secondItem="1aY-se-Fqk" secondAttribute="trailing" constant="40" id="2kO-uX-oyT"/>
                             <constraint firstItem="kc2-9h-3FS" firstAttribute="top" secondItem="fYO-vP-Nh5" secondAttribute="bottom" constant="68" id="2of-mm-AX3"/>
                             <constraint firstItem="kc2-9h-3FS" firstAttribute="leading" secondItem="J5I-DE-X2A" secondAttribute="leading" constant="40" id="6UH-pH-zoW"/>
                             <constraint firstItem="g4q-kP-w3j" firstAttribute="centerX" secondItem="Unk-74-23j" secondAttribute="centerX" id="9fg-bA-tZY"/>
                             <constraint firstItem="J5I-DE-X2A" firstAttribute="trailing" secondItem="kc2-9h-3FS" secondAttribute="trailing" constant="40" id="DTB-OZ-UeQ"/>
+                            <constraint firstItem="1aY-se-Fqk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yln-Nx-Agq" secondAttribute="trailing" constant="8" id="Ehe-7t-D3e"/>
                             <constraint firstItem="YUk-ui-UWu" firstAttribute="leading" secondItem="J5I-DE-X2A" secondAttribute="leading" constant="40" id="Gli-Lk-7Aa"/>
                             <constraint firstItem="J5I-DE-X2A" firstAttribute="trailing" secondItem="fYO-vP-Nh5" secondAttribute="trailing" constant="40" id="VgF-Zs-xap"/>
                             <constraint firstItem="fYO-vP-Nh5" firstAttribute="top" secondItem="YUk-ui-UWu" secondAttribute="bottom" constant="30" id="X5d-yE-jUe"/>
                             <constraint firstItem="g4q-kP-w3j" firstAttribute="top" secondItem="J5I-DE-X2A" secondAttribute="top" constant="50" id="Ziu-aQ-mek"/>
-                            <constraint firstItem="J5I-DE-X2A" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1aY-se-Fqk" secondAttribute="trailing" constant="106" id="Zsr-EO-2yS"/>
+                            <constraint firstItem="kc2-9h-3FS" firstAttribute="top" secondItem="1aY-se-Fqk" secondAttribute="bottom" constant="25.5" id="gbk-cz-DlP"/>
+                            <constraint firstItem="1aY-se-Fqk" firstAttribute="centerY" secondItem="Yln-Nx-Agq" secondAttribute="centerY" id="iG2-bo-zyU"/>
                             <constraint firstItem="J5I-DE-X2A" firstAttribute="trailing" secondItem="YUk-ui-UWu" secondAttribute="trailing" constant="40" id="kJf-8q-ppD"/>
                             <constraint firstItem="Yln-Nx-Agq" firstAttribute="centerX" secondItem="Unk-74-23j" secondAttribute="centerX" id="mMk-sY-pOS"/>
-                            <constraint firstItem="1aY-se-Fqk" firstAttribute="centerY" secondItem="Yln-Nx-Agq" secondAttribute="centerY" id="nMQ-I4-Q7N"/>
                             <constraint firstItem="Yln-Nx-Agq" firstAttribute="top" secondItem="fYO-vP-Nh5" secondAttribute="bottom" constant="20" id="oB2-eV-Ffp"/>
                             <constraint firstItem="fYO-vP-Nh5" firstAttribute="leading" secondItem="J5I-DE-X2A" secondAttribute="leading" constant="40" id="wnU-Yb-q6J"/>
                             <constraint firstItem="YUk-ui-UWu" firstAttribute="top" secondItem="g4q-kP-w3j" secondAttribute="bottom" constant="30" id="y2S-uB-ZdC"/>
-                            <constraint firstItem="1aY-se-Fqk" firstAttribute="leading" secondItem="Yln-Nx-Agq" secondAttribute="trailing" constant="8" id="zRH-BN-XTt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J5I-DE-X2A"/>
                     </view>
@@ -622,7 +623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BQq-Qo-0IS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2581" y="118"/>
+            <point key="canvasLocation" x="2579.7101449275365" y="117.85714285714285"/>
         </scene>
         <!--Enter Age View Controller-->
         <scene sceneID="Lhz-Yb-1na">
@@ -652,7 +653,7 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qd8-Bb-9Es">
                                 <rect key="frame" x="40" y="420" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7Oe-Rj-Fsz"/>
                                 </constraints>
@@ -675,7 +676,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="L6L-Ah-ZHl" eventType="touchUpInside" id="APa-m7-Kln"/>
@@ -694,9 +695,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 必須 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-7t-BFo">
-                                <rect key="frame" x="294" y="378" width="36.5" height="17"/>
+                                <rect key="frame" x="337.5" y="377.5" width="36.5" height="17.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="original_blue"/>
+                                <color key="textColor" name="original_green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -710,18 +711,19 @@
                             <constraint firstItem="yEh-7t-BFo" firstAttribute="centerY" secondItem="jDw-J2-5Ij" secondAttribute="centerY" id="DhW-3u-0mO"/>
                             <constraint firstItem="qd8-Bb-9Es" firstAttribute="leading" secondItem="5hh-Q3-aW0" secondAttribute="leading" constant="40" id="IKg-nS-abh"/>
                             <constraint firstItem="0Kj-iC-7W3" firstAttribute="leading" secondItem="5hh-Q3-aW0" secondAttribute="leading" constant="40" id="LJ9-hi-lqv"/>
-                            <constraint firstItem="yEh-7t-BFo" firstAttribute="leading" secondItem="zoQ-IJ-Sq1" secondAttribute="trailing" constant="8" id="OEt-38-LbE"/>
+                            <constraint firstItem="qd8-Bb-9Es" firstAttribute="top" secondItem="yEh-7t-BFo" secondAttribute="bottom" constant="25" id="NUd-6j-RTn"/>
                             <constraint firstItem="0Kj-iC-7W3" firstAttribute="top" secondItem="tPX-CY-GWs" secondAttribute="bottom" constant="30" id="QAH-dv-fWP"/>
                             <constraint firstItem="jDw-J2-5Ij" firstAttribute="centerX" secondItem="fkC-Ln-XZM" secondAttribute="centerX" id="WGf-ED-tm5"/>
                             <constraint firstItem="mk5-NG-3CI" firstAttribute="trailing" secondItem="5hh-Q3-aW0" secondAttribute="trailing" id="XVK-Sq-QY2"/>
                             <constraint firstItem="5hh-Q3-aW0" firstAttribute="trailing" secondItem="qd8-Bb-9Es" secondAttribute="trailing" constant="40" id="ab4-vh-jOT"/>
                             <constraint firstItem="5hh-Q3-aW0" firstAttribute="trailing" secondItem="qvf-bM-IJ8" secondAttribute="trailing" constant="40" id="aqq-iM-Tr9"/>
-                            <constraint firstItem="5hh-Q3-aW0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yEh-7t-BFo" secondAttribute="trailing" constant="83.5" id="f81-OY-cnX"/>
+                            <constraint firstItem="5hh-Q3-aW0" firstAttribute="trailing" secondItem="yEh-7t-BFo" secondAttribute="trailing" constant="40" id="f81-OY-cnX"/>
                             <constraint firstItem="zoQ-IJ-Sq1" firstAttribute="centerY" secondItem="jDw-J2-5Ij" secondAttribute="centerY" id="gch-9O-8XP"/>
                             <constraint firstItem="qd8-Bb-9Es" firstAttribute="top" secondItem="jDw-J2-5Ij" secondAttribute="bottom" constant="20" id="nFQ-fc-4jJ"/>
                             <constraint firstItem="5hh-Q3-aW0" firstAttribute="trailing" secondItem="0Kj-iC-7W3" secondAttribute="trailing" constant="40" id="rYN-eP-8OO"/>
                             <constraint firstItem="tPX-CY-GWs" firstAttribute="centerX" secondItem="fkC-Ln-XZM" secondAttribute="centerX" id="sWd-hp-9Eb"/>
                             <constraint firstItem="zoQ-IJ-Sq1" firstAttribute="leading" secondItem="jDw-J2-5Ij" secondAttribute="trailing" constant="5" id="vxR-PI-z6r"/>
+                            <constraint firstItem="yEh-7t-BFo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zoQ-IJ-Sq1" secondAttribute="trailing" constant="51.5" id="wqZ-XE-eOa"/>
                             <constraint firstItem="mk5-NG-3CI" firstAttribute="top" secondItem="0Kj-iC-7W3" secondAttribute="bottom" constant="30" id="zii-SD-Ipq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5hh-Q3-aW0"/>
@@ -767,7 +769,7 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xht-UV-KYN">
                                 <rect key="frame" x="40" y="420" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="T3Z-vx-oDQ"/>
                                 </constraints>
@@ -787,7 +789,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="RGf-8N-pFt" eventType="touchUpInside" id="Ffn-oM-vBl"/>
@@ -800,14 +802,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 必須 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Niq-4I-OQo" userLabel="必須">
-                                <rect key="frame" x="282.5" y="378" width="33.5" height="17"/>
+                                <rect key="frame" x="337.5" y="378" width="36.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="original_blue"/>
+                                <color key="textColor" name="original_green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Niq-4I-OQo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f43-z6-iDw" secondAttribute="trailing" constant="63" id="2Rb-QU-7u1"/>
                             <constraint firstItem="Xht-UV-KYN" firstAttribute="leading" secondItem="wmB-dC-xwu" secondAttribute="leading" constant="40" id="3cS-NV-OCY"/>
                             <constraint firstItem="aKg-mx-9kc" firstAttribute="trailing" secondItem="wmB-dC-xwu" secondAttribute="trailing" id="5ve-4S-G1K"/>
                             <constraint firstItem="YCJ-Jl-Xb5" firstAttribute="leading" secondItem="wmB-dC-xwu" secondAttribute="leading" constant="40" id="9Cb-Js-CrQ"/>
@@ -815,8 +818,7 @@
                             <constraint firstItem="wmB-dC-xwu" firstAttribute="bottom" secondItem="YCJ-Jl-Xb5" secondAttribute="bottom" constant="50" id="KJr-Xj-5It"/>
                             <constraint firstItem="wmB-dC-xwu" firstAttribute="trailing" secondItem="YCJ-Jl-Xb5" secondAttribute="trailing" constant="40" id="MmU-pW-u44"/>
                             <constraint firstItem="258-2T-EwW" firstAttribute="centerX" secondItem="0qj-eo-ZTY" secondAttribute="centerX" id="OTe-Jd-9cW"/>
-                            <constraint firstItem="Niq-4I-OQo" firstAttribute="leading" secondItem="f43-z6-iDw" secondAttribute="trailing" constant="8" id="Rde-EG-FFD"/>
-                            <constraint firstItem="wmB-dC-xwu" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Niq-4I-OQo" secondAttribute="trailing" constant="98" id="YfJ-iA-m77"/>
+                            <constraint firstItem="wmB-dC-xwu" firstAttribute="trailing" secondItem="Niq-4I-OQo" secondAttribute="trailing" constant="40" id="YfJ-iA-m77"/>
                             <constraint firstItem="aKg-mx-9kc" firstAttribute="top" secondItem="0NM-X1-hCy" secondAttribute="bottom" constant="30" id="bq2-Xy-24c"/>
                             <constraint firstItem="258-2T-EwW" firstAttribute="top" secondItem="wmB-dC-xwu" secondAttribute="top" constant="50" id="dgs-Gr-7J7"/>
                             <constraint firstItem="f43-z6-iDw" firstAttribute="top" secondItem="aKg-mx-9kc" secondAttribute="bottom" constant="20" id="e2Y-c7-Ol5"/>
@@ -871,7 +873,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="T9Z-Jj-qng" eventType="touchUpInside" id="FdC-J3-B5b"/>
@@ -896,7 +898,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="スキップする">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <segue destination="QzH-kb-wjP" kind="presentation" id="5qU-aa-YLp"/>
@@ -907,7 +909,7 @@
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-kp-oT8">
                                 <rect key="frame" x="40" y="352.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="vIz-MB-uiQ"/>
                                 </constraints>
@@ -993,7 +995,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhW-iN-CpZ">
                                 <rect key="frame" x="40" y="370.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="8ea-H3-PvM"/>
                                 </constraints>
@@ -1013,7 +1015,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="QzH-kb-wjP" eventType="touchUpInside" id="gOe-5b-VG1"/>
@@ -1027,7 +1029,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="スキップする">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <segue destination="E1l-X3-PTp" kind="presentation" id="IPI-v5-Qj8"/>
@@ -1046,7 +1048,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 任意 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgX-xJ-zLV">
-                                <rect key="frame" x="299.5" y="328" width="36.5" height="17"/>
+                                <rect key="frame" x="337.5" y="328" width="36.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1062,11 +1064,10 @@
                             <constraint firstItem="yVv-7b-EGY" firstAttribute="top" secondItem="9Ps-3G-Jgw" secondAttribute="bottom" constant="30" id="IC6-hC-wkI"/>
                             <constraint firstItem="Se4-oW-hEL" firstAttribute="trailing" secondItem="JXO-7a-wbj" secondAttribute="trailing" constant="40" id="KKT-qw-9wO"/>
                             <constraint firstItem="JXO-7a-wbj" firstAttribute="top" secondItem="rhW-iN-CpZ" secondAttribute="bottom" constant="15" id="OGk-Bl-9Fr"/>
+                            <constraint firstItem="Se4-oW-hEL" firstAttribute="trailing" secondItem="zgX-xJ-zLV" secondAttribute="trailing" constant="40" id="RWu-9d-55w"/>
                             <constraint firstItem="rhW-iN-CpZ" firstAttribute="top" secondItem="RNN-nc-jCP" secondAttribute="bottom" constant="20" id="TyD-iO-4li"/>
                             <constraint firstItem="Se4-oW-hEL" firstAttribute="trailing" secondItem="rhW-iN-CpZ" secondAttribute="trailing" constant="40" id="bCH-sU-QGO"/>
                             <constraint firstItem="yVv-7b-EGY" firstAttribute="leading" secondItem="Se4-oW-hEL" secondAttribute="leading" id="bb1-TY-JC5"/>
-                            <constraint firstItem="Se4-oW-hEL" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zgX-xJ-zLV" secondAttribute="trailing" constant="61" id="gzI-b0-K28"/>
-                            <constraint firstItem="zgX-xJ-zLV" firstAttribute="leading" secondItem="RNN-nc-jCP" secondAttribute="trailing" constant="8" id="hIN-VP-PzP"/>
                             <constraint firstItem="RQC-0b-JnA" firstAttribute="centerX" secondItem="ZFg-kj-oiD" secondAttribute="centerX" id="hPc-Oy-xjB"/>
                             <constraint firstItem="9Ps-3G-Jgw" firstAttribute="leading" secondItem="Se4-oW-hEL" secondAttribute="leading" constant="40" id="hW3-Xo-vpe"/>
                             <constraint firstItem="RNN-nc-jCP" firstAttribute="centerX" secondItem="ZFg-kj-oiD" secondAttribute="centerX" id="nTe-GK-k8H"/>
@@ -1075,6 +1076,7 @@
                             <constraint firstItem="JXO-7a-wbj" firstAttribute="leading" secondItem="Se4-oW-hEL" secondAttribute="leading" constant="40" id="phs-P2-XEh"/>
                             <constraint firstItem="yVv-7b-EGY" firstAttribute="trailing" secondItem="Se4-oW-hEL" secondAttribute="trailing" id="rhI-Wi-mHC"/>
                             <constraint firstItem="Se4-oW-hEL" firstAttribute="trailing" secondItem="mlh-QX-1Jw" secondAttribute="trailing" constant="40" id="vdr-Ux-EsS"/>
+                            <constraint firstItem="zgX-xJ-zLV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RNN-nc-jCP" secondAttribute="trailing" constant="46" id="vjM-qf-qSL"/>
                             <constraint firstItem="rhW-iN-CpZ" firstAttribute="leading" secondItem="Se4-oW-hEL" secondAttribute="leading" constant="40" id="xjb-9K-4nn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Se4-oW-hEL"/>
@@ -1115,7 +1117,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-M5-ahw">
                                 <rect key="frame" x="40" y="420.5" width="334" height="50"/>
-                                <color key="backgroundColor" name="original_blue"/>
+                                <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="nxB-7F-wUj"/>
                                 </constraints>
@@ -1135,7 +1137,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="E1l-X3-PTp" eventType="touchUpInside" id="4vi-1x-Hha"/>
@@ -1154,9 +1156,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 必須 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aN-3h-cMu">
-                                <rect key="frame" x="298.5" y="378" width="36.5" height="17"/>
+                                <rect key="frame" x="337.5" y="378" width="36.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" name="original_blue"/>
+                                <color key="textColor" name="original_green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1164,7 +1166,7 @@
                         <constraints>
                             <constraint firstItem="2ov-aZ-5u7" firstAttribute="leading" secondItem="VK5-d6-TvP" secondAttribute="leading" id="3So-yI-qZG"/>
                             <constraint firstItem="VK5-d6-TvP" firstAttribute="trailing" secondItem="PiC-AT-ycv" secondAttribute="trailing" constant="40" id="4be-Pv-TBw"/>
-                            <constraint firstItem="7aN-3h-cMu" firstAttribute="leading" secondItem="gqd-y2-UnM" secondAttribute="trailing" constant="8" id="5yS-oU-rmj"/>
+                            <constraint firstItem="7aN-3h-cMu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gqd-y2-UnM" secondAttribute="trailing" constant="47" id="DXb-2I-kvF"/>
                             <constraint firstItem="gqd-y2-UnM" firstAttribute="centerX" secondItem="NuR-Fi-mSh" secondAttribute="centerX" id="DY3-Tj-MiQ"/>
                             <constraint firstItem="2ov-aZ-5u7" firstAttribute="top" secondItem="PiC-AT-ycv" secondAttribute="bottom" constant="30" id="JNY-ew-81Z"/>
                             <constraint firstItem="VK5-d6-TvP" firstAttribute="trailing" secondItem="JRd-M5-ahw" secondAttribute="trailing" constant="40" id="S8r-kA-96b"/>
@@ -1179,7 +1181,7 @@
                             <constraint firstItem="7aN-3h-cMu" firstAttribute="centerY" secondItem="gqd-y2-UnM" secondAttribute="centerY" id="sfd-tt-y6u"/>
                             <constraint firstItem="Oa4-5d-JcY" firstAttribute="top" secondItem="VK5-d6-TvP" secondAttribute="top" constant="50" id="u8a-4v-P6h"/>
                             <constraint firstItem="2ov-aZ-5u7" firstAttribute="trailing" secondItem="VK5-d6-TvP" secondAttribute="trailing" id="vdX-pj-wyJ"/>
-                            <constraint firstItem="VK5-d6-TvP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7aN-3h-cMu" secondAttribute="trailing" constant="77.5" id="y6T-DY-hcW"/>
+                            <constraint firstItem="VK5-d6-TvP" firstAttribute="trailing" secondItem="7aN-3h-cMu" secondAttribute="trailing" constant="40" id="y6T-DY-hcW"/>
                             <constraint firstItem="PiC-AT-ycv" firstAttribute="leading" secondItem="VK5-d6-TvP" secondAttribute="leading" constant="40" id="ySo-CN-oDT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VK5-d6-TvP"/>
@@ -1208,7 +1210,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DatingApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bv0-lh-uKV">
                                 <rect key="frame" x="99.5" y="410.5" width="215.5" height="75.5"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="47"/>
-                                <color key="textColor" name="original_blue"/>
+                                <color key="textColor" name="original_green"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1255,7 +1257,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="メールアドレスでログイン">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <action selector="mailButtonPressed:" destination="j4y-he-FOd" eventType="touchUpInside" id="IvE-ZH-bpv"/>
@@ -1284,7 +1286,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="新規登録">
-                                    <color key="titleColor" name="original_blue"/>
+                                    <color key="titleColor" name="original_green"/>
                                 </state>
                                 <connections>
                                     <segue destination="kH0-a1-L0Q" kind="presentation" id="Yaf-me-mEN"/>
@@ -1346,12 +1348,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="p2a-Jj-oo5"/>
+        <segue reference="I5d-Mn-j0A"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="placeholer-person" width="225" height="225"/>
-        <namedColor name="original_blue">
-            <color red="0.0" green="0.63921568627450975" blue="1" alpha="0.85000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="original_green">
+            <color red="0.13333333333333333" green="0.88235294117647056" blue="1" alpha="0.85000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -13,6 +13,12 @@ import FirebaseFirestore
 
 public let COLLECTION_USER = Firestore.firestore().collection("user")
 
+// MARK: - Color
+
+public let O_BLUE = "original_blue"
+public let O_GREEN = "original_green"
+
+
 // MARK: - User
 
 public let UID = "uid"

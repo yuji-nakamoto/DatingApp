@@ -106,10 +106,10 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         loginButton.layer.cornerRadius = 50 / 2
         resendButton.layer.cornerRadius = 50 / 2
         resendButton.layer.borderWidth = 1
-        resendButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
         emailTextField.delegate = self
         passwordTextField.delegate = self

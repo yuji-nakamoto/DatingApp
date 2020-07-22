@@ -92,14 +92,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             resendButton.isHidden = true
         }
         
-        descriptionLabel.text = "メールアドレスとパスワードを\n入力してください。"
+        descriptionLabel.text = "メールアドレスとパスワードを入力して、\nアカウントを作成してください。"
         doneButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
-        dismissButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         resendButton.layer.cornerRadius = 50 / 2
         resendButton.layer.borderWidth = 1
-        resendButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
 
         emailTextField.delegate = self
         passwordTextField.delegate = self

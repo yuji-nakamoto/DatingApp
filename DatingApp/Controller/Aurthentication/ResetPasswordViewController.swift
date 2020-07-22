@@ -76,7 +76,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         sendButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
         emailTextField.delegate = self
     }

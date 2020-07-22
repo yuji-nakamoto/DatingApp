@@ -111,13 +111,13 @@
 				838071E624C627C4008BAA2C /* API */,
 				838071C924C608F5008BAA2C /* AppDelegate.swift */,
 				838071CB24C608F5008BAA2C /* SceneDelegate.swift */,
+				838071E924C6299D008BAA2C /* Constants.swift */,
+				838071ED24C6338E008BAA2C /* Extension.swift */,
 				838071CF24C608F5008BAA2C /* Main.storyboard */,
 				838071D224C608FA008BAA2C /* Assets.xcassets */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
 				838071D724C608FA008BAA2C /* Info.plist */,
 				838071DD24C60BA4008BAA2C /* GoogleService-Info.plist */,
-				838071E924C6299D008BAA2C /* Constants.swift */,
-				838071ED24C6338E008BAA2C /* Extension.swift */,
 			);
 			path = DatingApp;
 			sourceTree = "<group>";

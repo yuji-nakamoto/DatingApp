@@ -89,7 +89,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
-        dismissButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
         emailTextField.delegate = self
         passwordTextField.delegate = self

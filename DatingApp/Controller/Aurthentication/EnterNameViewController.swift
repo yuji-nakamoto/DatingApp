@@ -41,6 +41,13 @@ class EnterNameViewController: UIViewController {
 
         if textFieldHaveText() {
             
+            if nameTextField.text!.count > 10 {
+                generator.notificationOccurred(.error)
+                hud.textLabel.text = "10文字以下で入力してください。"
+                hud.show(in: self.view)
+                hudError()
+                return
+            }
             nextButton.isEnabled = false
             saveUserName()
         } else {
@@ -82,8 +89,8 @@ class EnterNameViewController: UIViewController {
         nameTextField.becomeFirstResponder()
         nameLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
-        requiredLabel.layer.borderColor = UIColor(named: "original_blue")?.cgColor
-        descriptionLabel.text = "名前を入力してください。"
+        requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        descriptionLabel.text = "名前を10文字以下で入力してください。"
         nextButton.layer.cornerRadius = 50 / 2
         
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

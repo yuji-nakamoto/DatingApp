@@ -102,10 +102,10 @@ class EnterProfileImageViewController: UIViewController {
         nextButton.layer.cornerRadius = 50 / 2
         skipButton.layer.cornerRadius = 50 / 2
         skipButton.layer.borderWidth = 1
-        skipButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        skipButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = UIColor(named: "original_blue")?.cgColor
+        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         profileImageView.layer.cornerRadius = 150 / 2
     }
     

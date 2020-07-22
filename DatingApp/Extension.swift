@@ -9,11 +9,20 @@
 import UIKit
 import JGProgressHUD
 
+// MARK: - CAGradientLayer
+
+let gradientLayer = CAGradientLayer()
+let leftColor = UIColor(named: O_BLUE)
+let rightColor = UIColor(named: O_GREEN)
+
+// MARK: - UINotificationFeedbackGenerator
+
+public let generator = UINotificationFeedbackGenerator()
+
+
 // MARK : - JGProgressHUD
 
 public var hud = JGProgressHUD(style: .dark)
-public let generator = UINotificationFeedbackGenerator()
-
 
 public func hudError() {
     
