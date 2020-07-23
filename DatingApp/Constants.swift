@@ -18,6 +18,7 @@ public let COLLECTION_FEMALE_USERS = Firestore.firestore().collection("female_us
 
 public let O_BLUE = "original_blue"
 public let O_GREEN = "original_green"
+public let O_BLACK = "original_black"
 
 
 // MARK: - User
@@ -31,6 +32,8 @@ public let AGE = "age"
 public let RESIDENCE = "residence"
 public let PROFESSION = "profession"
 public let SELFINTRO = "selfIntro"
+public let COMMENT = "comment"
+public let BODYSIZE = "bodySize"
 
 // MARK: - UserOfject
 

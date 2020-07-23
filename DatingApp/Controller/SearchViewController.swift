@@ -66,14 +66,18 @@ class SearchViewController: UIViewController {
             User.fetchFemaleUser(User.currentUserId()) { (user) in
                 let residence1 = user.residence
                 User.maleResidenceSort(residence1!) { (users) in
+                    print("!=nil")
                     self.users = users
                 }
             }
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                let residence1 = user.residence
-                User.maleResidenceSort(residence1!) { (users) in
-                    self.users.append(contentsOf: users)
-                    self.collectionView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                User.fetchMaleUser(User.currentUserId()) { (user) in
+                    let residence1 = user.residence
+                    User.maleResidenceSort(residence1!) { (users) in
+                        print("!=nil2")
+                        self.users.append(contentsOf: users)
+                        self.collectionView.reloadData()
+                    }
                 }
             }
         }
@@ -82,14 +86,20 @@ class SearchViewController: UIViewController {
             User.fetchMaleUser(User.currentUserId()) { (user) in
                 let residence2 = user.residence
                 User.femaleResidenceSort(residence2!) { (users) in
+                    print("==nil")
+
                     self.users = users
                 }
             }
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                let residence2 = user.residence
-                User.femaleResidenceSort(residence2!) { (users) in
-                    self.users.append(contentsOf: users)
-                    self.collectionView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                User.fetchFemaleUser(User.currentUserId()) { (user) in
+                    let residence2 = user.residence
+                    User.femaleResidenceSort(residence2!) { (users) in
+                        print("==nil2")
+
+                        self.users.append(contentsOf: users)
+                        self.collectionView.reloadData()
+                    }
                 }
             }
         }
@@ -117,7 +127,16 @@ class SearchViewController: UIViewController {
         }
     }
     
-    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "DetailVC" {
+
+            let detailVC = segue.destination as! DetailTableViewController
+            detailVC.user = sender as! User
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
             navigationController?.setNavigationBarHidden(true, animated: true)
@@ -159,6 +178,8 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        print("indexPath: \(indexPath.row)")
+
+        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row])
     }
 }

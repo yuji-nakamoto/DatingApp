@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */; };
+		831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392324C9CBE00043AA76 /* DetailTableViewController.swift */; };
+		831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */; };
+		831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
 		834912F624C7283D002990F8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F524C7283D002990F8 /* Service.swift */; };
@@ -38,6 +41,9 @@
 		20119206395B34005853DB9C /* Pods-DatingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.debug.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		831E392324C9CBE00043AA76 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
 		834912F524C7283D002990F8 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 			children = (
 				838071F324C66BAC008BAA2C /* Aurthentication */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
+				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -145,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */,
+				831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */,
+				831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */,
@@ -328,6 +338,8 @@
 				834912FC24C75830002990F8 /* StartViewController.swift in Sources */,
 				838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
+				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
+				831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,

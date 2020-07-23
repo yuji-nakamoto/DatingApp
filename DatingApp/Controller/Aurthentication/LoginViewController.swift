@@ -68,7 +68,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     hud.textLabel.text = "ログインに成功しました。"
                     hud.show(in: self.view)
                     hudSuccess()
-                    UserDefaults.standard.set(true, forKey: CURRENTUSER)
                     self.toTabBerVC()
                 } else {
                     generator.notificationOccurred(.error)

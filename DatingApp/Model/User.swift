@@ -19,6 +19,8 @@ class User {
     var selfIntro: String!
     var residence: String!
     var profession: String!
+    var comment: String!
+    var bodySize: String!
     
     init() {
     }
@@ -32,6 +34,8 @@ class User {
         residence = dict[RESIDENCE] as? String ?? ""
         profession = dict[PROFESSION] as? String ?? ""
         selfIntro = dict[SELFINTRO] as? String ?? ""
+        comment = dict[COMMENT] as? String ?? ""
+        bodySize = dict[BODYSIZE] as? String ?? ""
     }
     
     // MARK: - Return user
@@ -90,7 +94,6 @@ class User {
             
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             UserDefaults.standard.removeObject(forKey: FEMALE)
-            UserDefaults.standard.removeObject(forKey: CURRENTUSER)
             UserDefaults.standard.synchronize()
             completion(nil)
             
@@ -233,7 +236,7 @@ func userDictFrom1(_ user: User) -> NSDictionary {
 
 func userDictFrom2(_ user: User) -> NSDictionary {
     
-    return NSDictionary(objects: [user.profileImageUrls ?? [], user.profession ?? "", user.residence ?? "", user.selfIntro ?? ""], forKeys: [PROFILEIMAGEURLS as NSCopying, PROFESSION as NSCopying, RESIDENCE as NSCopying, SELFINTRO as NSCopying])
+    return NSDictionary(objects: [user.profileImageUrls ?? [], user.profession ?? "", user.residence ?? "", user.selfIntro ?? "", user.comment ?? "", user.bodySize ?? ""], forKeys: [PROFILEIMAGEURLS as NSCopying, PROFESSION as NSCopying, RESIDENCE as NSCopying, SELFINTRO as NSCopying, COMMENT as NSCopying, BODYSIZE as NSCopying])
 }
 
 
