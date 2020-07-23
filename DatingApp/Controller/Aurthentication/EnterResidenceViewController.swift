@@ -25,7 +25,7 @@ class EnterResidenceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUser()
+        fetchUser()
         setupUI()
     }
     
@@ -56,12 +56,21 @@ class EnterResidenceViewController: UIViewController {
     
     // MARK: - User
     
-    private func loadUser() {
+    private func fetchUser() {
         
-        fetchUser(User.currentUserId()) { (user) in
-            self.user = user
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            User.fetchFemaleUser(User.currentUserId()) { (user) in
+                self.user = user
+                return
+            }
+        }
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            User.fetchMaleUser(User.currentUserId()) { (user) in
+                self.user = user
+            }
         }
     }
+
     
     private func saveUserProfession() {
         
@@ -71,7 +80,13 @@ class EnterResidenceViewController: UIViewController {
         user.profession = self.user.profession
         user.residence = self.residenceLabel.text
         
-        updateUserData2(user)
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            
+            updateFemaleUserData2(user)
+            toTabBerVC()
+            return
+        }
+        updateMaleUserData2(user)
         toTabBerVC()
     }
     

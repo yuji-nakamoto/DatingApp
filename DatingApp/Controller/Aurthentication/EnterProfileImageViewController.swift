@@ -29,13 +29,14 @@ class EnterProfileImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadUser()
         setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         nextButton.isEnabled = true
+        skipButton.isEnabled = true
     }
     
     // MARK: - Actions
@@ -50,7 +51,14 @@ class EnterProfileImageViewController: UIViewController {
             return
         }
         nextButton.isEnabled = false
+        skipButton.isEnabled = false
         saveProfileImage()
+    }
+    
+    @IBAction func skipButtonPressed(_ sender: Any) {
+        addPlaceholederImage()
+        skipButton.isEnabled = false
+        nextButton.isEnabled = false
     }
     
     @IBAction func profileImageTaped(_ sender: Any) {
@@ -66,29 +74,38 @@ class EnterProfileImageViewController: UIViewController {
     
     // MARK: - User
     
-    private func loadUser() {
-        
-        fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-        }
-    }
-    
     private func saveProfileImage() {
         indicator.startAnimating()
         
         Service.uploadImage(image: profileImage!) { (imageUrl) in
             
             let user = User()
-            user.uid = self.user.uid
+            user.uid = User.currentUserId()
             user.profileImageUrls = [String(imageUrl)]
             
-            updateUserData2(user)
-            hud.textLabel.text = "保存が成功しました。"
-            self.indicator.stopAnimating()
-            hud.show(in: self.view)
-            hudSuccess()
-            self.toEnterProfessionVC()
+            if UserDefaults.standard.object(forKey: FEMALE) != nil {
+                updateFemaleUserData2(user)
+                self.hudSetup()
+                return
+            }
+            updateMaleUserData2(user)
+            self.hudSetup()
         }
+    }
+    
+    private func addPlaceholederImage() {
+        
+        let user = User()
+        user.uid = self.user.uid
+        user.profileImageUrls = ["https://firebasestorage.googleapis.com/v0/b/appstore-a772d.appspot.com/o/ProfileImage%2F8Uujy2X4YbTc0J5SfNHGEnIXvpj2%2Fjpg?alt=media&token=fa105550-c4e2-4869-9487-19bc3516a1c1"]
+        
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            updateFemaleUserData2(user)
+            toEnterProfessionVC()
+            return
+        }
+        updateMaleUserData2(user)
+        toEnterProfessionVC()
     }
     
     // MARK: - Helpers
@@ -107,6 +124,15 @@ class EnterProfileImageViewController: UIViewController {
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         profileImageView.layer.cornerRadius = 150 / 2
+    }
+    
+    private func hudSetup() {
+        
+        hud.textLabel.text = "保存が成功しました。"
+        self.indicator.stopAnimating()
+        hud.show(in: self.view)
+        hudSuccess()
+        self.toEnterProfessionVC()
     }
     
     // MARK: - Navigation

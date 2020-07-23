@@ -12,12 +12,10 @@ class EnterGenderViewController: UIViewController {
     
     // MARK: - Properties
     
-    
     @IBOutlet weak var requiredLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var genderLabel: UILabel!
     
     private var user: User!
@@ -28,8 +26,8 @@ class EnterGenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUser()
-        setupUI()
+        fetchUser()
+        configureSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,30 +57,42 @@ class EnterGenderViewController: UIViewController {
     
     // MARK: - User
     
-    private func loadUser() {
+    private func fetchUser() {
         
-        fetchUser(User.currentUserId()) { (user) in
-            self.user = user
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            User.fetchFemaleUser(User.currentUserId()) { (user) in
+                self.user = user
+                return
+            }
+        }
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            User.fetchMaleUser(User.currentUserId()) { (user) in
+                self.user = user
+            }
         }
     }
     
     private func saveUserGender() {
         
         let user = User()
-        user.age = self.user.age
-        user.uid = self.user.uid
+        user.uid = User.currentUserId()
         user.email = self.user.email
-        user.username = self.user.username
-        user.gender = genderLabel.text
         
-        updateUserData1(user)
-        toEnterProfileImageVC()
+        if genderLabel.text == "男性" {
+            saveMaleUser(user)
+            toEnterNameVC()
+        } else {
+            UserDefaults.standard.set(true, forKey: FEMALE)
+            saveFemaleUser(user)
+            toEnterNameVC()
+        }
     }
     
     // MARK: - Helpers
     
-    private func setupUI() {
+    private func configureSetup() {
         
+        UserDefaults.standard.removeObject(forKey: FEMALE)
         pickerView.delegate = self
         pickerView.dataSource = self
         
@@ -91,19 +101,16 @@ class EnterGenderViewController: UIViewController {
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         descriptionLabel.text = "性別を選択してください。"
         nextButton.layer.cornerRadius = 50 / 2
-        backButton.layer.cornerRadius = 50 / 2
-        backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }
     
     // MARK: - Navigation
-
-    private func toEnterProfileImageVC() {
+    
+    private func toEnterNameVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterProfileImageVC = storyboard.instantiateViewController(withIdentifier: "EnterProfileImageVC")
-            self.present(toEnterProfileImageVC, animated: true, completion: nil)
+            let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
+            self.present(toEnterNameVC, animated: true, completion: nil)
         }
     }
 }

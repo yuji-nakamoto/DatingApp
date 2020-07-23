@@ -21,8 +21,10 @@ class StartViewController: UIViewController {
     // MARK: - Helpers
     
     private func autoLogin() {
+        
         if UserDefaults.standard.object(forKey: RCOMPLETION) != nil {
             toTabBerVC()
+            return
         }
         toSelectLoginVC()
     }

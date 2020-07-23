@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
 		834912F624C7283D002990F8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F524C7283D002990F8 /* Service.swift */; };
 		834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F724C74254002990F8 /* EnterProfessionViewController.swift */; };
 		834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */; };
 		834912FC24C75830002990F8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FB24C75830002990F8 /* StartViewController.swift */; };
-		834912FE24C75B90002990F8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* HomeViewController.swift */; };
+		834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* SearchViewController.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
@@ -36,13 +37,14 @@
 /* Begin PBXFileReference section */
 		20119206395B34005853DB9C /* Pods-DatingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.debug.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
 		834912F524C7283D002990F8 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		834912F724C74254002990F8 /* EnterProfessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfessionViewController.swift; sourceTree = "<group>"; };
 		834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceViewController.swift; sourceTree = "<group>"; };
 		834912FB24C75830002990F8 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		834912FD24C75B90002990F8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		834912FD24C75B90002990F8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				838071F324C66BAC008BAA2C /* Aurthentication */,
-				834912FD24C75B90002990F8 /* HomeViewController.swift */,
+				834912FD24C75B90002990F8 /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -142,6 +144,7 @@
 		838071E324C6141C008BAA2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,9 +166,9 @@
 				838071EB24C62F52008BAA2C /* RegisterViewController.swift */,
 				838071EF24C64D16008BAA2C /* VerifiedViewController.swift */,
 				838071F124C66651008BAA2C /* ResetPasswordViewController.swift */,
+				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
 				838071F424C6E541008BAA2C /* EnterNameViewController.swift */,
 				838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */,
-				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
 				834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */,
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
@@ -318,7 +321,7 @@
 			files = (
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
-				834912FE24C75B90002990F8 /* HomeViewController.swift in Sources */,
+				834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */,
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
 				838071EC24C62F52008BAA2C /* RegisterViewController.swift in Sources */,
 				834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */,
@@ -330,6 +333,7 @@
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
 				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
 				838071F024C64D16008BAA2C /* VerifiedViewController.swift in Sources */,
+				831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */,
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,

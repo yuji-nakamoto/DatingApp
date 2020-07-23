@@ -18,18 +18,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-        
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loginButton.isEnabled = true
     }
     
     // MARK: - Actions
@@ -42,13 +37,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if textFieldHaveText() {
             
-            loginButton.isEnabled = false
             loginUser()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
             hudError()
+        }
+    }
+    
+    @IBAction func segmentedTaped(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0: UserDefaults.standard.removeObject(forKey: FEMALE); UserDefaults.standard.synchronize()
+        case 1: UserDefaults.standard.set(true, forKey: FEMALE); UserDefaults.standard.synchronize()
+        default: break
         }
     }
     
@@ -65,6 +68,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     hud.textLabel.text = "ログインに成功しました。"
                     hud.show(in: self.view)
                     hudSuccess()
+                    UserDefaults.standard.set(true, forKey: CURRENTUSER)
                     self.toTabBerVC()
                 } else {
                     generator.notificationOccurred(.error)

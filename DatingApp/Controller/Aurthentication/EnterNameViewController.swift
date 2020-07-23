@@ -25,7 +25,7 @@ class EnterNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadUser()
+        fetchUser()
         setupUI()
     }
     
@@ -64,10 +64,18 @@ class EnterNameViewController: UIViewController {
     
     // MARK: - User
     
-    private func loadUser() {
+    private func fetchUser() {
         
-        fetchUser(User.currentUserId()) { (user) in
-            self.user = user
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            User.fetchFemaleUser(User.currentUserId()) { (user) in
+                self.user = user
+                return
+            }
+        }
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            User.fetchMaleUser(User.currentUserId()) { (user) in
+                self.user = user
+            }
         }
     }
     
@@ -75,10 +83,15 @@ class EnterNameViewController: UIViewController {
         
         let user = User()
         user.username = nameTextField.text
-        user.uid = self.user.uid
+        user.uid = User.currentUserId()
         user.email = self.user.email
         
-        updateUserData1(user)
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            updateFemaleUserData1(user)
+            toEnterAgeVC()
+            return
+        }
+        updateMaleUserData1(user)
         toEnterAgeVC()
     }
     

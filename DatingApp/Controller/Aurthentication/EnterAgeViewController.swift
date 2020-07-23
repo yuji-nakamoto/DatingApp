@@ -28,7 +28,7 @@ class EnterAgeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUser()
+        fetchUser()
         setupUI()
     }
     
@@ -51,23 +51,36 @@ class EnterAgeViewController: UIViewController {
     
     // MARK: - User
     
-    private func loadUser() {
+    private func fetchUser() {
         
-        fetchUser(User.currentUserId()) { (user) in
-            self.user = user
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            User.fetchFemaleUser(User.currentUserId()) { (user) in
+                self.user = user
+                return
+            }
+        }
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            User.fetchMaleUser(User.currentUserId()) { (user) in
+                self.user = user
+            }
         }
     }
     
     private func saveUserAge() {
         
         let user = User()
-        user.age = ageLabel.text!
-        user.uid = self.user.uid
-        user.email = self.user.email
+        user.age = ageLabel.text! + "歳"
+        user.uid = User.currentUserId()
         user.username = self.user.username
+        user.email = self.user.email
         
-        updateUserData1(user)
-        toEnterGenderVC()
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            updateFemaleUserData1(user)
+            toEnterProfileImageVC()
+            return
+        }
+        updateMaleUserData1(user)
+        toEnterProfileImageVC()
     }
     
     // MARK: - Helpers
@@ -77,7 +90,7 @@ class EnterAgeViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
         
-        ageLabel.text = String(18)
+        ageLabel.text = "18"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         descriptionLabel.text = "年齢を選択してください。"
@@ -89,12 +102,12 @@ class EnterAgeViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private func toEnterGenderVC() {
+    private func toEnterProfileImageVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterGenderVC")
-            self.present(toEnterGenderVC, animated: true, completion: nil)
+            let toEnterProfileImageVC = storyboard.instantiateViewController(withIdentifier: "EnterProfileImageVC")
+            self.present(toEnterProfileImageVC, animated: true, completion: nil)
         }
     }
 }

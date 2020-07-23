@@ -28,7 +28,7 @@ class EnterProfessionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUser()
+        fetchUser()
         setupUI()
     }
     
@@ -59,10 +59,18 @@ class EnterProfessionViewController: UIViewController {
     
     // MARK: - User
     
-    private func loadUser() {
+    private func fetchUser() {
         
-        fetchUser(User.currentUserId()) { (user) in
-            self.user = user
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            User.fetchFemaleUser(User.currentUserId()) { (user) in
+                self.user = user
+                return
+            }
+        }
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            User.fetchMaleUser(User.currentUserId()) { (user) in
+                self.user = user
+            }
         }
     }
     
@@ -72,8 +80,14 @@ class EnterProfessionViewController: UIViewController {
         user.uid = self.user.uid
         user.profileImageUrls = self.user.profileImageUrls
         user.profession = professionLabel.text
-      
-        updateUserData2(user)
+        
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            
+            updateFemaleUserData2(user)
+            toEnterResidenceVC()
+            return
+        }
+        updateMaleUserData2(user)
         toEnterResidenceVC()
     }
     

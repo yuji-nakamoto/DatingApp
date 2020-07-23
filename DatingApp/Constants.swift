@@ -11,7 +11,8 @@ import FirebaseFirestore
 
 // MARK: - Firestore
 
-public let COLLECTION_USER = Firestore.firestore().collection("user")
+public let COLLECTION_MALE_USERS = Firestore.firestore().collection("male_users")
+public let COLLECTION_FEMALE_USERS = Firestore.firestore().collection("female_users")
 
 // MARK: - Color
 
@@ -27,7 +28,6 @@ public let EMAIL = "email"
 public let PROFILEIMAGEURLS = "profileImageUrls"
 public let CURRENTUSER = "currentUser"
 public let AGE = "age"
-public let GENDER = "gender"
 public let RESIDENCE = "residence"
 public let PROFESSION = "profession"
 public let SELFINTRO = "selfIntro"
@@ -36,4 +36,7 @@ public let SELFINTRO = "selfIntro"
 
 public let RCOMPLETION = "registerCompletion"
 public let TO_VERIFIED_VC = "toVerifiedVC"
+public let FEMALE = "female"
+
+
 

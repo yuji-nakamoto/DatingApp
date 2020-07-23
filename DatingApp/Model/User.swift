@@ -19,7 +19,6 @@ class User {
     var selfIntro: String!
     var residence: String!
     var profession: String!
-    var gender: String!
     
     init() {
     }
@@ -30,7 +29,6 @@ class User {
         email = dict[EMAIL] as? String ?? ""
         profileImageUrls = dict[PROFILEIMAGEURLS] as? [String]  ?? []
         age = dict[AGE] as? String ?? ""
-        gender = dict[GENDER] as? String ?? ""
         residence = dict[RESIDENCE] as? String ?? ""
         profession = dict[PROFESSION] as? String ?? ""
         selfIntro = dict[SELFINTRO] as? String ?? ""
@@ -62,9 +60,7 @@ class User {
                 
                 if result!.user.isEmailVerified {
                     completion(error, true)
-                    print("Success: email verified")
                 } else {
-                    print("Error: email is not verified")
                     completion(error, false)
                 }
             } else {
@@ -93,6 +89,8 @@ class User {
             try Auth.auth().signOut()
             
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+            UserDefaults.standard.removeObject(forKey: FEMALE)
+            UserDefaults.standard.removeObject(forKey: CURRENTUSER)
             UserDefaults.standard.synchronize()
             completion(nil)
             
@@ -112,17 +110,6 @@ class User {
         })
     }
     
-    class func sendVerificaitionEmail(email: String, completion: @escaping (_ error: Error?) -> Void) {
-        
-        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
-            
-            Auth.auth().currentUser?.reload(completion: { (error) in
-                print("send email error:", error?.localizedDescription as Any)
-                completion(error)
-            })
-        })
-    }
-    
     class func resetPassword(email: String, completion: @escaping(_ error: Error?) -> Void) {
         
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
@@ -133,19 +120,107 @@ class User {
             completion(error)
         }
     }
-}
-
-// MARK: - Fetch user
-
-func fetchUser(_ currentUserId: String, completion: @escaping (_ user: User) -> Void) {
     
-    COLLECTION_USER.document(currentUserId).getDocument { (snapshot, error) in
+    // MARK: - Fetch user
+    
+    class func fetchMaleUser(_ currentUserId: String, completion: @escaping (_ user: User) -> Void) {
         
-        if error != nil {
-            print(error!.localizedDescription)
+        COLLECTION_MALE_USERS.document(currentUserId).getDocument { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+            let user = User(dict: snapshot!.data()! as NSDictionary)
+            completion(user)
         }
-        let user = User(dict: snapshot!.data()! as NSDictionary)
-        completion(user)
+    }
+    
+    class func fetchFemaleUser(_ currentUserId: String, completion: @escaping (_ user: User) -> Void) {
+        
+        COLLECTION_FEMALE_USERS.document(currentUserId).getDocument { (snapshot, error) in
+            
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+            let user = User(dict: snapshot!.data()! as NSDictionary)
+            completion(user)
+        }
+    }
+    
+    class func fetchMaleUsers (completion: @escaping([User]) -> Void) {
+        
+        var users: [User] = []
+        
+        COLLECTION_MALE_USERS.getDocuments { (snapshot, error) in
+            
+            snapshot?.documents.forEach({ (document) in
+                let dictionary = document.data()
+                let user = User(dict: dictionary as NSDictionary)
+                
+                users.append(user)
+                
+                if users.count == snapshot?.documents.count {
+                    completion(users)
+                }
+            })
+        }
+    }
+    
+    class func fetchFemaleUsers (completion: @escaping([User]) -> Void) {
+        
+        var users: [User] = []
+        
+        COLLECTION_FEMALE_USERS.getDocuments { (snapshot, error) in
+            
+            snapshot?.documents.forEach({ (document) in
+                let dictionary = document.data()
+                let user = User(dict: dictionary as NSDictionary)
+                
+                users.append(user)
+                
+                if users.count == snapshot?.documents.count {
+                    completion(users)
+                }
+            })
+        }
+    }
+    
+    class func maleResidenceSort(_ withResidence: String, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        COLLECTION_MALE_USERS.whereField(RESIDENCE, isEqualTo: withResidence).getDocuments { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {
+                completion(users)
+                return
+            }
+            if !snapshot.isEmpty {
+                
+                for userDict in snapshot.documents {
+                    users.append(User(dict: userDict.data() as NSDictionary))
+                }
+            }
+            completion(users)
+        }
+    }
+    
+    class func femaleResidenceSort(_ withResidence: String, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        COLLECTION_FEMALE_USERS.whereField(RESIDENCE, isEqualTo: withResidence).getDocuments { (snapshot, error) in
+            
+            guard let snapshot = snapshot else {
+                completion(users)
+                return
+            }
+            if !snapshot.isEmpty {
+                
+                for userDict in snapshot.documents {
+                    users.append(User(dict: userDict.data() as NSDictionary))
+                }
+            }
+            completion(users)
+        }
     }
 }
 
@@ -153,7 +228,7 @@ func fetchUser(_ currentUserId: String, completion: @escaping (_ user: User) -> 
 
 func userDictFrom1(_ user: User) -> NSDictionary {
     
-    return NSDictionary(objects: [user.uid ?? "", user.email ?? "", user.age ?? 0, user.gender ?? "", user.username ?? ""], forKeys: [UID as NSCopying, EMAIL as NSCopying, AGE as NSCopying, GENDER as NSCopying, USERNAME as NSCopying])
+    return NSDictionary(objects: [user.uid ?? "", user.email ?? "", user.age ?? 0, user.username ?? ""], forKeys: [UID as NSCopying, EMAIL as NSCopying, AGE as NSCopying, USERNAME as NSCopying])
 }
 
 func userDictFrom2(_ user: User) -> NSDictionary {
@@ -162,9 +237,9 @@ func userDictFrom2(_ user: User) -> NSDictionary {
 }
 
 
-func saveUserToFirestore(_ user: User) {
+func saveMaleUser(_ user: User) {
     
-    COLLECTION_USER.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
+    COLLECTION_MALE_USERS.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
         
         if error != nil {
             print("error saving user: \(error!.localizedDescription)")
@@ -172,9 +247,19 @@ func saveUserToFirestore(_ user: User) {
     }
 }
 
-func updateUserData1(_ user: User) {
+func saveFemaleUser(_ user: User) {
     
-    COLLECTION_USER.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
+    COLLECTION_FEMALE_USERS.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
+        
+        if error != nil {
+            print("error saving user: \(error!.localizedDescription)")
+        }
+    }
+}
+
+func updateMaleUserData1(_ user: User) {
+    
+    COLLECTION_MALE_USERS.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
         
         if error != nil {
             print("error updating user: \(error!.localizedDescription)")
@@ -182,9 +267,29 @@ func updateUserData1(_ user: User) {
     }
 }
 
-func updateUserData2(_ user: User) {
+func updateMaleUserData2(_ user: User) {
     
-    COLLECTION_USER.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
+    COLLECTION_MALE_USERS.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
+        
+        if error != nil {
+            print("error updating user: \(error!.localizedDescription)")
+        }
+    }
+}
+
+func updateFemaleUserData1(_ user: User) {
+    
+    COLLECTION_FEMALE_USERS.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
+        
+        if error != nil {
+            print("error updating user: \(error!.localizedDescription)")
+        }
+    }
+}
+
+func updateFemaleUserData2(_ user: User) {
+    
+    COLLECTION_FEMALE_USERS.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
         
         if error != nil {
             print("error updating user: \(error!.localizedDescription)")

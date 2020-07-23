@@ -80,9 +80,10 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     user.uid = User.currentUserId()
                     user.email = self.emailTextField.text
                     
-                    saveUserToFirestore(user)
-                    
-                    self.toEnterNameVC()
+                    saveMaleUser(user)
+                    saveFemaleUser(user)
+
+                    self.toEnterGenderVC()
                 } else {
                     generator.notificationOccurred(.error)
                     hud.textLabel.text = "認証メールを確認してください。"
@@ -129,13 +130,13 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Navigation
-
-    private func toEnterNameVC() {
+    
+    private func toEnterGenderVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
-            self.present(toEnterNameVC, animated: true, completion: nil)
+            let toEnterGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterGenderVC")
+            self.present(toEnterGenderVC, animated: true, completion: nil)
         }
     }
     
