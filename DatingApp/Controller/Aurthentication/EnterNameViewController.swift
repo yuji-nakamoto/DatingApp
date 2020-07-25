@@ -66,32 +66,20 @@ class EnterNameViewController: UIViewController {
     
     private func fetchUser() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                self.user = user
-                return
-            }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                self.user = user
-            }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
         }
     }
     
     private func saveUserName() {
         
         let user = User()
-        user.username = nameTextField.text
         user.uid = User.currentUserId()
         user.email = self.user.email
+        updateUserData1(user)
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            updateFemaleUserData1(user)
-            toEnterAgeVC()
-            return
-        }
-        updateMaleUserData1(user)
+        user.username = nameTextField.text
+        updateUserData2(user)
         toEnterAgeVC()
     }
     

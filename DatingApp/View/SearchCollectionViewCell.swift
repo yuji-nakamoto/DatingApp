@@ -33,7 +33,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         residenceLabel.text = user.residence
         selfIntroLabel.text = user.selfIntro
         
-        profileImageView.sd_setImage(with: URL(string: user.profileImageUrls.first!), completed: nil)
+        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
     }
 
 }

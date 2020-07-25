@@ -58,36 +58,29 @@ class EnterResidenceViewController: UIViewController {
     
     private func fetchUser() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                self.user = user
-                return
-            }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                self.user = user
-            }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
         }
     }
 
-    
     private func saveUserProfession() {
         
         let user = User()
         user.uid = self.user.uid
-        user.profileImageUrls = self.user.profileImageUrls
         user.profession = self.user.profession
         user.residence = self.residenceLabel.text
+        user.username = self.user.username
+        user.selfIntro = "はじめまして！"
+        user.comment = "最近、アプリに登録したよ！😊"
+        updateUserData2(user)
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
-            updateFemaleUserData2(user)
-            toTabBerVC()
-            return
+        user.profileImageUrl1 = self.user.profileImageUrl1
+        user.profileImageUrl2 = self.user.profileImageUrl2
+        user.profileImageUrl3 = self.user.profileImageUrl3
+        updateProfileImageData(user) { (error) in
+            self.toTabBerVC()
         }
-        updateMaleUserData2(user)
-        toTabBerVC()
+        
     }
     
     // MARK: - Helpers

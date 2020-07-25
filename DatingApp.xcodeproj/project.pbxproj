@@ -11,6 +11,9 @@
 		831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392324C9CBE00043AA76 /* DetailTableViewController.swift */; };
 		831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */; };
 		831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */; };
+		831E392A24CA37390043AA76 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392924CA37390043AA76 /* MyPageTableViewController.swift */; };
+		831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392B24CA46260043AA76 /* ProfileTableViewController.swift */; };
+		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
 		834912F624C7283D002990F8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F524C7283D002990F8 /* Service.swift */; };
@@ -44,6 +47,9 @@
 		831E392324C9CBE00043AA76 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		831E392924CA37390043AA76 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
+		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
 		834912F524C7283D002990F8 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -136,6 +142,9 @@
 				838071F324C66BAC008BAA2C /* Aurthentication */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
 				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
+				831E392924CA37390043AA76 /* MyPageTableViewController.swift */,
+				831E392B24CA46260043AA76 /* ProfileTableViewController.swift */,
+				8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -341,6 +350,7 @@
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
 				831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
+				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
 				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
@@ -348,7 +358,9 @@
 				831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */,
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
+				831E392A24CA37390043AA76 /* MyPageTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
+				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 			);

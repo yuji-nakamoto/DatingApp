@@ -53,16 +53,8 @@ class EnterAgeViewController: UIViewController {
     
     private func fetchUser() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                self.user = user
-                return
-            }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                self.user = user
-            }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
         }
     }
     
@@ -71,15 +63,11 @@ class EnterAgeViewController: UIViewController {
         let user = User()
         user.age = ageLabel.text! + "歳"
         user.uid = User.currentUserId()
-        user.username = self.user.username
         user.email = self.user.email
+        updateUserData1(user)
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            updateFemaleUserData1(user)
-            toEnterProfileImageVC()
-            return
-        }
-        updateMaleUserData1(user)
+        user.username = self.user.username
+        updateUserData2(user)
         toEnterProfileImageVC()
     }
     

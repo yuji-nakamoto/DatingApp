@@ -59,16 +59,8 @@ class EnterGenderViewController: UIViewController {
     
     private func fetchUser() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                self.user = user
-                return
-            }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                self.user = user
-            }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
         }
     }
     
@@ -77,6 +69,7 @@ class EnterGenderViewController: UIViewController {
         let user = User()
         user.uid = User.currentUserId()
         user.email = self.user.email
+        user.gender = genderLabel.text
         
         if genderLabel.text == "男性" {
             saveMaleUser(user)

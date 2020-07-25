@@ -15,7 +15,7 @@ struct Service {
         
         var task: StorageUploadTask!
         
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
         let filename = NSUUID().uuidString
         let withPath = "/images/\(filename)"
         let storageRef = Storage.storage().reference(forURL: "gs://datingapp-d0f98.appspot.com").child(withPath)
@@ -44,16 +44,13 @@ struct Service {
         for link in imageUrls {
             
             let url = NSURL(string: link)
-            let downloadQueue = DispatchQueue(label: "imageDownloadQueue")
-            
-            downloadQueue.async {
+            DispatchQueue(label: "imageDownloadQueue").async {
                 downloadCounter += 1
-                
                 let data = NSData(contentsOf: url! as URL)
                 
                 if data != nil {
-                    imageArray.append(UIImage(data: data! as Data)!)
                     
+                    imageArray.append(UIImage(data: data! as Data)!)
                     if downloadCounter == imageArray.count {
                         
                         DispatchQueue.main.async {
@@ -67,5 +64,23 @@ struct Service {
             }
         }
     }
-
+    
+    static func saveUserData(user: User, completion: @escaping(Error?) -> Void) {
+        
+        let data = [UID: user.uid ?? "",
+                    USERNAME: user.username ?? "",
+                    SELFINTRO: user.selfIntro ?? "",
+                    BODYSIZE: user.bodySize ?? "",
+                    HEIGHT: user.height ?? "",
+                    RESIDENCE: user.residence ?? "",
+                    PROFESSION: user.profession ?? "",
+                    COMMENT: user.comment ?? ""] as [String : Any]
+        
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            
+            COLLECTION_FEMALE_USERS.document(user.uid).updateData(data, completion: completion)
+        } else {
+            COLLECTION_MALE_USERS.document(user.uid).updateData(data, completion: completion)
+        }
+    }
 }

@@ -86,11 +86,13 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     self.toEnterGenderVC()
                 } else {
                     generator.notificationOccurred(.error)
+                    self.loginButton.isEnabled = true
                     hud.textLabel.text = "認証メールを確認してください。"
                     hud.show(in: self.view)
                     hudError()
                 }
             } else {
+                self.loginButton.isEnabled = true
                 hud.textLabel.text = error!.localizedDescription
                 hud.show(in: self.view)
                 hudError()
@@ -103,7 +105,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 
     private func setupUI() {
         
-        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n認証がお済みであればメールアドレス、パスワードを入力しログインに進んでください。"
+        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n認証がお済みであればログインを行い、ユーザー情報の入力を進めてください。"
         loginButton.layer.cornerRadius = 50 / 2
         resendButton.layer.cornerRadius = 50 / 2
         resendButton.layer.borderWidth = 1

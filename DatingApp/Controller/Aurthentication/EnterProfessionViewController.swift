@@ -61,16 +61,8 @@ class EnterProfessionViewController: UIViewController {
     
     private func fetchUser() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                self.user = user
-                return
-            }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                self.user = user
-            }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
         }
     }
     
@@ -78,17 +70,16 @@ class EnterProfessionViewController: UIViewController {
         
         let user = User()
         user.uid = self.user.uid
-        user.profileImageUrls = self.user.profileImageUrls
         user.profession = professionLabel.text
+        user.username = self.user.username
+        updateUserData2(user)
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
-            updateFemaleUserData2(user)
-            toEnterResidenceVC()
-            return
+        user.profileImageUrl1 = self.user.profileImageUrl1
+        user.profileImageUrl2 = self.user.profileImageUrl2
+        user.profileImageUrl3 = self.user.profileImageUrl3
+        updateProfileImageData(user) { (error) in
+            self.toEnterResidenceVC()
         }
-        updateMaleUserData2(user)
-        toEnterResidenceVC()
     }
     
     // MARK: - Helpers

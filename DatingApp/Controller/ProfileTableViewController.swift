@@ -1,18 +1,19 @@
 //
-//  DetailTableViewController.swift
+//  ProfileTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/23.
+//  Created by yuji_nakamoto on 2020/07/24.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 import SDWebImage
 
-class DetailTableViewController: UIViewController {
+class ProfileTableViewController: UIViewController {
     
     // MARK: - Propertis
     
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,7 +26,7 @@ class DetailTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        downloadImages()
+        fetchUser()
         configureUI()
     }
     
@@ -49,13 +50,24 @@ class DetailTableViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - Fetch user
+    
+    private func fetchUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            self.downloadImages(user)
+            self.tableView.reloadData()
+        }
+    }
+    
     // MARK: - Download images
     
-    private func downloadImages() {
-        
-        let profileImageUrls = [user.profileImageUrl1!, user.profileImageUrl2!, user.profileImageUrl3!]
-        let imageUrls = profileImageUrls.map({ URL(string: $0) })
+    private func downloadImages(_ user: User) {
 
+        let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2, user.profileImageUrl3]
+        let imageUrls = profileImageUrls.map({ URL(string: $0!) })
+        
         for (_, url) in imageUrls.enumerated() {
             SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
                 self.profileImages.append(image!)
@@ -72,13 +84,14 @@ class DetailTableViewController: UIViewController {
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        editButton.layer.cornerRadius = 50 / 2
     }
     
 }
 
 //MARK: UICollectionViewDelegate
 
-extension DetailTableViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ProfileTableViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -101,7 +114,7 @@ extension DetailTableViewController:  UICollectionViewDataSource, UICollectionVi
 
 
 // MARK: - UITableViewDelegate
-extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource {
+extension ProfileTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1

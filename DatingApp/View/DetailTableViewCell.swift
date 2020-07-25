@@ -22,7 +22,8 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var bodyLabel: UILabel!
     @IBOutlet weak var residenceLabel2: UILabel!
     @IBOutlet weak var professionLabel: UILabel!
-            
+    @IBOutlet weak var heightLabel: UILabel!
+    
     // MARK: - Helpers
     
     func configureCell(_ user: User) {
@@ -35,6 +36,7 @@ class DetailTableViewCell: UITableViewCell {
         ageLabel2.text = user.age
         selfIntrolabel.text = user.selfIntro
         professionLabel.text = user.profession
+        commentLabel.text = user.comment
     }
 
 }

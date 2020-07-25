@@ -81,31 +81,27 @@ class EnterProfileImageViewController: UIViewController {
             
             let user = User()
             user.uid = User.currentUserId()
-            user.profileImageUrls = [String(imageUrl)]
+            user.profileImageUrl1 = imageUrl
+            user.profileImageUrl2 = PLACEHOLDERIMAGEURL2
+            user.profileImageUrl3 = PLACEHOLDERIMAGEURL2
             
-            if UserDefaults.standard.object(forKey: FEMALE) != nil {
-                updateFemaleUserData2(user)
+            updateProfileImageData(user) { (error) in
                 self.hudSetup()
-                return
             }
-            updateMaleUserData2(user)
-            self.hudSetup()
         }
     }
     
     private func addPlaceholederImage() {
         
         let user = User()
-        user.uid = self.user.uid
-        user.profileImageUrls = ["https://firebasestorage.googleapis.com/v0/b/appstore-a772d.appspot.com/o/ProfileImage%2F8Uujy2X4YbTc0J5SfNHGEnIXvpj2%2Fjpg?alt=media&token=fa105550-c4e2-4869-9487-19bc3516a1c1"]
-        
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            updateFemaleUserData2(user)
-            toEnterProfessionVC()
-            return
+        user.uid = User.currentUserId()
+
+        user.profileImageUrl1 = PLACEHOLDERIMAGEURL
+        user.profileImageUrl2 = PLACEHOLDERIMAGEURL2
+        user.profileImageUrl3 = PLACEHOLDERIMAGEURL2
+        updateProfileImageData(user) { (error) in
+            self.toEnterProfessionVC()
         }
-        updateMaleUserData2(user)
-        toEnterProfessionVC()
     }
     
     // MARK: - Helpers

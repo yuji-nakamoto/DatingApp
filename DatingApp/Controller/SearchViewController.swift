@@ -42,31 +42,19 @@ class SearchViewController: UIViewController {
     
     private func fetchUsers() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
-            User.fetchMaleUsers { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                return
-            }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            
-            User.fetchFemaleUsers { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-            }
+        User.fetchUsers { (users) in
+            self.users = users
+            self.collectionView.reloadData()
         }
     }
     
     private func sortResidence() {
-        
+
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
+
             User.fetchFemaleUser(User.currentUserId()) { (user) in
                 let residence1 = user.residence
                 User.maleResidenceSort(residence1!) { (users) in
-                    print("!=nil")
                     self.users = users
                 }
             }
@@ -74,20 +62,15 @@ class SearchViewController: UIViewController {
                 User.fetchMaleUser(User.currentUserId()) { (user) in
                     let residence1 = user.residence
                     User.maleResidenceSort(residence1!) { (users) in
-                        print("!=nil2")
                         self.users.append(contentsOf: users)
                         self.collectionView.reloadData()
                     }
                 }
             }
-        }
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            
+        } else {
             User.fetchMaleUser(User.currentUserId()) { (user) in
                 let residence2 = user.residence
                 User.femaleResidenceSort(residence2!) { (users) in
-                    print("==nil")
-
                     self.users = users
                 }
             }
@@ -95,8 +78,6 @@ class SearchViewController: UIViewController {
                 User.fetchFemaleUser(User.currentUserId()) { (user) in
                     let residence2 = user.residence
                     User.femaleResidenceSort(residence2!) { (users) in
-                        print("==nil2")
-
                         self.users.append(contentsOf: users)
                         self.collectionView.reloadData()
                     }
@@ -178,8 +159,6 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("indexPath: \(indexPath.row)")
-
         performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row])
     }
 }
