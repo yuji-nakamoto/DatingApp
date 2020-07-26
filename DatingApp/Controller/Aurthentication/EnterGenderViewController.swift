@@ -66,17 +66,13 @@ class EnterGenderViewController: UIViewController {
     
     private func saveUserGender() {
         
-        let user = User()
-        user.uid = User.currentUserId()
-        user.email = self.user.email
-        user.gender = genderLabel.text
+        let dict = [GENDER: genderLabel.text]
+        updateUser(withValue: dict as [String : Any])
 
         if genderLabel.text == "男性" {
-            saveUser(user)
             toEnterNameVC()
         } else {
             UserDefaults.standard.set(true, forKey: FEMALE)
-            saveUser(user)
             toEnterNameVC()
         }
     }

@@ -73,10 +73,9 @@ class EnterNameViewController: UIViewController {
     
     private func saveUserName() {
         
-        let user = User()
-        
-        user.username = self.user.username
-        updateUserData2(user)
+        let dict = [USERNAME: nameLabel.text]
+        updateUser(withValue: dict as [String : Any])
+
         toEnterAgeVC()
     }
     

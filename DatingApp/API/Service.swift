@@ -65,22 +65,4 @@ struct Service {
         }
     }
     
-    static func saveUserData(user: User, completion: @escaping(Error?) -> Void) {
-        
-        let data = [UID: user.uid ?? "",
-                    USERNAME: user.username ?? "",
-                    SELFINTRO: user.selfIntro ?? "",
-                    BODYSIZE: user.bodySize ?? "",
-                    HEIGHT: user.height ?? "",
-                    RESIDENCE: user.residence ?? "",
-                    PROFESSION: user.profession ?? "",
-                    COMMENT: user.comment ?? ""] as [String : Any]
-        
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
-            COLLECTION_FEMALE_USERS.document(user.uid).updateData(data, completion: completion)
-        } else {
-            COLLECTION_MALE_USERS.document(user.uid).updateData(data, completion: completion)
-        }
-    }
 }

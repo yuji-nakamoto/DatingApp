@@ -137,57 +137,23 @@ class User {
 
 // MARK: - Save Data
 
-func updateUserData1(_ user: User) {
+func saveUser(userId: String, withValue: [String: Any]) {
     
-    COLLECTION_USERS.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
-        if error != nil {
-            print("error updating user: \(error!.localizedDescription)")
+    COLLECTION_USERS.document(userId).setData(withValue) { (error) in
+        if let error = error {
+            print("Error saving user: \(error.localizedDescription)")
         }
     }
 }
 
-func updateUserData2(_ user: User) {
+func updateUser(withValue: [String: Any]) {
     
-    COLLECTION_USERS.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
-        if error != nil {
-            print("error updating user: \(error!.localizedDescription)")
+    COLLECTION_USERS.document(User.currentUserId()).updateData(withValue) { (error) in
+        if let error = error {
+            print("Error updating user: \(error.localizedDescription)")
         }
     }
 }
 
-func updateProfileImageData(_ user: User, completion: @escaping(Error?) -> Void) {
-    
-    COLLECTION_USERS.document(user.uid).updateData(userProfileImageDict(user) as! [AnyHashable : Any]) { (error) in
-        if error != nil {
-            print("error updating user: \(error!.localizedDescription)")
-        }
-        completion(error)
-    }
-}
 
-// MARK: - Helpers
-
-func userDictFrom1(_ user: User) -> NSDictionary {
-    
-    return NSDictionary(objects: [user.uid ?? "", user.email ?? "", user.age ?? 0, user.gender ?? ""], forKeys: [UID as NSCopying, EMAIL as NSCopying, AGE as NSCopying, GENDER as NSCopying])
-}
-
-func userDictFrom2(_ user: User) -> NSDictionary {
-    
-    return NSDictionary(objects: [user.profession ?? "", user.residence ?? "", user.selfIntro ?? "", user.comment ?? "", user.bodySize ?? "", user.height ?? "", user.username ?? ""], forKeys: [PROFESSION as NSCopying, RESIDENCE as NSCopying, SELFINTRO as NSCopying, COMMENT as NSCopying, BODYSIZE as NSCopying, HEIGHT as NSCopying, USERNAME as NSCopying])
-}
-
-func userProfileImageDict(_ user: User) -> NSDictionary {
-    
-    return NSDictionary(objects: [user.profileImageUrl1 ?? "", user.profileImageUrl2 ?? "", user.profileImageUrl3 ?? ""], forKeys: [PROFILEIMAGEURL1 as NSCopying, PROFILEIMAGEURL2 as NSCopying, PROFILEIMAGEURL3 as NSCopying])
-}
-
-func saveUser(_ user: User) {
-    
-    COLLECTION_USERS.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
-        if error != nil {
-            print("error saving user: \(error!.localizedDescription)")
-        }
-    }
-}
 

@@ -15,7 +15,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var selfIntroLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     
@@ -31,7 +31,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         ageLabel.text = user.age
         residenceLabel.text = user.residence
-        selfIntroLabel.text = user.selfIntro
+        commentLabel.text = user.comment
         
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
     }

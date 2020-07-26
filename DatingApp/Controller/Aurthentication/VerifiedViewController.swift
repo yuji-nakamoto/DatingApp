@@ -76,11 +76,11 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     hud.textLabel.text = "メールの認証に成功しました。"
                     hud.show(in: self.view)
                     hudSuccess()
-                    let user = User()
-                    user.uid = User.currentUserId()
-                    user.email = self.emailTextField.text
                     
-                    saveUser(user)
+                    let dict = [UID: User.currentUserId(),
+                                EMAIL: self.emailTextField.text!] as [String : Any]
+                    saveUser(userId: User.currentUserId(), withValue: dict)
+                    
                     self.toEnterGenderVC()
                 } else {
                     generator.notificationOccurred(.error)

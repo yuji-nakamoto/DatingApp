@@ -12,8 +12,6 @@ import FirebaseFirestore
 // MARK: - Firestore
 
 public let COLLECTION_USERS = Firestore.firestore().collection("users")
-public let COLLECTION_MALE_USERS = Firestore.firestore().collection("male_users")
-public let COLLECTION_FEMALE_USERS = Firestore.firestore().collection("female_users")
 
 // MARK: - Color
 

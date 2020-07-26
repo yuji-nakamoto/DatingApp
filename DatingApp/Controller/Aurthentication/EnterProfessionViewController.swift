@@ -21,7 +21,7 @@ class EnterProfessionViewController: UIViewController {
     @IBOutlet weak var skipButton: UIButton!
     
     private var user: User!
-    private var dataArray = ["選択しない", "会社員", "医師", "弁護士", "会計士", "経営者", "大手商社", "外資金融", "大手企業", "クリエイター", "IT関連", "航空関係", "芸能・モデル", "アパレル", "秘書", "看護師", "医療関係", "保育士", "自由業", "学生", "栄養士", "教育関連", "食品関連", "製造", "保険", "不動産", "美容関係", "建築関係", "旅行関係", "福祉・介護", "フリーランス", "その他",]
+    private var dataArray = ["選択しない", "会社員", "医師", "弁護士", "会計士", "経営者", "大手商社", "外資金融", "大手企業", "クリエイター", "IT関連", "航空関係", "芸能・モデル", "アパレル", "秘書", "看護師", "医療関係", "保育士", "自由業", "学生", "栄養士", "教育関連", "食品関連", "製造", "保険", "不動産", "美容関係", "建築関係", "旅行関係", "福祉・介護", "フリーランス", "その他"]
     
     // MARK: - Lifecycle
     
@@ -68,18 +68,9 @@ class EnterProfessionViewController: UIViewController {
     
     private func saveUserProfession() {
         
-        let user = User()
-        user.uid = self.user.uid
-        user.profession = professionLabel.text
-        user.username = self.user.username
-        updateUserData2(user)
-        
-        user.profileImageUrl1 = self.user.profileImageUrl1
-        user.profileImageUrl2 = self.user.profileImageUrl2
-        user.profileImageUrl3 = self.user.profileImageUrl3
-        updateProfileImageData(user) { (error) in
-            self.toEnterResidenceVC()
-        }
+        let dict = [PROFESSION: professionLabel.text]
+        updateUser(withValue: dict as [String : Any])
+        toEnterResidenceVC()
     }
     
     // MARK: - Helpers

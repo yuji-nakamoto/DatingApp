@@ -65,22 +65,14 @@ class EnterResidenceViewController: UIViewController {
 
     private func saveUserProfession() {
         
-        let user = User()
-        user.uid = self.user.uid
-        user.profession = self.user.profession
-        user.residence = self.residenceLabel.text
-        user.username = self.user.username
-        user.selfIntro = "はじめまして！"
-        user.comment = "最近、アプリに登録したよ！😊"
-        updateUserData2(user)
+        let dict = [RESIDENCE: residenceLabel.text,
+                    SELFINTRO: "はじめまして！",
+                    COMMENT: "🆕アプリに登録したよ！😊",
+                    BODYSIZE: "未設定",
+                    HEIGHT: "未設定"]
+        updateUser(withValue: dict as [String : Any])
         
-        user.profileImageUrl1 = self.user.profileImageUrl1
-        user.profileImageUrl2 = self.user.profileImageUrl2
-        user.profileImageUrl3 = self.user.profileImageUrl3
-        updateProfileImageData(user) { (error) in
-            self.toTabBerVC()
-        }
-        
+        toTabBerVC()
     }
     
     // MARK: - Helpers

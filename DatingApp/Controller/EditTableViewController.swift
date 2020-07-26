@@ -13,6 +13,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
+    @IBOutlet weak var pickerKeyboardView1: PickerKeyboard1!
+    @IBOutlet weak var pickerKeyboardView2: PickerKeyboard2!
+    @IBOutlet weak var pickerKeyboardView3: PickerKeyboard3!
+    @IBOutlet weak var pickerKeyboardView4: PickerKeyboard4!
     @IBOutlet weak var profileImageView1: UIImageView!
     @IBOutlet weak var profileImageView2: UIImageView!
     @IBOutlet weak var profileImageView3: UIImageView!
@@ -34,6 +38,9 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var selectButton2: UIButton!
     @IBOutlet weak var selectButton3: UIButton!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var indicator1: UIActivityIndicatorView!
+    @IBOutlet weak var indicator2: UIActivityIndicatorView!
+    @IBOutlet weak var indicator3: UIActivityIndicatorView!
     
     private var user = User()
     private let picker = UIImagePickerController()
@@ -59,44 +66,19 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
-        saveButton.isEnabled = false
-        
-        if nameTextField.text!.count > 10 {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "名前は10文字以下で入力してください。"
-            hud.show(in: self.view)
-            hud.dismiss()
-            saveButton.isEnabled = true
-            return
-        }
-        
-        if commentTextField.text!.count > 16 {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "ひとことは16文字以下で入力してください。"
-            hud.show(in: self.view)
-            hud.dismiss()
-            saveButton.isEnabled = true
-            return
-        }
-        
+        validateTextField()
         hud.textLabel.text = "ユーザー情報を保存中..."
         hud.show(in: self.view)
-        let user = User()
-        user.uid = User.currentUserId()
-        user.selfIntro = textView.text
-        user.comment = commentTextField.text
-        user.username = nameTextField.text
-        user.residence = residenceSettingLabel.text
-        user.profession = professionSettingLabel.text
-        updateUserData2(user)
         
-        if profileImage1 != nil {
-            saveUploadImage1()
-        } else if profileImage2 != nil {
-            saveUploadImage2()
-        } else if profileImage3 != nil {
-            saveUploadImage3()
-        }
+        let dict = [SELFINTRO: textView.text,
+                    COMMENT: commentTextField.text,
+                    USERNAME: nameTextField.text,
+                    RESIDENCE: residenceSettingLabel.text,
+                    PROFESSION: professionSettingLabel.text,
+                    BODYSIZE: bodySizeSettingLabel.text,
+                    HEIGHT: heightSettingLabel.text]
+        
+        updateUser(withValue: dict as [String : Any])
         hudSetup()
     }
     
@@ -123,6 +105,71 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: Save data
+    
+    private func saveUploadImage1() {
+        guard profileImage1 != nil else { return }
+        
+        validateSelectButton()
+        indicator1.startAnimating()
+        
+        Service.uploadImage(image: profileImage1!) { (imageUrl) in
+            let dict = [PROFILEIMAGEURL1: imageUrl]
+            updateUser(withValue: dict)
+            
+            self.profileImage1 = nil
+            UserDefaults.standard.removeObject(forKey: "image1")
+            self.indicator1.stopAnimating()
+            
+            hud.textLabel.text = "プロフィール画像を保存しました。"
+            hud.show(in: self.view)
+            hudSuccess()
+            self.selectButtonIsEnabled()
+        }
+    }
+    
+    private func saveUploadImage2() {
+        guard profileImage2 != nil else { return }
+        
+        validateSelectButton()
+        indicator2.startAnimating()
+        
+        Service.uploadImage(image: profileImage2!) { (imageUrl) in
+            let dict = [PROFILEIMAGEURL2: imageUrl]
+            updateUser(withValue: dict)
+            
+            self.profileImage2 = nil
+            UserDefaults.standard.removeObject(forKey: "image2")
+            self.indicator2.stopAnimating()
+            
+            hud.textLabel.text = "プロフィール画像を保存しました。"
+            hud.show(in: self.view)
+            hudSuccess()
+            self.selectButtonIsEnabled()
+        }
+    }
+    
+    private func saveUploadImage3() {
+        guard profileImage3 != nil else { return }
+        
+        indicator3.startAnimating()
+        validateSelectButton()
+        
+        Service.uploadImage(image: profileImage3!) { (imageUrl) in
+            let dict = [PROFILEIMAGEURL3: imageUrl]
+            updateUser(withValue: dict)
+            
+            self.profileImage3 = nil
+            UserDefaults.standard.removeObject(forKey: "image3")
+            self.indicator3.stopAnimating()
+            
+            hud.textLabel.text = "プロフィール画像を保存しました。"
+            hud.show(in: self.view)
+            hudSuccess()
+            self.selectButtonIsEnabled()
+        }
+    }
+    
     // MARK: - Helpers
     
     private func setupUI(_ user: User) {
@@ -130,9 +177,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         nameTextField.delegate = self
         commentTextField.delegate = self
         picker.delegate = self
+        pickerKeyboardView1.delegate = self
+        pickerKeyboardView2.delegate = self
+        pickerKeyboardView3.delegate = self
+        pickerKeyboardView4.delegate = self
         
         saveButton.isEnabled = true
-        
         profileImageView1.layer.cornerRadius = 10
         profileImageView2.layer.cornerRadius = 10
         profileImageView3.layer.cornerRadius = 10
@@ -168,46 +218,49 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         nameTextField.text = user.username
         professionSettingLabel.text = user.profession
         residenceSettingLabel.text = user.residence
+        heightSettingLabel.text = user.height
+        bodySizeSettingLabel.text = user.bodySize
     }
     
-    private func saveUploadImage1() {
+    private func validateTextField() {
         
-        Service.uploadImage(image: profileImage1!) { (imageUrl) in
-            self.user.profileImageUrl1 = imageUrl
-            self.user.profileImageUrl2 = self.user.profileImageUrl2
-            self.user.profileImageUrl3 = self.user.profileImageUrl3
-            updateProfileImageData(self.user) { (error) in
-                self.hudSetup()
-            }
+        saveButton.isEnabled = false
+        
+        if nameTextField.text!.count > 10 {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "名前は10文字以下で入力してください。"
+            hud.show(in: self.view)
+            hud.dismiss()
+            saveButton.isEnabled = true
+            return
+        }
+        
+        if commentTextField.text!.count > 16 {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "ひとことは16文字以下で入力してください。"
+            hud.show(in: self.view)
+            hud.dismiss()
+            saveButton.isEnabled = true
+            return
         }
     }
     
-    private func saveUploadImage2() {
+    private func validateSelectButton() {
         
-        Service.uploadImage(image: profileImage2!) { (imageUrl) in
-            self.user.profileImageUrl1 = self.user.profileImageUrl1
-            self.user.profileImageUrl2 = imageUrl
-            self.user.profileImageUrl3 = self.user.profileImageUrl3
-            updateProfileImageData(self.user) { (error) in
-                self.hudSetup()
-            }
-        }
-
+        selectButton1.isEnabled = false
+        selectButton2.isEnabled = false
+        selectButton3.isEnabled = false
     }
     
-    private func saveUploadImage3() {
+    private func selectButtonIsEnabled() {
         
-        Service.uploadImage(image: profileImage3!) { (imageUrl) in
-            self.user.profileImageUrl1 = self.user.profileImageUrl1
-            self.user.profileImageUrl2 = self.user.profileImageUrl2
-            self.user.profileImageUrl3 = imageUrl
-            updateProfileImageData(self.user) { (error) in
-                self.hudSetup()
-            }
-        }
+        selectButton1.isEnabled = true
+        selectButton2.isEnabled = true
+        selectButton3.isEnabled = true
     }
-
+    
     private func settingPhoto(didSelect index: Int) {
+        
         self.imageIndex = index
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
@@ -224,9 +277,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func hudSetup() {
         
-        UserDefaults.standard.removeObject(forKey: "image1")
-        UserDefaults.standard.removeObject(forKey: "image2")
-        UserDefaults.standard.removeObject(forKey: "image3")
         hud.textLabel.text = "ユーザー情報を保存しました。"
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             hud.dismiss()
@@ -245,12 +295,57 @@ extension EditTableViewController: UIImagePickerControllerDelegate, UINavigation
         
         if UserDefaults.standard.object(forKey: "image1") != nil {
             profileImage1 = selectedImage!
-        } else if UserDefaults.standard.object(forKey: "image2") != nil {
-            profileImage2 = selectedImage!
-        } else if UserDefaults.standard.object(forKey: "image3") != nil {
-            profileImage3 = selectedImage!
+            saveUploadImage1()
         }
-
+        if UserDefaults.standard.object(forKey: "image2") != nil {
+            profileImage2 = selectedImage!
+            saveUploadImage2()
+        }
+        if UserDefaults.standard.object(forKey: "image3") != nil {
+            profileImage3 = selectedImage!
+            saveUploadImage3()
+        }
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditTableViewController: PickerKeyboard1Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard1) -> Array<String> {
+        return dataArray1
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard1, selectData: String) {
+        heightSettingLabel.text = selectData
+    }
+}
+
+extension EditTableViewController: PickerKeyboard2Delegate {
+    func titlesOfPickerViewKeyboard2(_ pickerKeyboard: PickerKeyboard2) -> Array<String> {
+        return dataArray2
+    }
+    
+    func didDone2(_ pickerKeyboard: PickerKeyboard2, selectData: String) {
+        
+        bodySizeSettingLabel.text = selectData
+    }
+}
+
+extension EditTableViewController: PickerKeyboard3Delegate {
+    func titlesOfPickerViewKeyboard3(_ pickerKeyboard: PickerKeyboard3) -> Array<String> {
+        return dataArray3
+    }
+    
+    func didDone3(_ pickerKeyboard: PickerKeyboard3, selectData: String) {
+        residenceSettingLabel.text = selectData
+    }
+}
+
+extension EditTableViewController: PickerKeyboard4Delegate {
+    func titlesOfPickerViewKeyboard4(_ pickerKeyboard: PickerKeyboard4) -> Array<String> {
+        return dataArray4
+    }
+    
+    func didDone4(_ pickerKeyboard: PickerKeyboard4, selectData: String) {
+        professionSettingLabel.text = selectData
     }
 }

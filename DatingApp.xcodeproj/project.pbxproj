@@ -14,6 +14,11 @@
 		831E392A24CA37390043AA76 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392924CA37390043AA76 /* MyPageTableViewController.swift */; };
 		831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392B24CA46260043AA76 /* ProfileTableViewController.swift */; };
 		8348E3CD24CD0148001D59C0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3CC24CD0148001D59C0 /* AuthService.swift */; };
+		8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */; };
+		8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */; };
+		8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D224CD3F4A001D59C0 /* PickerKeyboard3.swift */; };
+		8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */; };
+		8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D624CD658B001D59C0 /* DataArray.swift */; };
 		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
@@ -51,6 +56,11 @@
 		831E392924CA37390043AA76 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
 		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8348E3CC24CD0148001D59C0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIckerKeyboard1.swift; sourceTree = "<group>"; };
+		8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard2.swift; sourceTree = "<group>"; };
+		8348E3D224CD3F4A001D59C0 /* PickerKeyboard3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard3.swift; sourceTree = "<group>"; };
+		8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard4.swift; sourceTree = "<group>"; };
+		8348E3D624CD658B001D59C0 /* DataArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataArray.swift; sourceTree = "<group>"; };
 		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +139,7 @@
 				838071CB24C608F5008BAA2C /* SceneDelegate.swift */,
 				838071E924C6299D008BAA2C /* Constants.swift */,
 				838071ED24C6338E008BAA2C /* Extension.swift */,
+				8348E3D624CD658B001D59C0 /* DataArray.swift */,
 				838071CF24C608F5008BAA2C /* Main.storyboard */,
 				838071D224C608FA008BAA2C /* Assets.xcassets */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
@@ -165,6 +176,10 @@
 				831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */,
 				831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */,
 				831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */,
+				8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */,
+				8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */,
+				8348E3D224CD3F4A001D59C0 /* PickerKeyboard3.swift */,
+				8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,8 +358,10 @@
 				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
+				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
 				834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */,
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
+				8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */,
 				838071EC24C62F52008BAA2C /* RegisterViewController.swift in Sources */,
 				834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */,
 				834912FC24C75830002990F8 /* StartViewController.swift in Sources */,
@@ -352,6 +369,7 @@
 				838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
+				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
 				831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
@@ -364,9 +382,11 @@
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
 				831E392A24CA37390043AA76 /* MyPageTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
+				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
+				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

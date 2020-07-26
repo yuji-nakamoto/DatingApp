@@ -37,6 +37,8 @@ class DetailTableViewCell: UITableViewCell {
         selfIntrolabel.text = user.selfIntro
         professionLabel.text = user.profession
         commentLabel.text = user.comment
+        bodyLabel.text = user.bodySize
+        heightLabel.text = user.height
     }
 
 }

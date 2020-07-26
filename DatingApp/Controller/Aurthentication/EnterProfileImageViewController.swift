@@ -79,29 +79,24 @@ class EnterProfileImageViewController: UIViewController {
         
         Service.uploadImage(image: profileImage!) { (imageUrl) in
             
-            let user = User()
-            user.uid = User.currentUserId()
-            user.profileImageUrl1 = imageUrl
-            user.profileImageUrl2 = ""
-            user.profileImageUrl3 = ""
+            let dict = [PROFILEIMAGEURL1: imageUrl,
+                        PROFILEIMAGEURL2: "",
+                        PROFILEIMAGEURL3: ""]
             
-            updateProfileImageData(user) { (error) in
-                self.hudSetup()
-            }
+            updateUser(withValue: dict)
+            self.hudSetup()
         }
     }
     
     private func addPlaceholederImage() {
         
-        let user = User()
-        user.uid = User.currentUserId()
-
-        user.profileImageUrl1 = PLACEHOLDERIMAGEURL
-        user.profileImageUrl2 = ""
-        user.profileImageUrl3 = ""
-        updateProfileImageData(user) { (error) in
-            self.toEnterProfessionVC()
-        }
+        let dict = [PROFILEIMAGEURL1: PLACEHOLDERIMAGEURL,
+                    PROFILEIMAGEURL2: "",
+                    PROFILEIMAGEURL3: ""]
+        
+        updateUser(withValue: dict)
+        hudSetup()
+        toEnterProfessionVC()
     }
     
     // MARK: - Helpers

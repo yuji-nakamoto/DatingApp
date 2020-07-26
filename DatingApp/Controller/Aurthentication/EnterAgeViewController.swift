@@ -60,15 +60,9 @@ class EnterAgeViewController: UIViewController {
     
     private func saveUserAge() {
         
-        let user = User()
-        user.age = ageLabel.text! + "歳"
-        user.uid = User.currentUserId()
-        user.email = self.user.email
-        user.gender = self.user.gender
-        updateUserData1(user)
-        
-        user.username = self.user.username
-        updateUserData2(user)
+        let dict = [AGE: ageLabel.text! + "歳"]
+        updateUser(withValue: dict)
+
         toEnterProfileImageVC()
     }
     
