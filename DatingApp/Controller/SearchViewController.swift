@@ -15,82 +15,46 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var users = [User]()
+    private var user: User?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-//        fetchUsers()
-        sortResidence()
+        fetchUser()
         setupUI()
     }
     
     // MARK: - Actions
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-        sortResidence()
+        fetchUser()
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
         logout()
     }
     
-    // MARK: - User
+    // MARK: - Fetch user
     
-    private func fetchUsers() {
+    private func fetchUser() {
         
-        User.fetchUsers { (users) in
-            self.users = users
-            self.collectionView.reloadData()
-        }
-    }
-    
-    private func sortResidence() {
-
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-
-            User.fetchFemaleUser(User.currentUserId()) { (user) in
-                let residence1 = user.residence
-                User.maleResidenceSort(residence1!) { (users) in
-                    self.users = users
-                }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                User.fetchMaleUser(User.currentUserId()) { (user) in
-                    let residence1 = user.residence
-                    User.maleResidenceSort(residence1!) { (users) in
-                        self.users.append(contentsOf: users)
-                        self.collectionView.reloadData()
-                    }
-                }
-            }
-        } else {
-            User.fetchMaleUser(User.currentUserId()) { (user) in
-                let residence2 = user.residence
-                User.femaleResidenceSort(residence2!) { (users) in
-                    self.users = users
-                }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                User.fetchFemaleUser(User.currentUserId()) { (user) in
-                    let residence2 = user.residence
-                    User.femaleResidenceSort(residence2!) { (users) in
-                        self.users.append(contentsOf: users)
-                        self.collectionView.reloadData()
-                    }
-                }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            let residence = user.residence
+            User.genderAndResidenceSort(residence!) { (users) in
+                self.users = users
+                self.collectionView.reloadData()
             }
         }
     }
-    
+
     // MARK: - Heplers
     
     private func logout() {
         
-        User.logoutUser { (error) in
+        AuthService.logoutUser { (error) in
             
             if error != nil {
                 print("Error: \(String(describing: error?.localizedDescription))")
@@ -100,6 +64,9 @@ class SearchViewController: UIViewController {
     }
     
     private func setupUI() {
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             navigationItem.title = "男性をさがす"

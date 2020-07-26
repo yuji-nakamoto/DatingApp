@@ -53,13 +53,35 @@ class DetailTableViewController: UIViewController {
     
     private func downloadImages() {
         
-        let profileImageUrls = [user.profileImageUrl1!, user.profileImageUrl2!, user.profileImageUrl3!]
-        let imageUrls = profileImageUrls.map({ URL(string: $0) })
-
-        for (_, url) in imageUrls.enumerated() {
-            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                self.profileImages.append(image!)
-                self.collectionView.reloadData()
+        if user.profileImageUrl2 == "" && user.profileImageUrl3 == "" {
+            let profileImageUrls = [user.profileImageUrl1] as! [String]
+            let imageUrls = profileImageUrls.map({ URL(string: $0) })
+            
+            for (_, url) in imageUrls.enumerated() {
+                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                    self.profileImages.append(image!)
+                    self.collectionView.reloadData()
+                }
+            }
+        } else if user.profileImageUrl3 == "" {
+            let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2] as! [String]
+            let imageUrls = profileImageUrls.map({ URL(string: $0) })
+            
+            for (_, url) in imageUrls.enumerated() {
+                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                    self.profileImages.append(image!)
+                    self.collectionView.reloadData()
+                }
+            }
+        } else {
+            let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2, user.profileImageUrl3] as! [String]
+            let imageUrls = profileImageUrls.map({ URL(string: $0) })
+            
+            for (_, url) in imageUrls.enumerated() {
+                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                    self.profileImages.append(image!)
+                    self.collectionView.reloadData()
+                }
             }
         }
     }

@@ -62,104 +62,11 @@ class User {
         return nil
     }
     
-    // MARK: - Authentication func
-    
-    class func loginUser(email: String, password: String, completion: @escaping(_ error: Error?, _ isEmailVerified: Bool) -> Void) {
-        
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            
-            if error == nil {
-                
-                if result!.user.isEmailVerified {
-                    completion(error, true)
-                } else {
-                    completion(error, false)
-                }
-            } else {
-                completion(error, false)
-            }
-        }
-    }
-    
-    class func createUser(email: String, password: String, completion: @escaping(_ error: Error?) -> Void) {
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            
-            completion(error)
-            
-            if error == nil {
-                result!.user.sendEmailVerification { (error) in
-                    print("Error: \(String(describing: error?.localizedDescription))")
-                }
-            }
-        }
-    }
-    
-    class func logoutUser(completion: @escaping (_ error: Error?) -> Void) {
-        
-        do {
-            try Auth.auth().signOut()
-            
-            UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-            UserDefaults.standard.removeObject(forKey: FEMALE)
-            UserDefaults.standard.synchronize()
-            completion(nil)
-            
-        } catch let error as NSError {
-            completion(error)
-        }
-    }
-    
-    class func resendVerificaitionEmail(email: String, completion: @escaping (_ error: Error?) -> Void) {
-        
-        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
-            
-            Auth.auth().currentUser?.reload(completion: { (error) in
-                print("resend email error:", error?.localizedDescription as Any)
-                completion(error)
-            })
-        })
-    }
-    
-    class func resetPassword(email: String, completion: @escaping(_ error: Error?) -> Void) {
-        
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-            
-            if error != nil {
-                print("error reset password: \(error!.localizedDescription)")
-            }
-            completion(error)
-        }
-    }
-     
     // MARK: - Fetch user
     
     class func fetchUser(_ currentUserId: String, completion: @escaping(_ user: User) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            COLLECTION_FEMALE_USERS.document(currentUserId).getDocument { (snapshot, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
-                }
-                let user = User(dict: snapshot!.data()! as NSDictionary)
-                completion(user)
-            }
-        } else {
-            COLLECTION_MALE_USERS.document(currentUserId).getDocument { (snapshot, error) in
-                
-                if error != nil {
-                    print(error!.localizedDescription)
-                }
-                let user = User(dict: snapshot!.data()! as NSDictionary)
-                completion(user)
-            }
-        }
-    }
-    
-    class func fetchMaleUser(_ currentUserId: String, completion: @escaping(_ user: User) -> Void) {
-        
-        COLLECTION_MALE_USERS.document(currentUserId).getDocument { (snapshot, error) in
-            
+        COLLECTION_USERS.document(currentUserId).getDocument { (snapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             }
@@ -168,117 +75,94 @@ class User {
         }
     }
     
-    class func fetchFemaleUser(_ currentUserId: String, completion: @escaping(_ user: User) -> Void) {
-        
-        COLLECTION_FEMALE_USERS.document(currentUserId).getDocument { (snapshot, error) in
-            
-            if error != nil {
-                print(error!.localizedDescription)
-            }
-            let user = User(dict: snapshot!.data()! as NSDictionary)
-            completion(user)
-        }
-    }
-
     class func fetchUsers(completion: @escaping([User]) -> Void) {
         var users: [User] = []
+        
+        COLLECTION_USERS.getDocuments { (snapshot, error) in
+            snapshot?.documents.forEach({ (document) in
+                let dictionary = document.data()
+                let user = User(dict: dictionary as NSDictionary)
+                users.append(user)
+                
+                if users.count == snapshot?.documents.count {
+                    completion(users)
+                }
+            })
+        }
+    }
+    
+    class func genderAndResidenceSort(_ residence: String, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            
+            COLLECTION_USERS
+                .whereField(GENDER, isEqualTo: "男性")
+                .whereField(RESIDENCE, isEqualTo: residence)
+                .getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as NSDictionary)
+                            guard user.uid != User.currentUserId() else { return }
+                            users.append(user)
+                        })
+                    }
+                    completion(users)
+            }
+        } else {
+            COLLECTION_USERS
+                .whereField(GENDER, isEqualTo: "女性")
+                .whereField(RESIDENCE, isEqualTo: residence)
+                .getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as NSDictionary)
+                            guard user.uid != User.currentUserId() else { return }
+                            users.append(user)
+                        })
+                    }
+                    completion(users)
+            }
+        }
+    }
+    
+}
 
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
-            COLLECTION_FEMALE_USERS.getDocuments { (snapshot, error) in
-                snapshot?.documents.forEach({ (document) in
-                    let dictionary = document.data()
-                    let user = User(dict: dictionary as NSDictionary)
-                    users.append(user)
-                    
-                    if users.count == snapshot?.documents.count {
-                        completion(users)
-                    }
-                })
-            }
-        } else {
-            COLLECTION_MALE_USERS.getDocuments { (snapshot, error) in
-                snapshot?.documents.forEach({ (document) in
-                    let dictionary = document.data()
-                    let user = User(dict: dictionary as NSDictionary)
-                    users.append(user)
-                    
-                    if users.count == snapshot?.documents.count {
-                        completion(users)
-                    }
-                })
-            }
+// MARK: - Save Data
+
+func updateUserData1(_ user: User) {
+    
+    COLLECTION_USERS.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
+        if error != nil {
+            print("error updating user: \(error!.localizedDescription)")
         }
     }
+}
+
+func updateUserData2(_ user: User) {
     
-    class func maleResidenceSort(_ withResidence: String, completion: @escaping([User]) -> Void) {
-        var users: [User] = []
-        
-        COLLECTION_MALE_USERS.whereField(RESIDENCE, isEqualTo: withResidence).getDocuments { (snapshot, error) in
-            
-            guard let snapshot = snapshot else {
-                completion(users)
-                return
-            }
-            if !snapshot.isEmpty {
-                
-                for userDict in snapshot.documents {
-                    users.append(User(dict: userDict.data() as NSDictionary))
-                }
-            }
-            completion(users)
+    COLLECTION_USERS.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
+        if error != nil {
+            print("error updating user: \(error!.localizedDescription)")
         }
     }
+}
+
+func updateProfileImageData(_ user: User, completion: @escaping(Error?) -> Void) {
     
-    class func femaleResidenceSort(_ withResidence: String, completion: @escaping([User]) -> Void) {
-        var users: [User] = []
-        
-        COLLECTION_FEMALE_USERS.whereField(RESIDENCE, isEqualTo: withResidence).getDocuments { (snapshot, error) in
-            
-            guard let snapshot = snapshot else {
-                completion(users)
-                return
-            }
-            if !snapshot.isEmpty {
-                
-                for userDict in snapshot.documents {
-                    users.append(User(dict: userDict.data() as NSDictionary))
-                }
-            }
-            completion(users)
+    COLLECTION_USERS.document(user.uid).updateData(userProfileImageDict(user) as! [AnyHashable : Any]) { (error) in
+        if error != nil {
+            print("error updating user: \(error!.localizedDescription)")
         }
+        completion(error)
     }
-    
-    class func genderSort(completion: @escaping([User]) -> Void) {
-        var users: [User] = []
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            
-            COLLECTION_USERS.whereField(GENDER, isEqualTo: "女性").getDocuments { (snapshot, error) in
-                
-                if let error = error {
-                    print("Error gender sort: \(error.localizedDescription)")
-                } else {
-                    for document in snapshot!.documents {
-                        users.append(User(dict: document.data() as NSDictionary))
-                    }
-                }
-                completion(users)
-            }
-        } else {
-            COLLECTION_USERS.whereField(GENDER, isEqualTo: "男性").getDocuments { (snapshot, error) in
-                
-                if let error = error {
-                    print("Error gender sort: \(error.localizedDescription)")
-                } else {
-                    for document in snapshot!.documents {
-                        users.append(User(dict: document.data() as NSDictionary))
-                    }
-                }
-                completion(users)
-            }
-        }
-    }
-    
 }
 
 // MARK: - Helpers
@@ -298,76 +182,12 @@ func userProfileImageDict(_ user: User) -> NSDictionary {
     return NSDictionary(objects: [user.profileImageUrl1 ?? "", user.profileImageUrl2 ?? "", user.profileImageUrl3 ?? ""], forKeys: [PROFILEIMAGEURL1 as NSCopying, PROFILEIMAGEURL2 as NSCopying, PROFILEIMAGEURL3 as NSCopying])
 }
 
-func saveMaleUser(_ user: User) {
+func saveUser(_ user: User) {
     
-    COLLECTION_MALE_USERS.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
+    COLLECTION_USERS.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
         if error != nil {
             print("error saving user: \(error!.localizedDescription)")
         }
     }
 }
 
-func saveFemaleUser(_ user: User) {
-    
-    COLLECTION_FEMALE_USERS.document(user.uid).setData(userDictFrom1(user) as! [String: Any]) { (error) in
-        if error != nil {
-            print("error saving user: \(error!.localizedDescription)")
-        }
-    }
-}
-
-func updateUserData1(_ user: User) {
-    
-    if UserDefaults.standard.object(forKey: FEMALE) != nil {
-        
-        COLLECTION_FEMALE_USERS.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
-            if error != nil {
-                print("error updating user: \(error!.localizedDescription)")
-            }
-        }
-    } else {
-        COLLECTION_MALE_USERS.document(user.uid).updateData(userDictFrom1(user) as! [AnyHashable : Any]) { (error) in
-            if error != nil {
-                print("error updating user: \(error!.localizedDescription)")
-            }
-        }
-    }
-}
-
-func updateUserData2(_ user: User) {
-    
-    if UserDefaults.standard.object(forKey: FEMALE) != nil {
-        
-        COLLECTION_FEMALE_USERS.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
-            if error != nil {
-                print("error updating user: \(error!.localizedDescription)")
-            }
-        }
-    } else {
-        COLLECTION_MALE_USERS.document(user.uid).updateData(userDictFrom2(user) as! [AnyHashable : Any]) { (error) in
-            if error != nil {
-                print("error updating user: \(error!.localizedDescription)")
-            }
-        }
-    }
-}
-
-func updateProfileImageData(_ user: User, completion: @escaping(Error?) -> Void) {
-    
-    if UserDefaults.standard.object(forKey: FEMALE) != nil {
-        
-        COLLECTION_FEMALE_USERS.document(user.uid).updateData(userProfileImageDict(user) as! [AnyHashable : Any]) { (error) in
-            if error != nil {
-                print("error updating user: \(error!.localizedDescription)")
-            }
-            completion(error)
-        }
-    } else {
-        COLLECTION_MALE_USERS.document(user.uid).updateData(userProfileImageDict(user) as! [AnyHashable : Any]) { (error) in
-            if error != nil {
-                print("error updating user: \(error!.localizedDescription)")
-            }
-            completion(error)
-        }
-    }
-}

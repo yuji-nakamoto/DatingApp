@@ -19,7 +19,7 @@ class MyPageTableViewController: UITableViewController {
     @IBOutlet weak var cogButton: UIStackView!
     @IBOutlet weak var footStepButton: UIStackView!
     
-    private var user = User()
+    private var user: User!
     
     // MARK: - Lifecycle
     

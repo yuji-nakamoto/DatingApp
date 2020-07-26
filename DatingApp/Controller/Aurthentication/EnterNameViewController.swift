@@ -74,11 +74,8 @@ class EnterNameViewController: UIViewController {
     private func saveUserName() {
         
         let user = User()
-        user.uid = User.currentUserId()
-        user.email = self.user.email
-        updateUserData1(user)
         
-        user.username = nameTextField.text
+        user.username = self.user.username
         updateUserData2(user)
         toEnterAgeVC()
     }

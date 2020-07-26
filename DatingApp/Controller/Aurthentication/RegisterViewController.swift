@@ -61,7 +61,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     private func createUser() {
         
         self.activityIndicator.startAnimating()
-        User.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
+        AuthService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
             if error != nil {
                 generator.notificationOccurred(.error)
                 hud.textLabel.text = error!.localizedDescription

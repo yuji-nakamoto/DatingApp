@@ -51,7 +51,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func resendButtonPressed(_ sender: Any) {
         
-        User.resendVerificaitionEmail(email: emailTextField.text!) { (error) in
+        AuthService.resendVerificaitionEmail(email: emailTextField.text!) { (error) in
             print("Error: \(String(describing: error?.localizedDescription))")
         }
         hud.textLabel.text = "認証メールを再送信しました。"
@@ -69,7 +69,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        User.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
+        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
             if error == nil {
                 
                 if isEmailVerified {
@@ -80,9 +80,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     user.uid = User.currentUserId()
                     user.email = self.emailTextField.text
                     
-                    saveMaleUser(user)
-                    saveFemaleUser(user)
-
+                    saveUser(user)
                     self.toEnterGenderVC()
                 } else {
                     generator.notificationOccurred(.error)

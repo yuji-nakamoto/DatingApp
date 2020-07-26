@@ -50,7 +50,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     
     private func resetPassword() {
         
-        User.resetPassword(email: emailTextField.text!) { (error) in
+        AuthService.resetPassword(email: emailTextField.text!) { (error) in
             
             if error != nil {
                 generator.notificationOccurred(.error)

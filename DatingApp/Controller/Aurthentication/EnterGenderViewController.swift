@@ -70,13 +70,13 @@ class EnterGenderViewController: UIViewController {
         user.uid = User.currentUserId()
         user.email = self.user.email
         user.gender = genderLabel.text
-        
+
         if genderLabel.text == "男性" {
-            saveMaleUser(user)
+            saveUser(user)
             toEnterNameVC()
         } else {
             UserDefaults.standard.set(true, forKey: FEMALE)
-            saveFemaleUser(user)
+            saveUser(user)
             toEnterNameVC()
         }
     }

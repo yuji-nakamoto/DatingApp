@@ -82,8 +82,8 @@ class EnterProfileImageViewController: UIViewController {
             let user = User()
             user.uid = User.currentUserId()
             user.profileImageUrl1 = imageUrl
-            user.profileImageUrl2 = PLACEHOLDERIMAGEURL2
-            user.profileImageUrl3 = PLACEHOLDERIMAGEURL2
+            user.profileImageUrl2 = ""
+            user.profileImageUrl3 = ""
             
             updateProfileImageData(user) { (error) in
                 self.hudSetup()
@@ -97,8 +97,8 @@ class EnterProfileImageViewController: UIViewController {
         user.uid = User.currentUserId()
 
         user.profileImageUrl1 = PLACEHOLDERIMAGEURL
-        user.profileImageUrl2 = PLACEHOLDERIMAGEURL2
-        user.profileImageUrl3 = PLACEHOLDERIMAGEURL2
+        user.profileImageUrl2 = ""
+        user.profileImageUrl3 = ""
         updateProfileImageData(user) { (error) in
             self.toEnterProfessionVC()
         }

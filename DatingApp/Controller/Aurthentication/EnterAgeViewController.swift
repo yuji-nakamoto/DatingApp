@@ -64,6 +64,7 @@ class EnterAgeViewController: UIViewController {
         user.age = ageLabel.text! + "歳"
         user.uid = User.currentUserId()
         user.email = self.user.email
+        user.gender = self.user.gender
         updateUserData1(user)
         
         user.username = self.user.username
