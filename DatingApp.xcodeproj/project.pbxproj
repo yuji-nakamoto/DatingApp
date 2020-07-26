@@ -19,6 +19,13 @@
 		8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D224CD3F4A001D59C0 /* PickerKeyboard3.swift */; };
 		8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */; };
 		8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D624CD658B001D59C0 /* DataArray.swift */; };
+		8348E3DD24CDD378001D59C0 /* superLike.json in Resources */ = {isa = PBXBuildFile; fileRef = 8348E3DC24CDD378001D59C0 /* superLike.json */; };
+		8348E3E124CDD48E001D59C0 /* like.json in Resources */ = {isa = PBXBuildFile; fileRef = 8348E3E024CDD48E001D59C0 /* like.json */; };
+		8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3E424CE0B6E001D59C0 /* DidLikeTableViewController.swift */; };
+		8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3E624CE0BC4001D59C0 /* DidLikeTableViewCell.swift */; };
+		8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3E824CE0E3A001D59C0 /* Like.swift */; };
+		8348E3EB24CE283C001D59C0 /* SuperLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3EA24CE283C001D59C0 /* SuperLike.swift */; };
+		8348E3ED24CE2B3B001D59C0 /* DidSuperLikeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3EC24CE2B3B001D59C0 /* DidSuperLikeTableViewController.swift */; };
 		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
@@ -61,6 +68,13 @@
 		8348E3D224CD3F4A001D59C0 /* PickerKeyboard3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard3.swift; sourceTree = "<group>"; };
 		8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard4.swift; sourceTree = "<group>"; };
 		8348E3D624CD658B001D59C0 /* DataArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataArray.swift; sourceTree = "<group>"; };
+		8348E3DC24CDD378001D59C0 /* superLike.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = superLike.json; sourceTree = "<group>"; };
+		8348E3E024CDD48E001D59C0 /* like.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = like.json; sourceTree = "<group>"; };
+		8348E3E424CE0B6E001D59C0 /* DidLikeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidLikeTableViewController.swift; sourceTree = "<group>"; };
+		8348E3E624CE0BC4001D59C0 /* DidLikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidLikeTableViewCell.swift; sourceTree = "<group>"; };
+		8348E3E824CE0E3A001D59C0 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
+		8348E3EA24CE283C001D59C0 /* SuperLike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLike.swift; sourceTree = "<group>"; };
+		8348E3EC24CE2B3B001D59C0 /* DidSuperLikeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidSuperLikeTableViewController.swift; sourceTree = "<group>"; };
 		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
@@ -135,13 +149,15 @@
 				838071E324C6141C008BAA2C /* View */,
 				838071E124C61404008BAA2C /* Controller */,
 				838071E624C627C4008BAA2C /* API */,
+				838071CF24C608F5008BAA2C /* Main.storyboard */,
 				838071C924C608F5008BAA2C /* AppDelegate.swift */,
 				838071CB24C608F5008BAA2C /* SceneDelegate.swift */,
 				838071E924C6299D008BAA2C /* Constants.swift */,
 				838071ED24C6338E008BAA2C /* Extension.swift */,
 				8348E3D624CD658B001D59C0 /* DataArray.swift */,
-				838071CF24C608F5008BAA2C /* Main.storyboard */,
 				838071D224C608FA008BAA2C /* Assets.xcassets */,
+				8348E3E024CDD48E001D59C0 /* like.json */,
+				8348E3DC24CDD378001D59C0 /* superLike.json */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
 				838071D724C608FA008BAA2C /* Info.plist */,
 				838071DD24C60BA4008BAA2C /* GoogleService-Info.plist */,
@@ -158,6 +174,8 @@
 				831E392924CA37390043AA76 /* MyPageTableViewController.swift */,
 				831E392B24CA46260043AA76 /* ProfileTableViewController.swift */,
 				8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */,
+				8348E3E424CE0B6E001D59C0 /* DidLikeTableViewController.swift */,
+				8348E3EC24CE2B3B001D59C0 /* DidSuperLikeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -166,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				838071E724C627E0008BAA2C /* User.swift */,
+				8348E3E824CE0E3A001D59C0 /* Like.swift */,
+				8348E3EA24CE283C001D59C0 /* SuperLike.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +200,7 @@
 				8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */,
 				8348E3D224CD3F4A001D59C0 /* PickerKeyboard3.swift */,
 				8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */,
+				8348E3E624CE0BC4001D59C0 /* DidLikeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -282,7 +303,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8348E3DD24CDD378001D59C0 /* superLike.json in Resources */,
 				838071D624C608FA008BAA2C /* LaunchScreen.storyboard in Resources */,
+				8348E3E124CDD48E001D59C0 /* like.json in Resources */,
 				838071D324C608FA008BAA2C /* Assets.xcassets in Resources */,
 				838071DE24C60BA4008BAA2C /* GoogleService-Info.plist in Resources */,
 				838071D124C608F5008BAA2C /* Main.storyboard in Resources */,
@@ -356,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
+				8348E3ED24CE2B3B001D59C0 /* DidSuperLikeTableViewController.swift in Sources */,
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
@@ -371,6 +395,7 @@
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
 				831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */,
+				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
@@ -383,9 +408,12 @@
 				831E392A24CA37390043AA76 /* MyPageTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
+				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
+				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,
+				8348E3EB24CE283C001D59C0 /* SuperLike.swift in Sources */,
 				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

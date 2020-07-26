@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Lottie
 
 class DetailTableViewController: UIViewController {
     
@@ -16,15 +17,23 @@ class DetailTableViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var superLikeBackView: UIView!
+    @IBOutlet weak var likeBackView: UIView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var superLikeButton: UIButton!
     
     var profileImages = [UIImage]()
     var user = User()
+    var like = Like()
+    var superLike = SuperLike()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchLikeUser()
+        fetchSuperLikeUser()
         downloadImages()
         configureUI()
     }
@@ -48,6 +57,63 @@ class DetailTableViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        
+        showLikeAnimation()
+        let dict = [UID: user.uid!,
+                    USERNAME: user.username!,
+                    AGE: user.age!,
+                    PROFILEIMAGEURL1: user.profileImageUrl1!,
+                    RESIDENCE: user.residence!,
+                    ISLIKE: 1] as [String : Any]
+        
+        Service.saveLikes(forUser: user, isLike: dict)
+        likeButton.isEnabled = false
+    }
+    
+    @IBAction func superLikeButtonPressed(_ sender: Any) {
+
+        showSuperLikeAnimation()
+        let dict = [UID: user.uid!,
+                    USERNAME: user.username!,
+                    AGE: user.age!,
+                    PROFILEIMAGEURL1: user.profileImageUrl1!,
+                    RESIDENCE: user.residence!,
+                    ISSUPERLIKE: 1] as [String : Any]
+        
+        Service.saveSuperLikes(forUser: user, isSuperLike: dict)
+        superLikeButton.isEnabled = false
+    }
+    
+    // MARK: - Fetch like
+    
+    private func fetchLikeUser() {
+        
+        Like.fetchLikeUser(user.uid) { (like) in
+            self.like = like
+            
+            if like.isLike == 1 {
+                self.likeButton.isEnabled = false
+            } else {
+                self.likeButton.isEnabled = true
+            }
+        }
+    }
+    
+    private func fetchSuperLikeUser() {
+        
+        SuperLike.fetchSuperLikeUser(user.uid) { (superLike) in
+            self.superLike = superLike
+            
+            if superLike.isSuperLike == 1 {
+                self.superLikeButton.isEnabled = false
+            } else {
+                self.superLikeButton.isEnabled = true
+            }
+        }
+    }
+
     
     // MARK: - Download images
     
@@ -94,8 +160,55 @@ class DetailTableViewController: UIViewController {
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        likeBackView.layer.cornerRadius = 55 / 2
+        superLikeBackView.layer.cornerRadius = 55 / 2
+        
+        likeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        likeBackView.layer.shadowColor = UIColor.black.cgColor
+        likeBackView.layer.shadowOpacity = 0.3
+        likeBackView.layer.shadowRadius = 4
+        
+        superLikeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        superLikeBackView.layer.shadowColor = UIColor.black.cgColor
+        superLikeBackView.layer.shadowOpacity = 0.3
+        superLikeBackView.layer.shadowRadius = 4
     }
     
+    func showLikeAnimation() {
+        let animationView = AnimationView(name: "like")
+        animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        animationView.center = self.view.center
+        animationView.loopMode = .playOnce
+        animationView.contentMode = .scaleAspectFit
+        animationView.animationSpeed = 1
+
+        view.addSubview(animationView)
+        animationView.play()
+        
+        animationView.play { finished in
+            if finished {
+                animationView.removeFromSuperview()
+            }
+        }
+    }
+    
+    func showSuperLikeAnimation() {
+        let animationView = AnimationView(name: "superLike")
+        animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        animationView.center = self.view.center
+        animationView.loopMode = .playOnce
+        animationView.contentMode = .scaleAspectFit
+        animationView.animationSpeed = 1
+
+        view.addSubview(animationView)
+        animationView.play()
+        
+        animationView.play { finished in
+            if finished {
+                animationView.removeFromSuperview()
+            }
+        }
+    }
 }
 
 //MARK: UICollectionViewDelegate

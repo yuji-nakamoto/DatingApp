@@ -8,10 +8,13 @@
 
 import Foundation
 import FirebaseFirestore
+import Firebase
 
 // MARK: - Firestore
 
 public let COLLECTION_USERS = Firestore.firestore().collection("users")
+public let COLLECTION_LIKES = Firestore.firestore().collection("likes").document(Auth.auth().currentUser!.uid).collection("likeUsers")
+public let COLLECTION_SUPERLIKES = Firestore.firestore().collection("superLikes").document(Auth.auth().currentUser!.uid).collection("superLikeUsers")
 
 // MARK: - Color
 
@@ -36,6 +39,12 @@ public let SELFINTRO = "selfIntro"
 public let COMMENT = "comment"
 public let BODYSIZE = "bodySize"
 public let HEIGHT = "height"
+public let ISLIKE = "isLike"
+public let ISSUPERLIKE = "isSuperLike"
+public let LIKE = "like"
+public let SUPUERLIKE = "superLike"
+
+
 public let PLACEHOLDERIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2FEC19D574-4963-4C1B-A4E5-54D645F1DA10?alt=media&token=9737006c-d65e-4366-9b6d-4a565e26373f"
 public let PLACEHOLDERIMAGEURL2 = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2F1F237C97-F09E-4F48-9C3A-AE4E75FCD004?alt=media&token=9ffc537e-3d1a-49aa-a03d-cc758b88e31d"
 

@@ -78,6 +78,10 @@ class EnterAgeViewController: UIViewController {
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         descriptionLabel.text = "年齢を選択してください。"
         nextButton.layer.cornerRadius = 50 / 2
+        nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        nextButton.layer.shadowColor = UIColor.black.cgColor
+        nextButton.layer.shadowOpacity = 0.3
+        nextButton.layer.shadowRadius = 4
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

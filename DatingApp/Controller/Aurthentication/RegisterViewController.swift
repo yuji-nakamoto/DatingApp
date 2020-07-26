@@ -94,6 +94,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         descriptionLabel.text = "メールアドレスとパスワードを入力して、\nアカウントを作成してください。"
         doneButton.layer.cornerRadius = 50 / 2
+        doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        doneButton.layer.shadowColor = UIColor.black.cgColor
+        doneButton.layer.shadowOpacity = 0.3
+        doneButton.layer.shadowRadius = 4
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

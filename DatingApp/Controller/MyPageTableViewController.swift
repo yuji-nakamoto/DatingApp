@@ -59,6 +59,10 @@ class MyPageTableViewController: UITableViewController {
         
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5
+        profileButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        profileButton.layer.shadowColor = UIColor.black.cgColor
+        profileButton.layer.shadowOpacity = 0.3
+        profileButton.layer.shadowRadius = 4
         profileImageView.layer.cornerRadius = 100 / 2
     }
 

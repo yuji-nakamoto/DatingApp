@@ -8,8 +8,11 @@
 
 import Foundation
 import FirebaseStorage
+import Firebase
 
 struct Service {
+    
+    // MARK: - Load image
     
     static func uploadImage(image: UIImage, completion: @escaping(_ imageUrl: String) -> Void) {
         
@@ -62,6 +65,44 @@ struct Service {
                     completion(imageArray)
                 }
             }
+        }
+    }
+    
+    // MARK: -  Save like
+
+    static func saveLikes(forUser user: User, isLike: [String: Any]) {
+                
+        COLLECTION_LIKES.document(user.uid).getDocument { (snapshot, error) in
+            
+            if snapshot?.exists == true {
+                COLLECTION_LIKES.document(user.uid).updateData(isLike)
+            } else {
+                COLLECTION_LIKES.document(user.uid).setData(isLike)
+            }
+        }
+    }
+
+   static func saveSuperLikes(forUser user: User, isSuperLike: [String: Any]) {
+                
+        COLLECTION_SUPERLIKES.document(user.uid).getDocument { (snapshot, error) in
+            
+            if snapshot?.exists == true {
+                COLLECTION_SUPERLIKES.document(user.uid).updateData(isSuperLike)
+            } else {
+                COLLECTION_SUPERLIKES.document(user.uid).setData(isSuperLike)
+            }
+        }
+    }
+
+    
+    static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        COLLECTION_LIKES.document(user.uid).getDocument { (snapshot, error) in
+            guard let data = snapshot?.data() else { return }
+            guard let didMatch = data[currentUid] as? Bool else { return }
+            completion(didMatch)
         }
     }
     

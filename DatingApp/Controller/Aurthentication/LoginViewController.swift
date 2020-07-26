@@ -90,6 +90,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
         loginButton.layer.cornerRadius = 50 / 2
+        loginButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        loginButton.layer.shadowColor = UIColor.black.cgColor
+        loginButton.layer.shadowOpacity = 0.3
+        loginButton.layer.shadowRadius = 4
+
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

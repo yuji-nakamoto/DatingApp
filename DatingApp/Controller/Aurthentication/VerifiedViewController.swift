@@ -105,6 +105,10 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n認証がお済みであればログインを行い、ユーザー情報の入力を進めてください。"
         loginButton.layer.cornerRadius = 50 / 2
+        loginButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        loginButton.layer.shadowColor = UIColor.black.cgColor
+        loginButton.layer.shadowOpacity = 0.3
+        loginButton.layer.shadowRadius = 4
         resendButton.layer.cornerRadius = 50 / 2
         resendButton.layer.borderWidth = 1
         resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

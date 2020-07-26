@@ -29,7 +29,7 @@ class User {
     init() {
     }
     
-    init(dict: NSDictionary) {
+    init(dict: [String: Any]) {
         uid = dict[UID] as? String ?? ""
         username = dict[USERNAME] as? String ?? ""
         email = dict[EMAIL] as? String ?? ""
@@ -56,7 +56,7 @@ class User {
         
         if Auth.auth().currentUser != nil {
             if let dictionary = UserDefaults.standard.object(forKey: CURRENTUSER) {
-                return User.init(dict: dictionary as! NSDictionary)
+                return User.init(dict: dictionary as! [String: Any])
             }
         }
         return nil
@@ -70,7 +70,7 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
-            let user = User(dict: snapshot!.data()! as NSDictionary)
+            let user = User(dict: snapshot!.data()! as [String: Any])
             completion(user)
         }
     }
@@ -81,7 +81,7 @@ class User {
         COLLECTION_USERS.getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
                 let dictionary = document.data()
-                let user = User(dict: dictionary as NSDictionary)
+                let user = User(dict: dictionary as [String: Any])
                 users.append(user)
                 
                 if users.count == snapshot?.documents.count {
@@ -105,7 +105,7 @@ class User {
                     } else {
                         snapshot?.documents.forEach({ (document) in
                             let dict = document.data()
-                            let user = User(dict: dict as NSDictionary)
+                            let user = User(dict: dict as [String: Any])
                             guard user.uid != User.currentUserId() else { return }
                             users.append(user)
                         })
@@ -123,7 +123,7 @@ class User {
                     } else {
                         snapshot?.documents.forEach({ (document) in
                             let dict = document.data()
-                            let user = User(dict: dict as NSDictionary)
+                            let user = User(dict: dict as [String: Any])
                             guard user.uid != User.currentUserId() else { return }
                             users.append(user)
                         })
@@ -154,6 +154,3 @@ func updateUser(withValue: [String: Any]) {
         }
     }
 }
-
-
-
