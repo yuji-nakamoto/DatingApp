@@ -77,7 +77,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
                     PROFESSION: professionSettingLabel.text,
                     BODYSIZE: bodySizeSettingLabel.text,
                     HEIGHT: heightSettingLabel.text]
-        
+
         updateUser(withValue: dict as [String : Any])
         hudSetup()
     }

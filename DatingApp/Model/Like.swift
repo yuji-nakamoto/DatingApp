@@ -37,7 +37,6 @@ class Like {
                 print(error!.localizedDescription)
             }
             guard snapshot?.data() != nil else { return }
-            print("DEBUG: \(snapshot!.data()!)")
             let like = Like(dict: snapshot!.data()! as [String: Any])
             completion(like)
         }
@@ -59,6 +58,20 @@ class Like {
                     completion(likes)
                 }
             })
+        }
+    }
+    
+    // MARK: - Save
+    
+    class func saveLikes(forUser user: User, isLike: [String: Any]) {
+                
+        COLLECTION_LIKES.document(user.uid).getDocument { (snapshot, error) in
+            
+            if snapshot?.exists == true {
+                COLLECTION_LIKES.document(user.uid).updateData(isLike)
+            } else {
+                COLLECTION_LIKES.document(user.uid).setData(isLike)
+            }
         }
     }
 }

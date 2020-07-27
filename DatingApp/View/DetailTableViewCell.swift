@@ -40,5 +40,21 @@ class DetailTableViewCell: UITableViewCell {
         bodyLabel.text = user.bodySize
         heightLabel.text = user.height
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        nameLabel.text = ""
+        nameLabel2.text = ""
+        residenceLabel.text = ""
+        residenceLabel2.text = ""
+        ageLabel.text = ""
+        ageLabel2.text = ""
+        selfIntrolabel.text = ""
+        professionLabel.text = ""
+        commentLabel.text = ""
+        bodyLabel.text = ""
+        heightLabel.text = ""
+    }
 
 }

@@ -340,6 +340,9 @@
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CommentLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBW-j8-j0Q">
                                                     <rect key="frame" x="158" y="79.5" width="98.5" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20.5" id="8H1-mU-Ch8"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="original_black2"/>
                                                     <nil key="highlightedColor"/>
@@ -353,12 +356,18 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自己紹介" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8O0-6g-At8">
                                                     <rect key="frame" x="35" y="136" width="69.5" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20.5" id="fbt-2u-Tun"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" name="original_black2"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHV-yg-cre">
                                                     <rect key="frame" x="35" y="171.5" width="344" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="We7-b7-YpM"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="original_black2"/>
                                                     <nil key="highlightedColor"/>
@@ -437,6 +446,9 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJK-qe-M0V">
                                                     <rect key="frame" x="158.5" y="10" width="97.5" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="29" id="etP-rU-SHR"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                     <color key="textColor" name="original_black2"/>
                                                     <nil key="highlightedColor"/>
@@ -2921,15 +2933,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9WM-uD-5ik"/>
+                    <connections>
+                        <segue destination="JJI-ii-Pv5" kind="show" identifier="DetailVC" id="3dc-PF-ilC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaO-vZ-hrI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928" y="2437"/>
+            <point key="canvasLocation" x="961" y="2437"/>
         </scene>
-        <!--Did Like Table View Controller-->
+        <!--Did Super Like Table View Controller-->
         <scene sceneID="9tl-Rk-gvC">
             <objects>
-                <tableViewController id="VeI-q2-ibB" customClass="DidLikeTableViewController" customModule="DatingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VeI-q2-ibB" customClass="DidSuperLikeTableViewController" customModule="DatingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4zT-Vh-yWL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2997,6 +3012,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="d4K-SU-JE3"/>
+                    <connections>
+                        <segue destination="JJI-ii-Pv5" kind="show" identifier="DetailVC" id="ZnY-hN-DFp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6G-e7-aY4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3006,6 +3024,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="3qg-xn-go8"/>
         <segue reference="p2a-Jj-oo5"/>
+        <segue reference="ZnY-hN-DFp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="batu" width="25" height="25"/>

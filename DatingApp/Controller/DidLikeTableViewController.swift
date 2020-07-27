@@ -32,6 +32,16 @@ class DidLikeTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "DetailVC" {
+
+            let detailVC = segue.destination as! DetailTableViewController
+            let userId = sender as! String
+            detailVC.likeUserId = userId
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,6 +55,10 @@ class DidLikeTableViewController: UITableViewController {
         cell.configureCell(likes[indexPath.row])
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailVC", sender: likes[indexPath.row].uid)
     }
     
 }

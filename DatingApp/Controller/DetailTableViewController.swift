@@ -26,12 +26,14 @@ class DetailTableViewController: UIViewController {
     var user = User()
     var like = Like()
     var superLike = SuperLike()
+    var likeUserId = ""
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchUser()
         fetchLikeUser()
         fetchSuperLikeUser()
         downloadImages()
@@ -65,55 +67,69 @@ class DetailTableViewController: UIViewController {
                     USERNAME: user.username!,
                     AGE: user.age!,
                     PROFILEIMAGEURL1: user.profileImageUrl1!,
+                    PROFILEIMAGEURL2: user.profileImageUrl2!,
+                    PROFILEIMAGEURL3: user.profileImageUrl3!,
+                    COMMENT: user.comment!,
+                    BODYSIZE: user.bodySize!,
+                    HEIGHT: user.height!,
+                    SELFINTRO: user.selfIntro!,
+                    PROFESSION: user.profession!,
                     RESIDENCE: user.residence!,
                     ISLIKE: 1] as [String : Any]
         
-        Service.saveLikes(forUser: user, isLike: dict)
+        Like.saveLikes(forUser: user, isLike: dict)
         likeButton.isEnabled = false
     }
     
     @IBAction func superLikeButtonPressed(_ sender: Any) {
-
+        
         showSuperLikeAnimation()
         let dict = [UID: user.uid!,
                     USERNAME: user.username!,
                     AGE: user.age!,
                     PROFILEIMAGEURL1: user.profileImageUrl1!,
+                    PROFILEIMAGEURL2: user.profileImageUrl2!,
+                    PROFILEIMAGEURL3: user.profileImageUrl3!,
+                    COMMENT: user.comment!,
+                    BODYSIZE: user.bodySize!,
+                    HEIGHT: user.height!,
+                    SELFINTRO: user.selfIntro!,
+                    PROFESSION: user.profession!,
                     RESIDENCE: user.residence!,
                     ISSUPERLIKE: 1] as [String : Any]
         
-        Service.saveSuperLikes(forUser: user, isSuperLike: dict)
+        SuperLike.saveSuperLikes(forUser: user, isSuperLike: dict)
         superLikeButton.isEnabled = false
     }
     
     // MARK: - Fetch like
     
     private func fetchLikeUser() {
+        guard user.uid != nil else { return }
         
         Like.fetchLikeUser(user.uid) { (like) in
             self.like = like
-            
-            if like.isLike == 1 {
-                self.likeButton.isEnabled = false
-            } else {
-                self.likeButton.isEnabled = true
-            }
+            self.validateLikeButton()
         }
     }
     
     private func fetchSuperLikeUser() {
+        guard user.uid != nil else { return }
         
         SuperLike.fetchSuperLikeUser(user.uid) { (superLike) in
             self.superLike = superLike
-            
-            if superLike.isSuperLike == 1 {
-                self.superLikeButton.isEnabled = false
-            } else {
-                self.superLikeButton.isEnabled = true
-            }
+            self.validateSuperLikeButton()
         }
     }
-
+    
+    private func fetchUser() {
+        guard likeUserId != "" else { return }
+        
+        User.fetchUser(likeUserId) { (user) in
+            self.user = user
+            self.downloadImages()
+        }
+    }
     
     // MARK: - Download images
     
@@ -122,7 +138,6 @@ class DetailTableViewController: UIViewController {
         if user.profileImageUrl2 == "" && user.profileImageUrl3 == "" {
             let profileImageUrls = [user.profileImageUrl1] as! [String]
             let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            
             for (_, url) in imageUrls.enumerated() {
                 SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
                     self.profileImages.append(image!)
@@ -139,7 +154,7 @@ class DetailTableViewController: UIViewController {
                     self.collectionView.reloadData()
                 }
             }
-        } else {
+        } else if user.profileImageUrl1 != nil && user.profileImageUrl2 != nil && user.profileImageUrl3 != nil {
             let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2, user.profileImageUrl3] as! [String]
             let imageUrls = profileImageUrls.map({ URL(string: $0) })
             
@@ -147,6 +162,7 @@ class DetailTableViewController: UIViewController {
                 SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
                     self.profileImages.append(image!)
                     self.collectionView.reloadData()
+                    
                 }
             }
         }
@@ -156,6 +172,10 @@ class DetailTableViewController: UIViewController {
     
     private func configureUI() {
         
+        likeButton.isHidden = false
+        superLikeButton.isHidden = false
+        likeBackView.isHidden = false
+        superLikeBackView.isHidden = false
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -172,6 +192,31 @@ class DetailTableViewController: UIViewController {
         superLikeBackView.layer.shadowColor = UIColor.black.cgColor
         superLikeBackView.layer.shadowOpacity = 0.3
         superLikeBackView.layer.shadowRadius = 4
+        
+        if likeUserId != "" {
+            likeButton.isHidden = true
+            superLikeButton.isHidden = true
+            likeBackView.isHidden = true
+            superLikeBackView.isHidden = true
+        }
+    }
+    
+    private func validateLikeButton() {
+        
+        if like.isLike == 1 {
+            self.likeButton.isEnabled = false
+        } else {
+            self.likeButton.isEnabled = true
+        }
+    }
+    
+    private func validateSuperLikeButton() {
+        
+        if superLike.isSuperLike == 1 {
+            self.superLikeButton.isEnabled = false
+        } else {
+            self.superLikeButton.isEnabled = true
+        }
     }
     
     func showLikeAnimation() {
@@ -181,7 +226,7 @@ class DetailTableViewController: UIViewController {
         animationView.loopMode = .playOnce
         animationView.contentMode = .scaleAspectFit
         animationView.animationSpeed = 1
-
+        
         view.addSubview(animationView)
         animationView.play()
         
@@ -199,7 +244,7 @@ class DetailTableViewController: UIViewController {
         animationView.loopMode = .playOnce
         animationView.contentMode = .scaleAspectFit
         animationView.animationSpeed = 1
-
+        
         view.addSubview(animationView)
         animationView.play()
         
@@ -221,7 +266,7 @@ extension DetailTableViewController:  UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         return profileImages.count
     }
     
@@ -234,7 +279,6 @@ extension DetailTableViewController:  UICollectionViewDataSource, UICollectionVi
     }
 }
 
-
 // MARK: - UITableViewDelegate
 extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -245,8 +289,9 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
         
-        cell.configureCell(user)
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            cell.configureCell(self.user)
+        }
         return cell
     }
 }

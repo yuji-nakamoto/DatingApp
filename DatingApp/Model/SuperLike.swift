@@ -60,4 +60,18 @@ class SuperLike {
             })
         }
     }
+    
+    // MARK: - Save
+    
+    class func saveSuperLikes(forUser user: User, isSuperLike: [String: Any]) {
+                
+        COLLECTION_SUPERLIKES.document(user.uid).getDocument { (snapshot, error) in
+            
+            if snapshot?.exists == true {
+                COLLECTION_SUPERLIKES.document(user.uid).updateData(isSuperLike)
+            } else {
+                COLLECTION_SUPERLIKES.document(user.uid).setData(isSuperLike)
+            }
+        }
+    }
 }
