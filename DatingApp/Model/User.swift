@@ -70,6 +70,7 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
+//            print("DEBUG: snapshot data \(snapshot!.data()!)")
             let user = User(dict: snapshot!.data()! as [String: Any])
             completion(user)
         }

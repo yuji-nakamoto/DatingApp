@@ -1,5 +1,5 @@
 //
-//  DidLikeTableViewController.swift
+//  DidTypeTableViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/07/27.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class DidLikeTableViewController: UITableViewController {
+class DidTypeTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    private var likes = [Like]()
+    private var types = [Type]()
     private var users = [User]()
     
     // MARK: - Lifecycle
@@ -20,7 +20,7 @@ class DidLikeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchLikeUsers()
+        fetchTypeUsers()
         tableView.tableFooterView = UIView()
     }
     
@@ -30,50 +30,51 @@ class DidLikeTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func segementControlled(_ sender: UISegmentedControl) {
+    @IBAction func segmentControlled(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: fetchLikeUsers()
-        case 1: fetchLikedUsers()
+        case 0: fetchTypeUsers()
+        case 1: fetchtTypedUsers()
         default: break
         }
     }
+
+    // MARK: - Fetch isLike
     
-    // MARK: - Fetch like
-    
-    private func fetchLikeUsers() {
+    private func fetchTypeUsers() {
         
-        likes.removeAll()
+        types.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Like.fetchLikeUsers { (like) in
-            guard let uid = like.uid else { return }
+        Type.fetchTypeUsers { (superLike) in
+            guard let uid = superLike.uid else { return }
             self.fetchUser(uid: uid) {
-                self.likes.append(like)
+                self.types.append(superLike)
                 self.tableView.reloadData()
             }
         }
     }
-    
+
     // MARK: - Fetch liekd
     
-    private func fetchLikedUsers() {
+    private func fetchtTypedUsers() {
         
-        likes.removeAll()
+        types.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Like.fetchLikedUser { (like) in
-            guard let uid = like.uid else { return }
+        Type.fetchTyped { (superLike) in
+            guard let uid = superLike.uid else { return }
             self.fetchUser(uid: uid) {
-                self.likes.append(like)
+                self.types.append(superLike)
                 self.tableView.reloadData()
             }
         }
     }
     
     // MARK: - Fetch user
+    
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
@@ -83,14 +84,13 @@ class DidLikeTableViewController: UITableViewController {
     }
     
     // MARK: - Segue
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailVC" {
-
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
-            detailVC.likeUserId = userId
+            detailVC.typeUserId = userId
         }
     }
     
@@ -98,7 +98,7 @@ class DidLikeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return likes.count
+        return types.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,7 +109,7 @@ class DidLikeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: likes[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: types[indexPath.row].uid)
     }
     
 }

@@ -66,6 +66,8 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         validateTextField()
         hud.textLabel.text = "ユーザー情報を保存中..."
         hud.show(in: self.view)
@@ -174,6 +176,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func setupUI(_ user: User) {
         
+        navigationItem.title = "プロフィール編集"
         nameTextField.delegate = self
         commentTextField.delegate = self
         picker.delegate = self
@@ -278,8 +281,8 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     private func hudSetup() {
         
         hud.textLabel.text = "ユーザー情報を保存しました。"
+        hud.dismiss(afterDelay: 2.0)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            hud.dismiss()
             self.navigationController?.popViewController(animated: true)
         }
     }

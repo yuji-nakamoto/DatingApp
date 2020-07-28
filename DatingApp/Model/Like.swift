@@ -15,6 +15,7 @@ class Like {
     var profileImageUrl: String!
     var uid: String!
     var isLike: Int!
+    var selfIntro: String!
     
     init() {
     }
@@ -26,13 +27,14 @@ class Like {
         self.age = dict[AGE] as? String ?? ""
         self.residence = dict[RESIDENCE] as? String ?? ""
         self.isLike = dict[ISLIKE] as? Int ?? 0
+        self.selfIntro = dict[SELFINTRO] as? String ?? ""
     }
     
-    // MARK: - Fetch like user
+    // MARK: - Fetch isLike user
     
     class func fetchLikeUser(_ forUserId: String, completion: @escaping(_ like: Like) -> Void) {
         
-        COLLECTION_LIKES.document(forUserId).getDocument { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(forUserId).getDocument { (snapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             }
@@ -42,35 +44,62 @@ class Like {
         }
     }
     
-    class func fetchLikeUsers(completion: @escaping([Like]) -> Void) {
-        var likes: [Like] = []
+    class func fetchLikeUsers(completion: @escaping(Like) -> Void) {
 
-        COLLECTION_LIKES.getDocuments { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription) ")
+            }
+            snapshot?.documents.forEach({ (document) in
+//                print("DEBUG: fetchLikeUsers document data\(document.data())")
+                let dict = document.data()
+                let like = Like(dict: dict)
+                completion(like)
+            })
+        }
+    }
+    
+    // MARK: - Fetch liked user
+    
+    class func fetchLikedUser(completion: @escaping(Like) -> Void) {
+        
+        COLLECTION_LIKE.document(User.currentUserId()).collection("liked").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
             snapshot?.documents.forEach({ (document) in
                 let dict = document.data()
+//                print("DEBUG: fetchLiked document data\(document.data())")
                 let like = Like(dict: dict)
-                likes.append(like)
-                
-                if likes.count == snapshot?.documents.count {
-                    completion(likes)
-                }
+                completion(like)
             })
         }
     }
     
     // MARK: - Save
     
-    class func saveLikes(forUser user: User, isLike: [String: Any]) {
+    class func saveIsLikeUser(forUser user: User, isLike: [String: Any]) {
                 
-        COLLECTION_LIKES.document(user.uid).getDocument { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(user.uid).getDocument { (snapshot, error) in
             
             if snapshot?.exists == true {
-                COLLECTION_LIKES.document(user.uid).updateData(isLike)
+                COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(user.uid).updateData(isLike)
             } else {
-                COLLECTION_LIKES.document(user.uid).setData(isLike)
+                COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(user.uid).setData(isLike)
+            }
+        }
+    }
+    
+    class func saveLikedUser(forUser user: User) {
+                
+        COLLECTION_LIKE.document(user.uid).collection("liked").document(User.currentUserId()).getDocument { (snapshot, error) in
+            
+            let dict = [UID: User.currentUserId()]
+            
+            if snapshot?.exists == true {
+                COLLECTION_LIKE.document(user.uid).collection("liked").document(User.currentUserId()).updateData(dict)
+            } else {
+                COLLECTION_LIKE.document(user.uid).collection("liked").document(User.currentUserId()).setData(dict)
             }
         }
     }

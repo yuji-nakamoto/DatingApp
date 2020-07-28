@@ -68,17 +68,4 @@ struct Service {
         }
     }
     
-    // MARK: -  Match
-
-    static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
-        
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        COLLECTION_LIKES.document(user.uid).getDocument { (snapshot, error) in
-            guard let data = snapshot?.data() else { return }
-            guard let didMatch = data[currentUid] as? Bool else { return }
-            completion(didMatch)
-        }
-    }
-    
 }

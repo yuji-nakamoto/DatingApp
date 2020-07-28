@@ -16,6 +16,7 @@ class SearchViewController: UIViewController {
     
     private var users = [User]()
     private var user: User?
+    let refresh = UIRefreshControl()
     
     // MARK: - Lifecycle
     
@@ -34,6 +35,12 @@ class SearchViewController: UIViewController {
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
         logout()
+    }
+    
+    @objc func update(){
+        fetchUser()
+        collectionView.reloadData()
+        refresh.endRefreshing()
     }
     
     // MARK: - Fetch user
@@ -65,6 +72,7 @@ class SearchViewController: UIViewController {
     
     private func setupUI() {
         
+        refresh.addTarget(self, action: #selector(update), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
         

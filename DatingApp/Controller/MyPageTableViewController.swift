@@ -50,6 +50,7 @@ class MyPageTableViewController: UITableViewController {
             self.user = user
             self.profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
             self.nameLabel.text = user.username
+            self.tableView.reloadData()
         }
     }
     
@@ -64,6 +65,7 @@ class MyPageTableViewController: UITableViewController {
         profileButton.layer.shadowOpacity = 0.3
         profileButton.layer.shadowRadius = 4
         profileImageView.layer.cornerRadius = 100 / 2
+        navigationItem.title = "マイページ"
     }
 
 }

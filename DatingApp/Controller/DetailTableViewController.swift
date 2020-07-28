@@ -17,25 +17,27 @@ class DetailTableViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var superLikeBackView: UIView!
+    @IBOutlet weak var typeBackView: UIView!
     @IBOutlet weak var likeBackView: UIView!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var superLikeButton: UIButton!
+    @IBOutlet weak var typeButton: UIButton!
     
     var profileImages = [UIImage]()
     var user = User()
     var like = Like()
-    var superLike = SuperLike()
+    var type = Type()
     var likeUserId = ""
+    var typeUserId = ""
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchUser()
+        fetchLikeUserId()
+        fetchTypeUserId()
         fetchLikeUser()
-        fetchSuperLikeUser()
+        fetchTypeUser()
+        fetchCurrentUser()
         downloadImages()
         configureUI()
     }
@@ -64,42 +66,22 @@ class DetailTableViewController: UIViewController {
         
         showLikeAnimation()
         let dict = [UID: user.uid!,
-                    USERNAME: user.username!,
-                    AGE: user.age!,
-                    PROFILEIMAGEURL1: user.profileImageUrl1!,
-                    PROFILEIMAGEURL2: user.profileImageUrl2!,
-                    PROFILEIMAGEURL3: user.profileImageUrl3!,
-                    COMMENT: user.comment!,
-                    BODYSIZE: user.bodySize!,
-                    HEIGHT: user.height!,
-                    SELFINTRO: user.selfIntro!,
-                    PROFESSION: user.profession!,
-                    RESIDENCE: user.residence!,
-                    ISLIKE: 1] as [String : Any]
+                    ISLIKE: 1,] as [String : Any]
         
-        Like.saveLikes(forUser: user, isLike: dict)
+        Like.saveIsLikeUser(forUser: user, isLike: dict)
+        Like.saveLikedUser(forUser: user)
         likeButton.isEnabled = false
     }
     
-    @IBAction func superLikeButtonPressed(_ sender: Any) {
+    @IBAction func typeButtonPressed(_ sender: Any) {
         
-        showSuperLikeAnimation()
+        showTypeAnimation()
         let dict = [UID: user.uid!,
-                    USERNAME: user.username!,
-                    AGE: user.age!,
-                    PROFILEIMAGEURL1: user.profileImageUrl1!,
-                    PROFILEIMAGEURL2: user.profileImageUrl2!,
-                    PROFILEIMAGEURL3: user.profileImageUrl3!,
-                    COMMENT: user.comment!,
-                    BODYSIZE: user.bodySize!,
-                    HEIGHT: user.height!,
-                    SELFINTRO: user.selfIntro!,
-                    PROFESSION: user.profession!,
-                    RESIDENCE: user.residence!,
-                    ISSUPERLIKE: 1] as [String : Any]
+                    ISTYPE: 1] as [String : Any]
         
-        SuperLike.saveSuperLikes(forUser: user, isSuperLike: dict)
-        superLikeButton.isEnabled = false
+        Type.saveIsTypeUser(forUser: user, isType: dict)
+        Type.saveTypedUser(forUser: user)
+        typeButton.isEnabled = false
     }
     
     // MARK: - Fetch like
@@ -109,25 +91,50 @@ class DetailTableViewController: UIViewController {
         
         Like.fetchLikeUser(user.uid) { (like) in
             self.like = like
-            self.validateLikeButton()
+            self.validateLikeButton(like)
         }
     }
     
-    private func fetchSuperLikeUser() {
+    private func fetchTypeUser() {
         guard user.uid != nil else { return }
-        
-        SuperLike.fetchSuperLikeUser(user.uid) { (superLike) in
-            self.superLike = superLike
-            self.validateSuperLikeButton()
+
+        Type.fetchTypeUser(user.uid) { (type) in
+            self.type = type
+            self.validateTypeButton(type)
         }
     }
     
-    private func fetchUser() {
+    private func fetchLikeUserId() {
         guard likeUserId != "" else { return }
         
         User.fetchUser(likeUserId) { (user) in
             self.user = user
+            self.tableView.reloadData()
             self.downloadImages()
+        }
+    }
+    
+    private func fetchTypeUserId() {
+        guard typeUserId != "" else { return }
+        
+        User.fetchUser(typeUserId) { (user) in
+            self.user = user
+            self.tableView.reloadData()
+            self.downloadImages()
+        }
+    }
+    
+    private func fetchCurrentUser() {
+        
+        if typeUserId != "" {
+            Type.fetchTypeUser(typeUserId) { (type) in
+                self.validateTypeButton(type)
+            }
+        }
+        if likeUserId != "" {
+            Like.fetchLikeUser(likeUserId) { (like) in
+                self.validateLikeButton(like)
+            }
         }
     }
     
@@ -162,7 +169,6 @@ class DetailTableViewController: UIViewController {
                 SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
                     self.profileImages.append(image!)
                     self.collectionView.reloadData()
-                    
                 }
             }
         }
@@ -172,36 +178,25 @@ class DetailTableViewController: UIViewController {
     
     private func configureUI() {
         
-        likeButton.isHidden = false
-        superLikeButton.isHidden = false
-        likeBackView.isHidden = false
-        superLikeBackView.isHidden = false
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         likeBackView.layer.cornerRadius = 55 / 2
-        superLikeBackView.layer.cornerRadius = 55 / 2
+        typeBackView.layer.cornerRadius = 55 / 2
         
         likeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         likeBackView.layer.shadowColor = UIColor.black.cgColor
         likeBackView.layer.shadowOpacity = 0.3
         likeBackView.layer.shadowRadius = 4
         
-        superLikeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        superLikeBackView.layer.shadowColor = UIColor.black.cgColor
-        superLikeBackView.layer.shadowOpacity = 0.3
-        superLikeBackView.layer.shadowRadius = 4
-        
-        if likeUserId != "" {
-            likeButton.isHidden = true
-            superLikeButton.isHidden = true
-            likeBackView.isHidden = true
-            superLikeBackView.isHidden = true
-        }
+        typeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        typeBackView.layer.shadowColor = UIColor.black.cgColor
+        typeBackView.layer.shadowOpacity = 0.3
+        typeBackView.layer.shadowRadius = 4
     }
     
-    private func validateLikeButton() {
+    private func validateLikeButton(_ like: Like) {
         
         if like.isLike == 1 {
             self.likeButton.isEnabled = false
@@ -210,16 +205,17 @@ class DetailTableViewController: UIViewController {
         }
     }
     
-    private func validateSuperLikeButton() {
+    private func validateTypeButton(_ type: Type) {
         
-        if superLike.isSuperLike == 1 {
-            self.superLikeButton.isEnabled = false
+        if type.isType == 1 {
+            self.typeButton.isEnabled = false
         } else {
-            self.superLikeButton.isEnabled = true
+            self.typeButton.isEnabled = true
         }
     }
     
     func showLikeAnimation() {
+        
         let animationView = AnimationView(name: "like")
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         animationView.center = self.view.center
@@ -237,8 +233,9 @@ class DetailTableViewController: UIViewController {
         }
     }
     
-    func showSuperLikeAnimation() {
-        let animationView = AnimationView(name: "superLike")
+    func showTypeAnimation() {
+        
+        let animationView = AnimationView(name: "type")
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         animationView.center = self.view.center
         animationView.loopMode = .playOnce
@@ -261,12 +258,10 @@ class DetailTableViewController: UIViewController {
 extension DetailTableViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: 375, height: 425)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return profileImages.count
     }
     
@@ -289,9 +284,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            cell.configureCell(self.user)
-        }
+        cell.configureCell(self.user)
         return cell
     }
 }
