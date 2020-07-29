@@ -12,9 +12,12 @@ class StartViewController: UIViewController {
     
     // MARK: - Lifecycle
 
+    @IBOutlet weak var logoLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupColor()
         autoLogin()
     }
     
@@ -27,6 +30,14 @@ class StartViewController: UIViewController {
             return
         }
         toSelectLoginVC()
+    }
+    
+    private func setupColor() {
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            logoLabel.textColor = UIColor(named: O_PINK)
+        } else {
+            logoLabel.textColor = UIColor(named: O_GREEN)
+        }
     }
     
     private func toTabBerVC() {

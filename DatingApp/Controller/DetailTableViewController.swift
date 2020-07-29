@@ -322,7 +322,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
-        
+ 
         cell.configureCell(self.user)
         return cell
     }

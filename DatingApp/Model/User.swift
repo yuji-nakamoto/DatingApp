@@ -17,7 +17,7 @@ class User {
     var profileImageUrl1: String!
     var profileImageUrl2: String!
     var profileImageUrl3: String!
-    var age: String!
+    var age: Int!
     var gender: String!
     var selfIntro: String!
     var residence: String!
@@ -25,6 +25,9 @@ class User {
     var comment: String!
     var bodySize: String!
     var height: String!
+    var minAge: Int!
+    var maxAge: Int!
+    var residenceSerch: String!
     
     init() {
     }
@@ -36,7 +39,7 @@ class User {
         profileImageUrl1 = dict[PROFILEIMAGEURL1] as? String ?? ""
         profileImageUrl2 = dict[PROFILEIMAGEURL2] as? String ?? ""
         profileImageUrl3 = dict[PROFILEIMAGEURL3] as? String ?? ""
-        age = dict[AGE] as? String ?? ""
+        age = dict[AGE] as? Int ?? 18
         gender = dict[GENDER] as? String ?? ""
         residence = dict[RESIDENCE] as? String ?? ""
         profession = dict[PROFESSION] as? String ?? ""
@@ -44,22 +47,15 @@ class User {
         comment = dict[COMMENT] as? String ?? ""
         bodySize = dict[BODYSIZE] as? String ?? ""
         height = dict[HEIGHT] as? String ?? ""
+        minAge = dict[MINAGE] as? Int ?? 18
+        maxAge = dict[MAXAGE] as? Int ?? 60
+        residenceSerch = dict[RESIDENCESEARCH] as? String ?? ""
     }
     
     // MARK: - Return user
     
     class func currentUserId() -> String {
         return Auth.auth().currentUser!.uid
-    }
-    
-    class func currentUser() -> User? {
-        
-        if Auth.auth().currentUser != nil {
-            if let dictionary = UserDefaults.standard.object(forKey: CURRENTUSER) {
-                return User.init(dict: dictionary as! [String: Any])
-            }
-        }
-        return nil
     }
     
     // MARK: - Fetch user
@@ -70,16 +66,20 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
-//            print("DEBUG: snapshot data \(snapshot!.data()!)")
+            //                        print("DEBUG: snapshot data \(snapshot!.data()!)")
             let user = User(dict: snapshot!.data()! as [String: Any])
             completion(user)
         }
     }
     
-    class func fetchUsers(completion: @escaping([User]) -> Void) {
+    class func fetchUsers(forCurrentUer user: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         
-        COLLECTION_USERS.getDocuments { (snapshot, error) in
+        let query = COLLECTION_USERS
+            .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
+            .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
+        
+        query.getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
                 let dictionary = document.data()
                 let user = User(dict: dictionary as [String: Any])
@@ -92,44 +92,47 @@ class User {
         }
     }
     
-    class func genderAndResidenceSort(_ residence: String, completion: @escaping([User]) -> Void) {
+    class func genderAndResidenceSort(_ residenceSearch: String, _ user: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            let usersRef = COLLECTION_USERS.whereField(GENDER, isEqualTo: "男性")
+                .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
+                .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
             
-            COLLECTION_USERS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residence)
-                .getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            users.append(user)
-                        })
-                    }
-                    completion(users)
+            usersRef.getDocuments { (snapshot, error) in
+                
+                if let error = error {
+                    print("Error gender sort: \(error.localizedDescription)")
+                } else {
+                    snapshot?.documents.forEach({ (document) in
+                        let dict = document.data()
+                        let user = User(dict: dict as [String: Any])
+                        guard user.uid != User.currentUserId() else { return }
+                        users.append(user)
+                    })
+                }
+                completion(users)
             }
         } else {
-            COLLECTION_USERS
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(RESIDENCE, isEqualTo: residence)
-                .getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            users.append(user)
-                        })
-                    }
-                    completion(users)
+            let usersRef = COLLECTION_USERS.whereField(GENDER, isEqualTo: "女性")
+                .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
+                .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
+            
+            usersRef.getDocuments { (snapshot, error) in
+                
+                if let error = error {
+                    print("Error gender sort: \(error.localizedDescription)")
+                } else {
+                    snapshot?.documents.forEach({ (document) in
+                        let dict = document.data()
+                        let user = User(dict: dict as [String: Any])
+                        guard user.uid != User.currentUserId() else { return }
+                        users.append(user)
+                    })
+                }
+                completion(users)
             }
         }
     }

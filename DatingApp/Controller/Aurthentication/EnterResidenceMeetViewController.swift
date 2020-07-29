@@ -1,14 +1,14 @@
 //
-//  EnterResidenceViewController.swift
+//  EnterResidenceMeetViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/22.
+//  Created by yuji_nakamoto on 2020/07/30.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 
-class EnterResidenceViewController: UIViewController {
+class EnterResidenceMeetController: UIViewController {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -55,9 +55,14 @@ class EnterResidenceViewController: UIViewController {
 
     private func saveUserProfession() {
         
-        let dict = [RESIDENCE: residenceLabel.text]
+        let dict = [RESIDENCESEARCH: residenceLabel.text,
+                    SELFINTRO: "はじめまして！",
+                    COMMENT: "🆕アプリに登録したよ！😊",
+                    BODYSIZE: "未設定",
+                    HEIGHT: "未設定"]
         updateUser(withValue: dict as [String : Any])
-        toEnterResidenceMeetVC()
+        
+        toTabBerVC()
     }
     
     // MARK: - Helpers
@@ -70,7 +75,7 @@ class EnterResidenceViewController: UIViewController {
         residenceLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "居住地を選択してください。\nあとで変更することもできます。"
+        descriptionLabel.text = "出会いたい人の居住地を選択してください。\nあとで変更することもできます。"
         nextButton.layer.cornerRadius = 50 / 2
         nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         nextButton.layer.shadowColor = UIColor.black.cgColor
@@ -82,19 +87,21 @@ class EnterResidenceViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    
-    private func toEnterResidenceMeetVC() {
+
+    private func toTabBerVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
+            UserDefaults.standard.set(true, forKey: RCOMPLETION)
+            UserDefaults.standard.synchronize()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterResidenceMeetVC = storyboard.instantiateViewController(withIdentifier: "EnterResidenceMeetVC")
-            self.present(toEnterResidenceMeetVC, animated: true, completion: nil)
+            let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
+            self.present(toTabBerVC, animated: true, completion: nil)
         }
     }
-    
 }
 
-extension EnterResidenceViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension EnterResidenceMeetController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

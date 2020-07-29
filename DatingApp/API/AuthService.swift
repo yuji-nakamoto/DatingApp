@@ -50,8 +50,6 @@ struct AuthService {
             try Auth.auth().signOut()
             
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-            UserDefaults.standard.removeObject(forKey: FEMALE)
-            UserDefaults.standard.synchronize()
             completion(nil)
             
         } catch let error as NSError {

@@ -25,23 +25,27 @@ class MyPageTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupColor()
         setupUI()
         fetchUser()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewDidLoad()
+    }
+    
     // MARK: - Actions
     
-    @IBAction func footStepButtonPressed(_ sender: Any) {
+    @IBAction func settingButtonPressed(_ sender: Any) {
         
-        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyboard.instantiateViewController(withIdentifier: "SettingVC") as! UINavigationController
+        self.present(navigationController, animated: true, completion: nil)
     }
     
-    @IBAction func goodButtonPressed(_ sender: Any) {
-        
-        
-    }
-        
+    
     // MARK: - Fetch user
     
     private func fetchUser() {
@@ -58,15 +62,27 @@ class MyPageTableViewController: UITableViewController {
     
     private func setupUI() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            profileButton.backgroundColor = UIColor(named: O_PINK)
-        } else {
-            profileButton.backgroundColor = UIColor(named: O_GREEN)
-        }
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 100 / 2
         navigationItem.title = "マイページ"
     }
-
+    
+    private func setupColor() {
+        
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            profileButton.backgroundColor = UIColor(named: O_PINK)
+            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
+            navigationController?.navigationBar.tintColor = UIColor.white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            tabBarController?.tabBar.barTintColor = UIColor(named: O_PINK)
+        } else {
+            profileButton.backgroundColor = UIColor(named: O_GREEN)
+            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
+            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            tabBarController?.tabBar.barTintColor = UIColor(named: O_GREEN)
+        }
+    }
+    
 }

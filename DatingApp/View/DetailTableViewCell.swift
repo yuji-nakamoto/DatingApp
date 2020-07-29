@@ -26,19 +26,22 @@ class DetailTableViewCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func configureCell(_ user: User) {
+    func configureCell(_ user: User?) {
         
-        selfIntrolabel.text = user.selfIntro
-        self.nameLabel.text = user.username
-        self.nameLabel2.text = user.username
-        self.residenceLabel.text = user.residence
-        self.residenceLabel2.text = user.residence
-        self.ageLabel.text = user.age
-        self.ageLabel2.text = user.age
-        self.professionLabel.text = user.profession
-        self.commentLabel.text = user.comment
-        self.bodyLabel.text = user.bodySize
-        self.heightLabel.text = user.height
+        selfIntrolabel.text = user!.selfIntro
+        nameLabel.text = user!.username
+        nameLabel2.text = user!.username
+        residenceLabel.text = user!.residence
+        residenceLabel2.text = user!.residence
+        professionLabel.text = user!.profession
+        commentLabel.text = user!.comment
+        bodyLabel.text = user!.bodySize
+        heightLabel.text = user!.height
+        if user!.age == nil {
+            return
+        }
+        ageLabel.text = String(user!.age) + "歳"
+        ageLabel2.text = String(user!.age) + "歳"
     }
     
     override func awakeFromNib() {

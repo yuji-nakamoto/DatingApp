@@ -15,21 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        setupNavColor()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
-    }
-    
-    private func setupNavColor() {
-        
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            UINavigationBar.appearance().barTintColor = UIColor(named: O_PINK)
-            UINavigationBar.appearance().tintColor = UIColor.white
-            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
-            UINavigationBar.appearance().barTintColor = UIColor(named: O_GREEN)
-            UINavigationBar.appearance().tintColor = UIColor(named: O_BLACK)
-        }
     }
 
     // MARK: UISceneSession Lifecycle

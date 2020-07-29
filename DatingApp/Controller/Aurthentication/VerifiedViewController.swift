@@ -103,7 +103,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 
     private func setupUI() {
         
-        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n認証がお済みであればログインを行い、ユーザー情報の入力を進めてください。"
+        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n\n認証がお済みであればログインを行い、ユーザー情報の入力を進めてください。"
         loginButton.layer.cornerRadius = 50 / 2
         loginButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         loginButton.layer.shadowColor = UIColor.black.cgColor

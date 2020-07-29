@@ -42,9 +42,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var indicator2: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var indicator3: UIActivityIndicatorView!
-    
-    
-    
+
     private var user = User()
     private let picker = UIImagePickerController()
     private var buttons = [UIButton]()
@@ -58,6 +56,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavColor()
         setupUI()
         fetchUser()
     }
@@ -299,6 +298,19 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         hud.dismiss(afterDelay: 2.0)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    private func setupNavColor() {
+        
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
+            navigationController?.navigationBar.tintColor = UIColor.white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        } else {
+            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
+            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
         }
     }
     

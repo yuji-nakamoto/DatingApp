@@ -18,7 +18,6 @@ class EnterGenderViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var genderLabel: UILabel!
     
-    private var user: User!
     private var dataArray = ["-", "男性", "女性"]
     
     // MARK: - Lifecycle
@@ -26,7 +25,6 @@ class EnterGenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUser()
         configureSetup()
     }
     
@@ -55,14 +53,7 @@ class EnterGenderViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - User
-    
-    private func fetchUser() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-        }
-    }
+    // MARK: - Save
     
     private func saveUserGender() {
         

@@ -30,7 +30,7 @@ class DidLikeTableViewCell: UITableViewCell {
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         nameLabel.text = user.username
         residenceLabel.text = user.residence
-        ageLabel.text = user.age
+        ageLabel.text = String(user.age) + "歳"
         selfIntroLabel.text = user.selfIntro
     }
 
@@ -55,7 +55,7 @@ class DidLikeTableViewCell: UITableViewCell {
     var timestamp1: String {
         let date = footstep?.timestamp.dateValue()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateFormat = "hh:mm a"
         return dateFormatter.string(from: date!)
     }
     

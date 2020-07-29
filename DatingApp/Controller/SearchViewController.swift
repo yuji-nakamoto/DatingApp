@@ -12,29 +12,37 @@ class SearchViewController: UIViewController {
     
     // MARK:  - Properties
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var users = [User]()
     private var user: User?
-    let refresh = UIRefreshControl()
+    private let refresh = UIRefreshControl()
+    
+    
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavTabColor()
         fetchUser()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupNavTabColor()
+        fetchUser()
     }
     
     // MARK: - Actions
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
+        self.viewDidLoad()
         fetchUser()
-    }
-    
-    @IBAction func logoutButtonPressed(_ sender: Any) {
-        logout()
     }
     
     @objc func update(){
@@ -46,40 +54,42 @@ class SearchViewController: UIViewController {
     // MARK: - Fetch user
     
     private func fetchUser() {
+        indicator.startAnimating()
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            let residence = user.residence
-            User.genderAndResidenceSort(residence!) { (users) in
+            let residenceSerch = user.residenceSerch
+            User.genderAndResidenceSort(residenceSerch!, user) { (users) in
                 self.users = users
                 self.collectionView.reloadData()
+                self.indicator.stopAnimating()
             }
         }
     }
 
     // MARK: - Heplers
     
-    private func logout() {
-        
-        AuthService.logoutUser { (error) in
-            
-            if error != nil {
-                print("Error: \(String(describing: error?.localizedDescription))")
-            }
-            self.toSelectLoginVC()
-        }
-    }
-    
     private func setupUI() {
         
         refresh.addTarget(self, action: #selector(update), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+
+    private func setupNavTabColor() {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             navigationItem.title = "男性をさがす"
+            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
+            navigationController?.navigationBar.tintColor = UIColor.white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            tabBarController?.tabBar.barTintColor = UIColor(named: O_PINK)
         } else {
             navigationItem.title = "女性をさがす"
+            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
+            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            tabBarController?.tabBar.barTintColor = UIColor(named: O_GREEN)
         }
     }
     
@@ -100,15 +110,7 @@ class SearchViewController: UIViewController {
             navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
-    
-    private func toSelectLoginVC() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
-            self.present(toSelectLoginVC, animated: true, completion: nil)
-        }
-    }
+
 }
 
 //MARK: CollectionView

@@ -15,7 +15,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var selfIntroLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     
@@ -29,9 +29,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
         statusView.layer.borderWidth = 5
         statusView.layer.borderColor = UIColor.white.cgColor
         
-        ageLabel.text = user.age
+        ageLabel.text = String(user.age) + "歳"
         residenceLabel.text = user.residence
-        commentLabel.text = user.comment
+        selfIntroLabel.text = user.selfIntro
         
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
     }

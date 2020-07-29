@@ -20,7 +20,6 @@ class EnterProfileImageViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     
-    private var user: User!
     private let picker = UIImagePickerController()
     private var profileImage: UIImage?
     
@@ -28,7 +27,6 @@ class EnterProfileImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
     
@@ -72,7 +70,7 @@ class EnterProfileImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - User
+    // MARK: - Save
     
     private func saveProfileImage() {
         indicator.startAnimating()

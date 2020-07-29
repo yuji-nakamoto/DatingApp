@@ -13,6 +13,8 @@
 		831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */; };
 		831E392A24CA37390043AA76 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392924CA37390043AA76 /* MyPageTableViewController.swift */; };
 		831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392B24CA46260043AA76 /* ProfileTableViewController.swift */; };
+		8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */; };
+		8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */; };
 		8348E3CD24CD0148001D59C0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3CC24CD0148001D59C0 /* AuthService.swift */; };
 		8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */; };
 		8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */; };
@@ -29,6 +31,7 @@
 		8348E3F724D0E123001D59C0 /* FootstepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3F624D0E123001D59C0 /* FootstepViewController.swift */; };
 		8348E3F924D0EC09001D59C0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3F824D0EC09001D59C0 /* TabBarController.swift */; };
 		8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FC24D10F90001D59C0 /* Footstep.swift */; };
+		8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */; };
 		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
@@ -65,6 +68,8 @@
 		831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		831E392924CA37390043AA76 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
 		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderTableViewController.swift; sourceTree = "<group>"; };
+		8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceMeetViewController.swift; sourceTree = "<group>"; };
 		8348E3CC24CD0148001D59C0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIckerKeyboard1.swift; sourceTree = "<group>"; };
 		8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard2.swift; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 		8348E3F624D0E123001D59C0 /* FootstepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootstepViewController.swift; sourceTree = "<group>"; };
 		8348E3F824D0EC09001D59C0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8348E3FC24D10F90001D59C0 /* Footstep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footstep.swift; sourceTree = "<group>"; };
+		8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 				8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */,
 				8348E3F624D0E123001D59C0 /* FootstepViewController.swift */,
 				8348E3F824D0EC09001D59C0 /* TabBarController.swift */,
+				8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */,
+				8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -238,6 +246,7 @@
 				834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */,
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
+				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
 			);
 			path = Aurthentication;
 			sourceTree = "<group>";
@@ -393,6 +402,7 @@
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
+				8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */,
 				834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */,
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
 				8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */,
@@ -410,6 +420,7 @@
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
 				8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
+				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
 				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
 				838071F024C64D16008BAA2C /* VerifiedViewController.swift in Sources */,
@@ -422,6 +433,7 @@
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
 				8348E3F924D0EC09001D59C0 /* TabBarController.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
+				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,

@@ -19,16 +19,12 @@ class EnterAgeViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var ageLabel: UILabel!
     
-    private var user: User!
-    private let dataArray = ["18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60~"]
-//    private var dataArray: [Int] = ([Int])(18...59)
+    private var dataArray: [Int] = ([Int])(18...60)
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchUser()
         setupUI()
     }
     
@@ -49,19 +45,12 @@ class EnterAgeViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - User
-    
-    private func fetchUser() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-        }
-    }
+    // MARK: - Save
     
     private func saveUserAge() {
         
-        let dict = [AGE: ageLabel.text! + "歳"]
-        updateUser(withValue: dict)
+        let dict = [AGE: Int(ageLabel.text!)]
+        updateUser(withValue: dict as [String : Any])
 
         toEnterProfileImageVC()
     }
@@ -112,7 +101,7 @@ extension EnterAgeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = UILabel()
-        label.text = dataArray[row]
+        label.text = String(dataArray[row])
         label.textAlignment = NSTextAlignment.center
         
         return label
@@ -122,6 +111,6 @@ extension EnterAgeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                     didSelectRow row: Int,
                     inComponent component: Int) {
         
-        ageLabel.text = dataArray[row]
+        ageLabel.text = String(dataArray[row])
     }
 }

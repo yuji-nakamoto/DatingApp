@@ -41,6 +41,9 @@ public let SELFINTRO = "selfIntro"
 public let COMMENT = "comment"
 public let BODYSIZE = "bodySize"
 public let HEIGHT = "height"
+public let MINAGE = "minAge"
+public let MAXAGE = "maxAge"
+public let RESIDENCESEARCH = "residenceSerch"
 
 // MARK: - Like Type
 

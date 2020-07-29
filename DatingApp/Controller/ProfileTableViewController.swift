@@ -33,6 +33,7 @@ class ProfileTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        reFetchUser()
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -57,6 +58,13 @@ class ProfileTableViewController: UIViewController {
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
             self.downloadImages(user)
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func reFetchUser() {
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
             self.tableView.reloadData()
         }
     }
@@ -153,9 +161,8 @@ extension ProfileTableViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
-        
-        cell.configureCell(user)
-
+ 
+        cell.configureCell(self.user)
         return cell
     }
 }

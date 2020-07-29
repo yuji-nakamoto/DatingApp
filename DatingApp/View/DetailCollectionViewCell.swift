@@ -12,8 +12,8 @@ class DetailCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!
     
-    
     func setupProfileImages(profileImage: UIImage) {
         profileImageView.image = profileImage
+        profileImageView.layer.cornerRadius = 10
     }
 }
