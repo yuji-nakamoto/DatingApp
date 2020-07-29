@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import Lottie
+import Firebase
 
 class DetailTableViewController: UIViewController {
     
@@ -66,7 +67,8 @@ class DetailTableViewController: UIViewController {
         
         showLikeAnimation()
         let dict = [UID: user.uid!,
-                    ISLIKE: 1,] as [String : Any]
+                    ISLIKE: 1,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         Like.saveIsLikeUser(forUser: user, isLike: dict)
         Like.saveLikedUser(forUser: user)
@@ -77,7 +79,8 @@ class DetailTableViewController: UIViewController {
         
         showTypeAnimation()
         let dict = [UID: user.uid!,
-                    ISTYPE: 1] as [String : Any]
+                    ISTYPE: 1,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         Type.saveIsTypeUser(forUser: user, isType: dict)
         Type.saveTypedUser(forUser: user)
@@ -88,6 +91,7 @@ class DetailTableViewController: UIViewController {
     
     private func fetchLikeUser() {
         guard user.uid != nil else { return }
+        footsteps(user)
         
         Like.fetchLikeUser(user.uid) { (like) in
             self.like = like
@@ -97,6 +101,7 @@ class DetailTableViewController: UIViewController {
     
     private func fetchTypeUser() {
         guard user.uid != nil else { return }
+        footsteps(user)
 
         Type.fetchTypeUser(user.uid) { (type) in
             self.type = type
@@ -106,6 +111,7 @@ class DetailTableViewController: UIViewController {
     
     private func fetchLikeUserId() {
         guard likeUserId != "" else { return }
+        footsteps2(likeUserId)
         
         User.fetchUser(likeUserId) { (user) in
             self.user = user
@@ -116,6 +122,7 @@ class DetailTableViewController: UIViewController {
     
     private func fetchTypeUserId() {
         guard typeUserId != "" else { return }
+        footsteps2(typeUserId)
         
         User.fetchUser(typeUserId) { (user) in
             self.user = user
@@ -136,6 +143,38 @@ class DetailTableViewController: UIViewController {
                 self.validateLikeButton(like)
             }
         }
+    }
+    
+    // MARL: - FootStep
+    
+    private func footsteps(_ user: User) {
+        guard user.uid != nil else { return }
+        
+        let dict = [UID: user.uid!,
+                    ISFOOTSTEP: 1,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+        
+        Footstep.saveIsFootstepUser(forUser: user, isFootStep: dict)
+        Footstep.saveFootstepedUser(forUser: user)
+    }
+    
+    private func footsteps2(_ userId: String) {
+        
+        if likeUserId != "" {
+            let dict = [UID: userId,
+                        ISFOOTSTEP: 1,
+                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+            Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
+            Footstep.saveFootstepedUser2(userId: userId)
+        }
+        if typeUserId != "" {
+            let dict = [UID: userId,
+                        ISFOOTSTEP: 1,
+                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+            Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
+            Footstep.saveFootstepedUser2(userId: userId)
+        }
+        
     }
     
     // MARK: - Download images

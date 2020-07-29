@@ -1,18 +1,19 @@
 //
-//  DidTypeTableViewController.swift
+//  FootstepTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/27.
+//  Created by yuji_nakamoto on 2020/07/29.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 
-class DidTypeTableViewController: UITableViewController {
+class FootstepTableViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var types = [Type]()
+    @IBOutlet weak var tableView: UITableView!
+    private var footsteps = [Footstep]()
     private var users = [User]()
     
     // MARK: - Lifecycle
@@ -20,7 +21,9 @@ class DidTypeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchTypeUsers()
+        tableView.delegate = self
+        tableView.dataSource = self
+        fetchtFootStepedUsers()
         tableView.tableFooterView = UIView()
     }
     
@@ -33,41 +36,41 @@ class DidTypeTableViewController: UITableViewController {
     @IBAction func segmentControlled(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: fetchTypeUsers()
-        case 1: fetchtTypedUsers()
+        case 0: fetchtFootStepedUsers()
+        case 1: fetchFootStepUsers()
         default: break
         }
     }
 
-    // MARK: - Fetch isLike
+    // MARK: - Fetch isFootStep
     
-    private func fetchTypeUsers() {
+    private func fetchFootStepUsers() {
         
-        types.removeAll()
+        footsteps.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Type.fetchTypeUsers { (superLike) in
-            guard let uid = superLike.uid else { return }
+        Footstep.fetchFootstepUsers { (footStep) in
+            guard let uid = footStep.uid else { return }
             self.fetchUser(uid: uid) {
-                self.types.append(superLike)
+                self.footsteps.append(footStep)
                 self.tableView.reloadData()
             }
         }
     }
 
-    // MARK: - Fetch liekd
+    // MARK: - Fetch footSteped
     
-    private func fetchtTypedUsers() {
+    private func fetchtFootStepedUsers() {
         
-        types.removeAll()
+        footsteps.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Type.fetchTypedUser { (superLike) in
-            guard let uid = superLike.uid else { return }
+        Footstep.fetchFootstepedUser { (footStep) in
+            guard let uid = footStep.uid else { return }
             self.fetchUser(uid: uid) {
-                self.types.append(superLike)
+                self.footsteps.append(footStep)
                 self.tableView.reloadData()
             }
         }
@@ -94,24 +97,27 @@ class DidTypeTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table view data source
+}
+
+// MARK: - Table view data source
+
+extension FootstepTableViewController: UITableViewDelegate, UITableViewDataSource {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return types.count
+        return footsteps.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
-        let type = types[indexPath.row]
-        cell.type = type
+        let footstep = footsteps[indexPath.row]
+        cell.footstep = footstep
         cell.configureCell(users[indexPath.row])
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: types[indexPath.row].uid)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailVC", sender: footsteps[indexPath.row].uid)
     }
-    
 }

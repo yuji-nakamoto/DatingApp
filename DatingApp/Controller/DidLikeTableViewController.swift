@@ -104,6 +104,8 @@ class DidLikeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
+        let like = likes[indexPath.row]
+        cell.like = like
         cell.configureCell(users[indexPath.row])
         return cell
     }

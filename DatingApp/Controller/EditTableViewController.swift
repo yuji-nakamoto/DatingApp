@@ -40,7 +40,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var indicator1: UIActivityIndicatorView!
     @IBOutlet weak var indicator2: UIActivityIndicatorView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var indicator3: UIActivityIndicatorView!
+    
+    
     
     private var user = User()
     private let picker = UIImagePickerController()
@@ -55,6 +58,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         fetchUser()
     }
     
@@ -102,7 +106,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            self.setupUI(user)
+            self.setupUserInfo(user)
             self.tableView.reloadData()
         }
     }
@@ -174,8 +178,15 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Helpers
     
-    private func setupUI(_ user: User) {
+    private func setupUI() {
         
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            backButton.tintColor = UIColor.white
+            saveButton.tintColor = UIColor.white
+        } else {
+            backButton.tintColor = UIColor(named: O_BLACK)
+            saveButton.tintColor = UIColor(named: O_BLACK)
+        }
         navigationItem.title = "プロフィール編集"
         nameTextField.delegate = self
         commentTextField.delegate = self
@@ -210,12 +221,16 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         selectButton2.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         selectButton3.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         
+        backTextView.layer.borderWidth = 1
+        backTextView.layer.borderColor = UIColor.systemGray.cgColor
+    }
+    
+    private func setupUserInfo(_ user: User) {
+        
         profileImageView1.sd_setImage(with: URL(string: user.profileImageUrl1))
         profileImageView2.sd_setImage(with: URL(string: user.profileImageUrl2))
         profileImageView3.sd_setImage(with: URL(string: user.profileImageUrl3))
         
-        backTextView.layer.borderWidth = 1
-        backTextView.layer.borderColor = UIColor.systemGray.cgColor
         textView.text = user.selfIntro
         commentTextField.text = user.comment
         nameTextField.text = user.username

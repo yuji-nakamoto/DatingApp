@@ -7,27 +7,21 @@
 //
 
 import Foundation
+import Firebase
 
 class Like {
-    var name: String!
-    var age: String!
-    var residence: String!
-    var profileImageUrl: String!
+
     var uid: String!
     var isLike: Int!
-    var selfIntro: String!
+    var timestamp: Timestamp!
     
     init() {
     }
     
     init(dict: [String: Any]) {
-        self.name = dict[USERNAME] as? String ?? ""
-        self.profileImageUrl = dict[PROFILEIMAGEURL1] as? String ?? ""
         self.uid = dict[UID] as? String ?? ""
-        self.age = dict[AGE] as? String ?? ""
-        self.residence = dict[RESIDENCE] as? String ?? ""
         self.isLike = dict[ISLIKE] as? Int ?? 0
-        self.selfIntro = dict[SELFINTRO] as? String ?? ""
+        self.timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
     }
     
     // MARK: - Fetch isLike user

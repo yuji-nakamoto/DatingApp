@@ -7,27 +7,22 @@
 //
 
 import Foundation
+import Firebase
 
 class Type {
-    var name: String!
-    var age: String!
-    var residence: String!
-    var profileImageUrl: String!
+
     var uid: String!
     var isType: Int!
-    var selfIntro: String!
-    
+    var timestamp: Timestamp!
+
     init() {
     }
     
     init(dict: [String: Any]) {
-        self.name = dict[USERNAME] as? String ?? ""
-        self.profileImageUrl = dict[PROFILEIMAGEURL1] as? String ?? ""
+
         self.uid = dict[UID] as? String ?? ""
-        self.age = dict[AGE] as? String ?? ""
-        self.residence = dict[RESIDENCE] as? String ?? ""
         self.isType = dict[ISTYPE] as? Int ?? 0
-        self.selfIntro = dict[SELFINTRO] as? String ?? ""
+        self.timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
     }
     
     // MARK: - Fetch isLike user
@@ -61,7 +56,7 @@ class Type {
     
     // MARK: - Fetch liked user
     
-    class func fetchTyped(completion: @escaping(Type) -> Void) {
+    class func fetchTypedUser(completion: @escaping(Type) -> Void) {
         
         COLLECTION_TYPE.document(User.currentUserId()).collection("typed").getDocuments { (snapshot, error) in
             if let error = error {
