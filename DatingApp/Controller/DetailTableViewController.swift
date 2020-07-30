@@ -155,7 +155,9 @@ class DetailTableViewController: UIViewController {
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         Footstep.saveIsFootstepUser(forUser: user, isFootStep: dict)
-        Footstep.saveFootstepedUser(forUser: user)
+        if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+            Footstep.saveFootstepedUser(forUser: user)
+        }
     }
     
     private func footsteps2(_ userId: String) {
@@ -165,16 +167,19 @@ class DetailTableViewController: UIViewController {
                         ISFOOTSTEP: 1,
                         TIMESTAMP: Timestamp(date: Date())] as [String : Any]
             Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
-            Footstep.saveFootstepedUser2(userId: userId)
+            if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+                Footstep.saveFootstepedUser2(userId: userId)
+            }
         }
         if typeUserId != "" {
             let dict = [UID: userId,
                         ISFOOTSTEP: 1,
                         TIMESTAMP: Timestamp(date: Date())] as [String : Any]
             Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
-            Footstep.saveFootstepedUser2(userId: userId)
+            if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+                Footstep.saveFootstepedUser2(userId: userId)
+            }
         }
-        
     }
     
     // MARK: - Download images

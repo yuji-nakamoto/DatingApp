@@ -20,6 +20,10 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var pickerKeyboard: PickerKeyboard3!
+    @IBOutlet weak var footstepSwitch: UISwitch!
+    @IBOutlet weak var footstepLabel: UILabel!
+    
+    
     private var user: User!
 
     // MARK: - Lifecycle
@@ -55,6 +59,18 @@ class SettingTableViewController: UITableViewController {
         maxSlider.minimumValue = minSlider.value + 1
     }
     
+    @IBAction func footstepSwitch(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            UserDefaults.standard.set(true, forKey: FOOTSTEP_ON)
+            footstepLabel.text = "足あとを残す"
+        } else {
+            UserDefaults.standard.removeObject(forKey: FOOTSTEP_ON)
+            footstepLabel.text = "足あとを残さない"
+        }
+    }
+    
+    
     @IBAction func completionButtonPressed(_ sender: Any) {
         
         let dict = [MINAGE: Int(minLabel.text!)!,
@@ -64,9 +80,7 @@ class SettingTableViewController: UITableViewController {
         updateUser(withValue: dict as [String : Any])
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
+        
     // MARK: - Fetch user
     
     private func fetchUser() {
@@ -114,6 +128,15 @@ class SettingTableViewController: UITableViewController {
         genderLabel.text = ""
         navigationItem.title = "設定"
         
+        if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+            footstepSwitch.isOn = true
+            footstepLabel.text = "足あとを残す"
+        } else {
+            footstepSwitch.isOn = false
+            footstepLabel.text = "足あとを残さない"
+
+        }
+        
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             genderLabel.text = "男性"
             navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
@@ -139,7 +162,7 @@ class SettingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             logoutUser()
         }
     }

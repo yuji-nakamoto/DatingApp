@@ -83,12 +83,14 @@ class SearchViewController: UIViewController {
             navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
             navigationController?.navigationBar.tintColor = UIColor.white
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            tabBarController?.tabBar.tintColor = UIColor.white
             tabBarController?.tabBar.barTintColor = UIColor(named: O_PINK)
         } else {
             navigationItem.title = "女性をさがす"
             navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
             navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            tabBarController?.tabBar.tintColor = UIColor(named: O_BLACK)
             tabBarController?.tabBar.barTintColor = UIColor(named: O_GREEN)
         }
     }

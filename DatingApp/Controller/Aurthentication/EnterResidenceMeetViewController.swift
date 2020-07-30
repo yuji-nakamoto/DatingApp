@@ -93,7 +93,7 @@ class EnterResidenceMeetController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
             UserDefaults.standard.set(true, forKey: RCOMPLETION)
-            UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(true, forKey: FOOTSTEP_ON)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
             self.present(toTabBerVC, animated: true, completion: nil)

@@ -64,6 +64,8 @@ public let PLACEHOLDERIMAGEURL2 = "https://firebasestorage.googleapis.com/v0/b/d
 public let RCOMPLETION = "registerCompletion"
 public let TO_VERIFIED_VC = "toVerifiedVC"
 public let FEMALE = "female"
+public let FOOTSTEP_ON = "footstep_on"
+
 
 
 

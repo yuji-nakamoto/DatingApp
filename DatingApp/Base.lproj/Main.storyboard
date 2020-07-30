@@ -3439,10 +3439,44 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="足あと設定" footerTitle="足あとを残すことで、相手の足あと履歴にあなたが訪問した情報が表示されます。" id="p3p-qS-hgH">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="57" id="lGe-j5-dCG">
+                                        <rect key="frame" x="0.0" y="390" width="414" height="57"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lGe-j5-dCG" id="Zen-Un-Z0F">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="足あとを残す" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joW-Iq-xVx">
+                                                    <rect key="frame" x="20" y="18" width="104" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="original_black2"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12P-Pi-KGx">
+                                                    <rect key="frame" x="345" y="13" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="footstepSwitch:" destination="wUP-af-h3y" eventType="valueChanged" id="d6O-xq-dCq"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="12P-Pi-KGx" firstAttribute="centerY" secondItem="Zen-Un-Z0F" secondAttribute="centerY" id="Aew-E9-xdU"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="joW-Iq-xVx" secondAttribute="trailing" id="J46-ka-ntF"/>
+                                                <constraint firstItem="joW-Iq-xVx" firstAttribute="centerY" secondItem="Zen-Un-Z0F" secondAttribute="centerY" id="aQd-c2-0cP"/>
+                                                <constraint firstAttribute="trailing" secondItem="12P-Pi-KGx" secondAttribute="trailing" constant="20" id="djb-0l-OJJ"/>
+                                                <constraint firstItem="12P-Pi-KGx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="joW-Iq-xVx" secondAttribute="trailing" id="fgG-Ly-Naz"/>
+                                                <constraint firstItem="joW-Iq-xVx" firstAttribute="leading" secondItem="Zen-Un-Z0F" secondAttribute="leading" constant="20" id="phx-h0-PLw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="その他" id="4Fg-es-GC1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="57" id="rJi-cQ-VDK">
-                                        <rect key="frame" x="0.0" y="382.5" width="414" height="57"/>
+                                        <rect key="frame" x="0.0" y="531" width="414" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rJi-cQ-VDK" id="iTe-oi-78C">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="57"/>
@@ -3467,7 +3501,7 @@
                             <tableViewSection id="yRy-bJ-B85">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="57" id="BkI-vb-t8X">
-                                        <rect key="frame" x="0.0" y="475.5" width="414" height="57"/>
+                                        <rect key="frame" x="0.0" y="624" width="414" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BkI-vb-t8X" id="fNk-ky-FJa">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
@@ -3503,6 +3537,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="completionButton" destination="qJy-0e-uxC" id="RN2-sk-K81"/>
+                        <outlet property="footstepLabel" destination="joW-Iq-xVx" id="o5M-zv-qGk"/>
+                        <outlet property="footstepSwitch" destination="12P-Pi-KGx" id="Wxw-FE-hB9"/>
                         <outlet property="genderLabel" destination="FWz-PD-wd5" id="QJK-US-x1u"/>
                         <outlet property="maxLabel" destination="b44-zy-Wg3" id="oXS-xS-Q1m"/>
                         <outlet property="maxSlider" destination="aV8-Re-Af3" id="eD7-R6-OYI"/>

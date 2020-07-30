@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         return true
     }
 

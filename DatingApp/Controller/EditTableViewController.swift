@@ -182,9 +182,15 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             backButton.tintColor = UIColor.white
             saveButton.tintColor = UIColor.white
+            plusButton1.tintColor = UIColor(named: O_PINK)
+            plusButton2.tintColor = UIColor(named: O_PINK)
+            plusButton3.tintColor = UIColor(named: O_PINK)
         } else {
             backButton.tintColor = UIColor(named: O_BLACK)
             saveButton.tintColor = UIColor(named: O_BLACK)
+            plusButton1.tintColor = UIColor(named: O_GREEN)
+            plusButton2.tintColor = UIColor(named: O_GREEN)
+            plusButton3.tintColor = UIColor(named: O_GREEN)
         }
         navigationItem.title = "プロフィール編集"
         nameTextField.delegate = self
