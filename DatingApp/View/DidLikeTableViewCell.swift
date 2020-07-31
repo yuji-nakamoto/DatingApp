@@ -26,7 +26,7 @@ class DidLikeTableViewCell: UITableViewCell {
             backView.backgroundColor = UIColor(named: O_PINK)
         }
         backView.layer.cornerRadius = 10
-        profileImageView.layer.cornerRadius = 10
+        profileImageView.layer.cornerRadius = 70 / 2
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         nameLabel.text = user.username
         residenceLabel.text = user.residence

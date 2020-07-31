@@ -28,7 +28,7 @@ class SearchViewController: UIViewController {
         
         setupNavTabColor()
         fetchUser()
-        setupUI()
+        cofigureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,9 +45,8 @@ class SearchViewController: UIViewController {
         fetchUser()
     }
     
-    @objc func update(){
+    @objc func refreshCollectionView(){
         fetchUser()
-        collectionView.reloadData()
         refresh.endRefreshing()
     }
     
@@ -69,9 +68,10 @@ class SearchViewController: UIViewController {
 
     // MARK: - Heplers
     
-    private func setupUI() {
+    private func cofigureCollectionView() {
         
-        refresh.addTarget(self, action: #selector(update), for: .valueChanged)
+        collectionView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
     }

@@ -95,7 +95,8 @@ class User {
     class func genderAndResidenceSort(_ residenceSearch: String, _ user: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let usersRef = COLLECTION_USERS.whereField(GENDER, isEqualTo: "男性")
+            let usersRef = COLLECTION_USERS
+                .whereField(GENDER, isEqualTo: "男性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
                 .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
@@ -115,7 +116,8 @@ class User {
                 completion(users)
             }
         } else {
-            let usersRef = COLLECTION_USERS.whereField(GENDER, isEqualTo: "女性")
+            let usersRef = COLLECTION_USERS
+                .whereField(GENDER, isEqualTo: "女性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
                 .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)

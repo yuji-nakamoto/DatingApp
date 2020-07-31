@@ -16,6 +16,8 @@ public let COLLECTION_USERS = Firestore.firestore().collection("users")
 public let COLLECTION_LIKE = Firestore.firestore().collection("like")
 public let COLLECTION_TYPE = Firestore.firestore().collection("type")
 public let COLLECTION_FOOTSTEP = Firestore.firestore().collection("footstep")
+public let COLLECTION_POSTS = Firestore.firestore().collection("posts")
+public let COLLECTION_MYPOSTS = Firestore.firestore().collection("myPosts")
 
 // MARK: - Color
 
@@ -44,6 +46,13 @@ public let HEIGHT = "height"
 public let MINAGE = "minAge"
 public let MAXAGE = "maxAge"
 public let RESIDENCESEARCH = "residenceSerch"
+public let POST = "post"
+
+// MARK: - Post
+
+public let CAPTION = "caption"
+public let POSTID = "postId"
+public let GENRE = "genre"
 
 // MARK: - Like Type
 
@@ -65,7 +74,11 @@ public let RCOMPLETION = "registerCompletion"
 public let TO_VERIFIED_VC = "toVerifiedVC"
 public let FEMALE = "female"
 public let FOOTSTEP_ON = "footstep_on"
-
+public let LOVER = "lover"
+public let FRIEND = "friend"
+public let MAILFRIEND = "mailfriend"
+public let PLAY = "play"
+public let FREE = "free"
 
 
 

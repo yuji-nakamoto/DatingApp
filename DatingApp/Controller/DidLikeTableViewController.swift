@@ -90,7 +90,7 @@ class DidLikeTableViewController: UITableViewController {
 
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
-            detailVC.likeUserId = userId
+            detailVC.userId = userId
         }
     }
     

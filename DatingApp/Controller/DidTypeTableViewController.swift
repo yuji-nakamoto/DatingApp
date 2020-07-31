@@ -90,7 +90,7 @@ class DidTypeTableViewController: UITableViewController {
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
-            detailVC.typeUserId = userId
+            detailVC.userId = userId
         }
     }
     

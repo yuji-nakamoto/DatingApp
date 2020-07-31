@@ -20,9 +20,7 @@ class FootstepTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+
         fetchtFootStepedUsers()
         tableView.tableFooterView = UIView()
     }
@@ -93,7 +91,7 @@ class FootstepTableViewController: UIViewController {
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
-            detailVC.typeUserId = userId
+            detailVC.userId = userId
         }
     }
     

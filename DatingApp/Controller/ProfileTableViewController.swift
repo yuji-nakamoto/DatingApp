@@ -121,8 +121,10 @@ class ProfileTableViewController: UIViewController {
         editButton.layer.shadowRadius = 4
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             editButton.backgroundColor = UIColor(named: O_PINK)
+            editButton.setTitleColor(UIColor.white, for: .normal)
         } else {
             editButton.backgroundColor = UIColor(named: O_GREEN)
+            editButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         }
     }
     

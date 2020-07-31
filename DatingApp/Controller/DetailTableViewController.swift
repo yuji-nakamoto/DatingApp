@@ -27,18 +27,17 @@ class DetailTableViewController: UIViewController {
     var user = User()
     var like = Like()
     var type = Type()
-    var likeUserId = ""
-    var typeUserId = ""
+    var userId = ""
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchLikeUserId()
-        fetchTypeUserId()
+        fetchUserId()
         fetchLikeUser()
         fetchTypeUser()
-        fetchCurrentUser()
+        fetchUserIdLike()
+        fetchUserIdType()
         downloadImages()
         configureUI()
     }
@@ -87,7 +86,7 @@ class DetailTableViewController: UIViewController {
         typeButton.isEnabled = false
     }
     
-    // MARK: - Fetch like
+    // MARK: - Fetch like type userId
     
     private func fetchLikeUser() {
         guard user.uid != nil else { return }
@@ -95,52 +94,45 @@ class DetailTableViewController: UIViewController {
         
         Like.fetchLikeUser(user.uid) { (like) in
             self.like = like
-            self.validateLikeButton(like)
+            self.validateLikeButton(like: like)
         }
     }
     
     private func fetchTypeUser() {
         guard user.uid != nil else { return }
         footsteps(user)
-
-        Type.fetchTypeUser(user.uid) { (type) in
+        
+        Type.fetchTypeUser(self.user.uid) { (type) in
             self.type = type
-            self.validateTypeButton(type)
+            self.validateTypeButton(type: type)
         }
     }
     
-    private func fetchLikeUserId() {
-        guard likeUserId != "" else { return }
-        footsteps2(likeUserId)
+    private func fetchUserId() {
+        guard userId != "" else { return }
+        footsteps2(userId)
         
-        User.fetchUser(likeUserId) { (user) in
+        User.fetchUser(userId) { (user) in
             self.user = user
             self.tableView.reloadData()
             self.downloadImages()
         }
     }
     
-    private func fetchTypeUserId() {
-        guard typeUserId != "" else { return }
-        footsteps2(typeUserId)
+    private func fetchUserIdType() {
         
-        User.fetchUser(typeUserId) { (user) in
-            self.user = user
-            self.tableView.reloadData()
-            self.downloadImages()
-        }
-    }
-    
-    private func fetchCurrentUser() {
-        
-        if typeUserId != "" {
-            Type.fetchTypeUser(typeUserId) { (type) in
-                self.validateTypeButton(type)
+        if userId != "" {
+            Type.fetchTypeUser(userId) { (type) in
+                self.validateTypeButton(type: type)
             }
         }
-        if likeUserId != "" {
-            Like.fetchLikeUser(likeUserId) { (like) in
-                self.validateLikeButton(like)
+    }
+    
+    private func fetchUserIdLike() {
+        
+        if userId != "" {
+            Like.fetchLikeUser(self.userId) { (like) in
+                self.validateLikeButton(like: like)
             }
         }
     }
@@ -162,16 +154,7 @@ class DetailTableViewController: UIViewController {
     
     private func footsteps2(_ userId: String) {
         
-        if likeUserId != "" {
-            let dict = [UID: userId,
-                        ISFOOTSTEP: 1,
-                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
-            Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
-            if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-                Footstep.saveFootstepedUser2(userId: userId)
-            }
-        }
-        if typeUserId != "" {
+        if userId != "" {
             let dict = [UID: userId,
                         ISFOOTSTEP: 1,
                         TIMESTAMP: Timestamp(date: Date())] as [String : Any]
@@ -240,7 +223,7 @@ class DetailTableViewController: UIViewController {
         typeBackView.layer.shadowRadius = 4
     }
     
-    private func validateLikeButton(_ like: Like) {
+    private func validateLikeButton(like: Like) {
         
         if like.isLike == 1 {
             self.likeButton.isEnabled = false
@@ -249,7 +232,7 @@ class DetailTableViewController: UIViewController {
         }
     }
     
-    private func validateTypeButton(_ type: Type) {
+    private func validateTypeButton(type: Type) {
         
         if type.isType == 1 {
             self.typeButton.isEnabled = false
@@ -327,7 +310,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
- 
+        
         cell.configureCell(self.user)
         return cell
     }
