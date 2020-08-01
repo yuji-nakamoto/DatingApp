@@ -23,14 +23,13 @@ class MyPageTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
+        navigationItem.title = "マイページ"
         fetchCurrentUser()
         fetchMyPost()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupUI()
         fetchCurrentUser()
     }
     
@@ -69,24 +68,6 @@ class MyPageTableViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    
-    private func setupUI() {
-        navigationItem.title = "マイページ"
-        
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            tabBarController?.tabBar.tintColor = UIColor.white
-            tabBarController?.tabBar.barTintColor = UIColor(named: O_PINK)
-        } else {
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
-            tabBarController?.tabBar.tintColor = UIColor(named: O_BLACK)
-            tabBarController?.tabBar.barTintColor = UIColor(named: O_GREEN)
-        }
-    }
     
 }
 

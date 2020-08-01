@@ -91,16 +91,14 @@ class PostTableViewController: UIViewController {
         
         tableView.tableFooterView = UIView()
         navigationItem.title = "投稿"
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: PINK) != nil {
             plusButton.tintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
             plusButton.tintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            plusButton.tintColor = UIColor.systemGray4
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            plusButton.tintColor = UIColor(named: O_DARK)
         }
     }
     

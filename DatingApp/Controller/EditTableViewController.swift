@@ -56,9 +56,14 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavColor()
+        setupColor()
         setupUI()
         fetchUser()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - Actions
@@ -178,20 +183,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Helpers
     
     private func setupUI() {
-        
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            backButton.tintColor = UIColor.white
-            saveButton.tintColor = UIColor.white
-            plusButton1.tintColor = UIColor(named: O_PINK)
-            plusButton2.tintColor = UIColor(named: O_PINK)
-            plusButton3.tintColor = UIColor(named: O_PINK)
-        } else {
-            backButton.tintColor = UIColor(named: O_BLACK)
-            saveButton.tintColor = UIColor(named: O_BLACK)
-            plusButton1.tintColor = UIColor(named: O_GREEN)
-            plusButton2.tintColor = UIColor(named: O_GREEN)
-            plusButton3.tintColor = UIColor(named: O_GREEN)
-        }
         navigationItem.title = "プロフィール編集"
         nameTextField.delegate = self
         commentTextField.delegate = self
@@ -307,16 +298,32 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    private func setupNavColor() {
+    private func setupColor() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            saveButton.tintColor = UIColor.white
+            backButton.tintColor = UIColor.white
+            plusButton1.tintColor = UIColor(named: O_PINK)
+            plusButton2.tintColor = UIColor(named: O_PINK)
+            plusButton3.tintColor = UIColor(named: O_PINK)
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
+            saveButton.tintColor = UIColor(named: O_BLACK)
+            backButton.tintColor = UIColor(named: O_BLACK)
+            plusButton1.tintColor = UIColor(named: O_GREEN)
+            plusButton2.tintColor = UIColor(named: O_GREEN)
+            plusButton3.tintColor = UIColor(named: O_GREEN)
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            saveButton.tintColor = UIColor(named: O_BLACK)
+            backButton.tintColor = UIColor(named: O_BLACK)
+            plusButton1.tintColor = UIColor.white
+            plusButton2.tintColor = UIColor.white
+            plusButton3.tintColor = UIColor.white
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            saveButton.tintColor = UIColor.white
+            backButton.tintColor = UIColor.white
+            plusButton1.tintColor = UIColor(named: O_DARK)
+            plusButton2.tintColor = UIColor(named: O_DARK)
+            plusButton3.tintColor = UIColor(named: O_DARK)
         }
     }
     

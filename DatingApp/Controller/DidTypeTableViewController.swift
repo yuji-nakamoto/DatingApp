@@ -47,10 +47,10 @@ class DidTypeTableViewController: UITableViewController {
         users.removeAll()
         tableView.reloadData()
         
-        Type.fetchTypeUsers { (superLike) in
-            guard let uid = superLike.uid else { return }
+        Type.fetchTypeUsers { (type) in
+            guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.types.append(superLike)
+                self.types.append(type)
                 self.tableView.reloadData()
             }
         }
@@ -64,10 +64,10 @@ class DidTypeTableViewController: UITableViewController {
         users.removeAll()
         tableView.reloadData()
         
-        Type.fetchTypedUser { (superLike) in
-            guard let uid = superLike.uid else { return }
+        Type.fetchTypedUser { (type) in
+            guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.types.append(superLike)
+                self.types.append(type)
                 self.tableView.reloadData()
             }
         }

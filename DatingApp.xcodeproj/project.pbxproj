@@ -21,6 +21,7 @@
 		8348B5E724D35ADC0000A187 /* GenreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5E624D35ADC0000A187 /* GenreTableViewController.swift */; };
 		8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5E824D38C0F0000A187 /* MyPageTableViewController.swift */; };
 		8348B5EB24D38D780000A187 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5EA24D38D780000A187 /* MyPageTableViewCell.swift */; };
+		8348B5EF24D3EC020000A187 /* SelectColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */; };
 		8348E3CD24CD0148001D59C0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3CC24CD0148001D59C0 /* AuthService.swift */; };
 		8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */; };
 		8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */; };
@@ -35,7 +36,7 @@
 		8348E3EB24CE283C001D59C0 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3EA24CE283C001D59C0 /* Type.swift */; };
 		8348E3ED24CE2B3B001D59C0 /* DidTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */; };
 		8348E3F724D0E123001D59C0 /* FootstepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3F624D0E123001D59C0 /* FootstepViewController.swift */; };
-		8348E3F924D0EC09001D59C0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3F824D0EC09001D59C0 /* TabBarController.swift */; };
+		8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */; };
 		8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FC24D10F90001D59C0 /* Footstep.swift */; };
 		8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */; };
 		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
@@ -46,6 +47,11 @@
 		834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */; };
 		834912FC24C75830002990F8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FB24C75830002990F8 /* StartViewController.swift */; };
 		834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* SearchViewController.swift */; };
+		835013FC24D40F79008D1170 /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* InboxTableViewController.swift */; };
+		835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FD24D41458008D1170 /* MessageTebleViewController.swift */; };
+		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
+		8350140224D49E94008D1170 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140124D49E94008D1170 /* Message.swift */; };
+		8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
@@ -82,6 +88,7 @@
 		8348B5E624D35ADC0000A187 /* GenreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTableViewController.swift; sourceTree = "<group>"; };
 		8348B5E824D38C0F0000A187 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
 		8348B5EA24D38D780000A187 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
+		8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorTableViewController.swift; sourceTree = "<group>"; };
 		8348E3CC24CD0148001D59C0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIckerKeyboard1.swift; sourceTree = "<group>"; };
 		8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard2.swift; sourceTree = "<group>"; };
@@ -96,7 +103,7 @@
 		8348E3EA24CE283C001D59C0 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidTypeTableViewController.swift; sourceTree = "<group>"; };
 		8348E3F624D0E123001D59C0 /* FootstepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootstepViewController.swift; sourceTree = "<group>"; };
-		8348E3F824D0EC09001D59C0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		8348E3FC24D10F90001D59C0 /* Footstep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footstep.swift; sourceTree = "<group>"; };
 		8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +114,11 @@
 		834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceViewController.swift; sourceTree = "<group>"; };
 		834912FB24C75830002990F8 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		834912FD24C75B90002990F8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		835013FB24D40F79008D1170 /* InboxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
+		835013FD24D41458008D1170 /* MessageTebleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTebleViewController.swift; sourceTree = "<group>"; };
+		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		8350140124D49E94008D1170 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUINavigationViewController.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				838071F324C66BAC008BAA2C /* Aurthentication */,
+				8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */,
+				8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
 				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
 				8348B5E824D38C0F0000A187 /* MyPageTableViewController.swift */,
@@ -201,12 +215,14 @@
 				8348E3E424CE0B6E001D59C0 /* DidLikeTableViewController.swift */,
 				8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */,
 				8348E3F624D0E123001D59C0 /* FootstepViewController.swift */,
-				8348E3F824D0EC09001D59C0 /* TabBarController.swift */,
 				8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */,
 				8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */,
 				8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */,
 				8348B5E424D351D80000A187 /* SendPostTableViewController.swift */,
 				8348B5E624D35ADC0000A187 /* GenreTableViewController.swift */,
+				8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */,
+				835013FB24D40F79008D1170 /* InboxTableViewController.swift */,
+				835013FD24D41458008D1170 /* MessageTebleViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -219,6 +235,7 @@
 				8348E3EA24CE283C001D59C0 /* Type.swift */,
 				8348E3FC24D10F90001D59C0 /* Footstep.swift */,
 				8348B5E224D2A4A20000A187 /* Post.swift */,
+				8350140124D49E94008D1170 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +253,7 @@
 				8348E3D424CD3FD3001D59C0 /* PickerKeyboard4.swift */,
 				8348E3E624CE0BC4001D59C0 /* DidLikeTableViewCell.swift */,
 				8348B5E024D2A1560000A187 /* PostTableViewCell.swift */,
+				835013FF24D414C4008D1170 /* MessageTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -415,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
+				8348B5EF24D3EC020000A187 /* SelectColorTableViewController.swift in Sources */,
 				8348E3ED24CE2B3B001D59C0 /* DidTypeTableViewController.swift in Sources */,
 				8348E3F724D0E123001D59C0 /* FootstepViewController.swift in Sources */,
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
@@ -431,13 +450,16 @@
 				838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
+				8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */,
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
+				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */,
 				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
 				8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */,
+				835013FC24D40F79008D1170 /* InboxTableViewController.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
@@ -447,17 +469,19 @@
 				8348B5E524D351D80000A187 /* SendPostTableViewController.swift in Sources */,
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
+				8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */,
 				8348B5E724D35ADC0000A187 /* GenreTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
 				8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
-				8348E3F924D0EC09001D59C0 /* TabBarController.swift in Sources */,
+				8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
+				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,
 				8348B5EB24D38D780000A187 /* MyPageTableViewCell.swift in Sources */,
 				8348B5DF24D2A0B90000A187 /* PostTableViewController.swift in Sources */,

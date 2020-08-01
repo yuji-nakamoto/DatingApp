@@ -26,15 +26,12 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavTabColor()
         fetchUser()
         cofigureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupNavTabColor()
         fetchUser()
     }
     
@@ -69,30 +66,11 @@ class SearchViewController: UIViewController {
     // MARK: - Heplers
     
     private func cofigureCollectionView() {
-        
+        navigationItem.title = "さがす"
         collectionView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
-
-    private func setupNavTabColor() {
-        
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            navigationItem.title = "男性をさがす"
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            tabBarController?.tabBar.tintColor = UIColor.white
-            tabBarController?.tabBar.barTintColor = UIColor(named: O_PINK)
-        } else {
-            navigationItem.title = "女性をさがす"
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
-            tabBarController?.tabBar.tintColor = UIColor(named: O_BLACK)
-            tabBarController?.tabBar.barTintColor = UIColor(named: O_GREEN)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

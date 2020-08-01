@@ -18,11 +18,16 @@ class DetailTableViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var messageBackView: UIView!
     @IBOutlet weak var typeBackView: UIView!
     @IBOutlet weak var likeBackView: UIView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var typeButton: UIButton!
-    
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var messageButton2: UIButton!
+    @IBOutlet weak var likeButton2: UIButton!
+    @IBOutlet weak var typeButton2: UIButton!
+
     var profileImages = [UIImage]()
     var user = User()
     var like = Like()
@@ -72,6 +77,7 @@ class DetailTableViewController: UIViewController {
         Like.saveIsLikeUser(forUser: user, isLike: dict)
         Like.saveLikedUser(forUser: user)
         likeButton.isEnabled = false
+        likeButton2.isEnabled = false
     }
     
     @IBAction func typeButtonPressed(_ sender: Any) {
@@ -84,6 +90,12 @@ class DetailTableViewController: UIViewController {
         Type.saveIsTypeUser(forUser: user, isType: dict)
         Type.saveTypedUser(forUser: user)
         typeButton.isEnabled = false
+        typeButton2.isEnabled = false
+    }
+    
+    @IBAction func messageButtonPressed(_ sender: Any) {
+        
+        toMessageVC()
     }
     
     // MARK: - Fetch like type userId
@@ -201,7 +213,32 @@ class DetailTableViewController: UIViewController {
         }
     }
     
+    // MARK: - Segue
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "MessageVC" {
+            let messageVC = segue.destination as! MessageTebleViewController
+            let userId = sender as! String
+            messageVC.userId = userId
+        }
+    }
+    
     // MARK: - Helpers
+    
+    private func toMessageVC() {
+        
+        let alert: UIAlertController = UIAlertController(title: "\(user.username!)さんに", message: "メッセージを送りますか？", preferredStyle: .actionSheet)
+        let logout: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
+            
+            self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+        }
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        self.present(alert,animated: true,completion: nil)
+    }
     
     private func configureUI() {
         
@@ -211,6 +248,7 @@ class DetailTableViewController: UIViewController {
         tableView.separatorStyle = .none
         likeBackView.layer.cornerRadius = 55 / 2
         typeBackView.layer.cornerRadius = 55 / 2
+        messageBackView.layer.cornerRadius = 55 / 2
         
         likeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         likeBackView.layer.shadowColor = UIColor.black.cgColor
@@ -221,23 +259,32 @@ class DetailTableViewController: UIViewController {
         typeBackView.layer.shadowColor = UIColor.black.cgColor
         typeBackView.layer.shadowOpacity = 0.3
         typeBackView.layer.shadowRadius = 4
+        
+        messageBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        messageBackView.layer.shadowColor = UIColor.black.cgColor
+        messageBackView.layer.shadowOpacity = 0.3
+        messageBackView.layer.shadowRadius = 4
     }
     
     private func validateLikeButton(like: Like) {
         
         if like.isLike == 1 {
-            self.likeButton.isEnabled = false
+            likeButton.isEnabled = false
+            likeButton2.isEnabled = false
         } else {
-            self.likeButton.isEnabled = true
+            likeButton.isEnabled = true
+            likeButton2.isEnabled = true
         }
     }
     
     private func validateTypeButton(type: Type) {
         
         if type.isType == 1 {
-            self.typeButton.isEnabled = false
+            typeButton.isEnabled = false
+            typeButton2.isEnabled = false
         } else {
-            self.typeButton.isEnabled = true
+            typeButton.isEnabled = true
+            typeButton2.isEnabled = true
         }
     }
     

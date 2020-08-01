@@ -94,6 +94,7 @@ class EnterResidenceMeetController: UIViewController {
             UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
             UserDefaults.standard.set(true, forKey: RCOMPLETION)
             UserDefaults.standard.set(true, forKey: FOOTSTEP_ON)
+            UserDefaults.standard.set(true, forKey: WHITE)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
             self.present(toTabBerVC, animated: true, completion: nil)

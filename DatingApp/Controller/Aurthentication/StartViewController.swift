@@ -33,10 +33,14 @@ class StartViewController: UIViewController {
     }
     
     private func setupColor() {
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: PINK) != nil {
             logoLabel.textColor = UIColor(named: O_PINK)
-        } else {
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             logoLabel.textColor = UIColor(named: O_GREEN)
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            logoLabel.textColor = UIColor(named: O_BLACK)
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            logoLabel.textColor = UIColor(named: O_DARK)
         }
     }
     

@@ -19,14 +19,6 @@ class MyPageTableViewCell: UITableViewCell {
         if user != nil {
             profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
             nameLabel.text = user!.username
-            
-            if UserDefaults.standard.object(forKey: FEMALE) != nil {
-                profileButton.backgroundColor = UIColor(named: O_PINK)
-                profileButton.setTitleColor(UIColor.white, for: .normal)
-            } else {
-                profileButton.backgroundColor = UIColor(named: O_GREEN)
-                profileButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            }
         }
     }
 
@@ -36,8 +28,6 @@ class MyPageTableViewCell: UITableViewCell {
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 100 / 2
-        
-        
     }
 
 }

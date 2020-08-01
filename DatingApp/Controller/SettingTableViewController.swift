@@ -23,7 +23,6 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var footstepSwitch: UISwitch!
     @IBOutlet weak var footstepLabel: UILabel!
     
-    
     private var user: User!
 
     // MARK: - Lifecycle
@@ -69,7 +68,6 @@ class SettingTableViewController: UITableViewController {
             footstepLabel.text = "足あとを残さない"
         }
     }
-    
     
     @IBAction func completionButtonPressed(_ sender: Any) {
         
@@ -134,19 +132,12 @@ class SettingTableViewController: UITableViewController {
         } else {
             footstepSwitch.isOn = false
             footstepLabel.text = "足あとを残さない"
-
         }
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             genderLabel.text = "男性"
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         } else {
             genderLabel.text = "女性"
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
         }
     }
     
@@ -162,7 +153,7 @@ class SettingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             logoutUser()
         }
     }

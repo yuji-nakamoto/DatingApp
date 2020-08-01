@@ -14,26 +14,33 @@ class DidLikeTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var selfIntroLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     
+    var user = User()
+    
     func configureCell(_ user: User) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-        } else {
-            backView.backgroundColor = UIColor(named: O_PINK)
-        }
-        backView.layer.cornerRadius = 10
-        profileImageView.layer.cornerRadius = 70 / 2
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         nameLabel.text = user.username
         residenceLabel.text = user.residence
         ageLabel.text = String(user.age) + "歳"
         selfIntroLabel.text = user.selfIntro
     }
-
+    
+    func configureInboxCell(_ inbox: Inbox) {
+        
+        profileImageView.sd_setImage(with: URL(string: inbox.user.profileImageUrl1), completed: nil)
+        nameLabel.text = inbox.user.username
+        residenceLabel.text = inbox.user.residence
+        ageLabel.text = String(inbox.user.age) + "歳"
+        selfIntroLabel.text = inbox.message.messageText
+        
+        let date = Date(timeIntervalSince1970: inbox.message.date)
+        let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
+        timestampLabel.text = dateString
+    }
+    
     var footstep: Footstep? {
         didSet {
             timestampLabel.text = timestamp1
@@ -73,6 +80,12 @@ class DidLikeTableViewCell: UITableViewCell {
         dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateFormat = "M月d日"
         return dateFormatter.string(from: date!)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        profileImageView.layer.cornerRadius = 70 / 2
+        
     }
     
 }

@@ -26,7 +26,6 @@ class SendPostTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupUI()
         setupGenre()
         setupTextView()
         fetchUser()
@@ -34,8 +33,6 @@ class SendPostTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupUI()
         setupGenre()
     }
     
@@ -100,23 +97,8 @@ class SendPostTableViewController: UITableViewController {
     
     // MARK: - Helpers
     
-    private func setupUI() {
-        navigationItem.title = "投稿内容"
-        
-        if userDefaults.object(forKey: FEMALE) != nil {
-            sendButton.tintColor = UIColor.white
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        } else {
-            sendButton.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
-        }
-    }
-    
     private func setupGenre() {
+        navigationItem.title = "投稿内容"
         
         if userDefaults.object(forKey: LOVER) != nil {
             selectLabel.text = "恋人募集"

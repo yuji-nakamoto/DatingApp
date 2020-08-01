@@ -31,15 +31,9 @@ class SelectGenderTableViewController: UITableViewController {
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             checkMark1.isHidden = true
             checkMark2.isHidden = false
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
-            navigationController?.navigationBar.tintColor = UIColor.white
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         } else {
             checkMark2.isHidden = true
             checkMark1.isHidden = false
-            navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
         }
     }
 
