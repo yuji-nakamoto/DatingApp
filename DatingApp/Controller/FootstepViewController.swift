@@ -20,7 +20,7 @@ class FootstepTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
         fetchtFootStepedUsers()
         tableView.tableFooterView = UIView()
     }
@@ -95,6 +95,13 @@ class FootstepTableViewController: UIViewController {
         }
     }
     
+    private func setupUI() {
+        if UserDefaults.standard.object(forKey: DARK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: PINK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        }
+    }
 }
 
 // MARK: - Table view data source

@@ -19,7 +19,7 @@ class DidTypeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
         fetchTypeUsers()
         tableView.tableFooterView = UIView()
     }
@@ -91,6 +91,14 @@ class DidTypeTableViewController: UITableViewController {
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
             detailVC.userId = userId
+        }
+    }
+    
+    private func setupUI() {
+        if UserDefaults.standard.object(forKey: DARK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: PINK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
         }
     }
     

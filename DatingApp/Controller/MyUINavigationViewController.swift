@@ -26,6 +26,7 @@ class MyUINavigationViewController: UINavigationController {
             navigationBar.barTintColor = UIColor(named: O_PINK)
             navigationBar.tintColor = UIColor.white
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
             navigationBar.barTintColor = UIColor(named: O_GREEN)
             navigationBar.tintColor = UIColor(named: O_BLACK)
@@ -35,6 +36,7 @@ class MyUINavigationViewController: UINavigationController {
             navigationBar.barTintColor = UIColor.white
             navigationBar.tintColor = UIColor(named: O_BLACK)
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationBar.barTintColor = UIColor(named: O_DARK)
             navigationBar.tintColor = UIColor.white
