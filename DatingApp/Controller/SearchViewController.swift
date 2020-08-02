@@ -19,19 +19,15 @@ class SearchViewController: UIViewController {
     private var user: User?
     private let refresh = UIRefreshControl()
     
-    
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUser()
         cofigureCollectionView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
         fetchUser()
     }
     

@@ -52,7 +52,6 @@
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
 		8350140224D49E94008D1170 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140124D49E94008D1170 /* Message.swift */; };
 		8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */; };
-		8350140C24D683A1008D1170 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140B24D683A0008D1170 /* Counter.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
@@ -120,7 +119,6 @@
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		8350140124D49E94008D1170 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUINavigationViewController.swift; sourceTree = "<group>"; };
-		8350140B24D683A0008D1170 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 			children = (
 				834912F524C7283D002990F8 /* Service.swift */,
 				8348E3CC24CD0148001D59C0 /* AuthService.swift */,
-				8350140B24D683A0008D1170 /* Counter.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -499,7 +496,6 @@
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
-				8350140C24D683A1008D1170 /* Counter.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,

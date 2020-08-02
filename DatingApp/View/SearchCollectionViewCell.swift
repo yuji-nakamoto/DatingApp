@@ -62,7 +62,11 @@ class SearchCollectionViewCell: UICollectionViewCell {
                     totalLikeCount += likeCount
                 }
             }
-            self.likeCountLabel.text = String(totalLikeCount)
+            if totalLikeCount > 999 {
+                self.likeCountLabel.text = "999"
+            } else {
+                self.likeCountLabel.text = String(totalLikeCount)
+            }
         }
     }
     
@@ -77,7 +81,11 @@ class SearchCollectionViewCell: UICollectionViewCell {
                     totalTypeCount += typeCount
                 }
             }
-            self.typeCountLabel.text = String(totalTypeCount)
+            if totalTypeCount > 999 {
+                self.typeCountLabel.text = "999"
+            } else {
+                self.typeCountLabel.text = String(totalTypeCount)
+            }
         }
     }
 
