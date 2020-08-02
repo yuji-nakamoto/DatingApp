@@ -76,6 +76,7 @@ class DetailTableViewController: UIViewController {
         
         Like.saveIsLikeUser(forUser: user, isLike: dict)
         Like.saveLikedUser(forUser: user)
+        incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(user.uid), numShards: 10)
         likeButton.isEnabled = false
         likeButton2.isEnabled = false
     }
@@ -89,6 +90,7 @@ class DetailTableViewController: UIViewController {
         
         Type.saveIsTypeUser(forUser: user, isType: dict)
         Type.saveTypedUser(forUser: user)
+        incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
     }
@@ -225,6 +227,26 @@ class DetailTableViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    func incrementLikeCounter(ref: DocumentReference, numShards: Int) {
+        
+        let shardId = Int(arc4random_uniform(UInt32(numShards)))
+        let shardRef = ref.collection(SHARDS).document(String(shardId))
+        
+        shardRef.updateData([
+            LIKECOUNT: FieldValue.increment(Int64(1))
+        ])
+    }
+    
+    func incrementTypeCounter(ref: DocumentReference, numShards: Int) {
+        
+        let shardId = Int(arc4random_uniform(UInt32(numShards)))
+        let shardRef = ref.collection(SHARDS).document(String(shardId))
+        
+        shardRef.updateData([
+            TYPECOUNT: FieldValue.increment(Int64(1))
+        ])
+    }
     
     private func toMessageVC() {
         

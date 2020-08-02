@@ -46,9 +46,11 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Fetch
     
     private func fetchUser() {
+        
         guard userId != "" else { return }
         User.fetchUser(userId) { (user) in
             self.user = user
+            self.navigationItem.title = "\(self.user.username!)"
             self.fetchMessage()
         }
     }
@@ -69,7 +71,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
             guard let uid = message.to else { return }
             self.fetchUser2(uid) {
                 self.messages.append(message)
-                self.navigationItem.title = "\(self.user.username!)"
                 self.tableView.reloadData()
                 self.scrollToBottom()
             }

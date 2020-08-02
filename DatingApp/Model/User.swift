@@ -28,6 +28,8 @@ class User {
     var minAge: Int!
     var maxAge: Int!
     var residenceSerch: String!
+    var likeCount: Int!
+    var typeCount: Int!
     
     init() {
     }
@@ -50,6 +52,8 @@ class User {
         minAge = dict[MINAGE] as? Int ?? 18
         maxAge = dict[MAXAGE] as? Int ?? 60
         residenceSerch = dict[RESIDENCESEARCH] as? String ?? ""
+        likeCount = dict[LIKECOUNT] as? Int ?? 0
+        typeCount = dict[TYPECOUNT] as? Int ?? 0
     }
     
     // MARK: - Return user

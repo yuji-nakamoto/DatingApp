@@ -39,6 +39,11 @@ class SendPostTableViewController: UITableViewController {
     // MARK: - Actions
 
     @IBAction func backButtonPressed(_ sender: Any) {
+        userDefaults.removeObject(forKey: LOVER)
+        userDefaults.removeObject(forKey: FRIEND)
+        userDefaults.removeObject(forKey: MAILFRIEND)
+        userDefaults.removeObject(forKey: PLAY)
+        userDefaults.removeObject(forKey: FREE)
         dismiss(animated: true, completion: nil)
     }
     
@@ -138,6 +143,8 @@ class SendPostTableViewController: UITableViewController {
             navigationItem.rightBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.rightBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         }
     }
 

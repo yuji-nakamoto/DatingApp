@@ -20,6 +20,8 @@ public let COLLECTION_POSTS = Firestore.firestore().collection("posts")
 public let COLLECTION_MYPOSTS = Firestore.firestore().collection("myPosts")
 public let COLLECTION_MESSAGE = Firestore.firestore().collection("message")
 public let COLLECTION_INBOX = Firestore.firestore().collection("inbox")
+public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounter")
+public let COLLECTION_TYPECOUNTER = Firestore.firestore().collection("typeCounter")
 
 // MARK: - Color
 
@@ -49,9 +51,16 @@ public let HEIGHT = "height"
 public let MINAGE = "minAge"
 public let MAXAGE = "maxAge"
 public let RESIDENCESEARCH = "residenceSerch"
-public let POST = "post"
 public let STATUS = "status"
 public let LASTCHANGE = "lastChanged"
+
+// MARK: - Counter
+
+public let SHARDS = "shards"
+public let LIKE = "like"
+public let TYPE = "type"
+public let LIKECOUNT = "likeCount"
+public let TYPECOUNT = "typeCount"
 
 // MARK: - Post
 

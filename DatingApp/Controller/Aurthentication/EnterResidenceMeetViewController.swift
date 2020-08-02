@@ -63,11 +63,29 @@ class EnterResidenceMeetController: UIViewController {
                     HEIGHT: "未設定",
                     STATUS: "online",
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]
+        
         updateUser(withValue: dict as [String : Any])
+        createLikeCounter(ref: COLLECTION_LIKECOUNTER.document(User.currentUserId()), numShards: 10)
+        createTypeCounter(ref: COLLECTION_TYPECOUNTER.document(User.currentUserId()), numShards: 10)
         toTabBerVC()
     }
     
     // MARK: - Helpers
+    
+    private func createLikeCounter(ref: DocumentReference, numShards: Int) {
+        ref.setData(["numShards": numShards]){ (err) in
+            for i in 0...numShards {
+                ref.collection("shards").document(String(i)).setData([LIKECOUNT: 0])
+            }
+        }
+    }
+    private func createTypeCounter(ref: DocumentReference, numShards: Int) {
+        ref.setData(["numShards": numShards]){ (err) in
+            for i in 0...numShards {
+                ref.collection("shards").document(String(i)).setData([TYPECOUNT: 0])
+            }
+        }
+    }
     
     private func setupUI() {
         

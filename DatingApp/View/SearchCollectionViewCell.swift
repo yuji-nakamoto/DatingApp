@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import SDWebImage
 
 class SearchCollectionViewCell: UICollectionViewCell {
@@ -18,16 +19,19 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var selfIntroLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
-    
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var typeCountLabel: UILabel!
+    @IBOutlet weak var likeCountLabel: UILabel!
     
     // MARK: - Helpers
     
     func configureCell(_ user: User) {
         
+        getLikeCount(ref: COLLECTION_LIKECOUNTER.document(user.uid))
+        getTypeCount(ref: COLLECTION_TYPECOUNTER.document(user.uid))
+        backView.layer.cornerRadius = 10
         profileImageView.layer.cornerRadius = 150 / 2
-        statusView.layer.cornerRadius = 30 / 2
-        statusView.layer.borderWidth = 4
-        statusView.layer.borderColor = UIColor.white.cgColor
+        statusView.layer.cornerRadius = 15 / 2
         
         ageLabel.text = String(user.age) + "歳"
         residenceLabel.text = user.residence
@@ -45,7 +49,36 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
-        
+    }
+    
+    func getLikeCount(ref: DocumentReference) {
+        ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
+            var totalLikeCount = 0
+            if  let err = err {
+                print("Error total count: \(err.localizedDescription)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let likeCount = document.data()[LIKECOUNT] as! Int
+                    totalLikeCount += likeCount
+                }
+            }
+            self.likeCountLabel.text = String(totalLikeCount)
+        }
+    }
+    
+    func getTypeCount(ref: DocumentReference) {
+        ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
+            var totalTypeCount = 0
+            if  let err = err {
+                print("Error total count: \(err.localizedDescription)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let typeCount = document.data()[TYPECOUNT] as! Int
+                    totalTypeCount += typeCount
+                }
+            }
+            self.typeCountLabel.text = String(totalTypeCount)
+        }
     }
 
 }
