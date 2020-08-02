@@ -10,7 +10,6 @@
 		831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */; };
 		831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392324C9CBE00043AA76 /* DetailTableViewController.swift */; };
 		831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */; };
-		831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */; };
 		831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392B24CA46260043AA76 /* ProfileTableViewController.swift */; };
 		8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */; };
 		8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */; };
@@ -77,7 +76,6 @@
 		831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		831E392324C9CBE00043AA76 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
-		831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderTableViewController.swift; sourceTree = "<group>"; };
 		8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceMeetViewController.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 			children = (
 				831E392124C88E600043AA76 /* SearchCollectionViewCell.swift */,
 				831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */,
-				831E392724C9CC110043AA76 /* DetailCollectionViewCell.swift */,
 				8348B5EA24D38D780000A187 /* MyPageTableViewCell.swift */,
 				8348E3CE24CD3694001D59C0 /* PIckerKeyboard1.swift */,
 				8348E3D024CD3ED4001D59C0 /* PickerKeyboard2.swift */,
@@ -470,7 +467,6 @@
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
-				831E392824C9CC110043AA76 /* DetailCollectionViewCell.swift in Sources */,
 				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,

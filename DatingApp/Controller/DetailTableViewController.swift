@@ -17,7 +17,6 @@ class DetailTableViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var messageBackView: UIView!
     @IBOutlet weak var typeBackView: UIView!
     @IBOutlet weak var likeBackView: UIView!
@@ -43,7 +42,6 @@ class DetailTableViewController: UIViewController {
         fetchTypeUser()
         fetchUserIdLike()
         fetchUserIdType()
-        downloadImages()
         configureUI()
     }
     
@@ -102,6 +100,16 @@ class DetailTableViewController: UIViewController {
     
     // MARK: - Fetch like type userId
     
+    private func fetchUserId() {
+        guard userId != "" else { return }
+        footsteps2(userId)
+        
+        User.fetchUser(userId) { (user) in
+            self.user = user
+            self.tableView.reloadData()
+        }
+    }
+    
     private func fetchLikeUser() {
         guard user.uid != nil else { return }
         footsteps(user)
@@ -119,17 +127,6 @@ class DetailTableViewController: UIViewController {
         Type.fetchTypeUser(self.user.uid) { (type) in
             self.type = type
             self.validateTypeButton(type: type)
-        }
-    }
-    
-    private func fetchUserId() {
-        guard userId != "" else { return }
-        footsteps2(userId)
-        
-        User.fetchUser(userId) { (user) in
-            self.user = user
-            self.tableView.reloadData()
-            self.downloadImages()
         }
     }
     
@@ -175,42 +172,6 @@ class DetailTableViewController: UIViewController {
             Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
             if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
                 Footstep.saveFootstepedUser2(userId: userId)
-            }
-        }
-    }
-    
-    // MARK: - Download images
-    
-    private func downloadImages() {
-        
-        if user.profileImageUrl2 == "" && user.profileImageUrl3 == "" {
-            let profileImageUrls = [user.profileImageUrl1] as! [String]
-            let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            for (_, url) in imageUrls.enumerated() {
-                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                    self.profileImages.append(image!)
-                    self.collectionView.reloadData()
-                }
-            }
-        } else if user.profileImageUrl3 == "" {
-            let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2] as! [String]
-            let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            
-            for (_, url) in imageUrls.enumerated() {
-                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                    self.profileImages.append(image!)
-                    self.collectionView.reloadData()
-                }
-            }
-        } else if user.profileImageUrl1 != nil && user.profileImageUrl2 != nil && user.profileImageUrl3 != nil {
-            let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2, user.profileImageUrl3] as! [String]
-            let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            
-            for (_, url) in imageUrls.enumerated() {
-                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                    self.profileImages.append(image!)
-                    self.collectionView.reloadData()
-                }
             }
         }
     }
@@ -264,8 +225,6 @@ class DetailTableViewController: UIViewController {
     
     private func configureUI() {
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         likeBackView.layer.cornerRadius = 55 / 2
@@ -349,27 +308,6 @@ class DetailTableViewController: UIViewController {
     }
 }
 
-//MARK: UICollectionViewDelegate
-
-extension DetailTableViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 414, height: 414)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profileImages.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! DetailCollectionViewCell
-        
-        cell.setupProfileImages(profileImage: profileImages[indexPath.row])
-        return cell
-    }
-}
-
 // MARK: - UITableViewDelegate
 extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -380,6 +318,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
         
+        cell.user = self.user
         cell.configureCell(self.user)
         return cell
     }

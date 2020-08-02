@@ -27,7 +27,7 @@ class MessageTableViewCell: UITableViewCell {
     
     func updateView() {
         let text = message!.messageText
-        let widthValue = text!.estimateFrameForText1(text!).width + 40
+        let widthValue = text!.estimateFrameForText(text!).width + 40
         
         messageLabel.isHidden = false
         messageLabel.text = message!.messageText

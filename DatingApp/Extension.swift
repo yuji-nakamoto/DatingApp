@@ -19,11 +19,9 @@ let rightColor = UIColor(named: O_GREEN)
 
 public let generator = UINotificationFeedbackGenerator()
 
-
 // MARK : - JGProgressHUD
 
 public var hud = JGProgressHUD(style: .dark)
-
 public func hudError() {
     
     hud.indicatorView = JGProgressHUDErrorIndicatorView()
@@ -89,13 +87,8 @@ extension Date {
 }
 
 extension String {
-    func estimateFrameForText1(_ text: String) -> CGRect {
+    func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 250, height: 1000)
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)], context: nil)
-    }
-    func estimateFrameForText2(_ text: String) -> CGRect {
-        let size = CGSize(width: 300, height: 500)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)], context: nil)
     }

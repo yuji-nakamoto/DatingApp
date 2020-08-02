@@ -23,10 +23,37 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var residenceLabel2: UILabel!
     @IBOutlet weak var professionLabel: UILabel!
     @IBOutlet weak var heightLabel: UILabel!
-    
+    @IBOutlet weak var profileImageView1: UIImageView!
+    @IBOutlet weak var profileImageView2: UIImageView!
+    @IBOutlet weak var profileImageView3: UIImageView!
+    @IBOutlet weak var segBarSingle: UIView!
+    @IBOutlet weak var segBarDouble1: UIView!
+    @IBOutlet weak var segBarDouble2: UIView!
+    @IBOutlet weak var segBarTriple1: UIView!
+    @IBOutlet weak var segBarTriple2: UIView!
+    @IBOutlet weak var segBarTriple3: UIView!
+
     // MARK: - Helpers
     
+    var user: User!
+    
     func configureCell(_ user: User?) {
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
+        profileImageView1.addGestureRecognizer(tap1)
+        profileImageView2.addGestureRecognizer(tap2)
+        profileImageView3.addGestureRecognizer(tap3)
+        
+        if user?.profileImageUrl1 != nil {
+            profileImageView1.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
+            profileImageView2.sd_setImage(with: URL(string: user!.profileImageUrl2), completed: nil)
+            profileImageView3.sd_setImage(with: URL(string: user!.profileImageUrl3), completed: nil)
+        }
+        profileImageView1.layer.cornerRadius = 15
+        profileImageView2.layer.cornerRadius = 15
+        profileImageView3.layer.cornerRadius = 15
         
         selfIntrolabel.text = user!.selfIntro
         nameLabel.text = user!.username
@@ -42,22 +69,129 @@ class DetailTableViewCell: UITableViewCell {
         }
         ageLabel.text = String(user!.age) + "歳"
         ageLabel2.text = String(user!.age) + "歳"
+        
+        if user!.profileImageUrl2 == "" && user!.profileImageUrl3 == "" {
+            profileImageUrl23Nil()
+        } else if user!.profileImageUrl3 == "" {
+            profileImageUrl2or3Nil()
+        } else if user!.profileImageUrl2 == "" {
+            profileImageUrl2or3Nil()
+        } else {
+            profileImageUrlHaveAll()
+        }
+    }
+    
+    @objc func handleChangePhoto(_ sender: UITapGestureRecognizer) {
+        
+        let location = sender.location(in: nil).x
+        let shouldShowNextPhoto = location > self.frame.width / 2
+        
+        if shouldShowNextPhoto {
+            
+            if user.profileImageUrl2 == "" && user.profileImageUrl3 == "" {
+                return
+            } else if user.profileImageUrl3 == "" {
+                if profileImageView1.isHidden == false {
+                    profileImageView1.isHidden = true
+                    segBarDouble1.alpha = 0.5
+                    segBarDouble2.alpha = 1
+                } else if profileImageView1.isHidden == true {
+                    return
+                }
+            } else if user.profileImageUrl2 == "" {
+                if profileImageView1.isHidden == false {
+                    profileImageView1.isHidden = true
+                    segBarDouble1.alpha = 0.5
+                    segBarDouble2.alpha = 1
+                } else if profileImageView1.isHidden == true {
+                    profileImageView2.isHidden = true
+                    segBarDouble1.alpha = 0.5
+                    segBarDouble2.alpha = 1
+                } else if profileImageView2.isHidden == true {
+                    return
+                }
+            } else {
+                if profileImageView1.isHidden == false {
+                    profileImageView1.isHidden = true
+                    segBarTriple1.alpha = 0.5
+                    segBarTriple2.alpha = 1
+                } else if profileImageView1.isHidden == true {
+                    segBarTriple1.alpha = 0.5
+                    segBarTriple2.alpha = 0.5
+                    segBarTriple3.alpha = 1
+                    profileImageView2.isHidden = true
+                } else if profileImageView2.isHidden == true {
+                    return
+                }
+            }
+        } else {
+            if user.profileImageUrl3 == "" {
+                segBarDouble1.alpha = 1
+                segBarDouble2.alpha = 0.5
+            } else if user.profileImageUrl2 == "" {
+                segBarDouble1.alpha = 1
+                segBarDouble2.alpha = 0.5
+            } else {
+                if profileImageView2.isHidden == true {
+                    profileImageView2.isHidden = false
+                    segBarTriple2.alpha = 1
+                    segBarTriple3.alpha = 0.5
+                    return
+                } else if profileImageView1.isHidden == true {
+                    profileImageView1.isHidden = false
+                    segBarTriple1.alpha = 1
+                    segBarTriple2.alpha = 0.5
+                    return
+                } else if profileImageView1.isHidden == true && profileImageView2.isHidden == true {
+                    profileImageView2.isHidden = false
+                    segBarTriple2.alpha = 1
+                    segBarTriple3.alpha = 0.5
+                    return
+                }
+            }
+            if profileImageView2.isHidden == true {
+                profileImageView2.isHidden = false
+            } else if profileImageView1.isHidden == true {
+                profileImageView1.isHidden = false
+            } else if profileImageView1.isHidden == true && profileImageView2.isHidden == true {
+                profileImageView2.isHidden = false
+            }
+        }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        nameLabel.text = ""
-        nameLabel2.text = ""
-        residenceLabel.text = ""
-        residenceLabel2.text = ""
-        ageLabel.text = ""
-        ageLabel2.text = ""
-        selfIntrolabel.text = ""
-        professionLabel.text = ""
-        commentLabel.text = ""
-        bodyLabel.text = ""
-        heightLabel.text = ""
+        segBarSingle.layer.cornerRadius = 5 / 2
+        segBarDouble1.layer.cornerRadius = 5 / 2
+        segBarDouble2.layer.cornerRadius = 5 / 2
+        segBarTriple1.layer.cornerRadius = 5 / 2
+        segBarTriple2.layer.cornerRadius = 5 / 2
+        segBarTriple3.layer.cornerRadius = 5 / 2
+    }
+    
+    func profileImageUrl23Nil() {
+        segBarDouble1.isHidden = true
+        segBarDouble2.isHidden = true
+        segBarTriple1.isHidden = true
+        segBarTriple2.isHidden = true
+        segBarTriple3.isHidden = true
+    }
+    
+    func profileImageUrl2or3Nil() {
+        segBarSingle.isHidden = true
+        segBarTriple1.isHidden = true
+        segBarTriple2.isHidden = true
+        segBarTriple3.isHidden = true
+        segBarDouble2.alpha = 0.5
+    }
+    
+    func profileImageUrlHaveAll() {
+        segBarSingle.isHidden = true
+        segBarDouble1.isHidden = true
+        segBarDouble2.isHidden = true
+        segBarTriple2.alpha = 0.5
+        segBarTriple3.alpha = 0.5
     }
 
 }

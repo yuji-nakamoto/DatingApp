@@ -16,7 +16,6 @@ class ProfileTableViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var collectionView: UICollectionView!
     
     var profileImages = [UIImage]()
     var user = User()
@@ -57,7 +56,6 @@ class ProfileTableViewController: UIViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            self.downloadImages(user)
             self.tableView.reloadData()
         }
     }
@@ -69,49 +67,10 @@ class ProfileTableViewController: UIViewController {
         }
     }
     
-    // MARK: - Download images
-    
-    private func downloadImages(_ user: User) {
-        
-        if user.profileImageUrl2 == "" && user.profileImageUrl3 == "" {
-            let profileImageUrls = [user.profileImageUrl1] as! [String]
-            let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            
-            for (_, url) in imageUrls.enumerated() {
-                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                    self.profileImages.append(image!)
-                    self.collectionView.reloadData()
-                }
-            }
-        } else if user.profileImageUrl3 == "" {
-            let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2] as! [String]
-            let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            
-            for (_, url) in imageUrls.enumerated() {
-                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                    self.profileImages.append(image!)
-                    self.collectionView.reloadData()
-                }
-            }
-        } else {
-            let profileImageUrls = [user.profileImageUrl1, user.profileImageUrl2, user.profileImageUrl3] as! [String]
-            let imageUrls = profileImageUrls.map({ URL(string: $0) })
-            
-            for (_, url) in imageUrls.enumerated() {
-                SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                    self.profileImages.append(image!)
-                    self.collectionView.reloadData()
-                }
-            }
-        }
-    }
-    
     // MARK: - Helpers
     
     private func configureUI() {
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
+
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         editButton.layer.cornerRadius = 50 / 2
@@ -137,30 +96,6 @@ class ProfileTableViewController: UIViewController {
     
 }
 
-//MARK: UICollectionViewDelegate
-
-extension ProfileTableViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 414, height: 414)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        return profileImages.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! DetailCollectionViewCell
-        
-        cell.setupProfileImages(profileImage: profileImages[indexPath.row])
-        return cell
-    }
-}
-
-
 // MARK: - UITableViewDelegate
 extension ProfileTableViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -171,6 +106,7 @@ extension ProfileTableViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
  
+        cell.user = self.user
         cell.configureCell(self.user)
         return cell
     }
