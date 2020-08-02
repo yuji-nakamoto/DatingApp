@@ -160,6 +160,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8350140724D55D88008D1170 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				8348B5E824D38C0F0000A187 /* MyPageTableViewController.swift */,
+				8348E3E424CE0B6E001D59C0 /* DidLikeTableViewController.swift */,
+				8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */,
+				8348E3F624D0E123001D59C0 /* FootstepViewController.swift */,
+				831E392B24CA46260043AA76 /* ProfileTableViewController.swift */,
+				8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */,
+				8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */,
+				8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */,
+				8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		8350140824D55DF6008D1170 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */,
+				8348B5E424D351D80000A187 /* SendPostTableViewController.swift */,
+				8348B5E624D35ADC0000A187 /* GenreTableViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		838071BD24C608F5008BAA2C = {
 			isa = PBXGroup;
 			children = (
@@ -209,18 +235,8 @@
 				8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
 				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
-				8348B5E824D38C0F0000A187 /* MyPageTableViewController.swift */,
-				831E392B24CA46260043AA76 /* ProfileTableViewController.swift */,
-				8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */,
-				8348E3E424CE0B6E001D59C0 /* DidLikeTableViewController.swift */,
-				8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */,
-				8348E3F624D0E123001D59C0 /* FootstepViewController.swift */,
-				8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */,
-				8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */,
-				8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */,
-				8348B5E424D351D80000A187 /* SendPostTableViewController.swift */,
-				8348B5E624D35ADC0000A187 /* GenreTableViewController.swift */,
-				8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */,
+				8350140724D55D88008D1170 /* MyPage */,
+				8350140824D55DF6008D1170 /* Post */,
 				835013FB24D40F79008D1170 /* InboxTableViewController.swift */,
 				835013FD24D41458008D1170 /* MessageTebleViewController.swift */,
 			);

@@ -16,7 +16,7 @@ class InboxTableViewController: UIViewController {
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

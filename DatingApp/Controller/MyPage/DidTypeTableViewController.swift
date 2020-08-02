@@ -20,7 +20,7 @@ class DidTypeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        fetchTypeUsers()
+        fetchTypedUsers()
         tableView.tableFooterView = UIView()
     }
     
@@ -33,8 +33,8 @@ class DidTypeTableViewController: UITableViewController {
     @IBAction func segmentControlled(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: fetchTypeUsers()
-        case 1: fetchtTypedUsers()
+        case 0: fetchTypedUsers()
+        case 1: fetchTypeUsers()
         default: break
         }
     }
@@ -58,7 +58,7 @@ class DidTypeTableViewController: UITableViewController {
 
     // MARK: - Fetch liekd
     
-    private func fetchtTypedUsers() {
+    private func fetchTypedUsers() {
         
         types.removeAll()
         users.removeAll()

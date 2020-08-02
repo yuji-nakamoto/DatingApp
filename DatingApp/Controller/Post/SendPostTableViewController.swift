@@ -26,13 +26,13 @@ class SendPostTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupGenre()
         setupTextView()
         fetchUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupUI()
         setupGenre()
     }
     
@@ -131,6 +131,14 @@ class SendPostTableViewController: UITableViewController {
         pleaceholderLbl.textAlignment = .left
         
         textView.addSubview(pleaceholderLbl)
+    }
+    
+    private func setupUI() {
+        if UserDefaults.standard.object(forKey: DARK) != nil {
+            navigationItem.rightBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: PINK) != nil {
+            navigationItem.rightBarButtonItem?.tintColor = .white
+        }
     }
 
 }

@@ -20,7 +20,7 @@ class DidLikeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        fetchLikeUsers()
+        fetchLikedUsers()
         tableView.tableFooterView = UIView()
     }
     
@@ -33,8 +33,8 @@ class DidLikeTableViewController: UITableViewController {
     @IBAction func segementControlled(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: fetchLikeUsers()
-        case 1: fetchLikedUsers()
+        case 0: fetchLikedUsers()
+        case 1: fetchLikeUsers()
         default: break
         }
     }

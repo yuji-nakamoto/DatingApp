@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PostTableViewController: UIViewController {
     
@@ -46,7 +47,7 @@ class PostTableViewController: UIViewController {
     // MARK: - Fetch post
     
     private func fetchPost() {
-        
+        guard Auth.auth().currentUser?.uid != nil else { return }
         posts.removeAll()
         users.removeAll()
         tableView.reloadData()

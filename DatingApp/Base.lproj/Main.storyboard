@@ -275,39 +275,35 @@
                                 <rect key="frame" x="0.0" y="-64" width="414" height="960"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="VjC-j6-9zc">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="502"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="542"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tWw-la-H16">
-                                        <size key="itemSize" width="375" height="502"/>
+                                        <size key="itemSize" width="414" height="540"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                     <cells>
                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="rsz-Hs-hot" customClass="DetailCollectionViewCell" customModule="DatingApp" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.5" width="375" height="501"/>
+                                            <rect key="frame" x="0.0" y="1" width="390" height="540"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uLs-eC-DdF">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="501"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="390" height="540"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uIy-ME-y1J">
-                                                        <rect key="frame" x="0.0" y="126" width="375" height="375"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="375" id="Qno-0d-LBy"/>
-                                                            <constraint firstAttribute="width" constant="375" id="SsV-1o-azt"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="126" width="390" height="414"/>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="uIy-ME-y1J" secondAttribute="bottom" id="2I6-aN-OT1"/>
-                                                    <constraint firstAttribute="trailing" secondItem="uIy-ME-y1J" secondAttribute="trailing" id="6p8-4O-lgJ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uIy-ME-y1J" secondAttribute="bottom" id="32F-E8-0tf"/>
                                                     <constraint firstItem="uIy-ME-y1J" firstAttribute="leading" secondItem="uLs-eC-DdF" secondAttribute="leading" id="Jnl-Gt-tX8"/>
                                                     <constraint firstItem="uIy-ME-y1J" firstAttribute="top" secondItem="uLs-eC-DdF" secondAttribute="top" constant="126" id="RA9-J8-jzr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uIy-ME-y1J" secondAttribute="trailing" id="dzS-nv-HsI"/>
                                                 </constraints>
                                             </collectionViewCellContentView>
-                                            <size key="customSize" width="375" height="501"/>
+                                            <size key="customSize" width="390" height="540"/>
                                             <connections>
                                                 <outlet property="profileImageView" destination="uIy-ME-y1J" id="Jgu-q5-LOF"/>
                                             </connections>
@@ -316,7 +312,7 @@
                                 </collectionView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="489" id="CbM-hC-cqw" customClass="DetailTableViewCell" customModule="DatingApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="530" width="414" height="489"/>
+                                        <rect key="frame" x="0.0" y="570" width="414" height="489"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CbM-hC-cqw" id="xb5-Db-zKj">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="489"/>
@@ -1889,39 +1885,36 @@
                                 <rect key="frame" x="0.0" y="-64" width="414" height="960"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Mt2-uE-EKv">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="503"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="543"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cVy-Cv-Hpg">
-                                        <size key="itemSize" width="375" height="499"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cVy-Cv-Hpg">
+                                        <size key="itemSize" width="392" height="540"/>
+                                        <size key="estimatedItemSize" width="414" height="540"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                     <cells>
                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="yxt-TK-nag" customClass="DetailCollectionViewCell" customModule="DatingApp" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="1" width="375" height="501"/>
+                                            <rect key="frame" x="0.0" y="1.5" width="414" height="540"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="A0J-m7-grO">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="501"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="540"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-em-vdz">
-                                                        <rect key="frame" x="0.0" y="126" width="375" height="375"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="375" id="7U2-pj-5ev"/>
-                                                            <constraint firstAttribute="height" constant="375" id="yHc-nX-eYQ"/>
-                                                        </constraints>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5tQ-em-vdz">
+                                                        <rect key="frame" x="0.0" y="126" width="414" height="414"/>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="5tQ-em-vdz" secondAttribute="trailing" id="2fw-r5-lJ5"/>
                                                     <constraint firstItem="5tQ-em-vdz" firstAttribute="leading" secondItem="A0J-m7-grO" secondAttribute="leading" id="ikZ-Gv-kMp"/>
-                                                    <constraint firstAttribute="trailing" secondItem="5tQ-em-vdz" secondAttribute="trailing" id="jkI-7v-adb"/>
-                                                    <constraint firstAttribute="bottom" secondItem="5tQ-em-vdz" secondAttribute="bottom" id="lmj-Mt-ZdW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="5tQ-em-vdz" secondAttribute="bottom" id="jUN-bq-ujV"/>
                                                     <constraint firstItem="5tQ-em-vdz" firstAttribute="top" secondItem="A0J-m7-grO" secondAttribute="top" constant="126" id="xnV-E0-OID"/>
                                                 </constraints>
                                             </collectionViewCellContentView>
-                                            <size key="customSize" width="375" height="501"/>
+                                            <size key="customSize" width="414" height="540"/>
                                             <connections>
                                                 <outlet property="profileImageView" destination="5tQ-em-vdz" id="TUo-rE-3m9"/>
                                             </connections>
@@ -1934,7 +1927,7 @@
                                 </collectionView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="574" id="auH-oV-53B" customClass="DetailTableViewCell" customModule="DatingApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="531" width="414" height="574"/>
+                                        <rect key="frame" x="0.0" y="571" width="414" height="574"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="auH-oV-53B" id="STh-yu-R56">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="574"/>
@@ -2776,9 +2769,18 @@
                                             <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVS-9Y-smG">
+                                            <rect key="frame" x="65" y="65" width="15" height="15"/>
+                                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="15" id="FU0-jh-p7x"/>
+                                                <constraint firstAttribute="height" constant="15" id="eL0-kV-DXm"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="0sR-ol-ygX" firstAttribute="leading" secondItem="hqJ-eI-wBc" secondAttribute="trailing" constant="8" id="586-yZ-bfg"/>
+                                        <constraint firstItem="HVS-9Y-smG" firstAttribute="leading" secondItem="Drm-fg-iB4" secondAttribute="leading" constant="65" id="65z-vK-Uqs"/>
                                         <constraint firstAttribute="bottom" secondItem="hqJ-eI-wBc" secondAttribute="bottom" constant="10" id="9GL-cl-MAw"/>
                                         <constraint firstItem="JLP-Hs-792" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GaC-Nf-re3" secondAttribute="trailing" id="I9a-CG-2JE"/>
                                         <constraint firstItem="Nv7-HA-gJ6" firstAttribute="leading" secondItem="0sR-ol-ygX" secondAttribute="trailing" constant="5" id="J4Y-Nx-MbL"/>
@@ -2793,12 +2795,14 @@
                                         <constraint firstItem="hqJ-eI-wBc" firstAttribute="top" secondItem="Drm-fg-iB4" secondAttribute="top" constant="10" id="cVa-6w-ozJ"/>
                                         <constraint firstItem="MBK-T2-cw6" firstAttribute="top" secondItem="0sR-ol-ygX" secondAttribute="bottom" constant="8" id="k3a-LX-EU7"/>
                                         <constraint firstItem="hqJ-eI-wBc" firstAttribute="leading" secondItem="Drm-fg-iB4" secondAttribute="leading" constant="10" id="s8E-0V-tXo"/>
+                                        <constraint firstAttribute="bottom" secondItem="HVS-9Y-smG" secondAttribute="bottom" constant="10" id="vUs-7v-AKN"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="ageLabel" destination="Nv7-HA-gJ6" id="ggm-pd-9h6"/>
                                     <outlet property="nameLabel" destination="0sR-ol-ygX" id="6cJ-sY-UoG"/>
+                                    <outlet property="onlineView" destination="HVS-9Y-smG" id="IsR-oP-hrO"/>
                                     <outlet property="profileImageView" destination="hqJ-eI-wBc" id="xHA-1W-lcG"/>
                                     <outlet property="residenceLabel" destination="GaC-Nf-re3" id="2WW-fj-W3w"/>
                                     <outlet property="selfIntroLabel" destination="MBK-T2-cw6" id="Tkf-Rm-PmQ"/>
@@ -2823,8 +2827,8 @@
                             <rect key="frame" x="77" y="5.5" width="260" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="タイプした"/>
                                 <segment title="タイプされた"/>
+                                <segment title="タイプした"/>
                             </segments>
                             <connections>
                                 <action selector="segmentControlled:" destination="VeI-q2-ibB" eventType="valueChanged" id="2HZ-mY-97F"/>
@@ -3661,11 +3665,21 @@
                                             <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqe-xS-JlN">
+                                            <rect key="frame" x="65" y="65" width="15" height="15"/>
+                                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="7rY-Go-9ic"/>
+                                                <constraint firstAttribute="width" constant="15" id="HWA-3F-Bfc"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="qsE-di-F8B" secondAttribute="trailing" constant="12" id="4xa-da-Okr"/>
+                                        <constraint firstAttribute="bottom" secondItem="Eqe-xS-JlN" secondAttribute="bottom" constant="10" id="9sl-eD-XnJ"/>
                                         <constraint firstItem="WTc-JS-qCk" firstAttribute="leading" secondItem="7yL-qc-rLT" secondAttribute="leading" constant="10" id="H8P-nr-rOq"/>
                                         <constraint firstItem="npk-rT-Pkj" firstAttribute="leading" secondItem="XCG-t0-Ivd" secondAttribute="trailing" constant="5" id="Io5-80-poX"/>
+                                        <constraint firstItem="Eqe-xS-JlN" firstAttribute="leading" secondItem="7yL-qc-rLT" secondAttribute="leading" constant="65" id="Jb5-I9-Mi9"/>
                                         <constraint firstItem="pjb-N6-0K7" firstAttribute="leading" secondItem="WTc-JS-qCk" secondAttribute="trailing" constant="8" id="JoH-7L-eYk"/>
                                         <constraint firstItem="nRv-cl-NZf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="npk-rT-Pkj" secondAttribute="trailing" id="RXF-Er-kT6"/>
                                         <constraint firstAttribute="bottom" secondItem="WTc-JS-qCk" secondAttribute="bottom" constant="10" id="TPo-OZ-oGb"/>
@@ -3684,6 +3698,7 @@
                                 <connections>
                                     <outlet property="ageLabel" destination="XCG-t0-Ivd" id="1q1-T4-IkH"/>
                                     <outlet property="nameLabel" destination="pjb-N6-0K7" id="EJ6-5O-qxA"/>
+                                    <outlet property="onlineView" destination="Eqe-xS-JlN" id="unJ-Aa-6pe"/>
                                     <outlet property="profileImageView" destination="WTc-JS-qCk" id="RHY-Pl-1ZM"/>
                                     <outlet property="residenceLabel" destination="npk-rT-Pkj" id="l0J-8c-nvB"/>
                                     <outlet property="selfIntroLabel" destination="qsE-di-F8B" id="gZf-GI-o4u"/>
@@ -3708,8 +3723,8 @@
                             <rect key="frame" x="77" y="5.5" width="260" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="いいねした"/>
                                 <segment title="いいねされた"/>
+                                <segment title="いいねした"/>
                             </segments>
                             <connections>
                                 <action selector="segementControlled:" destination="vGm-Bn-ipu" eventType="valueChanged" id="iUG-L2-01N"/>
@@ -3780,9 +3795,18 @@
                                                     <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8b1-YE-9YH">
+                                                    <rect key="frame" x="65" y="65" width="15" height="15"/>
+                                                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="GyD-dA-Qww"/>
+                                                        <constraint firstAttribute="width" constant="15" id="lvs-sU-q2D"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="N1q-0T-nbu" firstAttribute="top" secondItem="0fa-Bo-4lu" secondAttribute="bottom" constant="8" id="1uf-oV-MkP"/>
+                                                <constraint firstAttribute="bottom" secondItem="8b1-YE-9YH" secondAttribute="bottom" constant="10" id="24c-uw-zfZ"/>
                                                 <constraint firstItem="se6-Xo-HQw" firstAttribute="firstBaseline" secondItem="0fa-Bo-4lu" secondAttribute="firstBaseline" id="6wc-ge-oJT"/>
                                                 <constraint firstItem="Qmw-HA-QLX" firstAttribute="firstBaseline" secondItem="0fa-Bo-4lu" secondAttribute="firstBaseline" id="7di-Sz-FeR"/>
                                                 <constraint firstItem="0fa-Bo-4lu" firstAttribute="leading" secondItem="kVe-Yv-RWf" secondAttribute="trailing" constant="8" id="IYO-Eb-DbV"/>
@@ -3790,6 +3814,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="N1q-0T-nbu" secondAttribute="trailing" constant="12" id="N4i-JC-i5T"/>
                                                 <constraint firstItem="kVe-Yv-RWf" firstAttribute="leading" secondItem="D6B-so-gny" secondAttribute="leading" constant="10" id="PC0-Ka-LKE"/>
                                                 <constraint firstItem="VQV-yL-9WJ" firstAttribute="leading" secondItem="Qmw-HA-QLX" secondAttribute="trailing" constant="5" id="VsU-Uz-2rI"/>
+                                                <constraint firstItem="8b1-YE-9YH" firstAttribute="leading" secondItem="D6B-so-gny" secondAttribute="leading" constant="65" id="Ysp-mU-ieH"/>
                                                 <constraint firstItem="Qmw-HA-QLX" firstAttribute="leading" secondItem="0fa-Bo-4lu" secondAttribute="trailing" constant="5" id="fFg-Dv-u7a"/>
                                                 <constraint firstAttribute="bottom" secondItem="kVe-Yv-RWf" secondAttribute="bottom" constant="10" id="gWQ-eZ-xTz"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="se6-Xo-HQw" secondAttribute="trailing" id="gpy-3t-kd6"/>
@@ -3803,6 +3828,7 @@
                                         <connections>
                                             <outlet property="ageLabel" destination="Qmw-HA-QLX" id="JOG-0m-F1W"/>
                                             <outlet property="nameLabel" destination="0fa-Bo-4lu" id="MjL-6m-rsT"/>
+                                            <outlet property="onlineView" destination="8b1-YE-9YH" id="yxu-YN-6zW"/>
                                             <outlet property="profileImageView" destination="kVe-Yv-RWf" id="ySa-g8-wB3"/>
                                             <outlet property="residenceLabel" destination="VQV-yL-9WJ" id="zJn-x5-vrc"/>
                                             <outlet property="selfIntroLabel" destination="N1q-0T-nbu" id="HzL-eW-Pvv"/>
@@ -4434,6 +4460,14 @@
                                                     <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY3-4E-27c">
+                                                    <rect key="frame" x="65" y="65" width="15" height="15"/>
+                                                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="Dkd-Ud-WqC"/>
+                                                        <constraint firstAttribute="height" constant="15" id="foK-dt-bej"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="hvN-6Q-ceK" firstAttribute="leading" secondItem="cgZ-xB-Z5w" secondAttribute="leading" constant="10" id="15J-qI-wgz"/>
@@ -4446,17 +4480,20 @@
                                                 <constraint firstItem="NjF-L4-V1a" firstAttribute="top" secondItem="hvN-6Q-ceK" secondAttribute="top" id="JKa-Us-epV"/>
                                                 <constraint firstItem="7Nj-M0-T68" firstAttribute="firstBaseline" secondItem="NjF-L4-V1a" secondAttribute="firstBaseline" id="OBs-zY-jGy"/>
                                                 <constraint firstItem="veU-KI-LUK" firstAttribute="firstBaseline" secondItem="NjF-L4-V1a" secondAttribute="firstBaseline" id="TLt-bv-2av"/>
+                                                <constraint firstAttribute="bottom" secondItem="iY3-4E-27c" secondAttribute="bottom" constant="10" id="cnp-WH-til"/>
                                                 <constraint firstItem="veU-KI-LUK" firstAttribute="leading" secondItem="7Nj-M0-T68" secondAttribute="trailing" constant="5" id="ghW-GE-Rk5"/>
                                                 <constraint firstItem="hvN-6Q-ceK" firstAttribute="top" secondItem="cgZ-xB-Z5w" secondAttribute="top" constant="10" id="hGb-5B-Ln8"/>
                                                 <constraint firstItem="7Nj-M0-T68" firstAttribute="leading" secondItem="NjF-L4-V1a" secondAttribute="trailing" constant="5" id="hav-2t-aUF"/>
                                                 <constraint firstAttribute="trailing" secondItem="CPN-ev-7Vg" secondAttribute="trailing" constant="12" id="l8r-yb-zv9"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ghZ-CB-77D" secondAttribute="trailing" id="otv-MK-6U3"/>
+                                                <constraint firstItem="iY3-4E-27c" firstAttribute="leading" secondItem="cgZ-xB-Z5w" secondAttribute="leading" constant="65" id="qd6-Ih-MXo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="ageLabel" destination="7Nj-M0-T68" id="E99-Pc-Mfq"/>
                                             <outlet property="nameLabel" destination="NjF-L4-V1a" id="Kvr-pA-50d"/>
+                                            <outlet property="onlineView" destination="iY3-4E-27c" id="6z3-nK-3ha"/>
                                             <outlet property="profileImageView" destination="hvN-6Q-ceK" id="wsz-Rv-FcT"/>
                                             <outlet property="residenceLabel" destination="veU-KI-LUK" id="XkX-cl-dVO"/>
                                             <outlet property="selfIntroLabel" destination="CPN-ev-7Vg" id="dJ6-fv-YHt"/>
@@ -4498,7 +4535,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ior-iV-Jbg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="675"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="105" id="vHu-yj-WzS" customClass="MessageTableViewCell" customModule="DatingApp" customModuleProvider="target">
@@ -4588,7 +4625,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOr-TF-3fH">
-                                <rect key="frame" x="0.0" y="763" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="07Y-EP-qtI">
                                         <rect key="frame" x="20" y="8" width="374" height="34"/>
@@ -4903,10 +4940,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UOh-zv-22G"/>
+        <segue reference="hxo-rm-HDa"/>
         <segue reference="3qg-xn-go8"/>
         <segue reference="p2a-Jj-oo5"/>
-        <segue reference="ezP-c6-cnr"/>
+        <segue reference="i3W-gC-jRd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="back" width="30" height="30"/>

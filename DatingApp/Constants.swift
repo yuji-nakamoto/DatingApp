@@ -50,6 +50,8 @@ public let MINAGE = "minAge"
 public let MAXAGE = "maxAge"
 public let RESIDENCESEARCH = "residenceSerch"
 public let POST = "post"
+public let STATUS = "status"
+public let LASTCHANGE = "lastChanged"
 
 // MARK: - Post
 
@@ -76,8 +78,7 @@ public let DATE = "date"
 
 // MARK: - Placeholder image
 
-public let PLACEHOLDERIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2FEC19D574-4963-4C1B-A4E5-54D645F1DA10?alt=media&token=9737006c-d65e-4366-9b6d-4a565e26373f"
-public let PLACEHOLDERIMAGEURL2 = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2F1F237C97-F09E-4F48-9C3A-AE4E75FCD004?alt=media&token=9ffc537e-3d1a-49aa-a03d-cc758b88e31d"
+public let PLACEHOLDERIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2F2EB76E60-16FA-494F-9419-19905F13553C?alt=media&token=3c8906ed-1a5e-4370-8270-432dc0431ae5"
 
 // MARK: - UserOfject
 

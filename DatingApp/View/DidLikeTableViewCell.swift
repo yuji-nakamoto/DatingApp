@@ -16,6 +16,7 @@ class DidLikeTableViewCell: UITableViewCell {
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var selfIntroLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var onlineView: UIView!
     
     var user = User()
     
@@ -26,6 +27,17 @@ class DidLikeTableViewCell: UITableViewCell {
         residenceLabel.text = user.residence
         ageLabel.text = String(user.age) + "歳"
         selfIntroLabel.text = user.selfIntro
+        
+        COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch is online: \(error.localizedDescription)")
+            }
+            if let dict = snapshot?.data() {
+                if let active = dict[STATUS] as? String {
+                    self.onlineView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
+                }
+            }
+        }
     }
     
     func configureInboxCell(_ inbox: Inbox) {
@@ -39,6 +51,17 @@ class DidLikeTableViewCell: UITableViewCell {
         let date = Date(timeIntervalSince1970: inbox.message.date)
         let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
         timestampLabel.text = dateString
+        
+        COLLECTION_USERS.document(inbox.user.uid).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch is online: \(error.localizedDescription)")
+            }
+            if let dict = snapshot?.data() {
+                if let active = dict[STATUS] as? String {
+                    self.onlineView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
+                }
+            }
+        }
     }
     
     var footstep: Footstep? {
@@ -85,6 +108,9 @@ class DidLikeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.layer.cornerRadius = 70 / 2
+        onlineView.layer.cornerRadius = 15 / 2
+        onlineView.layer.borderWidth = 2
+        onlineView.layer.borderColor = UIColor.white.cgColor
         
     }
     

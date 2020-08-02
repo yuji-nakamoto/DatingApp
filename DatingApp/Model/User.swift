@@ -66,7 +66,8 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
-            //                        print("DEBUG: snapshot data \(snapshot!.data()!)")
+//            print("DEBUG: snapshot data \(snapshot?.data()!)")
+            guard snapshot?.data() != nil else { return }
             let user = User(dict: snapshot!.data()! as [String: Any])
             completion(user)
         }
@@ -137,6 +138,13 @@ class User {
                 completion(users)
             }
         }
+    }
+    
+    class func isOnline(online: String) {
+        
+        guard Auth.auth().currentUser?.uid != nil else { return }
+        let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date())] as [String : Any]
+        COLLECTION_USERS.document(User.currentUserId()).updateData(dict)
     }
     
 }

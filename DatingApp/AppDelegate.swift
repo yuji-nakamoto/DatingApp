@@ -16,8 +16,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        
+        keepUpdatingStatus()
         return true
+    }
+    
+    func keepUpdatingStatus() {
+        guard Auth.auth().currentUser?.uid != nil else { return }
+        let database = Database.database()
+        let uid = Auth.auth().currentUser!.uid
+        
+        database.reference(withPath: ".info/connected").observe(.value) { snap in
+            let connected = snap.value as? Bool ?? false
+            print("connected: \(connected)")
+            if !connected {
+                return
+            }
+            let statusRef = database.reference().child(uid)
+            
+            statusRef.onDisconnectSetValue([
+                STATUS: "offline",
+                LASTCHANGE: ServerValue.timestamp()
+            ]) { (error, _) in
+                
+                statusRef.setValue([
+                    STATUS: "online",
+                    LASTCHANGE: ServerValue.timestamp()
+                    ])
+            }
+        }
     }
 
     // MARK: UISceneSession Lifecycle

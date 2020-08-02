@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class EnterResidenceMeetController: UIViewController {
     
@@ -55,13 +56,14 @@ class EnterResidenceMeetController: UIViewController {
 
     private func saveUserProfession() {
         
-        let dict = [RESIDENCESEARCH: residenceLabel.text,
+        let dict = [RESIDENCESEARCH: residenceLabel.text!,
                     SELFINTRO: "はじめまして！",
                     COMMENT: "🆕アプリに登録したよ！😊",
                     BODYSIZE: "未設定",
-                    HEIGHT: "未設定"]
+                    HEIGHT: "未設定",
+                    STATUS: "online",
+                    LASTCHANGE: Timestamp(date: Date())] as [String : Any]
         updateUser(withValue: dict as [String : Any])
-        
         toTabBerVC()
     }
     

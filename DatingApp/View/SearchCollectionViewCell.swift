@@ -26,7 +26,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         
         profileImageView.layer.cornerRadius = 150 / 2
         statusView.layer.cornerRadius = 30 / 2
-        statusView.layer.borderWidth = 5
+        statusView.layer.borderWidth = 4
         statusView.layer.borderColor = UIColor.white.cgColor
         
         ageLabel.text = String(user.age) + "歳"
@@ -34,6 +34,18 @@ class SearchCollectionViewCell: UICollectionViewCell {
         selfIntroLabel.text = user.selfIntro
         
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+        
+        COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch is online: \(error.localizedDescription)")
+            }
+            if let dict = snapshot?.data() {
+                if let active = dict[STATUS] as? String {
+                    self.statusView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
+                }
+            }
+        }
+        
     }
 
 }
