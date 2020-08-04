@@ -17,6 +17,17 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var pickerKeyboardView2: PickerKeyboard2!
     @IBOutlet weak var pickerKeyboardView3: PickerKeyboard3!
     @IBOutlet weak var pickerKeyboardView4: PickerKeyboard4!
+    @IBOutlet weak var pickerKeyboardView5: PickerKeyboard5!
+    @IBOutlet weak var pickerKeyboardView6: PickerKeyboard6!
+    @IBOutlet weak var pickerKeyboardView7: PickerKeyboard7!
+    @IBOutlet weak var pickerKeyboardView8: PickerKeyboard8!
+    @IBOutlet weak var pickerKeyboardView9: PickerKeyboard9!
+    @IBOutlet weak var pickerKeyboardView10: PickerKeyboard10!
+    @IBOutlet weak var pickerKeyboardView11: PickerKeyboard11!
+    @IBOutlet weak var pickerKeyboardView12: PickerKeyboard12!
+    @IBOutlet weak var pickerKeyboardView13: PickerKeyboard13!
+    @IBOutlet weak var pickerKeyboardView14: PickerKeyboard14!
+    @IBOutlet weak var pickerKeyboardView15: PickerKeyboard15!
     @IBOutlet weak var profileImageView1: UIImageView!
     @IBOutlet weak var profileImageView2: UIImageView!
     @IBOutlet weak var profileImageView3: UIImageView!
@@ -42,6 +53,17 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var indicator2: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var indicator3: UIActivityIndicatorView!
+    @IBOutlet weak var bloodSetLbl: UILabel!
+    @IBOutlet weak var educationalSetLbl: UILabel!
+    @IBOutlet weak var marriageHistoryLbl: UILabel!
+    @IBOutlet weak var marriageLbl: UILabel!
+    @IBOutlet weak var childLbl1: UILabel!
+    @IBOutlet weak var childLbl2: UILabel!
+    @IBOutlet weak var houseMateLbl: UILabel!
+    @IBOutlet weak var holidayLbl: UILabel!
+    @IBOutlet weak var liquorLbl: UILabel!
+    @IBOutlet weak var tobaccoLbl: UILabel!
+    @IBOutlet weak var birthplaceLbl: UILabel!
 
     private var user = User()
     private let picker = UIImagePickerController()
@@ -90,7 +112,18 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
                     RESIDENCE: residenceSettingLabel.text,
                     PROFESSION: professionSettingLabel.text,
                     BODYSIZE: bodySizeSettingLabel.text,
-                    HEIGHT: heightSettingLabel.text]
+                    HEIGHT: heightSettingLabel.text,
+                    BLOOD: bloodSetLbl.text,
+                    EDUCATION: educationalSetLbl.text,
+                    BIRTHPLACE: birthplaceLbl.text,
+                    MARRIAGEHISTORY: marriageHistoryLbl.text,
+                    MARRIAGE: marriageLbl.text,
+                    CHILD1: childLbl1.text,
+                    CHILD2: childLbl2.text,
+                    HOUSEMATE: houseMateLbl.text,
+                    HOLIDAY: holidayLbl.text,
+                    LIQUOR: liquorLbl.text,
+                    TOBACCO: tobaccoLbl.text]
 
         updateUser(withValue: dict as [String : Any])
         hudSetup()
@@ -201,6 +234,17 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         pickerKeyboardView2.delegate = self
         pickerKeyboardView3.delegate = self
         pickerKeyboardView4.delegate = self
+        pickerKeyboardView5.delegate = self
+        pickerKeyboardView6.delegate = self
+        pickerKeyboardView7.delegate = self
+        pickerKeyboardView8.delegate = self
+        pickerKeyboardView9.delegate = self
+        pickerKeyboardView10.delegate = self
+        pickerKeyboardView11.delegate = self
+        pickerKeyboardView12.delegate = self
+        pickerKeyboardView13.delegate = self
+        pickerKeyboardView14.delegate = self
+        pickerKeyboardView15.delegate = self
         
         saveButton.isEnabled = true
         profileImageView1.layer.cornerRadius = 10
@@ -244,6 +288,17 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         residenceSettingLabel.text = user.residence
         heightSettingLabel.text = user.height
         bodySizeSettingLabel.text = user.bodySize
+        bloodSetLbl.text = user.blood
+        birthplaceLbl.text = user.birthplace
+        educationalSetLbl.text = user.education
+        marriageHistoryLbl.text = user.marriageHistory
+        marriageLbl.text = user.marriage
+        childLbl1.text = user.child1
+        childLbl2.text = user.child2
+        houseMateLbl.text = user.houseMate
+        holidayLbl.text = user.holiday
+        liquorLbl.text = user.liquor
+        tobaccoLbl.text = user.tobacco
     }
     
     private func validateTextField() {
@@ -400,5 +455,105 @@ extension EditTableViewController: PickerKeyboard4Delegate {
     
     func didDone4(_ pickerKeyboard: PickerKeyboard4, selectData: String) {
         professionSettingLabel.text = selectData
+    }
+}
+
+extension EditTableViewController: PickerKeyboard5Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard5) -> Array<String> {
+        return dataArray5
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard5, selectData: String) {
+        birthplaceLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard6Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard6) -> Array<String> {
+        return dataArray6
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard6, selectData: String) {
+        bloodSetLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard7Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard7) -> Array<String> {
+        return dataArray7
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard7, selectData: String) {
+        educationalSetLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard8Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard8) -> Array<String> {
+        return dataArray8
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard8, selectData: String) {
+        marriageHistoryLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard9Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard9) -> Array<String> {
+        return dataArray9
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard9, selectData: String) {
+        marriageLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard10Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard10) -> Array<String> {
+        return dataArray10
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard10, selectData: String) {
+        childLbl1.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard11Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard11) -> Array<String> {
+        return dataArray11
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard11, selectData: String) {
+        childLbl2.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard12Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard12) -> Array<String> {
+        return dataArray12
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard12, selectData: String) {
+        houseMateLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard13Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard13) -> Array<String> {
+        return dataArray13
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard13, selectData: String) {
+        holidayLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard14Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard14) -> Array<String> {
+        return dataArray14
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard14, selectData: String) {
+        liquorLbl.text = selectData
+    }
+}
+extension EditTableViewController: PickerKeyboard15Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard15) -> Array<String> {
+        return dataArray15
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard15, selectData: String) {
+        tobaccoLbl.text = selectData
     }
 }

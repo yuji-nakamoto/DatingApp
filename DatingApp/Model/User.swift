@@ -34,6 +34,17 @@ class User {
     var messageBadgeCount: Int!
     var appBadgeCount: Int!
     var myPageBadgeCount: Int!
+    var blood: String!
+    var education: String!
+    var marriageHistory: String!
+    var marriage: String!
+    var child1: String!
+    var child2: String!
+    var houseMate: String!
+    var holiday: String!
+    var liquor: String!
+    var tobacco: String!
+    var birthplace: String!
     
     init() {
     }
@@ -54,7 +65,7 @@ class User {
         bodySize = dict[BODYSIZE] as? String ?? ""
         height = dict[HEIGHT] as? String ?? ""
         minAge = dict[MINAGE] as? Int ?? 18
-        maxAge = dict[MAXAGE] as? Int ?? 60
+        maxAge = dict[MAXAGE] as? Int ?? 40
         residenceSerch = dict[RESIDENCESEARCH] as? String ?? ""
         likeCount = dict[LIKECOUNT] as? Int ?? 0
         typeCount = dict[TYPECOUNT] as? Int ?? 0
@@ -62,6 +73,17 @@ class User {
         messageBadgeCount = dict[MESSAGEBADGECOUNT] as? Int ?? 0
         appBadgeCount = dict[APPBADGECOUNT] as? Int ?? 0
         myPageBadgeCount = dict[MYPAGEBADGECOUNT] as? Int ?? 0
+        birthplace = dict[BIRTHPLACE] as? String ?? ""
+        blood = dict[BLOOD] as? String ?? ""
+        education = dict[EDUCATION] as? String ?? ""
+        marriageHistory = dict[MARRIAGEHISTORY] as? String ?? ""
+        marriage = dict[MARRIAGE] as? String ?? ""
+        child1 = dict[CHILD1] as? String ?? ""
+        child2 = dict[CHILD2] as? String ?? ""
+        liquor = dict[LIQUOR] as? String ?? ""
+        tobacco = dict[TOBACCO] as? String ?? ""
+        houseMate = dict[HOUSEMATE] as? String ?? ""
+        holiday = dict[HOLIDAY] as? String ?? ""
     }
     
     // MARK: - Return user
