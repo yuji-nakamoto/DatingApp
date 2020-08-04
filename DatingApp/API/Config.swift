@@ -17,12 +17,12 @@ func sendRequestNotification(toUser: User, message: String, badge: Int) {
     request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
     request.httpMethod = "POST"
     
-    let notification: [String: Any] = [ "to": "/topics/\(toUser.uid!)",
+    let notification: [String: Any] = [ "to": "/topics/\(toUser.uid!)", "content-available": 1,
         "notification": ["title": "メッセージ",
                           "body": message,
                           "badge": badge,
-                          "sound": "default",
-                          "content-available": true]
+                          "sound": "default"
+                          ]
     ]
     
     let data = try! JSONSerialization.data(withJSONObject: notification, options: [])

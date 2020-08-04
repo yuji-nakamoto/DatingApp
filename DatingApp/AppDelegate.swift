@@ -97,13 +97,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         print(userInfo)
     }
-    
+
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
+
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID2: \(messageID)")
         }
+
         Messaging.messaging().appDidReceiveMessage(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -142,7 +143,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
         
         print("userInfo: \(userInfo)")
         
-        completionHandler([.sound, .badge, .alert])
+        completionHandler([.sound, .badge])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
