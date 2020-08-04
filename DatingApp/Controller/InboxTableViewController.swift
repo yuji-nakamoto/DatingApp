@@ -16,6 +16,7 @@ class InboxTableViewController: UIViewController {
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
+    private var user: User!
 
     // MARK: - Lifecycle
     
@@ -24,6 +25,11 @@ class InboxTableViewController: UIViewController {
         navigationItem.title = "メッセージ"
         tableView.tableFooterView = UIView()
         fetchInbox()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resetBadge()
     }
 
     // MARK: - Fetch
@@ -49,6 +55,25 @@ class InboxTableViewController: UIViewController {
             let userId = sender as! String
             messageVC.userId = userId
         }
+        if segue.identifier == "DetailVC" {
+            let detailVC = segue.destination as! DetailTableViewController
+            let userId = sender as! String
+            detailVC.userId = userId
+        }
+    }
+    
+    // MARK: - Helper
+    
+    private func resetBadge() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            let totalAppBadgeCount = user.appBadgeCount - user.messageBadgeCount
+            
+            updateUser(withValue: [MESSAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
+            UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
+            self.tabBarController!.viewControllers![2].tabBarItem.badgeValue = nil
+        }
     }
     
 }
@@ -64,6 +89,9 @@ extension InboxTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
+        let inbox = inboxArray[indexPath.row]
+        cell.inbox = inbox
+        cell.inboxVC = self
         cell.configureInboxCell(inboxArray[indexPath.row])
         return cell
     }

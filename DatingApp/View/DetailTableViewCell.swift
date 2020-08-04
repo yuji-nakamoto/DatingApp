@@ -32,7 +32,8 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var segBarTriple1: UIView!
     @IBOutlet weak var segBarTriple2: UIView!
     @IBOutlet weak var segBarTriple3: UIView!
-
+    @IBOutlet weak var timeLabel: UILabel!
+    
     // MARK: - Helpers
     
     var user: User!
@@ -64,18 +65,24 @@ class DetailTableViewCell: UITableViewCell {
         commentLabel.text = user!.comment
         bodyLabel.text = user!.bodySize
         heightLabel.text = user!.height
+        
         if user!.age == nil {
             return
         }
         ageLabel.text = String(user!.age) + "歳"
         ageLabel2.text = String(user!.age) + "歳"
         
+        if timeLabel != nil {
+            let date = user?.lastChanged.dateValue()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd h:m"
+            timeLabel.text = dateFormatter.string(from: date!)
+        }
+        
         if user!.profileImageUrl2 == "" && user!.profileImageUrl3 == "" {
             profileImageUrl23Nil()
         } else if user!.profileImageUrl3 == "" {
-            profileImageUrl2or3Nil()
-        } else if user!.profileImageUrl2 == "" {
-            profileImageUrl2or3Nil()
+            profileImageUrl3Nil()
         } else {
             profileImageUrlHaveAll()
         }
@@ -88,6 +95,7 @@ class DetailTableViewCell: UITableViewCell {
         
         if shouldShowNextPhoto {
             
+            generator.notificationOccurred(.success)
             if user.profileImageUrl2 == "" && user.profileImageUrl3 == "" {
                 return
             } else if user.profileImageUrl3 == "" {
@@ -96,18 +104,6 @@ class DetailTableViewCell: UITableViewCell {
                     segBarDouble1.alpha = 0.5
                     segBarDouble2.alpha = 1
                 } else if profileImageView1.isHidden == true {
-                    return
-                }
-            } else if user.profileImageUrl2 == "" {
-                if profileImageView1.isHidden == false {
-                    profileImageView1.isHidden = true
-                    segBarDouble1.alpha = 0.5
-                    segBarDouble2.alpha = 1
-                } else if profileImageView1.isHidden == true {
-                    profileImageView2.isHidden = true
-                    segBarDouble1.alpha = 0.5
-                    segBarDouble2.alpha = 1
-                } else if profileImageView2.isHidden == true {
                     return
                 }
             } else {
@@ -125,10 +121,8 @@ class DetailTableViewCell: UITableViewCell {
                 }
             }
         } else {
+            generator.notificationOccurred(.success)
             if user.profileImageUrl3 == "" {
-                segBarDouble1.alpha = 1
-                segBarDouble2.alpha = 0.5
-            } else if user.profileImageUrl2 == "" {
                 segBarDouble1.alpha = 1
                 segBarDouble2.alpha = 0.5
             } else {
@@ -162,6 +156,7 @@ class DetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        ageLabel.text = ""
         segBarSingle.layer.cornerRadius = 5 / 2
         segBarDouble1.layer.cornerRadius = 5 / 2
         segBarDouble2.layer.cornerRadius = 5 / 2
@@ -178,8 +173,10 @@ class DetailTableViewCell: UITableViewCell {
         segBarTriple3.isHidden = true
     }
     
-    func profileImageUrl2or3Nil() {
+    func profileImageUrl3Nil() {
         segBarSingle.isHidden = true
+        segBarDouble1.isHidden = false
+        segBarDouble2.isHidden = false
         segBarTriple1.isHidden = true
         segBarTriple2.isHidden = true
         segBarTriple3.isHidden = true
@@ -190,6 +187,9 @@ class DetailTableViewCell: UITableViewCell {
         segBarSingle.isHidden = true
         segBarDouble1.isHidden = true
         segBarDouble2.isHidden = true
+        segBarTriple1.isHidden = false
+        segBarTriple2.isHidden = false
+        segBarTriple3.isHidden = false
         segBarTriple2.alpha = 0.5
         segBarTriple3.alpha = 0.5
     }

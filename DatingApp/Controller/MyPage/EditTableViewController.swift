@@ -69,6 +69,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: "image1")
+        UserDefaults.standard.removeObject(forKey: "image2")
+        UserDefaults.standard.removeObject(forKey: "image3")
+
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -99,6 +103,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         } else if sender.tag == 1 {
             UserDefaults.standard.set(true, forKey: "image2")
         } else if sender.tag == 2 {
+            if user.profileImageUrl2 == "" {
+                hud.textLabel.text = "中央の画像から設定してください"
+                hud.show(in: self.view)
+                hudError()
+                return
+            }
             UserDefaults.standard.set(true, forKey: "image3")
         }
         settingPhoto(didSelect: sender.tag)

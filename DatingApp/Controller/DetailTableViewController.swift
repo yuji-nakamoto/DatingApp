@@ -26,17 +26,20 @@ class DetailTableViewController: UIViewController {
     @IBOutlet weak var messageButton2: UIButton!
     @IBOutlet weak var likeButton2: UIButton!
     @IBOutlet weak var typeButton2: UIButton!
-
+    
     var profileImages = [UIImage]()
     var user = User()
     var like = Like()
     var type = Type()
     var userId = ""
+    var badgeUser: User!
+    var currentUser = User()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchCurrentUser()
         fetchUserId()
         fetchLikeUser()
         fetchTypeUser()
@@ -75,6 +78,7 @@ class DetailTableViewController: UIViewController {
         Like.saveIsLikeUser(forUser: user, isLike: dict)
         Like.saveLikedUser(forUser: user)
         incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(user.uid), numShards: 10)
+        incrementAppBadgeCount()
         likeButton.isEnabled = false
         likeButton2.isEnabled = false
     }
@@ -89,16 +93,23 @@ class DetailTableViewController: UIViewController {
         Type.saveIsTypeUser(forUser: user, isType: dict)
         Type.saveTypedUser(forUser: user)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
+        incrementAppBadgeCount2()
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
-        
         toMessageVC()
     }
     
-    // MARK: - Fetch like type userId
+    // MARK: - Fetch
+    
+    private func fetchCurrentUser() {
+        guard Auth.auth().currentUser?.uid != nil else { return }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.currentUser = user
+        }
+    }
     
     private func fetchUserId() {
         guard userId != "" else { return }
@@ -177,7 +188,7 @@ class DetailTableViewController: UIViewController {
     }
     
     // MARK: - Segue
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "MessageVC" {
@@ -188,6 +199,17 @@ class DetailTableViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func incrementAppBadgeCount() {
+        
+        sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがいいねしてくれました", badge: self.user.appBadgeCount + 1)
+    }
+    
+    private func incrementAppBadgeCount2() {
+        
+        sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがタイプと言っています", badge: self.user.appBadgeCount + 1)
+    }
+    
     
     func incrementLikeCounter(ref: DocumentReference, numShards: Int) {
         

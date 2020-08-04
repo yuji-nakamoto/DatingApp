@@ -22,6 +22,7 @@ class DidLikeTableViewController: UITableViewController {
         setupUI()
         fetchLikedUsers()
         tableView.tableFooterView = UIView()
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     // MARK: - Actions

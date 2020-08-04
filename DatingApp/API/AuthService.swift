@@ -48,7 +48,7 @@ struct AuthService {
         
         do {
             try Auth.auth().signOut()
-            
+            Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             completion(nil)
             

@@ -51,6 +51,7 @@
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
 		8350140224D49E94008D1170 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140124D49E94008D1170 /* Message.swift */; };
 		8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */; };
+		8354409F24D7DF09001C9398 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8354409E24D7DF09001C9398 /* Config.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
@@ -117,6 +118,8 @@
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		8350140124D49E94008D1170 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUINavigationViewController.swift; sourceTree = "<group>"; };
+		8354409D24D7DC8E001C9398 /* DatingApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatingApp.entitlements; sourceTree = "<group>"; };
+		8354409E24D7DF09001C9398 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +208,7 @@
 		838071C824C608F5008BAA2C /* DatingApp */ = {
 			isa = PBXGroup;
 			children = (
+				8354409D24D7DC8E001C9398 /* DatingApp.entitlements */,
 				838071E224C61417008BAA2C /* Model */,
 				838071E324C6141C008BAA2C /* View */,
 				838071E124C61404008BAA2C /* Controller */,
@@ -276,6 +280,7 @@
 			children = (
 				834912F524C7283D002990F8 /* Service.swift */,
 				8348E3CC24CD0148001D59C0 /* AuthService.swift */,
+				8354409E24D7DF09001C9398 /* Config.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
 				8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */,
+				8354409F24D7DF09001C9398 /* Config.swift in Sources */,
 				8348B5E724D35ADC0000A187 /* GenreTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
@@ -643,6 +649,7 @@
 			baseConfigurationReference = 20119206395B34005853DB9C /* Pods-DatingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
@@ -654,7 +661,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yncompany.DatingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -663,6 +670,7 @@
 			baseConfigurationReference = A8E80E13719AC776BE4305A8 /* Pods-DatingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
@@ -674,7 +682,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yncompany.DatingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -33,6 +33,10 @@ class SelectColorTableViewController: UITableViewController {
     // MARK: - Helpers
     
     private func setupUI() {
+        checkButton1.isHidden = true
+        checkButton2.isHidden = true
+        checkButton3.isHidden = true
+        checkButton4.isHidden = true
         
         navigationItem.title = "テーマカラー"
         if UserDefaults.standard.object(forKey: WHITE) != nil {

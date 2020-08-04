@@ -24,15 +24,13 @@ class ProfileTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchUser()
         configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reFetchUser()
+        fetchUser()
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -59,14 +57,7 @@ class ProfileTableViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    private func reFetchUser() {
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            self.tableView.reloadData()
-        }
-    }
-    
+
     // MARK: - Helpers
     
     private func configureUI() {

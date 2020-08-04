@@ -22,6 +22,7 @@ class DidTypeTableViewController: UITableViewController {
         setupUI()
         fetchTypedUsers()
         tableView.tableFooterView = UIView()
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     // MARK: - Actions

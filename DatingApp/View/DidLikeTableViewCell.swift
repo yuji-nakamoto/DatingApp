@@ -19,6 +19,8 @@ class DidLikeTableViewCell: UITableViewCell {
     @IBOutlet weak var onlineView: UIView!
     
     var user = User()
+    var inbox: Inbox!
+    var inboxVC: InboxTableViewController?
     
     func configureCell(_ user: User) {
         
@@ -41,6 +43,8 @@ class DidLikeTableViewCell: UITableViewCell {
     }
     
     func configureInboxCell(_ inbox: Inbox) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapProfileImage))
+        profileImageView.addGestureRecognizer(tap)
         
         profileImageView.sd_setImage(with: URL(string: inbox.user.profileImageUrl1), completed: nil)
         nameLabel.text = inbox.user.username
@@ -61,6 +65,12 @@ class DidLikeTableViewCell: UITableViewCell {
                     self.onlineView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
                 }
             }
+        }
+    }
+    
+    @objc func tapProfileImage() {
+        if let uid = inbox.user.uid {
+            inboxVC?.performSegue(withIdentifier: "DetailVC", sender: uid)
         }
     }
     

@@ -30,6 +30,10 @@ class User {
     var residenceSerch: String!
     var likeCount: Int!
     var typeCount: Int!
+    var lastChanged: Timestamp!
+    var messageBadgeCount: Int!
+    var appBadgeCount: Int!
+    var myPageBadgeCount: Int!
     
     init() {
     }
@@ -54,6 +58,10 @@ class User {
         residenceSerch = dict[RESIDENCESEARCH] as? String ?? ""
         likeCount = dict[LIKECOUNT] as? Int ?? 0
         typeCount = dict[TYPECOUNT] as? Int ?? 0
+        lastChanged = dict[LASTCHANGE] as? Timestamp ?? Timestamp(date: Date())
+        messageBadgeCount = dict[MESSAGEBADGECOUNT] as? Int ?? 0
+        appBadgeCount = dict[APPBADGECOUNT] as? Int ?? 0
+        myPageBadgeCount = dict[MYPAGEBADGECOUNT] as? Int ?? 0
     }
     
     // MARK: - Return user
@@ -70,7 +78,7 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
-//            print("DEBUG: snapshot data \(snapshot?.data()!)")
+//            print("DEBUG: snapshot data \(snapshot?.data())")
             guard snapshot?.data() != nil else { return }
             let user = User(dict: snapshot!.data()! as [String: Any])
             completion(user)
@@ -97,10 +105,23 @@ class User {
         }
     }
     
+    class func fetchTabBarBadgeCount(forCurrentId: String, completion: @escaping(User) -> Void) {
+        
+        COLLECTION_USERS.document(forCurrentId).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch badge count: \(error.localizedDescription)")
+            }
+            let user = User(dict: (snapshot?.data())!)
+            completion(user)
+        }
+    }
+    
     class func genderAndResidenceSort(_ residenceSearch: String, _ user: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             let usersRef = COLLECTION_USERS
+                .order(by: AGE)
+                .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "男性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
@@ -122,6 +143,8 @@ class User {
             }
         } else {
             let usersRef = COLLECTION_USERS
+                .order(by: AGE)
+                .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "女性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)

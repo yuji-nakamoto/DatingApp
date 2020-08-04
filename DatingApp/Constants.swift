@@ -53,6 +53,9 @@ public let MAXAGE = "maxAge"
 public let RESIDENCESEARCH = "residenceSerch"
 public let STATUS = "status"
 public let LASTCHANGE = "lastChanged"
+public let MESSAGEBADGECOUNT = "messageBadgeCount"
+public let APPBADGECOUNT = "appBadgeCount"
+public let MYPAGEBADGECOUNT = "myPageBadgeCount"
 
 // MARK: - Counter
 
@@ -104,6 +107,10 @@ public let WHITE = "white"
 public let PINK = "pink"
 public let GREEN = "green"
 public let DARK = "dark"
+
+// MARK: - Notification
+
+public let NOTIFICATION = "notification"
 
 
 

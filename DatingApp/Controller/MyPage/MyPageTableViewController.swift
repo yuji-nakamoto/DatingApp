@@ -30,7 +30,9 @@ class MyPageTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         fetchCurrentUser()
+        resetBadge()
     }
     
     // MARK: - Fetch user
@@ -69,6 +71,17 @@ class MyPageTableViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func resetBadge() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            let totalAppBadgeCount = user.appBadgeCount - user.myPageBadgeCount
+            
+            updateUser(withValue: [MYPAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
+            UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
+            self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
+        }
+    }
 }
 
 // MARK: - Table view

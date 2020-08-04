@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SearchViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class SearchViewController: UIViewController {
     
     private var users = [User]()
     private var user: User?
+    private var currentUser: User!
     private let refresh = UIRefreshControl()
     
     // MARK: - Lifecycle
@@ -25,10 +27,15 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         cofigureCollectionView()
+        fetchBadgeCount()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         fetchUser()
+        if !Auth.auth().currentUser!.uid.isEmpty {
+            Messaging.messaging().subscribe(toTopic: Auth.auth().currentUser!.uid)
+            print("messaging subscribe")
+        }
     }
     
     // MARK: - Actions
@@ -43,7 +50,7 @@ class SearchViewController: UIViewController {
         refresh.endRefreshing()
     }
     
-    // MARK: - Fetch user
+    // MARK: - Fetch
     
     private func fetchUser() {
         indicator.startAnimating()
@@ -55,6 +62,25 @@ class SearchViewController: UIViewController {
                 self.users = users
                 self.collectionView.reloadData()
                 self.indicator.stopAnimating()
+            }
+        }
+    }
+    
+    private func fetchBadgeCount() {
+        
+        User.fetchTabBarBadgeCount(forCurrentId: User.currentUserId()) { (user) in
+            self.currentUser = user
+            
+            if self.currentUser.messageBadgeCount == 0 {
+                self.tabBarController!.viewControllers![2].tabBarItem?.badgeValue = nil
+            } else {
+                self.tabBarController!.viewControllers![2].tabBarItem?.badgeValue = String(self.currentUser.messageBadgeCount)
+            }
+            
+            if self.currentUser.myPageBadgeCount == 0 {
+                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = nil
+            } else {
+                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = String(self.currentUser.myPageBadgeCount)
             }
         }
     }

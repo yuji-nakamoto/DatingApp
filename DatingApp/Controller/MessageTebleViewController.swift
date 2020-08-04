@@ -18,7 +18,9 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     
-    private var user = User()
+    private var user: User!
+    private var currentUser: User!
+    private var badgeUser: User!
     private var users = [User]()
     private var messages = [Message]()
     var userId = ""
@@ -30,11 +32,11 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
         
         setupUI()
         handleTextField()
-        fetchUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchUser()
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -89,6 +91,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
                     DATE: date] as [String : Any]
         Message.saveMessage(to: user, withValue: dict)
         
+        incrementAppBadgeCount()
         scrollToBottom()
         textField.text = ""
         sendButton.isEnabled = false
@@ -128,8 +131,20 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    
     // MARK: - Helpers
+    
+    private func incrementAppBadgeCount() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.currentUser = user
+            
+            User.fetchUser(self.userId) { (user) in
+                self.badgeUser = user
+                
+                sendRequestNotification(toUser: self.badgeUser, message: "\(self.currentUser.username!)さんからメッセージが届いています", badge: self.badgeUser.appBadgeCount + 1)
+            }
+        }
+    }
     
     private func setupUI() {
         
