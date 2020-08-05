@@ -33,6 +33,18 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var segBarTriple2: UIView!
     @IBOutlet weak var segBarTriple3: UIView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var educationLabel: UILabel!
+    @IBOutlet weak var birthplaceLabel: UILabel!
+    @IBOutlet weak var bloodLabel: UILabel!
+    @IBOutlet weak var marriageHistoyLabel: UILabel!
+    @IBOutlet weak var child1Label: UILabel!
+    @IBOutlet weak var marriageLabel: UILabel!
+    @IBOutlet weak var hobbyLabel: UILabel!
+    @IBOutlet weak var child2Label: UILabel!
+    @IBOutlet weak var holidayLabel: UILabel!
+    @IBOutlet weak var liquorlabel: UILabel!
+    @IBOutlet weak var housemateLabel: UILabel!
+    @IBOutlet weak var tobaccoLabel: UILabel!
     
     // MARK: - Helpers
     
@@ -56,21 +68,53 @@ class DetailTableViewCell: UITableViewCell {
         profileImageView2.layer.cornerRadius = 15
         profileImageView3.layer.cornerRadius = 15
         
-        selfIntrolabel.text = user!.selfIntro
-        nameLabel.text = user!.username
-        nameLabel2.text = user!.username
-        residenceLabel.text = user!.residence
-        residenceLabel2.text = user!.residence
-        professionLabel.text = user!.profession
-        commentLabel.text = user!.comment
-        bodyLabel.text = user!.bodySize
-        heightLabel.text = user!.height
+        selfIntrolabel.text = user?.selfIntro
+        nameLabel.text = user?.username
+        nameLabel2.text = user?.username
+        residenceLabel.text = user?.residence
+        residenceLabel2.text = user?.residence
+        professionLabel.text = user?.profession
+        commentLabel.text = user?.comment
+        bodyLabel.text = user?.bodySize
+        heightLabel.text = user?.height
         
         if user!.age == nil {
             return
         }
         ageLabel.text = String(user!.age) + "歳"
         ageLabel2.text = String(user!.age) + "歳"
+        bloodLabel.text = user?.blood
+        birthplaceLabel.text = user?.birthplace
+        educationLabel.text = user?.education
+        marriageHistoyLabel.text = user?.marriageHistory
+        marriageLabel.text = user?.marriage
+        child1Label.text = user?.child1
+        child2Label.text = user?.child2
+        hobbyLabel.text = user?.hobby1
+        housemateLabel.text = user?.houseMate
+        holidayLabel.text = user?.holiday
+        liquorlabel.text = user?.liquor
+        tobaccoLabel.text = user?.tobacco
+        
+        if user?.hobby1 != "" && user?.hobby2 != "" && user?.hobby3 != "" {
+            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)! + ",\n" + (user?.hobby3)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 13)
+        } else if user?.hobby1 != "" && user?.hobby2 != "" {
+            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 15)
+        } else if user?.hobby2 != "" && user?.hobby3 != "" {
+            hobbyLabel.text = (user?.hobby2)! + "," + (user?.hobby3)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 15)
+        } else if user?.hobby1 != "" && user?.hobby3 != "" {
+            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby3)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 15)
+        } else if user?.hobby1 != "" || user?.hobby2 != "" || user?.hobby3 != "" {
+            hobbyLabel.text = (user?.hobby1)! + (user?.hobby2)! + (user?.hobby3)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 17)
+        } else {
+            hobbyLabel.text = "未設定"
+            hobbyLabel.font = UIFont.systemFont(ofSize: 17)
+        }
         
         if timeLabel != nil {
             let date = user?.lastChanged.dateValue()
@@ -193,5 +237,5 @@ class DetailTableViewCell: UITableViewCell {
         segBarTriple2.alpha = 0.5
         segBarTriple3.alpha = 0.5
     }
-
+    
 }

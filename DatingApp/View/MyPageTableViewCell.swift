@@ -13,6 +13,8 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var redmark: UIView!
+    
     
     func configureCell(_ user: User?) {
         
@@ -24,7 +26,7 @@ class MyPageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        redmark.layer.cornerRadius = 5
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 100 / 2

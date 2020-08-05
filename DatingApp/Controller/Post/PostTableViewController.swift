@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
 class PostTableViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class PostTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var posts = [Post]()
     private var users = [User]()
@@ -27,8 +29,8 @@ class PostTableViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        setupBanner()
         fetchPost()
-        tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
@@ -88,23 +90,35 @@ class PostTableViewController: UIViewController {
     
     // MARK: - Helpers
     
-    private func setupUI() {
+    private func setupBanner() {
         
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func setupUI() {
+        tableView.separatorStyle = .none
+        tableView.refreshControl = refresh
         tableView.tableFooterView = UIView()
         navigationItem.title = "投稿"
+        
+        plusButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        plusButton.layer.shadowColor = UIColor.black.cgColor
+        plusButton.layer.shadowOpacity = 0.3
+        plusButton.layer.shadowRadius = 4
         if UserDefaults.standard.object(forKey: PINK) != nil {
             plusButton.tintColor = UIColor(named: O_PINK)
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
             plusButton.tintColor = UIColor(named: O_GREEN)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            plusButton.tintColor = UIColor.systemGray4
+            plusButton.tintColor = .white
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             plusButton.tintColor = UIColor(named: O_DARK)
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
             navigationController?.setNavigationBarHidden(true, animated: true)
         } else {
@@ -117,10 +131,20 @@ class PostTableViewController: UIViewController {
 extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        posts.count
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 5 || indexPath.row == 15 || indexPath.row == 25 || indexPath.row == 35 || indexPath.row == 45 {
+            
+            let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
+            
+            cell2.postVC = self
+            cell2.setupBanner()
+            return cell2
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         
         let post = posts[indexPath.row]

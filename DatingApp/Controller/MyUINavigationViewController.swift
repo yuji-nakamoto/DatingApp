@@ -22,6 +22,8 @@ class MyUINavigationViewController: UINavigationController {
     
     public func setupColor() {
         
+        navigationBar.shadowImage = UIImage()
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationBar.barTintColor = UIColor(named: O_PINK)
             navigationBar.tintColor = UIColor.white

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
 class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     
@@ -17,6 +18,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var user: User!
     private var currentUser: User!
@@ -29,7 +31,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupBanner()
         setupUI()
         handleTextField()
     }
@@ -144,6 +146,13 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
                 sendRequestNotification(toUser: self.badgeUser, message: "\(self.currentUser.username!)さんからメッセージが届いています", badge: self.badgeUser.appBadgeCount + 1)
             }
         }
+    }
+    
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
     }
     
     private func setupUI() {

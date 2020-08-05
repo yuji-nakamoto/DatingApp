@@ -76,7 +76,7 @@ class EnterNameViewController: UIViewController {
         nameLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "名前を10文字以下で入力してください。"
+        descriptionLabel.text = "ニックネームを10文字以下で入力してください。"
         nextButton.layer.cornerRadius = 50 / 2
         nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         nextButton.layer.shadowColor = UIColor.black.cgColor

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 import UserNotifications
 
 @UIApplicationMain
@@ -143,7 +144,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
         
         print("userInfo: \(userInfo)")
         
-        completionHandler([.sound, .badge])
+        completionHandler([.sound, .badge, .alert])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,

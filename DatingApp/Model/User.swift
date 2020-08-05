@@ -45,6 +45,10 @@ class User {
     var liquor: String!
     var tobacco: String!
     var birthplace: String!
+    var postCount: Int!
+    var hobby1: String!
+    var hobby2: String!
+    var hobby3: String!
     
     init() {
     }
@@ -84,6 +88,10 @@ class User {
         tobacco = dict[TOBACCO] as? String ?? ""
         houseMate = dict[HOUSEMATE] as? String ?? ""
         holiday = dict[HOLIDAY] as? String ?? ""
+        postCount = dict[POSTCOUNT] as? Int ?? 0
+        hobby1 = dict[HOBBY1] as? String ?? ""
+        hobby2 = dict[HOBBY2] as? String ?? ""
+        hobby3 = dict[HOBBY3] as? String ?? ""
     }
     
     // MARK: - Return user

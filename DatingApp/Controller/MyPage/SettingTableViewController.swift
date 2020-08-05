@@ -61,9 +61,11 @@ class SettingTableViewController: UITableViewController {
     @IBAction func footstepSwitch(_ sender: UISwitch) {
         
         if sender.isOn {
+            generator.notificationOccurred(.success)
             UserDefaults.standard.set(true, forKey: FOOTSTEP_ON)
             footstepLabel.text = "足あとを残す"
         } else {
+            generator.notificationOccurred(.success)
             UserDefaults.standard.removeObject(forKey: FOOTSTEP_ON)
             footstepLabel.text = "足あとを残さない"
         }

@@ -19,12 +19,13 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var shadowView: UIView!
     
     private let userDefaults = UserDefaults.standard
     
     func configureUserCell(_ user: User) {
         
-        profileImageView.layer.cornerRadius = 70 / 2
+        profileImageView.layer.cornerRadius = 10
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         nameLabel.text = user.username
         residenceLabel.text = user.residence
@@ -74,7 +75,12 @@ class PostTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        shadowView.layer.cornerRadius = 10
+        shadowView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOpacity = 0.3
+        shadowView.layer.shadowRadius = 4
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

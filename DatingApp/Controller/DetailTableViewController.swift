@@ -10,8 +10,9 @@ import UIKit
 import SDWebImage
 import Lottie
 import Firebase
+import GoogleMobileAds
 
-class DetailTableViewController: UIViewController {
+class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
     // MARK: - Propertis
     
@@ -27,13 +28,14 @@ class DetailTableViewController: UIViewController {
     @IBOutlet weak var likeButton2: UIButton!
     @IBOutlet weak var typeButton2: UIButton!
     
-    var profileImages = [UIImage]()
+    private var profileImages = [UIImage]()
     var user = User()
-    var like = Like()
-    var type = Type()
+    private var like = Like()
+    private var type = Type()
     var userId = ""
-    var badgeUser: User!
-    var currentUser = User()
+    private var badgeUser: User!
+    private var currentUser = User()
+    private var interstitial: GADInterstitial!
     
     // MARK: - Lifecycle
     
@@ -46,6 +48,7 @@ class DetailTableViewController: UIViewController {
         fetchUserIdLike()
         fetchUserIdType()
         configureUI()
+        interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +99,14 @@ class DetailTableViewController: UIViewController {
         incrementAppBadgeCount2()
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
+            }
+        }
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
@@ -200,6 +211,18 @@ class DetailTableViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+    }
+    
     private func incrementAppBadgeCount() {
         
         sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがいいねしてくれました", badge: self.user.appBadgeCount + 1)
@@ -236,7 +259,13 @@ class DetailTableViewController: UIViewController {
         let alert: UIAlertController = UIAlertController(title: "\(user.username!)さんに", message: "メッセージを送りますか？", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
             
-            self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+                self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
+                
+            } else {
+                print("Error interstitial")
+            }
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
         }

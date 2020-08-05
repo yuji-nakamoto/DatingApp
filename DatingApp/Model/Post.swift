@@ -84,7 +84,7 @@ class Post {
     
     class func fetchMyPost(comletion: @escaping(_ post: Post) -> Void) {
         
-        COLLECTION_MYPOSTS.document(User.currentUserId()).collection("posts").getDocuments { (snapshot, error) in
+        COLLECTION_MYPOSTS.document(User.currentUserId()).collection("posts").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
             if let error = error {
                 print("ERROR fetch my post: \(error.localizedDescription)")
             }

@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class FootstepTableViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var topBannerView: GADBannerView!
+    
     private var footsteps = [Footstep]()
     private var users = [User]()
     
@@ -20,9 +24,9 @@ class FootstepTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBanner()
         setupUI()
         fetchtFootStepedUsers()
-        tableView.tableFooterView = UIView()
     }
     
     // MARK: - Actions
@@ -95,7 +99,22 @@ class FootstepTableViewController: UIViewController {
         }
     }
     
+    // MARK: - Helpers
+    
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        topBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        topBannerView.rootViewController = self
+        topBannerView.load(GADRequest())
+    }
+    
     private func setupUI() {
+        tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
+
         if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: PINK) != nil {

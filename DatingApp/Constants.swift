@@ -67,6 +67,10 @@ public let HOLIDAY = "holiday"
 public let LIQUOR = "liquor"
 public let TOBACCO = "tobacco"
 public let BIRTHPLACE = "birthplace"
+public let POSTCOUNT = "postCount"
+public let HOBBY1 = "hobby1"
+public let HOBBY2 = "hobby2"
+public let HOBBY3 = "hobby3"
 
 // MARK: - Counter
 
@@ -118,6 +122,7 @@ public let WHITE = "white"
 public let PINK = "pink"
 public let GREEN = "green"
 public let DARK = "dark"
+public let REFRESH = "refresh"
 
 // MARK: - Notification
 

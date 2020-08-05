@@ -50,7 +50,6 @@ class DidLikeTableViewCell: UITableViewCell {
         nameLabel.text = inbox.user.username
         residenceLabel.text = inbox.user.residence
         ageLabel.text = String(inbox.user.age) + "歳"
-        selfIntroLabel.text = inbox.message.messageText
         
         let date = Date(timeIntervalSince1970: inbox.message.date)
         let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)

@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class DidLikeTableViewController: UITableViewController {
+class DidLikeTableViewController: UIViewController {
     
     // MARK: - Properties
+    
+    @IBOutlet weak var topBannerView: GADBannerView!
+    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var tableView: UITableView!
     
     private var likes = [Like]()
     private var users = [User]()
@@ -19,9 +24,10 @@ class DidLikeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupBanner()
         setupUI()
         fetchLikedUsers()
-        tableView.tableFooterView = UIView()
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
@@ -95,22 +101,42 @@ class DidLikeTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - Helpers
+    
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        topBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        topBannerView.rootViewController = self
+        topBannerView.load(GADRequest())
+    }
+    
     private func setupUI() {
+        
+        tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
         if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
         }
     }
+
+}
+
+// MARK: - Table view data source
+
+
+extension DidLikeTableViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: - Table view data source
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return likes.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
         let like = likes[indexPath.row]
@@ -119,8 +145,7 @@ class DidLikeTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: likes[indexPath.row].uid)
     }
-    
 }

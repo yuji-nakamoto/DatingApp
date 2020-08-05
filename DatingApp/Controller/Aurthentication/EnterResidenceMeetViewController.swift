@@ -61,6 +61,18 @@ class EnterResidenceMeetController: UIViewController {
                     COMMENT: "🆕アプリに登録したよ！😊",
                     BODYSIZE: "未設定",
                     HEIGHT: "未設定",
+                    BLOOD: "未設定",
+                    EDUCATION: "未設定",
+                    BIRTHPLACE: "未設定",
+                    MARRIAGEHISTORY: "未設定",
+                    MARRIAGE: "未設定",
+                    CHILD1: "未設定",
+                    CHILD2: "未設定",
+                    HOUSEMATE: "未設定",
+                    HOLIDAY: "未設定",
+                    LIQUOR: "未設定",
+                    TOBACCO: "未設定",
+                    HOBBY1: "未設定",
                     STATUS: "online",
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]
         

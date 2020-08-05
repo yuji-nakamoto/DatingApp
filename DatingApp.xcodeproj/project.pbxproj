@@ -46,6 +46,10 @@
 		834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */; };
 		834912FC24C75830002990F8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FB24C75830002990F8 /* StartViewController.swift */; };
 		834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* SearchViewController.swift */; };
+		834BD3E624DA65040088D4EA /* MyPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E524DA65040088D4EA /* MyPostTableViewCell.swift */; };
+		834BD3E824DAD0D70088D4EA /* AdsSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */; };
+		834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */; };
+		834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */; };
 		835013FC24D40F79008D1170 /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* InboxTableViewController.swift */; };
 		835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FD24D41458008D1170 /* MessageTebleViewController.swift */; };
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
@@ -124,6 +128,10 @@
 		834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceViewController.swift; sourceTree = "<group>"; };
 		834912FB24C75830002990F8 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		834912FD24C75B90002990F8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		834BD3E524DA65040088D4EA /* MyPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostTableViewCell.swift; sourceTree = "<group>"; };
+		834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPostTableViewCell.swift; sourceTree = "<group>"; };
+		834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyTableViewController.swift; sourceTree = "<group>"; };
 		835013FB24D40F79008D1170 /* InboxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
 		835013FD24D41458008D1170 /* MessageTebleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTebleViewController.swift; sourceTree = "<group>"; };
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -195,6 +203,7 @@
 				8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */,
 				8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */,
 				8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */,
+				834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -304,6 +313,9 @@
 				8348E3E624CE0BC4001D59C0 /* DidLikeTableViewCell.swift */,
 				8348B5E024D2A1560000A187 /* PostTableViewCell.swift */,
 				835013FF24D414C4008D1170 /* MessageTableViewCell.swift */,
+				834BD3E524DA65040088D4EA /* MyPostTableViewCell.swift */,
+				834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */,
+				834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -483,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */,
 				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
 				8348B5EF24D3EC020000A187 /* SelectColorTableViewController.swift in Sources */,
 				8350E4C324D9AE8300487DB9 /* PIckerKeyboard15.swift in Sources */,
@@ -514,6 +527,7 @@
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
 				8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */,
+				834BD3E824DAD0D70088D4EA /* AdsSearchCollectionViewCell.swift in Sources */,
 				8350E4B324D9AE1500487DB9 /* PIckerKeyboard7.swift in Sources */,
 				8350E4B724D9AE2600487DB9 /* PIckerKeyboard9.swift in Sources */,
 				835013FC24D40F79008D1170 /* InboxTableViewController.swift in Sources */,
@@ -540,12 +554,14 @@
 				8350E4B124D9AE0C00487DB9 /* PIckerKeyboard6.swift in Sources */,
 				8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
+				834BD3E624DA65040088D4EA /* MyPostTableViewCell.swift in Sources */,
 				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,
 				8348B5EB24D38D780000A187 /* MyPageTableViewCell.swift in Sources */,
+				834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */,
 				8348B5DF24D2A0B90000A187 /* PostTableViewController.swift in Sources */,
 				8348E3EB24CE283C001D59C0 /* Type.swift in Sources */,
 				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,

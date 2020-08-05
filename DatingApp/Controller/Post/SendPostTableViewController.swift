@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SendPostTableViewController: UITableViewController {
+class SendPostTableViewController: UITableViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
     // MARK: - Properties
     
@@ -20,6 +20,7 @@ class SendPostTableViewController: UITableViewController {
     private let userDefaults = UserDefaults.standard
     private var pleaceholderLbl = UILabel()
     private var user: User?
+    private var interstitial: GADInterstitial!
     
     // MARK: - Lifecycle
     
@@ -28,6 +29,7 @@ class SendPostTableViewController: UITableViewController {
 
         setupTextView()
         fetchUser()
+        interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,12 +85,18 @@ class SendPostTableViewController: UITableViewController {
         
         Post.savePost(postId, withValue: dict)
         Post.saveMyPost(postId, withValue: dict2)
+        updateUser(withValue: [POSTCOUNT: user!.postCount + 1])
         userDefaults.removeObject(forKey: LOVER)
         userDefaults.removeObject(forKey: FRIEND)
         userDefaults.removeObject(forKey: MAILFRIEND)
         userDefaults.removeObject(forKey: PLAY)
         userDefaults.removeObject(forKey: FREE)
-        dismiss(animated: true, completion: nil)
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Error interstitial")
+        }
     }
     
     // MARK: - Fetch user
@@ -101,6 +109,19 @@ class SendPostTableViewController: UITableViewController {
     }
     
     // MARK: - Helpers
+    
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+        dismiss(animated: true, completion: nil)
+    }
     
     private func setupGenre() {
         navigationItem.title = "投稿内容"

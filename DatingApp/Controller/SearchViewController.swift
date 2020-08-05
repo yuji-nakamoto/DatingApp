@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 import Firebase
 
 class SearchViewController: UIViewController {
@@ -15,23 +16,36 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var users = [User]()
     private var user: User?
     private var currentUser: User!
     private let refresh = UIRefreshControl()
+    private var profileImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBanner()
+        fetchUser()
         cofigureCollectionView()
         fetchBadgeCount()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UserDefaults.standard.object(forKey: REFRESH) != nil {
+            fetchUser()
+            UserDefaults.standard.removeObject(forKey: REFRESH)
+        }
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        fetchUser()
+        
         if !Auth.auth().currentUser!.uid.isEmpty {
             Messaging.messaging().subscribe(toTopic: Auth.auth().currentUser!.uid)
             print("messaging subscribe")
@@ -84,8 +98,15 @@ class SearchViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK: - Heplers
+    
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
     
     private func cofigureCollectionView() {
         navigationItem.title = "さがす"
@@ -98,21 +119,20 @@ class SearchViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailVC" {
-
+            
             let detailVC = segue.destination as! DetailTableViewController
             detailVC.user = sender as! User
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
             navigationController?.setNavigationBarHidden(true, animated: true)
         } else {
             navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
-
+    
 }
 
 //MARK: CollectionView
@@ -130,10 +150,19 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
+        if indexPath.row == 5 || indexPath.row == 15 || indexPath.row == 25 || indexPath.row == 35 || indexPath.row == 45 {
+            
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as! AdsSearchCollectionViewCell
+            
+            cell2.searchVC = self
+            cell2.setupBanner()
+            return cell2
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
         
         cell.configureCell(users[indexPath.row])
-        
         return cell
     }
     

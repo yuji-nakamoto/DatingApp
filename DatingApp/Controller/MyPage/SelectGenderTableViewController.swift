@@ -41,9 +41,11 @@ class SelectGenderTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
                 
         if indexPath.row == 0 {
+            UserDefaults.standard.set(true, forKey: REFRESH)
             UserDefaults.standard.removeObject(forKey: FEMALE)
             setupUI()
         } else {
+            UserDefaults.standard.set(true, forKey: REFRESH)
             UserDefaults.standard.set(true, forKey: FEMALE)
             setupUI()
         }

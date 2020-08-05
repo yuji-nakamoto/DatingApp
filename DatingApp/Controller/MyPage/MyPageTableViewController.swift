@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class MyPageTableViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var user: User!
     private var myPosts = [Post]()
@@ -22,15 +24,16 @@ class MyPageTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.title = "マイページ"
+        tableView.separatorStyle = .none
+        setupBanner()
         fetchCurrentUser()
-        fetchMyPost()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchMyPost()
         fetchCurrentUser()
         resetBadge()
     }
@@ -82,6 +85,13 @@ class MyPageTableViewController: UIViewController {
             self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
         }
     }
+    
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
 }
 
 // MARK: - Table view
@@ -89,7 +99,7 @@ class MyPageTableViewController: UIViewController {
 extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + myPosts.count
+        return 1 + 1 + myPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,10 +109,18 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
             
             cell.configureCell(user)
             return cell
+        } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! MyPostTableViewCell
+            
+            cell.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            cell.bannerView.rootViewController = self
+            cell.bannerView.load(GADRequest())
+            
+            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! PostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell3", for: indexPath) as! PostTableViewCell
         
-        let myPost = myPosts[indexPath.row - 1]
+        let myPost = myPosts[indexPath.row - 2]
         cell.post = myPost
         cell.configureUserCell(user)
         return cell

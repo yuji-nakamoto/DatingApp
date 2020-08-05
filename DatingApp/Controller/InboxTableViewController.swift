@@ -7,24 +7,33 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class InboxTableViewController: UIViewController {
+class InboxTableViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var topBannerView: GADBannerView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
     private var user: User!
+    private var interstitial: GADInterstitial!
+
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.title = "メッセージ"
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
         fetchInbox()
+        setupBanner()
+        interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +85,28 @@ class InboxTableViewController: UIViewController {
         }
     }
     
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+    }
+    
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        topBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        topBannerView.rootViewController = self
+        topBannerView.load(GADRequest())
+    }
+    
 }
 
 // MARK: - Table view
@@ -97,6 +128,11 @@ extension InboxTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.interstitial.isReady {
+            self.interstitial.present(fromRootViewController: self)
+        } else {
+            print("Error interstitial")
+        }
         performSegue(withIdentifier: "MessageVC", sender: inboxArray[indexPath.row].message.chatPartnerId)
     }
 }

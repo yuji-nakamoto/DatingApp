@@ -64,6 +64,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var liquorLbl: UILabel!
     @IBOutlet weak var tobaccoLbl: UILabel!
     @IBOutlet weak var birthplaceLbl: UILabel!
+    @IBOutlet weak var hobbySetLbl: UILabel!
 
     private var user = User()
     private let picker = UIImagePickerController()
@@ -80,11 +81,11 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         
         setupColor()
         setupUI()
-        fetchUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchUser()
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -299,6 +300,26 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         holidayLbl.text = user.holiday
         liquorLbl.text = user.liquor
         tobaccoLbl.text = user.tobacco
+        
+        if user.hobby1 != "" && user.hobby2 != "" && user.hobby3 != "" {
+            hobbySetLbl.text = user.hobby1 + "," + user.hobby2 + ",\n" + user.hobby3
+            hobbySetLbl.font = UIFont.systemFont(ofSize: 13)
+        } else if user.hobby1 != "" && user.hobby2 != "" {
+            hobbySetLbl.text = user.hobby1 + "," + user.hobby2
+            hobbySetLbl.font = UIFont.systemFont(ofSize: 15)
+        } else if user.hobby2 != "" && user.hobby3 != "" {
+            hobbySetLbl.text = user.hobby2 + "," + user.hobby3
+            hobbySetLbl.font = UIFont.systemFont(ofSize: 15)
+        } else if user.hobby1 != "" && user.hobby3 != "" {
+            hobbySetLbl.text = user.hobby1 + "," + user.hobby3
+            hobbySetLbl.font = UIFont.systemFont(ofSize: 15)
+        } else if user.hobby1 != "" || user.hobby2 != "" || user.hobby3 != "" {
+            hobbySetLbl.text = user.hobby1 + user.hobby2 + user.hobby3
+            hobbySetLbl.font = UIFont.systemFont(ofSize: 17)
+        } else {
+            hobbySetLbl.text = "入力する"
+            hobbySetLbl.font = UIFont.systemFont(ofSize: 17)
+        }
     }
     
     private func validateTextField() {
@@ -390,6 +411,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             plusButton2.tintColor = UIColor(named: O_DARK)
             plusButton3.tintColor = UIColor(named: O_DARK)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

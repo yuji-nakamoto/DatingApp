@@ -13,7 +13,6 @@ class MyTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColor()
-        notificationCenterDefault()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,15 +25,10 @@ class MyTabBarController: UITabBarController {
 
     // MARK: - Helpers
     
-    func notificationCenterDefault() {
-        
-        if UserDefaults.standard.object(forKey: "userNotificationCenter") != nil {
-            viewControllers![2].tabBarItem?.badgeValue = "1"
-        }
-    }
-    
     public func setupColor() {
-
+        tabBar.layer.borderColor = UIColor.clear.cgColor
+        tabBar.clipsToBounds = true
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             tabBar.tintColor = UIColor.white
             tabBar.barTintColor = UIColor(named: O_PINK)
