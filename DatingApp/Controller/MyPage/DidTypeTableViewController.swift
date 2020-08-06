@@ -9,16 +9,18 @@
 import UIKit
 import GoogleMobileAds
 
-class DidTypeTableViewController: UIViewController {
+class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var types = [Type]()
     private var users = [User]()
+    private var interstitial: GADInterstitial!
     
     // MARK: - Lifecycle
     
@@ -28,6 +30,7 @@ class DidTypeTableViewController: UIViewController {
         setupBanner()
         setupUI()
         fetchTypedUsers()
+        interstitial = createAndLoadIntersitial()
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
@@ -103,6 +106,18 @@ class DidTypeTableViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+    }
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
@@ -141,11 +156,35 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
         
         let type = types[indexPath.row]
         cell.type = type
-        cell.configureCell(users[indexPath.row])
+        
+        if segmentControl.selectedSegmentIndex == 0 && UserDefaults.standard.object(forKey: FEMALE) == nil {
+            cell.configureCell2(users[indexPath.row])
+            return cell
+        }
+        cell.configureCell3(users[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if segmentControl.selectedSegmentIndex == 0 && UserDefaults.standard.object(forKey: FEMALE) == nil {
+            let alert: UIAlertController = UIAlertController(title: "広告の表示" , message: "プロフィールに移動すると広告が表示されます", preferredStyle: .actionSheet)
+            let logout: UIAlertAction = UIAlertAction(title: "移動する", style: UIAlertAction.Style.default) { (alert) in
+                
+                if self.interstitial.isReady {
+                    self.interstitial.present(fromRootViewController: self)
+                } else {
+                    print("Error interstitial")
+                }
+                self.performSegue(withIdentifier: "DetailVC", sender: self.types[indexPath.row].uid)
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+            }
+            alert.addAction(logout)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+            return
+        }
         performSegue(withIdentifier: "DetailVC", sender: types[indexPath.row].uid)
     }
 }

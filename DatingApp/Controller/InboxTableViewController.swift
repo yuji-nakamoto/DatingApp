@@ -2,7 +2,7 @@
 //  InboxTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/31.
+//  Created by yuji_nakamoto on 2020/08/06.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -22,27 +22,30 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate, GADBa
     private var user: User!
     private var interstitial: GADInterstitial!
 
-
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchInbox()
         navigationItem.title = "メッセージ"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        fetchInbox()
         setupBanner()
         interstitial = createAndLoadIntersitial()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        resetBadge()
-    }
 
-    // MARK: - Fetch
+    @IBAction func segmentControl(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0: navigationController?.popViewController(animated: true)
+        case 1: print("")
+        default: break
+        }
+    }
     
+    // MARK: - Fetch
+
     private func fetchInbox() {
         
         Message.fetchInbox { (inboxs) in
@@ -72,18 +75,6 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate, GADBa
     }
     
     // MARK: - Helper
-    
-    private func resetBadge() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            let totalAppBadgeCount = user.appBadgeCount - user.messageBadgeCount
-            
-            updateUser(withValue: [MESSAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
-            UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
-            self.tabBarController!.viewControllers![2].tabBarItem.badgeValue = nil
-        }
-    }
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
@@ -128,10 +119,13 @@ extension InboxTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.interstitial.isReady {
-            self.interstitial.present(fromRootViewController: self)
-        } else {
-            print("Error interstitial")
+        
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
+            }
         }
         performSegue(withIdentifier: "MessageVC", sender: inboxArray[indexPath.row].message.chatPartnerId)
     }

@@ -92,10 +92,12 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         userDefaults.removeObject(forKey: PLAY)
         userDefaults.removeObject(forKey: FREE)
         
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        } else {
-            print("Error interstitial")
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            if interstitial.isReady {
+                interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
+            }
         }
     }
     

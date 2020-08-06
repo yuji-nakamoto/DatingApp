@@ -17,6 +17,10 @@ class DidLikeTableViewCell: UITableViewCell {
     @IBOutlet weak var selfIntroLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var onlineView: UIView!
+    @IBOutlet weak var mozaicView: UIView!
+    @IBOutlet weak var blackLine1: UIView!
+    @IBOutlet weak var blackLine2: UIView!
+    @IBOutlet weak var blackLine3: UIView!
     
     var user = User()
     var inbox: Inbox!
@@ -42,7 +46,70 @@ class DidLikeTableViewCell: UITableViewCell {
         }
     }
     
+    func configureCell2(_ user: User) {
+        
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            onlineView.isHidden = true
+            mozaicView.isHidden = false
+            blackLine1.isHidden = false
+            blackLine2.isHidden = false
+            blackLine3.isHidden = false
+            blackLine1.layer.cornerRadius = 16 / 2
+            blackLine2.layer.cornerRadius = 16 / 2
+            blackLine3.layer.cornerRadius = 16 / 2
+            mozaicView.layer.cornerRadius = 70 / 2
+            profileImageView.layer.shouldRasterize = true
+            profileImageView.layer.rasterizationScale = 0.4
+            nameLabel.layer.shouldRasterize = true
+            nameLabel.layer.rasterizationScale = 0.35
+            selfIntroLabel.layer.shouldRasterize = true
+            selfIntroLabel.layer.rasterizationScale = 0.35
+        } else {
+            mozaicView.isHidden = true
+        }
+        
+        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+        nameLabel.text = user.username
+        residenceLabel.text = user.residence
+        ageLabel.text = String(user.age) + "歳"
+        selfIntroLabel.text = user.selfIntro
+    }
+    
+    func configureCell3(_ user: User) {
+        
+        mozaicView.isHidden = true
+        blackLine1.isHidden = true
+        blackLine2.isHidden = true
+        blackLine3.isHidden = true
+        onlineView.isHidden = false
+        profileImageView.layer.shouldRasterize = false
+        nameLabel.layer.shouldRasterize = false
+        selfIntroLabel.layer.shouldRasterize = false
+
+        profileImageView.layer.rasterizationScale = 1
+        nameLabel.layer.rasterizationScale = 1
+        selfIntroLabel.layer.rasterizationScale = 1
+
+        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+        nameLabel.text = user.username
+        residenceLabel.text = user.residence
+        ageLabel.text = String(user.age) + "歳"
+        selfIntroLabel.text = user.selfIntro
+        
+        COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch is online: \(error.localizedDescription)")
+            }
+            if let dict = snapshot?.data() {
+                if let active = dict[STATUS] as? String {
+                    self.onlineView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
+                }
+            }
+        }
+    }
+    
     func configureInboxCell(_ inbox: Inbox) {
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapProfileImage))
         profileImageView.addGestureRecognizer(tap)
         
@@ -120,7 +187,6 @@ class DidLikeTableViewCell: UITableViewCell {
         onlineView.layer.cornerRadius = 15 / 2
         onlineView.layer.borderWidth = 2
         onlineView.layer.borderColor = UIColor.white.cgColor
-        
     }
     
 }

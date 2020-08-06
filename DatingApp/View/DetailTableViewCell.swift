@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DetailTableViewCell: UITableViewCell {
     
@@ -26,7 +27,6 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView1: UIImageView!
     @IBOutlet weak var profileImageView2: UIImageView!
     @IBOutlet weak var profileImageView3: UIImageView!
-    @IBOutlet weak var segBarSingle: UIView!
     @IBOutlet weak var segBarDouble1: UIView!
     @IBOutlet weak var segBarDouble2: UIView!
     @IBOutlet weak var segBarTriple1: UIView!
@@ -45,12 +45,27 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var liquorlabel: UILabel!
     @IBOutlet weak var housemateLabel: UILabel!
     @IBOutlet weak var tobaccoLabel: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var likeCountLabel: UILabel!
+    @IBOutlet weak var typeCountLabel: UILabel!
+    @IBOutlet weak var loginBottomConstrait: NSLayoutConstraint!
+    @IBOutlet weak var AgeLabelBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Helpers
     
     var user: User!
     
     func configureCell(_ user: User?) {
+        
+        if user?.profileImageUrl2 == "" && user?.profileImageUrl3 == "" {
+            loginBottomConstrait.constant = -10
+            AgeLabelBottomConstraint.constant = -10
+        }
+        
+        if user?.uid != nil {
+            getLikeCount(ref: COLLECTION_LIKECOUNTER.document((user?.uid)!))
+            getTypeCount(ref: COLLECTION_TYPECOUNTER.document((user?.uid)!))
+        }
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
@@ -67,6 +82,7 @@ class DetailTableViewCell: UITableViewCell {
         profileImageView1.layer.cornerRadius = 15
         profileImageView2.layer.cornerRadius = 15
         profileImageView3.layer.cornerRadius = 15
+        statusView.layer.cornerRadius = 15 / 2
         
         selfIntrolabel.text = user?.selfIntro
         nameLabel.text = user?.username
@@ -97,8 +113,8 @@ class DetailTableViewCell: UITableViewCell {
         tobaccoLabel.text = user?.tobacco
         
         if user?.hobby1 != "" && user?.hobby2 != "" && user?.hobby3 != "" {
-            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)! + ",\n" + (user?.hobby3)!
-            hobbyLabel.font = UIFont.systemFont(ofSize: 13)
+            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)! + "," + (user?.hobby3)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 12)
         } else if user?.hobby1 != "" && user?.hobby2 != "" {
             hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 15)
@@ -129,6 +145,17 @@ class DetailTableViewCell: UITableViewCell {
             profileImageUrl3Nil()
         } else {
             profileImageUrlHaveAll()
+        }
+        
+        COLLECTION_USERS.document((user?.uid)!).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch is online: \(error.localizedDescription)")
+            }
+            if let dict = snapshot?.data() {
+                if let active = dict[STATUS] as? String {
+                    self.statusView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
+                }
+            }
         }
     }
     
@@ -197,11 +224,48 @@ class DetailTableViewCell: UITableViewCell {
         }
     }
     
+    func getLikeCount(ref: DocumentReference) {
+        ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
+            var totalLikeCount = 0
+            if  let err = err {
+                print("Error total count: \(err.localizedDescription)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let likeCount = document.data()[LIKECOUNT] as! Int
+                    totalLikeCount += likeCount
+                }
+            }
+            if totalLikeCount > 999 {
+                self.likeCountLabel.text = "999"
+            } else {
+                self.likeCountLabel.text = String(totalLikeCount)
+            }
+        }
+    }
+    
+    func getTypeCount(ref: DocumentReference) {
+        ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
+            var totalTypeCount = 0
+            if  let err = err {
+                print("Error total count: \(err.localizedDescription)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let typeCount = document.data()[TYPECOUNT] as! Int
+                    totalTypeCount += typeCount
+                }
+            }
+            if totalTypeCount > 999 {
+                self.typeCountLabel.text = "999"
+            } else {
+                self.typeCountLabel.text = String(totalTypeCount)
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         ageLabel.text = ""
-        segBarSingle.layer.cornerRadius = 5 / 2
         segBarDouble1.layer.cornerRadius = 5 / 2
         segBarDouble2.layer.cornerRadius = 5 / 2
         segBarTriple1.layer.cornerRadius = 5 / 2
@@ -218,7 +282,6 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func profileImageUrl3Nil() {
-        segBarSingle.isHidden = true
         segBarDouble1.isHidden = false
         segBarDouble2.isHidden = false
         segBarTriple1.isHidden = true
@@ -228,7 +291,6 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func profileImageUrlHaveAll() {
-        segBarSingle.isHidden = true
         segBarDouble1.isHidden = true
         segBarDouble2.isHidden = true
         segBarTriple1.isHidden = false

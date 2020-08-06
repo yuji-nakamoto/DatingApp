@@ -27,7 +27,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var messageButton2: UIButton!
     @IBOutlet weak var likeButton2: UIButton!
     @IBOutlet weak var typeButton2: UIButton!
-    
+    @IBOutlet weak var matchLabel: UILabel!
+    @IBOutlet weak var currentUserView: UIImageView!
+    @IBOutlet weak var matchedUserView: UIImageView!
+    @IBOutlet weak var sendMessageButton: UIButton!
+    @IBOutlet weak var afterMessageButton: UIButton!
+
     private var profileImages = [UIImage]()
     var user = User()
     private var like = Like()
@@ -36,7 +41,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var badgeUser: User!
     private var currentUser = User()
     private var interstitial: GADInterstitial!
-    
+    private var typeUser = Type()
+    private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton]
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -47,6 +55,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         fetchTypeUser()
         fetchUserIdLike()
         fetchUserIdType()
+        checkIfMatch()
         configureUI()
         interstitial = createAndLoadIntersitial()
     }
@@ -97,29 +106,41 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         Type.saveTypedUser(forUser: user)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
         incrementAppBadgeCount2()
+
+        if self.typeUser.isType == 1 {
+            self.matchView()
+            Match.saveMatchUser(forUser: self.user)
+        }
+
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
-            if self.interstitial.isReady {
-                self.interstitial.present(fromRootViewController: self)
-            } else {
-                print("Error interstitial")
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+                if self.interstitial.isReady {
+                    self.interstitial.present(fromRootViewController: self)
+                } else {
+                    print("Error interstitial")
+                }
             }
         }
+    }
+    
+    @objc func handleDismissal() {
+        removeEffectView()
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
         toMessageVC()
     }
     
-    // MARK: - Fetch
+    @IBAction func sendMessageButtonPressed(_ sender: Any) {
+        removeEffectView()
+        self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
+    }
     
-    private func fetchCurrentUser() {
-        guard Auth.auth().currentUser?.uid != nil else { return }
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.currentUser = user
-        }
+    @IBAction func afterMessageButtonPressed(_ sender: Any) {
+        removeEffectView()
     }
     
     private func fetchUserId() {
@@ -129,6 +150,16 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         User.fetchUser(userId) { (user) in
             self.user = user
             self.tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Fetch
+    
+    private func fetchCurrentUser() {
+        guard Auth.auth().currentUser?.uid != nil else { return }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.currentUser = user
+            self.currentUserView.sd_setImage(with: URL(string: self.currentUser.profileImageUrl1), completed: nil)
         }
     }
     
@@ -167,6 +198,13 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             Like.fetchLikeUser(self.userId) { (like) in
                 self.validateLikeButton(like: like)
             }
+        }
+    }
+    
+    private func checkIfMatch() {
+        guard user.uid != nil else { return }
+        Type.checkIfMatch(toUserId: user.uid) { (type) in
+            self.typeUser = type
         }
     }
     
@@ -210,7 +248,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     // MARK: - Helpers
-    
+
     private func createAndLoadIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
@@ -230,9 +268,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func incrementAppBadgeCount2() {
         
-        sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがタイプと言っています", badge: self.user.appBadgeCount + 1)
+        if self.typeUser.isType == 1 {
+            sendRequestNotification2(isMatch: 1, toUser: self.user, message: "\(self.currentUser.username!)さんとマッチングしました", badge: self.user.appBadgeCount + 1)
+        } else {
+            sendRequestNotification2(isMatch: 0, toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
+        }
     }
-    
     
     func incrementLikeCounter(ref: DocumentReference, numShards: Int) {
         
@@ -254,18 +295,53 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         ])
     }
     
+    private func removeEffectView() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 0
+            self.views.forEach({ $0?.alpha = 0 })
+        }) { (_) in
+            self.visualEffectView.removeFromSuperview()
+        }
+    }
+    
+    private func matchView() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
+        visualEffectView.addGestureRecognizer(tap)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            
+            self.visualEffectView.frame = self.view.frame
+            self.view.addSubview(self.visualEffectView)
+            self.visualEffectView.alpha = 0
+            self.views.forEach { (view) in
+                self.view.addSubview(view!)
+            }
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.visualEffectView.alpha = 1
+                self.views.forEach({ $0?.alpha = 1})
+                self.sendMessageButton.isEnabled = true
+                self.afterMessageButton.isEnabled = true
+                self.matchLabel.text = "\(self.user.username!)さんとマッチしました！"
+                self.matchedUserView.sd_setImage(with: URL(string: self.user.profileImageUrl1), completed: nil)
+            }, completion: nil)
+        }
+    }
+    
     private func toMessageVC() {
         
         let alert: UIAlertController = UIAlertController(title: "\(user.username!)さんに", message: "メッセージを送りますか？", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
             
-            if self.interstitial.isReady {
-                self.interstitial.present(fromRootViewController: self)
-                self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
-                
-            } else {
-                print("Error interstitial")
+            if UserDefaults.standard.object(forKey: FEMALE) == nil {
+                if self.interstitial.isReady {
+                    self.interstitial.present(fromRootViewController: self)
+                } else {
+                    print("Error interstitial")
+                }
             }
+            self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
         }
@@ -275,6 +351,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     private func configureUI() {
+        
+        views.forEach({ $0?.alpha = 0})
+        currentUserView.layer.cornerRadius = 100 / 2
+        matchedUserView.layer.cornerRadius = 100 / 2
         
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
@@ -296,6 +376,14 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         messageBackView.layer.shadowColor = UIColor.black.cgColor
         messageBackView.layer.shadowOpacity = 0.3
         messageBackView.layer.shadowRadius = 4
+        
+        sendMessageButton.isEnabled = false
+        afterMessageButton.isEnabled = false
+        sendMessageButton.layer.cornerRadius = 50 / 2
+        afterMessageButton.layer.cornerRadius = 50 / 2
+        afterMessageButton.backgroundColor = .clear
+        afterMessageButton.layer.borderWidth = 2
+        afterMessageButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }
     
     private func validateLikeButton(like: Like) {

@@ -45,14 +45,14 @@ func sendRequestNotification(toUser: User, message: String, badge: Int) {
     }.resume()
 }
 
-func sendRequestNotification2(toUser: User, message: String, badge: Int) {
+func sendRequestNotification2(isMatch: Int = 0, toUser: User, message: String, badge: Int) {
     var request = URLRequest(url: URL(string: fcmUrl)!)
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
     request.httpMethod = "POST"
     
     let notification: [String: Any] = [ "to": "/topics/\(toUser.uid!)",
-        "notification": ["title": "New",
+        "notification": ["title": (isMatch == 0) ? "お知らせ" : "マッチング",
                           "body": message,
                           "badge": badge,
                           "sound": "default",

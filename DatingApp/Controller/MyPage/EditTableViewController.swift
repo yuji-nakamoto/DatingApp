@@ -109,22 +109,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         
         let dict = [SELFINTRO: textView.text,
                     COMMENT: commentTextField.text,
-                    USERNAME: nameTextField.text,
-                    RESIDENCE: residenceSettingLabel.text,
-                    PROFESSION: professionSettingLabel.text,
-                    BODYSIZE: bodySizeSettingLabel.text,
-                    HEIGHT: heightSettingLabel.text,
-                    BLOOD: bloodSetLbl.text,
-                    EDUCATION: educationalSetLbl.text,
-                    BIRTHPLACE: birthplaceLbl.text,
-                    MARRIAGEHISTORY: marriageHistoryLbl.text,
-                    MARRIAGE: marriageLbl.text,
-                    CHILD1: childLbl1.text,
-                    CHILD2: childLbl2.text,
-                    HOUSEMATE: houseMateLbl.text,
-                    HOLIDAY: holidayLbl.text,
-                    LIQUOR: liquorLbl.text,
-                    TOBACCO: tobaccoLbl.text]
+                    USERNAME: nameTextField.text]
 
         updateUser(withValue: dict as [String : Any])
         hudSetup()
@@ -449,6 +434,7 @@ extension EditTableViewController: PickerKeyboard1Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard1, selectData: String) {
         heightSettingLabel.text = selectData
+        updateUser(withValue: [HEIGHT: heightSettingLabel.text as Any])
     }
 }
 
@@ -458,8 +444,8 @@ extension EditTableViewController: PickerKeyboard2Delegate {
     }
     
     func didDone2(_ pickerKeyboard: PickerKeyboard2, selectData: String) {
-        
         bodySizeSettingLabel.text = selectData
+        updateUser(withValue: [BODYSIZE: bodySizeSettingLabel.text as Any])
     }
 }
 
@@ -470,6 +456,7 @@ extension EditTableViewController: PickerKeyboard3Delegate {
     
     func didDone3(_ pickerKeyboard: PickerKeyboard3, selectData: String) {
         residenceSettingLabel.text = selectData
+        updateUser(withValue: [RESIDENCE: residenceSettingLabel.text as Any])
     }
 }
 
@@ -480,6 +467,7 @@ extension EditTableViewController: PickerKeyboard4Delegate {
     
     func didDone4(_ pickerKeyboard: PickerKeyboard4, selectData: String) {
         professionSettingLabel.text = selectData
+        updateUser(withValue: [PROFESSION: professionSettingLabel.text as Any])
     }
 }
 
@@ -490,6 +478,7 @@ extension EditTableViewController: PickerKeyboard5Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard5, selectData: String) {
         birthplaceLbl.text = selectData
+        updateUser(withValue: [BIRTHPLACE: birthplaceLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard6Delegate {
@@ -499,6 +488,7 @@ extension EditTableViewController: PickerKeyboard6Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard6, selectData: String) {
         bloodSetLbl.text = selectData
+        updateUser(withValue: [BLOOD: bloodSetLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard7Delegate {
@@ -508,6 +498,7 @@ extension EditTableViewController: PickerKeyboard7Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard7, selectData: String) {
         educationalSetLbl.text = selectData
+        updateUser(withValue: [EDUCATION: educationalSetLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard8Delegate {
@@ -517,6 +508,7 @@ extension EditTableViewController: PickerKeyboard8Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard8, selectData: String) {
         marriageHistoryLbl.text = selectData
+        updateUser(withValue: [MARRIAGEHISTORY: marriageHistoryLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard9Delegate {
@@ -526,6 +518,7 @@ extension EditTableViewController: PickerKeyboard9Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard9, selectData: String) {
         marriageLbl.text = selectData
+        updateUser(withValue: [MARRIAGE: marriageLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard10Delegate {
@@ -535,6 +528,7 @@ extension EditTableViewController: PickerKeyboard10Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard10, selectData: String) {
         childLbl1.text = selectData
+        updateUser(withValue: [CHILD1: childLbl1.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard11Delegate {
@@ -544,6 +538,7 @@ extension EditTableViewController: PickerKeyboard11Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard11, selectData: String) {
         childLbl2.text = selectData
+        updateUser(withValue: [CHILD2: childLbl2.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard12Delegate {
@@ -553,6 +548,7 @@ extension EditTableViewController: PickerKeyboard12Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard12, selectData: String) {
         houseMateLbl.text = selectData
+        updateUser(withValue: [HOUSEMATE: houseMateLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard13Delegate {
@@ -562,6 +558,7 @@ extension EditTableViewController: PickerKeyboard13Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard13, selectData: String) {
         holidayLbl.text = selectData
+        updateUser(withValue: [HOLIDAY: holidayLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard14Delegate {
@@ -571,6 +568,7 @@ extension EditTableViewController: PickerKeyboard14Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard14, selectData: String) {
         liquorLbl.text = selectData
+        updateUser(withValue: [LIQUOR: liquorLbl.text as Any])
     }
 }
 extension EditTableViewController: PickerKeyboard15Delegate {
@@ -580,5 +578,6 @@ extension EditTableViewController: PickerKeyboard15Delegate {
     
     func didDone(_ pickerKeyboard: PickerKeyboard15, selectData: String) {
         tobaccoLbl.text = selectData
+        updateUser(withValue: [TOBACCO: tobaccoLbl.text as Any])
     }
 }

@@ -99,7 +99,7 @@ class MyPageTableViewController: UIViewController {
 extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + 1 + myPosts.count
+        return 1 + myPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,18 +109,11 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
             
             cell.configureCell(user)
             return cell
-        } else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! MyPostTableViewCell
-            
-            cell.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-            cell.bannerView.rootViewController = self
-            cell.bannerView.load(GADRequest())
-            
-            return cell
         }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell3", for: indexPath) as! PostTableViewCell
         
-        let myPost = myPosts[indexPath.row - 2]
+        let myPost = myPosts[indexPath.row - 1]
         cell.post = myPost
         cell.configureUserCell(user)
         return cell

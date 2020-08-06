@@ -10,22 +10,22 @@ import Foundation
 import Firebase
 
 class Type {
-
+    
     var uid: String!
     var isType: Int!
     var timestamp: Timestamp!
-
+    
     init() {
     }
     
     init(dict: [String: Any]) {
-
+        
         self.uid = dict[UID] as? String ?? ""
         self.isType = dict[ISTYPE] as? Int ?? 0
         self.timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
     }
     
-    // MARK: - Fetch isLike user
+    // MARK: - Fetch isType user
     
     class func fetchTypeUser(_ forUserId: String, completion: @escaping(_ type: Type) -> Void) {
         
@@ -46,7 +46,7 @@ class Type {
                 print("Error: \(error.localizedDescription) ")
             }
             snapshot?.documents.forEach({ (document) in
-//                print("DEBUG: fetchTypeUsers document data\(document.data())")
+                //                print("DEBUG: fetchTypeUsers document data\(document.data())")
                 let dict = document.data()
                 let type = Type(dict: dict)
                 completion(type)
@@ -54,7 +54,7 @@ class Type {
         }
     }
     
-    // MARK: - Fetch liked user
+    // MARK: - Fetch typed user
     
     class func fetchTypedUser(completion: @escaping(Type) -> Void) {
         
@@ -67,6 +67,20 @@ class Type {
                 let type = Type(dict: dict)
                 completion(type)
             })
+        }
+    }
+    
+    // MARK: - Check if match
+    
+    class func checkIfMatch(toUserId: String, completion: @escaping(Type) -> Void) {
+        
+        COLLECTION_TYPE.document(toUserId).collection("isType").document(User.currentUserId()).getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error check if match: \(error.localizedDescription)")
+            }
+            guard let data = snapshot?.data() else { return }
+            let type = Type(dict: data)
+            completion(type)
         }
     }
     

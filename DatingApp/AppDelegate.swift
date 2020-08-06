@@ -98,14 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         print(userInfo)
     }
-
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
+        
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID2: \(messageID)")
         }
-
+        
         Messaging.messaging().appDidReceiveMessage(userInfo)
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -126,17 +126,21 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
             print("Message ID3: \(messageID)")
         }
         
-        if notification.request.content.title == "メッセージ" {
-            User.fetchUser(User.currentUserId()) { (user) in
-                self.user = user
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            if notification.request.content.title == "メッセージ" {
+                
                 let dict = [MESSAGEBADGECOUNT: user.messageBadgeCount + 1,
                             APPBADGECOUNT: user.appBadgeCount + 1]
                 updateUser(withValue: dict)
-            }
-        } else if notification.request.content.title == "New" {
-            User.fetchUser(User.currentUserId()) { (user) in
-                self.user = user
+            } else if notification.request.content.title == "お知らせ" {
+                
                 let dict = [MYPAGEBADGECOUNT: user.myPageBadgeCount + 1,
+                            APPBADGECOUNT: user.appBadgeCount + 1]
+                updateUser(withValue: dict)
+            } else if notification.request.content.title == "マッチング" {
+                
+                let dict = [MESSAGEBADGECOUNT: user.messageBadgeCount + 1,
                             APPBADGECOUNT: user.appBadgeCount + 1]
                 updateUser(withValue: dict)
             }
@@ -156,17 +160,21 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
             print("Message ID4: \(messageID)")
         }
         
-        if response.notification.request.content.title == "メッセージ" {
-            User.fetchUser(User.currentUserId()) { (user) in
-                self.user = user
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            if response.notification.request.content.title == "メッセージ" {
+                
                 let dict = [MESSAGEBADGECOUNT: user.messageBadgeCount + 1,
                             APPBADGECOUNT: user.appBadgeCount + 1]
                 updateUser(withValue: dict)
-            }
-        } else if response.notification.request.content.title == "New" {
-            User.fetchUser(User.currentUserId()) { (user) in
-                self.user = user
+            } else if response.notification.request.content.title == "お知らせ" {
+                
                 let dict = [MYPAGEBADGECOUNT: user.myPageBadgeCount + 1,
+                            APPBADGECOUNT: user.appBadgeCount + 1]
+                updateUser(withValue: dict)
+            } else if response.notification.request.content.title == "マッチング" {
+                
+                let dict = [MESSAGEBADGECOUNT: user.messageBadgeCount + 1,
                             APPBADGECOUNT: user.appBadgeCount + 1]
                 updateUser(withValue: dict)
             }

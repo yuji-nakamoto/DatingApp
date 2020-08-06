@@ -22,7 +22,6 @@ class SearchViewController: UIViewController {
     private var user: User?
     private var currentUser: User!
     private let refresh = UIRefreshControl()
-    private var profileImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
     
     // MARK: - Lifecycle
     
@@ -149,7 +148,6 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         
         if indexPath.row == 5 || indexPath.row == 15 || indexPath.row == 25 || indexPath.row == 35 || indexPath.row == 45 {
             

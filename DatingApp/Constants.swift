@@ -22,6 +22,7 @@ public let COLLECTION_MESSAGE = Firestore.firestore().collection("message")
 public let COLLECTION_INBOX = Firestore.firestore().collection("inbox")
 public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounter")
 public let COLLECTION_TYPECOUNTER = Firestore.firestore().collection("typeCounter")
+public let COLLECTION_MATCH = Firestore.firestore().collection("match")
 
 // MARK: - Color
 
@@ -86,10 +87,11 @@ public let CAPTION = "caption"
 public let POSTID = "postId"
 public let GENRE = "genre"
 
-// MARK: - Like Tcype
+// MARK: - Like Type Match
 
 public let ISLIKE = "isLike"
 public let ISTYPE = "isType"
+public let ISMATCH = "isMatch"
 
 // MARK: - Footstep
 
