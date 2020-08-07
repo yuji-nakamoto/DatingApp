@@ -49,6 +49,10 @@
 		834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */; };
 		834966C024DC0B9600C9B7DD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BF24DC0B9600C9B7DD /* Match.swift */; };
 		834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C324DC25E200C9B7DD /* InboxTableViewController.swift */; };
+		834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C524DCF4CD00C9B7DD /* CommentTableViewController.swift */; };
+		834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */; };
+		834966CA24DD098E00C9B7DD /* SelfIntroTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */; };
+		834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */; };
 		834BD3E824DAD0D70088D4EA /* AdsSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */; };
 		834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */; };
 		834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */; };
@@ -133,6 +137,10 @@
 		834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834966BF24DC0B9600C9B7DD /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		834966C324DC25E200C9B7DD /* InboxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
+		834966C524DCF4CD00C9B7DD /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
+		834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameTableViewController.swift; sourceTree = "<group>"; };
+		834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfIntroTableViewController.swift; sourceTree = "<group>"; };
+		834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapTableViewController.swift; sourceTree = "<group>"; };
 		834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPostTableViewCell.swift; sourceTree = "<group>"; };
 		834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyTableViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +238,10 @@
 				8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */,
 				8348B5EE24D3EC020000A187 /* SelectColorTableViewController.swift */,
 				834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */,
+				834966C524DCF4CD00C9B7DD /* CommentTableViewController.swift */,
+				834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */,
+				834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */,
+				834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -517,6 +529,7 @@
 				8348E3F724D0E123001D59C0 /* FootstepViewController.swift in Sources */,
 				8350E4BF24D9AE7000487DB9 /* PIckerKeyboard13.swift in Sources */,
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
+				834966CA24DD098E00C9B7DD /* SelfIntroTableViewController.swift in Sources */,
 				8350E4B524D9AE1E00487DB9 /* PIckerKeyboard8.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
@@ -550,6 +563,7 @@
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
 				834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */,
+				834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */,
 				834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
 				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
@@ -566,6 +580,7 @@
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
 				8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */,
+				834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
 				8350E4B124D9AE0C00487DB9 /* PIckerKeyboard6.swift in Sources */,
@@ -575,6 +590,7 @@
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
+				834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,
 				8348B5EB24D38D780000A187 /* MyPageTableViewCell.swift in Sources */,
 				834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */,

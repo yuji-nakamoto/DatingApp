@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class InboxTableViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
+class InboxTableViewController: UIViewController, GADInterstitialDelegate {
     
     // MARK: - Properties
     

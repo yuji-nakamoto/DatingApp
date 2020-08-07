@@ -31,28 +31,32 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var profileImageView1: UIImageView!
     @IBOutlet weak var profileImageView2: UIImageView!
     @IBOutlet weak var profileImageView3: UIImageView!
+    @IBOutlet weak var profileImageView4: UIImageView!
+    @IBOutlet weak var profileImageView5: UIImageView!
+    @IBOutlet weak var profileImageView6: UIImageView!
     @IBOutlet weak var backView1: UIView!
     @IBOutlet weak var backView2: UIView!
     @IBOutlet weak var backView3: UIView!
-    @IBOutlet weak var plusButton1: UIImageView!
-    @IBOutlet weak var plusButton2: UIImageView!
-    @IBOutlet weak var plusButton3: UIImageView!
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var backTextView: UIView!
+    @IBOutlet weak var backView4: UIView!
+    @IBOutlet weak var backView5: UIView!
+    @IBOutlet weak var backView6: UIView!
     @IBOutlet weak var heightSettingLabel: UILabel!
     @IBOutlet weak var bodySizeSettingLabel: UILabel!
     @IBOutlet weak var residenceSettingLabel: UILabel!
     @IBOutlet weak var professionSettingLabel: UILabel!
-    @IBOutlet weak var commentTextField: UITextField!
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var selectButton1: UIButton!
     @IBOutlet weak var selectButton2: UIButton!
     @IBOutlet weak var selectButton3: UIButton!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var selectButton4: UIButton!
+    @IBOutlet weak var selectButton5: UIButton!
+    @IBOutlet weak var selectButton6: UIButton!
     @IBOutlet weak var indicator1: UIActivityIndicatorView!
     @IBOutlet weak var indicator2: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var indicator3: UIActivityIndicatorView!
+    @IBOutlet weak var indicator4: UIActivityIndicatorView!
+    @IBOutlet weak var indicator5: UIActivityIndicatorView!
+    @IBOutlet weak var indicator6: UIActivityIndicatorView!
     @IBOutlet weak var bloodSetLbl: UILabel!
     @IBOutlet weak var educationalSetLbl: UILabel!
     @IBOutlet weak var marriageHistoryLbl: UILabel!
@@ -65,7 +69,17 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var tobaccoLbl: UILabel!
     @IBOutlet weak var birthplaceLbl: UILabel!
     @IBOutlet weak var hobbySetLbl: UILabel!
-
+    @IBOutlet weak var commentSetLbl: UILabel!
+    @IBOutlet weak var nicknameSetLbl: UILabel!
+    @IBOutlet weak var selfIntroLabl: UILabel!
+    @IBOutlet weak var selfIntroSetLbl: UILabel!
+    @IBOutlet weak var detailMapSetLbl: UILabel!
+    @IBOutlet weak var plusImageView2: UIImageView!
+    @IBOutlet weak var plusImageView3: UIImageView!
+    @IBOutlet weak var plusImageView4: UIImageView!
+    @IBOutlet weak var plusImageView5: UIImageView!
+    @IBOutlet weak var plusImageView6: UIImageView!
+ 
     private var user = User()
     private let picker = UIImagePickerController()
     private var buttons = [UIButton]()
@@ -73,6 +87,9 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     private var profileImage1: UIImage?
     private var profileImage2: UIImage?
     private var profileImage3: UIImage?
+    private var profileImage4: UIImage?
+    private var profileImage5: UIImage?
+    private var profileImage6: UIImage?
     
     // MARK: - Lifecycle
     
@@ -86,49 +103,60 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchUser()
+        setupUI()
         self.tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: "image1")
-        UserDefaults.standard.removeObject(forKey: "image2")
-        UserDefaults.standard.removeObject(forKey: "image3")
-
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func saveButtonPressed(_ sender: Any) {
-        
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        validateTextField()
-        hud.textLabel.text = "ユーザー情報を保存中..."
-        hud.show(in: self.view)
-        
-        let dict = [SELFINTRO: textView.text,
-                    COMMENT: commentTextField.text,
-                    USERNAME: nameTextField.text]
-
-        updateUser(withValue: dict as [String : Any])
-        hudSetup()
     }
     
     @objc func handleSelectPhoto(_ sender: UIButton) {
         
         if sender.tag == 0 {
             UserDefaults.standard.set(true, forKey: "image1")
+            UserDefaults.standard.removeObject(forKey: "image2")
+            UserDefaults.standard.removeObject(forKey: "image3")
+            UserDefaults.standard.removeObject(forKey: "image4")
+            UserDefaults.standard.removeObject(forKey: "image5")
+            UserDefaults.standard.removeObject(forKey: "image6")
         } else if sender.tag == 1 {
             UserDefaults.standard.set(true, forKey: "image2")
+            UserDefaults.standard.removeObject(forKey: "image1")
+            UserDefaults.standard.removeObject(forKey: "image3")
+            UserDefaults.standard.removeObject(forKey: "image4")
+            UserDefaults.standard.removeObject(forKey: "image5")
+            UserDefaults.standard.removeObject(forKey: "image6")
         } else if sender.tag == 2 {
-            if user.profileImageUrl2 == "" {
-                hud.textLabel.text = "中央の画像から設定してください"
-                hud.show(in: self.view)
-                hudError()
-                return
-            }
             UserDefaults.standard.set(true, forKey: "image3")
+            UserDefaults.standard.removeObject(forKey: "image2")
+            UserDefaults.standard.removeObject(forKey: "image1")
+            UserDefaults.standard.removeObject(forKey: "image4")
+            UserDefaults.standard.removeObject(forKey: "image5")
+            UserDefaults.standard.removeObject(forKey: "image6")
+        } else if sender.tag == 3 {
+            UserDefaults.standard.set(true, forKey: "image4")
+            UserDefaults.standard.removeObject(forKey: "image2")
+            UserDefaults.standard.removeObject(forKey: "image3")
+            UserDefaults.standard.removeObject(forKey: "image1")
+            UserDefaults.standard.removeObject(forKey: "image5")
+            UserDefaults.standard.removeObject(forKey: "image6")
+        } else if sender.tag == 4 {
+            UserDefaults.standard.set(true, forKey: "image5")
+            UserDefaults.standard.removeObject(forKey: "image2")
+            UserDefaults.standard.removeObject(forKey: "image3")
+            UserDefaults.standard.removeObject(forKey: "image4")
+            UserDefaults.standard.removeObject(forKey: "image1")
+            UserDefaults.standard.removeObject(forKey: "image6")
+        } else if sender.tag == 5 {
+            UserDefaults.standard.set(true, forKey: "image6")
+            UserDefaults.standard.removeObject(forKey: "image2")
+            UserDefaults.standard.removeObject(forKey: "image3")
+            UserDefaults.standard.removeObject(forKey: "image4")
+            UserDefaults.standard.removeObject(forKey: "image5")
+            UserDefaults.standard.removeObject(forKey: "image1")
         }
         settingPhoto(didSelect: sender.tag)
     }
@@ -184,6 +212,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             hud.textLabel.text = "プロフィール画像を保存しました。"
             hud.show(in: self.view)
             hudSuccess()
+            self.fetchUser()
             self.selectButtonIsEnabled()
         }
     }
@@ -205,6 +234,72 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             hud.textLabel.text = "プロフィール画像を保存しました。"
             hud.show(in: self.view)
             hudSuccess()
+            self.fetchUser()
+            self.selectButtonIsEnabled()
+        }
+    }
+    
+    private func saveUploadImage4() {
+        guard profileImage4 != nil else { return }
+        
+        indicator4.startAnimating()
+        validateSelectButton()
+        
+        Service.uploadImage(image: profileImage4!) { (imageUrl) in
+            let dict = [PROFILEIMAGEURL4: imageUrl]
+            updateUser(withValue: dict)
+            
+            self.profileImage4 = nil
+            UserDefaults.standard.removeObject(forKey: "image4")
+            self.indicator4.stopAnimating()
+            
+            hud.textLabel.text = "プロフィール画像を保存しました。"
+            hud.show(in: self.view)
+            hudSuccess()
+            self.fetchUser()
+            self.selectButtonIsEnabled()
+        }
+    }
+    
+    private func saveUploadImage5() {
+        guard profileImage5 != nil else { return }
+        
+        indicator5.startAnimating()
+        validateSelectButton()
+        
+        Service.uploadImage(image: profileImage5!) { (imageUrl) in
+            let dict = [PROFILEIMAGEURL5: imageUrl]
+            updateUser(withValue: dict)
+            
+            self.profileImage5 = nil
+            UserDefaults.standard.removeObject(forKey: "image5")
+            self.indicator5.stopAnimating()
+            
+            hud.textLabel.text = "プロフィール画像を保存しました。"
+            hud.show(in: self.view)
+            hudSuccess()
+            self.fetchUser()
+            self.selectButtonIsEnabled()
+        }
+    }
+    
+    private func saveUploadImage6() {
+        guard profileImage6 != nil else { return }
+        
+        indicator6.startAnimating()
+        validateSelectButton()
+        
+        Service.uploadImage(image: profileImage6!) { (imageUrl) in
+            let dict = [PROFILEIMAGEURL6: imageUrl]
+            updateUser(withValue: dict)
+            
+            self.profileImage6 = nil
+            UserDefaults.standard.removeObject(forKey: "image6")
+            self.indicator6.stopAnimating()
+            
+            hud.textLabel.text = "プロフィール画像を保存しました。"
+            hud.show(in: self.view)
+            hudSuccess()
             self.selectButtonIsEnabled()
         }
     }
@@ -213,8 +308,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func setupUI() {
         navigationItem.title = "プロフィール編集"
-        nameTextField.delegate = self
-        commentTextField.delegate = self
         picker.delegate = self
         pickerKeyboardView1.delegate = self
         pickerKeyboardView2.delegate = self
@@ -232,33 +325,53 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         pickerKeyboardView14.delegate = self
         pickerKeyboardView15.delegate = self
         
-        saveButton.isEnabled = true
         profileImageView1.layer.cornerRadius = 10
         profileImageView2.layer.cornerRadius = 10
         profileImageView3.layer.cornerRadius = 10
+        profileImageView4.layer.cornerRadius = 10
+        profileImageView5.layer.cornerRadius = 10
+        profileImageView6.layer.cornerRadius = 10
+        
         backView1.layer.cornerRadius = 10
         backView2.layer.cornerRadius = 10
         backView3.layer.cornerRadius = 10
-        backTextView.layer .cornerRadius = 5
-        
+        backView4.layer.cornerRadius = 10
+        backView5.layer.cornerRadius = 10
+        backView6.layer.cornerRadius = 10
+
         selectButton1.layer.cornerRadius = 10
         selectButton2.layer.cornerRadius = 10
         selectButton3.layer.cornerRadius = 10
+        selectButton4.layer.cornerRadius = 10
+        selectButton5.layer.cornerRadius = 10
+        selectButton6.layer.cornerRadius = 10
         
         selectButton1.imageView?.contentMode = .scaleAspectFill
         selectButton2.imageView?.contentMode = .scaleAspectFill
         selectButton3.imageView?.contentMode = .scaleAspectFill
+        selectButton4.imageView?.contentMode = .scaleAspectFill
+        selectButton5.imageView?.contentMode = .scaleAspectFill
+        selectButton6.imageView?.contentMode = .scaleAspectFill
         
         buttons.append(selectButton1)
         buttons.append(selectButton2)
         buttons.append(selectButton3)
+        buttons.append(selectButton4)
+        buttons.append(selectButton5)
+        buttons.append(selectButton6)
         
         selectButton1.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         selectButton2.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         selectButton3.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        selectButton4.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        selectButton5.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        selectButton6.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         
-        backTextView.layer.borderWidth = 1
-        backTextView.layer.borderColor = UIColor.systemGray.cgColor
+        plusImageView2.isHidden = true
+        plusImageView3.isHidden = true
+        plusImageView4.isHidden = true
+        plusImageView5.isHidden = true
+        plusImageView6.isHidden = true
     }
     
     private func setupUserInfo(_ user: User) {
@@ -266,67 +379,192 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         profileImageView1.sd_setImage(with: URL(string: user.profileImageUrl1))
         profileImageView2.sd_setImage(with: URL(string: user.profileImageUrl2))
         profileImageView3.sd_setImage(with: URL(string: user.profileImageUrl3))
+        profileImageView4.sd_setImage(with: URL(string: user.profileImageUrl4))
+        profileImageView5.sd_setImage(with: URL(string: user.profileImageUrl5))
+        profileImageView6.sd_setImage(with: URL(string: user.profileImageUrl6))
         
-        textView.text = user.selfIntro
-        commentTextField.text = user.comment
-        nameTextField.text = user.username
         professionSettingLabel.text = user.profession
+        professionSettingLabel.textColor = UIColor(named: O_GREEN)
         residenceSettingLabel.text = user.residence
-        heightSettingLabel.text = user.height
-        bodySizeSettingLabel.text = user.bodySize
-        bloodSetLbl.text = user.blood
-        birthplaceLbl.text = user.birthplace
-        educationalSetLbl.text = user.education
-        marriageHistoryLbl.text = user.marriageHistory
-        marriageLbl.text = user.marriage
-        childLbl1.text = user.child1
-        childLbl2.text = user.child2
-        houseMateLbl.text = user.houseMate
-        holidayLbl.text = user.holiday
-        liquorLbl.text = user.liquor
-        tobaccoLbl.text = user.tobacco
+        residenceSettingLabel.textColor = UIColor(named: O_GREEN)
+        
+        if user.selfIntro != "" {
+            selfIntroLabl.text = user.selfIntro
+            selfIntroLabl.isHidden = false
+            selfIntroSetLbl.isHidden = true
+        } else {
+            selfIntroLabl.text = "自己紹介"
+            selfIntroSetLbl.isHidden = false
+        }
+
+        if user.height != "未設定" {
+            heightSettingLabel.text = user.height
+            heightSettingLabel.textColor = UIColor(named: O_GREEN)
+        } else {
+
+            heightSettingLabel.textColor = .systemGray
+        }
+        
+        if user.bodySize != "未設定" {
+            bodySizeSettingLabel.text = user.bodySize
+            bodySizeSettingLabel.textColor = UIColor(named: O_GREEN)
+        } else {
+            bodySizeSettingLabel.textColor = .systemGray
+        }
+        
+        if user.blood != "未設定" {
+            bloodSetLbl.text = user.blood
+            bloodSetLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            bloodSetLbl.textColor = .systemGray
+        }
+        
+        if user.birthplace != "未設定" {
+            birthplaceLbl.text = user.birthplace
+            birthplaceLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            birthplaceLbl.textColor = .systemGray
+        }
+        
+        if user.education != "未設定" {
+            educationalSetLbl.text = user.education
+            educationalSetLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            educationalSetLbl.textColor = .systemGray
+        }
+        
+        if user.marriageHistory != "未設定" {
+            marriageHistoryLbl.text = user.marriageHistory
+            marriageHistoryLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            marriageHistoryLbl.textColor = .systemGray
+        }
+        
+        if user.marriage != "未設定" {
+            marriageLbl.text = user.marriage
+            marriageLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            marriageLbl.textColor = .systemGray
+        }
+        
+        if user.child1 != "未設定" {
+            childLbl1.text = user.child1
+            childLbl1.textColor = UIColor(named: O_GREEN)
+        } else {
+            childLbl1.textColor = .systemGray
+        }
+        
+        if user.child2 != "未設定" {
+            childLbl2.text = user.child2
+            childLbl2.textColor = UIColor(named: O_GREEN)
+        } else {
+            childLbl2.textColor = .systemGray
+        }
+        
+        if user.houseMate != "未設定" {
+            houseMateLbl.text = user.houseMate
+            houseMateLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            houseMateLbl.textColor = .systemGray
+        }
+        
+        if user.holiday != "未設定" {
+            holidayLbl.text = user.holiday
+            holidayLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            holidayLbl.textColor = .systemGray
+        }
+        
+        if user.liquor != "未設定" {
+            liquorLbl.text = user.liquor
+            liquorLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            liquorLbl.textColor = .systemGray
+        }
+        
+        if user.tobacco != "未設定" {
+            tobaccoLbl.text = user.tobacco
+            tobaccoLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            tobaccoLbl.textColor = .systemGray
+        }
+        
+        nicknameSetLbl.text = user.username
+        
+        if user.comment != "" {
+            commentSetLbl.text = user.comment
+        } else {
+            commentSetLbl.text = "入力する"
+        }
+        
+        if user.detailMap != "" {
+            detailMapSetLbl.text = user.detailMap
+            detailMapSetLbl.textColor = UIColor(named: O_GREEN)
+        } else {
+            detailMapSetLbl.textColor = .systemGray
+            detailMapSetLbl.text = "入力する"
+        }
         
         if user.hobby1 != "" && user.hobby2 != "" && user.hobby3 != "" {
             hobbySetLbl.text = user.hobby1 + "," + user.hobby2 + ",\n" + user.hobby3
             hobbySetLbl.font = UIFont.systemFont(ofSize: 13)
+            hobbySetLbl.textColor = UIColor(named: O_GREEN)
         } else if user.hobby1 != "" && user.hobby2 != "" {
             hobbySetLbl.text = user.hobby1 + "," + user.hobby2
             hobbySetLbl.font = UIFont.systemFont(ofSize: 15)
+            hobbySetLbl.textColor = UIColor(named: O_GREEN)
         } else if user.hobby2 != "" && user.hobby3 != "" {
             hobbySetLbl.text = user.hobby2 + "," + user.hobby3
             hobbySetLbl.font = UIFont.systemFont(ofSize: 15)
+            hobbySetLbl.textColor = UIColor(named: O_GREEN)
         } else if user.hobby1 != "" && user.hobby3 != "" {
             hobbySetLbl.text = user.hobby1 + "," + user.hobby3
             hobbySetLbl.font = UIFont.systemFont(ofSize: 15)
+            hobbySetLbl.textColor = UIColor(named: O_GREEN)
         } else if user.hobby1 != "" || user.hobby2 != "" || user.hobby3 != "" {
             hobbySetLbl.text = user.hobby1 + user.hobby2 + user.hobby3
             hobbySetLbl.font = UIFont.systemFont(ofSize: 17)
+            hobbySetLbl.textColor = UIColor(named: O_GREEN)
         } else {
             hobbySetLbl.text = "入力する"
             hobbySetLbl.font = UIFont.systemFont(ofSize: 17)
-        }
-    }
-    
-    private func validateTextField() {
-        
-        saveButton.isEnabled = false
-        
-        if nameTextField.text!.count > 10 {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "名前は10文字以下で入力してください。"
-            hud.show(in: self.view)
-            hud.dismiss()
-            saveButton.isEnabled = true
-            return
-        }
-        
-        if commentTextField.text!.count > 16 {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "ひとことは16文字以下で入力してください。"
-            hud.show(in: self.view)
-            hud.dismiss()
-            saveButton.isEnabled = true
-            return
+            hobbySetLbl.textColor = .systemGray
+            
+            if user.profileImageUrl2 == "" {
+                selectButton3.isEnabled = false
+                selectButton4.isEnabled = false
+                selectButton5.isEnabled = false
+                selectButton6.isEnabled = false
+                plusImageView2.isHidden = false
+                backView2.backgroundColor = UIColor(named: O_GREEN)
+            } else if user.profileImageUrl3 == "" {
+                selectButton3.isEnabled = true
+                selectButton4.isEnabled = false
+                selectButton5.isEnabled = false
+                selectButton6.isEnabled = false
+                plusImageView2.isHidden = true
+                plusImageView3.isHidden = false
+                backView3.backgroundColor = UIColor(named: O_GREEN)
+            } else if user.profileImageUrl4 == "" {
+                selectButton4.isEnabled = true
+                selectButton5.isEnabled = false
+                selectButton6.isEnabled = false
+                plusImageView3.isHidden = true
+                plusImageView4.isHidden = false
+                backView4.backgroundColor = UIColor(named: O_GREEN)
+            } else if user.profileImageUrl5 == "" {
+                selectButton5.isEnabled = true
+                selectButton6.isEnabled = false
+                plusImageView4.isHidden = true
+                plusImageView5.isHidden = false
+                backView5.backgroundColor = UIColor(named: O_GREEN)
+            } else if user.profileImageUrl6 == "" {
+                selectButton6.isEnabled = true
+                plusImageView5.isHidden = true
+                plusImageView6.isHidden = false
+                backView6.backgroundColor = UIColor(named: O_GREEN)
+            }
+            
         }
     }
     
@@ -335,6 +573,9 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         selectButton1.isEnabled = false
         selectButton2.isEnabled = false
         selectButton3.isEnabled = false
+        selectButton4.isEnabled = false
+        selectButton5.isEnabled = false
+        selectButton6.isEnabled = false
     }
     
     private func selectButtonIsEnabled() {
@@ -342,6 +583,9 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         selectButton1.isEnabled = true
         selectButton2.isEnabled = true
         selectButton3.isEnabled = true
+        selectButton4.isEnabled = true
+        selectButton5.isEnabled = true
+        selectButton6.isEnabled = true
     }
     
     private func settingPhoto(didSelect index: Int) {
@@ -372,29 +616,13 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     private func setupColor() {
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
-            saveButton.tintColor = UIColor.white
             backButton.tintColor = UIColor.white
-            plusButton1.tintColor = UIColor(named: O_PINK)
-            plusButton2.tintColor = UIColor(named: O_PINK)
-            plusButton3.tintColor = UIColor(named: O_PINK)
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
-            saveButton.tintColor = UIColor(named: O_BLACK)
             backButton.tintColor = UIColor(named: O_BLACK)
-            plusButton1.tintColor = UIColor(named: O_GREEN)
-            plusButton2.tintColor = UIColor(named: O_GREEN)
-            plusButton3.tintColor = UIColor(named: O_GREEN)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            saveButton.tintColor = UIColor(named: O_BLACK)
             backButton.tintColor = UIColor(named: O_BLACK)
-            plusButton1.tintColor = UIColor.white
-            plusButton2.tintColor = UIColor.white
-            plusButton3.tintColor = UIColor.white
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            saveButton.tintColor = UIColor.white
             backButton.tintColor = UIColor.white
-            plusButton1.tintColor = UIColor(named: O_DARK)
-            plusButton2.tintColor = UIColor(named: O_DARK)
-            plusButton3.tintColor = UIColor(named: O_DARK)
         }
     }
     
@@ -422,6 +650,18 @@ extension EditTableViewController: UIImagePickerControllerDelegate, UINavigation
         if UserDefaults.standard.object(forKey: "image3") != nil {
             profileImage3 = selectedImage!
             saveUploadImage3()
+        }
+        if UserDefaults.standard.object(forKey: "image4") != nil {
+            profileImage4 = selectedImage!
+            saveUploadImage4()
+        }
+        if UserDefaults.standard.object(forKey: "image5") != nil {
+            profileImage5 = selectedImage!
+            saveUploadImage5()
+        }
+        if UserDefaults.standard.object(forKey: "image6") != nil {
+            profileImage6 = selectedImage!
+            saveUploadImage6()
         }
         dismiss(animated: true, completion: nil)
     }

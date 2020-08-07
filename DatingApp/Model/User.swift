@@ -17,6 +17,9 @@ class User {
     var profileImageUrl1: String!
     var profileImageUrl2: String!
     var profileImageUrl3: String!
+    var profileImageUrl4: String!
+    var profileImageUrl5: String!
+    var profileImageUrl6: String!
     var age: Int!
     var gender: String!
     var selfIntro: String!
@@ -49,6 +52,7 @@ class User {
     var hobby1: String!
     var hobby2: String!
     var hobby3: String!
+    var detailMap: String!
     
     init() {
     }
@@ -60,6 +64,9 @@ class User {
         profileImageUrl1 = dict[PROFILEIMAGEURL1] as? String ?? ""
         profileImageUrl2 = dict[PROFILEIMAGEURL2] as? String ?? ""
         profileImageUrl3 = dict[PROFILEIMAGEURL3] as? String ?? ""
+        profileImageUrl4 = dict[PROFILEIMAGEURL4] as? String ?? ""
+        profileImageUrl5 = dict[PROFILEIMAGEURL5] as? String ?? ""
+        profileImageUrl6 = dict[PROFILEIMAGEURL6] as? String ?? ""
         age = dict[AGE] as? Int ?? 18
         gender = dict[GENDER] as? String ?? ""
         residence = dict[RESIDENCE] as? String ?? ""
@@ -92,6 +99,7 @@ class User {
         hobby1 = dict[HOBBY1] as? String ?? ""
         hobby2 = dict[HOBBY2] as? String ?? ""
         hobby3 = dict[HOBBY3] as? String ?? ""
+        detailMap = dict[DETAILMAP] as? String ?? ""
     }
     
     // MARK: - Return user

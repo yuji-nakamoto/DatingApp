@@ -32,7 +32,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var matchedUserView: UIImageView!
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var afterMessageButton: UIButton!
-
+    
     private var profileImages = [UIImage]()
     var user = User()
     private var like = Like()
@@ -44,7 +44,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var typeUser = Type()
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton]
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -106,12 +106,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         Type.saveTypedUser(forUser: user)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
         incrementAppBadgeCount2()
-
+        
         if self.typeUser.isType == 1 {
             self.matchView()
             Match.saveMatchUser(forUser: self.user)
         }
-
+        
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
         
@@ -143,17 +143,20 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         removeEffectView()
     }
     
+    // MARK: - Fetch
+    
     private func fetchUserId() {
         guard userId != "" else { return }
         footsteps2(userId)
         
+        Type.checkIfMatch(toUserId: userId) { (type) in
+            self.typeUser = type
+        }
         User.fetchUser(userId) { (user) in
             self.user = user
             self.tableView.reloadData()
         }
     }
-    
-    // MARK: - Fetch
     
     private func fetchCurrentUser() {
         guard Auth.auth().currentUser?.uid != nil else { return }
@@ -248,7 +251,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     // MARK: - Helpers
-
+    
     private func createAndLoadIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
@@ -353,8 +356,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func configureUI() {
         
         views.forEach({ $0?.alpha = 0})
-        currentUserView.layer.cornerRadius = 100 / 2
-        matchedUserView.layer.cornerRadius = 100 / 2
+        currentUserView.layer.cornerRadius = 120 / 2
+        currentUserView.layer.borderWidth = 5
+        currentUserView.layer.borderColor = UIColor.white.cgColor
+        matchedUserView.layer.cornerRadius = 120 / 2
+        matchedUserView.layer.borderWidth = 5
+        matchedUserView.layer.borderColor = UIColor.white.cgColor
         
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none

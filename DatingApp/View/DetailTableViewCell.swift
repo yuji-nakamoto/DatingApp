@@ -50,6 +50,8 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var typeCountLabel: UILabel!
     @IBOutlet weak var loginBottomConstrait: NSLayoutConstraint!
     @IBOutlet weak var AgeLabelBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var detailMapLabel: UILabel!
+    
     
     // MARK: - Helpers
     
@@ -84,15 +86,31 @@ class DetailTableViewCell: UITableViewCell {
         profileImageView3.layer.cornerRadius = 15
         statusView.layer.cornerRadius = 15 / 2
         
-        selfIntrolabel.text = user?.selfIntro
         nameLabel.text = user?.username
         nameLabel2.text = user?.username
         residenceLabel.text = user?.residence
         residenceLabel2.text = user?.residence
         professionLabel.text = user?.profession
-        commentLabel.text = user?.comment
         bodyLabel.text = user?.bodySize
         heightLabel.text = user?.height
+        
+        if user?.selfIntro == "" {
+            selfIntrolabel.text = "未入力"
+        } else {
+            selfIntrolabel.text = user?.selfIntro
+        }
+            
+        if user?.comment == "" {
+            commentLabel.text = "未設定"
+        } else {
+            commentLabel.text = user?.comment
+        }
+        
+        if user?.detailMap == "" {
+            detailMapLabel.text = "未設定"
+        } else {
+            detailMapLabel.text = user?.detailMap
+        }
         
         if user!.age == nil {
             return

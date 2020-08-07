@@ -40,6 +40,9 @@ public let EMAIL = "email"
 public let PROFILEIMAGEURL1 = "profileImageUrl1"
 public let PROFILEIMAGEURL2 = "profileImageUrl2"
 public let PROFILEIMAGEURL3 = "profileImageUrl3"
+public let PROFILEIMAGEURL4 = "profileImageUrl4"
+public let PROFILEIMAGEURL5 = "profileImageUrl5"
+public let PROFILEIMAGEURL6 = "profileImageUrl6"
 public let CURRENTUSER = "currentUser"
 public let AGE = "age"
 public let GENDER = "gender"
@@ -72,6 +75,7 @@ public let POSTCOUNT = "postCount"
 public let HOBBY1 = "hobby1"
 public let HOBBY2 = "hobby2"
 public let HOBBY3 = "hobby3"
+public let DETAILMAP = "detailMap"
 
 // MARK: - Counter
 
