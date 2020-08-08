@@ -31,7 +31,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         getTypeCount(ref: COLLECTION_TYPECOUNTER.document(user.uid))
         backView.layer.cornerRadius = 10
         profileImageView.layer.cornerRadius = 150 / 2
-        statusView.layer.cornerRadius = 15 / 2
+        statusView.layer.cornerRadius = 12 / 2
         
         ageLabel.text = String(user.age) + "歳"
         residenceLabel.text = user.residence

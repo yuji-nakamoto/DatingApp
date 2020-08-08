@@ -108,6 +108,7 @@ public let TO = "to"
 public let FROM = "from"
 public let MESSAGETEXT = "messageText"
 public let DATE = "date"
+public let ISREAD = "isRead"
 
 // MARK: - Placeholder image
 
@@ -119,6 +120,11 @@ public let RCOMPLETION = "registerCompletion"
 public let TO_VERIFIED_VC = "toVerifiedVC"
 public let FEMALE = "female"
 public let FOOTSTEP_ON = "footstep_on"
+public let LIKE_ON = "like_on"
+public let TYPE_ON = "type_on"
+public let MATCH_ON = "match_on"
+public let MESSAGE_ON = "message_on"
+
 public let LOVER = "lover"
 public let FRIEND = "friend"
 public let MAILFRIEND = "mailfriend"

@@ -22,7 +22,7 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var pickerKeyboard: PickerKeyboard3!
     @IBOutlet weak var footstepSwitch: UISwitch!
     @IBOutlet weak var footstepLabel: UILabel!
-    
+
     private var user: User!
 
     // MARK: - Lifecycle
@@ -70,7 +70,7 @@ class SettingTableViewController: UITableViewController {
             footstepLabel.text = "足あとを残さない"
         }
     }
-    
+
     @IBAction func completionButtonPressed(_ sender: Any) {
         
         let dict = [MINAGE: Int(minLabel.text!)!,

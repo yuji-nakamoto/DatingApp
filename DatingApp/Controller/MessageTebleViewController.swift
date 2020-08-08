@@ -25,6 +25,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     private var badgeUser: User!
     private var users = [User]()
     private var messages = [Message]()
+    private var read: Read!
     var userId = ""
     
     // MARK: - Lifecycle
@@ -52,6 +53,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     private func fetchUser() {
         
         guard userId != "" else { return }
+        fetchRead(userId: userId)
+        Read.updateRead(userId)
         User.fetchUser(userId) { (user) in
             self.user = user
             self.navigationItem.title = "\(self.user.username!)"
@@ -78,6 +81,13 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
                 self.tableView.reloadData()
                 self.scrollToBottom()
             }
+        }
+    }
+    
+    private func fetchRead(userId: String) {
+        
+        Read.fetchRead(toUserId: userId) { (read) in
+            self.read = read
         }
     }
     
@@ -215,7 +225,9 @@ extension MessageTebleViewController: UITableViewDelegate, UITableViewDataSource
         
         let message = messages[indexPath.row]
         cell.message = message
+        cell.read = self.read
         cell.configureUser(user)
+        cell.timeLabel.isHidden = indexPath.row % 3 == 0 ? false : true
         
         return cell
     }

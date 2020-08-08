@@ -97,7 +97,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     @IBAction func typeButtonPressed(_ sender: Any) {
         
-        showTypeAnimation()
         let dict = [UID: user.uid!,
                     ISTYPE: 1,
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
@@ -107,23 +106,23 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
         incrementAppBadgeCount2()
         
+        typeButton.isEnabled = false
+        typeButton2.isEnabled = false
+        
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
+            }
+        } else {
+            showTypeAnimation()
+        }
         if self.typeUser.isType == 1 {
             self.matchView()
             Match.saveMatchUser(forUser: self.user)
         }
         
-        typeButton.isEnabled = false
-        typeButton2.isEnabled = false
-        
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
-                if self.interstitial.isReady {
-                    self.interstitial.present(fromRootViewController: self)
-                } else {
-                    print("Error interstitial")
-                }
-            }
-        }
     }
     
     @objc func handleDismissal() {
@@ -265,7 +264,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     private func incrementAppBadgeCount() {
-        
         sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがいいねしてくれました", badge: self.user.appBadgeCount + 1)
     }
     
@@ -313,7 +311,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
         visualEffectView.addGestureRecognizer(tap)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
             self.visualEffectView.frame = self.view.frame
             self.view.addSubview(self.visualEffectView)

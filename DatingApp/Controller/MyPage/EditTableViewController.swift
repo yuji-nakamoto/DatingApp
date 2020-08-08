@@ -529,42 +529,41 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             hobbySetLbl.text = "入力する"
             hobbySetLbl.font = UIFont.systemFont(ofSize: 17)
             hobbySetLbl.textColor = .systemGray
-            
-            if user.profileImageUrl2 == "" {
-                selectButton3.isEnabled = false
-                selectButton4.isEnabled = false
-                selectButton5.isEnabled = false
-                selectButton6.isEnabled = false
-                plusImageView2.isHidden = false
-                backView2.backgroundColor = UIColor(named: O_GREEN)
-            } else if user.profileImageUrl3 == "" {
-                selectButton3.isEnabled = true
-                selectButton4.isEnabled = false
-                selectButton5.isEnabled = false
-                selectButton6.isEnabled = false
-                plusImageView2.isHidden = true
-                plusImageView3.isHidden = false
-                backView3.backgroundColor = UIColor(named: O_GREEN)
-            } else if user.profileImageUrl4 == "" {
-                selectButton4.isEnabled = true
-                selectButton5.isEnabled = false
-                selectButton6.isEnabled = false
-                plusImageView3.isHidden = true
-                plusImageView4.isHidden = false
-                backView4.backgroundColor = UIColor(named: O_GREEN)
-            } else if user.profileImageUrl5 == "" {
-                selectButton5.isEnabled = true
-                selectButton6.isEnabled = false
-                plusImageView4.isHidden = true
-                plusImageView5.isHidden = false
-                backView5.backgroundColor = UIColor(named: O_GREEN)
-            } else if user.profileImageUrl6 == "" {
-                selectButton6.isEnabled = true
-                plusImageView5.isHidden = true
-                plusImageView6.isHidden = false
-                backView6.backgroundColor = UIColor(named: O_GREEN)
-            }
-            
+        }
+        
+        if user.profileImageUrl2 == "" {
+            selectButton3.isEnabled = false
+            selectButton4.isEnabled = false
+            selectButton5.isEnabled = false
+            selectButton6.isEnabled = false
+            plusImageView2.isHidden = false
+            backView2.backgroundColor = UIColor(named: O_GREEN)
+        } else if user.profileImageUrl3 == "" {
+            selectButton3.isEnabled = true
+            selectButton4.isEnabled = false
+            selectButton5.isEnabled = false
+            selectButton6.isEnabled = false
+            plusImageView2.isHidden = true
+            plusImageView3.isHidden = false
+            backView3.backgroundColor = UIColor(named: O_GREEN)
+        } else if user.profileImageUrl4 == "" {
+            selectButton4.isEnabled = true
+            selectButton5.isEnabled = false
+            selectButton6.isEnabled = false
+            plusImageView3.isHidden = true
+            plusImageView4.isHidden = false
+            backView4.backgroundColor = UIColor(named: O_GREEN)
+        } else if user.profileImageUrl5 == "" {
+            selectButton5.isEnabled = true
+            selectButton6.isEnabled = false
+            plusImageView4.isHidden = true
+            plusImageView5.isHidden = false
+            backView5.backgroundColor = UIColor(named: O_GREEN)
+        } else if user.profileImageUrl6 == "" {
+            selectButton6.isEnabled = true
+            plusImageView5.isHidden = true
+            plusImageView6.isHidden = false
+            backView6.backgroundColor = UIColor(named: O_GREEN)
         }
     }
     

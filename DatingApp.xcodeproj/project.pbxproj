@@ -53,6 +53,7 @@
 		834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */; };
 		834966CA24DD098E00C9B7DD /* SelfIntroTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */; };
 		834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */; };
+		834966CE24DE7E8700C9B7DD /* Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CD24DE7E8600C9B7DD /* Read.swift */; };
 		834BD3E824DAD0D70088D4EA /* AdsSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */; };
 		834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */; };
 		834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */; };
@@ -141,6 +142,7 @@
 		834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameTableViewController.swift; sourceTree = "<group>"; };
 		834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfIntroTableViewController.swift; sourceTree = "<group>"; };
 		834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapTableViewController.swift; sourceTree = "<group>"; };
+		834966CD24DE7E8600C9B7DD /* Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Read.swift; sourceTree = "<group>"; };
 		834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPostTableViewCell.swift; sourceTree = "<group>"; };
 		834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyTableViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				8348B5E224D2A4A20000A187 /* Post.swift */,
 				8350140124D49E94008D1170 /* Message.swift */,
 				834966BF24DC0B9600C9B7DD /* Match.swift */,
+				834966CD24DE7E8600C9B7DD /* Read.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				834912FC24C75830002990F8 /* StartViewController.swift in Sources */,
 				8348E3CD24CD0148001D59C0 /* AuthService.swift in Sources */,
 				838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */,
+				834966CE24DE7E8700C9B7DD /* Read.swift in Sources */,
 				8350E4BB24D9AE3800487DB9 /* PIckerKeyboard11.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,

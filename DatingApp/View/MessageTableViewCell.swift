@@ -15,6 +15,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var readLabel: UILabel!
     @IBOutlet weak var bubleLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubleWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubleRightConstraint: NSLayoutConstraint!
@@ -24,6 +25,8 @@ class MessageTableViewCell: UITableViewCell {
             updateView()
         }
     }
+    
+    var read: Read!
     
     func updateView() {
         let text = message!.messageText
@@ -40,6 +43,23 @@ class MessageTableViewCell: UITableViewCell {
         }
         
         if User.currentUserId() == message!.from {
+            
+            readLabel.isHidden = false
+            
+            if read == nil {
+                return
+            }
+            
+            if read.readed == 1 {
+                readLabel.text = "既読"
+
+            } else {
+                if readLabel.text == "既読" {
+                    readLabel.text = "既読"
+                } else {
+                    readLabel.text = "未読"
+                }
+            }
             
             if UserDefaults.standard.object(forKey: PINK) != nil {
                 bubleView.backgroundColor = UIColor(named: O_PINK)
@@ -62,6 +82,7 @@ class MessageTableViewCell: UITableViewCell {
             bubleRightConstraint.constant = 8
             bubleLeftConstraint.constant = UIScreen.main.bounds.width - bubleWidthConstraint.constant - bubleRightConstraint.constant
         } else {
+            readLabel.isHidden = true
             profileImageView.isHidden = false
             bubleView.backgroundColor = UIColor.systemGray2
             bubleView.layer.borderColor = UIColor.clear.cgColor
@@ -105,6 +126,7 @@ class MessageTableViewCell: UITableViewCell {
         timeLabel.text = ""
         dateLabel.text = ""
         messageLabel.text = ""
+        readLabel.isHidden = true
     }
     
     override func prepareForReuse() {

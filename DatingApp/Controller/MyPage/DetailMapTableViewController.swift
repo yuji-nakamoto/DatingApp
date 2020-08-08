@@ -21,7 +21,7 @@ class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "詳細値"
+        navigationItem.title = "詳細エリア"
         tableView.separatorStyle = .none
         setupKeyboard()
         fetchUser()

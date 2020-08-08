@@ -145,9 +145,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
                 updateUser(withValue: dict)
             }
         }
-        
-        print("userInfo: \(userInfo)")
-        
+
         completionHandler([.sound, .badge, .alert])
     }
     
