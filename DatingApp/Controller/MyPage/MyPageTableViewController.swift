@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class MyPageTableViewController: UIViewController {
     
@@ -34,10 +35,14 @@ class MyPageTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupUI()
-        fetchMatchedUser()
+        
+        if segmentControl.selectedSegmentIndex == 0 {
+            fetchMatchedUser()
+        } else {
+            fetchMyPost()
+        }
         resetBadge()
-        UserDefaults.standard.set(true, forKey: FEED)
+        setupUI()
     }
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
@@ -45,11 +50,8 @@ class MyPageTableViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             fetchMatchedUser()
-            UserDefaults.standard.set(true, forKey: FEED)
-
         case 1:
             fetchMyPost()
-            UserDefaults.standard.removeObject(forKey: FEED)
 
         default: break
         }
@@ -117,8 +119,6 @@ class MyPageTableViewController: UIViewController {
     
     private func setupUI() {
         
-        segmentControl.selectedSegmentIndex = 0
-
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
@@ -158,16 +158,17 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell3", for: indexPath) as! PostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! PostTableViewCell
         
         let myPost = myPosts[indexPath.row - 1]
         cell.post = myPost
         
-        if UserDefaults.standard.object(forKey: FEED) != nil {
+        if segmentControl.selectedSegmentIndex == 0 {
             cell.configureUserCell(users[indexPath.row - 1])
         } else {
             cell.configureCurrentUserCell(currentUser)
         }
+        
         return cell
     }
 }

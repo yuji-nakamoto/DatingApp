@@ -139,8 +139,6 @@ public let GREEN = "green"
 public let DARK = "dark"
 public let REFRESH = "refresh"
 public let CARDVC = "cardVC"
-public let FEED = "feed"
-public let MYPOST = "myPost"
 
 // MARK: - Notification
 

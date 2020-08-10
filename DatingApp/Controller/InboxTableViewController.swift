@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class InboxTableViewController: UIViewController, GADInterstitialDelegate {
     
@@ -106,6 +107,9 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func setupUI() {
         
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
@@ -151,5 +155,18 @@ extension InboxTableViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         performSegue(withIdentifier: "MessageVC", sender: inboxArray[indexPath.row].message.chatPartnerId)
+    }
+}
+
+extension InboxTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: " メッセージを送った\nお相手が、\nこちらに表示されます。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "気になった方のプロフィール欄から、\nメッセージを送ってみましょう。")
     }
 }

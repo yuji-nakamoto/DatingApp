@@ -74,7 +74,7 @@ class EnterResidenceMeetController: UIViewController {
                     HOLIDAY: "未設定",
                     LIQUOR: "未設定",
                     TOBACCO: "未設定",
-                    HOBBY1: "未設定",
+                    HOBBY1: "",
                     STATUS: "online",
                     DATE: date,
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]

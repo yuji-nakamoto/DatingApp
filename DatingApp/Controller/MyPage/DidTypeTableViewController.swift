@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
@@ -29,6 +30,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         setupBanner()
         fetchTypedUsers()
         interstitial = createAndLoadIntersitial()
@@ -135,6 +137,9 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     private func setupUI() {
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         navigationItem.title = "タイプ"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
@@ -202,5 +207,18 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
             return
         }
         performSegue(withIdentifier: "DetailVC", sender: types[indexPath.row].uid)
+    }
+}
+
+extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: "タイプされた、\nタイプした履歴が、\nこちらに表示されます。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "気になった方にタイプを送り、\nアプローチをしてみましょう。")
     }
 }

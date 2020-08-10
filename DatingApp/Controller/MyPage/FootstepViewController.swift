@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class FootstepTableViewController: UIViewController {
     
@@ -26,6 +27,7 @@ class FootstepTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         setupBanner()
         fetchtFootStepedUsers()
     }
@@ -118,6 +120,9 @@ class FootstepTableViewController: UIViewController {
     }
     
     private func setupUI() {
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         navigationItem.title = "足あと"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
@@ -159,5 +164,19 @@ extension FootstepTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: footsteps[indexPath.row].uid)
+    }
+}
+
+extension FootstepTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: "ユーザーの足あと、\nあなたの足あと履歴が、\nこちらに表示されます。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "足あとを残したくない場合は、\nマイページにある歯車マークから\n設定ができます。")
     }
 }

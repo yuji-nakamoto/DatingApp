@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class DidLikeTableViewController: UIViewController {
     
@@ -25,7 +26,7 @@ class DidLikeTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
         setupBanner()
         fetchLikedUsers()
         UIApplication.shared.applicationIconBadgeNumber = 0
@@ -119,6 +120,9 @@ class DidLikeTableViewController: UIViewController {
     }
     
     private func setupUI() {
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         navigationItem.title = "いいね"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
@@ -162,5 +166,19 @@ extension DidLikeTableViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: likes[indexPath.row].uid)
+    }
+}
+
+extension DidLikeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: "いいねされた、\nいいねした履歴が、\nこちらに表示されます。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "気になった方にいいねを送り、\nアプローチをしてみましょう。")
     }
 }

@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import GoogleMobileAds
 import Firebase
+import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class SearchViewController: UIViewController {
     
@@ -29,13 +30,15 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         setupBanner()
-        fetchUser()
         cofigureCollectionView()
         fetchBadgeCount()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        fetchUser()
+
         UserDefaults.standard.removeObject(forKey: CARDVC)
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
             fetchUser()
@@ -54,15 +57,15 @@ class SearchViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func refreshButtonPressed(_ sender: Any) {
-        self.viewDidLoad()
-        fetchUser()
-    }
-    
     @objc func refreshCollectionView(){
         fetchUser()
         refresh.endRefreshing()
     }
+    
+    @IBAction func refreshButtonPressed(_ sender: Any) {
+        fetchUser()
+    }
+    
     
     // MARK: - Fetch
     
@@ -114,12 +117,13 @@ class SearchViewController: UIViewController {
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailVC" {
-            
             let detailVC = segue.destination as! DetailTableViewController
             detailVC.user = sender as! User
         }
@@ -148,7 +152,7 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1 + users.count
+        return users.count == 0 ? 0 : 1 + users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -174,5 +178,19 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1])
+    }
+}
+
+extension SearchViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: "検索条件の結果から\n登録しているユーザーは\n見つかりませんでした。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "ユーザーが登録されるまで\n暫くお待ちになるか、\n検索条件を変更してみてください。")
     }
 }

@@ -26,6 +26,9 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionLabel2: UILabel!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var emptyLabel2: UILabel!
+    @IBOutlet weak var buttonStackView: UIStackView!
     
     private var cards = [Card]()
     private var users = [User]()
@@ -43,12 +46,12 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         super.viewDidLoad()
         setupUI()
         setupBanner()
-        fetchUser()
         interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchUser()
         UserDefaults.standard.set(true, forKey: CARDVC)
     }
     
@@ -396,6 +399,9 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func setupUI() {
         
+        emptyLabel.text = "スワイプできるカードは\nありません。"
+        emptyLabel2.text = "暫くお待ちになるか、\n検索条件を変更してみてください。"
+        emptyLabel2.textColor = .systemGray
         navigationItem.title = "カードからさがす"
         likeButtonView.layer.cornerRadius = 55 / 2
         typeButtonView.layer.cornerRadius = 55 / 2

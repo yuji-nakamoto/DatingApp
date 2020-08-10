@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
@@ -29,7 +30,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
         navigationItem.title = "メッセージ"
         setupBanner()
         collectionView.refreshControl = refresh
@@ -128,6 +129,9 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     
     private func setupUI() {
         
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
@@ -176,5 +180,18 @@ extension InboxCollectionViewController:  UICollectionViewDataSource, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: matches[indexPath.row].uid)
+    }
+}
+
+extension InboxCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: "マッチしているお相手が、\nこちらに表示されます。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "気になった方にタイプやメッセージを送り、\nアプローチしてみましょう。\n\nお互いがタイプになると\nマッチングが成立します。")
     }
 }

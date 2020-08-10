@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class PostTableViewController: UIViewController {
     
@@ -98,6 +99,9 @@ class PostTableViewController: UIViewController {
     }
     
     private func setupUI() {
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         UserDefaults.standard.removeObject(forKey: CARDVC)
         tableView.separatorStyle = .none
         tableView.refreshControl = refresh
@@ -132,12 +136,12 @@ class PostTableViewController: UIViewController {
 extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + posts.count
+        return posts.count == 0 ? 0 : 1 + posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 || indexPath.row == 5 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
+        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
@@ -158,4 +162,18 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
         performSegue(withIdentifier: "DetailVC", sender: posts[indexPath.row - 1].uid)
     }
 
+}
+
+extension PostTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        return NSAttributedString(string: "検索条件の結果、\n投稿は見つかりませんでした。", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "投稿されるまで暫くお待ちになるか、\n検索条件を変更してみてください。")
+    }
 }

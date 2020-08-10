@@ -76,6 +76,8 @@
 		8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350E4C024D9AE7B00487DB9 /* PIckerKeyboard14.swift */; };
 		8350E4C324D9AE8300487DB9 /* PIckerKeyboard15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350E4C224D9AE8300487DB9 /* PIckerKeyboard15.swift */; };
 		8354409F24D7DF09001C9398 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8354409E24D7DF09001C9398 /* Config.swift */; };
+		8368CD8E24E16ACF009C0391 /* PickerKeyboard16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */; };
+		8368CD9024E16B49009C0391 /* ModalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
@@ -168,6 +170,8 @@
 		8350E4C224D9AE8300487DB9 /* PIckerKeyboard15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIckerKeyboard15.swift; sourceTree = "<group>"; };
 		8354409D24D7DC8E001C9398 /* DatingApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatingApp.entitlements; sourceTree = "<group>"; };
 		8354409E24D7DF09001C9398 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard16.swift; sourceTree = "<group>"; };
+		8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSearchTableViewController.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 				8350E4BE24D9AE7000487DB9 /* PIckerKeyboard13.swift */,
 				8350E4C024D9AE7B00487DB9 /* PIckerKeyboard14.swift */,
 				8350E4C224D9AE8300487DB9 /* PIckerKeyboard15.swift */,
+				8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */,
 			);
 			path = PickerKeyboard;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				838071F324C66BAC008BAA2C /* Aurthentication */,
+				8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */,
 				8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */,
 				8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
@@ -582,11 +588,13 @@
 				831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */,
 				834966C024DC0B9600C9B7DD /* Match.swift in Sources */,
 				8348B5E524D351D80000A187 /* SendPostTableViewController.swift in Sources */,
+				8368CD8E24E16ACF009C0391 /* PickerKeyboard16.swift in Sources */,
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				8350E4BD24D9AE6800487DB9 /* PIckerKeyboard12.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
 				8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */,
 				8354409F24D7DF09001C9398 /* Config.swift in Sources */,
+				8368CD9024E16B49009C0391 /* ModalSearchTableViewController.swift in Sources */,
 				8348B5E724D35ADC0000A187 /* GenreTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
