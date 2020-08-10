@@ -11,12 +11,14 @@ import Foundation
 class Match {
     
     var uid: String!
+    var date: Double!
     
     init() {
     }
     
     init(dict: [String: Any]) {
         uid = dict[UID] as? String ?? ""
+        date = dict[DATE] as? Double ?? 0
     }
     
     // MARK: - Fetch match user
@@ -42,7 +44,8 @@ class Match {
         
         COLLECTION_MATCH.document(User.currentUserId()).collection("isMatch").document(user.uid).getDocument { (snapshot, error) in
             
-            let dict = [UID: user.uid]
+            let date: Double = Date().timeIntervalSince1970
+            let dict = [UID: user.uid!, DATE: date] as [String : Any]
             
             if snapshot?.exists == true {
                 COLLECTION_MATCH.document(User.currentUserId()).collection("isMatch").document(user.uid).updateData(dict as [AnyHashable : Any])
@@ -52,7 +55,8 @@ class Match {
         }
         COLLECTION_MATCH.document(user.uid).collection("isMatch").document(User.currentUserId()).getDocument { (snapshot, error) in
             
-            let dict = [UID: User.currentUserId()]
+            let date: Double = Date().timeIntervalSince1970
+            let dict = [UID: User.currentUserId(), DATE: date] as [String : Any]
             
             if snapshot?.exists == true {
                 COLLECTION_MATCH.document(user.uid).collection("isMatch").document(User.currentUserId()).updateData(dict)

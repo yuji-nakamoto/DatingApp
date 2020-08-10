@@ -58,8 +58,6 @@ class DidLikeTableViewCell: UITableViewCell {
             blackLine2.layer.cornerRadius = 16 / 2
             blackLine3.layer.cornerRadius = 16 / 2
             mozaicView.layer.cornerRadius = 70 / 2
-            profileImageView.layer.shouldRasterize = true
-            profileImageView.layer.rasterizationScale = 0.4
             nameLabel.layer.shouldRasterize = true
             nameLabel.layer.rasterizationScale = 0.35
             selfIntroLabel.layer.shouldRasterize = true

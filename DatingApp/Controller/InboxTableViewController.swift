@@ -16,6 +16,7 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var backView: UIView!
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
@@ -33,6 +34,11 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
         tableView.separatorStyle = .none
         setupBanner()
         interstitial = createAndLoadIntersitial()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupUI()
     }
 
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
@@ -96,6 +102,23 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
         topBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         topBannerView.rootViewController = self
         topBannerView.load(GADRequest())
+    }
+    
+    private func setupUI() {
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            backView.backgroundColor = UIColor(named: O_PINK)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            backView.backgroundColor = UIColor(named: O_GREEN)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            backView.backgroundColor = UIColor.white
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            backView.backgroundColor = UIColor(named: O_DARK)
+            backView.alpha = 0.85
+        }
     }
     
 }

@@ -26,10 +26,11 @@ class MatchCollectionViewCell: UICollectionViewCell {
         residenceLabel.text = user.residence
         ageLabel.text = String(user.age) + "歳"
         nameLabel.text = user.username
-        
-        let date = Date(timeIntervalSince1970: user.date)
+    }
+    
+    func configureDateCell(_ match: Match) {
+        let date = Date(timeIntervalSince1970: match.date)
         let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
         timeLabel.text = dateString
-
     }
 }

@@ -58,12 +58,14 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         guard let firstCard = cards.first else { return }
         
         let dict = [UID: firstCard.user?.uid! as Any,
-        ISTYPE: 1,
-        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                    ISTYPE: 1,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+        
         Type.saveIsTypeUser(forUser: firstCard.user!, isType: dict)
         Type.saveTypedUser(forUser: firstCard.user!)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(firstCard.user.uid), numShards: 10)
         incrementAppBadgeCount2()
+        Service.saveSwipe(toUserId: firstCard.user.uid)
         
         checkIfMatch(firstCard.user.uid, cardUser: firstCard.user)
         swipeAnimationY(translation: 1000)
@@ -83,12 +85,14 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         guard let firstCard = cards.first else { return }
         
         let dict = [UID: firstCard.user?.uid! as Any,
-        ISLIKE: 1,
-        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                    ISLIKE: 1,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+        
         Like.saveIsLikeUser(forUser: firstCard.user!, isLike: dict)
         Like.saveLikedUser(forUser: firstCard.user!)
         incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(firstCard.user.uid), numShards: 10)
         incrementAppBadgeCount()
+        Service.saveSwipe(toUserId: firstCard.user.uid)
         
         swipeAnimationX(translation: 750)
     }
@@ -97,9 +101,11 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         guard let firstCard = cards.first else { return }
         
         let dict = [UID: firstCard.user?.uid! as Any,
-        ISLIKE: 0,
-        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                    ISLIKE: 0,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+        
         Like.saveIsLikeUser(forUser: firstCard.user!, isLike: dict)
+        Service.saveSwipe(toUserId: firstCard.user.uid)
         swipeAnimationX(translation: -750)
     }
 
@@ -148,13 +154,15 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                     card.removeFromSuperview()
                 }
                 let dict = [UID: card.user?.uid! as Any,
-                ISLIKE: 1,
-                TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                            ISLIKE: 1,
+                            TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                
                 Like.saveIsLikeUser(forUser: card.user!, isLike: dict)
                 Like.saveLikedUser(forUser: card.user!)
                 incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(card.user.uid), numShards: 10)
                 incrementAppBadgeCount()
-                
+                Service.saveSwipe(toUserId: card.user.uid)
+                                    
                 self.updateCards(card: card)
                 return
                 
@@ -165,9 +173,11 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                     card.removeFromSuperview()
                 }
                 let dict = [UID: card.user?.uid! as Any,
-                ISLIKE: 0,
-                TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                            ISLIKE: 0,
+                            TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                
                 Like.saveIsLikeUser(forUser: card.user!, isLike: dict)
+                Service.saveSwipe(toUserId: card.user.uid)
                 
                 self.updateCards(card: card)
                 return
@@ -179,12 +189,14 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                     card.removeFromSuperview()
                 }
                 let dict = [UID: card.user?.uid! as Any,
-                ISTYPE: 1,
-                TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                            ISTYPE: 1,
+                            TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                
                 Type.saveIsTypeUser(forUser: card.user!, isType: dict)
                 Type.saveTypedUser(forUser: card.user!)
                 incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(card.user.uid), numShards: 10)
                 incrementAppBadgeCount2()
+                Service.saveSwipe(toUserId: card.user.uid)
                 
                 checkIfMatch(card.user.uid, cardUser: card.user)
                 
@@ -197,7 +209,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                         }
                     }
                 }
-                
                 self.updateCards(card: card)
                 return
             }

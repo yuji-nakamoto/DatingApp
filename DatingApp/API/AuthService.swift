@@ -59,6 +59,9 @@ struct AuthService {
         do {
             Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
             try Auth.auth().signOut()
+            UserDefaults.standard.removeObject(forKey: PINK)
+            UserDefaults.standard.removeObject(forKey: GREEN)
+            UserDefaults.standard.removeObject(forKey: DARK)
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             completion(nil)
             

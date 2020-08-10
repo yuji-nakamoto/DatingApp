@@ -24,6 +24,8 @@ public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounte
 public let COLLECTION_TYPECOUNTER = Firestore.firestore().collection("typeCounter")
 public let COLLECTION_MATCH = Firestore.firestore().collection("match")
 public let COLLECTION_FEED = Firestore.firestore().collection("feed")
+public let COLLECTION_SWIPE = Firestore.firestore().collection("swipe")
+
 
 // MARK: - Color
 

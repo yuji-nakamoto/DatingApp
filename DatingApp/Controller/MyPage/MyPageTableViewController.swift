@@ -16,6 +16,7 @@ class MyPageTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var currentUser = User()
     private var user = User()
@@ -105,6 +106,7 @@ class MyPageTableViewController: UIViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.currentUser = user
+            self.tableView.reloadData()
             let totalAppBadgeCount = user.appBadgeCount - user.myPageBadgeCount
             
             updateUser(withValue: [MYPAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
@@ -115,6 +117,8 @@ class MyPageTableViewController: UIViewController {
     
     private func setupUI() {
         
+        segmentControl.selectedSegmentIndex = 0
+
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
@@ -150,7 +154,6 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MyPageTableViewCell
-            
             cell.configureCell(currentUser)
             return cell
         }
@@ -161,7 +164,7 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell.post = myPost
         
         if UserDefaults.standard.object(forKey: FEED) != nil {
-            cell.configureUserCell(user)
+            cell.configureUserCell(users[indexPath.row - 1])
         } else {
             cell.configureCurrentUserCell(currentUser)
         }

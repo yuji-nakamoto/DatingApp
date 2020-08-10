@@ -34,6 +34,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var afterMessageButton: UIButton!
     @IBOutlet weak var congratsLabel: UILabel!
     @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel2: UILabel!
     
     private var profileImages = [UIImage]()
     var user = User()
@@ -45,7 +47,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var interstitial: GADInterstitial!
     private var typeUser = Type()
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel]
+    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel, descriptionLabel, descriptionLabel2]
     
     // MARK: - Lifecycle
     
@@ -125,7 +127,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             self.matchView()
             Match.saveMatchUser(forUser: self.user)
         }
-        
     }
     
     @objc func handleDismissal() {

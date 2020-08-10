@@ -105,14 +105,16 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
             } else {
                 print("Error interstitial")
             }
+        } else {
+            hud.textLabel.text = "投稿しました"
+            hud.show(in: self.view)
+            hudSuccess()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
-        hud.textLabel.text = "投稿しました"
-        hud.show(in: self.view)
-        hudSuccess()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.dismiss(animated: true, completion: nil)
-        }
     }
     
     // MARK: - Fetch user

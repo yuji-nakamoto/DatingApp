@@ -25,12 +25,6 @@ class AdsPostTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        bannerView.layer.cornerRadius = 10
-        bannerView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        bannerView.layer.shadowColor = UIColor.black.cgColor
-        bannerView.layer.shadowOpacity = 0.3
-        bannerView.layer.shadowRadius = 4
-        
         bannerLabel.layer.cornerRadius = 18 / 2
         bannerLabel.backgroundColor = .systemPurple
     }

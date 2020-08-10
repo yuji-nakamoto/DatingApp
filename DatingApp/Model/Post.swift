@@ -47,9 +47,10 @@ class Post {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
             let postRef = COLLECTION_POSTS
-                .order(by: TIMESTAMP)
                 .whereField(GENDER, isEqualTo: "男性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                .order(by: TIMESTAMP)
+
             
             postRef.addSnapshotListener { (snapshot, error) in
                 if let error = error {
@@ -98,7 +99,7 @@ class Post {
     
     class func fetchFeed(matchedUserId: String, comletion: @escaping(_ post: Post) -> Void) {
         
-        COLLECTION_FEED.document(matchedUserId).collection(User.currentUserId()).getDocuments { (snapshot, error) in
+        COLLECTION_FEED.document(matchedUserId).collection(User.currentUserId()).order(by: TIMESTAMP).getDocuments { (snapshot, error) in
             if let error = error {
                 print("ERROR fetch feed: \(error.localizedDescription)")
             }

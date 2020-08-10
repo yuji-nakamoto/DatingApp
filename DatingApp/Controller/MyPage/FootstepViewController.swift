@@ -16,6 +16,8 @@ class FootstepTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var topBannerView: GADBannerView!
+    @IBOutlet weak var backView: UIView!
+    
     
     private var footsteps = [Footstep]()
     private var users = [User]()
@@ -25,8 +27,12 @@ class FootstepTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBanner()
-        setupUI()
         fetchtFootStepedUsers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupUI()
     }
     
     // MARK: - Actions
@@ -112,13 +118,23 @@ class FootstepTableViewController: UIViewController {
     }
     
     private func setupUI() {
+        navigationItem.title = "足あと"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-
-        if UserDefaults.standard.object(forKey: DARK) != nil {
+        if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: PINK) != nil {
+            backView.backgroundColor = UIColor(named: O_PINK)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            backView.backgroundColor = UIColor(named: O_GREEN)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            backView.backgroundColor = UIColor.white
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
+            backView.backgroundColor = UIColor(named: O_DARK)
+            backView.alpha = 0.85
         }
     }
 }

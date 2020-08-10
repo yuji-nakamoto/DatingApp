@@ -16,6 +16,7 @@ class DidLikeTableViewController: UIViewController {
     @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backView: UIView!
     
     private var likes = [Like]()
     private var users = [User]()
@@ -26,9 +27,13 @@ class DidLikeTableViewController: UIViewController {
         super.viewDidLoad()
         
         setupBanner()
-        setupUI()
         fetchLikedUsers()
         UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupUI()
     }
     
     // MARK: - Actions
@@ -114,13 +119,23 @@ class DidLikeTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        
+        navigationItem.title = "いいね"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        if UserDefaults.standard.object(forKey: DARK) != nil {
+        if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: PINK) != nil {
+            backView.backgroundColor = UIColor(named: O_PINK)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            backView.backgroundColor = UIColor(named: O_GREEN)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            backView.backgroundColor = UIColor.white
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
+            backView.backgroundColor = UIColor(named: O_DARK)
+            backView.alpha = 0.85
         }
     }
 

@@ -17,6 +17,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var backView: UIView!
     
     private var matches = [Match]()
     private var users = [User]()
@@ -43,6 +44,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         segmentControl.selectedSegmentIndex = 0
         fetchMatchUsers()
         resetBadge()
+        setupUI()
     }
     
     // MARK: - Actions
@@ -124,6 +126,23 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         topBannerView.load(GADRequest())
     }
     
+    private func setupUI() {
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            backView.backgroundColor = UIColor(named: O_PINK)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            backView.backgroundColor = UIColor(named: O_GREEN)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            backView.backgroundColor = UIColor.white
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            backView.backgroundColor = UIColor(named: O_DARK)
+            backView.alpha = 0.85
+        }
+    }
+    
 }
 
 
@@ -145,6 +164,7 @@ extension InboxCollectionViewController:  UICollectionViewDataSource, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MatchCollectionViewCell
         
         cell.configureCell(users[indexPath.row])
+        cell.configureDateCell(matches[indexPath.row])
         cell.layer.cornerRadius = 10
         cell.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         cell.layer.shadowColor = UIColor.black.cgColor

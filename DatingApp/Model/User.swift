@@ -118,7 +118,7 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
-//            print("DEBUG: snapshot data \(snapshot?.data())")
+            //            print("DEBUG: snapshot data \(snapshot?.data())")
             guard snapshot?.data() != nil else { return }
             let user = User(dict: snapshot!.data()! as [String: Any])
             completion(user)
@@ -126,11 +126,11 @@ class User {
     }
     
     class func fetchUsers(forCurrentUer user: User, completion: @escaping(User) -> Void) {
-
+        
         let query = COLLECTION_USERS
             .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
             .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
-
+        
         query.getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
                 let dictionary = document.data()
@@ -158,35 +158,42 @@ class User {
                 .whereField(GENDER, isEqualTo: "男性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
             
-            usersRef.getDocuments { (snapshot, error) in
-                
-                if let error = error {
-                    print("Error gender sort: \(error.localizedDescription)")
-                } else {
-                    snapshot?.documents.forEach({ (document) in
-                        let dict = document.data()
-                        let user = User(dict: dict as [String: Any])
-                        guard user.uid != User.currentUserId() else { return }
-                        completion(user)
-                    })
+            Service.fetchSwipe { (swipeUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error card sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard swipeUserIDs[user.uid] == nil else { return }
+                            completion(user)
+                        })
+                    }
                 }
             }
+            
         } else {
             let usersRef = COLLECTION_USERS
                 .whereField(GENDER, isEqualTo: "女性")
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
             
-            usersRef.getDocuments { (snapshot, error) in
-                
-                if let error = error {
-                    print("Error gender sort: \(error.localizedDescription)")
-                } else {
-                    snapshot?.documents.forEach({ (document) in
-                        let dict = document.data()
-                        let user = User(dict: dict as [String: Any])
-                        guard user.uid != User.currentUserId() else { return }
-                        completion(user)
-                    })
+            Service.fetchSwipe { (swipeUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error card sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard swipeUserIDs[user.uid] == nil else { return }
+                            completion(user)
+                        })
+                    }
                 }
             }
         }

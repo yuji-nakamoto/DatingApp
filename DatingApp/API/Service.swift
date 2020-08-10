@@ -68,4 +68,28 @@ struct Service {
         }
     }
     
+    static func saveSwipe(toUserId: String) {
+        
+        COLLECTION_SWIPE.document(User.currentUserId()).getDocument { (snapshot, error) in
+            let data = [toUserId: true]
+            
+            if snapshot?.exists == true {
+                COLLECTION_SWIPE.document(User.currentUserId()).updateData(data)
+            } else {
+                COLLECTION_SWIPE.document(User.currentUserId()).setData(data)
+            }
+        }
+    }
+    
+    static func fetchSwipe(completion: @escaping([String: Bool]) -> Void) {
+                
+        COLLECTION_SWIPE.document(User.currentUserId()).getDocument { (snapshot, error) in
+            guard let data = snapshot?.data() as? [String: Bool] else {
+                completion([String: Bool]())
+                return
+            }
+            completion(data)
+        }
+    }
+    
 }

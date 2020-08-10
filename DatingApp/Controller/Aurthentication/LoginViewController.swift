@@ -62,7 +62,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.startAnimating()
         
         AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-                   
+                   UserDefaults.standard.set(true, forKey: WHITE)
+
                    self.toTabBerVC()
                    self.activityIndicator.stopAnimating()
                }
@@ -74,6 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //                    hud.textLabel.text = "ログインに成功しました。"
 //                    hud.show(in: self.view)
 //                    hudSuccess()
+//                    UserDefaults.standard.set(true, forKey: WHITE)
 //                    self.toTabBerVC()
 //                } else {
 //                    generator.notificationOccurred(.error)
