@@ -13,6 +13,16 @@ struct AuthService {
     
     // MARK: - Authentication func
     
+    static func testLoginUser(email: String, password: String, comletion: @escaping() -> Void) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            comletion()
+        }
+    }
+    
     static func loginUser(email: String, password: String, completion: @escaping(_ error: Error?, _ isEmailVerified: Bool) -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
@@ -37,9 +47,9 @@ struct AuthService {
             completion(error)
             
             if error == nil {
-                result!.user.sendEmailVerification { (error) in
-                    print("Error: \(String(describing: error?.localizedDescription))")
-                }
+//                result!.user.sendEmailVerification { (error) in
+//                    print("Error: \(String(describing: error?.localizedDescription))")
+//                }
             }
         }
     }
@@ -47,8 +57,8 @@ struct AuthService {
     static func logoutUser(completion: @escaping (_ error: Error?) -> Void) {
         
         do {
-            try Auth.auth().signOut()
             Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
+            try Auth.auth().signOut()
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             completion(nil)
             

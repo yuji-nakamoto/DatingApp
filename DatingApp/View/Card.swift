@@ -1,29 +1,15 @@
 //
-//  DetailTableViewCell.swift
+//  Card.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/23.
+//  Created by yuji_nakamoto on 2020/08/08.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
-import Firebase
 
-class DetailTableViewCell: UITableViewCell {
-    
-    // MARK: - Properties
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
-    @IBOutlet weak var residenceLabel: UILabel!
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var selfIntrolabel: UILabel!
-    @IBOutlet weak var nameLabel2: UILabel!
-    @IBOutlet weak var ageLabel2: UILabel!
-    @IBOutlet weak var bodyLabel: UILabel!
-    @IBOutlet weak var residenceLabel2: UILabel!
-    @IBOutlet weak var professionLabel: UILabel!
-    @IBOutlet weak var heightLabel: UILabel!
+class Card: UIView {
+
     @IBOutlet weak var profileImageView1: UIImageView!
     @IBOutlet weak var profileImageView2: UIImageView!
     @IBOutlet weak var profileImageView3: UIImageView!
@@ -55,44 +41,19 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var stackViewFour: UIStackView!
     @IBOutlet weak var stackViewFive: UIStackView!
     @IBOutlet weak var stackViewSix: UIStackView!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var educationLabel: UILabel!
-    @IBOutlet weak var birthplaceLabel: UILabel!
-    @IBOutlet weak var bloodLabel: UILabel!
-    @IBOutlet weak var marriageHistoyLabel: UILabel!
-    @IBOutlet weak var child1Label: UILabel!
-    @IBOutlet weak var marriageLabel: UILabel!
-    @IBOutlet weak var hobbyLabel: UILabel!
-    @IBOutlet weak var child2Label: UILabel!
-    @IBOutlet weak var holidayLabel: UILabel!
-    @IBOutlet weak var liquorlabel: UILabel!
-    @IBOutlet weak var housemateLabel: UILabel!
-    @IBOutlet weak var tobaccoLabel: UILabel!
-    @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var likeCountLabel: UILabel!
-    @IBOutlet weak var typeCountLabel: UILabel!
-    @IBOutlet weak var loginBottomConstrait: NSLayoutConstraint!
-    @IBOutlet weak var AgeLabelBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var detailMapLabel: UILabel!
-    
-    // MARK: - Helpers
-    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var residenceLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var likeView: UIView!
+    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var nopeView: UIView!
+    @IBOutlet weak var nopeLabel: UILabel!
+    @IBOutlet weak var typeView: UIView!
+
     var user: User!
+    var cardVC: CardViewController?
     
     func configureCell(_ user: User?) {
-        
-        if user?.profileImageUrl2 == "" {
-            loginBottomConstrait.constant = -10
-            AgeLabelBottomConstraint.constant = -10
-        } else {
-            loginBottomConstrait.constant = 10
-            AgeLabelBottomConstraint.constant = 10
-        }
-        
-        if user?.uid != nil {
-            getLikeCount(ref: COLLECTION_LIKECOUNTER.document((user?.uid)!))
-            getTypeCount(ref: COLLECTION_TYPECOUNTER.document((user?.uid)!))
-        }
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
@@ -121,85 +82,11 @@ class DetailTableViewCell: UITableViewCell {
         profileImageView4.layer.cornerRadius = 15
         profileImageView5.layer.cornerRadius = 15
         profileImageView6.layer.cornerRadius = 15
-        statusView.layer.cornerRadius = 12 / 2
         
         nameLabel.text = user?.username
-        nameLabel2.text = user?.username
         residenceLabel.text = user?.residence
-        residenceLabel2.text = user?.residence
-        if user?.profession == "" {
-            professionLabel.text = "未設定"
-        } else {
-            professionLabel.text = user?.profession
-        }
-        bodyLabel.text = user?.bodySize
-        heightLabel.text = user?.height
-        
-        if user?.selfIntro == "" {
-            selfIntrolabel.text = "未入力"
-        } else {
-            selfIntrolabel.text = user?.selfIntro
-        }
-        
-        if user?.comment == "" {
-            commentLabel.text = "まだひとことはありません"
-            commentLabel.textColor = .systemGray
-        } else {
-            commentLabel.text = user?.comment
-            commentLabel.textColor = UIColor(named: O_BLACK)
-        }
-        
-        if user?.detailMap == "" {
-            detailMapLabel.text = "未設定"
-        } else {
-            detailMapLabel.text = user?.detailMap
-        }
-        
-        if user!.age == nil {
-            return
-        }
         ageLabel.text = String(user!.age) + "歳"
-        ageLabel2.text = String(user!.age) + "歳"
-        bloodLabel.text = user?.blood
-        birthplaceLabel.text = user?.birthplace
-        educationLabel.text = user?.education
-        marriageHistoyLabel.text = user?.marriageHistory
-        marriageLabel.text = user?.marriage
-        child1Label.text = user?.child1
-        child2Label.text = user?.child2
-        hobbyLabel.text = user?.hobby1
-        housemateLabel.text = user?.houseMate
-        holidayLabel.text = user?.holiday
-        liquorlabel.text = user?.liquor
-        tobaccoLabel.text = user?.tobacco
-        
-        if user?.hobby1 != "" && user?.hobby2 != "" && user?.hobby3 != "" {
-            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)! + "," + (user?.hobby3)!
-            hobbyLabel.font = UIFont.systemFont(ofSize: 12)
-        } else if user?.hobby1 != "" && user?.hobby2 != "" {
-            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)!
-            hobbyLabel.font = UIFont.systemFont(ofSize: 15)
-        } else if user?.hobby2 != "" && user?.hobby3 != "" {
-            hobbyLabel.text = (user?.hobby2)! + "," + (user?.hobby3)!
-            hobbyLabel.font = UIFont.systemFont(ofSize: 15)
-        } else if user?.hobby1 != "" && user?.hobby3 != "" {
-            hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby3)!
-            hobbyLabel.font = UIFont.systemFont(ofSize: 15)
-        } else if user?.hobby1 != "" || user?.hobby2 != "" || user?.hobby3 != "" {
-            hobbyLabel.text = (user?.hobby1)! + (user?.hobby2)! + (user?.hobby3)!
-            hobbyLabel.font = UIFont.systemFont(ofSize: 17)
-        } else {
-            hobbyLabel.text = "未設定"
-            hobbyLabel.font = UIFont.systemFont(ofSize: 17)
-        }
-        
-        if timeLabel != nil {
-            let date = user?.lastChanged.dateValue()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd h:m"
-            timeLabel.text = dateFormatter.string(from: date!)
-        }
-        
+
         if user!.profileImageUrl2 == "" && user!.profileImageUrl3 == "" && user!.profileImageUrl4 == "" && user!.profileImageUrl5 == "" && user!.profileImageUrl6 == "" {
             profileImageUrl_23456Nil()
             
@@ -218,18 +105,17 @@ class DetailTableViewCell: UITableViewCell {
         } else {
             profileImageUrlHaveAll()
         }
-        
-        COLLECTION_USERS.document((user?.uid)!).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                print("Error fetch is online: \(error.localizedDescription)")
-            }
-            if let dict = snapshot?.data() {
-                if let active = dict[STATUS] as? String {
-                    self.statusView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
-                }
-            }
-        }
     }
+    
+    @IBAction func infoImageTapped(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailTableViewController
+        detailVC.user = user
+    
+        cardVC?.present(detailVC, animated: true, completion: nil)
+    }
+    
     
     @objc func handleChangePhoto(_ sender: UITapGestureRecognizer) {
         
@@ -504,53 +390,18 @@ class DetailTableViewCell: UITableViewCell {
         }
     }
     
-    func getLikeCount(ref: DocumentReference) {
-        ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
-            var totalLikeCount = 0
-            if  let err = err {
-                print("Error total count: \(err.localizedDescription)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let likeCount = document.data()[LIKECOUNT] as! Int
-                    totalLikeCount += likeCount
-                }
-            }
-            if totalLikeCount > 999 {
-                self.likeCountLabel.text = "999"
-            } else {
-                self.likeCountLabel.text = String(totalLikeCount)
-            }
-        }
-    }
-    
-    func getTypeCount(ref: DocumentReference) {
-        ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
-            var totalTypeCount = 0
-            if  let err = err {
-                print("Error total count: \(err.localizedDescription)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let typeCount = document.data()[TYPECOUNT] as! Int
-                    totalTypeCount += typeCount
-                }
-            }
-            if totalTypeCount > 999 {
-                self.typeCountLabel.text = "999"
-            } else {
-                self.typeCountLabel.text = String(totalTypeCount)
-            }
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .clear
+        likeView.alpha = 0
+        nopeView.alpha = 0
+        typeView.alpha = 0
+        likeView.layer.cornerRadius = 15
+        nopeView.layer.cornerRadius = 15
+        typeView.layer.cornerRadius = 15
         
-        ageLabel.text = ""
-        segBarDouble1.layer.cornerRadius = 5 / 2
-        segBarDouble2.layer.cornerRadius = 5 / 2
-        segBarTriple1.layer.cornerRadius = 5 / 2
-        segBarTriple2.layer.cornerRadius = 5 / 2
-        segBarTriple3.layer.cornerRadius = 5 / 2
+        likeLabel.transform = CGAffineTransform(rotationAngle: -.pi / 8)
+        nopeLabel.transform = CGAffineTransform(rotationAngle: .pi / 8)
     }
     
     func profileImageUrl_23456Nil() {
@@ -615,5 +466,5 @@ class DetailTableViewCell: UITableViewCell {
         segBarSix5.alpha = 0.5
         segBarSix6.alpha = 0.5
     }
-    
+
 }

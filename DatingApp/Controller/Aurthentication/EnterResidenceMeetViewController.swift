@@ -56,6 +56,7 @@ class EnterResidenceMeetController: UIViewController {
 
     private func saveUserProfession() {
         
+        let date: Double = Date().timeIntervalSince1970
         let dict = [RESIDENCESEARCH: residenceLabel.text!,
                     SELFINTRO: "はじめまして！",
                     COMMENT: "",
@@ -75,6 +76,7 @@ class EnterResidenceMeetController: UIViewController {
                     TOBACCO: "未設定",
                     HOBBY1: "未設定",
                     STATUS: "online",
+                    DATE: date,
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]
         
         updateUser(withValue: dict as [String : Any])

@@ -27,9 +27,9 @@ class MatchCollectionViewCell: UICollectionViewCell {
         ageLabel.text = String(user.age) + "歳"
         nameLabel.text = user.username
         
-        let date = user.lastChanged.dateValue()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd h:m"
-        timeLabel.text = dateFormatter.string(from: date)
+        let date = Date(timeIntervalSince1970: user.date)
+        let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
+        timeLabel.text = dateString
+
     }
 }

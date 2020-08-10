@@ -15,8 +15,10 @@ class MyPageTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var backView: UIView!
     
-    private var user: User!
+    private var currentUser = User()
+    private var user = User()
     private var myPosts = [Post]()
     private var users = [User]()
     
@@ -27,28 +29,34 @@ class MyPageTableViewController: UIViewController {
         navigationItem.title = "マイページ"
         tableView.separatorStyle = .none
         setupBanner()
-        fetchCurrentUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        fetchMyPost()
-        fetchCurrentUser()
+        setupUI()
+        fetchMatchedUser()
         resetBadge()
+        UserDefaults.standard.set(true, forKey: FEED)
     }
     
-    // MARK: - Fetch user
-    
-    private func fetchCurrentUser() {
+    @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            self.tableView.reloadData()
+        switch sender.selectedSegmentIndex {
+        case 0:
+            fetchMatchedUser()
+            UserDefaults.standard.set(true, forKey: FEED)
+
+        case 1:
+            fetchMyPost()
+            UserDefaults.standard.removeObject(forKey: FEED)
+
+        default: break
         }
     }
     
-    private func fetchUser(_ uid: String, completion: @escaping() -> Void) {
+    // MARK: - Fetch
+    
+    private func fetchUsers(_ uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
             self.users.insert(user, at: 0)
@@ -56,18 +64,37 @@ class MyPageTableViewController: UIViewController {
         }
     }
     
-    // MARK: - Fetch my post
-    
     private func fetchMyPost() {
         
         users.removeAll()
         myPosts.removeAll()
+        tableView.reloadData()
         
         Post.fetchMyPost() { (post) in
             guard let uid = post.uid else { return }
-            self.fetchUser(uid) {
+            self.fetchUsers(uid) {
                 self.myPosts.insert(post, at: 0)
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func fetchMatchedUser() {
+        
+        users.removeAll()
+        myPosts.removeAll()
+        tableView.reloadData()
+
+        Match.fetchMatchUser { (match) in
+            User.fetchUser(match.uid) { (user) in
+                self.user = user
+            }
+            guard let uid = match.uid else { return }
+            Post.fetchFeed(matchedUserId: uid) { (feed) in
+                self.fetchUsers(uid) {
+                    self.myPosts.insert(feed, at: 0)
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -77,12 +104,29 @@ class MyPageTableViewController: UIViewController {
     private func resetBadge() {
         
         User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
+            self.currentUser = user
             let totalAppBadgeCount = user.appBadgeCount - user.myPageBadgeCount
             
             updateUser(withValue: [MYPAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
             UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
-            self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
+            self.tabBarController!.viewControllers![4].tabBarItem.badgeValue = nil
+        }
+    }
+    
+    private func setupUI() {
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            backView.backgroundColor = UIColor(named: O_PINK)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            backView.backgroundColor = UIColor(named: O_GREEN)
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            backView.backgroundColor = UIColor.white
+            backView.alpha = 0.85
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            backView.backgroundColor = UIColor(named: O_DARK)
+            backView.alpha = 0.85
         }
     }
     
@@ -107,7 +151,7 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MyPageTableViewCell
             
-            cell.configureCell(user)
+            cell.configureCell(currentUser)
             return cell
         }
         
@@ -115,7 +159,12 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         let myPost = myPosts[indexPath.row - 1]
         cell.post = myPost
-        cell.configureUserCell(user)
+        
+        if UserDefaults.standard.object(forKey: FEED) != nil {
+            cell.configureUserCell(user)
+        } else {
+            cell.configureCurrentUserCell(currentUser)
+        }
         return cell
     }
 }

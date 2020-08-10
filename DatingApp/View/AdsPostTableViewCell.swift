@@ -12,7 +12,6 @@ import GoogleMobileAds
 class AdsPostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var bannerLabel: UILabel!
 
     var postVC: PostTableViewController?
@@ -26,13 +25,12 @@ class AdsPostTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        shadowView.layer.cornerRadius = 10
-        shadowView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        shadowView.layer.shadowColor = UIColor.black.cgColor
-        shadowView.layer.shadowOpacity = 0.3
-        shadowView.layer.shadowRadius = 4
-        
         bannerView.layer.cornerRadius = 10
+        bannerView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        bannerView.layer.shadowColor = UIColor.black.cgColor
+        bannerView.layer.shadowOpacity = 0.3
+        bannerView.layer.shadowRadius = 4
+        
         bannerLabel.layer.cornerRadius = 18 / 2
         bannerLabel.backgroundColor = .systemPurple
     }

@@ -30,7 +30,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         super.viewDidLoad()
         
         navigationItem.title = "メッセージ"
-        fetchMatchUsers()
         setupBanner()
         collectionView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
@@ -39,7 +38,10 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        UserDefaults.standard.removeObject(forKey: CARDVC)
         segmentControl.selectedSegmentIndex = 0
+        fetchMatchUsers()
         resetBadge()
     }
     
@@ -96,7 +98,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
             
             updateUser(withValue: [MESSAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
             UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
-            self.tabBarController!.viewControllers![2].tabBarItem.badgeValue = nil
+            self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
         }
     }
     

@@ -23,6 +23,7 @@ public let COLLECTION_INBOX = Firestore.firestore().collection("inbox")
 public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounter")
 public let COLLECTION_TYPECOUNTER = Firestore.firestore().collection("typeCounter")
 public let COLLECTION_MATCH = Firestore.firestore().collection("match")
+public let COLLECTION_FEED = Firestore.firestore().collection("feed")
 
 // MARK: - Color
 
@@ -135,6 +136,9 @@ public let PINK = "pink"
 public let GREEN = "green"
 public let DARK = "dark"
 public let REFRESH = "refresh"
+public let CARDVC = "cardVC"
+public let FEED = "feed"
+public let MYPOST = "myPost"
 
 // MARK: - Notification
 

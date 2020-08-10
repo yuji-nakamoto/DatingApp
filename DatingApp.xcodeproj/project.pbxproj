@@ -54,7 +54,9 @@
 		834966CA24DD098E00C9B7DD /* SelfIntroTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */; };
 		834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */; };
 		834966CE24DE7E8700C9B7DD /* Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CD24DE7E8600C9B7DD /* Read.swift */; };
-		834BD3E824DAD0D70088D4EA /* AdsSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */; };
+		834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CF24DEE07B00C9B7DD /* CardViewController.swift */; };
+		834966D224DEE10C00C9B7DD /* Card.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834966D124DEE10C00C9B7DD /* Card.xib */; };
+		834966D424DEE19C00C9B7DD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966D324DEE19C00C9B7DD /* Card.swift */; };
 		834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */; };
 		834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */; };
 		835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */; };
@@ -143,7 +145,9 @@
 		834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfIntroTableViewController.swift; sourceTree = "<group>"; };
 		834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapTableViewController.swift; sourceTree = "<group>"; };
 		834966CD24DE7E8600C9B7DD /* Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Read.swift; sourceTree = "<group>"; };
-		834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		834966CF24DEE07B00C9B7DD /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		834966D124DEE10C00C9B7DD /* Card.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Card.xib; sourceTree = "<group>"; };
+		834966D324DEE19C00C9B7DD /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPostTableViewCell.swift; sourceTree = "<group>"; };
 		834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyTableViewController.swift; sourceTree = "<group>"; };
 		835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxCollectionViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 				8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
 				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
+				834966CF24DEE07B00C9B7DD /* CardViewController.swift */,
 				8350140724D55D88008D1170 /* MyPage */,
 				8350140824D55DF6008D1170 /* Post */,
 				835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */,
@@ -342,9 +347,10 @@
 				8348E3E624CE0BC4001D59C0 /* DidLikeTableViewCell.swift */,
 				8348B5E024D2A1560000A187 /* PostTableViewCell.swift */,
 				835013FF24D414C4008D1170 /* MessageTableViewCell.swift */,
-				834BD3E724DAD0D60088D4EA /* AdsSearchCollectionViewCell.swift */,
 				834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */,
 				834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */,
+				834966D124DEE10C00C9B7DD /* Card.xib */,
+				834966D324DEE19C00C9B7DD /* Card.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				838071D324C608FA008BAA2C /* Assets.xcassets in Resources */,
 				838071DE24C60BA4008BAA2C /* GoogleService-Info.plist in Resources */,
 				838071D124C608F5008BAA2C /* Main.storyboard in Resources */,
+				834966D224DEE10C00C9B7DD /* Card.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +545,7 @@
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
 				8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */,
 				834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */,
+				834966D424DEE19C00C9B7DD /* Card.swift in Sources */,
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
 				8350E4B924D9AE3000487DB9 /* PIckerKeyboard10.swift in Sources */,
 				8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */,
@@ -558,7 +566,6 @@
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
 				8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */,
-				834BD3E824DAD0D70088D4EA /* AdsSearchCollectionViewCell.swift in Sources */,
 				8350E4B324D9AE1500487DB9 /* PIckerKeyboard7.swift in Sources */,
 				8350E4B724D9AE2600487DB9 /* PIckerKeyboard9.swift in Sources */,
 				835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */,
@@ -586,6 +593,7 @@
 				8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */,
 				834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
+				834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */,
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
 				8350E4B124D9AE0C00487DB9 /* PIckerKeyboard6.swift in Sources */,
 				8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */,

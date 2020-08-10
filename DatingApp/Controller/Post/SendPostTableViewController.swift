@@ -19,14 +19,15 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     
     private let userDefaults = UserDefaults.standard
     private var pleaceholderLbl = UILabel()
-    private var user: User?
+    private var user = User()
+    private var match = Match()
     private var interstitial: GADInterstitial!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupTextView()
         fetchUser()
         interstitial = createAndLoadIntersitial()
@@ -39,7 +40,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     }
     
     // MARK: - Actions
-
+    
     @IBAction func backButtonPressed(_ sender: Any) {
         userDefaults.removeObject(forKey: LOVER)
         userDefaults.removeObject(forKey: FRIEND)
@@ -69,11 +70,12 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
             hudError()
             return
         }
+        sendButton.isEnabled = false
         
         let postId = UUID().uuidString
         let dict = [UID: User.currentUserId(),
-                    GENDER: user!.gender!,
-                    RESIDENCE: user!.residence!,
+                    GENDER: user.gender!,
+                    RESIDENCE: user.residence!,
                     CAPTION: textView.text!,
                     GENRE: selectLabel.text!,
                     TIMESTAMP: Timestamp(date: Date()) ] as [String : Any]
@@ -85,7 +87,12 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         
         Post.savePost(postId, withValue: dict)
         Post.saveMyPost(postId, withValue: dict2)
-        updateUser(withValue: [POSTCOUNT: user!.postCount + 1])
+        updateUser(withValue: [POSTCOUNT: user.postCount + 1])
+        Match.fetchMatchUser { (match) in
+            self.match = match
+            Post.saveFeed(postId, toUserId: match.uid, withValue: dict)
+        }
+        
         userDefaults.removeObject(forKey: LOVER)
         userDefaults.removeObject(forKey: FRIEND)
         userDefaults.removeObject(forKey: MAILFRIEND)
@@ -98,6 +105,13 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
             } else {
                 print("Error interstitial")
             }
+        }
+        hud.textLabel.text = "投稿しました"
+        hud.show(in: self.view)
+        hudSuccess()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -162,15 +176,19 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     }
     
     private func setupUI() {
+        
+        sendButton.isEnabled = true
         if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.rightBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.rightBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         }
     }
-
+    
 }
 
 extension SendPostTableViewController: UITextViewDelegate {

@@ -25,12 +25,27 @@ class PostTableViewCell: UITableViewCell {
     
     func configureUserCell(_ user: User) {
         
-        profileImageView.layer.cornerRadius = 10
-        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
-        nameLabel.text = user.username
-        residenceLabel.text = user.residence
-        if user.age != nil {
-            ageLabel.text = String(user.age) + "歳"
+        if user.uid != nil {
+            profileImageView.layer.cornerRadius = 10
+            profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+            nameLabel.text = user.username
+            residenceLabel.text = user.residence
+            if user.age != nil {
+                ageLabel.text = String(user.age) + "歳"
+            }
+        }
+    }
+    
+    func configureCurrentUserCell(_ user: User) {
+        
+        if user.uid != nil {
+            profileImageView.layer.cornerRadius = 10
+            profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+            nameLabel.text = user.username
+            residenceLabel.text = user.residence
+            if user.age != nil {
+                ageLabel.text = String(user.age) + "歳"
+            }
         }
     }
     

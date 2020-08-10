@@ -98,6 +98,7 @@ class PostTableViewController: UIViewController {
     }
     
     private func setupUI() {
+        UserDefaults.standard.removeObject(forKey: CARDVC)
         tableView.separatorStyle = .none
         tableView.refreshControl = refresh
         tableView.tableFooterView = UIView()
@@ -131,12 +132,12 @@ class PostTableViewController: UIViewController {
 extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return 1 + posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 5 || indexPath.row == 15 || indexPath.row == 25 || indexPath.row == 35 || indexPath.row == 45 {
+        if indexPath.row == 0 || indexPath.row == 5 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
@@ -147,14 +148,14 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.row - 1]
         cell.post = post
-        cell.configureUserCell(users[indexPath.row])
+        cell.configureUserCell(users[indexPath.row - 1])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: posts[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: posts[indexPath.row - 1].uid)
     }
 
 }

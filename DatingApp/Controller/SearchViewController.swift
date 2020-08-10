@@ -36,6 +36,7 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UserDefaults.standard.removeObject(forKey: CARDVC)
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
             fetchUser()
             UserDefaults.standard.removeObject(forKey: REFRESH)
@@ -85,15 +86,15 @@ class SearchViewController: UIViewController {
             self.currentUser = user
             
             if self.currentUser.messageBadgeCount == 0 {
-                self.tabBarController!.viewControllers![2].tabBarItem?.badgeValue = nil
+                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = nil
             } else {
-                self.tabBarController!.viewControllers![2].tabBarItem?.badgeValue = String(self.currentUser.messageBadgeCount)
+                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = String(self.currentUser.messageBadgeCount)
             }
             
             if self.currentUser.myPageBadgeCount == 0 {
-                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = nil
+                self.tabBarController!.viewControllers![4].tabBarItem?.badgeValue = nil
             } else {
-                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = String(self.currentUser.myPageBadgeCount)
+                self.tabBarController!.viewControllers![4].tabBarItem?.badgeValue = String(self.currentUser.myPageBadgeCount)
             }
         }
     }
@@ -140,31 +141,38 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
+            return CGSize(width: 300, height: 250)
+        }
         return CGSize(width: 150, height: 230)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return users.count
+        return 1 + users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == 5 || indexPath.row == 15 || indexPath.row == 25 || indexPath.row == 35 || indexPath.row == 45 {
+        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
             
-            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as! AdsSearchCollectionViewCell
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath)
             
-            cell2.searchVC = self
-            cell2.setupBanner()
+            let bannerView = cell2.viewWithTag(1) as! GADBannerView
+            bannerView.layer.cornerRadius = 15
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+            
             return cell2
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
         
-        cell.configureCell(users[indexPath.row])
+        cell.configureCell(users[indexPath.row - 1])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row])
+        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1])
     }
 }

@@ -69,34 +69,42 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
-            if error == nil {
-                
-                if isEmailVerified {
-                    hud.textLabel.text = "メールの認証に成功しました。"
-                    hud.show(in: self.view)
-                    hudSuccess()
-                    
-                    let dict = [UID: User.currentUserId(),
-                                EMAIL: self.emailTextField.text!] as [String : Any]
-                    saveUser(userId: User.currentUserId(), withValue: dict)
-                    
-                    self.toEnterGenderVC()
-                } else {
-                    generator.notificationOccurred(.error)
-                    self.loginButton.isEnabled = true
-                    hud.textLabel.text = "認証メールを確認してください。"
-                    hud.show(in: self.view)
-                    hudError()
-                }
-            } else {
-                self.loginButton.isEnabled = true
-                hud.textLabel.text = error!.localizedDescription
-                hud.show(in: self.view)
-                hudError()
-            }
+        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+            let dict = [UID: User.currentUserId(),
+                        EMAIL: self.emailTextField.text!] as [String : Any]
+            saveUser(userId: User.currentUserId(), withValue: dict)
+            self.toEnterGenderVC()
             self.activityIndicator.stopAnimating()
         }
+        
+//        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
+//            if error == nil {
+//
+//                if isEmailVerified {
+//                    hud.textLabel.text = "メールの認証に成功しました。"
+//                    hud.show(in: self.view)
+//                    hudSuccess()
+//
+//                    let dict = [UID: User.currentUserId(),
+//                                EMAIL: self.emailTextField.text!] as [String : Any]
+//                    saveUser(userId: User.currentUserId(), withValue: dict)
+//
+//                    self.toEnterGenderVC()
+//                } else {
+//                    generator.notificationOccurred(.error)
+//                    self.loginButton.isEnabled = true
+//                    hud.textLabel.text = "認証メールを確認してください。"
+//                    hud.show(in: self.view)
+//                    hudError()
+//                }
+//            } else {
+//                self.loginButton.isEnabled = true
+//                hud.textLabel.text = error!.localizedDescription
+//                hud.show(in: self.view)
+//                hudError()
+//            }
+//            self.activityIndicator.stopAnimating()
+//        }
     }
     
     // MARK: - Helpers

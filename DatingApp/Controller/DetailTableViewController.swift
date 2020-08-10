@@ -32,6 +32,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var matchedUserView: UIImageView!
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var afterMessageButton: UIButton!
+    @IBOutlet weak var congratsLabel: UILabel!
+    @IBOutlet weak var buttonStackView: UIStackView!
     
     private var profileImages = [UIImage]()
     var user = User()
@@ -43,7 +45,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var interstitial: GADInterstitial!
     private var typeUser = Type()
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton]
+    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel]
     
     // MARK: - Lifecycle
     
@@ -78,6 +80,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func likeButtonPressed(_ sender: Any) {
@@ -322,12 +325,38 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.visualEffectView.alpha = 1
                 self.views.forEach({ $0?.alpha = 1})
+                self.configureAnimations()
                 self.sendMessageButton.isEnabled = true
                 self.afterMessageButton.isEnabled = true
                 self.matchLabel.text = "\(self.user.username!)さんとマッチしました！"
                 self.matchedUserView.sd_setImage(with: URL(string: self.user.profileImageUrl1), completed: nil)
             }, completion: nil)
         }
+    }
+    
+    func configureAnimations() {
+                
+        let angle = 30 * CGFloat.pi / 180
+        
+        currentUserView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
+        
+        matchedUserView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+        
+        self.sendMessageButton.transform = CGAffineTransform(translationX: -500, y: 0)
+        self.afterMessageButton.transform = CGAffineTransform(translationX: 500, y: 0)
+        
+        UIView.animateKeyframes(withDuration: 1.3, delay: 0, options: .calculationModeCubic, animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.45) {
+                self.currentUserView.transform = .identity
+                self.matchedUserView.transform = .identity
+            }
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.75, delay: 0.6 * 1.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            self.sendMessageButton.transform = .identity
+            self.afterMessageButton.transform = .identity
+        }, completion: nil)
     }
     
     private func toMessageVC() {
@@ -352,6 +381,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     private func configureUI() {
+        
+        if UserDefaults.standard.object(forKey: CARDVC) != nil {
+            buttonStackView.isHidden = true
+        } else {
+            buttonStackView.isHidden = false
+        }
         
         views.forEach({ $0?.alpha = 0})
         currentUserView.layer.cornerRadius = 120 / 2

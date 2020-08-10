@@ -61,27 +61,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
-            if error == nil {
-                
-                if isEmailVerified {
-                    hud.textLabel.text = "ログインに成功しました。"
-                    hud.show(in: self.view)
-                    hudSuccess()
-                    self.toTabBerVC()
-                } else {
-                    generator.notificationOccurred(.error)
-                    hud.textLabel.text = "認証メールを確認してください。"
-                    hud.show(in: self.view)
-                    hudError()
-                }
-            } else {
-                hud.textLabel.text = error!.localizedDescription
-                hud.show(in: self.view)
-                hudError()
-            }
-            self.activityIndicator.stopAnimating()
-        }
+        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+                   
+                   self.toTabBerVC()
+                   self.activityIndicator.stopAnimating()
+               }
+        
+//        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
+//            if error == nil {
+//
+//                if isEmailVerified {
+//                    hud.textLabel.text = "ログインに成功しました。"
+//                    hud.show(in: self.view)
+//                    hudSuccess()
+//                    self.toTabBerVC()
+//                } else {
+//                    generator.notificationOccurred(.error)
+//                    hud.textLabel.text = "認証メールを確認してください。"
+//                    hud.show(in: self.view)
+//                    hudError()
+//                }
+//            } else {
+//                hud.textLabel.text = error!.localizedDescription
+//                hud.show(in: self.view)
+//                hudError()
+//            }
+//            self.activityIndicator.stopAnimating()
+//        }
     }
     
     // MARK: - Helpers

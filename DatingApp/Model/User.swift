@@ -34,6 +34,7 @@ class User {
     var likeCount: Int!
     var typeCount: Int!
     var lastChanged: Timestamp!
+    var date: Double!
     var messageBadgeCount: Int!
     var appBadgeCount: Int!
     var myPageBadgeCount: Int!
@@ -100,6 +101,7 @@ class User {
         hobby2 = dict[HOBBY2] as? String ?? ""
         hobby3 = dict[HOBBY3] as? String ?? ""
         detailMap = dict[DETAILMAP] as? String ?? ""
+        date = dict[DATE] as? Double ?? 0
     }
     
     // MARK: - Return user
@@ -123,22 +125,17 @@ class User {
         }
     }
     
-    class func fetchUsers(forCurrentUer user: User, completion: @escaping([User]) -> Void) {
-        var users: [User] = []
-        
+    class func fetchUsers(forCurrentUer user: User, completion: @escaping(User) -> Void) {
+
         let query = COLLECTION_USERS
             .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
             .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
-        
+
         query.getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
                 let dictionary = document.data()
                 let user = User(dict: dictionary as [String: Any])
-                users.append(user)
-                
-                if users.count == snapshot?.documents.count {
-                    completion(users)
-                }
+                completion(user)
             })
         }
     }
@@ -151,6 +148,47 @@ class User {
             }
             let user = User(dict: (snapshot?.data())!)
             completion(user)
+        }
+    }
+    
+    class func fetchCardUsers(_ residenceSearch: String, _ user: User, completion: @escaping(User) -> Void) {
+        
+        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            let usersRef = COLLECTION_USERS
+                .whereField(GENDER, isEqualTo: "男性")
+                .whereField(RESIDENCE, isEqualTo: residenceSearch)
+            
+            usersRef.getDocuments { (snapshot, error) in
+                
+                if let error = error {
+                    print("Error gender sort: \(error.localizedDescription)")
+                } else {
+                    snapshot?.documents.forEach({ (document) in
+                        let dict = document.data()
+                        let user = User(dict: dict as [String: Any])
+                        guard user.uid != User.currentUserId() else { return }
+                        completion(user)
+                    })
+                }
+            }
+        } else {
+            let usersRef = COLLECTION_USERS
+                .whereField(GENDER, isEqualTo: "女性")
+                .whereField(RESIDENCE, isEqualTo: residenceSearch)
+            
+            usersRef.getDocuments { (snapshot, error) in
+                
+                if let error = error {
+                    print("Error gender sort: \(error.localizedDescription)")
+                } else {
+                    snapshot?.documents.forEach({ (document) in
+                        let dict = document.data()
+                        let user = User(dict: dict as [String: Any])
+                        guard user.uid != User.currentUserId() else { return }
+                        completion(user)
+                    })
+                }
+            }
         }
     }
     
@@ -208,7 +246,8 @@ class User {
     class func isOnline(online: String) {
         
         guard Auth.auth().currentUser?.uid != nil else { return }
-        let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date())] as [String : Any]
+        let date: Double = Date().timeIntervalSince1970
+        let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date()), DATE: date] as [String : Any]
         COLLECTION_USERS.document(User.currentUserId()).updateData(dict)
     }
     

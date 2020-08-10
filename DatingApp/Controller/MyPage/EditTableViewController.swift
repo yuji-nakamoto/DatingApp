@@ -383,10 +383,16 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         profileImageView5.sd_setImage(with: URL(string: user.profileImageUrl5))
         profileImageView6.sd_setImage(with: URL(string: user.profileImageUrl6))
         
-        professionSettingLabel.text = user.profession
-        professionSettingLabel.textColor = UIColor(named: O_GREEN)
         residenceSettingLabel.text = user.residence
         residenceSettingLabel.textColor = UIColor(named: O_GREEN)
+        
+        if user.profession == "" {
+            professionSettingLabel.text = "設定する"
+            bodySizeSettingLabel.textColor = .systemGray
+        } else {
+            professionSettingLabel.text = user.profession
+            professionSettingLabel.textColor = UIColor(named: O_GREEN)
+        }
         
         if user.selfIntro != "" {
             selfIntroLabl.text = user.selfIntro

@@ -18,7 +18,7 @@ class MyPageTableViewCell: UITableViewCell {
     
     func configureCell(_ user: User?) {
         
-        if user != nil {
+        if user?.uid != nil {
             profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
             nameLabel.text = user!.username
         }

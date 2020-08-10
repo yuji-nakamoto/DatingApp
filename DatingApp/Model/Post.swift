@@ -96,11 +96,36 @@ class Post {
         }
     }
     
+    class func fetchFeed(matchedUserId: String, comletion: @escaping(_ post: Post) -> Void) {
+        
+        COLLECTION_FEED.document(matchedUserId).collection(User.currentUserId()).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("ERROR fetch feed: \(error.localizedDescription)")
+            }
+            snapshot?.documents.forEach({ (document) in
+//                print(snapshot?.documents)
+
+                let dict = document.data()
+                let feed = Post(dict: dict)
+                comletion(feed)
+            })
+        }
+    }
+    
     class func savePost(_ forPostId: String, withValue: [String: Any]) {
         
         COLLECTION_POSTS.document(forPostId).setData(withValue) { (error) in
             if let error = error {
                 print("Error save post: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    class func saveFeed(_ forPostId: String, toUserId: String, withValue: [String: Any]) {
+        print(toUserId)
+        COLLECTION_FEED.document(User.currentUserId()).collection(toUserId).document(forPostId).setData(withValue) { (error) in
+            if let error = error {
+                print("Error save feed: \(error.localizedDescription)")
             }
         }
     }
