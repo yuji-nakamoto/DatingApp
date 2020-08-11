@@ -173,12 +173,11 @@ extension DidLikeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
         return NSAttributedString(string: "いいねされた、\nいいねした履歴が、\nこちらに表示されます。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        
         return NSAttributedString(string: "気になった方にいいねを送り、\nアプローチをしてみましょう。")
     }
 }

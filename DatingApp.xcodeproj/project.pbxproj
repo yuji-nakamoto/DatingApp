@@ -94,6 +94,14 @@
 		838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F124C66651008BAA2C /* ResetPasswordViewController.swift */; };
 		838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F424C6E541008BAA2C /* EnterNameViewController.swift */; };
 		838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */; };
+		83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231424E238D900363548 /* ModalPostTableViewController.swift */; };
+		83B6231724E23B4E00363548 /* PickerKeyboard17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231624E23B4E00363548 /* PickerKeyboard17.swift */; };
+		83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231824E2713E00363548 /* ReportTableViewController.swift */; };
+		83B6231B24E2854400363548 /* WriteReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231A24E2854400363548 /* WriteReportTableViewController.swift */; };
+		83B6231D24E2B27E00363548 /* InquiryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231C24E2B27E00363548 /* InquiryTableViewController.swift */; };
+		83B6231F24E2BA7800363548 /* InquryInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231E24E2BA7800363548 /* InquryInputTableViewController.swift */; };
+		83B6232124E2BA9100363548 /* OpinionInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6232024E2BA9100363548 /* OpinionInputTableViewController.swift */; };
+		83B6232624E2E22900363548 /* BlockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6232524E2E22900363548 /* BlockTableViewController.swift */; };
 		BEA72603F135CFE06F286361 /* Pods_DatingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +198,14 @@
 		838071F124C66651008BAA2C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		838071F424C6E541008BAA2C /* EnterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameViewController.swift; sourceTree = "<group>"; };
 		838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAgeViewController.swift; sourceTree = "<group>"; };
+		83B6231424E238D900363548 /* ModalPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPostTableViewController.swift; sourceTree = "<group>"; };
+		83B6231624E23B4E00363548 /* PickerKeyboard17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard17.swift; sourceTree = "<group>"; };
+		83B6231824E2713E00363548 /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
+		83B6231A24E2854400363548 /* WriteReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReportTableViewController.swift; sourceTree = "<group>"; };
+		83B6231C24E2B27E00363548 /* InquiryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryTableViewController.swift; sourceTree = "<group>"; };
+		83B6231E24E2BA7800363548 /* InquryInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquryInputTableViewController.swift; sourceTree = "<group>"; };
+		83B6232024E2BA9100363548 /* OpinionInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpinionInputTableViewController.swift; sourceTree = "<group>"; };
+		83B6232524E2E22900363548 /* BlockTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewController.swift; sourceTree = "<group>"; };
 		A8E80E13719AC776BE4305A8 /* Pods-DatingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.release.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -232,6 +248,7 @@
 				8350E4C024D9AE7B00487DB9 /* PIckerKeyboard14.swift */,
 				8350E4C224D9AE8300487DB9 /* PIckerKeyboard15.swift */,
 				8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */,
+				83B6231624E23B4E00363548 /* PickerKeyboard17.swift */,
 			);
 			path = PickerKeyboard;
 			sourceTree = "<group>";
@@ -253,6 +270,9 @@
 				834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */,
 				834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */,
 				834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */,
+				83B6231C24E2B27E00363548 /* InquiryTableViewController.swift */,
+				83B6231E24E2BA7800363548 /* InquryInputTableViewController.swift */,
+				83B6232024E2BA9100363548 /* OpinionInputTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -263,6 +283,7 @@
 				8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */,
 				8348B5E424D351D80000A187 /* SendPostTableViewController.swift */,
 				8348B5E624D35ADC0000A187 /* GenreTableViewController.swift */,
+				83B6231424E238D900363548 /* ModalPostTableViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -317,13 +338,11 @@
 				8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */,
 				8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */,
 				834912FD24C75B90002990F8 /* SearchViewController.swift */,
-				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
 				834966CF24DEE07B00C9B7DD /* CardViewController.swift */,
+				83B6232324E2E19700363548 /* Detail */,
 				8350140724D55D88008D1170 /* MyPage */,
 				8350140824D55DF6008D1170 /* Post */,
-				835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */,
-				834966C324DC25E200C9B7DD /* InboxTableViewController.swift */,
-				835013FD24D41458008D1170 /* MessageTebleViewController.swift */,
+				83B6232424E2E1DF00363548 /* Message */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -389,6 +408,27 @@
 				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
 			);
 			path = Aurthentication;
+			sourceTree = "<group>";
+		};
+		83B6232324E2E19700363548 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				831E392324C9CBE00043AA76 /* DetailTableViewController.swift */,
+				83B6231824E2713E00363548 /* ReportTableViewController.swift */,
+				83B6231A24E2854400363548 /* WriteReportTableViewController.swift */,
+				83B6232524E2E22900363548 /* BlockTableViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		83B6232424E2E1DF00363548 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */,
+				834966C324DC25E200C9B7DD /* InboxTableViewController.swift */,
+				835013FD24D41458008D1170 /* MessageTebleViewController.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		F0A321C1752DD509E2A96CD9 /* Pods */ = {
@@ -563,6 +603,7 @@
 				834966CE24DE7E8700C9B7DD /* Read.swift in Sources */,
 				8350E4BB24D9AE3800487DB9 /* PIckerKeyboard11.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
+				83B6231F24E2BA7800363548 /* InquryInputTableViewController.swift in Sources */,
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
 				8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */,
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
@@ -575,6 +616,7 @@
 				8350E4B324D9AE1500487DB9 /* PIckerKeyboard7.swift in Sources */,
 				8350E4B724D9AE2600487DB9 /* PIckerKeyboard9.swift in Sources */,
 				835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */,
+				83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */,
 				8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
@@ -582,6 +624,7 @@
 				834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */,
 				834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */,
 				834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */,
+				83B6231D24E2B27E00363548 /* InquiryTableViewController.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
 				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
 				838071F024C64D16008BAA2C /* VerifiedViewController.swift in Sources */,
@@ -600,6 +643,8 @@
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
 				8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */,
 				834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */,
+				83B6231724E23B4E00363548 /* PickerKeyboard17.swift in Sources */,
+				83B6232624E2E22900363548 /* BlockTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
 				834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */,
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
@@ -616,7 +661,10 @@
 				834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */,
 				8348B5DF24D2A0B90000A187 /* PostTableViewController.swift in Sources */,
 				8348E3EB24CE283C001D59C0 /* Type.swift in Sources */,
+				83B6231B24E2854400363548 /* WriteReportTableViewController.swift in Sources */,
 				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,
+				83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */,
+				83B6232124E2BA9100363548 /* OpinionInputTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

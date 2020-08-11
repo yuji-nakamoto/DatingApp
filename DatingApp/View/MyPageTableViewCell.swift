@@ -14,6 +14,7 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var redmark: UIView!
+    @IBOutlet weak var cogImageView: UIImageView!
     
     func configureCell(_ user: User?) {
         
@@ -30,5 +31,13 @@ class MyPageTableViewCell: UITableViewCell {
         profileButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 100 / 2
     }
-
+    
+    func cogAnimation() {
+        let rollingAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rollingAnimation.fromValue = 0
+        rollingAnimation.toValue = CGFloat.pi * 0.2
+        rollingAnimation.duration = 0.3
+        rollingAnimation.repeatDuration = CFTimeInterval.zero
+        cogImageView.layer.add(rollingAnimation, forKey: "rollingImage")
+    }
 }

@@ -80,7 +80,7 @@ struct Service {
             }
         }
     }
-    
+
     static func fetchSwipe(completion: @escaping([String: Bool]) -> Void) {
                 
         COLLECTION_SWIPE.document(User.currentUserId()).getDocument { (snapshot, error) in
@@ -92,4 +92,43 @@ struct Service {
         }
     }
     
+    static func saveBlock(toUserId: String) {
+        
+        COLLECTION_BLOCK.document(User.currentUserId()).getDocument { (snapshot, error) in
+            let data = [toUserId: true]
+            
+            if snapshot?.exists == true {
+                COLLECTION_BLOCK.document(User.currentUserId()).updateData(data)
+                COLLECTION_USERS.document(User.currentUserId()).collection(ISBLOCK).document(toUserId).setData([ISBLOCK: 1])
+            } else {
+                COLLECTION_BLOCK.document(User.currentUserId()).setData(data)
+                COLLECTION_USERS.document(User.currentUserId()).collection(ISBLOCK).document(toUserId).setData([ISBLOCK: 1])
+            }
+        }
+        
+        COLLECTION_BLOCK.document(toUserId).getDocument { (snapshot, error) in
+            let data2 = [User.currentUserId(): false]
+            
+            if snapshot?.exists == true {
+                COLLECTION_BLOCK.document(toUserId).updateData(data2)
+                COLLECTION_USERS.document(toUserId).collection(ISBLOCK).document(User.currentUserId()).setData([ISBLOCK: 0])
+
+            } else {
+                COLLECTION_BLOCK.document(toUserId).setData(data2)
+                COLLECTION_USERS.document(toUserId).collection(ISBLOCK).document(User.currentUserId()).setData([ISBLOCK: 0])
+            }
+        }
+    }
+    
+    static func fetchBlock(completion: @escaping([String: Bool]) -> Void) {
+                
+        COLLECTION_BLOCK.document(User.currentUserId()).getDocument { (snapshot, error) in
+            guard let data = snapshot?.data() as? [String: Bool] else  {
+                completion([String: Bool]())
+                return
+            }
+            completion(data)
+        }
+    }
+
 }

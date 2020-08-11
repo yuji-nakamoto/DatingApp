@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     
@@ -16,6 +17,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
 
@@ -38,7 +41,9 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "メールアドレスを入力してください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            
         }
     }
     
@@ -54,14 +59,16 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             
             if error != nil {
                 generator.notificationOccurred(.error)
-                hud.textLabel.text = error!.localizedDescription
-                hud.show(in: self.view)
-                hudError()
+                self.hud.textLabel.text = error!.localizedDescription
+                self.hud.show(in: self.view)
+                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
                 return
             }
-            hud.textLabel.text = "リセットメールを送信しました"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "リセットメールを送信しました"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.view.endEditing(true)
                 self.dismiss(animated: true, completion: nil)

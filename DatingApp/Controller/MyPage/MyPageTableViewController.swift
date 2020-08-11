@@ -155,6 +155,7 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MyPageTableViewCell
             cell.configureCell(currentUser)
+            cell.cogAnimation()
             return cell
         }
         

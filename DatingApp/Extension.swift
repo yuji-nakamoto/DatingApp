@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 // MARK: - CAGradientLayer
 
@@ -18,21 +17,6 @@ let rightColor = UIColor(named: O_GREEN)
 // MARK: - UINotificationFeedbackGenerator
 
 public let generator = UINotificationFeedbackGenerator()
-
-// MARK : - JGProgressHUD
-
-public var hud = JGProgressHUD(style: .dark)
-public func hudError() {
-    
-    hud.indicatorView = JGProgressHUDErrorIndicatorView()
-    hud.dismiss(afterDelay: 2.0)
-}
-
-public func hudSuccess() {
-    
-    hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-    hud.dismiss(afterDelay: 2.0)
-}
 
 // MARK: - Date
 

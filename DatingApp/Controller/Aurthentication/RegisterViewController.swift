@@ -21,6 +21,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    private var hud = JGProgressHUD(style: .dark)
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -52,7 +54,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            
         }
     }
     
@@ -64,16 +68,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         AuthService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
             if error != nil {
                 generator.notificationOccurred(.error)
-                hud.textLabel.text = error!.localizedDescription
-                hud.show(in: self.view)
-                hudError()
+                self.hud.textLabel.text = error!.localizedDescription
+                self.hud.show(in: self.view)
+                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
                 self.activityIndicator.stopAnimating()
                 return
             }
             self.activityIndicator.stopAnimating()
-            hud.textLabel.text = "認証確認のメールを送りました。\nメールを認証しログインしてください。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "認証確認のメールを送りました。\nメールを認証しログインしてください。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             UserDefaults.standard.set(true, forKey: TO_VERIFIED_VC)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.view.endEditing(true)

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class SendPostTableViewController: UITableViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
@@ -22,6 +23,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     private var user = User()
     private var match = Match()
     private var interstitial: GADInterstitial!
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -55,19 +57,22 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         if selectLabel.text == "選択してください" {
             hud.textLabel.text = "ジャンルを選択してください"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         }
         if textView.text.count == 0 {
             hud.textLabel.text = "文字を入力してください"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         }
         if textView.text.count > 30 {
             hud.textLabel.text = "30文字以下で入力してください"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         }
         sendButton.isEnabled = false
@@ -108,8 +113,9 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         } else {
             hud.textLabel.text = "投稿しました"
             hud.show(in: self.view)
-            hudSuccess()
-            
+            hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.dismiss(animated: true, completion: nil)
             }

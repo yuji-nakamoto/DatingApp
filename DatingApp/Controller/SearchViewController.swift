@@ -20,8 +20,8 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var bannerView: GADBannerView!
     
     private var users = [User]()
-    private var user: User?
-    private var currentUser: User!
+    private var user = User()
+    private var currentUser = User()
     private let refresh = UIRefreshControl()
     
     // MARK: - Lifecycle
@@ -36,15 +36,13 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         fetchUser()
-
+        
         UserDefaults.standard.removeObject(forKey: CARDVC)
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
             fetchUser()
             UserDefaults.standard.removeObject(forKey: REFRESH)
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,16 +64,16 @@ class SearchViewController: UIViewController {
         fetchUser()
     }
     
-    
     // MARK: - Fetch
     
     private func fetchUser() {
         indicator.startAnimating()
         
         User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            let residenceSerch = user.residenceSerch
-            User.genderAndResidenceSort(residenceSerch!, user) { (users) in
+            self.currentUser = user
+            let residence = self.currentUser.residenceSerch
+            
+            User.genderAndResidenceSort(residence!, self.currentUser) { (users) in
                 self.users = users
                 self.collectionView.reloadData()
                 self.indicator.stopAnimating()
@@ -85,7 +83,7 @@ class SearchViewController: UIViewController {
     
     private func fetchBadgeCount() {
         
-        User.fetchTabBarBadgeCount(forCurrentId: User.currentUserId()) { (user) in
+        User.fetchTabBarBadgeCount() { (user) in
             self.currentUser = user
             
             if self.currentUser.messageBadgeCount == 0 {
@@ -182,15 +180,14 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
 }
 
 extension SearchViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
         return NSAttributedString(string: "検索条件の結果から\n登録しているユーザーは\n見つかりませんでした。", attributes: attributes)
     }
-
+    
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        
         return NSAttributedString(string: "ユーザーが登録されるまで\n暫くお待ちになるか、\n検索条件を変更してみてください。")
     }
 }

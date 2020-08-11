@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class EnterNameViewController: UIViewController {
     
@@ -17,6 +18,8 @@ class EnterNameViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var requiredLabel: UILabel!
+    
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -41,7 +44,8 @@ class EnterNameViewController: UIViewController {
                 generator.notificationOccurred(.error)
                 hud.textLabel.text = "10文字以下で入力してください。"
                 hud.show(in: self.view)
-                hudError()
+                hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud.dismiss(afterDelay: 2.0)
                 return
             }
             nextButton.isEnabled = false
@@ -50,7 +54,9 @@ class EnterNameViewController: UIViewController {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "名前を入力してください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            
         }
     }
     

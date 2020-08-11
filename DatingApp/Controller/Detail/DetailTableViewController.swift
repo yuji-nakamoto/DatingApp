@@ -36,6 +36,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionLabel2: UILabel!
+    @IBOutlet weak var reportButton: UIButton!
     
     private var profileImages = [UIImage]()
     var user = User()
@@ -83,6 +84,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBAction func backButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func reportButtonPressed(_ sender: Any) {
+        selectAlert()
     }
     
     @IBAction func likeButtonPressed(_ sender: Any) {
@@ -251,6 +256,18 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             let userId = sender as! String
             messageVC.userId = userId
         }
+        
+        if segue.identifier == "ReportVC" {
+            let reportVC = segue.destination as! ReportTableViewController
+            let userId = sender as! String
+            reportVC.userId = userId
+        }
+        
+        if segue.identifier == "BlockVC" {
+            let blockVC = segue.destination as! BlockTableViewController
+            let userId = sender as! String
+            blockVC.userId = userId
+        }
     }
     
     // MARK: - Helpers
@@ -381,12 +398,34 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         self.present(alert,animated: true,completion: nil)
     }
     
+    private func selectAlert() {
+        
+        let alert: UIAlertController = UIAlertController(title: "", message: "\(user.username!)さんを", preferredStyle: .actionSheet)
+        
+        let block: UIAlertAction = UIAlertAction(title: "ブロックする", style: UIAlertAction.Style.default) { (alert) in
+            
+            self.performSegue(withIdentifier: "BlockVC", sender: self.user.uid)
+        }
+        let report: UIAlertAction = UIAlertAction(title: "通報する", style: UIAlertAction.Style.default) { (alert) in
+            
+            self.performSegue(withIdentifier: "ReportVC", sender: self.user.uid)
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+        }
+        alert.addAction(block)
+        alert.addAction(report)
+        alert.addAction(cancel)
+        self.present(alert,animated: true,completion: nil)
+    }
+    
     private func configureUI() {
         
         if UserDefaults.standard.object(forKey: CARDVC) != nil {
             buttonStackView.isHidden = true
+            reportButton.isHidden = true
         } else {
             buttonStackView.isHidden = false
+            reportButton.isHidden = false
         }
         
         views.forEach({ $0?.alpha = 0})

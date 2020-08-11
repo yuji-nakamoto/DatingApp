@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import JGProgressHUD
 
 class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -90,6 +91,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     private var profileImage4: UIImage?
     private var profileImage5: UIImage?
     private var profileImage6: UIImage?
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -188,9 +190,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.removeObject(forKey: "image1")
             self.indicator1.stopAnimating()
             
-            hud.textLabel.text = "プロフィール画像を保存しました。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "プロフィール画像を保存しました。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             self.selectButtonIsEnabled()
         }
     }
@@ -209,9 +212,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.removeObject(forKey: "image2")
             self.indicator2.stopAnimating()
             
-            hud.textLabel.text = "プロフィール画像を保存しました。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "プロフィール画像を保存しました。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             self.fetchUser()
             self.selectButtonIsEnabled()
         }
@@ -231,9 +235,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.removeObject(forKey: "image3")
             self.indicator3.stopAnimating()
             
-            hud.textLabel.text = "プロフィール画像を保存しました。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "プロフィール画像を保存しました。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             self.fetchUser()
             self.selectButtonIsEnabled()
         }
@@ -253,9 +258,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.removeObject(forKey: "image4")
             self.indicator4.stopAnimating()
             
-            hud.textLabel.text = "プロフィール画像を保存しました。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "プロフィール画像を保存しました。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             self.fetchUser()
             self.selectButtonIsEnabled()
         }
@@ -275,9 +281,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.removeObject(forKey: "image5")
             self.indicator5.stopAnimating()
             
-            hud.textLabel.text = "プロフィール画像を保存しました。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "プロフィール画像を保存しました。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             self.fetchUser()
             self.selectButtonIsEnabled()
         }
@@ -297,9 +304,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.removeObject(forKey: "image6")
             self.indicator6.stopAnimating()
             
-            hud.textLabel.text = "プロフィール画像を保存しました。"
-            hud.show(in: self.view)
-            hudSuccess()
+            self.hud.textLabel.text = "プロフィール画像を保存しました。"
+            self.hud.show(in: self.view)
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
             self.selectButtonIsEnabled()
         }
     }

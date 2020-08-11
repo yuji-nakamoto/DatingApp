@@ -47,6 +47,10 @@ class PostTableViewController: UIViewController {
         refresh.endRefreshing()
     }
     
+    @IBAction func refreshButtonPressed(_ sender: Any) {
+        fetchPost()
+    }
+    
     // MARK: - Fetch post
     
     private func fetchPost() {
@@ -59,13 +63,55 @@ class PostTableViewController: UIViewController {
             self.user = user
             let residence = user.residenceSerch
             
-            Post.fetchPosts(residence!) { (post) in
-                guard let uid = post.uid else { return }
-                self.fetchUser(uid) {
-                    self.posts.insert(post, at: 0)
-                    self.tableView.reloadData()
+            if UserDefaults.standard.object(forKey: LOVER2) != nil {
+                Post.fetchGenreLoverPosts(residence!) { (post) in
+                    guard let uid = post.uid else { return }
+                    self.fetchUser(uid) {
+                        self.posts.insert(post, at: 0)
+                        self.tableView.reloadData()
+                    }
                 }
-            }
+            } else if UserDefaults.standard.object(forKey: FRIEND2) != nil {
+                Post.fetchGenreFriendPosts(residence!) { (post) in
+                    guard let uid = post.uid else { return }
+                    self.fetchUser(uid) {
+                        self.posts.insert(post, at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            } else if UserDefaults.standard.object(forKey: MAILFRIEND2) != nil {
+                Post.fetchGenreMailFriendPosts(residence!) { (post) in
+                    guard let uid = post.uid else { return }
+                    self.fetchUser(uid) {
+                        self.posts.insert(post, at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            } else if UserDefaults.standard.object(forKey: PLAY2) != nil {
+                Post.fetchGenrePlayPosts(residence!) { (post) in
+                    guard let uid = post.uid else { return }
+                    self.fetchUser(uid) {
+                        self.posts.insert(post, at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            } else if UserDefaults.standard.object(forKey: FREE2) != nil {
+                Post.fetchGenreFreePosts(residence!) { (post) in
+                    guard let uid = post.uid else { return }
+                    self.fetchUser(uid) {
+                        self.posts.insert(post, at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            } else {
+                Post.fetchPosts(residence!) { (post) in
+                    guard let uid = post.uid else { return }
+                    self.fetchUser(uid) {
+                        self.posts.insert(post, at: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            }            
         }
     }
     
@@ -168,12 +214,11 @@ extension PostTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
         return NSAttributedString(string: "検索条件の結果、\n投稿は見つかりませんでした。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        
         return NSAttributedString(string: "投稿されるまで暫くお待ちになるか、\n検索条件を変更してみてください。")
     }
 }

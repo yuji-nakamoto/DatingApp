@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -18,6 +19,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -41,7 +44,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            
         }
     }
     
@@ -71,21 +76,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //            if error == nil {
 //
 //                if isEmailVerified {
-//                    hud.textLabel.text = "ログインに成功しました。"
-//                    hud.show(in: self.view)
-//                    hudSuccess()
+//                    self.hud.textLabel.text = "ログインに成功しました。"
+//                    self.hud.show(in: self.view)
+//                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+//                    self.hud.dismiss(afterDelay: 2.0)
 //                    UserDefaults.standard.set(true, forKey: WHITE)
 //                    self.toTabBerVC()
 //                } else {
 //                    generator.notificationOccurred(.error)
-//                    hud.textLabel.text = "認証メールを確認してください。"
-//                    hud.show(in: self.view)
-//                    hudError()
+//                    self.hud.textLabel.text = "認証メールを確認してください。"
+//                    self.hud.show(in: self.view)
+//                    hud.indicatorView = JGProgressHUDErrorIndicatorView()
+//                    hud.dismiss(afterDelay: 2.0)
 //                }
 //            } else {
-//                hud.textLabel.text = error!.localizedDescription
-//                hud.show(in: self.view)
-//                hudError()
+//                self.hud.textLabel.text = error!.localizedDescription
+//                self.hud.show(in: self.view)
+//                hud.indicatorView = JGProgressHUDErrorIndicatorView()
+//                hud.dismiss(afterDelay: 2.0)
 //            }
 //            self.activityIndicator.stopAnimating()
 //        }

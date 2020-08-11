@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class EnterGenderViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class EnterGenderViewController: UIViewController {
     @IBOutlet weak var genderLabel: UILabel!
     
     private var dataArray = ["-", "男性", "女性"]
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -45,7 +47,8 @@ class EnterGenderViewController: UIViewController {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "性別を選択してください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
         }
     }
     

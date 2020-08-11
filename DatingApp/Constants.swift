@@ -25,7 +25,10 @@ public let COLLECTION_TYPECOUNTER = Firestore.firestore().collection("typeCounte
 public let COLLECTION_MATCH = Firestore.firestore().collection("match")
 public let COLLECTION_FEED = Firestore.firestore().collection("feed")
 public let COLLECTION_SWIPE = Firestore.firestore().collection("swipe")
-
+public let COLLECTION_REPORT = Firestore.firestore().collection("report")
+public let COLLECTION_INQUIRY = Firestore.firestore().collection("inquiry")
+public let COLLECTION_OPINION = Firestore.firestore().collection("opinion")
+public let COLLECTION_BLOCK = Firestore.firestore().collection("block")
 
 // MARK: - Color
 
@@ -79,6 +82,10 @@ public let HOBBY1 = "hobby1"
 public let HOBBY2 = "hobby2"
 public let HOBBY3 = "hobby3"
 public let DETAILMAP = "detailMap"
+public let SELECTEDGENRE = "selectedGenre"
+public let REPORT = "report"
+public let INQUIRY = "inquiry"
+public let OPINION = "opinion"
 
 // MARK: - Counter
 
@@ -113,6 +120,9 @@ public let MESSAGETEXT = "messageText"
 public let DATE = "date"
 public let ISREAD = "isRead"
 
+// MARK: - Block
+public let ISBLOCK = "isBlock"
+
 // MARK: - Placeholder image
 
 public let PLACEHOLDERIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2F2EB76E60-16FA-494F-9419-19905F13553C?alt=media&token=3c8906ed-1a5e-4370-8270-432dc0431ae5"
@@ -133,6 +143,11 @@ public let FRIEND = "friend"
 public let MAILFRIEND = "mailfriend"
 public let PLAY = "play"
 public let FREE = "free"
+public let LOVER2 = "lover2"
+public let FRIEND2 = "friend2"
+public let MAILFRIEND2 = "mailfriend2"
+public let PLAY2 = "play2"
+public let FREE2 = "free2"
 public let WHITE = "white"
 public let PINK = "pink"
 public let GREEN = "green"

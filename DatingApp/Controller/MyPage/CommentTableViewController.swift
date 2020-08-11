@@ -6,6 +6,7 @@
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 import UIKit
+import JGProgressHUD
 
 class CommentTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -15,6 +16,7 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     private var user: User!
+    private var hud = JGProgressHUD(style: .dark)
 
     // MARK: - Lifecycle
     

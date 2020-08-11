@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -16,6 +17,7 @@ class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     private var user: User!
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     

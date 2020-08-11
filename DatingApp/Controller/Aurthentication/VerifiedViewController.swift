@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
@@ -19,6 +20,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -45,7 +48,9 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            
         }
     }
     
@@ -56,7 +61,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         }
         hud.textLabel.text = "認証メールを再送信しました。"
         hud.show(in: self.view)
-        hudSuccess()
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.dismiss(afterDelay: 2.0)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -81,9 +87,10 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 //            if error == nil {
 //
 //                if isEmailVerified {
-//                    hud.textLabel.text = "メールの認証に成功しました。"
-//                    hud.show(in: self.view)
-//                    hudSuccess()
+//                    self.hud.textLabel.text = "メールの認証に成功しました。"
+//                    self.hud.show(in: self.view)
+//                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+//                    self.hud.dismiss(afterDelay: 2.0)
 //
 //                    let dict = [UID: User.currentUserId(),
 //                                EMAIL: self.emailTextField.text!] as [String : Any]
@@ -93,15 +100,17 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 //                } else {
 //                    generator.notificationOccurred(.error)
 //                    self.loginButton.isEnabled = true
-//                    hud.textLabel.text = "認証メールを確認してください。"
-//                    hud.show(in: self.view)
-//                    hudError()
+//                    self.hud.textLabel.text = "認証メールを確認してください。"
+//                    self.hud.show(in: self.view)
+//                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+//                    self.hud.dismiss(afterDelay: 2.0)
 //                }
 //            } else {
 //                self.loginButton.isEnabled = true
-//                hud.textLabel.text = error!.localizedDescription
-//                hud.show(in: self.view)
-//                hudError()
+//                self.hud.textLabel.text = error!.localizedDescription
+//                self.hud.show(in: self.view)
+//                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+//                self.hud.dismiss(afterDelay: 2.0)
 //            }
 //            self.activityIndicator.stopAnimating()
 //        }

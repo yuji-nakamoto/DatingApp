@@ -171,7 +171,7 @@ extension FootstepTableViewController: EmptyDataSetSource, EmptyDataSetDelegate 
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
         return NSAttributedString(string: "ユーザーの足あと、\nあなたの足あと履歴が、\nこちらに表示されます。", attributes: attributes)
     }
 

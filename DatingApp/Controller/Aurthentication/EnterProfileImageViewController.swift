@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class EnterProfileImageViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class EnterProfileImageViewController: UIViewController {
     
     private let picker = UIImagePickerController()
     private var profileImage: UIImage?
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -45,7 +47,8 @@ class EnterProfileImageViewController: UIViewController {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "プロフィール画像を設定してください。"
             hud.show(in: self.view)
-            hudError()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         }
         nextButton.isEnabled = false
@@ -124,7 +127,8 @@ class EnterProfileImageViewController: UIViewController {
         hud.textLabel.text = "保存が成功しました。"
         self.indicator.stopAnimating()
         hud.show(in: self.view)
-        hudSuccess()
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.dismiss(afterDelay: 2.0)
         self.toEnterProfessionVC()
     }
     
