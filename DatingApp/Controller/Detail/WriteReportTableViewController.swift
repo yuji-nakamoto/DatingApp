@@ -72,6 +72,21 @@ class WriteReportTableViewController: UITableViewController, UITextViewDelegate 
         backView.layer.borderColor = UIColor.systemGray.cgColor
         tableView.separatorStyle = .none
         textView.delegate = self
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            saveButton.backgroundColor = UIColor(named: O_PINK)
+            saveButton.setTitleColor(UIColor.white, for: .normal)
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            saveButton.backgroundColor = UIColor(named: O_GREEN)
+            saveButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            saveButton.backgroundColor = UIColor.white
+            saveButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            saveButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            saveButton.backgroundColor = UIColor(named: O_DARK)
+            saveButton.setTitleColor(UIColor.white, for: .normal)
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {

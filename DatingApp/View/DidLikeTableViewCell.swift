@@ -14,13 +14,12 @@ class DidLikeTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var selfIntroLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var onlineView: UIView!
     @IBOutlet weak var mozaicView: UIView!
     @IBOutlet weak var blackLine1: UIView!
     @IBOutlet weak var blackLine2: UIView!
-    @IBOutlet weak var blackLine3: UIView!
+    @IBOutlet weak var deleteButon: UIButton!
     
     var user = User()
     var inbox: Inbox!
@@ -32,7 +31,6 @@ class DidLikeTableViewCell: UITableViewCell {
         nameLabel.text = user.username
         residenceLabel.text = user.residence
         ageLabel.text = String(user.age) + "歳"
-        selfIntroLabel.text = user.selfIntro
         
         COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
             if let error = error {
@@ -53,15 +51,11 @@ class DidLikeTableViewCell: UITableViewCell {
             mozaicView.isHidden = false
             blackLine1.isHidden = false
             blackLine2.isHidden = false
-            blackLine3.isHidden = false
             blackLine1.layer.cornerRadius = 16 / 2
             blackLine2.layer.cornerRadius = 16 / 2
-            blackLine3.layer.cornerRadius = 16 / 2
             mozaicView.layer.cornerRadius = 70 / 2
             nameLabel.layer.shouldRasterize = true
             nameLabel.layer.rasterizationScale = 0.35
-            selfIntroLabel.layer.shouldRasterize = true
-            selfIntroLabel.layer.rasterizationScale = 0.35
         } else {
             mozaicView.isHidden = true
         }
@@ -70,7 +64,6 @@ class DidLikeTableViewCell: UITableViewCell {
         nameLabel.text = user.username
         residenceLabel.text = user.residence
         ageLabel.text = String(user.age) + "歳"
-        selfIntroLabel.text = user.selfIntro
     }
     
     func configureCell3(_ user: User) {
@@ -78,21 +71,17 @@ class DidLikeTableViewCell: UITableViewCell {
         mozaicView.isHidden = true
         blackLine1.isHidden = true
         blackLine2.isHidden = true
-        blackLine3.isHidden = true
         onlineView.isHidden = false
         profileImageView.layer.shouldRasterize = false
         nameLabel.layer.shouldRasterize = false
-        selfIntroLabel.layer.shouldRasterize = false
 
         profileImageView.layer.rasterizationScale = 1
         nameLabel.layer.rasterizationScale = 1
-        selfIntroLabel.layer.rasterizationScale = 1
 
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         nameLabel.text = user.username
         residenceLabel.text = user.residence
         ageLabel.text = String(user.age) + "歳"
-        selfIntroLabel.text = user.selfIntro
         
         COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
             if let error = error {
@@ -104,6 +93,14 @@ class DidLikeTableViewCell: UITableViewCell {
                 }
             }
         }
+    }
+    
+    func configureCell4(_ user: User) {
+        
+        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+        nameLabel.text = user.username
+        residenceLabel.text = user.residence
+        ageLabel.text = String(user.age) + "歳"
     }
     
     func configureInboxCell(_ inbox: Inbox) {
@@ -131,7 +128,7 @@ class DidLikeTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
     @objc func tapProfileImage() {
         if let uid = inbox.user.uid {
             inboxVC?.performSegue(withIdentifier: "DetailVC", sender: uid)
@@ -140,42 +137,51 @@ class DidLikeTableViewCell: UITableViewCell {
     
     var footstep: Footstep? {
         didSet {
-            timestampLabel.text = timestamp1
+            let date = Date(timeIntervalSince1970: footstep!.date)
+            let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
+            timestampLabel.text = dateString
         }
     }
     
     var like: Like? {
         didSet {
-            timestampLabel.text = timestamp2
+            timestampLabel.text = timestamp1
         }
     }
     
     var type: Type? {
+        didSet {
+            timestampLabel.text = timestamp2
+        }
+    }
+    
+    var block: Block? {
         didSet {
             timestampLabel.text = timestamp3
         }
     }
     
     var timestamp1: String {
-        let date = footstep?.timestamp.dateValue()
+        let date = like?.timestamp.dateValue()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.dateFormat = "M月d日(EEEEE) H時m分"
         return dateFormatter.string(from: date!)
     }
     
     var timestamp2: String {
-        let date = like?.timestamp.dateValue()
+        let date = type?.timestamp.dateValue()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
-        dateFormatter.dateFormat = "M月d日"
+        dateFormatter.dateFormat = "M月d日(EEEEE) H時m分"
         return dateFormatter.string(from: date!)
     }
     
     var timestamp3: String {
-        let date = type?.timestamp.dateValue()
+        let date = block?.timestamp.dateValue()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ja_JP")
-        dateFormatter.dateFormat = "M月d日"
+        dateFormatter.dateFormat = "M月d日(EEEEE) H時m分"
         return dateFormatter.string(from: date!)
     }
     

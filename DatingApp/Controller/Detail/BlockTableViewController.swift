@@ -57,7 +57,7 @@ class BlockTableViewController: UITableViewController {
     
     private func saveBlock() {
         
-        Service.saveBlock(toUserId: userId)
+        Block.saveBlock(toUserId: userId)
         hud.textLabel.text = "ブロックしました"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()

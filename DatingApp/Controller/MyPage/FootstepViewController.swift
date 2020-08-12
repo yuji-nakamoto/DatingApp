@@ -29,7 +29,7 @@ class FootstepTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupBanner()
-        fetchtFootStepedUsers()
+        fetchtFootstepedUsers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,15 +46,15 @@ class FootstepTableViewController: UIViewController {
     @IBAction func segmentControlled(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: fetchtFootStepedUsers()
-        case 1: fetchFootStepUsers()
+        case 0: fetchtFootstepedUsers()
+        case 1: fetchIsFootstepUsers()
         default: break
         }
     }
 
-    // MARK: - Fetch isFootStep
+    // MARK: - Fetch
     
-    private func fetchFootStepUsers() {
+    private func fetchIsFootstepUsers() {
         
         footsteps.removeAll()
         users.removeAll()
@@ -68,10 +68,8 @@ class FootstepTableViewController: UIViewController {
             }
         }
     }
-
-    // MARK: - Fetch footSteped
     
-    private func fetchtFootStepedUsers() {
+    private func fetchtFootstepedUsers() {
         
         footsteps.removeAll()
         users.removeAll()
@@ -85,9 +83,7 @@ class FootstepTableViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Fetch user
-    
+        
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
@@ -176,7 +172,6 @@ extension FootstepTableViewController: EmptyDataSetSource, EmptyDataSetDelegate 
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        
         return NSAttributedString(string: "足あとを残したくない場合は、\nマイページにある歯車マークから\n設定ができます。")
     }
 }

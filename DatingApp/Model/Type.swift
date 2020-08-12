@@ -29,7 +29,7 @@ class Type {
     
     class func fetchTypeUser(_ forUserId: String, completion: @escaping(_ type: Type) -> Void) {
         
-        COLLECTION_TYPE.document(User.currentUserId()).collection("isType").document(forUserId).getDocument { (snapshot, error) in
+        COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).document(forUserId).addSnapshotListener { (snapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             }
@@ -41,7 +41,7 @@ class Type {
     
     class func fetchTypeUsers(completion: @escaping(Type) -> Void) {
         
-        COLLECTION_TYPE.document(User.currentUserId()).collection("isType").getDocuments { (snapshot, error) in
+        COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
@@ -58,7 +58,7 @@ class Type {
     
     class func fetchTypedUser(completion: @escaping(Type) -> Void) {
         
-        COLLECTION_TYPE.document(User.currentUserId()).collection("typed").getDocuments { (snapshot, error) in
+        COLLECTION_TYPE.document(User.currentUserId()).collection(TYPED).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
@@ -74,7 +74,7 @@ class Type {
     
     class func checkIfMatch(toUserId: String, completion: @escaping(Type) -> Void) {
         
-        COLLECTION_TYPE.document(toUserId).collection("isType").document(User.currentUserId()).getDocument { (snapshot, error) in
+        COLLECTION_TYPE.document(toUserId).collection(ISTYPE).document(User.currentUserId()).getDocument { (snapshot, error) in
             if let error = error {
                 print("Error check if match: \(error.localizedDescription)")
             }
@@ -88,26 +88,26 @@ class Type {
     
     class func saveIsTypeUser(forUser user: User, isType: [String: Any]) {
         
-        COLLECTION_TYPE.document(User.currentUserId()).collection("isType").document(user.uid).getDocument { (snapshot, error) in
+        COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).document(user.uid).getDocument { (snapshot, error) in
             
             if snapshot?.exists == true {
-                COLLECTION_TYPE.document(User.currentUserId()).collection("isType").document(user.uid).updateData(isType)
+                COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).document(user.uid).updateData(isType)
             } else {
-                COLLECTION_TYPE.document(User.currentUserId()).collection("isType").document(user.uid).setData(isType)
+                COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).document(user.uid).setData(isType)
             }
         }
     }
     
     class func saveTypedUser(forUser user: User) {
         
-        COLLECTION_TYPE.document(user.uid).collection("typed").document(User.currentUserId()).getDocument { (snapshot, error) in
+        COLLECTION_TYPE.document(user.uid).collection(TYPED).document(User.currentUserId()).getDocument { (snapshot, error) in
             
             let dict = [UID: User.currentUserId()]
             
             if snapshot?.exists == true {
-                COLLECTION_TYPE.document(user.uid).collection("typed").document(User.currentUserId()).updateData(dict)
+                COLLECTION_TYPE.document(user.uid).collection(TYPED).document(User.currentUserId()).updateData(dict)
             } else {
-                COLLECTION_TYPE.document(user.uid).collection("typed").document(User.currentUserId()).setData(dict)
+                COLLECTION_TYPE.document(user.uid).collection(TYPED).document(User.currentUserId()).setData(dict)
             }
         }
     }

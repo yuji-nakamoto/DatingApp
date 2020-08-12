@@ -165,7 +165,7 @@ class User {
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
             
             Service.fetchSwipe { (swipeUserIDs) in
-                Service.fetchBlock { (blockUserIDs) in
+                Block.fetchBlock { (blockUserIDs) in
                     usersRef.getDocuments { (snapshot, error) in
                         
                         if let error = error {
@@ -190,7 +190,7 @@ class User {
                 .whereField(RESIDENCE, isEqualTo: residenceSearch)
             
             Service.fetchSwipe { (swipeUserIDs) in
-                Service.fetchBlock { (blockUserIDs) in
+                Block.fetchBlock { (blockUserIDs) in
                     usersRef.getDocuments { (snapshot, error) in
                         
                         if let error = error {
@@ -222,9 +222,8 @@ class User {
                 .whereField(AGE, isGreaterThanOrEqualTo: currentUser.minAge!)
                 .whereField(AGE, isLessThanOrEqualTo: currentUser.maxAge!)
             
-            Service.fetchBlock { (blockUserIDs) in
+            Block.fetchBlock { (blockUserIDs) in
                 usersRef.getDocuments { (snapshot, error) in
-                    
                     if let error = error {
                         print("Error gender sort: \(error.localizedDescription)")
                     } else {
@@ -249,7 +248,7 @@ class User {
                 .whereField(AGE, isGreaterThanOrEqualTo: currentUser.minAge!)
                 .whereField(AGE, isLessThanOrEqualTo: currentUser.maxAge!)
             
-            Service.fetchBlock { (blockUserIDs) in
+            Block.fetchBlock { (blockUserIDs) in
                 usersRef.getDocuments { (snapshot, error) in
                     
                     if let error = error {

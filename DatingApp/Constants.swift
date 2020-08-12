@@ -104,12 +104,16 @@ public let GENRE = "genre"
 // MARK: - Like Type Match
 
 public let ISLIKE = "isLike"
+public let LIKED = "liked"
 public let ISTYPE = "isType"
+public let TYPED = "typed"
 public let ISMATCH = "isMatch"
+
 
 // MARK: - Footstep
 
 public let ISFOOTSTEP = "isFootstep"
+public let FOOTSTEPED = "footsteped"
 public let TIMESTAMP = "timestamp"
 
 // MARK: - Message

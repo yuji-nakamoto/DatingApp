@@ -28,7 +28,7 @@ class Like {
     
     class func fetchLikeUser(_ forUserId: String, completion: @escaping(_ like: Like) -> Void) {
         
-        COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(forUserId).getDocument { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(forUserId).getDocument { (snapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             }
@@ -40,7 +40,7 @@ class Like {
     
     class func fetchLikeUsers(completion: @escaping(Like) -> Void) {
 
-        COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").getDocuments { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
@@ -57,7 +57,7 @@ class Like {
     
     class func fetchLikedUser(completion: @escaping(Like) -> Void) {
         
-        COLLECTION_LIKE.document(User.currentUserId()).collection("liked").getDocuments { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection(LIKED).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
@@ -74,27 +74,28 @@ class Like {
     
     class func saveIsLikeUser(forUser user: User, isLike: [String: Any]) {
                 
-        COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(user.uid).getDocument { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(user.uid).getDocument { (snapshot, error) in
             
             if snapshot?.exists == true {
-                COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(user.uid).updateData(isLike)
+                COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(user.uid).updateData(isLike)
             } else {
-                COLLECTION_LIKE.document(User.currentUserId()).collection("isLike").document(user.uid).setData(isLike)
+                COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(user.uid).setData(isLike)
             }
         }
     }
     
     class func saveLikedUser(forUser user: User) {
                 
-        COLLECTION_LIKE.document(user.uid).collection("liked").document(User.currentUserId()).getDocument { (snapshot, error) in
+        COLLECTION_LIKE.document(user.uid).collection(LIKED).document(User.currentUserId()).getDocument { (snapshot, error) in
             
             let dict = [UID: User.currentUserId()]
             
             if snapshot?.exists == true {
-                COLLECTION_LIKE.document(user.uid).collection("liked").document(User.currentUserId()).updateData(dict)
+                COLLECTION_LIKE.document(user.uid).collection(LIKED).document(User.currentUserId()).updateData(dict)
             } else {
-                COLLECTION_LIKE.document(user.uid).collection("liked").document(User.currentUserId()).setData(dict)
+                COLLECTION_LIKE.document(user.uid).collection(LIKED).document(User.currentUserId()).setData(dict)
             }
         }
     }
+    
 }

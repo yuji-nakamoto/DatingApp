@@ -1,8 +1,8 @@
 //
-//  DidLikeTableViewController.swift
+//  BlockListTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/27.
+//  Created by yuji_nakamoto on 2020/08/12.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -10,17 +10,18 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class DidLikeTableViewController: UIViewController {
+class BlockListTableViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
-    private var likeUsers = [Like]()
     private var users = [User]()
+    private var blockUsers = [Block]()
+    private var block = Block()
     
     // MARK: - Lifecycle
     
@@ -28,13 +29,7 @@ class DidLikeTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupBanner()
-        fetchLikedUsers()
-        UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
+        fetchBlockUser()
     }
     
     // MARK: - Actions
@@ -43,55 +38,33 @@ class DidLikeTableViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func segementControlled(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: fetchLikedUsers()
-        case 1: fetchLikeUsers()
-        default: break
-        }
-    }
+    // MARK: - Fetch
     
-    // MARK: - Fetch like
-    
-    private func fetchLikeUsers() {
-        
-        likeUsers.removeAll()
-        users.removeAll()
-        tableView.reloadData()
-        
-        Like.fetchLikeUsers { (like) in
-            guard let uid = like.uid else { return }
-            self.fetchUser(uid: uid) {
-                self.likeUsers.append(like)
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    // MARK: - Fetch liekd
-    
-    private func fetchLikedUsers() {
-        
-        likeUsers.removeAll()
-        users.removeAll()
-        tableView.reloadData()
-        
-        Like.fetchLikedUser { (like) in
-            guard let uid = like.uid else { return }
-            self.fetchUser(uid: uid) {
-                self.likeUsers.append(like)
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    // MARK: - Fetch user
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
             self.users.append(user)
             completion()
+        }
+    }
+    
+    private func fetchBlockUser() {
+        
+        users.removeAll()
+        blockUsers.removeAll()
+        
+        Block.fetchBlockUsers { (block) in
+            self.block = block
+            
+            if self.block.isBlock == 0 {
+                return
+            } else if self.block.isBlock == 1 {
+                guard let uid = block.uid else { return }
+                self.fetchUser(uid: uid) {
+                    self.blockUsers.append(block)
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     
@@ -123,23 +96,31 @@ class DidLikeTableViewController: UIViewController {
         
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        navigationItem.title = "いいね"
+        navigationItem.title = "ブロック"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
-            backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
+            
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
+            
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
-            backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
+        }
+        navigationItem.rightBarButtonItem = editButtonItem
+        self.editButtonItem.title = "取り消す"
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if self.isEditing {
+            self.editButtonItem.title = "完了"
+            tableView.setEditing(editing, animated: animated)
+        } else {
+            self.editButtonItem.title = "取り消す"
+            tableView.setEditing(editing, animated: animated)
         }
     }
 
@@ -147,37 +128,50 @@ class DidLikeTableViewController: UIViewController {
 
 // MARK: - Table view data source
 
-
-extension DidLikeTableViewController: UITableViewDataSource, UITableViewDelegate {
+extension BlockListTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return likeUsers.count
+        return blockUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
-        
-        let like = likeUsers[indexPath.row]
-        cell.like = like
-        cell.configureCell(users[indexPath.row])
+
+        let block = blockUsers[indexPath.row]
+        cell.block = block
+        cell.configureCell4(users[indexPath.row])
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: likeUsers[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: blockUsers[indexPath.row].uid)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let block = blockUsers[indexPath.row]
+        Block.deleteBlock(toUserId: block.uid)
+        
+        blockUsers.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "取り消す"
     }
 }
 
-extension DidLikeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+extension BlockListTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
-        return NSAttributedString(string: "いいねされた、\nいいねした履歴が、\nこちらに表示されます。", attributes: attributes)
+        return NSAttributedString(string: "ブロックしたお相手は\nまだいません。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "気になった方にいいねを送り、\nアプローチをしてみましょう。")
+        return NSAttributedString(string: "プロフィール画面右上の\nボタンからブロックができます")
     }
 }
+

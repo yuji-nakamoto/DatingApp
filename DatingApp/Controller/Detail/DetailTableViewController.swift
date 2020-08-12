@@ -42,8 +42,9 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     var user = User()
     private var like = Like()
     private var type = Type()
+    private var block = Block()
     var userId = ""
-    private var badgeUser: User!
+    private var badgeUser = User()
     private var currentUser = User()
     private var interstitial: GADInterstitial!
     private var typeUser = Type()
@@ -57,7 +58,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         fetchCurrentUser()
         fetchUserId()
         fetchLikeUser()
-        fetchTypeUser()
         fetchUserIdLike()
         fetchUserIdType()
         checkIfMatch()
@@ -68,6 +68,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchTypeUser()
+        fetchBlockUser()
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -187,7 +189,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func fetchTypeUser() {
         guard user.uid != nil else { return }
         footsteps(user)
-        
+        print("aaaaaaaa")
         Type.fetchTypeUser(self.user.uid) { (type) in
             self.type = type
             self.validateTypeButton(type: type)
@@ -219,30 +221,32 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
     }
     
+    private func fetchBlockUser() {
+        
+        guard userId != "" else { return }
+        Block.fetchBlockUser(toUserId: userId) { (block) in
+            self.block = block
+        }
+    }
+    
     // MARL: - FootStep
     
     private func footsteps(_ user: User) {
         guard user.uid != nil else { return }
         
-        let dict = [UID: user.uid!,
-                    ISFOOTSTEP: 1,
-                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
-        
-        Footstep.saveIsFootstepUser(forUser: user, isFootStep: dict)
+        Footstep.saveIsFootstepUser(toUserId: user.uid)
         if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-            Footstep.saveFootstepedUser(forUser: user)
+            Footstep.saveFootstepedUser(toUserId: user.uid)
         }
     }
     
     private func footsteps2(_ userId: String) {
         
         if userId != "" {
-            let dict = [UID: userId,
-                        ISFOOTSTEP: 1,
-                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
-            Footstep.saveIsFootstepUser2(userId: userId, isFootStep: dict)
+            
+            Footstep.saveIsFootstepUser(toUserId: userId)
             if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-                Footstep.saveFootstepedUser2(userId: userId)
+                Footstep.saveFootstepedUser(toUserId: userId)
             }
         }
     }
@@ -412,9 +416,15 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
         }
-        alert.addAction(block)
-        alert.addAction(report)
-        alert.addAction(cancel)
+        
+        if self.block.isBlock == 1 {
+            alert.addAction(report)
+            alert.addAction(cancel)
+        } else {
+            alert.addAction(block)
+            alert.addAction(report)
+            alert.addAction(cancel)
+        }
         self.present(alert,animated: true,completion: nil)
     }
     

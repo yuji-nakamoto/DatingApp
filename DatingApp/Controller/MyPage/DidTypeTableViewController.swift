@@ -21,7 +21,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     @IBOutlet weak var backView: UIView!
     
     
-    private var types = [Type]()
+    private var typeUsers = [Type]()
     private var users = [User]()
     private var interstitial: GADInterstitial!
     
@@ -61,14 +61,14 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func fetchTypeUsers() {
         
-        types.removeAll()
+        typeUsers.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Type.fetchTypeUsers { (type) in
             guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.types.append(type)
+                self.typeUsers.append(type)
                 self.tableView.reloadData()
             }
         }
@@ -78,14 +78,14 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func fetchTypedUsers() {
         
-        types.removeAll()
+        typeUsers.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Type.fetchTypedUser { (type) in
             guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.types.append(type)
+                self.typeUsers.append(type)
                 self.tableView.reloadData()
             }
         }
@@ -169,13 +169,13 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return types.count
+        return typeUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
-        let type = types[indexPath.row]
+        let type = typeUsers[indexPath.row]
         cell.type = type
         
         if segmentControl.selectedSegmentIndex == 0 && UserDefaults.standard.object(forKey: FEMALE) == nil {
@@ -197,7 +197,7 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
                 } else {
                     print("Error interstitial")
                 }
-                self.performSegue(withIdentifier: "DetailVC", sender: self.types[indexPath.row].uid)
+                self.performSegue(withIdentifier: "DetailVC", sender: self.typeUsers[indexPath.row].uid)
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
             }
@@ -206,8 +206,9 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
             self.present(alert,animated: true,completion: nil)
             return
         }
-        performSegue(withIdentifier: "DetailVC", sender: types[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: typeUsers[indexPath.row].uid)
     }
+    
 }
 
 extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {

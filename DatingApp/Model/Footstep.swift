@@ -12,7 +12,7 @@ import Firebase
 class Footstep {
     var uid: String!
     var isFootStep: Int!
-    var timestamp: Timestamp!
+    var date: Double!
     
     init() {
     }
@@ -20,7 +20,7 @@ class Footstep {
     init(dict: [String: Any]) {
         self.uid = dict[UID] as? String ?? ""
         self.isFootStep = dict[ISFOOTSTEP] as? Int ?? 0
-        self.timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
+        self.date = dict[DATE] as? Double ?? 0
     }
     
     // MARK: - Fetch isFootStep user
@@ -40,7 +40,7 @@ class Footstep {
     
     class func fetchFootstepUsers(completion: @escaping(Footstep) -> Void) {
 
-        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
+        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").order(by: DATE).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
@@ -57,7 +57,7 @@ class Footstep {
     
     class func fetchFootstepedUser(completion: @escaping(Footstep) -> Void) {
         
-        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("footsteped").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
+        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("footsteped").order(by: DATE).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription) ")
             }
@@ -72,57 +72,37 @@ class Footstep {
     
     // MARK: - Save
     
-    class func saveIsFootstepUser(forUser user: User, isFootStep: [String: Any]) {
+    class func saveIsFootstepUser(toUserId: String) {
                 
-        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(user.uid).getDocument { (snapshot, error) in
+        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(toUserId).getDocument { (snapshot, error) in
+            
+            let date: Double = Date().timeIntervalSince1970
+            let dict = [UID: toUserId,
+                        ISFOOTSTEP: 1,
+                        DATE: date] as [String : Any]
             
             if snapshot?.exists == true {
-                COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(user.uid).updateData(isFootStep)
+                COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(toUserId).updateData(dict)
             } else {
-                COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(user.uid).setData(isFootStep)
+                COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(toUserId).setData(dict)
             }
         }
     }
     
-    class func saveIsFootstepUser2(userId: String, isFootStep: [String: Any]) {
+    class func saveFootstepedUser(toUserId: String) {
                 
-        COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(userId).getDocument { (snapshot, error) in
+        COLLECTION_FOOTSTEP.document(toUserId).collection("footsteped").document(User.currentUserId()).getDocument { (snapshot, error) in
             
-            if snapshot?.exists == true {
-                COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(userId).updateData(isFootStep)
-            } else {
-                COLLECTION_FOOTSTEP.document(User.currentUserId()).collection("isFootstep").document(userId).setData(isFootStep)
-            }
-        }
-    }
-    
-    class func saveFootstepedUser(forUser user: User) {
-                
-        COLLECTION_FOOTSTEP.document(user.uid).collection("footsteped").document(User.currentUserId()).getDocument { (snapshot, error) in
-            
+            let date: Double = Date().timeIntervalSince1970
             let dict = [UID: User.currentUserId(),
-                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                        DATE: date] as [String : Any]
             
             if snapshot?.exists == true {
-                COLLECTION_FOOTSTEP.document(user.uid).collection("footsteped").document(User.currentUserId()).updateData(dict)
+                COLLECTION_FOOTSTEP.document(toUserId).collection("footsteped").document(User.currentUserId()).updateData(dict)
             } else {
-                COLLECTION_FOOTSTEP.document(user.uid).collection("footsteped").document(User.currentUserId()).setData(dict)
+                COLLECTION_FOOTSTEP.document(toUserId).collection("footsteped").document(User.currentUserId()).setData(dict)
             }
         }
     }
     
-    class func saveFootstepedUser2(userId: String) {
-                
-        COLLECTION_FOOTSTEP.document(userId).collection("footsteped").document(User.currentUserId()).getDocument { (snapshot, error) in
-            
-            let dict = [UID: User.currentUserId(),
-                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
-            
-            if snapshot?.exists == true {
-                COLLECTION_FOOTSTEP.document(userId).collection("footsteped").document(User.currentUserId()).updateData(dict)
-            } else {
-                COLLECTION_FOOTSTEP.document(userId).collection("footsteped").document(User.currentUserId()).setData(dict)
-            }
-        }
-    }
 }

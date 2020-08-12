@@ -47,6 +47,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        collectionView.reloadData()
         if !Auth.auth().currentUser!.uid.isEmpty {
             Messaging.messaging().subscribe(toTopic: Auth.auth().currentUser!.uid)
             print("messaging subscribe")
@@ -124,14 +125,6 @@ class SearchViewController: UIViewController {
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
             detailVC.user = sender as! User
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        } else {
-            navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
     
