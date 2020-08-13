@@ -27,7 +27,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
     }
     
@@ -76,12 +75,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             self.activityIndicator.stopAnimating()
-            self.hud.textLabel.text = "認証確認のメールを送りました。\nメールを認証しログインしてください。"
+            self.hud.textLabel.text = "認証のメールを送りました。\nメールを確認しログインしてください。"
             self.hud.show(in: self.view)
             self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
+            self.hud.dismiss(afterDelay: 3.0)
             UserDefaults.standard.set(true, forKey: TO_VERIFIED_VC)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.view.endEditing(true)
                 self.toVerifiedVC()
             }
@@ -100,10 +99,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         descriptionLabel.text = "メールアドレスとパスワードを入力して、\nアカウントを作成してください。"
         doneButton.layer.cornerRadius = 50 / 2
-        doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        doneButton.layer.shadowColor = UIColor.black.cgColor
-        doneButton.layer.shadowOpacity = 0.3
-        doneButton.layer.shadowRadius = 4
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

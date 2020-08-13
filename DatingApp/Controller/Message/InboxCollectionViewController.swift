@@ -86,8 +86,8 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
-            let userId = sender as! String
-            detailVC.userId = userId
+            let toUserId = sender as! String
+            detailVC.toUserId = toUserId
         }
     }
     

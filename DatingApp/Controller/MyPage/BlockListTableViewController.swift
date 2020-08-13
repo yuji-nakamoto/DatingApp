@@ -75,8 +75,8 @@ class BlockListTableViewController: UIViewController {
         if segue.identifier == "DetailVC" {
 
             let detailVC = segue.destination as! DetailTableViewController
-            let userId = sender as! String
-            detailVC.userId = userId
+            let toUserId = sender as! String
+            detailVC.toUserId = toUserId
         }
     }
     
@@ -101,10 +101,6 @@ class BlockListTableViewController: UIViewController {
         tableView.separatorStyle = .none
         if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
         }

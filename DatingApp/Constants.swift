@@ -17,7 +17,7 @@ public let COLLECTION_LIKE = Firestore.firestore().collection("like")
 public let COLLECTION_TYPE = Firestore.firestore().collection("type")
 public let COLLECTION_FOOTSTEP = Firestore.firestore().collection("footstep")
 public let COLLECTION_POSTS = Firestore.firestore().collection("posts")
-public let COLLECTION_MYPOSTS = Firestore.firestore().collection("myPosts")
+public let COLLECTION_MYPOST = Firestore.firestore().collection("myPost")
 public let COLLECTION_MESSAGE = Firestore.firestore().collection("message")
 public let COLLECTION_INBOX = Firestore.firestore().collection("inbox")
 public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounter")
@@ -158,6 +158,12 @@ public let GREEN = "green"
 public let DARK = "dark"
 public let REFRESH = "refresh"
 public let CARDVC = "cardVC"
+public let FACEBOOK = "facebook"
+public let GOOGLE = "google"
+public let FACEBOOK2 = "facebook2"
+public let GOOGLE2 = "google2"
+public let DELETE = "delete"
+public let ALL = "all"
 
 // MARK: - Notification
 

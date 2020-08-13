@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import GoogleMobileAds
 import UserNotifications
+import FBSDKCoreKit
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         keepUpdatingStatus()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         
         
         if #available(iOS 10.0, *) {
@@ -76,6 +80,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ])
             }
         }
+    }
+    
+    func application(_ application: UIApplication,open url:URL,sourceApplication: String?,annotation: Any) -> Bool {
+        var handled = false
+        
+        if url.absoluteString.contains("fb") {
+            handled = ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        } else {
+            handled = GIDSignIn.sharedInstance()!.handle(url)
+        }
+        
+        return handled
     }
     
     // MARK: UISceneSession Lifecycle

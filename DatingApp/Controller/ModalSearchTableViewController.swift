@@ -72,6 +72,12 @@ class ModalSearchTableViewController: UITableViewController {
             UserDefaults.standard.removeObject(forKey: FEMALE)
         }
         
+        if residenceLabel.text == "こだわらない" {
+            UserDefaults.standard.set(true, forKey: ALL)
+        } else {
+            UserDefaults.standard.removeObject(forKey: ALL)
+        }
+        
         updateUser(withValue: dict as [String : Any])
         dismiss(animated: true, completion: nil)
     }
@@ -131,7 +137,7 @@ class ModalSearchTableViewController: UITableViewController {
 
 extension ModalSearchTableViewController: PickerKeyboard3Delegate {
     func titlesOfPickerViewKeyboard3(_ pickerKeyboard: PickerKeyboard3) -> Array<String> {
-        return dataArray3
+        return dataArray18
     }
     
     func didDone3(_ pickerKeyboard: PickerKeyboard3, selectData: String) {

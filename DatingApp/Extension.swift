@@ -83,3 +83,14 @@ extension UIView {
         return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! Card as! T
     }
 }
+
+extension UIImageView {
+    func addBlackGradientLayer(frame: CGRect, colors: [UIColor]) {
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+        gradient.locations = [0.5, 1.0]
+        
+        gradient.colors = colors.map({ $0.cgColor })
+        self.layer.addSublayer(gradient)
+    }
+}

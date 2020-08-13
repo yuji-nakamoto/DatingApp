@@ -96,8 +96,8 @@ class EnterProfileImageViewController: UIViewController {
                     PROFILEIMAGEURL3: ""]
         
         updateUser(withValue: dict)
-        hudSetup()
-        toEnterProfessionVC()
+        indicator.stopAnimating()
+        toEnterGenderVC()
     }
     
     // MARK: - Helpers
@@ -109,10 +109,6 @@ class EnterProfileImageViewController: UIViewController {
         anyLabel.layer.borderColor = UIColor.systemGray3.cgColor
         descriptionLabel.text = "プロフィール画像を設定してください。\nあとで設定する場合はスキップを押してください。"
         nextButton.layer.cornerRadius = 50 / 2
-        nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        nextButton.layer.shadowColor = UIColor.black.cgColor
-        nextButton.layer.shadowOpacity = 0.3
-        nextButton.layer.shadowRadius = 4
         skipButton.layer.cornerRadius = 50 / 2
         skipButton.layer.borderWidth = 1
         skipButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
@@ -129,17 +125,17 @@ class EnterProfileImageViewController: UIViewController {
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
-        self.toEnterProfessionVC()
+        self.toEnterGenderVC()
     }
     
     // MARK: - Navigation
 
-    private func toEnterProfessionVC() {
+    private func toEnterGenderVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterProfessionVC = storyboard.instantiateViewController(withIdentifier: "EnterProfessionVC")
-            self.present(toEnterProfessionVC, animated: true, completion: nil)
+            let toEnterGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterGenderVC")
+            self.present(toEnterGenderVC, animated: true, completion: nil)
         }
     }
     

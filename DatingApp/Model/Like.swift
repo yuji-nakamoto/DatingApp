@@ -28,7 +28,7 @@ class Like {
     
     class func fetchLikeUser(_ forUserId: String, completion: @escaping(_ like: Like) -> Void) {
         
-        COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(forUserId).getDocument { (snapshot, error) in
+        COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(forUserId).addSnapshotListener { (snapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             }

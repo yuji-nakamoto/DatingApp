@@ -120,11 +120,14 @@ class ReportTableViewController: UITableViewController {
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor.white
             sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            sendButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
+            sendButton.layer.borderColor = UIColor.systemGray3.cgColor
+            sendButton.layer.borderWidth = 2
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
         }
+        
+        
     }
     
     private func setupUserInfo(_ user: User, _ currentUser: User) {
@@ -146,5 +149,4 @@ class ReportTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 }

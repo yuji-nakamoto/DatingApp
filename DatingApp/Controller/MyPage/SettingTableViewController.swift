@@ -22,14 +22,14 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var pickerKeyboard: PickerKeyboard3!
     @IBOutlet weak var footstepSwitch: UISwitch!
     @IBOutlet weak var footstepLabel: UILabel!
-
+    
     private var user: User!
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         pickerKeyboard.delegate = self
         setupUI()
         fetchUser()
@@ -70,17 +70,23 @@ class SettingTableViewController: UITableViewController {
             footstepLabel.text = "足あとを残さない"
         }
     }
-
+    
     @IBAction func completionButtonPressed(_ sender: Any) {
         
         let dict = [MINAGE: Int(minLabel.text!)!,
                     MAXAGE: Int(maxLabel.text!)!,
                     RESIDENCESEARCH: residenceLabel.text!] as [String : Any]
         
+        if residenceLabel.text == "こだわらない" {
+            UserDefaults.standard.set(true, forKey: ALL)
+        } else {
+            UserDefaults.standard.removeObject(forKey: ALL)
+        }
+        
         updateUser(withValue: dict as [String : Any])
         dismiss(animated: true, completion: nil)
     }
-        
+    
     // MARK: - Fetch user
     
     private func fetchUser() {
@@ -100,12 +106,28 @@ class SettingTableViewController: UITableViewController {
             
             AuthService.logoutUser { (error) in
                 if error != nil {
-                    
                     print("error logout user: \(error!.localizedDescription)")
+                } else {
+                    self.toSelectLoginVC()
                 }
-                self.toSelectLoginVC()
             }
         }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+        }
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        self.present(alert,animated: true,completion: nil)
+    }
+    
+    // MARK: - Withdraw
+    
+    private func withdraw() {
+        
+        let alert: UIAlertController = UIAlertController(title: user.username, message: "退会するとアカウント情報がすべて削除されます。\n元に戻すことはできません。", preferredStyle: .actionSheet)
+        let logout: UIAlertAction = UIAlertAction(title: "退会を進める", style: UIAlertAction.Style.default) { (alert) in
+            self.toWithdrawVC()
+        }
+        
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
         }
         alert.addAction(logout)
@@ -123,8 +145,9 @@ class SettingTableViewController: UITableViewController {
         maxSlider.value = Float(user.maxAge)
         residenceLabel.text = user.residenceSerch
     }
-        
+    
     private func setupUI() {
+        
         genderLabel.text = ""
         navigationItem.title = "設定"
         
@@ -145,26 +168,36 @@ class SettingTableViewController: UITableViewController {
     
     private func toSelectLoginVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
-            self.present(toSelectLoginVC, animated: true, completion: nil)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
+        self.present(toSelectLoginVC, animated: true, completion: nil)
     }
+    
+    private func toWithdrawVC() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toWithdrawVC = storyboard.instantiateViewController(withIdentifier: "WithdrawVC")
+        self.present(toWithdrawVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Table view
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 4 && indexPath.row == 3 {
+            withdraw()
+        }
         if indexPath.section == 5 {
             logoutUser()
         }
     }
-
 }
 
 extension SettingTableViewController: PickerKeyboard3Delegate {
     func titlesOfPickerViewKeyboard3(_ pickerKeyboard: PickerKeyboard3) -> Array<String> {
-        return dataArray3
+        return dataArray18
     }
     
     func didDone3(_ pickerKeyboard: PickerKeyboard3, selectData: String) {

@@ -241,9 +241,16 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func fetchUsers(_ user: User) {
         
-        User.fetchCardUsers(user.residenceSerch, user) { (user) in
-            self.users.append(user)
-            self.setupCards(user: user)
+        if user.residenceSerch == "こだわらない" {
+            User.fetchCardAllUsers(user) { (user) in
+                self.users.append(user)
+                self.setupCards(user: user)
+            }
+        } else {
+            User.fetchCardUsers(user.residenceSerch, user) { (user) in
+                self.users.append(user)
+                self.setupCards(user: user)
+            }
         }
     }
     

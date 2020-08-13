@@ -10,13 +10,14 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class SendPostTableViewController: UITableViewController, GADInterstitialDelegate, GADBannerViewDelegate {
+class SendPostTableViewController: UITableViewController, GADInterstitialDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var sendButton: UIBarButtonItem!
+    @IBOutlet weak var countLabel: UILabel!
     
     private let userDefaults = UserDefaults.standard
     private var pleaceholderLbl = UILabel()
@@ -44,6 +45,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        
         userDefaults.removeObject(forKey: LOVER)
         userDefaults.removeObject(forKey: FRIEND)
         userDefaults.removeObject(forKey: MAILFRIEND)
@@ -120,7 +122,6 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
     }
     
     // MARK: - Fetch user
@@ -210,6 +211,13 @@ extension SendPostTableViewController: UITextViewDelegate {
             pleaceholderLbl.isHidden = true
         } else {
             pleaceholderLbl.isHidden = false
+        }
+        
+        let reportNum = 30 - textView.text.count
+        if reportNum < 0 {
+            countLabel.text = "文字数制限です"
+        } else {
+            countLabel.text = String(reportNum)
         }
     }
 }

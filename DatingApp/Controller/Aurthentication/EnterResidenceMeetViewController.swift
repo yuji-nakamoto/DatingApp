@@ -20,7 +20,7 @@ class EnterResidenceMeetController: UIViewController {
     @IBOutlet weak var requiredLabel: UILabel!
     
     private var hud = JGProgressHUD(style: .dark)
-    private var dataArray = ["-", "海外", "北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島", "茨城", "栃木", "群馬", "埼玉", "千葉", "東京", "神奈川", "新潟", "富山", "石川", "福井", "山梨", "長野", "岐阜", "静岡", "愛知", "三重", "滋賀", "京都", "大阪", "兵庫", "奈良", "和歌山", "鳥取", "島根", "岡山", "広島", "山口", "徳島", "香川", "愛媛", "高知", "福岡", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄"]
+    private var dataArray = ["-", "こだわらない", "海外", "北海道", "青森", "岩手", "宮城", "秋田", "山形", "福島", "茨城", "栃木", "群馬", "埼玉", "千葉", "東京", "神奈川", "新潟", "富山", "石川", "福井", "山梨", "長野", "岐阜", "静岡", "愛知", "三重", "滋賀", "京都", "大阪", "兵庫", "奈良", "和歌山", "鳥取", "島根", "岡山", "広島", "山口", "徳島", "香川", "愛媛", "高知", "福岡", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄"]
     
     // MARK: - Lifecycle
     
@@ -114,12 +114,8 @@ class EnterResidenceMeetController: UIViewController {
         residenceLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "出会いたい人の居住地を選択してください。\nあとで変更することもできます。"
+        descriptionLabel.text = "出会いたい人の居住地を選択してください。\nあとで変更することができます。"
         nextButton.layer.cornerRadius = 50 / 2
-        nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        nextButton.layer.shadowColor = UIColor.black.cgColor
-        nextButton.layer.shadowOpacity = 0.3
-        nextButton.layer.shadowRadius = 4
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
@@ -129,6 +125,14 @@ class EnterResidenceMeetController: UIViewController {
 
     private func toTabBerVC() {
         
+        if UserDefaults.standard.object(forKey: FACEBOOK) != nil {
+            UserDefaults.standard.set(true, forKey: FACEBOOK2)
+            UserDefaults.standard.removeObject(forKey: FACEBOOK)
+        }
+        if UserDefaults.standard.object(forKey: GOOGLE) != nil {
+            UserDefaults.standard.set(true, forKey: GOOGLE2)
+            UserDefaults.standard.removeObject(forKey: GOOGLE)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
             UserDefaults.standard.set(true, forKey: RCOMPLETION)

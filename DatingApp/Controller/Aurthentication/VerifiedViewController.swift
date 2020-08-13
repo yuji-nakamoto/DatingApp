@@ -16,7 +16,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -59,7 +58,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         AuthService.resendVerificaitionEmail(email: emailTextField.text!) { (error) in
             print("Error: \(String(describing: error?.localizedDescription))")
         }
-        hud.textLabel.text = "認証メールを再送信しました。"
+        hud.textLabel.text = "認証のメールを再送信しました。"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
@@ -79,7 +78,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             let dict = [UID: User.currentUserId(),
                         EMAIL: self.emailTextField.text!] as [String : Any]
             saveUser(userId: User.currentUserId(), withValue: dict)
-            self.toEnterGenderVC()
+            self.toEnterNameVC()
             self.activityIndicator.stopAnimating()
         }
         
@@ -96,11 +95,11 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 //                                EMAIL: self.emailTextField.text!] as [String : Any]
 //                    saveUser(userId: User.currentUserId(), withValue: dict)
 //
-//                    self.toEnterGenderVC()
+//                    self.toEnterNameVC()
 //                } else {
 //                    generator.notificationOccurred(.error)
 //                    self.loginButton.isEnabled = true
-//                    self.hud.textLabel.text = "認証メールを確認してください。"
+//                    self.hud.textLabel.text = "メールを確認してください。"
 //                    self.hud.show(in: self.view)
 //                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
 //                    self.hud.dismiss(afterDelay: 2.0)
@@ -120,15 +119,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
 
     private func setupUI() {
         
-        descriptionLabel.text = "認証メールに記載しているURLを開いて、認証を完了させてください。\n\n認証がお済みであればログインを行い、ユーザー情報の入力を進めてください。"
+        descriptionLabel.text = "メールに記載しているURLを開き、認証を完了させてください。"
         loginButton.layer.cornerRadius = 50 / 2
-        loginButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        loginButton.layer.shadowColor = UIColor.black.cgColor
-        loginButton.layer.shadowOpacity = 0.3
-        loginButton.layer.shadowRadius = 4
-        resendButton.layer.cornerRadius = 50 / 2
-        resendButton.layer.borderWidth = 1
-        resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
@@ -152,12 +144,12 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Navigation
     
-    private func toEnterGenderVC() {
+    private func toEnterNameVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterGenderVC")
-            self.present(toEnterGenderVC, animated: true, completion: nil)
+            let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
+            self.present(toEnterNameVC, animated: true, completion: nil)
         }
     }
     

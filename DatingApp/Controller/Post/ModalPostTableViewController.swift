@@ -71,6 +71,12 @@ class ModalPostTableViewController: UITableViewController {
             UserDefaults.standard.removeObject(forKey: FEMALE)
         }
         
+        if residenceLabel.text == "こだわらない" {
+            UserDefaults.standard.set(true, forKey: ALL)
+        } else {
+            UserDefaults.standard.removeObject(forKey: ALL)
+        }
+        
         if genreLabel.text == "すべて" {
             UserDefaults.standard.removeObject(forKey: LOVER2)
             UserDefaults.standard.removeObject(forKey: FRIEND2)
@@ -153,7 +159,7 @@ class ModalPostTableViewController: UITableViewController {
 
 extension ModalPostTableViewController: PickerKeyboard3Delegate {
     func titlesOfPickerViewKeyboard3(_ pickerKeyboard: PickerKeyboard3) -> Array<String> {
-        return dataArray3
+        return dataArray18
     }
     
     func didDone3(_ pickerKeyboard: PickerKeyboard3, selectData: String) {

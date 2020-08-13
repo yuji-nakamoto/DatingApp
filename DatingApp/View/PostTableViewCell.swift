@@ -96,6 +96,9 @@ class PostTableViewCell: UITableViewCell {
         shadowView.layer.shadowColor = UIColor.black.cgColor
         shadowView.layer.shadowOpacity = 0.3
         shadowView.layer.shadowRadius = 4
+        
+        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 270)
+        profileImageView.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

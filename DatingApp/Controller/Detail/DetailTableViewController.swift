@@ -37,17 +37,17 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionLabel2: UILabel!
     @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var typeDoneLabel: UILabel!
+    @IBOutlet weak var likeDoneLabel: UILabel!
     
-    private var profileImages = [UIImage]()
-    var user = User()
+    private var user = User()
     private var like = Like()
     private var type = Type()
     private var block = Block()
-    var userId = ""
-    private var badgeUser = User()
+    public var toUserId = ""
     private var currentUser = User()
-    private var interstitial: GADInterstitial!
     private var typeUser = Type()
+    private var interstitial: GADInterstitial!
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel, descriptionLabel, descriptionLabel2]
     
@@ -55,19 +55,17 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchCurrentUser()
-        fetchUserId()
-        fetchLikeUser()
-        fetchUserIdLike()
-        fetchUserIdType()
-        checkIfMatch()
-        configureUI()
+        setupUI()
         interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchCurrentUser()
+        fetchUserId()
+        checkIfMatch()
+        fetchLikeUser()
         fetchTypeUser()
         fetchBlockUser()
         self.navigationController?.navigationBar.isHidden = true
@@ -130,10 +128,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         } else {
             showTypeAnimation()
         }
-        if self.typeUser.isType == 1 {
-            self.matchView()
-            Match.saveMatchUser(forUser: self.user)
-        }
+        checkIfMatch()
     }
     
     @objc func handleDismissal() {
@@ -156,13 +151,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     // MARK: - Fetch
     
     private func fetchUserId() {
-        guard userId != "" else { return }
-        footsteps2(userId)
+        guard toUserId != "" else { return }
+        footsteps(toUserId)
         
-        Type.checkIfMatch(toUserId: userId) { (type) in
-            self.typeUser = type
-        }
-        User.fetchUser(userId) { (user) in
+        User.fetchUser(toUserId) { (user) in
             self.user = user
             self.tableView.reloadData()
         }
@@ -175,79 +167,54 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             self.currentUserView.sd_setImage(with: URL(string: self.currentUser.profileImageUrl1), completed: nil)
         }
     }
-    
-    private func fetchLikeUser() {
-        guard user.uid != nil else { return }
-        footsteps(user)
-        
-        Like.fetchLikeUser(user.uid) { (like) in
-            self.like = like
-            self.validateLikeButton(like: like)
-        }
-    }
-    
+
     private func fetchTypeUser() {
-        guard user.uid != nil else { return }
-        footsteps(user)
-        print("aaaaaaaa")
-        Type.fetchTypeUser(self.user.uid) { (type) in
+        
+        guard toUserId != "" else { return }
+        Type.fetchTypeUser(toUserId) { (type) in
             self.type = type
             self.validateTypeButton(type: type)
         }
     }
     
-    private func fetchUserIdType() {
+    private func fetchLikeUser() {
         
-        if userId != "" {
-            Type.fetchTypeUser(userId) { (type) in
-                self.validateTypeButton(type: type)
-            }
-        }
-    }
-    
-    private func fetchUserIdLike() {
-        
-        if userId != "" {
-            Like.fetchLikeUser(self.userId) { (like) in
-                self.validateLikeButton(like: like)
-            }
+        guard toUserId != "" else { return }
+        Like.fetchLikeUser(toUserId) { (like) in
+            self.like = like
+            self.validateLikeButton(like: like)
         }
     }
     
     private func checkIfMatch() {
+        
         guard user.uid != nil else { return }
-        Type.checkIfMatch(toUserId: user.uid) { (type) in
+        Type.checkIfMatch(toUserId: toUserId) { (type) in
             self.typeUser = type
+            
+            if self.typeUser.isType == 1 {
+                self.matchView()
+                Match.saveMatchUser(forUser: self.user)
+            }
         }
     }
     
     private func fetchBlockUser() {
         
-        guard userId != "" else { return }
-        Block.fetchBlockUser(toUserId: userId) { (block) in
+        guard toUserId != "" else { return }
+        Block.fetchBlockUser(toUserId: toUserId) { (block) in
             self.block = block
         }
     }
     
     // MARL: - FootStep
     
-    private func footsteps(_ user: User) {
-        guard user.uid != nil else { return }
+    private func footsteps(_ userId: String) {
         
-        Footstep.saveIsFootstepUser(toUserId: user.uid)
+        guard toUserId != "" else { return }
+        Footstep.saveIsFootstepUser(toUserId: toUserId)
         if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-            Footstep.saveFootstepedUser(toUserId: user.uid)
-        }
-    }
-    
-    private func footsteps2(_ userId: String) {
-        
-        if userId != "" {
-            
-            Footstep.saveIsFootstepUser(toUserId: userId)
-            if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-                Footstep.saveFootstepedUser(toUserId: userId)
-            }
+            Footstep.saveFootstepedUser(toUserId: toUserId)
         }
     }
     
@@ -357,7 +324,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     func configureAnimations() {
-                
+        
         let angle = 30 * CGFloat.pi / 180
         
         currentUserView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
@@ -428,7 +395,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         self.present(alert,animated: true,completion: nil)
     }
     
-    private func configureUI() {
+    private func setupUI() {
         
         if UserDefaults.standard.object(forKey: CARDVC) != nil {
             buttonStackView.isHidden = true
@@ -437,6 +404,9 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             buttonStackView.isHidden = false
             reportButton.isHidden = false
         }
+        
+        typeDoneLabel.isHidden = true
+        likeDoneLabel.isHidden = true
         
         views.forEach({ $0?.alpha = 0})
         currentUserView.layer.cornerRadius = 120 / 2
@@ -481,9 +451,11 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         if like.isLike == 1 {
             likeButton.isEnabled = false
             likeButton2.isEnabled = false
+            likeDoneLabel.isHidden = false
         } else {
             likeButton.isEnabled = true
             likeButton2.isEnabled = true
+            likeDoneLabel.isHidden = true
         }
     }
     
@@ -492,9 +464,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         if type.isType == 1 {
             typeButton.isEnabled = false
             typeButton2.isEnabled = false
+            typeDoneLabel.isHidden = false
+            
         } else {
             typeButton.isEnabled = true
             typeButton2.isEnabled = true
+            typeDoneLabel.isHidden = true
         }
     }
     

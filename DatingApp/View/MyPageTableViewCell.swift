@@ -30,6 +30,8 @@ class MyPageTableViewCell: UITableViewCell {
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 100 / 2
+        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 270)
+        profileImageView.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
     }
     
     func cogAnimation() {

@@ -82,7 +82,8 @@ class WriteReportTableViewController: UITableViewController, UITextViewDelegate 
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             saveButton.backgroundColor = UIColor.white
             saveButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            saveButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
+            saveButton.layer.borderColor = UIColor.systemGray3.cgColor
+            saveButton.layer.borderWidth = 1
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             saveButton.backgroundColor = UIColor(named: O_DARK)
             saveButton.setTitleColor(UIColor.white, for: .normal)

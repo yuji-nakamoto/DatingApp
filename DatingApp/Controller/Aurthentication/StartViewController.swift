@@ -61,5 +61,4 @@ class StartViewController: UIViewController {
             self.present(toSelectLoginVC, animated: true, completion: nil)
         }
     }
-
 }

@@ -52,7 +52,7 @@ class EnterAgeViewController: UIViewController {
         let dict = [AGE: Int(ageLabel.text!)]
         updateUser(withValue: dict as [String : Any])
 
-        toEnterProfileImageVC()
+        toEnterProfessionVC()
     }
     
     // MARK: - Helpers
@@ -65,12 +65,8 @@ class EnterAgeViewController: UIViewController {
         ageLabel.text = "18"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "年齢を選択してください。"
+        descriptionLabel.text = "年齢を選択してください。\n年齢はあとで変更することができません。"
         nextButton.layer.cornerRadius = 50 / 2
-        nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        nextButton.layer.shadowColor = UIColor.black.cgColor
-        nextButton.layer.shadowOpacity = 0.3
-        nextButton.layer.shadowRadius = 4
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
@@ -78,12 +74,12 @@ class EnterAgeViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private func toEnterProfileImageVC() {
+    private func toEnterProfessionVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterProfileImageVC = storyboard.instantiateViewController(withIdentifier: "EnterProfileImageVC")
-            self.present(toEnterProfileImageVC, animated: true, completion: nil)
+            let toEnterProfessionVC = storyboard.instantiateViewController(withIdentifier: "EnterProfessionVC")
+            self.present(toEnterProfessionVC, animated: true, completion: nil)
         }
     }
 }

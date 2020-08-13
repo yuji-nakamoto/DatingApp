@@ -115,13 +115,7 @@ class DetailTableViewCell: UITableViewCell {
             profileImageView5.sd_setImage(with: URL(string: user!.profileImageUrl5), completed: nil)
             profileImageView6.sd_setImage(with: URL(string: user!.profileImageUrl6), completed: nil)
         }
-        profileImageView1.layer.cornerRadius = 15
-        profileImageView2.layer.cornerRadius = 15
-        profileImageView3.layer.cornerRadius = 15
-        profileImageView4.layer.cornerRadius = 15
-        profileImageView5.layer.cornerRadius = 15
-        profileImageView6.layer.cornerRadius = 15
-        statusView.layer.cornerRadius = 12 / 2
+    
         
         nameLabel.text = user?.username
         nameLabel2.text = user?.username
@@ -551,6 +545,22 @@ class DetailTableViewCell: UITableViewCell {
         segBarTriple1.layer.cornerRadius = 5 / 2
         segBarTriple2.layer.cornerRadius = 5 / 2
         segBarTriple3.layer.cornerRadius = 5 / 2
+        
+        profileImageView1.layer.cornerRadius = 15
+        profileImageView2.layer.cornerRadius = 15
+        profileImageView3.layer.cornerRadius = 15
+        profileImageView4.layer.cornerRadius = 15
+        profileImageView5.layer.cornerRadius = 15
+        profileImageView6.layer.cornerRadius = 15
+        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 700)
+        profileImageView1.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView2.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView3.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView4.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView5.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView6.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        
+        statusView.layer.cornerRadius = 12 / 2
     }
     
     func profileImageUrl_23456Nil() {

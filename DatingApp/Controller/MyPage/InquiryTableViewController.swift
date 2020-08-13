@@ -114,7 +114,8 @@ class InquiryTableViewController: UITableViewController {
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor.white
             sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            sendButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
+            sendButton.layer.borderColor = UIColor.systemGray3.cgColor
+            sendButton.layer.borderWidth = 1
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)

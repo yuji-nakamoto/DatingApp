@@ -111,7 +111,7 @@ class Card: UIView {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailTableViewController
-        detailVC.user = user
+        detailVC.toUserId = user.uid
     
         cardVC?.present(detailVC, animated: true, completion: nil)
     }
@@ -402,6 +402,14 @@ class Card: UIView {
         
         likeLabel.transform = CGAffineTransform(rotationAngle: -.pi / 8)
         nopeLabel.transform = CGAffineTransform(rotationAngle: .pi / 8)
+        
+        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: bounds.height)
+        profileImageView1.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView2.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView3.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView4.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView5.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        profileImageView6.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
     }
     
     func profileImageUrl_23456Nil() {

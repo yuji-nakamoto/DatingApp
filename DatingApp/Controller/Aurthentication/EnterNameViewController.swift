@@ -18,6 +18,7 @@ class EnterNameViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var requiredLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
     
     private var hud = JGProgressHUD(style: .dark)
     
@@ -71,7 +72,7 @@ class EnterNameViewController: UIViewController {
         let dict = [USERNAME: nameLabel.text]
         updateUser(withValue: dict as [String : Any])
 
-        toEnterAgeVC()
+        toEnterProfileImageVC()
     }
     
     // MARK: - Helpers
@@ -82,18 +83,22 @@ class EnterNameViewController: UIViewController {
         nameLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "ニックネームを10文字以下で入力してください。"
+        descriptionLabel.text = "ニックネームを10文字以下で入力してください。\nニックネームはあとで変更することができます。"
         nextButton.layer.cornerRadius = 50 / 2
-        nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        nextButton.layer.shadowColor = UIColor.black.cgColor
-        nextButton.layer.shadowOpacity = 0.3
-        nextButton.layer.shadowRadius = 4
         
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     @objc func textFieldDidChange() {
+     
         nameLabel.text = nameTextField.text
+
+        let nicknameNum = 10 - nameTextField.text!.count
+        if nicknameNum < 0 {
+            countLabel.text = "文字数制限です"
+        } else {
+            countLabel.text = String(nicknameNum)
+        }
     }
     
     private func textFieldHaveText() -> Bool {
@@ -103,12 +108,12 @@ class EnterNameViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private func toEnterAgeVC() {
+    private func toEnterProfileImageVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterAgeVC = storyboard.instantiateViewController(withIdentifier: "EnterAgeVC")
-            self.present(toEnterAgeVC, animated: true, completion: nil)
+            let toEnterProfileImageVC = storyboard.instantiateViewController(withIdentifier: "EnterProfileImageVC")
+            self.present(toEnterProfileImageVC, animated: true, completion: nil)
         }
     }
 

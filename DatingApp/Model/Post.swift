@@ -46,39 +46,76 @@ class Post {
     class func fetchPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .order(by: TIMESTAMP)
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .order(by: TIMESTAMP)
 
-            
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
-        } else {
-            let postRef = COLLECTION_POSTS
-                .order(by: TIMESTAMP)
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
             
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+        } else {
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .order(by: TIMESTAMP)
+                    .whereField(GENDER, isEqualTo: "女性")
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .order(by: TIMESTAMP)
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
         }
     }
@@ -86,41 +123,83 @@ class Post {
     class func fetchGenreLoverPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(GENRE, isEqualTo: "恋人募集")
-                .order(by: TIMESTAMP)
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(GENRE, isEqualTo: "恋人募集")
+                    .order(by: TIMESTAMP)
 
-            
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .whereField(GENRE, isEqualTo: "恋人募集")
+                    .order(by: TIMESTAMP)
+
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
-        } else {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(GENRE, isEqualTo: "恋人募集")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .order(by: TIMESTAMP)
             
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+        } else {
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "恋人募集")
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "恋人募集")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
         }
     }
@@ -128,41 +207,83 @@ class Post {
     class func fetchGenreFriendPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(GENRE, isEqualTo: "友達募集")
-                .order(by: TIMESTAMP)
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(GENRE, isEqualTo: "友達募集")
+                    .order(by: TIMESTAMP)
 
-            
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .whereField(GENRE, isEqualTo: "友達募集")
+                    .order(by: TIMESTAMP)
+
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
-        } else {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(GENRE, isEqualTo: "友達募集")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .order(by: TIMESTAMP)
             
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+        } else {
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "友達募集")
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "友達募集")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
         }
     }
@@ -170,41 +291,83 @@ class Post {
     class func fetchGenreMailFriendPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(GENRE, isEqualTo: "メル友募集")
-                .order(by: TIMESTAMP)
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(GENRE, isEqualTo: "メル友募集")
+                    .order(by: TIMESTAMP)
 
-            
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .whereField(GENRE, isEqualTo: "メル友募集")
+                    .order(by: TIMESTAMP)
+
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
-        } else {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(GENRE, isEqualTo: "メル友募集")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .order(by: TIMESTAMP)
             
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+        } else {
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "メル友募集")
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "メル友募集")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
         }
     }
@@ -212,41 +375,83 @@ class Post {
     class func fetchGenrePlayPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(GENRE, isEqualTo: "遊びたい")
-                .order(by: TIMESTAMP)
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(GENRE, isEqualTo: "遊びたい")
+                    .order(by: TIMESTAMP)
 
-            
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .whereField(GENRE, isEqualTo: "遊びたい")
+                    .order(by: TIMESTAMP)
+
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
-        } else {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(GENRE, isEqualTo: "遊びたい")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .order(by: TIMESTAMP)
             
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+        } else {
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "遊びたい")
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "遊びたい")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
         }
     }
@@ -254,48 +459,90 @@ class Post {
     class func fetchGenreFreePosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: FEMALE) != nil {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(GENRE, isEqualTo: "ヒマしてる")
-                .order(by: TIMESTAMP)
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(GENRE, isEqualTo: "ヒマしてる")
+                    .order(by: TIMESTAMP)
 
-            
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "男性")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .whereField(GENRE, isEqualTo: "ヒマしてる")
+                    .order(by: TIMESTAMP)
+
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
-        } else {
-            let postRef = COLLECTION_POSTS
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(GENRE, isEqualTo: "ヒマしてる")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .order(by: TIMESTAMP)
             
-            postRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    print("Error fetch posts: \(error.localizedDescription)")
+        } else {
+            
+            if UserDefaults.standard.object(forKey: ALL) != nil {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "ヒマしてる")
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
                 }
-                snapshot?.documentChanges.forEach({ (change) in
-                    let dict = change.document.data()
-                    let post = Post(dict: dict)
-                    guard post.uid != User.currentUserId() else { return }
-                    completion(post)
-                })
+            } else {
+                let postRef = COLLECTION_POSTS
+                    .whereField(GENDER, isEqualTo: "女性")
+                    .whereField(GENRE, isEqualTo: "ヒマしてる")
+                    .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                    .order(by: TIMESTAMP)
+                
+                postRef.addSnapshotListener { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetch posts: \(error.localizedDescription)")
+                    }
+                    snapshot?.documentChanges.forEach({ (change) in
+                        let dict = change.document.data()
+                        let post = Post(dict: dict)
+                        guard post.uid != User.currentUserId() else { return }
+                        completion(post)
+                    })
+                }
             }
         }
     }
     
     class func fetchMyPost(comletion: @escaping(_ post: Post) -> Void) {
         
-        COLLECTION_MYPOSTS.document(User.currentUserId()).collection("posts").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
+        COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
             if let error = error {
                 print("ERROR fetch my post: \(error.localizedDescription)")
             }
@@ -315,7 +562,6 @@ class Post {
             }
             snapshot?.documents.forEach({ (document) in
 //                print(snapshot?.documents)
-
                 let dict = document.data()
                 let feed = Post(dict: dict)
                 comletion(feed)
@@ -343,13 +589,14 @@ class Post {
     
     class func saveMyPost(_ forPostId: String, withValue: [String: Any]) {
         
-        COLLECTION_MYPOSTS.document(User.currentUserId()).collection("posts").document(forPostId).getDocument { (snapshot, error) in
+        COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").document(forPostId).getDocument { (snapshot, error) in
             
             if snapshot?.exists == true {
-                COLLECTION_MYPOSTS.document(User.currentUserId()).collection("posts").document(forPostId).updateData(withValue)
+                COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").document(forPostId).updateData(withValue)
             } else {
-                COLLECTION_MYPOSTS.document(User.currentUserId()).collection("posts").document(forPostId).setData(withValue)
+                COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").document(forPostId).setData(withValue)
             }
         }
     }
+
 }

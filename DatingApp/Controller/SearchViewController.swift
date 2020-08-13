@@ -32,11 +32,11 @@ class SearchViewController: UIViewController {
         setupBanner()
         cofigureCollectionView()
         fetchBadgeCount()
+        fetchUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchUser()
         
         UserDefaults.standard.removeObject(forKey: CARDVC)
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
@@ -69,15 +69,25 @@ class SearchViewController: UIViewController {
     
     private func fetchUser() {
         indicator.startAnimating()
+        users.removeAll()
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.currentUser = user
             let residence = self.currentUser.residenceSerch
-            
-            User.genderAndResidenceSort(residence!, self.currentUser) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.indicator.stopAnimating()
+            if residence == "こだわらない" {
+                print("bbbbbb")
+                User.fetchNationwide(self.currentUser) { (users) in
+                    self.users = users
+                    print("aaaaaaa")
+                    self.collectionView.reloadData()
+                    self.indicator.stopAnimating()
+                }
+            } else {
+                User.genderAndResidenceSort(residence!, self.currentUser) { (users) in
+                    self.users = users
+                    self.collectionView.reloadData()
+                    self.indicator.stopAnimating()
+                }
             }
         }
     }
@@ -124,7 +134,8 @@ class SearchViewController: UIViewController {
         
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
-            detailVC.user = sender as! User
+            let toUserId = sender as! String
+            detailVC.toUserId = toUserId
         }
     }
     
@@ -136,7 +147,7 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
+        if indexPath.row == 0 || indexPath.row == 14 || indexPath.row == 28 || indexPath.row == 42 || indexPath.row == 56 || indexPath.row == 70 || indexPath.row == 84 || indexPath.row == 98 {
             return CGSize(width: 300, height: 250)
         }
         return CGSize(width: 150, height: 230)
@@ -148,7 +159,7 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
+        if indexPath.row == 0 || indexPath.row == 14 || indexPath.row == 28 || indexPath.row == 42 || indexPath.row == 56 || indexPath.row == 70 || indexPath.row == 84 || indexPath.row == 98 {
             
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath)
             
@@ -168,7 +179,7 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1])
+        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
     }
 }
 

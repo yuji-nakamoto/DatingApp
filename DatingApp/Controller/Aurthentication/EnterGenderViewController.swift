@@ -18,6 +18,7 @@ class EnterGenderViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     private var dataArray = ["-", "男性", "女性"]
     private var hud = JGProgressHUD(style: .dark)
@@ -26,8 +27,7 @@ class EnterGenderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureSetup()
+        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,16 +64,16 @@ class EnterGenderViewController: UIViewController {
         updateUser(withValue: dict as [String : Any])
 
         if genderLabel.text == "男性" {
-            toEnterNameVC()
+            toEnterAgeVC()
         } else {
             UserDefaults.standard.set(true, forKey: FEMALE)
-            toEnterNameVC()
+            toEnterAgeVC()
         }
     }
     
     // MARK: - Helpers
     
-    private func configureSetup() {
+    private func setupUI() {
         
         UserDefaults.standard.removeObject(forKey: FEMALE)
         pickerView.delegate = self
@@ -82,22 +82,27 @@ class EnterGenderViewController: UIViewController {
         genderLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "性別を選択してください。"
+        descriptionLabel.text = "性別を選択してください。\n性別はあとで変更することができません。"
         nextButton.layer.cornerRadius = 50 / 2
-        nextButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        nextButton.layer.shadowColor = UIColor.black.cgColor
-        nextButton.layer.shadowOpacity = 0.3
-        nextButton.layer.shadowRadius = 4
+        backButton.layer.cornerRadius = 50 / 2
+        backButton.layer.borderWidth = 1
+        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        
+        if UserDefaults.standard.object(forKey: FACEBOOK) != nil || UserDefaults.standard.object(forKey: GOOGLE) != nil {
+            backButton.isHidden = true
+        } else {
+            backButton.isHidden = false
+        }
     }
     
     // MARK: - Navigation
     
-    private func toEnterNameVC() {
+    private func toEnterAgeVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
-            self.present(toEnterNameVC, animated: true, completion: nil)
+            let toEnterAgeVC = storyboard.instantiateViewController(withIdentifier: "EnterAgeVC")
+            self.present(toEnterAgeVC, animated: true, completion: nil)
         }
     }
 }

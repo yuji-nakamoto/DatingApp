@@ -57,10 +57,12 @@
 		834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CF24DEE07B00C9B7DD /* CardViewController.swift */; };
 		834966D224DEE10C00C9B7DD /* Card.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834966D124DEE10C00C9B7DD /* Card.xib */; };
 		834966D424DEE19C00C9B7DD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966D324DEE19C00C9B7DD /* Card.swift */; };
+		8349F12624E56E8700CC5951 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8349F12524E56E8700CC5951 /* WithdrawViewController.swift */; };
 		834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */; };
 		834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */; };
 		834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */; };
 		834C32D424E3BD10003330B1 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D324E3BD10003330B1 /* Block.swift */; };
+		834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */; };
 		835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */; };
 		835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FD24D41458008D1170 /* MessageTebleViewController.swift */; };
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
@@ -160,10 +162,12 @@
 		834966CF24DEE07B00C9B7DD /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		834966D124DEE10C00C9B7DD /* Card.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Card.xib; sourceTree = "<group>"; };
 		834966D324DEE19C00C9B7DD /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		8349F12524E56E8700CC5951 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		834BD3E924DAE1D80088D4EA /* AdsPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPostTableViewCell.swift; sourceTree = "<group>"; };
 		834BD3EB24DAF0140088D4EA /* HobbyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyTableViewController.swift; sourceTree = "<group>"; };
 		834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewController.swift; sourceTree = "<group>"; };
 		834C32D324E3BD10003330B1 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotVerifiedViewController.swift; sourceTree = "<group>"; };
 		835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxCollectionViewController.swift; sourceTree = "<group>"; };
 		835013FD24D41458008D1170 /* MessageTebleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTebleViewController.swift; sourceTree = "<group>"; };
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -405,13 +409,15 @@
 				838071EB24C62F52008BAA2C /* RegisterViewController.swift */,
 				838071EF24C64D16008BAA2C /* VerifiedViewController.swift */,
 				838071F124C66651008BAA2C /* ResetPasswordViewController.swift */,
-				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
+				834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */,
 				838071F424C6E541008BAA2C /* EnterNameViewController.swift */,
-				838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */,
 				834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */,
+				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
+				838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */,
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
 				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
+				8349F12524E56E8700CC5951 /* WithdrawViewController.swift */,
 			);
 			path = Aurthentication;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8349F12624E56E8700CC5951 /* WithdrawViewController.swift in Sources */,
 				834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */,
 				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
 				8348B5EF24D3EC020000A187 /* SelectColorTableViewController.swift in Sources */,
@@ -613,6 +620,7 @@
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
 				8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */,
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
+				834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,

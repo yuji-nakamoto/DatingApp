@@ -118,7 +118,7 @@ class MyPageTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        
+                
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85

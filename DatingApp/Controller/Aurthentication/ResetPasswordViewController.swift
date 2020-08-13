@@ -81,10 +81,6 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         descriptionLabel.text = "メールに記載しているURLを開いて、新しいパスワードを登録してください。"
         sendButton.isEnabled = true
         sendButton.layer.cornerRadius = 50 / 2
-        sendButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        sendButton.layer.shadowColor = UIColor.black.cgColor
-        sendButton.layer.shadowOpacity = 0.3
-        sendButton.layer.shadowRadius = 4
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import GoogleSignIn
 
 struct AuthService {
     
@@ -47,27 +48,77 @@ struct AuthService {
             completion(error)
             
             if error == nil {
-//                result!.user.sendEmailVerification { (error) in
-//                    print("Error: \(String(describing: error?.localizedDescription))")
-//                }
+                //                result!.user.sendEmailVerification { (error) in
+                //                    print("Error: \(String(describing: error?.localizedDescription))")
+                //                }
             }
         }
     }
     
-    static func logoutUser(completion: @escaping (_ error: Error?) -> Void) {
+    static func logoutUser(completion: @escaping(_ error: Error?) -> Void) {
         
         do {
+            User.isOnline(online: "offline")
             Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
-            try Auth.auth().signOut()
             UserDefaults.standard.removeObject(forKey: PINK)
             UserDefaults.standard.removeObject(forKey: GREEN)
             UserDefaults.standard.removeObject(forKey: DARK)
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+            UserDefaults.standard.removeObject(forKey: GOOGLE)
+            UserDefaults.standard.removeObject(forKey: FACEBOOK)
+            
+            if let providerData = Auth.auth().currentUser?.providerData {
+                let userInfo = providerData[0]
+                
+                switch userInfo.providerID {
+                case "google.com":
+                    GIDSignIn.sharedInstance()?.signOut()
+                default:
+                    break
+                }
+            }
+            try Auth.auth().signOut()
+            
             completion(nil)
             
         } catch let error as NSError {
             completion(error)
         }
+    }
+    
+    static func withdrawUser(completion: @escaping(_ error: Error?) -> Void) {
+        
+        COLLECTION_USERS.document(User.currentUserId()).delete()
+        COLLECTION_FEED.document(User.currentUserId()).delete()
+        COLLECTION_MATCH.document(User.currentUserId()).delete()
+        COLLECTION_LIKE.document(User.currentUserId()).delete()
+        COLLECTION_TYPE.document(User.currentUserId()).delete()
+        COLLECTION_FOOTSTEP.document(User.currentUserId()).delete()
+        COLLECTION_MESSAGE.document(User.currentUserId()).delete()
+        COLLECTION_BLOCK.document(User.currentUserId()).delete()
+        COLLECTION_TYPECOUNTER.document(User.currentUserId()).delete()
+        COLLECTION_LIKECOUNTER.document(User.currentUserId()).delete()
+        COLLECTION_MYPOST.document(User.currentUserId()).delete()
+        COLLECTION_SWIPE.document(User.currentUserId()).delete()
+        COLLECTION_INBOX.document(User.currentUserId()).delete()
+
+        Auth.auth().currentUser?.delete(completion: { (error) in
+            
+            if error != nil {
+                print("Error withdraw user: \(error!.localizedDescription)")
+                completion(error)
+            } else {
+                UserDefaults.standard.removeObject(forKey: PINK)
+                UserDefaults.standard.removeObject(forKey: GREEN)
+                UserDefaults.standard.removeObject(forKey: DARK)
+                UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+                UserDefaults.standard.removeObject(forKey: GOOGLE)
+                UserDefaults.standard.removeObject(forKey: GOOGLE2)
+                UserDefaults.standard.removeObject(forKey: FACEBOOK)
+                UserDefaults.standard.removeObject(forKey: FACEBOOK2)
+                completion(error)
+            }
+        })
     }
     
     static func resendVerificaitionEmail(email: String, completion: @escaping (_ error: Error?) -> Void) {

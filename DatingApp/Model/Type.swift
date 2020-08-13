@@ -74,7 +74,7 @@ class Type {
     
     class func checkIfMatch(toUserId: String, completion: @escaping(Type) -> Void) {
         
-        COLLECTION_TYPE.document(toUserId).collection(ISTYPE).document(User.currentUserId()).getDocument { (snapshot, error) in
+        COLLECTION_TYPE.document(toUserId).collection(ISTYPE).document(User.currentUserId()).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 print("Error check if match: \(error.localizedDescription)")
             }
