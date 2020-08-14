@@ -73,10 +73,8 @@ class HobbyTableViewController: UITableViewController, UITextFieldDelegate {
         hobbyTextField2.delegate = self
         hobbyTextField3.delegate = self
     }
-
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
- 
 }

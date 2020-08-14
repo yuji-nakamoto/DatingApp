@@ -80,6 +80,8 @@
 		8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350E4C024D9AE7B00487DB9 /* PIckerKeyboard14.swift */; };
 		8350E4C324D9AE8300487DB9 /* PIckerKeyboard15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350E4C224D9AE8300487DB9 /* PIckerKeyboard15.swift */; };
 		8354409F24D7DF09001C9398 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8354409E24D7DF09001C9398 /* Config.swift */; };
+		83545E4D24E67F76003BA06D /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83545E4C24E67F76003BA06D /* ChangeEmailViewController.swift */; };
+		83545E4F24E67F8D003BA06D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */; };
 		8368CD8E24E16ACF009C0391 /* PickerKeyboard16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */; };
 		8368CD9024E16B49009C0391 /* ModalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
@@ -186,6 +188,8 @@
 		8350E4C224D9AE8300487DB9 /* PIckerKeyboard15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIckerKeyboard15.swift; sourceTree = "<group>"; };
 		8354409D24D7DC8E001C9398 /* DatingApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatingApp.entitlements; sourceTree = "<group>"; };
 		8354409E24D7DF09001C9398 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		83545E4C24E67F76003BA06D /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
+		83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard16.swift; sourceTree = "<group>"; };
 		8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSearchTableViewController.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -418,6 +422,8 @@
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
 				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
 				8349F12524E56E8700CC5951 /* WithdrawViewController.swift */,
+				83545E4C24E67F76003BA06D /* ChangeEmailViewController.swift */,
+				83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */,
 			);
 			path = Aurthentication;
 			sourceTree = "<group>";
@@ -591,6 +597,7 @@
 			files = (
 				8349F12624E56E8700CC5951 /* WithdrawViewController.swift in Sources */,
 				834BD3EC24DAF0140088D4EA /* HobbyTableViewController.swift in Sources */,
+				83545E4D24E67F76003BA06D /* ChangeEmailViewController.swift in Sources */,
 				831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */,
 				8348B5EF24D3EC020000A187 /* SelectColorTableViewController.swift in Sources */,
 				8350E4C324D9AE8300487DB9 /* PIckerKeyboard15.swift in Sources */,
@@ -677,6 +684,7 @@
 				8348B5DF24D2A0B90000A187 /* PostTableViewController.swift in Sources */,
 				8348E3EB24CE283C001D59C0 /* Type.swift in Sources */,
 				83B6231B24E2854400363548 /* WriteReportTableViewController.swift in Sources */,
+				83545E4F24E67F8D003BA06D /* ChangePasswordViewController.swift in Sources */,
 				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,
 				834C32D424E3BD10003330B1 /* Block.swift in Sources */,
 				83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */,

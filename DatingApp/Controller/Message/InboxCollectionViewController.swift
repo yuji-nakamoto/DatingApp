@@ -48,6 +48,11 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         setupUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
+    
     // MARK: - Actions
     
     @objc func refreshCollectionView(){
@@ -64,6 +69,10 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         collectionView.reloadData()
         
         Match.fetchMatchUser { (match) in
+            if match.uid == "" {
+                self.collectionView.reloadData()
+                return
+            }
             guard let uid = match.uid else { return }
             self.fetchUser(uid: uid) {
                 self.matches.append(match)

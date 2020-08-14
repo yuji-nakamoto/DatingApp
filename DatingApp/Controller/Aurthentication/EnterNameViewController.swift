@@ -12,13 +12,14 @@ import JGProgressHUD
 class EnterNameViewController: UIViewController {
     
     // MARK: - Properties
-
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var requiredLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     
@@ -38,26 +39,9 @@ class EnterNameViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-
-        if textFieldHaveText() {
-            
-            if nameTextField.text!.count > 10 {
-                generator.notificationOccurred(.error)
-                hud.textLabel.text = "10文字以下で入力してください。"
-                hud.show(in: self.view)
-                hud.indicatorView = JGProgressHUDErrorIndicatorView()
-                hud.dismiss(afterDelay: 2.0)
-                return
-            }
-            nextButton.isEnabled = false
-            saveUserName()
-        } else {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "名前を入力してください。"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
-            hud.dismiss(afterDelay: 2.0)
-            
+        indicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.prepareSave()
         }
     }
     
@@ -71,14 +55,40 @@ class EnterNameViewController: UIViewController {
         
         let dict = [USERNAME: nameLabel.text]
         updateUser(withValue: dict as [String : Any])
-
+        indicator.stopAnimating()
+        
         toEnterProfileImageVC()
     }
     
     // MARK: - Helpers
     
+    private func prepareSave() {
+        
+        if textFieldHaveText() {
+            
+            if nameTextField.text!.count > 10 {
+                generator.notificationOccurred(.error)
+                hud.textLabel.text = "10文字以下で入力してください。"
+                hud.show(in: self.view)
+                hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud.dismiss(afterDelay: 2.0)
+                indicator.stopAnimating()
+                return
+            }
+            nextButton.isEnabled = false
+            saveUserName()
+        } else {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "名前を入力してください。"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            indicator.stopAnimating()
+        }
+    }
+    
     private func setupUI() {
-                
+        
         nameTextField.becomeFirstResponder()
         nameLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
@@ -90,9 +100,9 @@ class EnterNameViewController: UIViewController {
     }
     
     @objc func textFieldDidChange() {
-     
+        
         nameLabel.text = nameTextField.text
-
+        
         let nicknameNum = 10 - nameTextField.text!.count
         if nicknameNum < 0 {
             countLabel.text = "文字数制限です"
@@ -116,5 +126,5 @@ class EnterNameViewController: UIViewController {
             self.present(toEnterProfileImageVC, animated: true, completion: nil)
         }
     }
-
+    
 }

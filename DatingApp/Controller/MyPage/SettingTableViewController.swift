@@ -123,7 +123,7 @@ class SettingTableViewController: UITableViewController {
     
     private func withdraw() {
         
-        let alert: UIAlertController = UIAlertController(title: user.username, message: "退会するとアカウント情報がすべて削除されます。\n元に戻すことはできません。", preferredStyle: .actionSheet)
+        let alert: UIAlertController = UIAlertController(title: user.username, message: "退会するとアカウント・プロフィール情報がすべて削除されます。\n元に戻すことはできません。", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "退会を進める", style: UIAlertAction.Style.default) { (alert) in
             self.toWithdrawVC()
         }
@@ -180,16 +180,33 @@ class SettingTableViewController: UITableViewController {
         self.present(toWithdrawVC, animated: true, completion: nil)
     }
     
+    private func toChangeEmailVC() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toChangeEmailVC = storyboard.instantiateViewController(withIdentifier: "ChangeEmailVC")
+        self.present(toChangeEmailVC, animated: true, completion: nil)
+    }
+    
+    private func toChangePasswordVC() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toChangePasswordVC = storyboard.instantiateViewController(withIdentifier: "ChangePasswordVC")
+        self.present(toChangePasswordVC, animated: true, completion: nil)
+    }
+    
     // MARK: - Table view
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.section == 4 && indexPath.row == 3 {
+
+        if indexPath.section == 4 && indexPath.row == 0 {
+            toChangeEmailVC()
+        } else if indexPath.section == 4 && indexPath.row == 1 {
+            toChangePasswordVC()
+        } else if indexPath.section == 5 && indexPath.row == 3 {
             withdraw()
-        }
-        if indexPath.section == 5 {
+        } else if indexPath.section == 6 {
             logoutUser()
         }
     }

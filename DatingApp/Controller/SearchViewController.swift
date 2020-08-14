@@ -50,7 +50,6 @@ class SearchViewController: UIViewController {
         collectionView.reloadData()
         if !Auth.auth().currentUser!.uid.isEmpty {
             Messaging.messaging().subscribe(toTopic: Auth.auth().currentUser!.uid)
-            print("messaging subscribe")
         }
     }
     
@@ -75,10 +74,8 @@ class SearchViewController: UIViewController {
             self.currentUser = user
             let residence = self.currentUser.residenceSerch
             if residence == "こだわらない" {
-                print("bbbbbb")
                 User.fetchNationwide(self.currentUser) { (users) in
                     self.users = users
-                    print("aaaaaaa")
                     self.collectionView.reloadData()
                     self.indicator.stopAnimating()
                 }
@@ -138,7 +135,6 @@ class SearchViewController: UIViewController {
             detailVC.toUserId = toUserId
         }
     }
-    
 }
 
 //MARK: CollectionView

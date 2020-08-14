@@ -14,6 +14,7 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nickNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var countLabel: UILabel!
     
     private var user: User!
     private var hud = JGProgressHUD(style: .dark)
@@ -37,13 +38,15 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "1文字以上入力してください。"
             hud.show(in: self.view)
-            hud.dismiss()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         } else if nickNameTextField.text!.count > 10 {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "名前は10文字以下で入力してください。"
             hud.show(in: self.view)
-            hud.dismiss()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         } else {
             saveTextField()
@@ -67,7 +70,6 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Helpers
     
     private func setupUserInfo(_ user: User) {
-        
         nickNameTextField.text = user.username
     }
     
@@ -81,11 +83,20 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
         
         nickNameTextField.becomeFirstResponder()
         nickNameTextField.delegate = self
+        nickNameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
-
+    
+    @objc func textFieldDidChange() {
+                
+        let nicknameNum = 10 - nickNameTextField.text!.count
+        if nicknameNum < 0 {
+            countLabel.text = "文字数制限です"
+        } else {
+            countLabel.text = String(nicknameNum)
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
- 
 }

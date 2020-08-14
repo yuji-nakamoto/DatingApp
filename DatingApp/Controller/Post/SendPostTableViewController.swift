@@ -79,17 +79,20 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         }
         sendButton.isEnabled = false
         
+        let date: Double = Date().timeIntervalSince1970
         let postId = UUID().uuidString
         let dict = [UID: User.currentUserId(),
                     GENDER: user.gender!,
                     RESIDENCE: user.residence!,
                     CAPTION: textView.text!,
                     GENRE: selectLabel.text!,
-                    TIMESTAMP: Timestamp(date: Date()) ] as [String : Any]
+                    DATE: date,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         let dict2 = [UID: User.currentUserId(),
                      CAPTION: textView.text!,
                      GENRE: selectLabel.text!,
+                     DATE: date,
                      TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         Post.savePost(postId, withValue: dict)

@@ -16,6 +16,7 @@ class Post {
     var postId: String!
     var genre: String!
     var timestamp: Timestamp!
+    var date: Double!
     
     init() {
     }
@@ -27,6 +28,7 @@ class Post {
         postId = dict[POSTID] as? String ?? ""
         genre = dict[GENRE] as? String ?? ""
         timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
+        date = dict[DATE] as? Double ?? 0
     }
     
 //    class func fetchPost(completion: @escaping(_ post: Post) -> Void) {
@@ -540,31 +542,37 @@ class Post {
         }
     }
     
-    class func fetchMyPost(comletion: @escaping(_ post: Post) -> Void) {
+    class func fetchMyPost(completion: @escaping(_ post: Post) -> Void) {
         
         COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
             if let error = error {
                 print("ERROR fetch my post: \(error.localizedDescription)")
             }
+            if snapshot?.documents == [] {
+                completion(Post(dict: [UID: ""]))
+            }
             snapshot?.documents.forEach({ (document) in
                 let dict = document.data()
                 let myPost = Post(dict: dict)
-                comletion(myPost)
+                completion(myPost)
             })
         }
     }
     
-    class func fetchFeed(matchedUserId: String, comletion: @escaping(_ post: Post) -> Void) {
+    class func fetchFeed(matchedUserId: String, completion: @escaping(_ post: Post) -> Void) {
         
-        COLLECTION_FEED.document(matchedUserId).collection(User.currentUserId()).order(by: TIMESTAMP).getDocuments { (snapshot, error) in
+        COLLECTION_FEED.document(matchedUserId).collection(User.currentUserId()).order(by: DATE).getDocuments { (snapshot, error) in
             if let error = error {
                 print("ERROR fetch feed: \(error.localizedDescription)")
             }
+            
+            if snapshot?.documents == [] {
+                completion(Post(dict: [UID: ""]))
+            }
             snapshot?.documents.forEach({ (document) in
-//                print(snapshot?.documents)
                 let dict = document.data()
                 let feed = Post(dict: dict)
-                comletion(feed)
+                completion(feed)
             })
         }
     }

@@ -18,6 +18,8 @@ class DidLikeTableViewController: UIViewController {
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var likeUsers = [Like]()
     private var users = [User]()
@@ -56,14 +58,23 @@ class DidLikeTableViewController: UIViewController {
     
     private func fetchLikeUsers() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         likeUsers.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Like.fetchLikeUsers { (like) in
+            if like.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
             guard let uid = like.uid else { return }
             self.fetchUser(uid: uid) {
-                self.likeUsers.append(like)
+                self.likeUsers.insert(like, at: 0)
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -73,14 +84,23 @@ class DidLikeTableViewController: UIViewController {
     
     private func fetchLikedUsers() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         likeUsers.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Like.fetchLikedUser { (like) in
+        Like.fetchLikedUsers { (like) in
+            if like.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
             guard let uid = like.uid else { return }
             self.fetchUser(uid: uid) {
-                self.likeUsers.append(like)
+                self.likeUsers.insert(like, at: 0)
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -90,7 +110,7 @@ class DidLikeTableViewController: UIViewController {
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
-            self.users.append(user)
+            self.users.insert(user, at: 0)
             completion()
         }
     }

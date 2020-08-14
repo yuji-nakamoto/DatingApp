@@ -58,15 +58,6 @@ struct AuthService {
     static func logoutUser(completion: @escaping(_ error: Error?) -> Void) {
         
         do {
-            User.isOnline(online: "offline")
-            Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
-            UserDefaults.standard.removeObject(forKey: PINK)
-            UserDefaults.standard.removeObject(forKey: GREEN)
-            UserDefaults.standard.removeObject(forKey: DARK)
-            UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-            UserDefaults.standard.removeObject(forKey: GOOGLE)
-            UserDefaults.standard.removeObject(forKey: FACEBOOK)
-            
             if let providerData = Auth.auth().currentUser?.providerData {
                 let userInfo = providerData[0]
                 
@@ -77,6 +68,14 @@ struct AuthService {
                     break
                 }
             }
+            User.isOnline(online: "offline")
+            Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
+            UserDefaults.standard.removeObject(forKey: PINK)
+            UserDefaults.standard.removeObject(forKey: GREEN)
+            UserDefaults.standard.removeObject(forKey: DARK)
+            UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+            UserDefaults.standard.removeObject(forKey: GOOGLE)
+            UserDefaults.standard.removeObject(forKey: FACEBOOK)
             try Auth.auth().signOut()
             
             completion(nil)
@@ -141,5 +140,27 @@ struct AuthService {
             }
             completion(error)
         }
+    }
+    
+    static func changeEmail(email: String, completion: @escaping(_ error: Error?) -> Void) {
+        
+        Auth.auth().currentUser?.updateEmail(to: email, completion: { (error) in
+            if let error = error {
+                print("Error change email: \(error.localizedDescription)")
+            } else {
+                updateUser(withValue: [EMAIL: email])
+            }
+            completion(error)
+        })
+    }
+    
+    static func changePassword(password: String, completion: @escaping(_ error: Error?) -> Void) {
+        
+        Auth.auth().currentUser?.updatePassword(to: password, completion: { (error) in
+            if let error = error {
+                print("Error change password: \(error.localizedDescription)")
+            }
+            completion(error)
+        })
     }
 }

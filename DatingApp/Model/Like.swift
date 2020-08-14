@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 class Like {
-
+    
     var uid: String!
     var isLike: Int!
     var timestamp: Timestamp!
@@ -39,41 +39,53 @@ class Like {
     }
     
     class func fetchLikeUsers(completion: @escaping(Like) -> Void) {
-
-        COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription) ")
+        
+        Block.fetchBlock { (blockUserIDs) in
+            COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription) ")
+                }
+                
+                if snapshot?.documents == [] {
+                    completion(Like(dict: [UID: ""]))
+                }
+                snapshot?.documents.forEach({ (document) in
+                    let dict = document.data()
+                    let like = Like(dict: dict)
+                    guard blockUserIDs[like.uid] == nil else { return }
+                    completion(like)
+                })
             }
-            snapshot?.documents.forEach({ (document) in
-//                print("DEBUG: fetchLikeUsers document data\(document.data())")
-                let dict = document.data()
-                let like = Like(dict: dict)
-                completion(like)
-            })
         }
     }
     
     // MARK: - Fetch liked user
     
-    class func fetchLikedUser(completion: @escaping(Like) -> Void) {
+    class func fetchLikedUsers(completion: @escaping(Like) -> Void) {
         
-        COLLECTION_LIKE.document(User.currentUserId()).collection(LIKED).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription) ")
+        Block.fetchBlock { (blockUserIDs) in
+            COLLECTION_LIKE.document(User.currentUserId()).collection(LIKED).getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription) ")
+                }
+                
+                if snapshot?.documents == [] {
+                    completion(Like(dict: [UID: ""]))
+                }
+                snapshot?.documents.forEach({ (document) in
+                    let dict = document.data()
+                    let like = Like(dict: dict)
+                    guard blockUserIDs[like.uid] == nil else { return }
+                    completion(like)
+                })
             }
-            snapshot?.documents.forEach({ (document) in
-                let dict = document.data()
-//                print("DEBUG: fetchLiked document data\(document.data())")
-                let like = Like(dict: dict)
-                completion(like)
-            })
         }
     }
     
     // MARK: - Save
     
     class func saveIsLikeUser(forUser user: User, isLike: [String: Any]) {
-                
+        
         COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).document(user.uid).getDocument { (snapshot, error) in
             
             if snapshot?.exists == true {
@@ -85,7 +97,7 @@ class Like {
     }
     
     class func saveLikedUser(forUser user: User) {
-                
+        
         COLLECTION_LIKE.document(user.uid).collection(LIKED).document(User.currentUserId()).getDocument { (snapshot, error) in
             
             let dict = [UID: User.currentUserId()]

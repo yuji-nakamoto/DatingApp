@@ -1,8 +1,8 @@
 //
-//  WithdrawViewController.swift
+//  ChangeEmailViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/08/13.
+//  Created by yuji_nakamoto on 2020/08/14.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import JGProgressHUD
 import Firebase
 
-class WithdrawViewController: UIViewController, UITextFieldDelegate {
+class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
@@ -18,8 +18,9 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var newEmailTextField: UITextField!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     
@@ -34,10 +35,10 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         doneButton.isEnabled = false
-
+        
         if textFieldHaveText() {
             indicator.startAnimating()
-            withdrawUser()
+            changeEmail()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
@@ -51,12 +52,13 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Withdraw
+    // MARK: - Change email
     
-    private func withdrawUser() {
-                
+    private func changeEmail() {
+        
         let email = emailTextField.text
         let password = passwordTextField.text
+        let newEmail = newEmailTextField.text
         let credential = EmailAuthProvider.credential(withEmail: email!, password: password!)
         
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
@@ -65,22 +67,26 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
                 self.hud.textLabel.text = "メールアドレスかパスワードが間違えています。"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
-                self.hud.dismiss(afterDelay: 3.0)
+                self.hud.dismiss(afterDelay: 2.0)
                 self.doneButton.isEnabled = true
+                self.indicator.stopAnimating()
             } else {
-                AuthService.withdrawUser { (error) in
+                
+                AuthService.changeEmail(email: newEmail!) { (error) in
                     if let error = error {
-                        print("Error withdraw: \(error.localizedDescription)")
+                        print("Error change email: \(error.localizedDescription)")
                     } else {
-                        self.hud.textLabel.text = "アカウントを削除しました"
+                        self.hud.textLabel.text = "メールアドレスを変更しました"
                         self.hud.show(in: self.view)
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                        self.hud.dismiss(afterDelay: 3.0)
-                        self.toSelectLoginVC()
+                        self.hud.dismiss(afterDelay: 2.0)
                         self.doneButton.isEnabled = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     }
+                    self.indicator.stopAnimating()
                 }
-                self.indicator.stopAnimating()
             }
         })
     }
@@ -89,7 +95,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
     
     private func setupUI() {
         
-        descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
+        descriptionlabel.text = "今までのメールアドレス、\n今までパスワード、\n新しいメールアドレスを入力してください。"
         doneButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
@@ -134,16 +140,6 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        
-        return (emailTextField.text != "" && passwordTextField.text != "")
-    }
-    
-    private func toSelectLoginVC() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
-            self.present(toSelectLoginVC, animated: true, completion: nil)
-        }
+        return (emailTextField.text != "" && passwordTextField.text != "" && newEmailTextField.text != "")
     }
 }

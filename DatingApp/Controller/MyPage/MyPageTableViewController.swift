@@ -18,6 +18,7 @@ class MyPageTableViewController: UIViewController {
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var currentUser = User()
     private var user = User()
@@ -69,34 +70,57 @@ class MyPageTableViewController: UIViewController {
     
     private func fetchMyPost() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         users.removeAll()
         myPosts.removeAll()
         tableView.reloadData()
         
         Post.fetchMyPost() { (post) in
+            if post.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
             guard let uid = post.uid else { return }
             self.fetchUsers(uid) {
                 self.myPosts.insert(post, at: 0)
                 self.tableView.reloadData()
+                self.indicator.stopAnimating()
+                self.segmentControl.isEnabled = true
             }
         }
     }
     
     private func fetchMatchedUser() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         users.removeAll()
         myPosts.removeAll()
         tableView.reloadData()
 
         Match.fetchMatchUser { (match) in
+            if match.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
             User.fetchUser(match.uid) { (user) in
                 self.user = user
             }
             guard let uid = match.uid else { return }
             Post.fetchFeed(matchedUserId: uid) { (feed) in
+                if feed.uid == "" {
+                    self.segmentControl.isEnabled = true
+                    self.indicator.stopAnimating()
+                    return
+                }
                 self.fetchUsers(uid) {
                     self.myPosts.insert(feed, at: 0)
                     self.tableView.reloadData()
+                    self.segmentControl.isEnabled = true
+                    self.indicator.stopAnimating()
                 }
             }
         }

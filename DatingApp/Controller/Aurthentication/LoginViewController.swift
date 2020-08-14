@@ -62,37 +62,38 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.startAnimating()
         
         AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-                   UserDefaults.standard.set(true, forKey: WHITE)
-
-                   self.toTabBerVC()
-                   self.activityIndicator.stopAnimating()
-               }
+            UserDefaults.standard.set(true, forKey: WHITE)
+            
+            User.isOnline(online: "online")
+            self.toTabBerVC()
+            self.activityIndicator.stopAnimating()
+        }
         
-//        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
-//            if error == nil {
-//
-//                if isEmailVerified {
-//                    self.hud.textLabel.text = "ログインに成功しました。"
-//                    self.hud.show(in: self.view)
-//                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-//                    self.hud.dismiss(afterDelay: 2.0)
-//                    UserDefaults.standard.set(true, forKey: WHITE)
-//                    self.toTabBerVC()
-//                } else {
-//                    generator.notificationOccurred(.error)
-//                    self.hud.textLabel.text = "認証メールを確認してください。"
-//                    self.hud.show(in: self.view)
-//                    hud.indicatorView = JGProgressHUDErrorIndicatorView()
-//                    hud.dismiss(afterDelay: 2.0)
-//                }
-//            } else {
-//                self.hud.textLabel.text = error!.localizedDescription
-//                self.hud.show(in: self.view)
-//                hud.indicatorView = JGProgressHUDErrorIndicatorView()
-//                hud.dismiss(afterDelay: 2.0)
-//            }
-//            self.activityIndicator.stopAnimating()
-//        }
+        //        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
+        //            if error == nil {
+        //
+        //                if isEmailVerified {
+        //                    self.hud.textLabel.text = "ログインに成功しました。"
+        //                    self.hud.show(in: self.view)
+        //                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        //                    self.hud.dismiss(afterDelay: 2.0)
+        //                    UserDefaults.standard.set(true, forKey: WHITE)
+        //                    self.toTabBerVC()
+        //                } else {
+        //                    generator.notificationOccurred(.error)
+        //                    self.hud.textLabel.text = "認証メールを確認してください。"
+        //                    self.hud.show(in: self.view)
+        //                    hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        //                    hud.dismiss(afterDelay: 2.0)
+        //                }
+        //            } else {
+        //                self.hud.textLabel.text = error!.localizedDescription
+        //                self.hud.show(in: self.view)
+        //                hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        //                hud.dismiss(afterDelay: 2.0)
+        //            }
+        //            self.activityIndicator.stopAnimating()
+        //        }
     }
     
     // MARK: - Helpers

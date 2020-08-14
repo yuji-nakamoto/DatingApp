@@ -25,16 +25,22 @@ class Match {
     
     class func fetchMatchUser(completion: @escaping(Match) -> Void) {
         
-        COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error: fetch match user: \(error.localizedDescription)")
+        Block.fetchBlock { (blockUserIDs) in
+            COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error: fetch match user: \(error.localizedDescription)")
+                }
+                snapshot?.documents.forEach({ (document) in
+                    let dict = document.data()
+                    let match = Match(dict: dict)
+                    
+                    guard blockUserIDs[match.uid] == nil else {
+                        completion(Match(dict: [UID: ""]))
+                        return
+                    }
+                    completion(match)
+                })
             }
-//            print(snapshot?.documents)
-            snapshot?.documents.forEach({ (document) in
-                let dict = document.data()
-                let match = Match(dict: dict)
-                completion(match)
-            })
         }
     }
     

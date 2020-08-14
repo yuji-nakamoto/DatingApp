@@ -14,6 +14,7 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var countLabel: UILabel!
     
     private var user: User!
     private var hud = JGProgressHUD(style: .dark)
@@ -36,7 +37,8 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "ひとことは16文字以下で入力してください。"
             hud.show(in: self.view)
-            hud.dismiss()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         } else {
             saveTextField()
@@ -60,7 +62,6 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Helpers
     
     private func setupUserInfo(_ user: User) {
-        
         commentTextField.text = user.comment
     }
     
@@ -74,6 +75,17 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
         
         commentTextField.becomeFirstResponder()
         commentTextField.delegate = self
+        commentTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange() {
+                
+        let commentNum = 16 - commentTextField.text!.count
+        if commentNum < 0 {
+            countLabel.text = "文字数制限です"
+        } else {
+            countLabel.text = String(commentNum)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

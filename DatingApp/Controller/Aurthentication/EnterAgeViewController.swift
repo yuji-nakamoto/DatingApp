@@ -18,6 +18,7 @@ class EnterAgeViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var dataArray: [Int] = ([Int])(18...100)
     
@@ -36,7 +37,7 @@ class EnterAgeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        
+        indicator.startAnimating()
         nextButton.isEnabled = false
         saveUserAge()
     }
@@ -49,10 +50,13 @@ class EnterAgeViewController: UIViewController {
     
     private func saveUserAge() {
         
-        let dict = [AGE: Int(ageLabel.text!)]
-        updateUser(withValue: dict as [String : Any])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            let dict = [AGE: Int(self.ageLabel.text!)]
+            updateUser(withValue: dict as [String : Any])
+            self.indicator.stopAnimating()
 
-        toEnterProfessionVC()
+            self.toEnterProfessionVC()
+        }
     }
     
     // MARK: - Helpers

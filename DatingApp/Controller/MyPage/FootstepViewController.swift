@@ -18,7 +18,8 @@ class FootstepTableViewController: UIViewController {
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
-    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var footsteps = [Footstep]()
     private var users = [User]()
@@ -56,14 +57,23 @@ class FootstepTableViewController: UIViewController {
     
     private func fetchIsFootstepUsers() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         footsteps.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Footstep.fetchFootstepUsers { (footStep) in
-            guard let uid = footStep.uid else { return }
+        Footstep.fetchFootstepUsers { (footstep) in
+            if footstep.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
+            guard let uid = footstep.uid else { return }
             self.fetchUser(uid: uid) {
-                self.footsteps.append(footStep)
+                self.footsteps.insert(footstep, at: 0)
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -71,14 +81,23 @@ class FootstepTableViewController: UIViewController {
     
     private func fetchtFootstepedUsers() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         footsteps.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Footstep.fetchFootstepedUser { (footStep) in
-            guard let uid = footStep.uid else { return }
+        Footstep.fetchFootstepedUsers { (footstep) in
+            if footstep.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
+            guard let uid = footstep.uid else { return }
             self.fetchUser(uid: uid) {
-                self.footsteps.append(footStep)
+                self.footsteps.insert(footstep, at: 0)
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -87,7 +106,7 @@ class FootstepTableViewController: UIViewController {
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
-            self.users.append(user)
+            self.users.insert(user, at: 0)
             completion()
         }
     }

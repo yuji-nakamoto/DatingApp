@@ -19,6 +19,7 @@ class EnterGenderViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var dataArray = ["-", "男性", "女性"]
     private var hud = JGProgressHUD(style: .dark)
@@ -38,17 +39,9 @@ class EnterGenderViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        
-        if genderLabel.text != "-" {
-            
-            nextButton.isEnabled = false
-            saveUserGender()
-        } else {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "性別を選択してください。"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
-            hud.dismiss(afterDelay: 2.0)
+        indicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.prepareSave()
         }
     }
     
@@ -62,6 +55,7 @@ class EnterGenderViewController: UIViewController {
         
         let dict = [GENDER: genderLabel.text]
         updateUser(withValue: dict as [String : Any])
+        indicator.stopAnimating()
 
         if genderLabel.text == "男性" {
             toEnterAgeVC()
@@ -72,6 +66,21 @@ class EnterGenderViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func prepareSave() {
+        
+        if genderLabel.text != "-" {
+            nextButton.isEnabled = false
+            saveUserGender()
+        } else {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "性別を選択してください。"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            indicator.stopAnimating()
+        }
+    }
     
     private func setupUI() {
         

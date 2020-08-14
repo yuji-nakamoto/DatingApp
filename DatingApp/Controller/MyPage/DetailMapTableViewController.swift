@@ -15,6 +15,7 @@ class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var detailMapTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var countLabel: UILabel!
     
     private var user: User!
     private var hud = JGProgressHUD(style: .dark)
@@ -75,8 +76,18 @@ class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
         
         detailMapTextField.becomeFirstResponder()
         detailMapTextField.delegate = self
+        detailMapTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
-
+    
+    @objc func textFieldDidChange() {
+                
+        let areaNum = 4 - detailMapTextField.text!.count
+        if areaNum < 0 {
+            countLabel.text = "文字数制限です"
+        } else {
+            countLabel.text = String(areaNum)
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -19,7 +19,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var backView: UIView!
-    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var typeUsers = [Type]()
     private var users = [User]()
@@ -61,14 +61,23 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func fetchTypeUsers() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         typeUsers.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Type.fetchTypeUsers { (type) in
+            if type.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
             guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.typeUsers.append(type)
+                self.typeUsers.insert(type, at: 0)
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -78,14 +87,23 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func fetchTypedUsers() {
         
+        indicator.startAnimating()
+        segmentControl.isEnabled = false
         typeUsers.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Type.fetchTypedUser { (type) in
+        Type.fetchTypedUsers { (type) in
+            if type.uid == "" {
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
+                return
+            }
             guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.typeUsers.append(type)
+                self.typeUsers.insert(type, at: 0)
+                self.segmentControl.isEnabled = true
+                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -96,7 +114,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
-            self.users.append(user)
+            self.users.insert(user, at: 0)
             completion()
         }
     }

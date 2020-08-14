@@ -65,7 +65,7 @@ class Message {
         COLLECTION_INBOX.document(user.uid).collection("resent-messages").document(User.currentUserId()).setData(withValue)
     }
     
-    class func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
+    class private func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
         
         COLLECTION_USERS.document(uid).getDocument { (snapshot, error) in
             guard let dict = snapshot?.data() else { return }
@@ -76,20 +76,24 @@ class Message {
     
     class func fetchInbox(completion: @escaping([Inbox]) -> Void) {
         var inboxArray = [Inbox]()
-        COLLECTION_INBOX.document(User.currentUserId()).collection("resent-messages").order(by: TIMESTAMP).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                print("Error fetch conversation: \(error.localizedDescription)")
-            }
-            snapshot?.documentChanges.forEach({ (change) in
-                let dict = change.document.data()
-                let message = Message(dict: dict)
-                
-                self.fetchUser(withUid: message.chatPartnerId) { (user) in
-                    let inbox = Inbox(user: user, message: message)
-                    inboxArray.append(inbox)
-                    completion(inboxArray)
+        Block.fetchBlock { (blockUserIDs) in
+            COLLECTION_INBOX.document(User.currentUserId()).collection("resent-messages").order(by: TIMESTAMP).addSnapshotListener { (snapshot, error) in
+                if let error = error {
+                    print("Error fetch conversation: \(error.localizedDescription)")
                 }
-            })
+                snapshot?.documentChanges.forEach({ (change) in
+                    let dict = change.document.data()
+                    let message = Message(dict: dict)
+                    
+                    self.fetchUser(withUid: message.chatPartnerId) { (user) in
+                        let inbox = Inbox(user: user, message: message)
+                        guard blockUserIDs[user.uid] == nil else { return }
+                        inboxArray.append(inbox)
+                        completion(inboxArray)
+                    }
+                    completion(inboxArray)
+                })
+            }
         }
     }
 }

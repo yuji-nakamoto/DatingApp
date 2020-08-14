@@ -41,32 +41,45 @@ class Type {
     
     class func fetchTypeUsers(completion: @escaping(Type) -> Void) {
         
-        COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription) ")
+        Block.fetchBlock { (blockUserIDs) in
+            COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription) ")
+                }
+                
+                if snapshot?.documents == [] {
+                    completion(Type(dict: [UID: ""]))
+                }
+                snapshot?.documents.forEach({ (document) in
+                    let dict = document.data()
+                    let type = Type(dict: dict)
+                    guard blockUserIDs[type.uid] == nil else { return }
+                    completion(type)
+                })
             }
-            snapshot?.documents.forEach({ (document) in
-                //                print("DEBUG: fetchTypeUsers document data\(document.data())")
-                let dict = document.data()
-                let type = Type(dict: dict)
-                completion(type)
-            })
         }
     }
     
     // MARK: - Fetch typed user
     
-    class func fetchTypedUser(completion: @escaping(Type) -> Void) {
+    class func fetchTypedUsers(completion: @escaping(Type) -> Void) {
         
-        COLLECTION_TYPE.document(User.currentUserId()).collection(TYPED).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription) ")
+        Block.fetchBlock { (blockUserIDs) in
+            COLLECTION_TYPE.document(User.currentUserId()).collection(TYPED).getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription) ")
+                }
+                
+                if snapshot?.documents == [] {
+                    completion(Type(dict: [UID: ""]))
+                }
+                snapshot?.documents.forEach({ (document) in
+                    let dict = document.data()
+                    let type = Type(dict: dict)
+                    guard blockUserIDs[type.uid] == nil else { return }
+                    completion(type)
+                })
             }
-            snapshot?.documents.forEach({ (document) in
-                let dict = document.data()
-                let type = Type(dict: dict)
-                completion(type)
-            })
         }
     }
     
