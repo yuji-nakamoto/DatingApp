@@ -262,9 +262,9 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func incrementAppBadgeCount2() {
         
         if self.typeUser.isType == 1 {
-            sendRequestNotification2(isMatch: 1, toUser: self.user, message: "\(self.currentUser.username!)さんとマッチングしました", badge: self.user.appBadgeCount + 1)
+            sendRequestNotification4(toUser: self.user, message: "マッチしました！メッセージを送ってみましょう！", badge: self.user.appBadgeCount + 1)
         } else {
-            sendRequestNotification2(isMatch: 0, toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
+            sendRequestNotification3(toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
         }
     }
     

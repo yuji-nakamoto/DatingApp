@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         
-        
         if #available(iOS 10.0, *) {
             let current = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.sound, .badge, .alert]

@@ -38,6 +38,8 @@
 		8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */; };
 		8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FC24D10F90001D59C0 /* Footstep.swift */; };
 		8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */; };
+		8348E76924E7CCEC0046C6DE /* TermsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */; };
+		8348E76B24E7CD5D0046C6DE /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */; };
 		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
@@ -145,6 +147,8 @@
 		8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		8348E3FC24D10F90001D59C0 /* Footstep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footstep.swift; sourceTree = "<group>"; };
 		8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewController.swift; sourceTree = "<group>"; };
+		8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
 		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				83B6231E24E2BA7800363548 /* InquryInputTableViewController.swift */,
 				83B6232024E2BA9100363548 /* OpinionInputTableViewController.swift */,
 				834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */,
+				8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */,
 				834966D124DEE10C00C9B7DD /* Card.xib */,
 				834966D324DEE19C00C9B7DD /* Card.swift */,
+				8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
 				8350E4B924D9AE3000487DB9 /* PIckerKeyboard10.swift in Sources */,
 				8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */,
+				8348E76B24E7CD5D0046C6DE /* TermsTableViewCell.swift in Sources */,
 				838071EC24C62F52008BAA2C /* RegisterViewController.swift in Sources */,
 				834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */,
 				834912FC24C75830002990F8 /* StartViewController.swift in Sources */,
@@ -637,6 +644,7 @@
 				8350E4B324D9AE1500487DB9 /* PIckerKeyboard7.swift in Sources */,
 				8350E4B724D9AE2600487DB9 /* PIckerKeyboard9.swift in Sources */,
 				835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */,
+				8348E76924E7CCEC0046C6DE /* TermsTableViewController.swift in Sources */,
 				83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */,
 				8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,

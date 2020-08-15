@@ -69,7 +69,10 @@ struct AuthService {
                 }
             }
             User.isOnline(online: "offline")
-            Messaging.messaging().unsubscribe(fromTopic: Auth.auth().currentUser!.uid)
+            Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
             UserDefaults.standard.removeObject(forKey: PINK)
             UserDefaults.standard.removeObject(forKey: GREEN)
             UserDefaults.standard.removeObject(forKey: DARK)
@@ -100,6 +103,10 @@ struct AuthService {
         COLLECTION_MYPOST.document(User.currentUserId()).delete()
         COLLECTION_SWIPE.document(User.currentUserId()).delete()
         COLLECTION_INBOX.document(User.currentUserId()).delete()
+        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
 
         Auth.auth().currentUser?.delete(completion: { (error) in
             

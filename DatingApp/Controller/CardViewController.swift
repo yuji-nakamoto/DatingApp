@@ -305,9 +305,9 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         guard let firstCard = cards.first else { return }
 
         if self.typeUser.isType == 1 {
-            sendRequestNotification2(isMatch: 1, toUser: self.user!, message: "\(self.user!.username!)さんとマッチングしました", badge: (firstCard.user?.appBadgeCount)! + 1)
+            sendRequestNotification4(toUser: self.user!, message: "マッチしました！メッセージを送ってみましょう！", badge: (firstCard.user?.appBadgeCount)! + 1)
         } else {
-            sendRequestNotification2(isMatch: 0, toUser: firstCard.user, message: "誰かがタイプと言っています", badge: firstCard.user!.appBadgeCount + 1)
+            sendRequestNotification3(toUser: firstCard.user, message: "誰かがタイプと言っています", badge: firstCard.user!.appBadgeCount + 1)
         }
     }
     

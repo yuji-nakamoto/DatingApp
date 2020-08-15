@@ -29,6 +29,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+
         setupBanner()
         cofigureCollectionView()
         fetchBadgeCount()
@@ -49,7 +54,18 @@ class SearchViewController: UIViewController {
         
         collectionView.reloadData()
         if !Auth.auth().currentUser!.uid.isEmpty {
-            Messaging.messaging().subscribe(toTopic: Auth.auth().currentUser!.uid)
+            if UserDefaults.standard.object(forKey: LIKE_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "like\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: TYPE_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "type\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: MESSAGE_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "message\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: MATCH_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "match\(Auth.auth().currentUser!.uid)")
+            }
         }
     }
     

@@ -30,6 +30,9 @@ class Match {
                 if let error = error {
                     print("Error: fetch match user: \(error.localizedDescription)")
                 }
+                if snapshot?.documents == [] {
+                    completion(Match(dict: [UID: ""]))
+                }
                 snapshot?.documents.forEach({ (document) in
                     let dict = document.data()
                     let match = Match(dict: dict)
