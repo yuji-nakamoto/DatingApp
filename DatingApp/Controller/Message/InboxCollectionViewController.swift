@@ -68,7 +68,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         users.removeAll()
         collectionView.reloadData()
         
-        Match.fetchMatchUser { (match) in
+        Match.fetchMatchUsers { (match) in
             if match.uid == "" {
                 self.collectionView.reloadData()
                 return
@@ -155,7 +155,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
             backView.alpha = 0.85
         }
     }
-    
 }
 
 

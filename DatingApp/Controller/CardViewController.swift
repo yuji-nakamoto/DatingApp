@@ -67,7 +67,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         Type.saveIsTypeUser(forUser: firstCard.user!, isType: dict)
         Type.saveTypedUser(forUser: firstCard.user!)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(firstCard.user.uid), numShards: 10)
-        incrementAppBadgeCount2()
         Service.saveSwipe(toUserId: firstCard.user.uid)
         
         checkIfMatch(firstCard.user.uid, cardUser: firstCard.user)
@@ -111,7 +110,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         Service.saveSwipe(toUserId: firstCard.user.uid)
         swipeAnimationX(translation: -750)
     }
-
+    
     @IBAction func afterSendButtonPressed(_ sender: Any) {
         removeEffectView()
     }
@@ -165,7 +164,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(card.user.uid), numShards: 10)
                 incrementAppBadgeCount()
                 Service.saveSwipe(toUserId: card.user.uid)
-                                    
+                
                 self.updateCards(card: card)
                 return
                 
@@ -198,7 +197,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 Type.saveIsTypeUser(forUser: card.user!, isType: dict)
                 Type.saveTypedUser(forUser: card.user!)
                 incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(card.user.uid), numShards: 10)
-                incrementAppBadgeCount2()
                 Service.saveSwipe(toUserId: card.user.uid)
                 
                 checkIfMatch(card.user.uid, cardUser: card.user)
@@ -255,11 +253,17 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     }
     
     private func checkIfMatch(_ userId: String, cardUser: User) {
+        
         Type.checkIfMatch(toUserId: userId) { (type) in
             self.typeUser = type
+            
             if self.typeUser.isType == 1 {
                 self.matchView(cardUser: cardUser)
                 Match.saveMatchUser(forUser: cardUser)
+                sendRequestNotification4(toUser: cardUser, message: "マッチしました！メッセージを送ってみましょう！", badge: (cardUser.appBadgeCount)! + 1)
+                
+            } else {
+                sendRequestNotification3(toUser: cardUser, message: "誰かがタイプと言っています", badge: cardUser.appBadgeCount + 1)
             }
         }
     }
@@ -300,17 +304,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         guard let firstCard = cards.first else { return }
         sendRequestNotification2(toUser: firstCard.user, message: "\(self.user!.username!)さんがいいねしてくれました", badge: firstCard.user.appBadgeCount + 1)
     }
-    
-    private func incrementAppBadgeCount2() {
-        guard let firstCard = cards.first else { return }
 
-        if self.typeUser.isType == 1 {
-            sendRequestNotification4(toUser: self.user!, message: "マッチしました！メッセージを送ってみましょう！", badge: (firstCard.user?.appBadgeCount)! + 1)
-        } else {
-            sendRequestNotification3(toUser: firstCard.user, message: "誰かがタイプと言っています", badge: firstCard.user!.appBadgeCount + 1)
-        }
-    }
-    
     private func updateCards(card: Card) {
         
         for (index, c) in self.cards.enumerated() {
@@ -471,7 +465,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     }
     
     func configureAnimations() {
-                
+        
         let angle = 30 * CGFloat.pi / 180
         
         currentUserView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))

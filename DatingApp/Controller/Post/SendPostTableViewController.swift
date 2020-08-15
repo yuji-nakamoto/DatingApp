@@ -98,7 +98,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         Post.savePost(postId, withValue: dict)
         Post.saveMyPost(postId, withValue: dict2)
         updateUser(withValue: [POSTCOUNT: user.postCount + 1])
-        Match.fetchMatchUser { (match) in
+        Match.fetchMatchUsers { (match) in
             self.match = match
             Post.saveFeed(postId, toUserId: match.uid, withValue: dict)
         }

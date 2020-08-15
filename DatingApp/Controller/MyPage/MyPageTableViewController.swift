@@ -100,7 +100,7 @@ class MyPageTableViewController: UIViewController {
         myPosts.removeAll()
         tableView.reloadData()
 
-        Match.fetchMatchUser { (match) in
+        Match.fetchMatchUsers { (match) in
             if match.uid == "" {
                 self.segmentControl.isEnabled = true
                 self.indicator.stopAnimating()

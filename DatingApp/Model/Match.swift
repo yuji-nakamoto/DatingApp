@@ -12,6 +12,7 @@ class Match {
     
     var uid: String!
     var date: Double!
+    var isMatch: Int!
     
     init() {
     }
@@ -19,11 +20,12 @@ class Match {
     init(dict: [String: Any]) {
         uid = dict[UID] as? String ?? ""
         date = dict[DATE] as? Double ?? 0
+        isMatch = dict[ISMATCH] as? Int ?? 0
     }
     
     // MARK: - Fetch match user
     
-    class func fetchMatchUser(completion: @escaping(Match) -> Void) {
+    class func fetchMatchUsers(completion: @escaping(Match) -> Void) {
         
         Block.fetchBlock { (blockUserIDs) in
             COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).getDocuments { (snapshot, error) in
@@ -47,30 +49,46 @@ class Match {
         }
     }
     
+    class func fetchMatchUser(toUserId: String, completion: @escaping(Match) -> Void) {
+        
+        COLLECTION_MATCH.document(toUserId).collection(ISMATCH).document(User.currentUserId()).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch match: \(error.localizedDescription)")
+            }
+            guard let data = snapshot?.data() else { return }
+            let match = Match(dict: data)
+            completion(match)
+        }
+    }
+    
     // MARK: - Save
     
     class func saveMatchUser(forUser user: User) {
         
-        COLLECTION_MATCH.document(User.currentUserId()).collection("isMatch").document(user.uid).getDocument { (snapshot, error) in
+        COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).document(user.uid).getDocument { (snapshot, error) in
             
             let date: Double = Date().timeIntervalSince1970
-            let dict = [UID: user.uid!, DATE: date] as [String : Any]
+            let dict = [UID: user.uid!,
+                        DATE: date,
+                        ISMATCH: 1] as [String : Any]
             
             if snapshot?.exists == true {
-                COLLECTION_MATCH.document(User.currentUserId()).collection("isMatch").document(user.uid).updateData(dict as [AnyHashable : Any])
+                COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).document(user.uid).updateData(dict as [AnyHashable : Any])
             } else {
-                COLLECTION_MATCH.document(User.currentUserId()).collection("isMatch").document(user.uid).setData(dict as [String : Any])
+                COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).document(user.uid).setData(dict as [String : Any])
             }
         }
-        COLLECTION_MATCH.document(user.uid).collection("isMatch").document(User.currentUserId()).getDocument { (snapshot, error) in
+        COLLECTION_MATCH.document(user.uid).collection(ISMATCH).document(User.currentUserId()).getDocument { (snapshot, error) in
             
             let date: Double = Date().timeIntervalSince1970
-            let dict = [UID: User.currentUserId(), DATE: date] as [String : Any]
+            let dict = [UID: User.currentUserId(),
+                        DATE: date,
+                        ISMATCH: 1] as [String : Any]
             
             if snapshot?.exists == true {
-                COLLECTION_MATCH.document(user.uid).collection("isMatch").document(User.currentUserId()).updateData(dict)
+                COLLECTION_MATCH.document(user.uid).collection(ISMATCH).document(User.currentUserId()).updateData(dict)
             } else {
-                COLLECTION_MATCH.document(user.uid).collection("isMatch").document(User.currentUserId()).setData(dict)
+                COLLECTION_MATCH.document(user.uid).collection(ISMATCH).document(User.currentUserId()).setData(dict)
             }
         }
     }

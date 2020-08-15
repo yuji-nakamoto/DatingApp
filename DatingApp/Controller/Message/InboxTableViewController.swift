@@ -10,7 +10,7 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class InboxTableViewController: UIViewController, GADInterstitialDelegate {
+class InboxTableViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -21,8 +21,6 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
-    private var user: User!
-    private var interstitial: GADInterstitial!
 
     // MARK: - Lifecycle
     
@@ -34,12 +32,12 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         setupBanner()
-        interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
+        tableView.reloadData()
     }
 
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
@@ -64,7 +62,7 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
             self.tableView.reloadData()
         }
     }
-    
+
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -82,19 +80,7 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     // MARK: - Helper
-    
-    private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
-    
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitial = createAndLoadIntersitial()
-    }
-    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
@@ -124,7 +110,6 @@ class InboxTableViewController: UIViewController, GADInterstitialDelegate {
             backView.alpha = 0.85
         }
     }
-    
 }
 
 // MARK: - Table view
@@ -146,14 +131,6 @@ extension InboxTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            if self.interstitial.isReady {
-                self.interstitial.present(fromRootViewController: self)
-            } else {
-                print("Error interstitial")
-            }
-        }
         performSegue(withIdentifier: "MessageVC", sender: inboxArray[indexPath.row].message.chatPartnerId)
     }
 }

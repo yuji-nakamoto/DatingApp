@@ -19,7 +19,6 @@ class DidLikeTableViewCell: UITableViewCell {
     @IBOutlet weak var mozaicView: UIView!
     @IBOutlet weak var blackLine1: UIView!
     @IBOutlet weak var blackLine2: UIView!
-    @IBOutlet weak var deleteButon: UIButton!
     
     var user = User()
     var inbox: Inbox!
@@ -74,10 +73,10 @@ class DidLikeTableViewCell: UITableViewCell {
         onlineView.isHidden = false
         profileImageView.layer.shouldRasterize = false
         nameLabel.layer.shouldRasterize = false
-
+        
         profileImageView.layer.rasterizationScale = 1
         nameLabel.layer.rasterizationScale = 1
-
+        
         profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         nameLabel.text = user.username
         residenceLabel.text = user.residence
@@ -128,7 +127,7 @@ class DidLikeTableViewCell: UITableViewCell {
             }
         }
     }
-
+    
     @objc func tapProfileImage() {
         if let uid = inbox.user.uid {
             inboxVC?.performSegue(withIdentifier: "DetailVC", sender: uid)

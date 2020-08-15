@@ -36,8 +36,19 @@ class TermsTableViewCell: UITableViewCell {
     @IBOutlet weak var terms5Label11: UILabel!
     @IBOutlet weak var terms5Label12: UILabel!
     @IBOutlet weak var terms5TitleLabel: UILabel!
-    
-    
+    @IBOutlet weak var terms6Label: UILabel!
+    @IBOutlet weak var terms7Label: UILabel!
+    @IBOutlet weak var terms8Label1: UILabel!
+    @IBOutlet weak var terms8Label1_1: UILabel!
+    @IBOutlet weak var terms8Label1_2: UILabel!
+    @IBOutlet weak var terms8Label1_3: UILabel!
+    @IBOutlet weak var terms8Label1_4: UILabel!
+    @IBOutlet weak var terms8Label1_5: UILabel!
+    @IBOutlet weak var terms8Label1_6: UILabel!
+    @IBOutlet weak var terms9Label1: UILabel!
+    @IBOutlet weak var terms9Label2: UILabel!
+    @IBOutlet weak var terms10Label: UILabel!
+
     func setupUI() {
         
         titleLabel.text = "本規約は、フリマ運営局（以下、当社）が運営するサービス『フリマ』（以下、本サービス）を通じて、本サービスを利用する利用者様（以下、利用者）に提供するサービスに関して、その諸条件を定めるものです。本サービスを利用されたことにより、本利用規約に同意いただいたものとみなします。"
@@ -69,8 +80,23 @@ class TermsTableViewCell: UITableViewCell {
         terms5Label10.text = "売買春を目的として本サービスを利用する行為"
         terms5Label11.text = "無限連鎖講（ねずみ講）、ネットワークビジネス関連の勧誘、及びこれらに類する情報の送信等"
         terms5Label12.text = "その他、当社が不適切と判断する行為"
-     
+        
+        terms6Label.text = "利用者は、利用者が法令または本規約に違反して本サービスを利用したことに起因して（かかる趣旨のクレームを第三者より当社が受けた場合を含みます）、当社が直接的もしくは間接的に何らかの損害、損失または費用負担（弁護士費用の負担を含みます）を被った場合、当社の請求に従って直ちにこれを賠償または保証しなければなりません。"
+        
+        terms7Label.text = "会員が本サービスの利用を停止しようとする場合は、当社が定める手続きに従い、退会通知を当社宛手に行うものとします。なお、大会に当たっての手数料等の発生はございません。"
+        
+        terms8Label1.text = "当社、以下各号の事由に起因する場合、本サービスの全部または一部を停止・中止・終了することができ、当該事由に起因して会員または第三者に損害を発生した場合、一切の責任を負わないものとします。"
+        terms8Label1_1.text = "定期的または緊急に本サービス提供のためのコンピューターシステムの保守・点検を行う場合"
+        terms8Label1_2.text = "火災・停電、天災地変等の非常事態により本サービスの運営が不能となった場合"
+        terms8Label1_3.text = "戦争、内乱、暴動、労働争議等により、本サービスの運営が不能となった場合"
+        terms8Label1_4.text = "サービス提供のためのコンピューターシステムの不良および第三者からの不正アクセス、コンピューターウィルスの感染等により本サービスを提供できない場合"
+        terms8Label1_5.text = "法律、法令等に基づく措置により本サービスが提供できない場合"
+        terms8Label1_6.text = "その他、当社が止むを得ないと判断した場合"
 
+        terms9Label1.text = "利用者は、本利用規約に別段の定めがある場合を除き、当社への連絡はお問い合わせフォームから行うものとします。当社は電話による連絡および来訪は受け付けておりません。"
+        terms9Label2.text = "利用者への連絡または通知の必要があると当社が判断した場合には、本サービスに登録されたメールアドレス宛にメールにて連絡または通知を行います。ただし、利用者から正確な連絡先の提供がなされていない場合の不利益に関しては、当社は一切責任を負いません。"
+
+        terms10Label.text = "本規約は日本語を定文とし、その準拠法は日本法とします。本サービスに起因または関連して利用者と当社のと間に生じた紛争については東京地方裁判所または東京簡易裁判所を第一審の専属的合意管轄裁判所とします。かかる管轄裁判所で得られた勝訴判決は、いずれの国の裁判所においても執行可能とします。"
     }
 
     override func awakeFromNib() {

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import GoogleMobileAds
 
-class MessageTebleViewController: UIViewController, UITextFieldDelegate {
+class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInterstitialDelegate {
     
     // MARK: - Properties
     
@@ -19,12 +19,20 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var matchLabel: UILabel!
+    @IBOutlet weak var nameLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var navBar: UIView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var bottomView: UIView!
     
-    private var user: User!
-    private var currentUser: User!
-    private var badgeUser: User!
+    private var user = User()
+    private var currentUser = User()
+    private var badgeUser = User()
+    private var matchUser = Match()
     private var users = [User]()
     private var messages = [Message]()
+    private var interstitial: GADInterstitial!
     var userId = ""
     
     // MARK: - Lifecycle
@@ -34,17 +42,21 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
         setupBanner()
         setupUI()
         handleTextField()
+        interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        fetchMatchUser()
         fetchUser()
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Fetch
@@ -54,7 +66,18 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
         guard userId != "" else { return }
         User.fetchUser(userId) { (user) in
             self.user = user
-            self.navigationItem.title = "\(self.user.username!)"
+            Match.fetchMatchUser(toUserId: self.userId) { (match) in
+                self.matchUser = match
+                if self.matchUser.isMatch == 1 {
+                    self.nameLabel.text = "\(self.user.username!)"
+                    self.matchLabel.text = "    マッチング済み✨"
+                    self.matchLabel.isHidden = false
+                } else {
+                    self.nameLabel.text = "\(self.user.username!)"
+                    self.matchLabel.isHidden = true
+                    self.nameLabelTopConstraint.constant = 50
+                }
+            }
             self.fetchMessage()
         }
     }
@@ -80,7 +103,27 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
+    
+    private func fetchMatchUser() {
+        guard userId != "" else { return }
+        Match.fetchMatchUser(toUserId: userId) { (match) in
+            self.matchUser = match
+        }
+    }
+    
+    private func checkIfMatch() {
+        
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            if self.matchUser.isMatch != 1 {
+                if self.interstitial.isReady {
+                    self.interstitial.present(fromRootViewController: self)
+                } else {
+                    print("Error interstitial")
+                }
+            }
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func sendButtonPressed(_ sender: Any) {
@@ -99,6 +142,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
         sendButton.isEnabled = false
         sendButton.alpha = 0.7
         textField.resignFirstResponder()
+        checkIfMatch()
     }
     
     @objc func adjustForKeyboard(notification: Notification) {
@@ -134,6 +178,18 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Helpers
+    
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+    }
     
     private func incrementAppBadgeCount() {
         
@@ -172,18 +228,34 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
         if UserDefaults.standard.object(forKey: PINK) != nil {
             sendButton.backgroundColor = UIColor(named: O_PINK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
+            navBar.backgroundColor = UIColor(named: O_PINK)
+            navBar.alpha = 0.85
+            nameLabel.textColor = .white
+            backButton.tintColor = .white
             
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            
+            navBar.backgroundColor = UIColor(named: O_GREEN)
+            navBar.alpha = 0.85
+            nameLabel.textColor = UIColor(named: O_BLACK)
+            backButton.tintColor = UIColor(named: O_BLACK)
+
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor.systemGray4
             sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            
+            navBar.backgroundColor = .white
+            navBar.alpha = 0.85
+            nameLabel.textColor = UIColor(named: O_BLACK)
+            backButton.tintColor = UIColor(named: O_BLACK)
+
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
+            navBar.backgroundColor = UIColor(named: O_DARK)
+            nameLabel.textColor = .white
+            backButton.tintColor = .white
+            navBar.alpha = 0.85
         }
     }
     
@@ -201,7 +273,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
-    
 }
 
 extension MessageTebleViewController: UITableViewDelegate, UITableViewDataSource {
@@ -220,5 +291,4 @@ extension MessageTebleViewController: UITableViewDelegate, UITableViewDataSource
         
         return cell
     }
-    
 }

@@ -64,7 +64,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         fetchCurrentUser()
         fetchUserId()
-        checkIfMatch()
         fetchLikeUser()
         fetchTypeUser()
         fetchBlockUser()
@@ -114,7 +113,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         Type.saveIsTypeUser(forUser: user, isType: dict)
         Type.saveTypedUser(forUser: user)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
-        incrementAppBadgeCount2()
         
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
@@ -191,7 +189,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         guard user.uid != nil else { return }
         Type.checkIfMatch(toUserId: toUserId) { (type) in
             self.typeUser = type
-            
+            self.incrementAppBadgeCount2()
+
             if self.typeUser.isType == 1 {
                 self.matchView()
                 Match.saveMatchUser(forUser: self.user)
@@ -260,7 +259,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     private func incrementAppBadgeCount2() {
-        
+
         if self.typeUser.isType == 1 {
             sendRequestNotification4(toUser: self.user, message: "マッチしました！メッセージを送ってみましょう！", badge: self.user.appBadgeCount + 1)
         } else {
@@ -352,14 +351,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         let alert: UIAlertController = UIAlertController(title: "\(user.username!)さんに", message: "メッセージを送りますか？", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
-            
-            if UserDefaults.standard.object(forKey: FEMALE) == nil {
-                if self.interstitial.isReady {
-                    self.interstitial.present(fromRootViewController: self)
-                } else {
-                    print("Error interstitial")
-                }
-            }
             self.performSegue(withIdentifier: "MessageVC", sender: self.user.uid)
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in

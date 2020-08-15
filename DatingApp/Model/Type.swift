@@ -91,6 +91,10 @@ class Type {
             if let error = error {
                 print("Error check if match: \(error.localizedDescription)")
             }
+            
+            if snapshot?.data() == nil {
+                completion(Type(dict: [ISTYPE: 0]))
+            }
             guard let data = snapshot?.data() else { return }
             let type = Type(dict: data)
             completion(type)
