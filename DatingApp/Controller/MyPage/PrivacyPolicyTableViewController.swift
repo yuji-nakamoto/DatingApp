@@ -1,14 +1,14 @@
 //
-//  TermsTableViewController.swift
+//  PrivacyPolicyTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/08/15.
+//  Created by yuji_nakamoto on 2020/08/16.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 
-class TermsTableViewController: UIViewController {
+class PrivacyPolicyTableViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -19,7 +19,7 @@ class TermsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "利用規約"
+        navigationItem.title = "プライバシーポリシー"
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -31,13 +31,13 @@ class TermsTableViewController: UIViewController {
     }
 }
 
-extension TermsTableViewController: UITableViewDelegate, UITableViewDataSource {
+extension PrivacyPolicyTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TermsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! PrivacyPolicyTableViewCell
         
         cell.setupUI()
         return cell

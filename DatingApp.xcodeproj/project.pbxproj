@@ -40,6 +40,8 @@
 		8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */; };
 		8348E76924E7CCEC0046C6DE /* TermsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */; };
 		8348E76B24E7CD5D0046C6DE /* TermsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */; };
+		8348E76D24E83BA20046C6DE /* PrivacyPolicyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E76C24E83BA10046C6DE /* PrivacyPolicyTableViewController.swift */; };
+		8348E76F24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348E76E24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift */; };
 		8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */; };
 		834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F124C70B7C002990F8 /* EnterGenderViewController.swift */; };
 		834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */; };
@@ -149,6 +151,8 @@
 		8348E3FE24D1154D001D59C0 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewController.swift; sourceTree = "<group>"; };
 		8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsTableViewCell.swift; sourceTree = "<group>"; };
+		8348E76C24E83BA10046C6DE /* PrivacyPolicyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyTableViewController.swift; sourceTree = "<group>"; };
+		8348E76E24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyTableViewCell.swift; sourceTree = "<group>"; };
 		8348FFBA24CAFFEC00C37009 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		834912F124C70B7C002990F8 /* EnterGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterGenderViewController.swift; sourceTree = "<group>"; };
 		834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileImageViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 				83B6232024E2BA9100363548 /* OpinionInputTableViewController.swift */,
 				834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */,
 				8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */,
+				8348E76C24E83BA10046C6DE /* PrivacyPolicyTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -396,6 +401,7 @@
 				834966D124DEE10C00C9B7DD /* Card.xib */,
 				834966D324DEE19C00C9B7DD /* Card.swift */,
 				8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */,
+				8348E76E24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -650,6 +656,7 @@
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
+				8348E76D24E83BA20046C6DE /* PrivacyPolicyTableViewController.swift in Sources */,
 				834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */,
 				834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */,
 				834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */,
@@ -684,6 +691,7 @@
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
+				8348E76F24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift in Sources */,
 				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
 				834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,
