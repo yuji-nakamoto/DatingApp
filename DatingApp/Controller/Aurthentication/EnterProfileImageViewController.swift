@@ -138,7 +138,6 @@ class EnterProfileImageViewController: UIViewController {
             self.present(toEnterGenderVC, animated: true, completion: nil)
         }
     }
-    
 }
 
 extension EnterProfileImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -150,7 +149,6 @@ extension EnterProfileImageViewController: UIImagePickerControllerDelegate, UINa
             profileImageView.image = selectedImage
             profileImage = selectedImage
         }
-        
         dismiss(animated: true, completion: nil)
     }
 }

@@ -99,5 +99,4 @@ class WriteReportTableViewController: UITableViewController, UITextViewDelegate 
             countLabel.text = String(reportNum)
         }
     }
- 
 }

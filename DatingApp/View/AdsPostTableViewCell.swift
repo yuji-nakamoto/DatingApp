@@ -28,5 +28,4 @@ class AdsPostTableViewCell: UITableViewCell {
         bannerLabel.layer.cornerRadius = 18 / 2
         bannerLabel.backgroundColor = .systemPurple
     }
-
 }

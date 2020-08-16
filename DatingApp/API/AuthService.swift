@@ -29,7 +29,6 @@ struct AuthService {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             
             if error == nil {
-                
                 if result!.user.isEmailVerified {
                     completion(error, true)
                 } else {
@@ -48,9 +47,9 @@ struct AuthService {
             completion(error)
             
             if error == nil {
-                //                result!.user.sendEmailVerification { (error) in
-                //                    print("Error: \(String(describing: error?.localizedDescription))")
-                //                }
+                result!.user.sendEmailVerification { (error) in
+                    print("Error: \(String(describing: error?.localizedDescription))")
+                }
             }
         }
     }
@@ -107,7 +106,7 @@ struct AuthService {
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-
+        
         Auth.auth().currentUser?.delete(completion: { (error) in
             
             if error != nil {
@@ -122,6 +121,11 @@ struct AuthService {
                 UserDefaults.standard.removeObject(forKey: GOOGLE2)
                 UserDefaults.standard.removeObject(forKey: FACEBOOK)
                 UserDefaults.standard.removeObject(forKey: FACEBOOK2)
+                UserDefaults.standard.removeObject(forKey: HINT_END)
+                UserDefaults.standard.removeObject(forKey: HINT_END2)
+                UserDefaults.standard.removeObject(forKey: MALE)
+                UserDefaults.standard.removeObject(forKey: FEMALE)
+
                 completion(error)
             }
         })

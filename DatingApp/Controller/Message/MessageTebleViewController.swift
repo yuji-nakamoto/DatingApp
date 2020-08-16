@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import JGProgressHUD
 
 class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInterstitialDelegate {
     
@@ -25,6 +26,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     @IBOutlet weak var navBar: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var countLabel: UILabel!
     
     private var user = User()
     private var currentUser = User()
@@ -33,7 +36,9 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     private var users = [User]()
     private var messages = [Message]()
     private var interstitial: GADInterstitial!
-    var userId = ""
+    private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private var hud = JGProgressHUD(style: .dark)
+    var toUserId = ""
     
     // MARK: - Lifecycle
     
@@ -42,12 +47,12 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         setupBanner()
         setupUI()
         handleTextField()
+        hintView()
         interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        fetchMatchUser()
         fetchUser()
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
@@ -59,23 +64,34 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    // MARK: - Action
+    
+    @objc func handleDismissal() {
+        removeEffectView()
+    }
+    
     // MARK: - Fetch
     
     private func fetchUser() {
         
-        guard userId != "" else { return }
-        User.fetchUser(userId) { (user) in
+        guard toUserId != "" else { return }
+        User.fetchUser(toUserId) { (user) in
             self.user = user
-            Match.fetchMatchUser(toUserId: self.userId) { (match) in
+            
+            Match.fetchMatchUser(toUserId: self.toUserId) { (match) in
                 self.matchUser = match
+                
                 if self.matchUser.isMatch == 1 {
                     self.nameLabel.text = "\(self.user.username!)"
                     self.matchLabel.text = "    マッチング済み✨"
+                    self.nameLabel.isHidden = false
                     self.matchLabel.isHidden = false
+                    
                 } else {
                     self.nameLabel.text = "\(self.user.username!)"
+                    self.nameLabel.isHidden = false
                     self.matchLabel.isHidden = true
-                    self.nameLabelTopConstraint.constant = 50
+                    self.nameLabelTopConstraint.constant = 60
                 }
             }
             self.fetchMessage()
@@ -105,8 +121,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     }
     
     private func fetchMatchUser() {
-        guard userId != "" else { return }
-        Match.fetchMatchUser(toUserId: userId) { (match) in
+        guard toUserId != "" else { return }
+        Match.fetchMatchUser(toUserId: toUserId) { (match) in
             self.matchUser = match
         }
     }
@@ -128,10 +144,19 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
+        if textField.text!.count > 60 {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "メッセージは60文字以下で入力してください。"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        }
+        
         let date: Double = Date().timeIntervalSince1970
         let dict = [MESSAGETEXT: textField.text!,
                     FROM: User.currentUserId(),
-                    TO: userId,
+                    TO: toUserId,
                     TIMESTAMP: Timestamp(date: Date()),
                     DATE: date] as [String : Any]
         Message.saveMessage(to: user, withValue: dict)
@@ -141,6 +166,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         textField.text = ""
         sendButton.isEnabled = false
         sendButton.alpha = 0.7
+        countLabel.text = "60"
         textField.resignFirstResponder()
         checkIfMatch()
     }
@@ -171,6 +197,13 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.isEnabled = false
             sendButton.alpha = 0.7
         }
+        
+        let messageNum = 60 - textField.text!.count
+        if messageNum < 0 {
+            countLabel.text = "×"
+        } else {
+            countLabel.text = String(messageNum)
+        }
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -196,11 +229,42 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         User.fetchUser(User.currentUserId()) { (user) in
             self.currentUser = user
             
-            User.fetchUser(self.userId) { (user) in
+            User.fetchUser(self.toUserId) { (user) in
                 self.badgeUser = user
                 
                 sendRequestNotification(toUser: self.badgeUser, message: "\(self.currentUser.username!)さんからメッセージが届いています", badge: self.badgeUser.appBadgeCount + 1)
             }
+        }
+    }
+    
+    private func hintView() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
+        backView.addGestureRecognizer(tap)
+        
+        if UserDefaults.standard.object(forKey: FEMALE) == nil && UserDefaults.standard.object(forKey: HINT_END) == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                
+                self.visualEffectView.frame = self.view.frame
+                self.view.addSubview(self.visualEffectView)
+                self.visualEffectView.alpha = 0
+                self.view.addSubview(self.backView)
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.visualEffectView.alpha = 1
+                    self.backView.alpha = 1
+                }, completion: nil)
+            }
+        }
+    }
+    
+    private func removeEffectView() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 0
+            self.backView.alpha = 0
+        }) { (_) in
+            self.visualEffectView.removeFromSuperview()
+            UserDefaults.standard.set(true, forKey: HINT_END)
         }
     }
     
@@ -213,9 +277,14 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func setupUI() {
         
+        backView.alpha = 0
+        visualEffectView.alpha = 0
+        nameLabel.isHidden = true
+        matchLabel.isHidden = true
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         sendButton.layer.cornerRadius = 5
+        backView.layer.cornerRadius = 15
         
         textField.delegate = self
         sendButton.isEnabled = false

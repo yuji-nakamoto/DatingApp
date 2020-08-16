@@ -67,9 +67,9 @@ class ModalSearchTableViewController: UITableViewController {
                     MAXAGE: Int(maxLabel.text!)!] as [String : Any]
         
         if genderLabel.text == "男性" {
-            UserDefaults.standard.set(true, forKey: FEMALE)
+            UserDefaults.standard.set(true, forKey: MALE)
         } else if genderLabel.text == "女性" {
-            UserDefaults.standard.removeObject(forKey: FEMALE)
+            UserDefaults.standard.removeObject(forKey: MALE)
         }
         
         if residenceLabel.text == "こだわらない" {
@@ -94,7 +94,7 @@ class ModalSearchTableViewController: UITableViewController {
     
     private func setupUserInfo(_ user: User) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             genderLabel.text = "男性"
         } else {
             genderLabel.text = "女性"

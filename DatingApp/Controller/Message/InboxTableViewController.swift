@@ -69,8 +69,8 @@ class InboxTableViewController: UIViewController {
         
         if segue.identifier == "MessageVC" {
             let messageVC = segue.destination as! MessageTebleViewController
-            let userId = sender as! String
-            messageVC.userId = userId
+            let toUserId = sender as! String
+            messageVC.toUserId = toUserId
         }
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
@@ -139,7 +139,7 @@ extension InboxTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: " メッセージを送った\nお相手が、\nこちらに表示されます。", attributes: attributes)
     }
 

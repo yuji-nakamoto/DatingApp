@@ -55,5 +55,4 @@ class PrivacyPolicyTableViewCell: UITableViewCell {
         
         privacy6Label.text = "フリマのプライバシーポリシーに関するお問い合わせは、フリマのお問い合わせフォームまでお願い致します。"
     }
- 
 }

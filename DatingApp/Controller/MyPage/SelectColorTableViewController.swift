@@ -105,5 +105,4 @@ class SelectColorTableViewController: UITableViewController {
             setupUI()
         }        
     }
-    
 }

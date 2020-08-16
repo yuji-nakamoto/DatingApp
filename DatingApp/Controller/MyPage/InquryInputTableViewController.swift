@@ -105,5 +105,4 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
             countLabel.text = String(reportNum)
         }
     }
- 
 }

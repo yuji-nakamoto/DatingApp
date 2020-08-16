@@ -195,7 +195,7 @@ extension InboxCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegat
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: "マッチしているお相手が、\nこちらに表示されます。", attributes: attributes)
     }
 

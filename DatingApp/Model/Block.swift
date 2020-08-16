@@ -49,7 +49,7 @@ class Block {
         }
     }
     
-    class func fetchBlock(completion: @escaping([String: Bool]) -> Void) {
+    class func fetchBlockSwipe(completion: @escaping([String: Bool]) -> Void) {
         
         COLLECTION_BLOCK.document(User.currentUserId()).getDocument { (snapshot, error) in
             guard let data = snapshot?.data() as? [String: Bool] else  {

@@ -29,7 +29,6 @@ class SelfIntroTableViewController: UITableViewController {
     // MARK: - Actions
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-    
         saveTextView()
     }
     
@@ -69,5 +68,4 @@ class SelfIntroTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         textView.becomeFirstResponder()
     }
- 
 }

@@ -28,7 +28,7 @@ class SelectGenderTableViewController: UITableViewController {
     private func setupUI() {
         navigationItem.title = "出会いたい人の性別"
 
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             checkMark1.isHidden = true
             checkMark2.isHidden = false
         } else {
@@ -42,13 +42,12 @@ class SelectGenderTableViewController: UITableViewController {
                 
         if indexPath.row == 0 {
             UserDefaults.standard.set(true, forKey: REFRESH)
-            UserDefaults.standard.removeObject(forKey: FEMALE)
+            UserDefaults.standard.removeObject(forKey: MALE)
             setupUI()
         } else {
             UserDefaults.standard.set(true, forKey: REFRESH)
-            UserDefaults.standard.set(true, forKey: FEMALE)
+            UserDefaults.standard.set(true, forKey: MALE)
             setupUI()
         }
     }
-
 }

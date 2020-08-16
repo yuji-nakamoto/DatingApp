@@ -29,6 +29,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyLabel2: UILabel!
     @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var cards = [Card]()
     private var users = [User]()
@@ -37,6 +38,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private var interstitial: GADInterstitial!
     private var cardInitialLocationCenter: CGPoint!
     private var panInitialLocation: CGPoint!
+
     lazy var views = [matchLabel, currentUserView, matchedUserView, descriptionLabel, descriptionLabel2, afterMessageButton, congratsLabel]
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
@@ -53,9 +55,34 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         super.viewWillAppear(animated)
         fetchUser()
         UserDefaults.standard.set(true, forKey: CARDVC)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Actions
+    
+    @IBAction func reloadButtonPressed(_ sender: Any) {
+        emptyLabel.isHidden = true
+        emptyLabel2.isHidden = true
+        loadView()
+        setupUI()
+        fetchUser()
+        setupBanner()
+        users.removeAll()
+        cards.removeAll()
+    }
+    
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toModalSearchVC = storyboard.instantiateViewController(withIdentifier: "ModalSearchVC")
+        self.present(toModalSearchVC, animated: true, completion: nil)
+    }
     
     @IBAction func typeButtonPressed(_ sender: Any) {
         guard let firstCard = cards.first else { return }
@@ -229,7 +256,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     // MARK: - Fetch
     
     private func fetchUser() {
-        
+        indicator.startAnimating()
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
             self.currentUserView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
@@ -241,11 +268,23 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         
         if user.residenceSerch == "こだわらない" {
             User.fetchCardAllUsers(user) { (user) in
+                if user.uid == "" {
+                    self.indicator.stopAnimating()
+                    self.emptyLabel.isHidden = false
+                    self.emptyLabel2.isHidden = false
+                    return
+                }
                 self.users.append(user)
                 self.setupCards(user: user)
             }
         } else {
             User.fetchCardUsers(user.residenceSerch, user) { (user) in
+                if user.uid == "" {
+                    self.indicator.stopAnimating()
+                    self.emptyLabel.isHidden = false
+                    self.emptyLabel2.isHidden = false
+                    return
+                }
                 self.users.append(user)
                 self.setupCards(user: user)
             }
@@ -304,7 +343,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         guard let firstCard = cards.first else { return }
         sendRequestNotification2(toUser: firstCard.user, message: "\(self.user!.username!)さんがいいねしてくれました", badge: firstCard.user.appBadgeCount + 1)
     }
-
+    
     private func updateCards(card: Card) {
         
         for (index, c) in self.cards.enumerated() {
@@ -391,7 +430,9 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         cards.append(card)
         cardStack.addSubview(card)
         cardStack.sendSubviewToBack(card)
-        
+        indicator.stopAnimating()
+        emptyLabel.isHidden = false
+        emptyLabel2.isHidden = false
         if cards.count == 1 {
             cardInitialLocationCenter = card.center
             card.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(gesture:))))
@@ -456,6 +497,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.visualEffectView.alpha = 1
                 self.views.forEach({ $0?.alpha = 1})
+                self.views.forEach({ $0?.isHidden = false})
                 self.configureAnimations()
                 self.afterMessageButton.isEnabled = true
                 self.matchLabel.text = "\(cardUser.username!)さんとマッチしました！"
@@ -505,5 +547,4 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadIntersitial()
     }
-    
 }

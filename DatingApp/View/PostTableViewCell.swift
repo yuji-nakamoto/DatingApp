@@ -100,11 +100,4 @@ class PostTableViewCell: UITableViewCell {
         let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 270)
         profileImageView.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

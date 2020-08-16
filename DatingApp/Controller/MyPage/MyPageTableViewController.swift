@@ -19,11 +19,14 @@ class MyPageTableViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var hintView: UIView!
+    @IBOutlet weak var hintLabel: UILabel!
     
     private var currentUser = User()
     private var user = User()
     private var myPosts = [Post]()
     private var users = [User]()
+    private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     // MARK: - Lifecycle
     
@@ -32,26 +35,37 @@ class MyPageTableViewController: UIViewController {
         navigationItem.title = "マイページ"
         tableView.separatorStyle = .none
         setupBanner()
+        showHintView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if segmentControl.selectedSegmentIndex == 0 {
+        if segmentControl.selectedSegmentIndex == 1 {
             fetchMatchedUser()
-        } else {
+        } else if segmentControl.selectedSegmentIndex == 2 {
             fetchMyPost()
         }
         resetBadge()
         setupUI()
     }
     
+    // MARK: - Action
+    
+    @objc func handleDismissal() {
+        removeEffectView()
+    }
+    
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            fetchMatchedUser()
+            users.removeAll()
+            myPosts.removeAll()
+            tableView.reloadData()
         case 1:
+            fetchMatchedUser()
+        case 2:
             fetchMyPost()
 
         default: break
@@ -141,8 +155,43 @@ class MyPageTableViewController: UIViewController {
         }
     }
     
+    private func showHintView() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
+        hintView.addGestureRecognizer(tap)
+        
+        if UserDefaults.standard.object(forKey: HINT_END2) == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                
+                self.visualEffectView.frame = self.view.frame
+                self.view.addSubview(self.visualEffectView)
+                self.visualEffectView.alpha = 0
+                self.view.addSubview(self.hintView)
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.visualEffectView.alpha = 1
+                    self.hintView.alpha = 1
+                }, completion: nil)
+            }
+        }
+    }
+    
+    private func removeEffectView() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 0
+            self.hintView.alpha = 0
+        }) { (_) in
+            self.visualEffectView.removeFromSuperview()
+            UserDefaults.standard.set(true, forKey: HINT_END2)
+        }
+    }
+    
     private func setupUI() {
                 
+        hintView.alpha = 0
+        visualEffectView.alpha = 0
+        hintView.layer.cornerRadius = 15
+        hintLabel.text = "マイページからプロフィールの確認・編集やタイプ等の履歴の確認ができます。\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
@@ -188,9 +237,9 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         let myPost = myPosts[indexPath.row - 1]
         cell.post = myPost
         
-        if segmentControl.selectedSegmentIndex == 0 {
+        if segmentControl.selectedSegmentIndex == 1 {
             cell.configureUserCell(users[indexPath.row - 1])
-        } else {
+        } else if segmentControl.selectedSegmentIndex == 2 {
             cell.configureCurrentUserCell(currentUser)
         }
         

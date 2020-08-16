@@ -9,6 +9,8 @@
 import UIKit
 import JGProgressHUD
 import Firebase
+import FBSDKLoginKit
+import GoogleSignIn
 
 class WithdrawViewController: UIViewController, UITextFieldDelegate {
     
@@ -58,6 +60,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
         let email = emailTextField.text
         let password = passwordTextField.text
         let credential = EmailAuthProvider.credential(withEmail: email!, password: password!)
+//        let fbCredential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
         
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
             if let error = error {
@@ -134,7 +137,6 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        
         return (emailTextField.text != "" && passwordTextField.text != "")
     }
     

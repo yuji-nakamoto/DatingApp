@@ -40,7 +40,7 @@ class Like {
     
     class func fetchLikeUsers(completion: @escaping(Like) -> Void) {
         
-        Block.fetchBlock { (blockUserIDs) in
+        Block.fetchBlockSwipe { (blockUserIDs) in
             COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription) ")
@@ -63,7 +63,7 @@ class Like {
     
     class func fetchLikedUsers(completion: @escaping(Like) -> Void) {
         
-        Block.fetchBlock { (blockUserIDs) in
+        Block.fetchBlockSwipe { (blockUserIDs) in
             COLLECTION_LIKE.document(User.currentUserId()).collection(LIKED).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription) ")

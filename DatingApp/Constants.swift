@@ -136,6 +136,7 @@ public let PLACEHOLDERIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/da
 public let RCOMPLETION = "registerCompletion"
 public let TO_VERIFIED_VC = "toVerifiedVC"
 public let FEMALE = "female"
+public let MALE = "male"
 public let FOOTSTEP_ON = "footstep_on"
 public let LIKE_ON = "like_on"
 public let TYPE_ON = "type_on"
@@ -164,12 +165,9 @@ public let FACEBOOK2 = "facebook2"
 public let GOOGLE2 = "google2"
 public let DELETE = "delete"
 public let ALL = "all"
+public let HINT_END = "hint_end"
+public let HINT_END2 = "hint_end2"
 
 // MARK: - Notification
 
 public let NOTIFICATION = "notification"
-
-
-
-
-

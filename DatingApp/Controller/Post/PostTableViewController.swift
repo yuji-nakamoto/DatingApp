@@ -38,6 +38,10 @@ class PostTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
+        if UserDefaults.standard.object(forKey: REFRESH) != nil {
+            fetchPost()
+            UserDefaults.standard.removeObject(forKey: REFRESH)
+        }
     }
     
     // MARK: - Actions
@@ -176,7 +180,6 @@ class PostTableViewController: UIViewController {
             navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
-
 }
 
 extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -187,7 +190,7 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 {
+        if indexPath.row == 0 || indexPath.row == 9 || indexPath.row == 18 || indexPath.row == 27 || indexPath.row == 36 || indexPath.row == 45 || indexPath.row == 54 || indexPath.row == 63 || indexPath.row == 72 || indexPath.row == 81 || indexPath.row == 90 || indexPath.row == 99 {
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
@@ -207,14 +210,13 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: posts[indexPath.row - 1].uid)
     }
-
 }
 
 extension PostTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: "検索条件の結果、\n投稿は見つかりませんでした。", attributes: attributes)
     }
 

@@ -26,7 +26,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
@@ -49,7 +49,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-            
         }
     }
     
@@ -74,49 +73,49 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-            let dict = [UID: User.currentUserId(),
-                        EMAIL: self.emailTextField.text!] as [String : Any]
-            saveUser(userId: User.currentUserId(), withValue: dict)
-            self.toEnterNameVC()
+        //        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+        //            let dict = [UID: User.currentUserId(),
+        //                        EMAIL: self.emailTextField.text!] as [String : Any]
+        //            saveUser(userId: User.currentUserId(), withValue: dict)
+        //            self.toEnterNameVC()
+        //            self.activityIndicator.stopAnimating()
+        //        }
+        
+        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
+            if error == nil {
+                
+                if isEmailVerified {
+                    self.hud.textLabel.text = "メールの認証に成功しました。"
+                    self.hud.show(in: self.view)
+                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    self.hud.dismiss(afterDelay: 2.0)
+                    
+                    let dict = [UID: User.currentUserId(),
+                                EMAIL: self.emailTextField.text!] as [String : Any]
+                    saveUser(userId: User.currentUserId(), withValue: dict)
+                    
+                    self.toEnterNameVC()
+                } else {
+                    generator.notificationOccurred(.error)
+                    self.loginButton.isEnabled = true
+                    self.hud.textLabel.text = "メールを確認してください。"
+                    self.hud.show(in: self.view)
+                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                    self.hud.dismiss(afterDelay: 2.0)
+                }
+            } else {
+                self.loginButton.isEnabled = true
+                self.hud.textLabel.text = "メールアドレスかパスワードが間違えています。"
+                self.hud.show(in: self.view)
+                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
+            }
             self.activityIndicator.stopAnimating()
         }
-        
-//        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
-//            if error == nil {
-//
-//                if isEmailVerified {
-//                    self.hud.textLabel.text = "メールの認証に成功しました。"
-//                    self.hud.show(in: self.view)
-//                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-//                    self.hud.dismiss(afterDelay: 2.0)
-//
-//                    let dict = [UID: User.currentUserId(),
-//                                EMAIL: self.emailTextField.text!] as [String : Any]
-//                    saveUser(userId: User.currentUserId(), withValue: dict)
-//
-//                    self.toEnterNameVC()
-//                } else {
-//                    generator.notificationOccurred(.error)
-//                    self.loginButton.isEnabled = true
-//                    self.hud.textLabel.text = "メールを確認してください。"
-//                    self.hud.show(in: self.view)
-//                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
-//                    self.hud.dismiss(afterDelay: 2.0)
-//                }
-//            } else {
-//                self.loginButton.isEnabled = true
-//                self.hud.textLabel.text = error!.localizedDescription
-//                self.hud.show(in: self.view)
-//                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
-//                self.hud.dismiss(afterDelay: 2.0)
-//            }
-//            self.activityIndicator.stopAnimating()
-//        }
     }
     
     // MARK: - Helpers
-
+    
     private func setupUI() {
         
         descriptionLabel.text = "メールに記載しているURLを開き、認証を完了させてください。"
@@ -138,7 +137,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        
         return (emailTextField.text != "" && passwordTextField.text != "")
     }
     
@@ -152,5 +150,4 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             self.present(toEnterNameVC, animated: true, completion: nil)
         }
     }
-    
 }

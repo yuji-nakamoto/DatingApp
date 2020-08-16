@@ -84,7 +84,6 @@ class ProfileTableViewController: UIViewController {
             editButton.setTitleColor(UIColor.white, for: .normal)
         }
     }
-    
 }
 
 // MARK: - UITableViewDelegate

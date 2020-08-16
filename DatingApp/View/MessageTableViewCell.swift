@@ -24,9 +24,7 @@ class MessageTableViewCell: UITableViewCell {
             updateView()
         }
     }
-    
-    var read: Read!
-    
+        
     func updateView() {
         let text = message!.messageText
         let widthValue = text!.estimateFrameForText(text!).width + 40
@@ -113,5 +111,4 @@ class MessageTableViewCell: UITableViewCell {
         super.prepareForReuse()
         profileImageView.isHidden = true
     }
-
 }

@@ -625,5 +625,4 @@ class DetailTableViewCell: UITableViewCell {
         segBarSix5.alpha = 0.5
         segBarSix6.alpha = 0.5
     }
-    
 }

@@ -66,9 +66,11 @@ class ModalPostTableViewController: UITableViewController {
     private func selectedPickerKeyboard() {
         
         if genderLabel.text == "男性" {
-            UserDefaults.standard.set(true, forKey: FEMALE)
+            UserDefaults.standard.set(true, forKey: MALE)
+            UserDefaults.standard.set(true, forKey: REFRESH)
         } else {
-            UserDefaults.standard.removeObject(forKey: FEMALE)
+            UserDefaults.standard.removeObject(forKey: MALE)
+            UserDefaults.standard.set(true, forKey: REFRESH)
         }
         
         if residenceLabel.text == "こだわらない" {
@@ -118,7 +120,7 @@ class ModalPostTableViewController: UITableViewController {
     
     private func setupUserInfo(_ user: User) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             genderLabel.text = "男性"
         } else {
             genderLabel.text = "女性"
@@ -132,6 +134,7 @@ class ModalPostTableViewController: UITableViewController {
         pickerKeyBoard16.delegate = self
         pickerKeyBoard17.delegate = self
         tableView.tableFooterView = UIView()
+        genreLabel.text = "すべて"
         
         doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         doneButton.layer.shadowColor = UIColor.black.cgColor
@@ -154,7 +157,6 @@ class ModalPostTableViewController: UITableViewController {
             doneButton.setTitleColor(UIColor.white, for: .normal)
         }
     }
-
 }
 
 extension ModalPostTableViewController: PickerKeyboard3Delegate {

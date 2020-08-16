@@ -104,6 +104,4 @@ class OpinionInputTableViewController: UITableViewController, UITextViewDelegate
             countLabel.text = String(reportNum)
         }
     }
- 
 }
-

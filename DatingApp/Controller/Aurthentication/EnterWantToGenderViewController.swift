@@ -1,15 +1,15 @@
 //
-//  EnterGenderViewController.swift
+//  EnterWantToGenderViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/21.
+//  Created by yuji_nakamoto on 2020/08/16.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 import JGProgressHUD
 
-class EnterGenderViewController: UIViewController {
+class EnterWantToGenderViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -51,17 +51,15 @@ class EnterGenderViewController: UIViewController {
     
     // MARK: - Save
     
-    private func saveUserGender() {
+    private func saveUserDefault() {
         
-        let dict = [GENDER: genderLabel.text]
-        updateUser(withValue: dict as [String : Any])
         indicator.stopAnimating()
 
-        if genderLabel.text == "女性" {
-            UserDefaults.standard.set(true, forKey: FEMALE)
-            toEnterWantToGenderVC()
+        if genderLabel.text == "男性" {
+            UserDefaults.standard.set(true, forKey: MALE)
+            toEnterAgeVC()
         } else {
-            toEnterWantToGenderVC()
+            toEnterAgeVC()
         }
     }
     
@@ -71,10 +69,10 @@ class EnterGenderViewController: UIViewController {
         
         if genderLabel.text != "-" {
             nextButton.isEnabled = false
-            saveUserGender()
+            saveUserDefault()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "性別を選択してください。"
+            hud.textLabel.text = "出会いたい人の性別を選択してください。"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -90,32 +88,26 @@ class EnterGenderViewController: UIViewController {
         genderLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "性別を選択してください。\n性別はあとで変更することができません。"
+        descriptionLabel.text = "出会いたい人の性別を選択してください。\nあとで変更することができます。"
         nextButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        
-        if UserDefaults.standard.object(forKey: FACEBOOK) != nil || UserDefaults.standard.object(forKey: GOOGLE) != nil {
-            backButton.isHidden = true
-        } else {
-            backButton.isHidden = false
-        }
     }
     
     // MARK: - Navigation
     
-    private func toEnterWantToGenderVC() {
+    private func toEnterAgeVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterWantToGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterWantToGenderVC")
-            self.present(toEnterWantToGenderVC, animated: true, completion: nil)
+            let toEnterAgeVC = storyboard.instantiateViewController(withIdentifier: "EnterAgeVC")
+            self.present(toEnterAgeVC, animated: true, completion: nil)
         }
     }
 }
 
-extension EnterGenderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension EnterWantToGenderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

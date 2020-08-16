@@ -29,7 +29,6 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Actions
-
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
@@ -43,7 +42,6 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-            
         }
     }
     
@@ -97,7 +95,6 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        
         return emailTextField.text != ""
     }
 }

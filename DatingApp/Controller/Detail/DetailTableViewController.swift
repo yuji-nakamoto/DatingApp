@@ -223,8 +223,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         if segue.identifier == "MessageVC" {
             let messageVC = segue.destination as! MessageTebleViewController
-            let userId = sender as! String
-            messageVC.userId = userId
+            let toUserId = sender as! String
+            messageVC.toUserId = toUserId
         }
         
         if segue.identifier == "ReportVC" {

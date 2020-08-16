@@ -76,7 +76,7 @@ class Message {
     
     class func fetchInbox(completion: @escaping([Inbox]) -> Void) {
         var inboxArray = [Inbox]()
-        Block.fetchBlock { (blockUserIDs) in
+        Block.fetchBlockSwipe { (blockUserIDs) in
             COLLECTION_INBOX.document(User.currentUserId()).collection("resent-messages").order(by: TIMESTAMP).addSnapshotListener { (snapshot, error) in
                 if let error = error {
                     print("Error fetch conversation: \(error.localizedDescription)")

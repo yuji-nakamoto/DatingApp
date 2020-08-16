@@ -92,5 +92,4 @@ class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
- 
 }

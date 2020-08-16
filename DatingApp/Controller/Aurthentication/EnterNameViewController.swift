@@ -126,5 +126,4 @@ class EnterNameViewController: UIViewController {
             self.present(toEnterProfileImageVC, animated: true, completion: nil)
         }
     }
-    
 }

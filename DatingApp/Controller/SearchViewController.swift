@@ -88,6 +88,12 @@ class SearchViewController: UIViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.currentUser = user
+            if self.currentUser.gender == "女性" {
+                UserDefaults.standard.set(true, forKey: FEMALE)
+            } else {
+                UserDefaults.standard.removeObject(forKey: FEMALE)
+            }
+            
             let residence = self.currentUser.residenceSerch
             if residence == "こだわらない" {
                 User.fetchNationwide(self.currentUser) { (users) in
@@ -199,7 +205,7 @@ extension SearchViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: "検索条件の結果から\n登録しているユーザーは\n見つかりませんでした。", attributes: attributes)
     }
     

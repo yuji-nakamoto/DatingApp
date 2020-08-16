@@ -261,7 +261,7 @@ class SettingTableViewController: UITableViewController {
             matchLabel.text = "マッチング通知を受信しない"
         }
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             genderLabel.text = "男性"
         } else {
             genderLabel.text = "女性"

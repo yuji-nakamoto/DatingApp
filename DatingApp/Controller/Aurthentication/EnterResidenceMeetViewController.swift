@@ -108,6 +108,7 @@ class EnterResidenceMeetController: UIViewController {
             }
         }
     }
+    
     private func createTypeCounter(ref: DocumentReference, numShards: Int) {
         ref.setData(["numShards": numShards]){ (err) in
             for i in 0...numShards {
@@ -150,6 +151,7 @@ class EnterResidenceMeetController: UIViewController {
             UserDefaults.standard.set(true, forKey: MESSAGE_ON)
             UserDefaults.standard.set(true, forKey: LIKE_ON)
             UserDefaults.standard.set(true, forKey: TYPE_ON)
+            UserDefaults.standard.set(true, forKey: MATCH_ON)
             UserDefaults.standard.set(true, forKey: WHITE)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")

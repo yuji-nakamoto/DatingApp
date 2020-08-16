@@ -200,7 +200,6 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
             navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         }
     }
-    
 }
 
 extension SendPostTableViewController: UITextViewDelegate {

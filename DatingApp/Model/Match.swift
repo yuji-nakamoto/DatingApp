@@ -27,7 +27,7 @@ class Match {
     
     class func fetchMatchUsers(completion: @escaping(Match) -> Void) {
         
-        Block.fetchBlock { (blockUserIDs) in
+        Block.fetchBlockSwipe { (blockUserIDs) in
             COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: fetch match user: \(error.localizedDescription)")
@@ -54,6 +54,9 @@ class Match {
         COLLECTION_MATCH.document(toUserId).collection(ISMATCH).document(User.currentUserId()).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 print("Error fetch match: \(error.localizedDescription)")
+            }
+            if snapshot?.data() == nil {
+                completion(Match(dict: [ISMATCH: 0]))
             }
             guard let data = snapshot?.data() else { return }
             let match = Match(dict: data)

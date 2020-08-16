@@ -47,7 +47,7 @@ class Post {
     
     class func fetchPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             
             if UserDefaults.standard.object(forKey: ALL) != nil {
                 let postRef = COLLECTION_POSTS
@@ -124,7 +124,7 @@ class Post {
     
     class func fetchGenreLoverPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             
             if UserDefaults.standard.object(forKey: ALL) != nil {
                 let postRef = COLLECTION_POSTS
@@ -208,7 +208,7 @@ class Post {
     
     class func fetchGenreFriendPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             
             if UserDefaults.standard.object(forKey: ALL) != nil {
                 let postRef = COLLECTION_POSTS
@@ -292,7 +292,7 @@ class Post {
     
     class func fetchGenreMailFriendPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             
             if UserDefaults.standard.object(forKey: ALL) != nil {
                 let postRef = COLLECTION_POSTS
@@ -376,7 +376,7 @@ class Post {
     
     class func fetchGenrePlayPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             
             if UserDefaults.standard.object(forKey: ALL) != nil {
                 let postRef = COLLECTION_POSTS
@@ -460,7 +460,7 @@ class Post {
     
     class func fetchGenreFreePosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
-        if UserDefaults.standard.object(forKey: FEMALE) != nil {
+        if UserDefaults.standard.object(forKey: MALE) != nil {
             
             if UserDefaults.standard.object(forKey: ALL) != nil {
                 let postRef = COLLECTION_POSTS
@@ -606,5 +606,4 @@ class Post {
             }
         }
     }
-
 }

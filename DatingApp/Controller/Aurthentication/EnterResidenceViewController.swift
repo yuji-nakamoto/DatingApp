@@ -100,7 +100,6 @@ class EnterResidenceViewController: UIViewController {
             self.present(toEnterResidenceMeetVC, animated: true, completion: nil)
         }
     }
-    
 }
 
 extension EnterResidenceViewController: UIPickerViewDelegate, UIPickerViewDataSource {

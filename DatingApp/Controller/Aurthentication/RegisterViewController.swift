@@ -43,7 +43,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func doneButtonPressed(_ sender: Any) {
         
         if textFieldHaveText() {
@@ -55,7 +54,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-            
         }
     }
     
@@ -119,7 +117,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        
         return (emailTextField.text != "" && passwordTextField.text != "")
     }
     
@@ -131,5 +128,4 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         let verifiedVC = storyboard.instantiateViewController(withIdentifier: "VerifiedVC")
         self.present(verifiedVC, animated: true, completion: nil)
     }
-    
 }

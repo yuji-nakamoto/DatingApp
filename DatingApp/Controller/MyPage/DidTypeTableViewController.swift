@@ -177,7 +177,6 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
             backView.alpha = 0.85
         }
     }
-
 }
 
 // MARK: - Table view data source
@@ -226,14 +225,13 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
         }
         performSegue(withIdentifier: "DetailVC", sender: typeUsers[indexPath.row].uid)
     }
-    
 }
 
 extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: "タイプされた、\nタイプした履歴が、\nこちらに表示されます。", attributes: attributes)
     }
 

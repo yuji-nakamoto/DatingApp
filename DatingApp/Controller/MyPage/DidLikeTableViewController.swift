@@ -162,7 +162,6 @@ class DidLikeTableViewController: UIViewController {
             backView.alpha = 0.85
         }
     }
-
 }
 
 // MARK: - Table view data source
@@ -193,7 +192,7 @@ extension DidLikeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: "いいねされた、\nいいねした履歴が、\nこちらに表示されます。", attributes: attributes)
     }
 

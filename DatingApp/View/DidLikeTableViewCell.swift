@@ -191,5 +191,4 @@ class DidLikeTableViewCell: UITableViewCell {
         onlineView.layer.borderWidth = 2
         onlineView.layer.borderColor = UIColor.white.cgColor
     }
-    
 }

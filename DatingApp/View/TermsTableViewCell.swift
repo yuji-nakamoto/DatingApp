@@ -98,16 +98,4 @@ class TermsTableViewCell: UITableViewCell {
 
         terms10Label.text = "本規約は日本語を定文とし、その準拠法は日本法とします。本サービスに起因または関連して利用者と当社のと間に生じた紛争については東京地方裁判所または東京簡易裁判所を第一審の専属的合意管轄裁判所とします。かかる管轄裁判所で得られた勝訴判決は、いずれの国の裁判所においても執行可能とします。"
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

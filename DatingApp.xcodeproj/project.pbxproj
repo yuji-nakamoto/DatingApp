@@ -67,6 +67,7 @@
 		834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */; };
 		834C32D424E3BD10003330B1 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D324E3BD10003330B1 /* Block.swift */; };
 		834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */; };
+		834FD55624E973D900E4BDCB /* EnterWantToGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */; };
 		835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */; };
 		835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FD24D41458008D1170 /* MessageTebleViewController.swift */; };
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
@@ -178,6 +179,7 @@
 		834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewController.swift; sourceTree = "<group>"; };
 		834C32D324E3BD10003330B1 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotVerifiedViewController.swift; sourceTree = "<group>"; };
+		834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWantToGenderViewController.swift; sourceTree = "<group>"; };
 		835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxCollectionViewController.swift; sourceTree = "<group>"; };
 		835013FD24D41458008D1170 /* MessageTebleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTebleViewController.swift; sourceTree = "<group>"; };
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				838071F424C6E541008BAA2C /* EnterNameViewController.swift */,
 				834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */,
 				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
+				834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */,
 				838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */,
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
@@ -689,6 +692,7 @@
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
+				834FD55624E973D900E4BDCB /* EnterWantToGenderViewController.swift in Sources */,
 				834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				8348E76F24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift in Sources */,

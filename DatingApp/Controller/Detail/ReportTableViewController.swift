@@ -125,9 +125,7 @@ class ReportTableViewController: UITableViewController {
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
-        }
-        
-        
+        }        
     }
     
     private func setupUserInfo(_ user: User, _ currentUser: User) {

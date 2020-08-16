@@ -24,7 +24,6 @@ class GenreTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         selectedGenre()
     }
     
@@ -123,5 +122,4 @@ class GenreTableViewController: UITableViewController {
             selectedGenre()
         }
     }
-    
 }

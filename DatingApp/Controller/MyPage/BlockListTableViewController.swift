@@ -17,7 +17,6 @@ class BlockListTableViewController: UIViewController {
     @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     private var users = [User]()
     private var blockUsers = [Block]()
@@ -119,7 +118,6 @@ class BlockListTableViewController: UIViewController {
             tableView.setEditing(editing, animated: animated)
         }
     }
-
 }
 
 // MARK: - Table view data source
@@ -162,7 +160,7 @@ extension BlockListTableViewController: EmptyDataSetSource, EmptyDataSetDelegate
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         return NSAttributedString(string: "ブロックしたお相手は\nまだいません。", attributes: attributes)
     }
 
@@ -170,4 +168,3 @@ extension BlockListTableViewController: EmptyDataSetSource, EmptyDataSetDelegate
         return NSAttributedString(string: "プロフィール画面右上の\nボタンからブロックができます")
     }
 }
-

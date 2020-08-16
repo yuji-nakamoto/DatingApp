@@ -19,6 +19,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var hud = JGProgressHUD(style: .dark)
     
@@ -42,15 +43,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-            
         }
     }
     
     @IBAction func segmentedTaped(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: UserDefaults.standard.removeObject(forKey: FEMALE); UserDefaults.standard.synchronize()
-        case 1: UserDefaults.standard.set(true, forKey: FEMALE); UserDefaults.standard.synchronize()
+        case 0: UserDefaults.standard.removeObject(forKey: MALE)
+        case 1: UserDefaults.standard.set(true, forKey: MALE)
         default: break
         }
     }
@@ -61,39 +61,40 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-            UserDefaults.standard.set(true, forKey: WHITE)
-            
-            User.isOnline(online: "online")
-            self.toTabBerVC()
-            self.activityIndicator.stopAnimating()
-        }
-        
-        //        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
-        //            if error == nil {
+        //        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+        //            UserDefaults.standard.set(true, forKey: WHITE)
         //
-        //                if isEmailVerified {
-        //                    self.hud.textLabel.text = "ログインに成功しました。"
-        //                    self.hud.show(in: self.view)
-        //                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        //                    self.hud.dismiss(afterDelay: 2.0)
-        //                    UserDefaults.standard.set(true, forKey: WHITE)
-        //                    self.toTabBerVC()
-        //                } else {
-        //                    generator.notificationOccurred(.error)
-        //                    self.hud.textLabel.text = "認証メールを確認してください。"
-        //                    self.hud.show(in: self.view)
-        //                    hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        //                    hud.dismiss(afterDelay: 2.0)
-        //                }
-        //            } else {
-        //                self.hud.textLabel.text = error!.localizedDescription
-        //                self.hud.show(in: self.view)
-        //                hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        //                hud.dismiss(afterDelay: 2.0)
-        //            }
+        //            User.isOnline(online: "online")
+        //            self.toTabBerVC()
         //            self.activityIndicator.stopAnimating()
         //        }
+        
+        AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
+            if error == nil {
+                
+                if isEmailVerified {
+                    self.hud.textLabel.text = "ログインに成功しました。"
+                    self.hud.show(in: self.view)
+                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    self.hud.dismiss(afterDelay: 2.0)
+                    User.isOnline(online: "online")
+                    UserDefaults.standard.set(true, forKey: WHITE)
+                    self.toTabBerVC()
+                } else {
+                    generator.notificationOccurred(.error)
+                    self.hud.textLabel.text = "認証メールを確認してください。"
+                    self.hud.show(in: self.view)
+                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                    self.hud.dismiss(afterDelay: 2.0)
+                }
+            } else {
+                self.hud.textLabel.text = "メールアドレスかパスワードが間違えています。"
+                self.hud.show(in: self.view)
+                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
+            }
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     // MARK: - Helpers
@@ -105,6 +106,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            segmentControl.selectedSegmentIndex = 1
+        } else {
+            segmentControl.selectedSegmentIndex = 0
+        }
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -119,7 +126,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        
         return (emailTextField.text != "" && passwordTextField.text != "")
     }
     
@@ -129,11 +135,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             UserDefaults.standard.set(true, forKey: RCOMPLETION)
-            UserDefaults.standard.synchronize()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
             self.present(toTabBerVC, animated: true, completion: nil)
         }
     }
-    
 }
