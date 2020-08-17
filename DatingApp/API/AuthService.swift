@@ -123,6 +123,7 @@ struct AuthService {
                 UserDefaults.standard.removeObject(forKey: FACEBOOK2)
                 UserDefaults.standard.removeObject(forKey: HINT_END)
                 UserDefaults.standard.removeObject(forKey: HINT_END2)
+                UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
                 UserDefaults.standard.removeObject(forKey: MALE)
                 UserDefaults.standard.removeObject(forKey: FEMALE)
 

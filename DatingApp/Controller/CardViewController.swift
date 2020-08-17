@@ -30,7 +30,12 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     @IBOutlet weak var emptyLabel2: UILabel!
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var placeholderImageView: UIImageView!
+    @IBOutlet weak var tutorialSwipeView: UIView!
+    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var nopeLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+
     private var cards = [Card]()
     private var users = [User]()
     private var user: User?
@@ -48,6 +53,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         super.viewDidLoad()
         setupUI()
         setupBanner()
+        showTutorialView()
         interstitial = createAndLoadIntersitial()
     }
     
@@ -144,6 +150,10 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     @objc func handleDismissal() {
         removeEffectView()
+    }
+    
+    @objc func handleDismissal2() {
+        removeEffectView2()
     }
     
     @objc func pan(gesture: UIPanGestureRecognizer) {
@@ -319,6 +329,17 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         }
     }
     
+    private func removeEffectView2() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 0
+            self.tutorialSwipeView.alpha = 0
+        }) { (_) in
+            self.visualEffectView.removeFromSuperview()
+            UserDefaults.standard.set(true, forKey: TUTORIAL_END)
+        }
+    }
+    
     func incrementLikeCounter(ref: DocumentReference, numShards: Int) {
         
         let shardId = Int(arc4random_uniform(UInt32(numShards)))
@@ -448,6 +469,16 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         likeButtonView.layer.cornerRadius = 55 / 2
         typeButtonView.layer.cornerRadius = 55 / 2
         nopeButtonView.layer.cornerRadius = 55 / 2
+        placeholderImageView.layer.cornerRadius = 15
+        tutorialSwipeView.layer.cornerRadius = 15
+        tutorialSwipeView.alpha = 0
+        
+        likeLabel.backgroundColor = .systemOrange
+        nopeLabel.backgroundColor = .systemIndigo
+        typeLabel.backgroundColor = .systemPink
+        likeLabel.layer.cornerRadius = 31.5 / 2
+        nopeLabel.layer.cornerRadius = 31.5 / 2
+        typeLabel.layer.cornerRadius = 30 / 2
         
         likeButtonView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         likeButtonView.layer.shadowColor = UIColor.black.cgColor
@@ -503,6 +534,28 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 self.matchLabel.text = "\(cardUser.username!)さんとマッチしました！"
                 self.matchedUserView.sd_setImage(with: URL(string: cardUser.profileImageUrl1), completed: nil)
             }, completion: nil)
+        }
+    }
+    
+    private func showTutorialView() {
+        
+        if UserDefaults.standard.object(forKey: TUTORIAL_END) == nil {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal2))
+            visualEffectView.addGestureRecognizer(tap)
+            tutorialSwipeView.addGestureRecognizer(tap)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                
+                self.visualEffectView.frame = self.view.frame
+                self.view.addSubview(self.visualEffectView)
+                self.visualEffectView.alpha = 0
+                self.view.addSubview(self.tutorialSwipeView)
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.visualEffectView.alpha = 1
+                    self.tutorialSwipeView.alpha = 1
+                    
+                }, completion: nil)
+            }
         }
     }
     

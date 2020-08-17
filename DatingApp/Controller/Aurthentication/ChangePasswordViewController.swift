@@ -117,12 +117,10 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             backButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
             
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            doneButton.backgroundColor = UIColor.white
-            doneButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            doneButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
-            doneButton.layer.borderWidth = 1
-            backButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            doneButton.backgroundColor = UIColor(named: O_GREEN)
+            doneButton.setTitleColor(UIColor.white, for: .normal)
+            backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+            backButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
             
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             doneButton.backgroundColor = UIColor(named: O_DARK)

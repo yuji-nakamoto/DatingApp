@@ -21,16 +21,13 @@ class InboxTableViewController: UIViewController {
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
+    private let refresh = UIRefreshControl()
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         fetchInbox()
-        navigationItem.title = "メッセージ"
-        tableView.tableFooterView = UIView()
-        tableView.separatorStyle = .none
         setupBanner()
     }
     
@@ -43,10 +40,16 @@ class InboxTableViewController: UIViewController {
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: navigationController?.popViewController(animated: true)
+        case 0: toInboxCVC()
         case 1: print("")
+        case 2: performSegue(withIdentifier: "FeedVC", sender: nil)
         default: break
         }
+    }
+    
+    @objc func refreshCollectionView(){
+        fetchInbox()
+        refresh.endRefreshing()
     }
     
     // MARK: - Fetch
@@ -92,9 +95,13 @@ class InboxTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        
+        navigationItem.title = "メッセージ"
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
@@ -109,6 +116,13 @@ class InboxTableViewController: UIViewController {
             backView.backgroundColor = UIColor(named: O_DARK)
             backView.alpha = 0.85
         }
+    }
+    
+    private func toInboxCVC() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let inboxCVC = storyboard.instantiateViewController(withIdentifier: "InboxCVC") as! InboxCollectionViewController
+        navigationController?.pushViewController(inboxCVC, animated: false)
     }
 }
 

@@ -20,9 +20,6 @@ class MyTabBarController: UITabBarController {
         setupColor()
     }
 
-    
-    // MARK - Actions
-
     // MARK: - Helpers
     
     public func setupColor() {
@@ -36,12 +33,11 @@ class MyTabBarController: UITabBarController {
             tabBar.tintColor = UIColor(named: O_BLACK)
             tabBar.barTintColor = UIColor(named: O_GREEN)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            tabBar.tintColor = UIColor(named: O_BLACK)
+            tabBar.tintColor = UIColor(named: O_GREEN)
             tabBar.barTintColor = UIColor.white
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             tabBar.tintColor = UIColor.white
             tabBar.barTintColor = UIColor(named: O_DARK)
         }
     }
-
 }

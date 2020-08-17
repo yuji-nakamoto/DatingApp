@@ -21,11 +21,13 @@ class MyPageTableViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var hintView: UIView!
     @IBOutlet weak var hintLabel: UILabel!
-    
+    @IBOutlet weak var closeButton: UIButton!
+
     private var currentUser = User()
     private var user = User()
     private var myPosts = [Post]()
     private var users = [User]()
+    private var comment = Comment()
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     // MARK: - Lifecycle
@@ -42,17 +44,16 @@ class MyPageTableViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if segmentControl.selectedSegmentIndex == 1 {
-            fetchMatchedUser()
-        } else if segmentControl.selectedSegmentIndex == 2 {
             fetchMyPost()
         }
+        fetchComment()
         resetBadge()
         setupUI()
     }
     
     // MARK: - Action
     
-    @objc func handleDismissal() {
+    @IBAction func closeButtonPressed(_ sender: Any) {
         removeEffectView()
     }
     
@@ -64,8 +65,6 @@ class MyPageTableViewController: UIViewController {
             myPosts.removeAll()
             tableView.reloadData()
         case 1:
-            fetchMatchedUser()
-        case 2:
             fetchMyPost()
 
         default: break
@@ -106,37 +105,11 @@ class MyPageTableViewController: UIViewController {
         }
     }
     
-    private func fetchMatchedUser() {
+    private func fetchComment() {
         
-        indicator.startAnimating()
-        segmentControl.isEnabled = false
-        users.removeAll()
-        myPosts.removeAll()
-        tableView.reloadData()
-
-        Match.fetchMatchUsers { (match) in
-            if match.uid == "" {
-                self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
-                return
-            }
-            User.fetchUser(match.uid) { (user) in
-                self.user = user
-            }
-            guard let uid = match.uid else { return }
-            Post.fetchFeed(matchedUserId: uid) { (feed) in
-                if feed.uid == "" {
-                    self.segmentControl.isEnabled = true
-                    self.indicator.stopAnimating()
-                    return
-                }
-                self.fetchUsers(uid) {
-                    self.myPosts.insert(feed, at: 0)
-                    self.tableView.reloadData()
-                    self.segmentControl.isEnabled = true
-                    self.indicator.stopAnimating()
-                }
-            }
+        Comment.fetchComment(toUserId: User.currentUserId()) { (comment) in
+            self.comment = comment
+            self.tableView.reloadData()
         }
     }
     
@@ -157,11 +130,8 @@ class MyPageTableViewController: UIViewController {
     
     private func showHintView() {
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
-        hintView.addGestureRecognizer(tap)
-        
         if UserDefaults.standard.object(forKey: HINT_END2) == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 
                 self.visualEffectView.frame = self.view.frame
                 self.view.addSubview(self.visualEffectView)
@@ -191,7 +161,8 @@ class MyPageTableViewController: UIViewController {
         hintView.alpha = 0
         visualEffectView.alpha = 0
         hintView.layer.cornerRadius = 15
-        hintLabel.text = "マイページからプロフィールの確認・編集やタイプ等の履歴の確認ができます。\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"
+        closeButton.layer.cornerRadius = 40 / 2
+        hintLabel.text = "マイページからプロフィールの確認・編集やタイプ等の履歴の確認ができます。\n\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
@@ -229,6 +200,8 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MyPageTableViewCell
             cell.configureCell(currentUser)
             cell.cogAnimation()
+            cell.myPageVC = self
+            cell.configureCommentCell(comment)
             return cell
         }
         
@@ -239,10 +212,7 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         if segmentControl.selectedSegmentIndex == 1 {
             cell.configureUserCell(users[indexPath.row - 1])
-        } else if segmentControl.selectedSegmentIndex == 2 {
-            cell.configureCurrentUserCell(currentUser)
-        }
-        
+        } 
         return cell
     }
 }

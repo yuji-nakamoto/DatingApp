@@ -139,7 +139,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     private func setupUI() {
         
-        descriptionLabel.text = "DatingAppは完全無料の\nマッチングアプリです。"
+        descriptionLabel.text = "フリーでマッチングしちゃおう！\n完全無料のマッチングアプリ、\nフリマへようこそ！"
         facebookButton.layer.cornerRadius = 50 / 2
         googleButton.layer.cornerRadius = 50 / 2
         mailButton.layer.cornerRadius = 50 / 2

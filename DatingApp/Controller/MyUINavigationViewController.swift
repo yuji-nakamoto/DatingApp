@@ -45,5 +45,4 @@ class MyUINavigationViewController: UINavigationController {
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
     }
-
 }

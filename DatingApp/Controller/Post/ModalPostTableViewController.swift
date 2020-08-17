@@ -136,10 +136,10 @@ class ModalPostTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         genreLabel.text = "すべて"
         
-        doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        doneButton.layer.shadowColor = UIColor.black.cgColor
-        doneButton.layer.shadowOpacity = 0.3
-        doneButton.layer.shadowRadius = 4
+//        doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+//        doneButton.layer.shadowColor = UIColor.black.cgColor
+//        doneButton.layer.shadowOpacity = 0.3
+//        doneButton.layer.shadowRadius = 4
         doneButton.layer.cornerRadius = 15
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
@@ -149,8 +149,8 @@ class ModalPostTableViewController: UITableViewController {
             doneButton.backgroundColor = UIColor(named: O_GREEN)
             doneButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            doneButton.backgroundColor = UIColor.white
-            doneButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            doneButton.backgroundColor = UIColor(named: O_GREEN)
+            doneButton.setTitleColor(UIColor.white, for: .normal)
             doneButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             doneButton.backgroundColor = UIColor(named: O_DARK)

@@ -15,12 +15,24 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var redmark: UIView!
     @IBOutlet weak var cogImageView: UIImageView!
+    @IBOutlet weak var commentView: UIView!
+    @IBOutlet weak var commentLabel: UILabel!
     
+    var myPageVC: MyPageTableViewController?
+
     func configureCell(_ user: User?) {
         
         if user?.uid != nil {
             profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
             nameLabel.text = user!.username
+        }
+    }
+    
+    func configureCommentCell(_ comment: Comment) {
+        if comment.text == "" {
+            commentLabel.text = "挨拶や今日の出来事など入力してみよう"
+        } else {
+            commentLabel.text = comment.text
         }
     }
 
@@ -32,6 +44,13 @@ class MyPageTableViewCell: UITableViewCell {
         profileImageView.layer.cornerRadius = 100 / 2
         let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 270)
         profileImageView.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toCommentVC))
+        commentView.addGestureRecognizer(tap)
+    }
+    
+    @objc func toCommentVC() {
+        myPageVC?.performSegue(withIdentifier: "CommentVC", sender: nil)
     }
     
     func cogAnimation() {

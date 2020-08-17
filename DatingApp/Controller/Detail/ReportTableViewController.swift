@@ -118,10 +118,8 @@ class ReportTableViewController: UITableViewController {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            sendButton.backgroundColor = UIColor.white
-            sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            sendButton.layer.borderColor = UIColor.systemGray3.cgColor
-            sendButton.layer.borderWidth = 2
+            sendButton.backgroundColor = UIColor(named: O_GREEN)
+            sendButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)

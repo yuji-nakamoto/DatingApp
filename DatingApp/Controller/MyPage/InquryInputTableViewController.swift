@@ -86,10 +86,8 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
             saveButton.backgroundColor = UIColor(named: O_GREEN)
             saveButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            saveButton.backgroundColor = UIColor.white
-            saveButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            saveButton.layer.borderColor = UIColor.systemGray3.cgColor
-            saveButton.layer.borderWidth = 1
+            saveButton.backgroundColor = UIColor(named: O_GREEN)
+            saveButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             saveButton.backgroundColor = UIColor(named: O_DARK)
             saveButton.setTitleColor(UIColor.white, for: .normal)

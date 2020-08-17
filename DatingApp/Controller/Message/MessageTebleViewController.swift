@@ -28,6 +28,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var hintLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
     
     private var user = User()
     private var currentUser = User()
@@ -65,8 +67,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     }
     
     // MARK: - Action
-    
-    @objc func handleDismissal() {
+
+    @IBAction func closeButtonPressed(_ sender: Any) {
         removeEffectView()
     }
     
@@ -239,11 +241,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func hintView() {
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
-        backView.addGestureRecognizer(tap)
-        
         if UserDefaults.standard.object(forKey: FEMALE) == nil && UserDefaults.standard.object(forKey: HINT_END) == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 
                 self.visualEffectView.frame = self.view.frame
                 self.view.addSubview(self.visualEffectView)
@@ -285,10 +284,12 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         tableView.separatorStyle = .none
         sendButton.layer.cornerRadius = 5
         backView.layer.cornerRadius = 15
+        closeButton.layer.cornerRadius = 40 / 2
         
         textField.delegate = self
         sendButton.isEnabled = false
         sendButton.alpha = 0.7
+        hintLabel.text = "メッセージを送ると広告が流れます。\n\nしかし、マッチしたお相手となら広告は流れません。"
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -311,8 +312,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             backButton.tintColor = UIColor(named: O_BLACK)
 
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            sendButton.backgroundColor = UIColor.systemGray4
-            sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            sendButton.backgroundColor = UIColor(named: O_GREEN)
+            sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = .white
             navBar.alpha = 0.85
             nameLabel.textColor = UIColor(named: O_BLACK)

@@ -18,8 +18,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var resendButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var termsButton: UIButton!
     
     private var hud = JGProgressHUD(style: .dark)
     
@@ -57,6 +58,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func termsButtonPressed(_ sender: Any) {
+    }
+    
+    
     // MARK: - User
     
     private func createUser() {
@@ -90,9 +95,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         
         if UserDefaults.standard.object(forKey: TO_VERIFIED_VC) != nil {
-            resendButton.isHidden = false
+            loginButton.isHidden = false
         } else {
-            resendButton.isHidden = true
+            loginButton.isHidden = true
         }
         
         descriptionLabel.text = "メールアドレスとパスワードを入力して、\nアカウントを作成してください。"
@@ -100,9 +105,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        resendButton.layer.cornerRadius = 50 / 2
-        resendButton.layer.borderWidth = 1
-        resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        loginButton.layer.cornerRadius = 50 / 2
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        termsButton.layer.cornerRadius = 50 / 2
+        termsButton.layer.borderWidth = 1
+        termsButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
 
         emailTextField.delegate = self
         passwordTextField.delegate = self

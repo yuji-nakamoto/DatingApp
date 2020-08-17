@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class StartViewController: UIViewController {
+class StartViewController: UIViewController, GADInterstitialDelegate {
     
     // MARK: - Lifecycle
-
+    
     @IBOutlet weak var logoLabel: UILabel!
+    private var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupColor()
         autoLogin()
+        interstitial = createAndLoadIntersitial()
     }
     
     // MARK: - Helpers
@@ -26,7 +29,13 @@ class StartViewController: UIViewController {
     private func autoLogin() {
         
         if UserDefaults.standard.object(forKey: RCOMPLETION) != nil {
-            toTabBerVC()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                if self.interstitial.isReady {
+                    self.interstitial.present(fromRootViewController: self)
+                } else {
+                    print("Error interstitial")
+                }
+            }
             return
         }
         toSelectLoginVC()
@@ -46,11 +55,9 @@ class StartViewController: UIViewController {
     
     private func toTabBerVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
-            self.present(toTabBerVC, animated: true, completion: nil)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
+        self.present(toTabBerVC, animated: true, completion: nil)
     }
     
     private func toSelectLoginVC() {
@@ -60,5 +67,18 @@ class StartViewController: UIViewController {
             let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
             self.present(toSelectLoginVC, animated: true, completion: nil)
         }
+    }
+    
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+        toTabBerVC()
     }
 }

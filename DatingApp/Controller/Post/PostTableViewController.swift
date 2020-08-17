@@ -167,7 +167,7 @@ class PostTableViewController: UIViewController {
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
             plusButton.tintColor = UIColor(named: O_GREEN)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            plusButton.tintColor = .white
+            plusButton.tintColor = UIColor(named: O_GREEN)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             plusButton.tintColor = UIColor(named: O_DARK)
         }

@@ -61,17 +61,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        //        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-        //            UserDefaults.standard.set(true, forKey: WHITE)
-        //
-        //            User.isOnline(online: "online")
-        //            self.toTabBerVC()
-        //            self.activityIndicator.stopAnimating()
-        //        }
+//                AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+//                    UserDefaults.standard.set(true, forKey: WHITE)
+//        
+//                    User.isOnline(online: "online")
+//                    self.toTabBerVC()
+//                    self.activityIndicator.stopAnimating()
+//                }
         
         AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
             if error == nil {
-                
+
                 if isEmailVerified {
                     self.hud.textLabel.text = "ログインに成功しました。"
                     self.hud.show(in: self.view)

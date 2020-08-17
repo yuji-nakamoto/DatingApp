@@ -79,10 +79,8 @@ class BlockTableViewController: UITableViewController {
             blockButton.backgroundColor = UIColor(named: O_GREEN)
             blockButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            blockButton.backgroundColor = UIColor.white
-            blockButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            blockButton.layer.borderColor = UIColor.systemGray3.cgColor
-            blockButton.layer.borderWidth = 1
+            blockButton.backgroundColor = UIColor(named: O_GREEN)
+            blockButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             blockButton.backgroundColor = UIColor(named: O_DARK)
             blockButton.setTitleColor(UIColor.white, for: .normal)

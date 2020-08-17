@@ -11,6 +11,10 @@
 		831E392424C9CBE00043AA76 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392324C9CBE00043AA76 /* DetailTableViewController.swift */; };
 		831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */; };
 		831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392B24CA46260043AA76 /* ProfileTableViewController.swift */; };
+		8348826424EA95E300054DF7 /* corp_round_v1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8348826324EA95E300054DF7 /* corp_round_v1.ttf */; };
+		8348826624EAA42000054DF7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826524EAA42000054DF7 /* Comment.swift */; };
+		8348826824EABAFE00054DF7 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826724EABAFE00054DF7 /* FeedTableViewController.swift */; };
+		8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */; };
 		8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */; };
 		8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */; };
 		8348B5DF24D2A0B90000A187 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */; };
@@ -123,6 +127,10 @@
 		831E392324C9CBE00043AA76 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		8348826324EA95E300054DF7 /* corp_round_v1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = corp_round_v1.ttf; sourceTree = "<group>"; };
+		8348826524EAA42000054DF7 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		8348826724EABAFE00054DF7 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderTableViewController.swift; sourceTree = "<group>"; };
 		8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceMeetViewController.swift; sourceTree = "<group>"; };
 		8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
@@ -202,7 +210,7 @@
 		83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard16.swift; sourceTree = "<group>"; };
 		8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSearchTableViewController.swift; sourceTree = "<group>"; };
-		838071C624C608F5008BAA2C /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		838071C624C608F5008BAA2C /* フリマ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "フリマ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		838071D024C608F5008BAA2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -326,7 +334,7 @@
 		838071C724C608F5008BAA2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				838071C624C608F5008BAA2C /* DatingApp.app */,
+				838071C624C608F5008BAA2C /* フリマ.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,6 +354,7 @@
 				838071ED24C6338E008BAA2C /* Extension.swift */,
 				8348E3D624CD658B001D59C0 /* DataArray.swift */,
 				838071D224C608FA008BAA2C /* Assets.xcassets */,
+				8348826324EA95E300054DF7 /* corp_round_v1.ttf */,
 				8348E3E024CDD48E001D59C0 /* like.json */,
 				8348E3DC24CDD378001D59C0 /* type.json */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
@@ -384,6 +393,7 @@
 				834966BF24DC0B9600C9B7DD /* Match.swift */,
 				834966CD24DE7E8600C9B7DD /* Read.swift */,
 				834C32D324E3BD10003330B1 /* Block.swift */,
+				8348826524EAA42000054DF7 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,6 +414,7 @@
 				834966D324DEE19C00C9B7DD /* Card.swift */,
 				8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */,
 				8348E76E24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift */,
+				8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,6 +470,7 @@
 			children = (
 				835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */,
 				834966C324DC25E200C9B7DD /* InboxTableViewController.swift */,
+				8348826724EABAFE00054DF7 /* FeedTableViewController.swift */,
 				835013FD24D41458008D1170 /* MessageTebleViewController.swift */,
 			);
 			path = Message;
@@ -493,7 +505,7 @@
 			);
 			name = DatingApp;
 			productName = DatingApp;
-			productReference = 838071C624C608F5008BAA2C /* DatingApp.app */;
+			productReference = 838071C624C608F5008BAA2C /* フリマ.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -540,6 +552,7 @@
 				838071D324C608FA008BAA2C /* Assets.xcassets in Resources */,
 				838071DE24C60BA4008BAA2C /* GoogleService-Info.plist in Resources */,
 				838071D124C608F5008BAA2C /* Main.storyboard in Resources */,
+				8348826424EA95E300054DF7 /* corp_round_v1.ttf in Resources */,
 				834966D224DEE10C00C9B7DD /* Card.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,7 +658,9 @@
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
 				834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
+				8348826624EAA42000054DF7 /* Comment.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
+				8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */,
 				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
@@ -673,6 +688,7 @@
 				8368CD8E24E16ACF009C0391 /* PickerKeyboard16.swift in Sources */,
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				8350E4BD24D9AE6800487DB9 /* PIckerKeyboard12.swift in Sources */,
+				8348826824EABAFE00054DF7 /* FeedTableViewController.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
 				8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */,
 				8354409F24D7DF09001C9398 /* Config.swift in Sources */,
@@ -863,7 +879,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yncompany.DatingApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "フリマ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -884,7 +900,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yncompany.DatingApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "フリマ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

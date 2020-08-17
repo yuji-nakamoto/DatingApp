@@ -31,10 +31,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        navigationItem.title = "メッセージ"
         setupBanner()
-        collectionView.refreshControl = refresh
-        refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         interstitial = createAndLoadIntersitial()
     }
     
@@ -42,7 +39,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         super.viewWillAppear(animated)
         
         UserDefaults.standard.removeObject(forKey: CARDVC)
-        segmentControl.selectedSegmentIndex = 0
         fetchMatchUsers()
         resetBadge()
         setupUI()
@@ -60,17 +56,25 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         refresh.endRefreshing()
     }
     
+    @IBAction func segmentControled(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0: print("")
+        case 1: performSegue(withIdentifier: "InboxVC", sender: nil)
+        case 2: performSegue(withIdentifier: "FeedVC", sender: nil)
+        default: break
+        }
+    }
+    
     // MARK: - Fetch
     
     private func fetchMatchUsers() {
         
         matches.removeAll()
         users.removeAll()
-        collectionView.reloadData()
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
-                self.collectionView.reloadData()
                 return
             }
             guard let uid = match.uid else { return }
@@ -137,9 +141,11 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     }
     
     private func setupUI() {
-        
+        navigationItem.title = "メッセージ"
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+        collectionView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)

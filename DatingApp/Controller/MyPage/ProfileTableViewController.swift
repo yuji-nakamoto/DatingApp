@@ -76,9 +76,8 @@ class ProfileTableViewController: UIViewController {
             editButton.backgroundColor = UIColor(named: O_GREEN)
             editButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            editButton.backgroundColor = UIColor.white
-            editButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-            editButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
+            editButton.backgroundColor = UIColor(named: O_GREEN)
+            editButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             editButton.backgroundColor = UIColor(named: O_DARK)
             editButton.setTitleColor(UIColor.white, for: .normal)
