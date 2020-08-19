@@ -119,7 +119,7 @@ class Type {
         
         COLLECTION_TYPE.document(user.uid).collection(TYPED).document(User.currentUserId()).getDocument { (snapshot, error) in
             
-            let dict = [UID: User.currentUserId()]
+            let dict = [UID: User.currentUserId(), TIMESTAMP: Timestamp(date: Date())] as [String : Any]
             
             if snapshot?.exists == true {
                 COLLECTION_TYPE.document(user.uid).collection(TYPED).document(User.currentUserId()).updateData(dict)
@@ -128,5 +128,4 @@ class Type {
             }
         }
     }
-    
 }

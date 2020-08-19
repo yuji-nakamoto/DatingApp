@@ -18,7 +18,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var termsButton: UIButton!
     
@@ -70,7 +69,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         AuthService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
             if error != nil {
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = error!.localizedDescription
+                self.hud.textLabel.text = "既に登録されているアドレスか、アドレスが無効です。"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
@@ -94,20 +93,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     private func setupUI() {
         
-        if UserDefaults.standard.object(forKey: TO_VERIFIED_VC) != nil {
-            loginButton.isHidden = false
-        } else {
-            loginButton.isHidden = true
-        }
-        
         descriptionLabel.text = "メールアドレスとパスワードを入力して、\nアカウントを作成してください。"
         doneButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.cornerRadius = 50 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        loginButton.layer.cornerRadius = 50 / 2
-        loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         termsButton.layer.cornerRadius = 50 / 2
         termsButton.layer.borderWidth = 1
         termsButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

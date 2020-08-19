@@ -29,9 +29,9 @@ class Read {
         }
     }
     
-    class func updateRead(_ toUserId: String) {
-        
-        let dict = [ISREAD: 1]
-        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).document(toUserId).updateData(dict)
-    }
+//    class func updateRead(_ toUserId: String) {
+//        
+//        let dict = [ISREAD: 1]
+//        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).document(toUserId).updateData(dict)
+//    }
 }

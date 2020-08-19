@@ -49,7 +49,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         setupBanner()
         setupUI()
         handleTextField()
-        hintView()
         interstitial = createAndLoadIntersitial()
     }
     
@@ -58,6 +57,10 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         fetchUser()
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        showHintView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -216,7 +219,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -239,7 +242,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         }
     }
     
-    private func hintView() {
+    private func showHintView() {
         
         if UserDefaults.standard.object(forKey: FEMALE) == nil && UserDefaults.standard.object(forKey: HINT_END) == nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -269,7 +272,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }

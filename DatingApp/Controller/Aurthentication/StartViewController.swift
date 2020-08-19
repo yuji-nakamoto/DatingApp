@@ -34,6 +34,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
                     self.interstitial.present(fromRootViewController: self)
                 } else {
                     print("Error interstitial")
+                    self.toTabBerVC()
                 }
             }
             return
@@ -71,7 +72,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial

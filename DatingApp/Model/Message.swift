@@ -57,10 +57,7 @@ class Message {
         COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).addDocument(data: withValue) { (_) in
             COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).addDocument(data: withValue)
         }
-        let dict = [ISREAD: 0]
-        
-        COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).document(User.currentUserId()).setData(dict)
-        
+                
         COLLECTION_INBOX.document(User.currentUserId()).collection("resent-messages").document(user.uid).setData(withValue)
         COLLECTION_INBOX.document(user.uid).collection("resent-messages").document(User.currentUserId()).setData(withValue)
     }

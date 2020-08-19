@@ -170,17 +170,17 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
             card.center.y = cardInitialLocationCenter.y + translation.y
             
             if translation.x > 0 {
-                card.likeView.alpha = abs(translation.x * 2) / cardStack.bounds.midX / 3
+                card.likeView.alpha = abs(translation.x * 2) / cardStack.bounds.midX / 2.5
                 card.nopeView.alpha = 0
                 card.typeView.alpha = 0
             }
             if translation.x < 0 {
-                card.nopeView.alpha = abs(translation.x * 2) / cardStack.bounds.midX / 3
+                card.nopeView.alpha = abs(translation.x * 2) / cardStack.bounds.midX / 2.5
                 card.likeView.alpha = 0
                 card.typeView.alpha = 0
             }
             if translation.y > 0 && translation.x < 50 && translation.x > -50 {
-                card.typeView.alpha = abs(translation.y * 2) / cardStack.bounds.midY / 3
+                card.typeView.alpha = abs(translation.y * 2) / cardStack.bounds.midY / 2.5
                 card.likeView.alpha = 0
                 card.nopeView.alpha = 0
             }
@@ -584,14 +584,14 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial

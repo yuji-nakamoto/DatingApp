@@ -50,8 +50,7 @@ class MessageTableViewCell: UITableViewCell {
                 messageLabel.textColor = UIColor(named: O_BLACK)
 
             } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-                bubleView.backgroundColor = UIColor.systemGray4
-                messageLabel.textColor = UIColor(named: O_BLACK)
+                bubleView.backgroundColor = UIColor(named: O_GREEN)
                 
             } else if UserDefaults.standard.object(forKey: DARK) != nil {
                 bubleView.backgroundColor = UIColor(named: O_DARK)
@@ -62,8 +61,9 @@ class MessageTableViewCell: UITableViewCell {
             bubleRightConstraint.constant = 8
             bubleLeftConstraint.constant = UIScreen.main.bounds.width - bubleWidthConstraint.constant - bubleRightConstraint.constant
         } else {
+            messageLabel.textColor = UIColor.black
             profileImageView.isHidden = false
-            bubleView.backgroundColor = UIColor.systemGray2
+            bubleView.backgroundColor = UIColor.systemGray3
             bubleView.layer.borderColor = UIColor.clear.cgColor
             bubleLeftConstraint.constant = 55
             bubleRightConstraint.constant = UIScreen.main.bounds.width - bubleWidthConstraint.constant - bubleLeftConstraint.constant

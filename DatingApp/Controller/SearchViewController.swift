@@ -134,7 +134,7 @@ class SearchViewController: UIViewController {
     
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -183,7 +183,7 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
             
             let bannerView = cell2.viewWithTag(1) as! GADBannerView
             bannerView.layer.cornerRadius = 15
-            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
             

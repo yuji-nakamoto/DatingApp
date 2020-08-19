@@ -396,9 +396,9 @@ class Card: UIView {
         likeView.alpha = 0
         nopeView.alpha = 0
         typeView.alpha = 0
-        likeView.layer.cornerRadius = 15
-        nopeView.layer.cornerRadius = 15
-        typeView.layer.cornerRadius = 15
+        likeView.layer.cornerRadius = 27 / 2
+        nopeView.layer.cornerRadius = 27 / 2
+        typeView.layer.cornerRadius = 27 / 2
         
         likeLabel.transform = CGAffineTransform(rotationAngle: -.pi / 8)
         nopeLabel.transform = CGAffineTransform(rotationAngle: .pi / 8)

@@ -100,8 +100,8 @@ class Like {
         
         COLLECTION_LIKE.document(user.uid).collection(LIKED).document(User.currentUserId()).getDocument { (snapshot, error) in
             
-            let dict = [UID: User.currentUserId()]
-            
+            let dict = [UID: User.currentUserId(), TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+
             if snapshot?.exists == true {
                 COLLECTION_LIKE.document(user.uid).collection(LIKED).document(User.currentUserId()).updateData(dict)
             } else {
@@ -109,5 +109,4 @@ class Like {
             }
         }
     }
-    
 }

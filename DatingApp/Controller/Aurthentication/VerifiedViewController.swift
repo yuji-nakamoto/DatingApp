@@ -73,13 +73,13 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
-        //        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-        //            let dict = [UID: User.currentUserId(),
-        //                        EMAIL: self.emailTextField.text!] as [String : Any]
-        //            saveUser(userId: User.currentUserId(), withValue: dict)
-        //            self.toEnterNameVC()
-        //            self.activityIndicator.stopAnimating()
-        //        }
+//                AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+//                    let dict = [UID: User.currentUserId(),
+//                                EMAIL: self.emailTextField.text!] as [String : Any]
+//                    saveUser(userId: User.currentUserId(), withValue: dict)
+//                    self.toEnterNameVC()
+//                    self.activityIndicator.stopAnimating()
+//                }
         
         AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
             if error == nil {
