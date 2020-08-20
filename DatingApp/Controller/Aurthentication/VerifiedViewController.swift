@@ -19,6 +19,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var resendButton: UIButton!
     
     private var hud = JGProgressHUD(style: .dark)
     
@@ -123,6 +124,9 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         backButton.layer.cornerRadius = 50 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        resendButton.layer.cornerRadius = 50 / 2
+        resendButton.layer.borderWidth = 1
+        resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
         emailTextField.delegate = self
         passwordTextField.delegate = self

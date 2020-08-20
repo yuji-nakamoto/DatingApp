@@ -14,7 +14,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     
     // MARK: - Properties
     
-    @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
@@ -135,9 +134,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
-        topBannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-        topBannerView.rootViewController = self
-        topBannerView.load(GADRequest())
     }
     
     private func setupUI() {

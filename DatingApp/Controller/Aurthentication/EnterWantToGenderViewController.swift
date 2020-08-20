@@ -40,9 +40,7 @@ class EnterWantToGenderViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: Any) {
         indicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.prepareSave()
-        }
+        self.prepareSave()
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

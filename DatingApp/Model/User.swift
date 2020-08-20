@@ -175,6 +175,9 @@ class User {
                         if let error = error {
                             print("Error card sort: \(error.localizedDescription)")
                         } else {
+                            if snapshot?.documents == [] {
+                                completion(User(dict: [UID: ""]))
+                            }
                             snapshot?.documents.forEach({ (document) in
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])
@@ -207,6 +210,9 @@ class User {
                         if let error = error {
                             print("Error card sort: \(error.localizedDescription)")
                         } else {
+                            if snapshot?.documents == [] {
+                                completion(User(dict: [UID: ""]))
+                            }
                             snapshot?.documents.forEach({ (document) in
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])
@@ -243,6 +249,9 @@ class User {
                         if let error = error {
                             print("Error card sort: \(error.localizedDescription)")
                         } else {
+                            if snapshot?.documents == [] {
+                                completion(User(dict: [UID: ""]))
+                            }
                             snapshot?.documents.forEach({ (document) in
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])
@@ -274,6 +283,9 @@ class User {
                         if let error = error {
                             print("Error card sort: \(error.localizedDescription)")
                         } else {
+                            if snapshot?.documents == [] {
+                                completion(User(dict: [UID: ""]))
+                            }
                             snapshot?.documents.forEach({ (document) in
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])

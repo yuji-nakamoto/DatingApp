@@ -603,13 +603,50 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     private func settingPhoto(didSelect index: Int) {
         
         self.imageIndex = index
-        picker.allowsEditing = true
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        alertCamera()
     }
     
     private func setProfileImage(_ image: UIImage?) {
         buttons[imageIndex].setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+    }
+    
+    private func alertCamera() {
+        
+        let alert: UIAlertController = UIAlertController(title: "", message: "選択してください", preferredStyle: .actionSheet)
+        let cameraAction: UIAlertAction = UIAlertAction(title: "カメラで撮影", style: .default, handler:{ [weak self]
+                (action: UIAlertAction!) -> Void in
+            guard let this = self else { return }
+            let sourceType:UIImagePickerController.SourceType = UIImagePickerController.SourceType.camera
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera){
+                let cameraPicker = UIImagePickerController()
+                cameraPicker.sourceType = sourceType
+                cameraPicker.delegate = this
+                cameraPicker.allowsEditing = true
+                this.present(cameraPicker, animated: true, completion: nil)
+            }
+        })
+        
+        let galleryAction: UIAlertAction = UIAlertAction(title: "アルバムから選択", style: .default, handler:{ [weak self]
+            (action: UIAlertAction!) -> Void in
+            guard let this = self else { return }
+            let sourceType:UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+                let libraryPicker = UIImagePickerController()
+                libraryPicker.sourceType = sourceType
+                libraryPicker.delegate = this
+                libraryPicker.allowsEditing = true
+                this.present(libraryPicker, animated: true, completion: nil)
+            }
+        })
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+            (action: UIAlertAction!) -> Void in
+            print("キャンセル")
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(cameraAction)
+        alert.addAction(galleryAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

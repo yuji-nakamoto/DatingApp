@@ -35,15 +35,14 @@ class EnterProfessionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         nextButton.isEnabled = true
+        skipButton.isEnabled = true
     }
     
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
         indicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.prepareSave()
-        }
+        self.prepareSave()
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -66,6 +65,7 @@ class EnterProfessionViewController: UIViewController {
         
         if professionLabel.text != "選択しない" {
             nextButton.isEnabled = false
+            skipButton.isEnabled = false
             saveUserProfession()
         } else {
             generator.notificationOccurred(.error)

@@ -50,13 +50,11 @@ class EnterAgeViewController: UIViewController {
     
     private func saveUserAge() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let dict = [AGE: Int(self.ageLabel.text!)]
-            updateUser(withValue: dict as [String : Any])
-            self.indicator.stopAnimating()
-
-            self.toEnterProfessionVC()
-        }
+        let dict = [AGE: Int(self.ageLabel.text!)]
+        updateUser(withValue: dict as [String : Any])
+        self.indicator.stopAnimating()
+        
+        self.toEnterProfessionVC()
     }
     
     // MARK: - Helpers

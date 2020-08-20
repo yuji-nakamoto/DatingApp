@@ -18,7 +18,7 @@ struct Service {
         
         var task: StorageUploadTask!
         
-        guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         let filename = NSUUID().uuidString
         let withPath = "/images/\(filename)"
         let storageRef = Storage.storage().reference(forURL: "gs://datingapp-d0f98.appspot.com").child(withPath)

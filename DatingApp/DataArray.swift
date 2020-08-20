@@ -22,7 +22,7 @@ public let dataArray6 = [ "未設定", "A型", "B型", "O型", "AB型", "わか�
 
 public let dataArray7 = [ "未設定", "短大/専門学校/高専卒", "高校卒", "大学卒", "大学院卒", "その他"]
 
-public let dataArray8 = [ "未設定", "独身(未婚)", "独身(離婚)", "その他"]
+public let dataArray8 = [ "未設定", "独身(未婚)", "独身(離婚)"]
 
 public let dataArray9 = [ "未設定", "すぐにしたい", "２〜３年のうちにしたい", "良い人がいればしたい", "今のところ考えてない", "まだわからない"]
 

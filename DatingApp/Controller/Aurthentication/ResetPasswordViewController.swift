@@ -76,7 +76,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
 
     private func setupUI() {
         
-        descriptionLabel.text = "メールに記載しているURLを開いて、新しいパスワードを登録してください。"
+        descriptionLabel.text = "リセットメールを送信後、届いたメールに記載しているURLを開いて、新しいパスワードを登録してください。"
         sendButton.isEnabled = true
         sendButton.layer.cornerRadius = 50 / 2
         backButton.layer.cornerRadius = 50 / 2

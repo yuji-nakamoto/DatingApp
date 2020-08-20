@@ -16,7 +16,6 @@ class FootstepTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var topBannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
@@ -129,9 +128,6 @@ class FootstepTableViewController: UIViewController {
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
-        topBannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-        topBannerView.rootViewController = self
-        topBannerView.load(GADRequest())
     }
     
     private func setupUI() {
