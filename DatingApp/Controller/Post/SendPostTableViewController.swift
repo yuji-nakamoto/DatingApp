@@ -100,7 +100,11 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         updateUser(withValue: [POSTCOUNT: user.postCount + 1])
         Match.fetchMatchUsers { (match) in
             self.match = match
-            Post.saveFeed(postId, toUserId: match.uid, withValue: dict)
+            if self.match.uid == "" {
+                return
+            } else {
+                Post.saveFeed(postId, toUserId: match.uid, withValue: dict)
+            }
         }
         
         userDefaults.removeObject(forKey: LOVER)

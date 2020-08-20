@@ -37,6 +37,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     private var matchUser = Match()
     private var users = [User]()
     private var messages = [Message]()
+    private var message = Message()
     private var interstitial: GADInterstitial!
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private var hud = JGProgressHUD(style: .dark)
@@ -48,6 +49,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         super.viewDidLoad()
         setupBanner()
         setupUI()
+        fetchMatchUser()
         handleTextField()
         interstitial = createAndLoadIntersitial()
     }
@@ -58,11 +60,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        showHintView()
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
@@ -70,7 +68,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     }
     
     // MARK: - Action
-
+    
     @IBAction func closeButtonPressed(_ sender: Any) {
         removeEffectView()
     }
@@ -100,6 +98,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                 }
             }
             self.fetchMessage()
+            self.checkMessage()
         }
     }
     
@@ -115,7 +114,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         users.removeAll()
         messages.removeAll()
         
-        Message.fetchMessage(forUser: user) { (message) in
+        Message.fetchMessage(toUserId: user.uid) { (message) in
             guard let uid = message.to else { return }
             self.fetchUser2(uid) {
                 self.messages.append(message)
@@ -129,18 +128,18 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         guard toUserId != "" else { return }
         Match.fetchMatchUser(toUserId: toUserId) { (match) in
             self.matchUser = match
+            self.checkMessage()
+            self.showHintView()
         }
     }
     
-    private func checkIfMatch() {
+    private func checkFemale() {
         
         if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            if self.matchUser.isMatch != 1 {
-                if self.interstitial.isReady {
-                    self.interstitial.present(fromRootViewController: self)
-                } else {
-                    print("Error interstitial")
-                }
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
             }
         }
     }
@@ -173,7 +172,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         sendButton.alpha = 0.7
         countLabel.text = "60"
         textField.resignFirstResponder()
-        checkIfMatch()
+        checkFemale()
+        checkMessage()
     }
     
     @objc func adjustForKeyboard(notification: Notification) {
@@ -217,6 +217,20 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     // MARK: - Helpers
     
+    private func checkMessage() {
+        
+        if matchUser.isMatch == 1 {
+            bottomView.isHidden = false
+        } else {
+            Message.fetchMessage(toUserId: toUserId) { (message) in
+                self.message = message
+                if self.message.from == User.currentUserId() {
+                    self.bottomView.isHidden = true
+                }
+            }
+        }
+    }
+    
     private func createAndLoadIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
@@ -244,18 +258,17 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func showHintView() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) == nil && UserDefaults.standard.object(forKey: HINT_END) == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                
-                self.visualEffectView.frame = self.view.frame
-                self.view.addSubview(self.visualEffectView)
-                self.visualEffectView.alpha = 0
-                self.view.addSubview(self.backView)
-                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                    self.visualEffectView.alpha = 1
-                    self.backView.alpha = 1
-                }, completion: nil)
-            }
+        if matchUser.isMatch == 1 {
+            return
+        } else {
+            visualEffectView.frame = self.view.frame
+            view.addSubview(self.visualEffectView)
+            visualEffectView.alpha = 0
+            view.addSubview(self.backView)
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.visualEffectView.alpha = 1
+                self.backView.alpha = 1
+            }, completion: nil)
         }
     }
     
@@ -292,7 +305,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         textField.delegate = self
         sendButton.isEnabled = false
         sendButton.alpha = 0.7
-        hintLabel.text = "メッセージを送ると広告が流れます。\n\nしかし、マッチしたお相手となら広告は流れません。"
+        hintLabel.text = "最初の一通目はマッチしなくても送信ができます。\n\nマッチすると二通目以降も送信ができます。"
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -313,7 +326,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             navBar.alpha = 0.85
             nameLabel.textColor = UIColor(named: O_BLACK)
             backButton.tintColor = UIColor(named: O_BLACK)
-
+            
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
@@ -321,7 +334,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             navBar.alpha = 0.85
             nameLabel.textColor = UIColor(named: O_BLACK)
             backButton.tintColor = UIColor(named: O_BLACK)
-
+            
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)

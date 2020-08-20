@@ -130,7 +130,7 @@ class MyPageTableViewController: UIViewController {
     
     private func showHintView() {
         
-        if UserDefaults.standard.object(forKey: HINT_END2) == nil {
+        if UserDefaults.standard.object(forKey: HINT_END) == nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 
                 self.visualEffectView.frame = self.view.frame
@@ -152,7 +152,7 @@ class MyPageTableViewController: UIViewController {
             self.hintView.alpha = 0
         }) { (_) in
             self.visualEffectView.removeFromSuperview()
-            UserDefaults.standard.set(true, forKey: HINT_END2)
+            UserDefaults.standard.set(true, forKey: HINT_END)
         }
     }
     

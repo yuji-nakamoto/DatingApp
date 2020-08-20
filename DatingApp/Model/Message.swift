@@ -35,9 +35,9 @@ class Message {
         isFromCurrentUser = from == User.currentUserId()
     }
     
-    class func fetchMessage(forUser user: User, completion: @escaping(_ message: Message) -> Void) {
+    class func fetchMessage(toUserId: String, completion: @escaping(_ message: Message) -> Void) {
     
-        COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).order(by: TIMESTAMP).addSnapshotListener { (snapshot, error) in
+        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).order(by: TIMESTAMP).addSnapshotListener { (snapshot, error) in
             
             if let error = error {
                 print("Error fetch message: \(error.localizedDescription)")

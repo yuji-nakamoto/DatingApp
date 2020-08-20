@@ -170,8 +170,8 @@ public let GOOGLE2 = "google2"
 public let DELETE = "delete"
 public let ALL = "all"
 public let HINT_END = "hint_end"
-public let HINT_END2 = "hint_end2"
 public let TUTORIAL_END = "tutorial_end"
+public let MATCHING = "matching"
 
 // MARK: - Notification
 

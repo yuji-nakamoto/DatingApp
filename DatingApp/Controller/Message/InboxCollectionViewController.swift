@@ -37,7 +37,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        segmentControl.selectedSegmentIndex = 0
         UserDefaults.standard.removeObject(forKey: CARDVC)
         fetchMatchUsers()
         resetBadge()
