@@ -57,9 +57,9 @@ class EnterGenderViewController: UIViewController {
 
         if genderLabel.text == "女性" {
             UserDefaults.standard.set(true, forKey: FEMALE)
-            toEnterWantToGenderVC()
+            toEnterAgeVC()
         } else {
-            toEnterWantToGenderVC()
+            toEnterAgeVC()
         }
     }
     
@@ -103,12 +103,12 @@ class EnterGenderViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private func toEnterWantToGenderVC() {
+    private func toEnterAgeVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterWantToGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterWantToGenderVC")
-            self.present(toEnterWantToGenderVC, animated: true, completion: nil)
+            let toEnterAgeVC = storyboard.instantiateViewController(withIdentifier: "EnterAgeVC")
+            self.present(toEnterAgeVC, animated: true, completion: nil)
         }
     }
 }

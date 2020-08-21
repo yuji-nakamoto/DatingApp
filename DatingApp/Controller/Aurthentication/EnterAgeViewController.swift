@@ -52,9 +52,9 @@ class EnterAgeViewController: UIViewController {
         
         let dict = [AGE: Int(self.ageLabel.text!)]
         updateUser(withValue: dict as [String : Any])
-        self.indicator.stopAnimating()
+        indicator.stopAnimating()
         
-        self.toEnterProfessionVC()
+        toEnterWantToGenderVC()
     }
     
     // MARK: - Helpers
@@ -76,12 +76,12 @@ class EnterAgeViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private func toEnterProfessionVC() {
+    private func toEnterWantToGenderVC() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterProfessionVC = storyboard.instantiateViewController(withIdentifier: "EnterProfessionVC")
-            self.present(toEnterProfessionVC, animated: true, completion: nil)
+            let toEnterWantToGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterWantToGenderVC")
+            self.present(toEnterWantToGenderVC, animated: true, completion: nil)
         }
     }
 }

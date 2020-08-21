@@ -94,6 +94,7 @@
 		83545E4F24E67F8D003BA06D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */; };
 		8368CD8E24E16ACF009C0391 /* PickerKeyboard16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */; };
 		8368CD9024E16B49009C0391 /* ModalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */; };
+		837C563124F078B400956FDC /* OpinionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C563024F078B400956FDC /* OpinionTableViewController.swift */; };
 		838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071C924C608F5008BAA2C /* AppDelegate.swift */; };
 		838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071CB24C608F5008BAA2C /* SceneDelegate.swift */; };
 		838071D124C608F5008BAA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838071CF24C608F5008BAA2C /* Main.storyboard */; };
@@ -212,6 +213,7 @@
 		83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		8368CD8D24E16ACF009C0391 /* PickerKeyboard16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard16.swift; sourceTree = "<group>"; };
 		8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSearchTableViewController.swift; sourceTree = "<group>"; };
+		837C563024F078B400956FDC /* OpinionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpinionTableViewController.swift; sourceTree = "<group>"; };
 		838071C624C608F5008BAA2C /* フリマ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "フリマ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		838071C924C608F5008BAA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838071CB24C608F5008BAA2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */,
 				83B6231C24E2B27E00363548 /* InquiryTableViewController.swift */,
 				83B6231E24E2BA7800363548 /* InquryInputTableViewController.swift */,
+				837C563024F078B400956FDC /* OpinionTableViewController.swift */,
 				83B6232024E2BA9100363548 /* OpinionInputTableViewController.swift */,
 				834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */,
 				8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */,
@@ -445,8 +448,8 @@
 				838071F424C6E541008BAA2C /* EnterNameViewController.swift */,
 				834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */,
 				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
-				834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */,
 				838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */,
+				834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */,
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
 				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
@@ -499,8 +502,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				8F75F4A93E67295506C3F68A /* [CP] Embed Pods Frameworks */,
-				954F7E81C41EB5EEE0CA1337 /* [CP] Copy Pods Resources */,
+				76F1F8D460F25D4BAB942167 /* [CP] Embed Pods Frameworks */,
+				CCEA433F969FC481F1048A0A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -585,7 +588,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F75F4A93E67295506C3F68A /* [CP] Embed Pods Frameworks */ = {
+		76F1F8D460F25D4BAB942167 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -602,7 +605,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		954F7E81C41EB5EEE0CA1337 /* [CP] Copy Pods Resources */ = {
+		CCEA433F969FC481F1048A0A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -662,6 +665,7 @@
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
 				834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
+				837C563124F078B400956FDC /* OpinionTableViewController.swift in Sources */,
 				8348826624EAA42000054DF7 /* Comment.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */,

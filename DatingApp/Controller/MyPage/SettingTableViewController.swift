@@ -171,7 +171,7 @@ class SettingTableViewController: UITableViewController {
     
     private func logoutUser() {
         
-        let alert: UIAlertController = UIAlertController(title: user.username, message: "ログアウトしてもよろしいですか？", preferredStyle: .actionSheet)
+        let alert: UIAlertController = UIAlertController(title: "", message: "ログアウトしてもよろしいですか？", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "ログアウト", style: UIAlertAction.Style.default) { (alert) in
             
             AuthService.logoutUser { (error) in
@@ -193,7 +193,7 @@ class SettingTableViewController: UITableViewController {
     
     private func withdraw() {
         
-        let alert: UIAlertController = UIAlertController(title: user.username, message: "退会するとアカウント・プロフィール情報がすべて削除されます。\n元に戻すことはできません。", preferredStyle: .actionSheet)
+        let alert: UIAlertController = UIAlertController(title: "", message: "退会するとアカウント・プロフィール情報がすべて削除されます。元に戻すことはできません。", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "退会を進める", style: UIAlertAction.Style.default) { (alert) in
             self.toWithdrawVC()
         }
@@ -306,7 +306,7 @@ class SettingTableViewController: UITableViewController {
             toChangeEmailVC()
         } else if indexPath.section == 5 && indexPath.row == 1 {
             toChangePasswordVC()
-        } else if indexPath.section == 6 && indexPath.row == 3 {
+        } else if indexPath.section == 6 && indexPath.row == 4 {
             withdraw()
         } else if indexPath.section == 7 {
             logoutUser()

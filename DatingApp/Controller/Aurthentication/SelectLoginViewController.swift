@@ -11,18 +11,22 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 import JGProgressHUD
+import AuthenticationServices
+import CryptoKit
 
 class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var appleButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var mailButton: UIButton!
     @IBOutlet weak var registertButton: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
+    fileprivate var currentNonce: String?
     
     // MARK: - Lifecycle
     
@@ -33,7 +37,39 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     // MARK: - Actions
     
-    @IBAction func facebookButtonPressed(_ sender: Any) {
+    @IBAction func appleButtonPressed(_ sender: Any) {
+        
+        UserDefaults.standard.set(true, forKey: APPLE)
+        let nonce = randomNonceString()
+        currentNonce = nonce
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        request.nonce = sha256(nonce)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    @IBAction func mailButtonPressed(_ sender: Any) {
+        
+        if UserDefaults.standard.object(forKey: TO_VERIFIED_VC) != nil {
+            toVerifiedVC()
+            return
+        }
+        toLoginVC()
+    }
+    
+    @IBAction func googleButtonPressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: GOOGLE)
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    // MARK: - Helpers
+    
+    private func facebookSignIn() {
         
         UserDefaults.standard.set(true, forKey: FACEBOOK)
         
@@ -67,22 +103,6 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         }
     }
     
-    @IBAction func mailButtonPressed(_ sender: Any) {
-        
-        if UserDefaults.standard.object(forKey: TO_VERIFIED_VC) != nil {
-            toVerifiedVC()
-            return
-        }
-        toLoginVC()
-    }
-    
-    @IBAction func googleButtonPressed(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: GOOGLE)
-        GIDSignIn.sharedInstance()?.signIn()
-    }
-    
-    // MARK: - Helpers
-    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
             return
@@ -90,12 +110,15 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         guard let authentication = user.authentication else {
             return
         }
+        
+        indicator.startAnimating()
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (result, error) in
             if let error = error {
                 generator.notificationOccurred(.error)
                 self.hud.textLabel.text = error.localizedDescription
                 self.setupHud()
+                self.indicator.stopAnimating()
                 print(error.localizedDescription)
                 return
             }
@@ -135,12 +158,55 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             UserDefaults.standard.set(true, forKey: WHITE)
             self.toTabBarVC()
         }
+        self.indicator.stopAnimating()
+    }
+    
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
+    }
+    
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset: Array<Character> =
+            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+        
+        return result
     }
     
     private func setupUI() {
         
-        descriptionLabel.text = "フリーでマッチングしちゃおう！\n完全無料のマッチングアプリ、\nフリマへようこそ！"
-        facebookButton.layer.cornerRadius = 44 / 2
+        descriptionLabel.text = "フリーでマッチしちゃおう！\n完全無料のマッチングアプリ、\nフリマへようこそ！"
+        appleButton.layer.cornerRadius = 44 / 2
         googleButton.layer.cornerRadius = 44 / 2
         mailButton.layer.cornerRadius = 44 / 2
         mailButton.layer.borderWidth = 1
@@ -187,5 +253,96 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
         self.present(toTabBerVC, animated: true, completion: nil)
+    }
+    
+    private func toEnterNameVC() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
+            self.present(toEnterNameVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension SelectLoginViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            
+            guard let nonce = currentNonce else {
+                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+            }
+            guard let appleIDToken = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                return
+            }
+            
+            //            let userIdentifier = appleIDCredential.user
+            //            let fullName = appleIDCredential.fullName
+            indicator.startAnimating()
+            let email = appleIDCredential.email
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+            
+            Auth.auth().signIn(with: credential) { (result, error) in
+                if let error = error {
+                    generator.notificationOccurred(.error)
+                    self.hud.textLabel.text = error.localizedDescription
+                    self.setupHud()
+                    self.indicator.stopAnimating()
+                    print("Error sing in apple", error.localizedDescription)
+                    return
+                    
+                } else if let authData = result {
+                    
+                    let dict : [String: Any] = [
+                        UID: authData.user.uid,
+                        EMAIL: email as Any]
+                    
+                    if UserDefaults.standard.object(forKey: APPLE) != nil && UserDefaults.standard.object(forKey: APPLE2) != nil {
+                        updateUser(withValue: dict)
+                        UserDefaults.standard.set(true, forKey: WHITE)
+                        self.toTabBarVC()
+                        
+                    } else if UserDefaults.standard.object(forKey: APPLE) != nil {
+                        saveUser(userId: authData.user.uid, withValue: dict)
+                        self.toEnterNameVC()
+                    }
+                    self.indicator.stopAnimating()
+                }
+            }
+            
+        } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            
+            DispatchQueue.main.async {
+                self.showPasswordCredentialAlert(username: username, password: password)
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Sign in with Apple errored: \(error)")
+    }
+    
+    private func showPasswordCredentialAlert(username: String, password: String) {
+        let message = "アプリはキーチェーンから選択した認証情報を受け取りました \n\n ユーザー名: \(username)\n パスワード: \(password)"
+        let alertController = UIAlertController(title: "受け取ったキーチェーン資格情報",
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "閉じる", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension SelectLoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }

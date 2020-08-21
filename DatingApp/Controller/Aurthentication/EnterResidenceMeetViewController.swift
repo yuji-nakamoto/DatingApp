@@ -135,15 +135,15 @@ class EnterResidenceMeetController: UIViewController {
         
         if UserDefaults.standard.object(forKey: FACEBOOK) != nil {
             UserDefaults.standard.set(true, forKey: FACEBOOK2)
-            UserDefaults.standard.removeObject(forKey: FACEBOOK)
         }
         if UserDefaults.standard.object(forKey: GOOGLE) != nil {
             UserDefaults.standard.set(true, forKey: GOOGLE2)
-            UserDefaults.standard.removeObject(forKey: GOOGLE)
+        }
+        if UserDefaults.standard.object(forKey: APPLE) != nil {
+            UserDefaults.standard.set(true, forKey: APPLE2)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             UserDefaults.standard.removeObject(forKey: TO_VERIFIED_VC)
-            UserDefaults.standard.set(true, forKey: RCOMPLETION)
             UserDefaults.standard.set(true, forKey: FOOTSTEP_ON)
             UserDefaults.standard.set(true, forKey: MESSAGE_ON)
             UserDefaults.standard.set(true, forKey: LIKE_ON)

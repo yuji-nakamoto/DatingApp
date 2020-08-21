@@ -78,6 +78,7 @@ struct AuthService {
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             UserDefaults.standard.removeObject(forKey: GOOGLE)
             UserDefaults.standard.removeObject(forKey: FACEBOOK)
+            UserDefaults.standard.removeObject(forKey: APPLE)
             try Auth.auth().signOut()
             
             completion(nil)
@@ -121,6 +122,8 @@ struct AuthService {
                 UserDefaults.standard.removeObject(forKey: GOOGLE2)
                 UserDefaults.standard.removeObject(forKey: FACEBOOK)
                 UserDefaults.standard.removeObject(forKey: FACEBOOK2)
+                UserDefaults.standard.removeObject(forKey: APPLE)
+                UserDefaults.standard.removeObject(forKey: APPLE2)
                 UserDefaults.standard.removeObject(forKey: HINT_END)
                 UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
                 UserDefaults.standard.removeObject(forKey: MALE)
