@@ -34,6 +34,10 @@ class ModalPostTableViewController: UITableViewController {
     
     // MARK: - Actions
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func doneButtonPressed(_ sender: Any) {
         
         if genderLabel.text == "選択する" {
@@ -50,6 +54,7 @@ class ModalPostTableViewController: UITableViewController {
         selectedPickerKeyboard()
         
         updateUser(withValue: dict as [String : Any])
+        UserDefaults.standard.set(true, forKey: REFRESH)
         dismiss(animated: true, completion: nil)
     }
     
@@ -135,12 +140,7 @@ class ModalPostTableViewController: UITableViewController {
         pickerKeyBoard17.delegate = self
         tableView.tableFooterView = UIView()
         genreLabel.text = "すべて"
-        
-//        doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-//        doneButton.layer.shadowColor = UIColor.black.cgColor
-//        doneButton.layer.shadowOpacity = 0.3
-//        doneButton.layer.shadowRadius = 4
-        doneButton.layer.cornerRadius = 15
+        doneButton.layer.cornerRadius = 44 / 2
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
             doneButton.backgroundColor = UIColor(named: O_PINK)

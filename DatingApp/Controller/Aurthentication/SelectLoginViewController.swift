@@ -140,12 +140,12 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     private func setupUI() {
         
         descriptionLabel.text = "フリーでマッチングしちゃおう！\n完全無料のマッチングアプリ、\nフリマへようこそ！"
-        facebookButton.layer.cornerRadius = 50 / 2
-        googleButton.layer.cornerRadius = 50 / 2
-        mailButton.layer.cornerRadius = 50 / 2
+        facebookButton.layer.cornerRadius = 44 / 2
+        googleButton.layer.cornerRadius = 44 / 2
+        mailButton.layer.cornerRadius = 44 / 2
         mailButton.layer.borderWidth = 1
         mailButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        registertButton.layer.cornerRadius = 50 / 2
+        registertButton.layer.cornerRadius = 44 / 2
         registertButton.layer.borderWidth = 1
         registertButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         

@@ -42,12 +42,7 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         UserDefaults.standard.removeObject(forKey: CARDVC)
-        if UserDefaults.standard.object(forKey: REFRESH) != nil {
-            fetchUser()
-            UserDefaults.standard.removeObject(forKey: REFRESH)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,6 +61,11 @@ class SearchViewController: UIViewController {
             if UserDefaults.standard.object(forKey: MATCH_ON) != nil {
                 Messaging.messaging().subscribe(toTopic: "match\(Auth.auth().currentUser!.uid)")
             }
+        }
+        
+        if UserDefaults.standard.object(forKey: REFRESH) != nil {
+            fetchUser()
+            UserDefaults.standard.removeObject(forKey: REFRESH)
         }
     }
     

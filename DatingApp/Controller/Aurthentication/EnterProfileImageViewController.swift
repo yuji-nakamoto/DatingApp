@@ -144,11 +144,11 @@ class EnterProfileImageViewController: UIViewController {
         anyLabel.layer.borderWidth = 1
         anyLabel.layer.borderColor = UIColor.systemGray3.cgColor
         descriptionLabel.text = "プロフィール画像を設定してください。\nあとで設定する場合はスキップを押してください。"
-        nextButton.layer.cornerRadius = 50 / 2
-        skipButton.layer.cornerRadius = 50 / 2
+        nextButton.layer.cornerRadius = 44 / 2
+        skipButton.layer.cornerRadius = 44 / 2
         skipButton.layer.borderWidth = 1
         skipButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        backButton.layer.cornerRadius = 50 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         profileImageView.layer.cornerRadius = 150 / 2

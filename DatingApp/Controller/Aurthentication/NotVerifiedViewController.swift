@@ -23,7 +23,7 @@ class NotVerifiedViewController: UIViewController {
         
         descriptionLabel.text = "登録の際に入力したメールアドレスが、間違えている可能性が考えられます。\nメールアドレスをご確認のうえ、もう一度新規登録からやり直してみてください。"
         descriptionLabel2.text = "お使いのメールソフトの「迷惑メールフォルダ」や「ゴミ箱」に届いていないかご確認ください。"
-        backButton.layer.cornerRadius = 50 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }

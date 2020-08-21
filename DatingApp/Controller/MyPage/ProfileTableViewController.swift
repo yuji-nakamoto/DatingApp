@@ -64,7 +64,7 @@ class ProfileTableViewController: UIViewController {
 
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        editButton.layer.cornerRadius = 50 / 2
+        editButton.layer.cornerRadius = 44 / 2
         editButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         editButton.layer.shadowColor = UIColor.black.cgColor
         editButton.layer.shadowOpacity = 0.3

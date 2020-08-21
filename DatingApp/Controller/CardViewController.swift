@@ -494,7 +494,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         nopeButtonView.layer.shadowRadius = 4
         
         afterMessageButton.isEnabled = false
-        afterMessageButton.layer.cornerRadius = 50 / 2
+        afterMessageButton.layer.cornerRadius = 44 / 2
         afterMessageButton.backgroundColor = .clear
         afterMessageButton.layer.borderWidth = 2
         afterMessageButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

@@ -23,7 +23,7 @@ class HelpViewController: UIViewController {
     
     private func setupUI() {
         
-        backButton.layer.cornerRadius = 50 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }

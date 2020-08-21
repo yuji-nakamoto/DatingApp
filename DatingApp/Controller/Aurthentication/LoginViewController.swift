@@ -102,8 +102,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         
         descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
-        loginButton.layer.cornerRadius = 50 / 2
-        dismissButton.layer.cornerRadius = 50 / 2
+        loginButton.layer.cornerRadius = 44 / 2
+        dismissButton.layer.cornerRadius = 44 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         

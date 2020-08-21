@@ -51,6 +51,9 @@ class ModalSearchTableViewController: UITableViewController {
         minSlider.maximumValue = sender.value - 1
         maxSlider.minimumValue = minSlider.value + 1
     }
+    @IBAction func backButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
@@ -79,6 +82,7 @@ class ModalSearchTableViewController: UITableViewController {
         }
         
         updateUser(withValue: dict as [String : Any])
+        UserDefaults.standard.set(true, forKey: REFRESH)
         dismiss(animated: true, completion: nil)
     }
     
@@ -110,12 +114,8 @@ class ModalSearchTableViewController: UITableViewController {
         pickerKeyBoard3.delegate = self
         pickerKeyBoard16.delegate = self
         tableView.tableFooterView = UIView()
-        
-//        doneButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-//        doneButton.layer.shadowColor = UIColor.black.cgColor
-//        doneButton.layer.shadowOpacity = 0.3
-//        doneButton.layer.shadowRadius = 4
-        doneButton.layer.cornerRadius = 15
+        navigationItem.title = "検索条件"
+        doneButton.layer.cornerRadius = 44 / 2
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
             doneButton.backgroundColor = UIColor(named: O_PINK)

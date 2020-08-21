@@ -92,7 +92,7 @@ class EnterNameViewController: UIViewController {
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         descriptionLabel.text = "ニックネームを10文字以下で入力してください。\nニックネームはあとで変更することができます。"
-        nextButton.layer.cornerRadius = 50 / 2
+        nextButton.layer.cornerRadius = 44 / 2
         
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }

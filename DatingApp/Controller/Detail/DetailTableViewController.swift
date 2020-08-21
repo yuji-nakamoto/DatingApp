@@ -430,8 +430,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         sendMessageButton.isEnabled = false
         afterMessageButton.isEnabled = false
-        sendMessageButton.layer.cornerRadius = 50 / 2
-        afterMessageButton.layer.cornerRadius = 50 / 2
+        sendMessageButton.layer.cornerRadius = 44 / 2
+        afterMessageButton.layer.cornerRadius = 44 / 2
         afterMessageButton.backgroundColor = .clear
         afterMessageButton.layer.borderWidth = 2
         afterMessageButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

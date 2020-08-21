@@ -38,6 +38,10 @@ class PostTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
             fetchPost()
             UserDefaults.standard.removeObject(forKey: REFRESH)

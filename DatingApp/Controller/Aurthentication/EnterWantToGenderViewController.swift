@@ -87,8 +87,8 @@ class EnterWantToGenderViewController: UIViewController {
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         descriptionLabel.text = "出会いたい人の性別を選択してください。\nあとで変更することができます。"
-        nextButton.layer.cornerRadius = 50 / 2
-        backButton.layer.cornerRadius = 50 / 2
+        nextButton.layer.cornerRadius = 44 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }

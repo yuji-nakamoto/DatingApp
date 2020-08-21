@@ -94,11 +94,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         
         descriptionLabel.text = "メールアドレスとパスワードを入力して、\nアカウントを作成してください。"
-        doneButton.layer.cornerRadius = 50 / 2
-        dismissButton.layer.cornerRadius = 50 / 2
+        doneButton.layer.cornerRadius = 44 / 2
+        dismissButton.layer.cornerRadius = 44 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        termsButton.layer.cornerRadius = 50 / 2
+        termsButton.layer.cornerRadius = 44 / 2
         termsButton.layer.borderWidth = 1
         termsButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
 

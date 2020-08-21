@@ -97,8 +97,8 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         
         descriptionlabel.text = "今までのメールアドレス、\n今までのパスワード、\n新しいパスワードを入力してください。"
-        doneButton.layer.cornerRadius = 50 / 2
-        backButton.layer.cornerRadius = 50 / 2
+        doneButton.layer.cornerRadius = 44 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         
         emailTextField.delegate = self

@@ -39,10 +39,10 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TU8-VO-9jh">
-                                <rect key="frame" x="40" y="334" width="334" height="50"/>
+                                <rect key="frame" x="40" y="334" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NmK-Tw-ygr"/>
+                                    <constraint firstAttribute="height" constant="44" id="NmK-Tw-ygr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="ログイン">
@@ -53,10 +53,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdH-8W-RbL">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="T2q-Kb-WoC"/>
+                                    <constraint firstAttribute="height" constant="44" id="T2q-Kb-WoC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="他の方法でログイン">
@@ -79,7 +79,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D1g-7s-QaP">
-                                <rect key="frame" x="40" y="404" width="334" height="32"/>
+                                <rect key="frame" x="40" y="398" width="334" height="32"/>
                                 <segments>
                                     <segment title="女性をさがす"/>
                                     <segment title="男性をさがす"/>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAm-jc-Bhf">
-                                <rect key="frame" x="107.5" y="712" width="199" height="30"/>
+                                <rect key="frame" x="107.5" y="718" width="199" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="パスワードをお忘れですか？">
                                     <color key="titleColor" name="original_green"/>
@@ -345,7 +345,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="KJV-56-HS4">
                             <connections>
-                                <segue destination="qQB-7Y-lRy" kind="presentation" id="kQL-z6-y3r"/>
+                                <segue destination="wtv-2q-NNH" kind="presentation" id="kQL-z6-y3r"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1360,10 +1360,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCN-5X-hky">
-                                <rect key="frame" x="50" y="672" width="314" height="50"/>
+                                <rect key="frame" x="50" y="684" width="314" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="duC-pY-OxR"/>
+                                    <constraint firstAttribute="height" constant="44" id="duC-pY-OxR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                 <state key="normal" title="メッセージを送る">
@@ -1399,10 +1399,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpZ-J8-5wQ">
-                                <rect key="frame" x="50" y="752" width="314" height="50"/>
+                                <rect key="frame" x="50" y="758" width="314" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="uYI-Wt-nio"/>
+                                    <constraint firstAttribute="height" constant="44" id="uYI-Wt-nio"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                 <state key="normal" title="あとで送る">
@@ -1551,10 +1551,10 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1h-s6-ONF">
-                                <rect key="frame" x="40" y="279" width="334" height="50"/>
+                                <rect key="frame" x="40" y="279" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="rEd-1C-agG"/>
+                                    <constraint firstAttribute="height" constant="44" id="rEd-1C-agG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="リセットメールを送信">
@@ -1566,10 +1566,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28e-Y1-soe">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="XyT-pz-DIc"/>
+                                    <constraint firstAttribute="height" constant="44" id="XyT-pz-DIc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -1647,10 +1647,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Uk-s3-oX4">
-                                <rect key="frame" x="40" y="334" width="334" height="50"/>
+                                <rect key="frame" x="40" y="334" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="q8b-yP-hFt"/>
+                                    <constraint firstAttribute="height" constant="44" id="q8b-yP-hFt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="利用規約に同意して登録">
@@ -1662,10 +1662,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAE-If-hZL">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="c5D-iS-XZ3"/>
+                                    <constraint firstAttribute="height" constant="44" id="c5D-iS-XZ3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="他の方法でログイン">
@@ -1676,10 +1676,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caJ-nA-cat">
-                                <rect key="frame" x="40" y="399" width="334" height="50"/>
+                                <rect key="frame" x="40" y="393" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="aWo-O0-Quf"/>
+                                    <constraint firstAttribute="height" constant="44" id="aWo-O0-Quf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="利用規約">
@@ -1749,10 +1749,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzn-FC-pua">
-                                <rect key="frame" x="40" y="281.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="281.5" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="i8C-YK-kaW"/>
+                                    <constraint firstAttribute="height" constant="44" id="i8C-YK-kaW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="ログイン">
@@ -1764,10 +1764,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrG-z0-Vho">
-                                <rect key="frame" x="40" y="782" width="334" height="50"/>
+                                <rect key="frame" x="40" y="788" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="UD8-5m-hKf"/>
+                                    <constraint firstAttribute="height" constant="44" id="UD8-5m-hKf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -1778,10 +1778,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15L-9J-5bI">
-                                <rect key="frame" x="40" y="346.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="340.5" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="vih-bP-fQp"/>
+                                    <constraint firstAttribute="height" constant="44" id="vih-bP-fQp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="認証メールを再送信する">
@@ -1809,7 +1809,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u09-rv-aBA">
-                                <rect key="frame" x="92" y="411.5" width="230" height="30"/>
+                                <rect key="frame" x="92" y="399.5" width="230" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="登録済みユーザーでログインする">
@@ -1825,7 +1825,7 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6b-UW-Ggf">
-                                <rect key="frame" x="115" y="732" width="184" height="30"/>
+                                <rect key="frame" x="115" y="738" width="184" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="ログインでお困りですか？">
                                     <color key="titleColor" name="original_green"/>
@@ -1901,10 +1901,10 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc2-9h-3FS">
-                                <rect key="frame" x="40" y="274.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="274.5" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ko4-zD-Kl8"/>
+                                    <constraint firstAttribute="height" constant="44" id="Ko4-zD-Kl8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="次へ">
@@ -1998,10 +1998,10 @@
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qd8-Bb-9Es">
-                                <rect key="frame" x="40" y="369" width="334" height="50"/>
+                                <rect key="frame" x="40" y="369" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="7Oe-Rj-Fsz"/>
+                                    <constraint firstAttribute="height" constant="44" id="7Oe-Rj-Fsz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="次へ">
@@ -2015,10 +2015,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvf-bM-IJ8">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="41e-Ws-2rp"/>
+                                    <constraint firstAttribute="height" constant="44" id="41e-Ws-2rp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -2112,10 +2112,10 @@
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xht-UV-KYN">
-                                <rect key="frame" x="40" y="369" width="334" height="50"/>
+                                <rect key="frame" x="40" y="369" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="T3Z-vx-oDQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="T3Z-vx-oDQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="次へ">
@@ -2138,10 +2138,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMi-9R-4GC">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="iWT-vL-1vt"/>
+                                    <constraint firstAttribute="height" constant="44" id="iWT-vL-1vt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -2208,10 +2208,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0B-xw-9Ev">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CCz-JF-vXd"/>
+                                    <constraint firstAttribute="height" constant="44" id="CCz-JF-vXd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -2233,10 +2233,10 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Mz-0u-pdn">
-                                <rect key="frame" x="40" y="386.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="380.5" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="dRL-a9-Y6N"/>
+                                    <constraint firstAttribute="height" constant="44" id="dRL-a9-Y6N"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="スキップする">
@@ -2247,10 +2247,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhb-kp-oT8">
-                                <rect key="frame" x="40" y="311.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="311.5" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="vIz-MB-uiQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="vIz-MB-uiQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="保存して次へ">
@@ -2328,10 +2328,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhW-iN-CpZ">
-                                <rect key="frame" x="40" y="319.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="319.5" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="8ea-H3-PvM"/>
+                                    <constraint firstAttribute="height" constant="44" id="8ea-H3-PvM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="保存して次へ">
@@ -2342,10 +2342,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlh-QX-1Jw">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="etf-ew-txD"/>
+                                    <constraint firstAttribute="height" constant="44" id="etf-ew-txD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -2356,10 +2356,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXO-7a-wbj">
-                                <rect key="frame" x="40" y="394.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="388.5" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="0dc-6D-dnZ"/>
+                                    <constraint firstAttribute="height" constant="44" id="0dc-6D-dnZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="スキップする">
@@ -2448,10 +2448,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-M5-ahw">
-                                <rect key="frame" x="40" y="369.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="369.5" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="nxB-7F-wUj"/>
+                                    <constraint firstAttribute="height" constant="44" id="nxB-7F-wUj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="保存して次へ">
@@ -2462,10 +2462,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utm-8G-Fd6">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="L6X-89-5yf"/>
+                                    <constraint firstAttribute="height" constant="44" id="L6X-89-5yf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -2589,10 +2589,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqZ-Ze-W6x">
-                                <rect key="frame" x="40" y="692" width="334" height="50"/>
+                                <rect key="frame" x="40" y="704" width="334" height="44"/>
                                 <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="lqO-sm-SOr"/>
+                                    <constraint firstAttribute="height" constant="44" id="lqO-sm-SOr"/>
                                 </constraints>
                                 <state key="normal" title="        Facebookアカウントでログイン">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2602,9 +2602,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENx-0P-6bG">
-                                <rect key="frame" x="40" y="315" width="334" height="50"/>
+                                <rect key="frame" x="40" y="315" width="334" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="IVG-EH-8E7"/>
+                                    <constraint firstAttribute="height" constant="44" id="IVG-EH-8E7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="メールアドレスでログイン">
@@ -2615,10 +2615,10 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbl-WW-D71">
-                                <rect key="frame" x="40" y="622" width="334" height="50"/>
+                                <rect key="frame" x="40" y="640" width="334" height="44"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="IVo-Jx-AiC"/>
+                                    <constraint firstAttribute="height" constant="44" id="IVo-Jx-AiC"/>
                                 </constraints>
                                 <state key="normal" title="    Googleアカウントでログイン">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2628,11 +2628,11 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-google" translatesAutoresizingMaskIntoConstraints="NO" id="frL-ly-wmA">
-                                <rect key="frame" x="60" y="632" width="30" height="30"/>
+                                <rect key="frame" x="60" y="649.5" width="25" height="25"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="66p-TS-T3L"/>
-                                    <constraint firstAttribute="width" constant="30" id="Cy5-E4-tLU"/>
+                                    <constraint firstAttribute="height" constant="25" id="66p-TS-T3L"/>
+                                    <constraint firstAttribute="width" constant="25" id="Cy5-E4-tLU"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DescriptionLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJx-rh-Bql">
@@ -2642,9 +2642,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqT-H0-V8l">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="mpF-zq-LZw"/>
+                                    <constraint firstAttribute="height" constant="44" id="mpF-zq-LZw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="新規登録">
@@ -2655,15 +2655,15 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-facebook" translatesAutoresizingMaskIntoConstraints="NO" id="8bD-Mx-lCr">
-                                <rect key="frame" x="60" y="702" width="30" height="30"/>
+                                <rect key="frame" x="60" y="713.5" width="25" height="25"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="KOP-6O-Ro1"/>
-                                    <constraint firstAttribute="height" constant="30" id="s9t-cE-6tq"/>
+                                    <constraint firstAttribute="width" constant="25" id="KOP-6O-Ro1"/>
+                                    <constraint firstAttribute="height" constant="25" id="s9t-cE-6tq"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="envelope" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RrB-JE-RaM">
-                                <rect key="frame" x="60" y="326.5" width="30" height="26.5"/>
+                                <rect key="frame" x="60" y="323.5" width="30" height="26.5"/>
                                 <color key="tintColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="2fV-Mk-Ywz"/>
@@ -3620,11 +3620,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-GV-OKV">
-                                <rect key="frame" x="40" y="782" width="334" height="50"/>
+                                <rect key="frame" x="40" y="788" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="334" id="K4t-Qh-OxD"/>
-                                    <constraint firstAttribute="height" constant="50" id="tU7-RK-mTf"/>
+                                    <constraint firstAttribute="height" constant="44" id="tU7-RK-mTf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="プロフィールを編集">
@@ -5069,7 +5069,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="DRF-JU-813">
                             <connections>
-                                <segue destination="x3X-7C-LOI" kind="presentation" id="jTP-0f-osb"/>
+                                <segue destination="2Vh-hk-u0L" kind="presentation" id="jTP-0f-osb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -6731,10 +6731,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDV-P9-cvU">
-                                <rect key="frame" x="40" y="369.5" width="334" height="50"/>
+                                <rect key="frame" x="40" y="369.5" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="DLp-Tk-HIt"/>
+                                    <constraint firstAttribute="height" constant="44" id="DLp-Tk-HIt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="保存して次へ">
@@ -6745,10 +6745,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tts-fN-TPP">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="89u-ci-tV4"/>
+                                    <constraint firstAttribute="height" constant="44" id="89u-ci-tV4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -7016,7 +7016,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ior-iV-Jbg">
-                                <rect key="frame" x="0.0" y="94" width="414" height="599"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="648"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="77" id="vHu-yj-WzS" customClass="MessageTableViewCell" customModule="フリマ" customModuleProvider="target">
@@ -7106,7 +7106,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOr-TF-3fH">
-                                <rect key="frame" x="0.0" y="753" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="07Y-EP-qtI">
                                         <rect key="frame" x="20" y="13" width="374" height="34"/>
@@ -7156,7 +7156,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFj-AW-HMd" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="693" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="742" width="414" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="J0J-6H-LW2"/>
                                 </constraints>
@@ -7622,10 +7622,10 @@
                                 </constraints>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JA4-Bq-4o7">
-                                <rect key="frame" x="50" y="703" width="314" height="50"/>
+                                <rect key="frame" x="50" y="709" width="314" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="oie-ic-yHu"/>
+                                    <constraint firstAttribute="height" constant="44" id="oie-ic-yHu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                 <state key="normal" title="画面に戻る">
@@ -8750,35 +8750,14 @@
             <objects>
                 <tableViewController storyboardIdentifier="ModalSearchVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qQB-7Y-lRy" customClass="ModalSearchTableViewController" customModule="フリマ" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Nmt-r7-O8F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="Yea-4n-SIS">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="aIB-wj-LTu">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aIB-wj-LTu" id="QEg-n6-1RH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索条件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-45-qPy">
-                                                    <rect key="frame" x="172" y="15" width="70" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                    <color key="textColor" name="original_black"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="IVv-45-qPy" firstAttribute="centerX" secondItem="QEg-n6-1RH" secondAttribute="centerX" id="QbM-No-Gvy"/>
-                                                <constraint firstItem="IVv-45-qPy" firstAttribute="top" secondItem="QEg-n6-1RH" secondAttribute="top" constant="15" id="j18-jl-ZH1"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="500" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="s5V-aO-Bee">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s5V-aO-Bee" id="1cl-Eu-Bf2">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
@@ -8815,7 +8794,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="dBQ-It-zG8">
-                                        <rect key="frame" x="0.0" y="148" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="88" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBQ-It-zG8" id="5W6-ni-uyY">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
@@ -8852,7 +8831,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="157" id="yhH-sH-UXo">
-                                        <rect key="frame" x="0.0" y="208" width="414" height="157"/>
+                                        <rect key="frame" x="0.0" y="148" width="414" height="157"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yhH-sH-UXo" id="OAb-0o-1Ou">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="157"/>
@@ -8931,18 +8910,18 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="500" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="109" id="Q5b-pU-r9W">
-                                        <rect key="frame" x="0.0" y="365" width="414" height="109"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="Q5b-pU-r9W">
+                                        <rect key="frame" x="0.0" y="305" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q5b-pU-r9W" id="eyT-2q-6bw">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8Y-ch-Rwh">
-                                                    <rect key="frame" x="40" y="5" width="334" height="50"/>
+                                                    <rect key="frame" x="40" y="8" width="334" height="44"/>
                                                     <color key="backgroundColor" name="original_green"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="KqX-lA-dhg"/>
+                                                        <constraint firstAttribute="height" constant="44" id="KqX-lA-dhg"/>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="334" id="aho-fw-9JK"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -8952,20 +8931,10 @@
                                                         <action selector="doneButtonPressed:" destination="qQB-7Y-lRy" eventType="touchUpInside" id="Wv7-le-c4m"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索条件を適応後、左上のリロードボタンを押してください。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfm-Oh-KbR">
-                                                    <rect key="frame" x="20" y="65" width="374" height="33.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="xfm-Oh-KbR" secondAttribute="bottom" constant="10.5" id="3Yi-dx-dNp"/>
-                                                <constraint firstAttribute="trailing" secondItem="xfm-Oh-KbR" secondAttribute="trailing" constant="20" id="BGM-u4-kdn"/>
-                                                <constraint firstItem="xfm-Oh-KbR" firstAttribute="leading" secondItem="eyT-2q-6bw" secondAttribute="leading" constant="20" id="LFS-J8-hJM"/>
-                                                <constraint firstItem="v8Y-ch-Rwh" firstAttribute="top" secondItem="eyT-2q-6bw" secondAttribute="top" constant="5" id="NZj-Br-2Qr"/>
-                                                <constraint firstItem="xfm-Oh-KbR" firstAttribute="top" secondItem="v8Y-ch-Rwh" secondAttribute="bottom" constant="10" id="QER-WO-Yyq"/>
                                                 <constraint firstItem="v8Y-ch-Rwh" firstAttribute="centerX" secondItem="eyT-2q-6bw" secondAttribute="centerX" id="h2g-BD-lNc"/>
+                                                <constraint firstItem="v8Y-ch-Rwh" firstAttribute="centerY" secondItem="eyT-2q-6bw" secondAttribute="centerY" id="jSv-Xr-yEC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="500" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -8979,7 +8948,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="cCW-T6-CtU">
-                        <barButtonItem key="rightBarButtonItem" title="完了" id="LCI-Gi-NRh"/>
+                        <barButtonItem key="leftBarButtonItem" image="batu" id="Scw-x9-xt6">
+                            <color key="tintColor" name="original_black"/>
+                            <connections>
+                                <action selector="backButtonPressed:" destination="qQB-7Y-lRy" id="qoS-UC-vsN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="v8Y-ch-Rwh" id="9cV-9s-f1l"/>
@@ -8995,7 +8969,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mmg-H2-OMD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2628.985507246377" y="945.53571428571422"/>
+            <point key="canvasLocation" x="3539.130434782609" y="945.53571428571422"/>
         </scene>
         <!--Report Table View Controller-->
         <scene sceneID="Tbc-rd-SDe">
@@ -9139,42 +9113,21 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19t-pl-uM1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3522" y="946"/>
+            <point key="canvasLocation" x="4431.884057971015" y="945.53571428571422"/>
         </scene>
         <!--Modal Post Table View Controller-->
         <scene sceneID="yKf-c0-1Dw">
             <objects>
                 <tableViewController id="x3X-7C-LOI" customClass="ModalPostTableViewController" customModule="フリマ" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="abx-f7-QaL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="W1P-Cp-XFz">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="OkR-Q0-Oj8">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OkR-Q0-Oj8" id="R3a-ve-hse">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索条件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kg-rg-s3B">
-                                                    <rect key="frame" x="172" y="15" width="70" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                    <color key="textColor" name="original_black"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="9Kg-rg-s3B" firstAttribute="top" secondItem="R3a-ve-hse" secondAttribute="top" constant="15" id="ECG-Jo-M7N"/>
-                                                <constraint firstItem="9Kg-rg-s3B" firstAttribute="centerX" secondItem="R3a-ve-hse" secondAttribute="centerX" id="HRO-Ej-ryR"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="500" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="NEN-je-d4b">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NEN-je-d4b" id="JJf-hx-GvE">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
@@ -9211,7 +9164,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="qUJ-ia-L4z">
-                                        <rect key="frame" x="0.0" y="148" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="88" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qUJ-ia-L4z" id="vNs-LJ-cKK">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
@@ -9248,7 +9201,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="kLJ-De-1V1">
-                                        <rect key="frame" x="0.0" y="208" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="148" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kLJ-De-1V1" id="1Aa-dj-8nD">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
@@ -9285,19 +9238,19 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="500" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="109" id="bQT-vE-YZa">
-                                        <rect key="frame" x="0.0" y="268" width="414" height="109"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="bQT-vE-YZa">
+                                        <rect key="frame" x="0.0" y="208" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bQT-vE-YZa" id="cu9-lZ-Ha4">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-EE-4r1">
-                                                    <rect key="frame" x="40" y="5" width="334" height="50"/>
+                                                    <rect key="frame" x="40" y="8" width="334" height="44"/>
                                                     <color key="backgroundColor" name="original_green"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="334" id="6j2-Ad-Jm3"/>
-                                                        <constraint firstAttribute="height" constant="50" id="PYb-p8-vrI"/>
+                                                        <constraint firstAttribute="height" constant="44" id="PYb-p8-vrI"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -9306,20 +9259,10 @@
                                                         <action selector="doneButtonPressed:" destination="x3X-7C-LOI" eventType="touchUpInside" id="cqJ-85-kcg"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索条件を適応後、左上のリロードボタンを押してください。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmu-8g-MBL">
-                                                    <rect key="frame" x="20" y="65" width="374" height="33.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Zmu-8g-MBL" secondAttribute="trailing" constant="20" id="Grd-gJ-KRa"/>
                                                 <constraint firstItem="Jnb-EE-4r1" firstAttribute="centerX" secondItem="cu9-lZ-Ha4" secondAttribute="centerX" id="JHk-7j-DeG"/>
-                                                <constraint firstItem="Jnb-EE-4r1" firstAttribute="top" secondItem="cu9-lZ-Ha4" secondAttribute="top" constant="5" id="PfB-0G-aCh"/>
-                                                <constraint firstItem="Zmu-8g-MBL" firstAttribute="leading" secondItem="cu9-lZ-Ha4" secondAttribute="leading" constant="20" id="dSk-8r-uyr"/>
-                                                <constraint firstItem="Zmu-8g-MBL" firstAttribute="top" secondItem="Jnb-EE-4r1" secondAttribute="bottom" constant="10" id="gIm-eC-rnO"/>
-                                                <constraint firstAttribute="bottom" secondItem="Zmu-8g-MBL" secondAttribute="bottom" constant="10.5" id="nXg-vJ-5sf"/>
+                                                <constraint firstItem="Jnb-EE-4r1" firstAttribute="centerY" secondItem="cu9-lZ-Ha4" secondAttribute="centerY" id="i01-Oa-2pX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="500" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -9333,7 +9276,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="N9q-oy-gXt">
-                        <barButtonItem key="rightBarButtonItem" title="完了" id="jyY-wK-gpj"/>
+                        <barButtonItem key="leftBarButtonItem" image="batu" id="UR5-Y7-uhU">
+                            <color key="tintColor" name="original_black"/>
+                            <connections>
+                                <action selector="backButtonPressed:" destination="x3X-7C-LOI" id="AO1-G4-f7Z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="Jnb-EE-4r1" id="LLp-fV-eiD"/>
@@ -9347,7 +9295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ueD-mj-wsi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4421.739130434783" y="3130.5803571428569"/>
+            <point key="canvasLocation" x="5225" y="3131"/>
         </scene>
         <!--Write Report Table View Controller-->
         <scene sceneID="nxZ-jS-Gox">
@@ -9441,7 +9389,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ho3-Z0-ikU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4421.739130434783" y="945.53571428571422"/>
+            <point key="canvasLocation" x="5331.884057971015" y="945.53571428571422"/>
         </scene>
         <!--Inquiry Table View Controller-->
         <scene sceneID="SmL-P2-4q0">
@@ -9883,7 +9831,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWd-4E-O3h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5225" y="946"/>
+            <point key="canvasLocation" x="6134.7826086956529" y="945.53571428571422"/>
         </scene>
         <!--Block List Table View Controller-->
         <scene sceneID="yTi-mc-x0Y">
@@ -11141,10 +11089,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qcs-yT-wZQ">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Kse-Dc-UIA"/>
+                                    <constraint firstAttribute="height" constant="44" id="Kse-Dc-UIA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -11240,10 +11188,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQx-h6-nt9">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="C3C-53-cYd"/>
+                                    <constraint firstAttribute="height" constant="44" id="C3C-53-cYd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -11340,10 +11288,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApJ-TL-hBZ">
-                                <rect key="frame" x="40" y="309" width="334" height="50"/>
+                                <rect key="frame" x="40" y="309" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ita-cE-qkg"/>
+                                    <constraint firstAttribute="height" constant="44" id="Ita-cE-qkg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="退会する">
@@ -11354,10 +11302,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNg-Dk-NoJ">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="XFl-PO-511"/>
+                                    <constraint firstAttribute="height" constant="44" id="XFl-PO-511"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -11445,10 +11393,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0a-4c-bDa">
-                                <rect key="frame" x="40" y="359" width="334" height="50"/>
+                                <rect key="frame" x="40" y="359" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="BMx-Sw-FQ9"/>
+                                    <constraint firstAttribute="height" constant="44" id="BMx-Sw-FQ9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="変更する">
@@ -11459,10 +11407,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jW8-L5-dJk">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9aq-VU-HJd"/>
+                                    <constraint firstAttribute="height" constant="44" id="9aq-VU-HJd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -11562,10 +11510,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dho-Kx-uRt">
-                                <rect key="frame" x="40" y="359" width="334" height="50"/>
+                                <rect key="frame" x="40" y="359" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="puK-Al-j0X"/>
+                                    <constraint firstAttribute="height" constant="44" id="puK-Al-j0X"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="変更する">
@@ -11576,10 +11524,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1u-ZW-cOw">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="lQ0-ah-Ork"/>
+                                    <constraint firstAttribute="height" constant="44" id="lQ0-ah-Ork"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -12198,10 +12146,10 @@
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Af1-Hw-IFJ">
-                                <rect key="frame" x="40" y="369" width="334" height="50"/>
+                                <rect key="frame" x="40" y="369" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="2kr-3L-h3t"/>
+                                    <constraint firstAttribute="height" constant="44" id="2kr-3L-h3t"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="次へ">
@@ -12224,10 +12172,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ACl-hJ-I2I">
-                                <rect key="frame" x="40" y="762" width="334" height="50"/>
+                                <rect key="frame" x="40" y="768" width="334" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="7xl-4Y-o97"/>
+                                    <constraint firstAttribute="height" constant="44" id="7xl-4Y-o97"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="戻る">
@@ -12489,14 +12437,50 @@
             </objects>
             <point key="canvasLocation" x="2628.985507246377" y="3940.8482142857142"/>
         </scene>
+        <!--MyUI Navigation View Controller-->
+        <scene sceneID="uIN-8A-m3E">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="wtv-2q-NNH" customClass="MyUINavigationViewController" customModule="フリマ" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8o7-g2-Ti1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qQB-7Y-lRy" kind="relationship" relationship="rootViewController" id="C8i-2w-8zA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EPq-LW-2Rf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2628.985507246377" y="945.53571428571422"/>
+        </scene>
+        <!--MyUI Navigation View Controller-->
+        <scene sceneID="lLe-vE-UAV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="2Vh-hk-u0L" customClass="MyUINavigationViewController" customModule="フリマ" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qUE-98-Pl7">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="x3X-7C-LOI" kind="relationship" relationship="rootViewController" id="1so-Mp-d54"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EWs-P4-mMo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4421.739130434783" y="3130.5803571428569"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ocR-CG-CJl"/>
         <segue reference="FcO-So-iES"/>
         <segue reference="2bB-BT-Qe5"/>
-        <segue reference="kKc-3X-sVg"/>
+        <segue reference="hxo-rm-HDa"/>
         <segue reference="3nk-HV-uhS"/>
-        <segue reference="ezP-c6-cnr"/>
+        <segue reference="PPE-aA-1pm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="back" width="30" height="30"/>

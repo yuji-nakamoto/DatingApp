@@ -450,8 +450,8 @@
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
 				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
-				8349F12524E56E8700CC5951 /* WithdrawViewController.swift */,
 				83545E4C24E67F76003BA06D /* ChangeEmailViewController.swift */,
+				8349F12524E56E8700CC5951 /* WithdrawViewController.swift */,
 				83545E4E24E67F8D003BA06D /* ChangePasswordViewController.swift */,
 			);
 			path = Aurthentication;
@@ -499,8 +499,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				C01663FFBA4B0DF0AD7361C9 /* [CP] Embed Pods Frameworks */,
-				67CABB456DB775D9F16D8802 /* [CP] Copy Pods Resources */,
+				8F75F4A93E67295506C3F68A /* [CP] Embed Pods Frameworks */,
+				954F7E81C41EB5EEE0CA1337 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -585,24 +585,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		67CABB456DB775D9F16D8802 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C01663FFBA4B0DF0AD7361C9 /* [CP] Embed Pods Frameworks */ = {
+		8F75F4A93E67295506C3F68A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -617,6 +600,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		954F7E81C41EB5EEE0CA1337 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

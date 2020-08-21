@@ -120,11 +120,11 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         
         descriptionLabel.text = "メールに記載しているURLを開き、認証を完了させてください。"
-        loginButton.layer.cornerRadius = 50 / 2
-        backButton.layer.cornerRadius = 50 / 2
+        loginButton.layer.cornerRadius = 44 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        resendButton.layer.cornerRadius = 50 / 2
+        resendButton.layer.cornerRadius = 44 / 2
         resendButton.layer.borderWidth = 1
         resendButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         

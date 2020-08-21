@@ -86,11 +86,11 @@ class EnterProfessionViewController: UIViewController {
         descriptionLabel.text = "職業を選択してください。\nあとで選択する場合はスキップを押してください。"
         anyLabel.layer.borderWidth = 1
         anyLabel.layer.borderColor = UIColor.systemGray3.cgColor
-        nextButton.layer.cornerRadius = 50 / 2
-        skipButton.layer.cornerRadius = 50 / 2
+        nextButton.layer.cornerRadius = 44 / 2
+        skipButton.layer.cornerRadius = 44 / 2
         skipButton.layer.borderWidth = 1
         skipButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        backButton.layer.cornerRadius = 50 / 2
+        backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
     }
