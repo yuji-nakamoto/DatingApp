@@ -23,6 +23,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
         setupColor()
         autoLogin()
         interstitial = createAndLoadIntersitial()
+        UserDefaults.standard.removeObject(forKey: LANKBAR)
     }
     
     // MARK: - Helpers

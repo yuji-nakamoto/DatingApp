@@ -33,7 +33,7 @@ class LikeNationwideViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-        tableView.reloadData()
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
@@ -80,6 +80,8 @@ class LikeNationwideViewController: UIViewController {
     }
     
     private func setupUI() {
+        
+        UserDefaults.standard.set(true, forKey: LANKBAR)
         navigationItem.title = "いいねランキング"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none

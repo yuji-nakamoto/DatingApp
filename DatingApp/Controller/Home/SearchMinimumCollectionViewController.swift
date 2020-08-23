@@ -178,6 +178,10 @@ class SearchMinimumCollectionViewController: UIViewController {
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
         
+        if UserDefaults.standard.object(forKey: LANKBAR) != nil {
+            lankView.isHidden = false
+        }
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             likeLankButton.backgroundColor = .white
             likeLankButton.setTitleColor(UIColor(named: O_PINK), for: .normal)
