@@ -46,6 +46,7 @@ class SelectColorTableViewController: UITableViewController {
             checkButton4.isHidden = true
             navigationController?.navigationBar.barTintColor = UIColor.white
             navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
         } else if UserDefaults.standard.object(forKey: PINK) != nil {
             checkButton1.isHidden = true
@@ -54,6 +55,7 @@ class SelectColorTableViewController: UITableViewController {
             checkButton4.isHidden = true
             navigationController?.navigationBar.barTintColor = UIColor(named: O_PINK)
             navigationController?.navigationBar.tintColor = UIColor.white
+            navigationItem.leftBarButtonItem?.tintColor = .white
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             checkButton1.isHidden = true
@@ -62,6 +64,7 @@ class SelectColorTableViewController: UITableViewController {
             checkButton4.isHidden = true
             navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
             navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             checkButton1.isHidden = true
@@ -70,6 +73,7 @@ class SelectColorTableViewController: UITableViewController {
             checkButton4.isHidden = false
             navigationController?.navigationBar.barTintColor = UIColor(named: O_DARK)
             navigationController?.navigationBar.tintColor = UIColor.white
+            navigationItem.leftBarButtonItem?.tintColor = .white
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
     }

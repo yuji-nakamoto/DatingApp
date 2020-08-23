@@ -111,6 +111,9 @@
 		838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F124C66651008BAA2C /* ResetPasswordViewController.swift */; };
 		838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F424C6E541008BAA2C /* EnterNameViewController.swift */; };
 		838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */; };
+		83AD3D2724F20DD400C02365 /* LikeNationwideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */; };
+		83AD3D2924F2161200C02365 /* LikeCountSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */; };
+		83AD3D2D24F2308400C02365 /* SearchMinimumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD3D2C24F2308400C02365 /* SearchMinimumCollectionViewController.swift */; };
 		83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231424E238D900363548 /* ModalPostTableViewController.swift */; };
 		83B6231724E23B4E00363548 /* PickerKeyboard17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231624E23B4E00363548 /* PickerKeyboard17.swift */; };
 		83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231824E2713E00363548 /* ReportTableViewController.swift */; };
@@ -232,6 +235,9 @@
 		838071F124C66651008BAA2C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		838071F424C6E541008BAA2C /* EnterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameViewController.swift; sourceTree = "<group>"; };
 		838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAgeViewController.swift; sourceTree = "<group>"; };
+		83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNationwideViewController.swift; sourceTree = "<group>"; };
+		83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCountSortViewController.swift; sourceTree = "<group>"; };
+		83AD3D2C24F2308400C02365 /* SearchMinimumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMinimumCollectionViewController.swift; sourceTree = "<group>"; };
 		83B6231424E238D900363548 /* ModalPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPostTableViewController.swift; sourceTree = "<group>"; };
 		83B6231624E23B4E00363548 /* PickerKeyboard17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard17.swift; sourceTree = "<group>"; };
 		83B6231824E2713E00363548 /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
@@ -373,10 +379,9 @@
 			isa = PBXGroup;
 			children = (
 				838071F324C66BAC008BAA2C /* Aurthentication */,
-				8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */,
 				8348E3F824D0EC09001D59C0 /* MyTabBarController.swift */,
 				8350140324D4E3C3008D1170 /* MyUINavigationViewController.swift */,
-				834912FD24C75B90002990F8 /* SearchViewController.swift */,
+				83AD3D2B24F21C2500C02365 /* Home */,
 				834966CF24DEE07B00C9B7DD /* CardViewController.swift */,
 				83B6232324E2E19700363548 /* Detail */,
 				8350140724D55D88008D1170 /* MyPage */,
@@ -460,6 +465,18 @@
 			path = Aurthentication;
 			sourceTree = "<group>";
 		};
+		83AD3D2B24F21C2500C02365 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				834912FD24C75B90002990F8 /* SearchViewController.swift */,
+				8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */,
+				83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */,
+				83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */,
+				83AD3D2C24F2308400C02365 /* SearchMinimumCollectionViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		83B6232324E2E19700363548 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,8 +519,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				76F1F8D460F25D4BAB942167 /* [CP] Embed Pods Frameworks */,
-				CCEA433F969FC481F1048A0A /* [CP] Copy Pods Resources */,
+				5DE091915DBBB6B0B279DC1B /* [CP] Embed Pods Frameworks */,
+				A6C1ADA1B4BB90151342DAE7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -588,7 +605,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		76F1F8D460F25D4BAB942167 /* [CP] Embed Pods Frameworks */ = {
+		5DE091915DBBB6B0B279DC1B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -605,7 +622,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CCEA433F969FC481F1048A0A /* [CP] Copy Pods Resources */ = {
+		A6C1ADA1B4BB90151342DAE7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -679,6 +696,7 @@
 				8348E76924E7CCEC0046C6DE /* TermsTableViewController.swift in Sources */,
 				83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */,
 				8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */,
+				83AD3D2D24F2308400C02365 /* SearchMinimumCollectionViewController.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
@@ -706,6 +724,7 @@
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
 				8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */,
 				834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */,
+				83AD3D2924F2161200C02365 /* LikeCountSortViewController.swift in Sources */,
 				83B6231724E23B4E00363548 /* PickerKeyboard17.swift in Sources */,
 				83B6232624E2E22900363548 /* BlockTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
@@ -717,6 +736,7 @@
 				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
 				834FD55624E973D900E4BDCB /* EnterWantToGenderViewController.swift in Sources */,
+				83AD3D2724F20DD400C02365 /* LikeNationwideViewController.swift in Sources */,
 				834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				8348E76F24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift in Sources */,
@@ -879,7 +899,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
@@ -901,7 +921,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;

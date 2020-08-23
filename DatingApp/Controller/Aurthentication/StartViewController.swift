@@ -14,6 +14,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     // MARK: - Lifecycle
     
     @IBOutlet weak var logoLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     private var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
@@ -27,7 +28,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     // MARK: - Helpers
     
     private func autoLogin() {
-        
+        indicator.startAnimating()
         if UserDefaults.standard.object(forKey: RCOMPLETION) != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 if self.interstitial.isReady {
@@ -39,9 +40,10 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
             }
             return
         }
+        indicator.stopAnimating()
         toSelectLoginVC()
     }
-    
+
     private func setupColor() {
         if UserDefaults.standard.object(forKey: PINK) != nil {
             logoLabel.textColor = UIColor(named: O_PINK)
@@ -72,8 +74,8 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -81,6 +83,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadIntersitial()
+        indicator.stopAnimating()
         toTabBerVC()
     }
 }

@@ -174,6 +174,7 @@ public let ALL = "all"
 public let HINT_END = "hint_end"
 public let TUTORIAL_END = "tutorial_end"
 public let MATCHING = "matching"
+public let SEARCH_MINI = "search_mini"
 
 // MARK: - Notification
 

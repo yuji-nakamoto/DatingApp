@@ -18,9 +18,14 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerView: GADBannerView!
-    
+    @IBOutlet weak var lankView: UIView!
+    @IBOutlet weak var likeLankButton: UIButton!
+    @IBOutlet weak var navBarView: UIView!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchMiniButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+
     private var users = [User]()
-    private var user = User()
     private var currentUser = User()
     private let refresh = UIRefreshControl()
     
@@ -36,7 +41,7 @@ class SearchViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
 
         setupBanner()
-        cofigureCollectionView()
+        configure()
         fetchBadgeCount()
         fetchUser()
     }
@@ -44,6 +49,7 @@ class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UserDefaults.standard.removeObject(forKey: CARDVC)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,8 +83,21 @@ class SearchViewController: UIViewController {
         refresh.endRefreshing()
     }
     
-    @IBAction func refreshButtonPressed(_ sender: Any) {
-        fetchUser()
+    @IBAction func likelankButtonPressed(_ sender: Any) {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.lankView.isHidden = !self.lankView.isHidden
+        }
+    }
+    
+    @IBAction func segmentControlled(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0: break
+        case 1: performSegue(withIdentifier: "LikeNationVC", sender: nil)
+        case 2: performSegue(withIdentifier: "LikeCountVC", sender: nil)
+        default: break
+        }
     }
     
     // MARK: - Fetch
@@ -101,12 +120,14 @@ class SearchViewController: UIViewController {
                     self.users = users
                     self.collectionView.reloadData()
                     self.indicator.stopAnimating()
+                    self.checkDefaultVC()
                 }
             } else {
                 User.genderAndResidenceSort(residence!, self.currentUser) { (users) in
                     self.users = users
                     self.collectionView.reloadData()
                     self.indicator.stopAnimating()
+                    self.checkDefaultVC()
                 }
             }
         }
@@ -135,19 +156,60 @@ class SearchViewController: UIViewController {
     
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
     
-    private func cofigureCollectionView() {
-        navigationItem.title = "さがす"
+    private func configure() {
+        
+        lankView.alpha = 0.85
+        navBarView.alpha = 0.85
+        likeLankButton.layer.cornerRadius = 27 / 2
         collectionView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            likeLankButton.backgroundColor = .white
+            likeLankButton.setTitleColor(UIColor(named: O_PINK), for: .normal)
+            titleLabel.textColor = .white
+            searchButton.tintColor = .white
+            searchMiniButton.tintColor = .white
+            navBarView.backgroundColor = UIColor(named: O_PINK)
+            lankView.backgroundColor = UIColor(named: O_PINK)
+            
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            likeLankButton.backgroundColor = UIColor(named: O_BLACK)
+            likeLankButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
+            titleLabel.textColor = UIColor(named: O_BLACK)
+            searchButton.tintColor = UIColor(named: O_BLACK)
+            searchMiniButton.tintColor = UIColor(named: O_BLACK)
+            navBarView.backgroundColor = UIColor(named: O_GREEN)
+            lankView.backgroundColor = UIColor(named: O_GREEN)
+
+        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            likeLankButton.backgroundColor = UIColor(named: O_GREEN)
+            likeLankButton.setTitleColor(UIColor.white, for: .normal)
+            titleLabel.textColor = UIColor(named: O_BLACK)
+            searchButton.tintColor = UIColor(named: O_BLACK)
+            searchMiniButton.tintColor = UIColor(named: O_BLACK)
+            navBarView.backgroundColor = .white
+            lankView.backgroundColor = .white
+
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            likeLankButton.backgroundColor = .white
+            likeLankButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            titleLabel.textColor = .white
+            searchButton.tintColor = .white
+            searchMiniButton.tintColor = .white
+            navBarView.backgroundColor = UIColor(named: O_DARK)
+            lankView.backgroundColor = UIColor(named: O_DARK)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -157,6 +219,19 @@ class SearchViewController: UIViewController {
             let toUserId = sender as! String
             detailVC.toUserId = toUserId
         }
+    }
+    
+    private func checkDefaultVC() {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+            toSearchMiniVC()
+        }
+    }
+    
+    private func toSearchMiniVC() {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toSearchMiniVC = storyboard.instantiateViewController(withIdentifier: "SearchMiniVC") as! SearchMinimumCollectionViewController
+        navigationController?.pushViewController(toSearchMiniVC, animated: false)
     }
 }
 
@@ -184,7 +259,8 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
             
             let bannerView = cell2.viewWithTag(1) as! GADBannerView
             bannerView.layer.cornerRadius = 15
-            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
             

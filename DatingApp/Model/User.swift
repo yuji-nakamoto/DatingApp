@@ -363,6 +363,114 @@ class User {
         }
     }
     
+    class func likeCountSort(_ residenceSearch: String, _ currentUser: User, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            
+            let usersRef = COLLECTION_USERS
+                .order(by: LIKECOUNT, descending: true)
+                .whereField(GENDER, isEqualTo: "男性")
+                .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                .limit(to: 30)
+
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+            
+        } else {
+            let usersRef = COLLECTION_USERS
+                .order(by: LIKECOUNT, descending: true)
+                .whereField(GENDER, isEqualTo: "女性")
+                .whereField(RESIDENCE, isEqualTo: residenceSearch)
+                .limit(to: 30)
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func likeCountSortNationwide(_ currentUser: User, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            
+            let usersRef = COLLECTION_USERS
+                .order(by: LIKECOUNT, descending: true)
+                .whereField(GENDER, isEqualTo: "男性")
+                .limit(to: 30)
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+            
+        } else {
+            let usersRef = COLLECTION_USERS
+                .order(by: LIKECOUNT, descending: true)
+                .whereField(GENDER, isEqualTo: "女性")
+                .limit(to: 30)
+
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+        }
+    }
+    
     class func fetchNationwide(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         
@@ -446,6 +554,15 @@ func updateUser(withValue: [String: Any]) {
     COLLECTION_USERS.document(User.currentUserId()).updateData(withValue) { (error) in
         if let error = error {
             print("Error updating user: \(error.localizedDescription)")
+        }
+    }
+}
+
+func updateCount(toUser: User, withValue: [String: Any]) {
+    
+    COLLECTION_USERS.document(toUser.uid).updateData(withValue) { (error) in
+        if let error = error {
+            print("Error updating count: \(error.localizedDescription)")
         }
     }
 }
