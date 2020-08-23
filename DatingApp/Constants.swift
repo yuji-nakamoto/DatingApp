@@ -87,6 +87,8 @@ public let SELECTEDGENRE = "selectedGenre"
 public let REPORT = "report"
 public let INQUIRY = "inquiry"
 public let OPINION = "opinion"
+public let POINTS = "points"
+public let ONEDAY = "oneDay"
 
 // MARK: - Counter
 

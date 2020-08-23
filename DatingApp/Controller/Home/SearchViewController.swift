@@ -28,12 +28,14 @@ class SearchViewController: UIViewController {
     private var users = [User]()
     private var currentUser = User()
     private let refresh = UIRefreshControl()
+    private var timer = Timer()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(loginBonus), userInfo: nil, repeats: true)
         UserDefaults.standard.set(true, forKey: RCOMPLETION)
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
@@ -44,6 +46,7 @@ class SearchViewController: UIViewController {
         configure()
         fetchBadgeCount()
         fetchUser()
+        getLoginBonus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +80,12 @@ class SearchViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    @objc func loginBonus() {
+        if timer.timeInterval > 4 {
+            updateUser(withValue: [ONEDAY: true])
+        }
+    }
     
     @objc func refreshCollectionView(){
         fetchUser()
@@ -135,7 +144,7 @@ class SearchViewController: UIViewController {
     
     private func fetchBadgeCount() {
         
-        User.fetchTabBarBadgeCount() { (user) in
+        User.fetchUserAddSnapshotListener() { (user) in
             self.currentUser = user
             
             if self.currentUser.messageBadgeCount == 0 {
@@ -153,6 +162,18 @@ class SearchViewController: UIViewController {
     }
     
     // MARK: - Heplers
+    
+    private func getLoginBonus() {
+        
+        User.fetchUserAddSnapshotListener { (user) in
+            self.currentUser = user
+            print("aaaaaaa")
+            if self.currentUser.oneDay == true {
+                updateUser(withValue: [POINTS: self.currentUser.points + 1, ONEDAY: false])
+                print(self.currentUser.oneDay)
+            }
+        }
+    }
     
     private func setupBanner() {
         

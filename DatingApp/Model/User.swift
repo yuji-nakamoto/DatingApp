@@ -59,6 +59,8 @@ class User {
     var inquiry: String!
     var opinion: String!
     var isBlock: Int!
+    var points: Int!
+    var oneDay: Bool!
     
     init() {
     }
@@ -112,6 +114,8 @@ class User {
         inquiry = dict[INQUIRY] as? String ?? ""
         opinion = dict[OPINION] as? String ?? ""
         isBlock = dict[ISBLOCK] as? Int ?? 0
+        points = dict[POINTS] as? Int ?? 0
+        oneDay = dict[ONEDAY] as? Bool ?? false
     }
     
     // MARK: - Return user
@@ -146,7 +150,7 @@ class User {
         }
     }
     
-    class func fetchTabBarBadgeCount(completion: @escaping(User) -> Void) {
+    class func fetchUserAddSnapshotListener(completion: @escaping(User) -> Void) {
         
         COLLECTION_USERS.document(User.currentUserId()).addSnapshotListener { (snapshot, error) in
             if let error = error {

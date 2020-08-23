@@ -139,7 +139,7 @@ class SearchMinimumCollectionViewController: UIViewController {
     
     private func fetchBadgeCount() {
         
-        User.fetchTabBarBadgeCount() { (user) in
+        User.fetchUserAddSnapshotListener() { (user) in
             self.currentUser = user
             
             if self.currentUser.messageBadgeCount == 0 {

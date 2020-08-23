@@ -71,6 +71,7 @@ class EnterResidenceMeetController: UIViewController {
                     TOBACCO: "未設定",
                     HOBBY1: "",
                     STATUS: "online",
+                    POINTS: 1,
                     DATE: date,
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]
         
