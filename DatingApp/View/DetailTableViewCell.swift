@@ -143,10 +143,10 @@ class DetailTableViewCell: UITableViewCell {
             commentLabel.textColor = UIColor(named: O_BLACK)
         }
         
-        if user?.detailMap == "" {
+        if user?.detailArea == "" {
             detailMapLabel.text = "未設定"
         } else {
-            detailMapLabel.text = user?.detailMap
+            detailMapLabel.text = user?.detailArea
         }
         
         if user!.age == nil {

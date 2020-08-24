@@ -34,7 +34,7 @@ class User {
     var likeCount: Int!
     var typeCount: Int!
     var lastChanged: Timestamp!
-    var date: Double!
+    var created_at: Double!
     var messageBadgeCount: Int!
     var appBadgeCount: Int!
     var myPageBadgeCount: Int!
@@ -53,7 +53,7 @@ class User {
     var hobby1: String!
     var hobby2: String!
     var hobby3: String!
-    var detailMap: String!
+    var detailArea: String!
     var selectedGenre: String!
     var report: String!
     var inquiry: String!
@@ -61,10 +61,13 @@ class User {
     var isBlock: Int!
     var points: Int!
     var oneDay: Bool!
+    var loginTime: Double!
+    var oneDayLate: Timestamp!
+    var messageItem: Int!
     
     init() {
     }
-    
+        
     init(dict: [String: Any]) {
         uid = dict[UID] as? String ?? ""
         username = dict[USERNAME] as? String ?? ""
@@ -107,8 +110,8 @@ class User {
         hobby1 = dict[HOBBY1] as? String ?? ""
         hobby2 = dict[HOBBY2] as? String ?? ""
         hobby3 = dict[HOBBY3] as? String ?? ""
-        detailMap = dict[DETAILMAP] as? String ?? ""
-        date = dict[DATE] as? Double ?? 0
+        detailArea = dict[DETAILAREA] as? String ?? ""
+        created_at = dict[CREATED_AT] as? Double ?? 0
         selectedGenre = dict[SELECTEDGENRE] as? String ?? ""
         report = dict[REPORT] as? String ?? ""
         inquiry = dict[INQUIRY] as? String ?? ""
@@ -116,6 +119,9 @@ class User {
         isBlock = dict[ISBLOCK] as? Int ?? 0
         points = dict[POINTS] as? Int ?? 0
         oneDay = dict[ONEDAY] as? Bool ?? false
+        loginTime = dict[LOGINTIME] as? Double ?? 0
+        oneDayLate = dict[ONEDAYLATE] as? Timestamp ?? Timestamp(date: Date())
+        messageItem = dict[MESSAGEITEM] as? Int ?? 0
     }
     
     // MARK: - Return user

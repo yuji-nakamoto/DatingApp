@@ -19,12 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var user = User()
     let gcmMessageIDKey = "gcm.message_id"
+    var timer = Timer()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        keepUpdatingStatus()
+        timerMethod()
+        getLoginBonus()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         
@@ -51,34 +53,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(setting)
             application.registerForRemoteNotifications()
         }
-        
         return true
     }
     
-    func keepUpdatingStatus() {
-        guard Auth.auth().currentUser?.uid != nil else { return }
-        let database = Database.database()
-        let uid = Auth.auth().currentUser!.uid
+    private func timerMethod() {
         
-        database.reference(withPath: ".info/connected").observe(.value) { snap in
-            let connected = snap.value as? Bool ?? false
-            print("connected: \(connected)")
-            if !connected {
-                return
-            }
-            let statusRef = database.reference().child(uid)
+        self.timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+    }
+    
+    private func getLoginBonus() {
+        
+        User.fetchUserAddSnapshotListener { (user) in
+            self.user = user
+            guard self.user.oneDayLate != nil else { return }
             
-            statusRef.onDisconnectSetValue([
-                STATUS: "offline",
-                LASTCHANGE: ServerValue.timestamp()
-            ]) { (error, _) in
-                
-                statusRef.setValue([
-                    STATUS: "online",
-                    LASTCHANGE: ServerValue.timestamp()
-                ])
+            let now = Timestamp()
+            let nowDate = now.dateValue()
+            let oneDayLate = user.oneDayLate.dateValue()
+            
+            if nowDate >= oneDayLate {
+                let day = Date()
+                let oneDayLate = Calendar.current.date(byAdding: .day, value: 1, to: day)!
+                updateUser(withValue: [ONEDAY: true, ONEDAYLATE: oneDayLate])
             }
         }
+    }
+    
+    @objc func timeCount() {
+        updateUser(withValue: [LOGINTIME: user.loginTime + 30])
     }
     
     func application(_ application: UIApplication,open url:URL,sourceApplication: String?,annotation: Any) -> Bool {
@@ -160,7 +162,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
                 updateUser(withValue: dict)
             }
         }
-
+        
         completionHandler([.sound, .badge, .alert])
     }
     

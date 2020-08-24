@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  SearchCollectionViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/07/22.
@@ -11,7 +11,7 @@ import Firebase
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class SearchViewController: UIViewController {
+class SearchCollectionViewController: UIViewController {
     
     // MARK:  - Properties
     
@@ -24,18 +24,18 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchMiniButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-
+    @IBOutlet weak var loginBunusView: UIView!
+    
     private var users = [User]()
     private var currentUser = User()
     private let refresh = UIRefreshControl()
-    private var timer = Timer()
+    private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(loginBonus), userInfo: nil, repeats: true)
         UserDefaults.standard.set(true, forKey: RCOMPLETION)
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
@@ -44,9 +44,8 @@ class SearchViewController: UIViewController {
 
         setupBanner()
         configure()
-        fetchBadgeCount()
+        fetchBadgeCountAndOneDay()
         fetchUser()
-        getLoginBonus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,10 +80,21 @@ class SearchViewController: UIViewController {
     
     // MARK: - Actions
     
-    @objc func loginBonus() {
-        if timer.timeInterval > 4 {
-            updateUser(withValue: [ONEDAY: true])
+    @IBAction func miniCollectionButtonPressed(_ sender: Any) {
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI) == nil {
+            UserDefaults.standard.set(true, forKey: SEARCH_MINI)
+            searchMiniButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
+            fetchUser()
+        } else {
+            UserDefaults.standard.removeObject(forKey: SEARCH_MINI)
+            searchMiniButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
+            fetchUser()
         }
+    }
+    
+    @objc func handleDismissal() {
+        removeEffectView()
     }
     
     @objc func refreshCollectionView(){
@@ -117,6 +127,7 @@ class SearchViewController: UIViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.currentUser = user
+            
             if self.currentUser.gender == "女性" {
                 UserDefaults.standard.set(true, forKey: FEMALE)
             } else {
@@ -129,23 +140,26 @@ class SearchViewController: UIViewController {
                     self.users = users
                     self.collectionView.reloadData()
                     self.indicator.stopAnimating()
-                    self.checkDefaultVC()
                 }
             } else {
                 User.genderAndResidenceSort(residence!, self.currentUser) { (users) in
                     self.users = users
                     self.collectionView.reloadData()
                     self.indicator.stopAnimating()
-                    self.checkDefaultVC()
                 }
             }
         }
     }
     
-    private func fetchBadgeCount() {
+    private func fetchBadgeCountAndOneDay() {
         
         User.fetchUserAddSnapshotListener() { (user) in
             self.currentUser = user
+            
+            if self.currentUser.oneDay == true {
+                updateUser(withValue: [POINTS: self.currentUser.points + 1, ONEDAY: false])
+                self.showLoginBunusView()
+            }
             
             if self.currentUser.messageBadgeCount == 0 {
                 self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = nil
@@ -163,18 +177,32 @@ class SearchViewController: UIViewController {
     
     // MARK: - Heplers
     
-    private func getLoginBonus() {
+    private func showLoginBunusView() {
         
-        User.fetchUserAddSnapshotListener { (user) in
-            self.currentUser = user
-            print("aaaaaaa")
-            if self.currentUser.oneDay == true {
-                updateUser(withValue: [POINTS: self.currentUser.points + 1, ONEDAY: false])
-                print(self.currentUser.oneDay)
-            }
-        }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
+        visualEffectView.addGestureRecognizer(tap)
+        
+        visualEffectView.frame = self.view.frame
+        visualEffectView.alpha = 0
+        view.addSubview(self.visualEffectView)
+        view.addSubview(self.loginBunusView)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 1
+            self.loginBunusView.alpha = 1
+            
+        }, completion: nil)
     }
     
+    private func removeEffectView() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 0
+            self.loginBunusView.alpha = 0
+        }) { (_) in
+            self.visualEffectView.removeFromSuperview()
+        }
+    }
+
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
@@ -185,8 +213,10 @@ class SearchViewController: UIViewController {
     
     private func configure() {
         
+        loginBunusView.alpha = 0
         lankView.alpha = 0.85
         navBarView.alpha = 0.85
+        loginBunusView.layer.cornerRadius = 15
         likeLankButton.layer.cornerRadius = 27 / 2
         collectionView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
@@ -235,6 +265,12 @@ class SearchViewController: UIViewController {
             navBarView.backgroundColor = UIColor(named: O_DARK)
             lankView.backgroundColor = UIColor(named: O_DARK)
         }
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+            searchMiniButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
+        } else {
+            searchMiniButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -245,30 +281,18 @@ class SearchViewController: UIViewController {
             detailVC.toUserId = toUserId
         }
     }
-    
-    private func checkDefaultVC() {
-        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
-            toSearchMiniVC()
-        }
-    }
-    
-    private func toSearchMiniVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toSearchMiniVC = storyboard.instantiateViewController(withIdentifier: "SearchMiniVC") as! SearchMinimumCollectionViewController
-        navigationController?.pushViewController(toSearchMiniVC, animated: false)
-    }
 }
 
 //MARK: CollectionView
 
-extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension SearchCollectionViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.row == 0 || indexPath.row == 14 || indexPath.row == 28 || indexPath.row == 42 || indexPath.row == 56 || indexPath.row == 70 || indexPath.row == 84 || indexPath.row == 98 {
+        if indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             return CGSize(width: 300, height: 250)
         }
+        
         return CGSize(width: 150, height: 230)
     }
     
@@ -278,17 +302,29 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == 0 || indexPath.row == 14 || indexPath.row == 28 || indexPath.row == 42 || indexPath.row == 56 || indexPath.row == 70 || indexPath.row == 84 || indexPath.row == 98 {
+        if indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
-            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath)
+            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath)
             
-            let bannerView = cell2.viewWithTag(1) as! GADBannerView
+            let bannerView = cell3.viewWithTag(1) as! GADBannerView
             bannerView.layer.cornerRadius = 15
             bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
 //            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
             
+            return cell3
+        }
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as! SearchCollectionViewCell
+            
+            cell2.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+            cell2.layer.shadowColor = UIColor.black.cgColor
+            cell2.layer.shadowOpacity = 0.3
+            cell2.layer.shadowRadius = 4
+            cell2.layer.masksToBounds = false
+            cell2.configureMiniCell(users[indexPath.row - 1])
             return cell2
         }
         
@@ -303,7 +339,7 @@ extension SearchViewController:  UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
-extension SearchViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+extension SearchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         

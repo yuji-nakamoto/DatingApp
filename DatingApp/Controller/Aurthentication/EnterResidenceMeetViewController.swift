@@ -51,6 +51,8 @@ class EnterResidenceMeetController: UIViewController {
 
     private func saveUserProfession() {
         
+        let day = Date()
+        let oneDayLate = Calendar.current.date(byAdding: .day, value: 1, to: day)!
         let date: Double = Date().timeIntervalSince1970
         let dict = [RESIDENCESEARCH: residenceLabel.text!,
                     SELFINTRO: "はじめまして！",
@@ -60,7 +62,7 @@ class EnterResidenceMeetController: UIViewController {
                     BLOOD: "未設定",
                     EDUCATION: "未設定",
                     BIRTHPLACE: "未設定",
-                    DETAILMAP: "",
+                    DETAILAREA: "",
                     MARRIAGEHISTORY: "未設定",
                     MARRIAGE: "未設定",
                     CHILD1: "未設定",
@@ -72,7 +74,8 @@ class EnterResidenceMeetController: UIViewController {
                     HOBBY1: "",
                     STATUS: "online",
                     POINTS: 1,
-                    DATE: date,
+                    CREATED_AT: date,
+                    ONEDAYLATE: oneDayLate,
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]
         
         indicator.stopAnimating()

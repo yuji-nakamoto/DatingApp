@@ -39,12 +39,8 @@ class LikeCountSortViewController: UIViewController {
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0:
-            if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
-                toSearchMiniVC()
-            } else {
-                toSearchVC()
-            }        case 1: toLikeNationVC()
+        case 0: toSearchVC()
+        case 1: toLikeNationVC()
         case 2: break
         default: break
         }
@@ -128,7 +124,7 @@ class LikeCountSortViewController: UIViewController {
     private func toSearchVC() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toSearchVC = storyboard.instantiateViewController(withIdentifier: "SearchVC") as! SearchViewController
+        let toSearchVC = storyboard.instantiateViewController(withIdentifier: "SearchVC") as! SearchCollectionViewController
         navigationController?.pushViewController(toSearchVC, animated: false)
     }
     
@@ -137,13 +133,6 @@ class LikeCountSortViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let toLikeNationVC = storyboard.instantiateViewController(withIdentifier: "LikeNationVC") as! LikeNationwideViewController
         navigationController?.pushViewController(toLikeNationVC, animated: false)
-    }
-    
-    private func toSearchMiniVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toSearchMiniVC = storyboard.instantiateViewController(withIdentifier: "SearchMiniVC") as! SearchMinimumCollectionViewController
-        navigationController?.pushViewController(toSearchMiniVC, animated: false)
     }
 }
 

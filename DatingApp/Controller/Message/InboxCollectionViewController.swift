@@ -58,7 +58,7 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     @IBAction func segmentControled(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
-        case 0: print("")
+        case 0: break
         case 1: performSegue(withIdentifier: "InboxVC", sender: nil)
         case 2: performSegue(withIdentifier: "FeedVC", sender: nil)
         default: break

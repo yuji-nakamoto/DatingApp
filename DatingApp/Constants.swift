@@ -82,13 +82,17 @@ public let POSTCOUNT = "postCount"
 public let HOBBY1 = "hobby1"
 public let HOBBY2 = "hobby2"
 public let HOBBY3 = "hobby3"
-public let DETAILMAP = "detailMap"
+public let DETAILAREA = "detailArea"
 public let SELECTEDGENRE = "selectedGenre"
 public let REPORT = "report"
 public let INQUIRY = "inquiry"
 public let OPINION = "opinion"
 public let POINTS = "points"
 public let ONEDAY = "oneDay"
+public let LOGINTIME = "loginTime"
+public let ONEDAYLATE = "oneDaylate"
+public let CREATED_AT = "created_at"
+public let MESSAGEITEM = "messageItem"
 
 // MARK: - Counter
 

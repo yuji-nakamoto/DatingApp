@@ -42,7 +42,7 @@ class FeedTableViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0: toInboxCVC()
         case 1: toInboxVC()
-        case 2: print("")
+        case 2: break
         default: break
         }
     }

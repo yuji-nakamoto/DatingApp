@@ -17,6 +17,7 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var cogImageView: UIImageView!
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var pointLabel: UILabel!
     
     var myPageVC: MyPageTableViewController?
 
@@ -25,6 +26,7 @@ class MyPageTableViewCell: UITableViewCell {
         if user?.uid != nil {
             profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
             nameLabel.text = user!.username
+            pointLabel.text = String(user!.points)
         }
     }
     

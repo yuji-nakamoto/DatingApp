@@ -63,12 +63,12 @@ class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func setupUserInfo(_ user: User) {
         
-        detailMapTextField.text = user.detailMap
+        detailMapTextField.text = user.detailArea
     }
     
     private func saveTextField() {
         
-        updateUser(withValue: [DETAILMAP: detailMapTextField.text as Any])
+        updateUser(withValue: [DETAILAREA: detailMapTextField.text as Any])
         navigationController?.popViewController(animated: true)
     }
     

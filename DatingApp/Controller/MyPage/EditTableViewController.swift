@@ -510,8 +510,8 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             commentSetLbl.text = "入力する"
         }
         
-        if user.detailMap != "" {
-            detailMapSetLbl.text = user.detailMap
+        if user.detailArea != "" {
+            detailMapSetLbl.text = user.detailArea
             detailMapSetLbl.textColor = UIColor(named: O_GREEN)
         } else {
             detailMapSetLbl.textColor = .systemGray

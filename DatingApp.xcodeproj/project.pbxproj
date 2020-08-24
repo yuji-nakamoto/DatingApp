@@ -54,7 +54,7 @@
 		834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F724C74254002990F8 /* EnterProfessionViewController.swift */; };
 		834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */; };
 		834912FC24C75830002990F8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FB24C75830002990F8 /* StartViewController.swift */; };
-		834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* SearchViewController.swift */; };
+		834912FE24C75B90002990F8 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* SearchCollectionViewController.swift */; };
 		834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */; };
 		834966C024DC0B9600C9B7DD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BF24DC0B9600C9B7DD /* Match.swift */; };
 		834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C324DC25E200C9B7DD /* InboxTableViewController.swift */; };
@@ -113,7 +113,6 @@
 		838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */; };
 		83AD3D2724F20DD400C02365 /* LikeNationwideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */; };
 		83AD3D2924F2161200C02365 /* LikeCountSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */; };
-		83AD3D2D24F2308400C02365 /* SearchMinimumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AD3D2C24F2308400C02365 /* SearchMinimumCollectionViewController.swift */; };
 		83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231424E238D900363548 /* ModalPostTableViewController.swift */; };
 		83B6231724E23B4E00363548 /* PickerKeyboard17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231624E23B4E00363548 /* PickerKeyboard17.swift */; };
 		83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6231824E2713E00363548 /* ReportTableViewController.swift */; };
@@ -175,7 +174,7 @@
 		834912F724C74254002990F8 /* EnterProfessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfessionViewController.swift; sourceTree = "<group>"; };
 		834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceViewController.swift; sourceTree = "<group>"; };
 		834912FB24C75830002990F8 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		834912FD24C75B90002990F8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		834912FD24C75B90002990F8 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834966BF24DC0B9600C9B7DD /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		834966C324DC25E200C9B7DD /* InboxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
@@ -237,7 +236,6 @@
 		838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAgeViewController.swift; sourceTree = "<group>"; };
 		83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNationwideViewController.swift; sourceTree = "<group>"; };
 		83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCountSortViewController.swift; sourceTree = "<group>"; };
-		83AD3D2C24F2308400C02365 /* SearchMinimumCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMinimumCollectionViewController.swift; sourceTree = "<group>"; };
 		83B6231424E238D900363548 /* ModalPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPostTableViewController.swift; sourceTree = "<group>"; };
 		83B6231624E23B4E00363548 /* PickerKeyboard17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboard17.swift; sourceTree = "<group>"; };
 		83B6231824E2713E00363548 /* ReportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableViewController.swift; sourceTree = "<group>"; };
@@ -468,11 +466,10 @@
 		83AD3D2B24F21C2500C02365 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				834912FD24C75B90002990F8 /* SearchViewController.swift */,
+				834912FD24C75B90002990F8 /* SearchCollectionViewController.swift */,
 				8368CD8F24E16B49009C0391 /* ModalSearchTableViewController.swift */,
 				83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */,
 				83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */,
-				83AD3D2C24F2308400C02365 /* SearchMinimumCollectionViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -519,8 +516,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				5DE091915DBBB6B0B279DC1B /* [CP] Embed Pods Frameworks */,
-				A6C1ADA1B4BB90151342DAE7 /* [CP] Copy Pods Resources */,
+				A0A10C21C453E76EE2C595C1 /* [CP] Embed Pods Frameworks */,
+				7B367A20C3DFB6AE7602AAAA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -605,24 +602,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5DE091915DBBB6B0B279DC1B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A6C1ADA1B4BB90151342DAE7 /* [CP] Copy Pods Resources */ = {
+		7B367A20C3DFB6AE7602AAAA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -637,6 +617,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0A10C21C453E76EE2C595C1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -661,7 +658,7 @@
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
 				8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */,
-				834912FE24C75B90002990F8 /* SearchViewController.swift in Sources */,
+				834912FE24C75B90002990F8 /* SearchCollectionViewController.swift in Sources */,
 				834966D424DEE19C00C9B7DD /* Card.swift in Sources */,
 				838071CA24C608F5008BAA2C /* AppDelegate.swift in Sources */,
 				830AF02E24EEE8140043827B /* HelpViewController.swift in Sources */,
@@ -696,7 +693,6 @@
 				8348E76924E7CCEC0046C6DE /* TermsTableViewController.swift in Sources */,
 				83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */,
 				8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */,
-				83AD3D2D24F2308400C02365 /* SearchMinimumCollectionViewController.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,

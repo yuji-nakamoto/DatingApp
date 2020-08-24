@@ -40,7 +40,7 @@ class InboxTableViewController: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0: toInboxCVC()
-        case 1: print("")
+        case 1: break
         case 2: performSegue(withIdentifier: "FeedVC", sender: nil)
         default: break
         }
