@@ -49,7 +49,6 @@ class FeedTableViewController: UIViewController {
     
     @objc func refreshCollectionView(){
         fetchMatchedUser()
-        refresh.endRefreshing()
     }
     
     // MARK: - Fetch
@@ -69,6 +68,7 @@ class FeedTableViewController: UIViewController {
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
+                self.refresh.endRefreshing()
                 return
             }
             User.fetchUser(match.uid) { (user) in
@@ -76,11 +76,13 @@ class FeedTableViewController: UIViewController {
                 guard let uid = match.uid else { return }
                  Comment.fetchComment(toUserId: uid) { (comment) in
                     if comment.uid == "" {
+                        self.refresh.endRefreshing()
                         return
                     }
                      self.fetchUsers(uid) {
                          self.comments.insert(comment, at: 0)
                          self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                      }
                  }
             }

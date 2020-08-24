@@ -667,7 +667,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backButton.tintColor = UIColor.white
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
-            backButton.tintColor = UIColor(named: O_BLACK)
+            backButton.tintColor = UIColor.white
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             backButton.tintColor = UIColor(named: O_BLACK)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {

@@ -137,20 +137,20 @@ class FootstepTableViewController: UIViewController {
         navigationItem.title = "足あと"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        backView.alpha = 0.85
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
             backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
             backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
             backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
             backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
         }
     }
 }

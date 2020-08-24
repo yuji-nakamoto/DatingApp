@@ -321,11 +321,11 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = UIColor(named: O_GREEN)
             navBar.alpha = 0.85
-            nameLabel.textColor = UIColor(named: O_BLACK)
-            backButton.tintColor = UIColor(named: O_BLACK)
+            nameLabel.textColor = .white
+            backButton.tintColor = .white
             
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)

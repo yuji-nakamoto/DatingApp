@@ -25,9 +25,11 @@ class SearchCollectionViewController: UIViewController {
     @IBOutlet weak var searchMiniButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loginBunusView: UIView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     
     private var users = [User]()
-    private var currentUser = User()
+    private var user = User()
     private let refresh = UIRefreshControl()
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
@@ -41,15 +43,15 @@ class SearchCollectionViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-
-        setupBanner()
-        configure()
-        fetchBadgeCountAndOneDay()
+        
         fetchUser()
+        setupBanner()
+        checkOneDay()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configure()
         UserDefaults.standard.removeObject(forKey: CARDVC)
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -73,7 +75,7 @@ class SearchCollectionViewController: UIViewController {
         }
         
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
-            fetchUser()
+            fetchUsers(user)
             UserDefaults.standard.removeObject(forKey: REFRESH)
         }
     }
@@ -85,11 +87,11 @@ class SearchCollectionViewController: UIViewController {
         if UserDefaults.standard.object(forKey: SEARCH_MINI) == nil {
             UserDefaults.standard.set(true, forKey: SEARCH_MINI)
             searchMiniButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
-            fetchUser()
+            fetchUsers(user)
         } else {
             UserDefaults.standard.removeObject(forKey: SEARCH_MINI)
             searchMiniButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
-            fetchUser()
+            fetchUsers(user)
         }
     }
     
@@ -98,8 +100,7 @@ class SearchCollectionViewController: UIViewController {
     }
     
     @objc func refreshCollectionView(){
-        fetchUser()
-        refresh.endRefreshing()
+        fetchUsers(user)
     }
     
     @IBAction func likelankButtonPressed(_ sender: Any) {
@@ -122,55 +123,49 @@ class SearchCollectionViewController: UIViewController {
     // MARK: - Fetch
     
     private func fetchUser() {
-        indicator.startAnimating()
-        users.removeAll()
         
         User.fetchUser(User.currentUserId()) { (user) in
-            self.currentUser = user
+            self.user = user
+            self.fetchUsers(self.user)
+            self.collectionView.reloadData()
             
-            if self.currentUser.gender == "女性" {
+            if self.user.gender == "女性" {
                 UserDefaults.standard.set(true, forKey: FEMALE)
             } else {
                 UserDefaults.standard.removeObject(forKey: FEMALE)
             }
-            
-            let residence = self.currentUser.residenceSerch
-            if residence == "こだわらない" {
-                User.fetchNationwide(self.currentUser) { (users) in
-                    self.users = users
-                    self.collectionView.reloadData()
-                    self.indicator.stopAnimating()
-                }
-            } else {
-                User.genderAndResidenceSort(residence!, self.currentUser) { (users) in
-                    self.users = users
-                    self.collectionView.reloadData()
-                    self.indicator.stopAnimating()
-                }
+        }
+    }
+    
+    private func fetchUsers(_ user: User) {
+        indicator.startAnimating()
+        
+        let residence = user.residenceSerch
+        if residence == "こだわらない" {
+            User.fetchNationwide(user) { (users) in
+                self.users = users
+                self.collectionView.reloadData()
+                self.indicator.stopAnimating()
+                self.refresh.endRefreshing()
+            }
+        } else {
+            User.fetchUserResidenceSort(residence!, user) { (users) in
+                self.users = users
+                self.collectionView.reloadData()
+                self.indicator.stopAnimating()
+                self.refresh.endRefreshing()
             }
         }
     }
     
-    private func fetchBadgeCountAndOneDay() {
+    private func checkOneDay() {
         
         User.fetchUserAddSnapshotListener() { (user) in
-            self.currentUser = user
+            self.user = user
             
-            if self.currentUser.oneDay == true {
-                updateUser(withValue: [POINTS: self.currentUser.points + 1, ONEDAY: false])
+            if self.user.oneDay == true {
+                updateUser(withValue: [POINTS: self.user.points + 1, ONEDAY: false])
                 self.showLoginBunusView()
-            }
-            
-            if self.currentUser.messageBadgeCount == 0 {
-                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = nil
-            } else {
-                self.tabBarController!.viewControllers![3].tabBarItem?.badgeValue = String(self.currentUser.messageBadgeCount)
-            }
-            
-            if self.currentUser.myPageBadgeCount == 0 {
-                self.tabBarController!.viewControllers![4].tabBarItem?.badgeValue = nil
-            } else {
-                self.tabBarController!.viewControllers![4].tabBarItem?.badgeValue = String(self.currentUser.myPageBadgeCount)
             }
         }
     }
@@ -202,17 +197,18 @@ class SearchCollectionViewController: UIViewController {
             self.visualEffectView.removeFromSuperview()
         }
     }
-
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
     
     private func configure() {
         
+        segmentControl.selectedSegmentIndex = 0
         loginBunusView.alpha = 0
         lankView.alpha = 0.85
         navBarView.alpha = 0.85
@@ -239,14 +235,14 @@ class SearchCollectionViewController: UIViewController {
             lankView.backgroundColor = UIColor(named: O_PINK)
             
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            likeLankButton.backgroundColor = UIColor(named: O_BLACK)
+            likeLankButton.backgroundColor = UIColor.white
             likeLankButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            titleLabel.textColor = UIColor(named: O_BLACK)
-            searchButton.tintColor = UIColor(named: O_BLACK)
-            searchMiniButton.tintColor = UIColor(named: O_BLACK)
+            titleLabel.textColor = UIColor.white
+            searchButton.tintColor = UIColor.white
+            searchMiniButton.tintColor = UIColor.white
             navBarView.backgroundColor = UIColor(named: O_GREEN)
             lankView.backgroundColor = UIColor(named: O_GREEN)
-
+            
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             likeLankButton.backgroundColor = UIColor(named: O_GREEN)
             likeLankButton.setTitleColor(UIColor.white, for: .normal)
@@ -255,7 +251,7 @@ class SearchCollectionViewController: UIViewController {
             searchMiniButton.tintColor = UIColor(named: O_BLACK)
             navBarView.backgroundColor = .white
             lankView.backgroundColor = .white
-
+            
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             likeLankButton.backgroundColor = .white
             likeLankButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
@@ -287,6 +283,22 @@ class SearchCollectionViewController: UIViewController {
 
 extension SearchCollectionViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+            return UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 10)
+        }
+        return UIEdgeInsets(top: 30, left: 25, bottom: 0, right: 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+            return 10
+        }
+        return 25
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
@@ -309,7 +321,7 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
             let bannerView = cell3.viewWithTag(1) as! GADBannerView
             bannerView.layer.cornerRadius = 15
             bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+            //            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
             
@@ -329,7 +341,6 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
-        
         cell.configureCell(users[indexPath.row - 1])
         return cell
     }

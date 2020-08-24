@@ -28,21 +28,29 @@ class MyUINavigationViewController: UINavigationController {
             navigationBar.barTintColor = UIColor(named: O_PINK)
             navigationBar.tintColor = UIColor.white
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationItem.leftBarButtonItem?.tintColor = .white
+            navigationItem.rightBarButtonItem?.tintColor = .white
             
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
             navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            navigationBar.tintColor = UIColor.white
+            navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationItem.leftBarButtonItem?.tintColor = .white
+            navigationItem.rightBarButtonItem?.tintColor = .white
 
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             navigationBar.barTintColor = UIColor.white
             navigationBar.tintColor = UIColor(named: O_BLACK)
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
+            navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
             
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationBar.barTintColor = UIColor(named: O_DARK)
             navigationBar.tintColor = UIColor.white
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationItem.leftBarButtonItem?.tintColor = .white
+            navigationItem.rightBarButtonItem?.tintColor = .white
         }
     }
 }

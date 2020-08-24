@@ -83,7 +83,7 @@ class OpinionInputTableViewController: UITableViewController, UITextViewDelegate
             saveButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             saveButton.backgroundColor = UIColor(named: O_GREEN)
-            saveButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            saveButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             saveButton.backgroundColor = UIColor(named: O_GREEN)
             saveButton.setTitleColor(UIColor.white, for: .normal)

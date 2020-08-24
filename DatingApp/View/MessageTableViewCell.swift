@@ -47,7 +47,7 @@ class MessageTableViewCell: UITableViewCell {
 
             } else if UserDefaults.standard.object(forKey: GREEN) != nil {
                 bubleView.backgroundColor = UIColor(named: O_GREEN)
-                messageLabel.textColor = UIColor(named: O_BLACK)
+                messageLabel.textColor = UIColor.white
 
             } else if UserDefaults.standard.object(forKey: WHITE) != nil {
                 bubleView.backgroundColor = UIColor(named: O_GREEN)

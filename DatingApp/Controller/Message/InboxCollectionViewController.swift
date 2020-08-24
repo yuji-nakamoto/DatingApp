@@ -52,7 +52,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     
     @objc func refreshCollectionView(){
         fetchMatchUsers()
-        refresh.endRefreshing()
     }
     
     @IBAction func segmentControled(_ sender: UISegmentedControl) {
@@ -74,12 +73,14 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
+                self.refresh.endRefreshing()
                 return
             }
             guard let uid = match.uid else { return }
             self.fetchUser(uid: uid) {
                 self.matches.append(match)
                 self.collectionView.reloadData()
+                self.refresh.endRefreshing()
             }
         }
     }
@@ -158,7 +159,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         }
     }
 }
-
 
 // MARK: - CollectionView
 

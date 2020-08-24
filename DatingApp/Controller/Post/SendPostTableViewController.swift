@@ -196,12 +196,19 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         sendButton.isEnabled = true
         if UserDefaults.standard.object(forKey: DARK) != nil {
             navigationItem.rightBarButtonItem?.tintColor = .white
+            navigationItem.leftBarButtonItem?.tintColor = .white
+
         } else if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.rightBarButtonItem?.tintColor = .white
+            navigationItem.leftBarButtonItem?.tintColor = .white
+
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
+            navigationItem.rightBarButtonItem?.tintColor = .white
+            navigationItem.leftBarButtonItem?.tintColor = .white
+
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         }
     }
 }

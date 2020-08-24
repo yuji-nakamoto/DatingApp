@@ -95,7 +95,7 @@ class OpinionTableViewController: UITableViewController {
             sendButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            sendButton.setTitleColor(UIColor.white, for: .normal)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)

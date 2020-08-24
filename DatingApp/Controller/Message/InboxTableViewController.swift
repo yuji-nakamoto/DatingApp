@@ -48,7 +48,6 @@ class InboxTableViewController: UIViewController {
     
     @objc func refreshCollectionView(){
         fetchInbox()
-        refresh.endRefreshing()
     }
     
     // MARK: - Fetch
@@ -62,6 +61,7 @@ class InboxTableViewController: UIViewController {
             }
             self.inboxArray = Array(self.inboxArrayDict.values)
             self.tableView.reloadData()
+            self.refresh.endRefreshing()
         }
     }
 

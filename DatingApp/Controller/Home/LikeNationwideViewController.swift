@@ -19,9 +19,9 @@ class LikeNationwideViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     
     private var users = [User]()
-    private var currentUser = User()
+    private var user = User()
     private let refresh = UIRefreshControl()
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class LikeNationwideViewController: UIViewController {
         setupUI()
         self.navigationController?.navigationBar.isHidden = false
     }
-
+    
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -47,26 +47,31 @@ class LikeNationwideViewController: UIViewController {
     }
     
     @objc func refreshCollectionView(){
-        refresh.endRefreshing()
+        fetchUsers(self.user)
     }
     
     // MARK: - Fetch
     
     private func fetchUser() {
-        users.removeAll()
         
         User.fetchUser(User.currentUserId()) { (user) in
-            self.currentUser = user
-            
-            User.likeCountSortNationwide(self.currentUser) { (users) in
-                self.users = users
-                self.tableView.reloadData()
-            }
+            self.user = user
+            self.fetchUsers(self.user)
+            self.tableView.reloadData()
         }
     }
-
-    // MARK: - Helper
+    
+    private func fetchUsers(_ user: User) {
         
+        User.likeCountSortNationwide(user) { (users) in
+            self.users = users
+            self.tableView.reloadData()
+            self.refresh.endRefreshing()
+        }
+    }
+    
+    // MARK: - Helper
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
@@ -149,7 +154,7 @@ extension LikeNationwideViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 extension LikeNationwideViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]

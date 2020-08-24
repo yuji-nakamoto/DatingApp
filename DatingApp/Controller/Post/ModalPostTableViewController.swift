@@ -145,16 +145,19 @@ class ModalPostTableViewController: UITableViewController {
         if UserDefaults.standard.object(forKey: PINK) != nil {
             doneButton.backgroundColor = UIColor(named: O_PINK)
             doneButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             doneButton.backgroundColor = UIColor(named: O_GREEN)
-            doneButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            doneButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             doneButton.backgroundColor = UIColor(named: O_GREEN)
             doneButton.setTitleColor(UIColor.white, for: .normal)
-            doneButton.layer.borderColor = UIColor(named: O_BLACK)?.cgColor
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             doneButton.backgroundColor = UIColor(named: O_DARK)
             doneButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         }
     }
 }

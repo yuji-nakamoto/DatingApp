@@ -1,5 +1,5 @@
 //
-//  DetailMapTableViewController.swift
+//  DetailAreaTableViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/08/07.
@@ -9,7 +9,7 @@
 import UIKit
 import JGProgressHUD
 
-class DetailMapTableViewController: UITableViewController, UITextFieldDelegate {
+class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     

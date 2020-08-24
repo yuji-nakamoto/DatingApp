@@ -63,9 +63,9 @@ class SelectColorTableViewController: UITableViewController {
             checkButton3.isHidden = false
             checkButton4.isHidden = true
             navigationController?.navigationBar.barTintColor = UIColor(named: O_GREEN)
-            navigationController?.navigationBar.tintColor = UIColor(named: O_BLACK)
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: O_BLACK) as Any]
+            navigationController?.navigationBar.tintColor = .white
+            navigationItem.leftBarButtonItem?.tintColor = .white
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white as Any]
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             checkButton1.isHidden = true
             checkButton2.isHidden = true

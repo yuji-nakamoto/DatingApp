@@ -55,13 +55,18 @@
 		834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */; };
 		834912FC24C75830002990F8 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FB24C75830002990F8 /* StartViewController.swift */; };
 		834912FE24C75B90002990F8 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834912FD24C75B90002990F8 /* SearchCollectionViewController.swift */; };
+		834959A924F404B600CD052E /* NoticeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959A824F404B600CD052E /* NoticeListTableViewController.swift */; };
+		834959AB24F4056000CD052E /* NoticeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959AA24F4056000CD052E /* NoticeListTableViewCell.swift */; };
+		834959AD24F406C600CD052E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959AC24F406C600CD052E /* Notice.swift */; };
+		834959AF24F4559100CD052E /* NoticeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959AE24F4559100CD052E /* NoticeTableViewController.swift */; };
+		834959B124F455E500CD052E /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959B024F455E500CD052E /* NoticeTableViewCell.swift */; };
 		834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */; };
 		834966C024DC0B9600C9B7DD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BF24DC0B9600C9B7DD /* Match.swift */; };
 		834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C324DC25E200C9B7DD /* InboxTableViewController.swift */; };
 		834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C524DCF4CD00C9B7DD /* CommentTableViewController.swift */; };
 		834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */; };
 		834966CA24DD098E00C9B7DD /* SelfIntroTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */; };
-		834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */; };
+		834966CC24DD172300C9B7DD /* DetailAreaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CB24DD172300C9B7DD /* DetailAreaTableViewController.swift */; };
 		834966CE24DE7E8700C9B7DD /* Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CD24DE7E8600C9B7DD /* Read.swift */; };
 		834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966CF24DEE07B00C9B7DD /* CardViewController.swift */; };
 		834966D224DEE10C00C9B7DD /* Card.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834966D124DEE10C00C9B7DD /* Card.xib */; };
@@ -175,13 +180,18 @@
 		834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceViewController.swift; sourceTree = "<group>"; };
 		834912FB24C75830002990F8 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		834912FD24C75B90002990F8 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
+		834959A824F404B600CD052E /* NoticeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListTableViewController.swift; sourceTree = "<group>"; };
+		834959AA24F4056000CD052E /* NoticeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListTableViewCell.swift; sourceTree = "<group>"; };
+		834959AC24F406C600CD052E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		834959AE24F4559100CD052E /* NoticeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewController.swift; sourceTree = "<group>"; };
+		834959B024F455E500CD052E /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoticeTableViewCell.swift; path = PickerKeyboard/NoticeTableViewCell.swift; sourceTree = "<group>"; };
 		834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834966BF24DC0B9600C9B7DD /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		834966C324DC25E200C9B7DD /* InboxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
 		834966C524DCF4CD00C9B7DD /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
 		834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameTableViewController.swift; sourceTree = "<group>"; };
 		834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfIntroTableViewController.swift; sourceTree = "<group>"; };
-		834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapTableViewController.swift; sourceTree = "<group>"; };
+		834966CB24DD172300C9B7DD /* DetailAreaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAreaTableViewController.swift; sourceTree = "<group>"; };
 		834966CD24DE7E8600C9B7DD /* Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Read.swift; sourceTree = "<group>"; };
 		834966CF24DEE07B00C9B7DD /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		834966D124DEE10C00C9B7DD /* Card.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Card.xib; sourceTree = "<group>"; };
@@ -307,7 +317,7 @@
 				834966C524DCF4CD00C9B7DD /* CommentTableViewController.swift */,
 				834966C724DCF4DF00C9B7DD /* NicknameTableViewController.swift */,
 				834966C924DD098E00C9B7DD /* SelfIntroTableViewController.swift */,
-				834966CB24DD172300C9B7DD /* DetailMapTableViewController.swift */,
+				834966CB24DD172300C9B7DD /* DetailAreaTableViewController.swift */,
 				83B6231C24E2B27E00363548 /* InquiryTableViewController.swift */,
 				83B6231E24E2BA7800363548 /* InquryInputTableViewController.swift */,
 				837C563024F078B400956FDC /* OpinionTableViewController.swift */,
@@ -315,6 +325,8 @@
 				834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */,
 				8348E76824E7CCEC0046C6DE /* TermsTableViewController.swift */,
 				8348E76C24E83BA10046C6DE /* PrivacyPolicyTableViewController.swift */,
+				834959A824F404B600CD052E /* NoticeListTableViewController.swift */,
+				834959AE24F4559100CD052E /* NoticeTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -402,6 +414,7 @@
 				834966CD24DE7E8600C9B7DD /* Read.swift */,
 				834C32D324E3BD10003330B1 /* Block.swift */,
 				8348826524EAA42000054DF7 /* Comment.swift */,
+				834959AC24F406C600CD052E /* Notice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -423,6 +436,8 @@
 				8348E76A24E7CD5D0046C6DE /* TermsTableViewCell.swift */,
 				8348E76E24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift */,
 				8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */,
+				834959B024F455E500CD052E /* NoticeTableViewCell.swift */,
+				834959AA24F4056000CD052E /* NoticeListTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,8 +531,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				A0A10C21C453E76EE2C595C1 /* [CP] Embed Pods Frameworks */,
-				7B367A20C3DFB6AE7602AAAA /* [CP] Copy Pods Resources */,
+				47A8119B107769D767C458BA /* [CP] Embed Pods Frameworks */,
+				D9BC42EAF4214AC676E2875A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -602,24 +617,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7B367A20C3DFB6AE7602AAAA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A0A10C21C453E76EE2C595C1 /* [CP] Embed Pods Frameworks */ = {
+		47A8119B107769D767C458BA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -634,6 +632,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9BC42EAF4214AC676E2875A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -672,6 +687,7 @@
 				838071E524C61A6F008BAA2C /* SelectLoginViewController.swift in Sources */,
 				834966CE24DE7E8700C9B7DD /* Read.swift in Sources */,
 				8350E4BB24D9AE3800487DB9 /* PIckerKeyboard11.swift in Sources */,
+				834959AB24F4056000CD052E /* NoticeListTableViewCell.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
 				83B6231F24E2BA7800363548 /* InquryInputTableViewController.swift in Sources */,
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
@@ -696,6 +712,7 @@
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
+				834959AD24F406C600CD052E /* Notice.swift in Sources */,
 				8348E76D24E83BA20046C6DE /* PrivacyPolicyTableViewController.swift in Sources */,
 				834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */,
 				834966C824DCF4DF00C9B7DD /* NicknameTableViewController.swift in Sources */,
@@ -703,10 +720,12 @@
 				83B6231D24E2B27E00363548 /* InquiryTableViewController.swift in Sources */,
 				834912F224C70B7C002990F8 /* EnterGenderViewController.swift in Sources */,
 				838071F224C66651008BAA2C /* ResetPasswordViewController.swift in Sources */,
+				834959B124F455E500CD052E /* NoticeTableViewCell.swift in Sources */,
 				838071F024C64D16008BAA2C /* VerifiedViewController.swift in Sources */,
 				831E392224C88E600043AA76 /* SearchCollectionViewCell.swift in Sources */,
 				834966C024DC0B9600C9B7DD /* Match.swift in Sources */,
 				8348B5E524D351D80000A187 /* SendPostTableViewController.swift in Sources */,
+				834959A924F404B600CD052E /* NoticeListTableViewController.swift in Sources */,
 				8368CD8E24E16ACF009C0391 /* PickerKeyboard16.swift in Sources */,
 				834912F824C74254002990F8 /* EnterProfessionViewController.swift in Sources */,
 				8350E4BD24D9AE6800487DB9 /* PIckerKeyboard12.swift in Sources */,
@@ -735,9 +754,10 @@
 				83AD3D2724F20DD400C02365 /* LikeNationwideViewController.swift in Sources */,
 				834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
+				834959AF24F4559100CD052E /* NoticeTableViewController.swift in Sources */,
 				8348E76F24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift in Sources */,
 				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
-				834966CC24DD172300C9B7DD /* DetailMapTableViewController.swift in Sources */,
+				834966CC24DD172300C9B7DD /* DetailAreaTableViewController.swift in Sources */,
 				8348E3E524CE0B6E001D59C0 /* DidLikeTableViewController.swift in Sources */,
 				8348B5EB24D38D780000A187 /* MyPageTableViewCell.swift in Sources */,
 				834BD3EA24DAE1D80088D4EA /* AdsPostTableViewCell.swift in Sources */,

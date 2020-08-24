@@ -30,6 +30,7 @@ public let COLLECTION_INQUIRY = Firestore.firestore().collection("inquiry")
 public let COLLECTION_OPINION = Firestore.firestore().collection("opinion")
 public let COLLECTION_BLOCK = Firestore.firestore().collection("block")
 public let COLLECTION_COMMENT = Firestore.firestore().collection("comment")
+public let COLLECTION_NOTICE = Firestore.firestore().collection("notice")
 
 // MARK: - Color
 
@@ -137,6 +138,11 @@ public let ISBLOCK = "isBlock"
 // MARK: - Comment
 public let TEXT = "text"
 
+// MARL: - Notice
+public let TITLE = "title"
+public let TITLE2 = "title2"
+public let MAINTEXT = "mainText"
+
 // MARK: - Placeholder image
 
 public let PLACEHOLDERIMAGEURL = "https://firebasestorage.googleapis.com/v0/b/datingapp-d0f98.appspot.com/o/images%2F2EB76E60-16FA-494F-9419-19905F13553C?alt=media&token=3c8906ed-1a5e-4370-8270-432dc0431ae5"
@@ -182,6 +188,12 @@ public let TUTORIAL_END = "tutorial_end"
 public let MATCHING = "matching"
 public let SEARCH_MINI = "search_mini"
 public let LANKBAR = "lankBar"
+public let FROM_SEARCHVC = "from_searchVC"
+public let NOTICE1 = "notice1"
+public let NOTICE2 = "notice2"
+public let NOTICE3 = "notice3"
+public let NOTICE4 = "notice4"
+public let NOTICE5 = "notice5"
 
 // MARK: - Notification
 

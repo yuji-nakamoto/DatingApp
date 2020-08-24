@@ -19,7 +19,7 @@ class LikeCountSortViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     
     private var users = [User]()
-    private var currentUser = User()
+    private var user = User()
     private let refresh = UIRefreshControl()
     
     // MARK: - Lifecycle
@@ -47,27 +47,34 @@ class LikeCountSortViewController: UIViewController {
     }
     
     @objc func refreshCollectionView(){
-        refresh.endRefreshing()
+        fetchUsers(self.user)
     }
     
     // MARK: - Fetch
     
     private func fetchUser() {
-        users.removeAll()
         
         User.fetchUser(User.currentUserId()) { (user) in
-            self.currentUser = user
-            let residence = self.currentUser.residenceSerch
-            if residence == "こだわらない" {
-                User.likeCountSortNationwide(self.currentUser) { (users) in
-                    self.users = users
-                    self.tableView.reloadData()
-                }
-            } else {
-                User.likeCountSort(residence!, self.currentUser) { (users) in
-                    self.users = users
-                    self.tableView.reloadData()
-                }
+            self.user = user
+            self.fetchUsers(self.user)
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchUsers(_ user: User) {
+        
+        let residence = user.residenceSerch
+        if residence == "こだわらない" {
+            User.likeCountSortNationwide(user) { (users) in
+                self.users = users
+                self.tableView.reloadData()
+                self.refresh.endRefreshing()
+            }
+        } else {
+            User.likeCountSort(residence!, user) { (users) in
+                self.users = users
+                self.tableView.reloadData()
+                self.refresh.endRefreshing()
             }
         }
     }

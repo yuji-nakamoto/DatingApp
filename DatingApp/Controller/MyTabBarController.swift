@@ -30,7 +30,7 @@ class MyTabBarController: UITabBarController {
             tabBar.tintColor = UIColor.white
             tabBar.barTintColor = UIColor(named: O_PINK)
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
-            tabBar.tintColor = UIColor(named: O_BLACK)
+            tabBar.tintColor = UIColor.white
             tabBar.barTintColor = UIColor(named: O_GREEN)
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             tabBar.tintColor = UIColor(named: O_GREEN)

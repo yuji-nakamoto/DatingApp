@@ -314,7 +314,7 @@ class User {
         }
     }
     
-    class func genderAndResidenceSort(_ residenceSearch: String, _ currentUser: User, completion: @escaping([User]) -> Void) {
+    class func fetchUserResidenceSort(_ residenceSearch: String, _ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         
         if UserDefaults.standard.object(forKey: MALE) != nil {

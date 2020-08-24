@@ -84,8 +84,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 for document in querySnapshot!.documents {
                     let likeCount = document.data()[LIKECOUNT] as! Int
                     totalLikeCount += likeCount
-                    updateCount(toUser: user, withValue: [LIKECOUNT: totalLikeCount])
                 }
+                updateCount(toUser: user, withValue: [LIKECOUNT: totalLikeCount])
             }
             if totalLikeCount > 999 {
                 self.likeCountLabel.text = "999"
@@ -104,8 +104,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 for document in querySnapshot!.documents {
                     let typeCount = document.data()[TYPECOUNT] as! Int
                     totalTypeCount += typeCount
-                    updateCount(toUser: user, withValue: [TYPECOUNT: totalTypeCount])
                 }
+                updateCount(toUser: user, withValue: [TYPECOUNT: totalTypeCount])
             }
             if totalTypeCount > 999 {
                 self.typeCountLabel.text = "999"
