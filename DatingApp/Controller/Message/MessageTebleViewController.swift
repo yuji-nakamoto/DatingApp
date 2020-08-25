@@ -60,7 +60,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
@@ -98,7 +98,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                 }
             }
             self.fetchMessage()
-            self.checkMessage()
         }
     }
     
@@ -129,7 +128,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         Match.fetchMatchUser(toUserId: toUserId) { (match) in
             self.matchUser = match
             self.checkMessage()
-            self.showHintView()
         }
     }
     
@@ -157,6 +155,39 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             return
         }
         
+        if matchUser.isMatch != 1 {
+            if self.message.from == User.currentUserId() {
+                if currentUser.usedItem1 > 0 {
+                    let alert: UIAlertController = UIAlertController(title: "メッセージ送信できる券", message: "アイテムを使用してメッセージを送信します。送信しますか？", preferredStyle: .alert)
+                    let exchange: UIAlertAction = UIAlertAction(title: "送信する", style: UIAlertAction.Style.default) { (alert) in
+                        
+                        self.hud.textLabel.text = "アイテムを使用しました。"
+                        self.hud.show(in: self.view)
+                        self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                        self.hud.dismiss(afterDelay: 2.0)
+                        updateUser(withValue: [USEDITEM1: self.currentUser.usedItem1 - 1])
+                        
+                        let date: Double = Date().timeIntervalSince1970
+                        let dict = [MESSAGETEXT: self.textField.text!,
+                                    FROM: User.currentUserId(),
+                                    TO: self.toUserId,
+                                    TIMESTAMP: Timestamp(date: Date()),
+                                    DATE: date] as [String : Any]
+                        Message.saveMessage(to: self.user, withValue: dict)
+                        
+                        self.setupMessage()
+                        return
+                    }
+                    let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+                    }
+                    alert.addAction(exchange)
+                    alert.addAction(cancel)
+                    self.present(alert,animated: true,completion: nil)
+                    return
+                }
+            }
+        }
+        
         let date: Double = Date().timeIntervalSince1970
         let dict = [MESSAGETEXT: textField.text!,
                     FROM: User.currentUserId(),
@@ -164,16 +195,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                     TIMESTAMP: Timestamp(date: Date()),
                     DATE: date] as [String : Any]
         Message.saveMessage(to: user, withValue: dict)
-        
-        incrementAppBadgeCount()
-        scrollToBottom()
-        textField.text = ""
-        sendButton.isEnabled = false
-        sendButton.alpha = 0.7
-        countLabel.text = "60"
-        textField.resignFirstResponder()
-        checkFemale()
-        checkMessage()
+        setupMessage()
     }
     
     @objc func adjustForKeyboard(notification: Notification) {
@@ -224,8 +246,19 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         } else {
             Message.fetchMessage(toUserId: toUserId) { (message) in
                 self.message = message
-                if self.message.from == User.currentUserId() {
-                    self.bottomView.isHidden = true
+                
+                User.fetchUser (User.currentUserId()) { (user) in
+                    
+                    if self.message.from == User.currentUserId() {
+                        
+                        self.currentUser = user
+                        if self.currentUser.usedItem1 > 0 {
+                            self.bottomView.isHidden = false
+                        } else {
+                            self.bottomView.isHidden = true
+                            self.showHintView()
+                        }
+                    }
                 }
             }
         }
@@ -258,18 +291,14 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func showHintView() {
         
-        if matchUser.isMatch == 1 {
-            return
-        } else {
-            visualEffectView.frame = self.view.frame
-            view.addSubview(self.visualEffectView)
-            visualEffectView.alpha = 0
-            view.addSubview(self.backView)
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.visualEffectView.alpha = 1
-                self.backView.alpha = 1
-            }, completion: nil)
-        }
+        visualEffectView.frame = self.view.frame
+        visualEffectView.alpha = 0
+        view.addSubview(self.visualEffectView)
+        view.addSubview(self.backView)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.visualEffectView.alpha = 1
+            self.backView.alpha = 1
+        }, completion: nil)
     }
     
     private func removeEffectView() {
@@ -283,9 +312,24 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         }
     }
     
+    private func setupMessage() {
+        
+        self.incrementAppBadgeCount()
+        self.scrollToBottom()
+        self.textField.text = ""
+        self.sendButton.isEnabled = false
+        self.sendButton.alpha = 0.7
+        self.countLabel.text = "60"
+        self.textField.resignFirstResponder()
+        self.checkFemale()
+        self.checkMessage()
+    }
+    
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        // test adUnitID
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -305,7 +349,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         textField.delegate = self
         sendButton.isEnabled = false
         sendButton.alpha = 0.7
-        hintLabel.text = "最初の一通目はマッチしなくても送信ができます。\n\nマッチすると二通目以降も送信ができます。"
+        navBar.alpha = 0.85
+        hintLabel.text = "マッチすると2通目以降も送信ができます。\n\nもしくは、アイテムを使用すると送信することができます。"
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -315,7 +360,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_PINK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = UIColor(named: O_PINK)
-            navBar.alpha = 0.85
             nameLabel.textColor = .white
             backButton.tintColor = .white
             
@@ -323,7 +367,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = UIColor(named: O_GREEN)
-            navBar.alpha = 0.85
             nameLabel.textColor = .white
             backButton.tintColor = .white
             
@@ -331,7 +374,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = .white
-            navBar.alpha = 0.85
             nameLabel.textColor = UIColor(named: O_BLACK)
             backButton.tintColor = UIColor(named: O_BLACK)
             
@@ -341,7 +383,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             navBar.backgroundColor = UIColor(named: O_DARK)
             nameLabel.textColor = .white
             backButton.tintColor = .white
-            navBar.alpha = 0.85
         }
     }
     

@@ -63,7 +63,12 @@ class User {
     var oneDay: Bool!
     var loginTime: Double!
     var oneDayLate: Timestamp!
-    var messageItem: Int!
+    var item1: Int!
+    var item2: Int!
+    var item3: Int!
+    var usedItem1: Int!
+    var usedItem2: Int!
+    var usedItem3: Int!
     
     init() {
     }
@@ -121,7 +126,12 @@ class User {
         oneDay = dict[ONEDAY] as? Bool ?? false
         loginTime = dict[LOGINTIME] as? Double ?? 0
         oneDayLate = dict[ONEDAYLATE] as? Timestamp ?? Timestamp(date: Date())
-        messageItem = dict[MESSAGEITEM] as? Int ?? 0
+        item1 = dict[ITEM1] as? Int ?? 0
+        item2 = dict[ITEM2] as? Int ?? 0
+        item3 = dict[ITEM3] as? Int ?? 0
+        usedItem1 = dict[USEDITEM1] as? Int ?? 0
+        usedItem2 = dict[USEDITEM2] as? Int ?? 0
+        usedItem3 = dict[USEDITEM3] as? Int ?? 0
     }
     
     // MARK: - Return user

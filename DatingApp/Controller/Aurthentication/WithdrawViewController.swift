@@ -91,7 +91,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = "メールアドレスかパスワードが間違えています。"
+                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています。"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 3.0)

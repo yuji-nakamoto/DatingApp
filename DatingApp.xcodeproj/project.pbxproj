@@ -60,6 +60,9 @@
 		834959AD24F406C600CD052E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959AC24F406C600CD052E /* Notice.swift */; };
 		834959AF24F4559100CD052E /* NoticeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959AE24F4559100CD052E /* NoticeTableViewController.swift */; };
 		834959B124F455E500CD052E /* NoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959B024F455E500CD052E /* NoticeTableViewCell.swift */; };
+		834959B324F46D9600CD052E /* ShopTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959B224F46D9600CD052E /* ShopTableViewController.swift */; };
+		834959B524F46DB500CD052E /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959B424F46DB500CD052E /* ShopTableViewCell.swift */; };
+		834959B724F4828800CD052E /* ItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834959B624F4828800CD052E /* ItemTableViewController.swift */; };
 		834966BD24DBC7E900C9B7DD /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */; };
 		834966C024DC0B9600C9B7DD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966BF24DC0B9600C9B7DD /* Match.swift */; };
 		834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834966C324DC25E200C9B7DD /* InboxTableViewController.swift */; };
@@ -185,6 +188,9 @@
 		834959AC24F406C600CD052E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		834959AE24F4559100CD052E /* NoticeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTableViewController.swift; sourceTree = "<group>"; };
 		834959B024F455E500CD052E /* NoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoticeTableViewCell.swift; path = PickerKeyboard/NoticeTableViewCell.swift; sourceTree = "<group>"; };
+		834959B224F46D9600CD052E /* ShopTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewController.swift; sourceTree = "<group>"; };
+		834959B424F46DB500CD052E /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
+		834959B624F4828800CD052E /* ItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewController.swift; sourceTree = "<group>"; };
 		834966BC24DBC7E900C9B7DD /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		834966BF24DC0B9600C9B7DD /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		834966C324DC25E200C9B7DD /* InboxTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
@@ -327,6 +333,8 @@
 				8348E76C24E83BA10046C6DE /* PrivacyPolicyTableViewController.swift */,
 				834959A824F404B600CD052E /* NoticeListTableViewController.swift */,
 				834959AE24F4559100CD052E /* NoticeTableViewController.swift */,
+				834959B224F46D9600CD052E /* ShopTableViewController.swift */,
+				834959B624F4828800CD052E /* ItemTableViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -438,6 +446,7 @@
 				8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */,
 				834959B024F455E500CD052E /* NoticeTableViewCell.swift */,
 				834959AA24F4056000CD052E /* NoticeListTableViewCell.swift */,
+				834959B424F46DB500CD052E /* ShopTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -696,6 +705,7 @@
 				834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
 				837C563124F078B400956FDC /* OpinionTableViewController.swift in Sources */,
+				834959B524F46DB500CD052E /* ShopTableViewCell.swift in Sources */,
 				8348826624EAA42000054DF7 /* Comment.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */,
@@ -731,6 +741,7 @@
 				8350E4BD24D9AE6800487DB9 /* PIckerKeyboard12.swift in Sources */,
 				8348826824EABAFE00054DF7 /* FeedTableViewController.swift in Sources */,
 				838071F724C6F2F6008BAA2C /* EnterAgeViewController.swift in Sources */,
+				834959B324F46D9600CD052E /* ShopTableViewController.swift in Sources */,
 				8350140424D4E3C3008D1170 /* MyUINavigationViewController.swift in Sources */,
 				8354409F24D7DF09001C9398 /* Config.swift in Sources */,
 				8368CD9024E16B49009C0391 /* ModalSearchTableViewController.swift in Sources */,
@@ -744,6 +755,7 @@
 				83B6232624E2E22900363548 /* BlockTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
 				834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */,
+				834959B724F4828800CD052E /* ItemTableViewController.swift in Sources */,
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
 				8350E4B124D9AE0C00487DB9 /* PIckerKeyboard6.swift in Sources */,
 				8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */,

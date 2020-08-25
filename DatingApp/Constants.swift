@@ -93,7 +93,14 @@ public let ONEDAY = "oneDay"
 public let LOGINTIME = "loginTime"
 public let ONEDAYLATE = "oneDaylate"
 public let CREATED_AT = "created_at"
-public let MESSAGEITEM = "messageItem"
+public let ITEM1 = "item1"
+public let ITEM2 = "item2"
+public let ITEM3 = "item3"
+public let USEDITEM1 = "usedItem1"
+public let USEDITEM2 = "usedItem2"
+public let USEDITEM3 = "usedItem3"
+
+
 
 // MARK: - Counter
 

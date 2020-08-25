@@ -46,7 +46,7 @@ class SearchCollectionViewController: UIViewController {
         
         fetchUser()
         setupBanner()
-        checkOneDay()
+        checkOneDayAndBadge()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,10 +158,22 @@ class SearchCollectionViewController: UIViewController {
         }
     }
     
-    private func checkOneDay() {
+    private func checkOneDayAndBadge() {
         
         User.fetchUserAddSnapshotListener() { (user) in
             self.user = user
+            
+            if self.user.messageBadgeCount == 0 {
+                self.tabBarController?.viewControllers?[3].tabBarItem?.badgeValue = nil
+            } else {
+                self.tabBarController?.viewControllers?[3].tabBarItem?.badgeValue = String(self.user.messageBadgeCount)
+            }
+            
+            if self.user.myPageBadgeCount == 0 {
+                self.tabBarController?.viewControllers?[4].tabBarItem?.badgeValue = nil
+            } else {
+                self.tabBarController?.viewControllers?[4].tabBarItem?.badgeValue = String(self.user.myPageBadgeCount)
+            }
             
             if self.user.oneDay == true {
                 updateUser(withValue: [POINTS: self.user.points + 1, ONEDAY: false])

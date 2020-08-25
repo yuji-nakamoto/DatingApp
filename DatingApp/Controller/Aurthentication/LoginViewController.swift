@@ -88,7 +88,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.hud.dismiss(afterDelay: 2.0)
                 }
             } else {
-                self.hud.textLabel.text = "メールアドレスかパスワードが間違えています。"
+                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています。"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)

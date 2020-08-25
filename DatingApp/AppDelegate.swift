@@ -65,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         User.fetchUserAddSnapshotListener { (user) in
             self.user = user
-            self.checkBadgeCount(user)
             
             guard self.user.oneDayLate != nil else { return }
             
@@ -78,24 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let oneDayLate = Calendar.current.date(byAdding: .day, value: 1, to: day)!
                 updateUser(withValue: [ONEDAY: true, ONEDAYLATE: oneDayLate])
             }
-        }
-    }
-    
-    private func checkBadgeCount(_ user: User) {
-        
-        let tabBarController = MyTabBarController()
-
-        if self.user.messageBadgeCount == 0 {
-            print(tabBarController)
-            tabBarController.viewControllers?[3].tabBarItem?.badgeValue = nil
-        } else {
-            tabBarController.viewControllers?[3].tabBarItem?.badgeValue = String(self.user.messageBadgeCount)
-        }
-        
-        if self.user.myPageBadgeCount == 0 {
-            tabBarController.viewControllers?[4].tabBarItem?.badgeValue = nil
-        } else {
-            tabBarController.viewControllers?[4].tabBarItem?.badgeValue = String(self.user.myPageBadgeCount)
         }
     }
     

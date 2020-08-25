@@ -64,7 +64,7 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
-                self.hud.textLabel.text = "メールアドレスかパスワードが間違えています。"
+                self.hud.textLabel.text = "メメールアドレス、もしくはパスワードが間違えています。"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)

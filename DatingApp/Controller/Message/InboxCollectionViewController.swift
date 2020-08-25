@@ -10,7 +10,7 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
+class InboxCollectionViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -22,7 +22,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
     private var matches = [Match]()
     private var users = [User]()
     private var user = User()
-    private var interstitial: GADInterstitial!
     private let refresh = UIRefreshControl()
 
     // MARK: - Lifecycle
@@ -31,7 +30,6 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         super.viewDidLoad()
         setupUI()
         setupBanner()
-        interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,21 +116,11 @@ class InboxCollectionViewController: UIViewController, GADInterstitialDelegate, 
         }
     }
     
-    private func createAndLoadIntersitial() -> GADInterstitial {
-        
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
-    
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitial = createAndLoadIntersitial()
-    }
-    
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        // test adUnitID
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
