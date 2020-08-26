@@ -59,7 +59,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchUser()
+        reloadAction()
         UserDefaults.standard.set(true, forKey: CARDVC)
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -73,21 +73,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     // MARK: - Actions
     
     @IBAction func reloadButtonPressed(_ sender: Any) {
-        emptyLabel.isHidden = true
-        emptyLabel2.isHidden = true
-        loadView()
-        setupUI()
-        fetchUser()
-        setupBanner()
-        users.removeAll()
-        cards.removeAll()
-    }
-    
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toModalSearchVC = storyboard.instantiateViewController(withIdentifier: "ModalSearchVC")
-        self.present(toModalSearchVC, animated: true, completion: nil)
+        reloadAction()
     }
     
     @IBAction func typeButtonPressed(_ sender: Any) {
@@ -319,6 +305,18 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     // MARK: - Helpers
     
+    private func reloadAction() {
+        
+        emptyLabel.isHidden = true
+        emptyLabel2.isHidden = true
+        loadView()
+        setupUI()
+        fetchUser()
+        setupBanner()
+        users.removeAll()
+        cards.removeAll()
+    }
+    
     private func removeEffectView() {
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -540,6 +538,13 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private func showTutorialView() {
         
         if UserDefaults.standard.object(forKey: TUTORIAL_END) == nil {
+            
+            if UserDefaults.standard.object(forKey: FEMALE) != nil {
+                placeholderImageView.image = UIImage(named: "cardModel2")
+            } else {
+                placeholderImageView.image = UIImage(named: "cardModel1")
+            }
+            
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal2))
             visualEffectView.addGestureRecognizer(tap)
             tutorialSwipeView.addGestureRecognizer(tap)

@@ -207,6 +207,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
         if UserDefaults.standard.object(forKey: APPLE) != nil && UserDefaults.standard.object(forKey: APPLE2) != nil {
             appleButton.isHidden = false
             iconApple.isHidden = false
+            iconGoogle.isHidden = true
+
         } else {
             appleButton.isHidden = true
             iconApple.isHidden = true
@@ -215,6 +217,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
         if UserDefaults.standard.object(forKey: GOOGLE) != nil && UserDefaults.standard.object(forKey: GOOGLE2) != nil {
             googleButton.isHidden = false
             iconGoogle.isHidden = false
+            iconApple.isHidden = true
+
         } else {
             googleButton.isHidden = true
             iconGoogle.isHidden = true

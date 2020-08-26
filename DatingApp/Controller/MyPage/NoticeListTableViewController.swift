@@ -76,19 +76,19 @@ extension NoticeListTableViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 4 {
+        if indexPath.row == 0 {
             UserDefaults.standard.set(true, forKey: NOTICE1)
             performSegue(withIdentifier: "NoticeVC", sender: nil)
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 1 {
             UserDefaults.standard.set(true, forKey: NOTICE2)
             performSegue(withIdentifier: "NoticeVC", sender: nil)
         } else if indexPath.row == 2 {
             UserDefaults.standard.set(true, forKey: NOTICE3)
             performSegue(withIdentifier: "NoticeVC", sender: nil)
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 3 {
             UserDefaults.standard.set(true, forKey: NOTICE4)
             performSegue(withIdentifier: "NoticeVC", sender: nil)
-        } else if indexPath.row == 0 {
+        } else if indexPath.row == 4 {
             UserDefaults.standard.set(true, forKey: NOTICE5)
             performSegue(withIdentifier: "NoticeVC", sender: nil)
         }

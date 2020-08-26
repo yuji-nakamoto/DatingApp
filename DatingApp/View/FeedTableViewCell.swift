@@ -19,6 +19,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var residenceLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
     
     var feedVC: FeedTableViewController?
     var likeNationVC: LikeNationwideViewController?

@@ -156,6 +156,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             
             updateUser(withValue: dict)
             UserDefaults.standard.set(true, forKey: WHITE)
+            User.isOnline(online: "online")
             self.toTabBarVC()
         }
         self.indicator.stopAnimating()
@@ -305,6 +306,7 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
                     
                     if UserDefaults.standard.object(forKey: APPLE) != nil && UserDefaults.standard.object(forKey: APPLE2) != nil {
                         updateUser(withValue: dict)
+                        User.isOnline(online: "online")
                         UserDefaults.standard.set(true, forKey: WHITE)
                         self.toTabBarVC()
                         

@@ -9,7 +9,7 @@
 import UIKit
 
 class Card: UIView {
-
+    
     @IBOutlet weak var profileImageView1: UIImageView!
     @IBOutlet weak var profileImageView2: UIImageView!
     @IBOutlet weak var profileImageView3: UIImageView!
@@ -49,7 +49,7 @@ class Card: UIView {
     @IBOutlet weak var nopeView: UIView!
     @IBOutlet weak var nopeLabel: UILabel!
     @IBOutlet weak var typeView: UIView!
-
+    
     var user: User!
     var cardVC: CardViewController?
     
@@ -86,7 +86,7 @@ class Card: UIView {
         nameLabel.text = user?.username
         residenceLabel.text = user?.residence
         ageLabel.text = String(user!.age) + "歳"
-
+        
         if user!.profileImageUrl2 == "" && user!.profileImageUrl3 == "" && user!.profileImageUrl4 == "" && user!.profileImageUrl5 == "" && user!.profileImageUrl6 == "" {
             profileImageUrl_23456Nil()
             
@@ -112,7 +112,7 @@ class Card: UIView {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailTableViewController
         detailVC.toUserId = user.uid
-    
+        
         cardVC?.present(detailVC, animated: true, completion: nil)
     }
     
@@ -161,6 +161,8 @@ class Card: UIView {
                 if profileImageView1.isHidden == false {
                     profileImageView1.isHidden = true
                     profileImageView2.isHidden = false
+                    profileImageView3.isHidden = true
+                    profileImageView4.isHidden = true
                     segBarFour1.alpha = 0.5
                     segBarFour2.alpha = 1
                 } else if profileImageView3.isHidden == true && profileImageView4.isHidden == false {
@@ -192,6 +194,9 @@ class Card: UIView {
                 if profileImageView1.isHidden == false {
                     profileImageView1.isHidden = true
                     profileImageView2.isHidden = false
+                    profileImageView3.isHidden = true
+                    profileImageView4.isHidden = true
+                    profileImageView5.isHidden = true
                     segBarFive1.alpha = 0.5
                     segBarFive2.alpha = 1
                 } else if profileImageView4.isHidden == true && profileImageView5.isHidden == false {
@@ -228,9 +233,13 @@ class Card: UIView {
                 if profileImageView1.isHidden == false {
                     profileImageView1.isHidden = true
                     profileImageView2.isHidden = false
+                    profileImageView3.isHidden = true
+                    profileImageView4.isHidden = true
+                    profileImageView5.isHidden = true
+                    profileImageView6.isHidden = true
                     segBarSix1.alpha = 0.5
                     segBarSix2.alpha = 1
-
+                    
                 } else if profileImageView5.isHidden == true && profileImageView6.isHidden == false {
                     return
                 } else if profileImageView1.isHidden == true && profileImageView2.isHidden == false && profileImageView3.isHidden == true {
@@ -311,16 +320,16 @@ class Card: UIView {
                 
                 if profileImageView1.isHidden == false {
                     return
+                } else if profileImageView1.isHidden == true && profileImageView3.isHidden == true && profileImageView4.isHidden == true {
+                    profileImageView1.isHidden = false
+                    profileImageView2.isHidden = true
+                    segBarFour1.alpha = 1
+                    segBarFour2.alpha = 0.5
                 } else if profileImageView1.isHidden == true && profileImageView2.isHidden == true && profileImageView3.isHidden == true {
                     profileImageView3.isHidden = false
                     profileImageView4.isHidden = true
                     segBarFour3.alpha = 1
                     segBarFour4.alpha = 0.5
-                } else if profileImageView3.isHidden == true && profileImageView4.isHidden == true {
-                    profileImageView1.isHidden = false
-                    profileImageView2.isHidden = true
-                    segBarFour1.alpha = 1
-                    segBarFour2.alpha = 0.5
                 } else if profileImageView4.isHidden == true {
                     profileImageView2.isHidden = false
                     profileImageView3.isHidden = true
@@ -333,16 +342,16 @@ class Card: UIView {
                 
                 if profileImageView1.isHidden == false {
                     return
+                } else if profileImageView1.isHidden == true && profileImageView3.isHidden == true && profileImageView4.isHidden == true && profileImageView5.isHidden == true {
+                    profileImageView1.isHidden = false
+                    profileImageView2.isHidden = true
+                    segBarFive1.alpha = 1
+                    segBarFive2.alpha = 0.5
                 } else if profileImageView1.isHidden == true && profileImageView2.isHidden == true && profileImageView3.isHidden == true && profileImageView4.isHidden == true {
                     profileImageView4.isHidden = false
                     profileImageView5.isHidden = true
                     segBarFive4.alpha = 1
                     segBarFive5.alpha = 0.5
-                } else if profileImageView2.isHidden == false && profileImageView3.isHidden == true && profileImageView4.isHidden == true {
-                    profileImageView1.isHidden = false
-                    profileImageView2.isHidden = true
-                    segBarFive1.alpha = 1
-                    segBarFive2.alpha = 0.5
                 } else if profileImageView3.isHidden == true && profileImageView5.isHidden == true {
                     profileImageView3.isHidden = false
                     profileImageView4.isHidden = true

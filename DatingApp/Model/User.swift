@@ -178,16 +178,13 @@ class User {
         }
     }
     
-    class func fetchCardUsers(_ residenceSearch: String, _ user: User, completion: @escaping(User) -> Void) {
+    class func fetchCardUsers(_ residenceSearch: String, _ currentUser: User, completion: @escaping(User) -> Void) {
         
         if UserDefaults.standard.object(forKey: MALE) != nil {
             let usersRef = COLLECTION_USERS
-                .order(by: AGE)
+                .order(by: USEDITEM2, descending: true)
                 .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
@@ -202,6 +199,9 @@ class User {
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])
                                 guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
                                 guard swipeUserIDs[user.uid] == nil else {
                                     completion(User(dict: [UID: ""]))
                                     return
@@ -216,12 +216,9 @@ class User {
             
         } else {
             let usersRef = COLLECTION_USERS
-                .order(by: AGE)
+                .order(by: USEDITEM2, descending: true)
                 .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "女性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
@@ -238,6 +235,9 @@ class User {
                                 let user = User(dict: dict as [String: Any])
 
                                 guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
                                 guard swipeUserIDs[user.uid] == nil else {
                                     completion(User(dict: [UID: ""]))
                                     return
@@ -252,15 +252,13 @@ class User {
         }
     }
     
-    class func fetchCardAllUsers(_ user: User, completion: @escaping(User) -> Void) {
+    class func fetchCardAllUsers(_ currentUser: User, completion: @escaping(User) -> Void) {
         
         if UserDefaults.standard.object(forKey: MALE) != nil {
             let usersRef = COLLECTION_USERS
-                .order(by: AGE)
+                .order(by: USEDITEM2, descending: true)
                 .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "男性")
-                .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
@@ -276,6 +274,8 @@ class User {
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])
                                 guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
                                 guard swipeUserIDs[user.uid] == nil else {
                                     completion(User(dict: [UID: ""]))
                                     return
@@ -290,11 +290,9 @@ class User {
             
         } else {
             let usersRef = COLLECTION_USERS
-                .order(by: AGE)
+                .order(by: USEDITEM2, descending: true)
                 .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "女性")
-                .whereField(AGE, isGreaterThanOrEqualTo: user.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: user.maxAge!)
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
@@ -310,6 +308,8 @@ class User {
                                 let dict = document.data()
                                 let user = User(dict: dict as [String: Any])
                                 guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
                                 guard swipeUserIDs[user.uid] == nil else {
                                     completion(User(dict: [UID: ""]))
                                     return
@@ -330,12 +330,9 @@ class User {
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
-                .order(by: AGE)
+                .order(by: USEDITEM2, descending: true)
                 .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(AGE, isGreaterThanOrEqualTo: currentUser.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: currentUser.maxAge!)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
                 usersRef.getDocuments { (snapshot, error) in
@@ -346,6 +343,9 @@ class User {
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
                             guard user.uid != User.currentUserId() else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard user.residence == currentUser.residenceSerch else { return }
                             guard blockUserIDs[user.uid] == nil else { return }
                             users.append(user)
                         })
@@ -356,12 +356,9 @@ class User {
             
         } else {
             let usersRef = COLLECTION_USERS
-                .order(by: AGE)
+                .order(by: USEDITEM2, descending: true)
                 .order(by: LASTCHANGE)
                 .whereField(GENDER, isEqualTo: "女性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
-                .whereField(AGE, isGreaterThanOrEqualTo: currentUser.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: currentUser.maxAge!)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
                 usersRef.getDocuments { (snapshot, error) in
@@ -373,6 +370,66 @@ class User {
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
                             guard user.uid != User.currentUserId() else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard user.residence == currentUser.residenceSerch else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func fetchNationwide(_ currentUser: User, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            
+            let usersRef = COLLECTION_USERS
+                .order(by: USEDITEM2, descending: true)
+                .order(by: LASTCHANGE)
+                .whereField(GENDER, isEqualTo: "男性")
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+            
+        } else {
+            let usersRef = COLLECTION_USERS
+                .order(by: USEDITEM2, descending: true)
+                .order(by: LASTCHANGE)
+                .whereField(GENDER, isEqualTo: "女性")
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
                             guard blockUserIDs[user.uid] == nil else { return }
                             users.append(user)
                         })
@@ -391,7 +448,6 @@ class User {
             let usersRef = COLLECTION_USERS
                 .order(by: LIKECOUNT, descending: true)
                 .whereField(GENDER, isEqualTo: "男性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 .limit(to: 30)
 
             Block.fetchBlockSwipe { (blockUserIDs) in
@@ -403,6 +459,7 @@ class User {
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
                             guard user.uid != User.currentUserId() else { return }
+                            guard user.residence == currentUser.residenceSerch else { return }
                             guard blockUserIDs[user.uid] == nil else { return }
                             users.append(user)
                         })
@@ -415,7 +472,6 @@ class User {
             let usersRef = COLLECTION_USERS
                 .order(by: LIKECOUNT, descending: true)
                 .whereField(GENDER, isEqualTo: "女性")
-                .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 .limit(to: 30)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
@@ -428,6 +484,7 @@ class User {
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
                             guard user.uid != User.currentUserId() else { return }
+                            guard user.residence == currentUser.residenceSerch else { return }
                             guard blockUserIDs[user.uid] == nil else { return }
                             users.append(user)
                         })
@@ -491,63 +548,6 @@ class User {
         }
     }
     
-    class func fetchNationwide(_ currentUser: User, completion: @escaping([User]) -> Void) {
-        var users: [User] = []
-        
-        if UserDefaults.standard.object(forKey: MALE) != nil {
-            
-            let usersRef = COLLECTION_USERS
-                .order(by: AGE)
-                .order(by: LASTCHANGE)
-                .whereField(GENDER, isEqualTo: "男性")
-                .whereField(AGE, isGreaterThanOrEqualTo: currentUser.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: currentUser.maxAge!)
-            
-            Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
-                    }
-                }
-            }
-            
-        } else {
-            let usersRef = COLLECTION_USERS
-                .order(by: AGE)
-                .order(by: LASTCHANGE)
-                .whereField(GENDER, isEqualTo: "女性")
-                .whereField(AGE, isGreaterThanOrEqualTo: currentUser.minAge!)
-                .whereField(AGE, isLessThanOrEqualTo: currentUser.maxAge!)
-            
-            Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
-                    }
-                }
-            }
-        }
-    }
-    
     class func isOnline(online: String) {
         
         guard Auth.auth().currentUser?.uid != nil else { return }
@@ -555,7 +555,6 @@ class User {
         let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date()), DATE: date] as [String : Any]
         COLLECTION_USERS.document(User.currentUserId()).updateData(dict)
     }
-    
 }
 
 // MARK: - Save Data

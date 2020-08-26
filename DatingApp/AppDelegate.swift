@@ -63,6 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func getLoginBonus() {
         
+        guard Auth.auth().currentUser != nil else { return }
+        
         User.fetchUserAddSnapshotListener { (user) in
             self.user = user
             
@@ -74,13 +76,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if nowDate >= oneDayLate {
                 let day = Date()
-                let oneDayLate = Calendar.current.date(byAdding: .day, value: 1, to: day)!
+                let oneDayLate = Calendar.current.date(byAdding: .hour, value: 12, to: day)!
                 updateUser(withValue: [ONEDAY: true, ONEDAYLATE: oneDayLate])
             }
         }
     }
     
     @objc func timeCount() {
+        
+        guard Auth.auth().currentUser != nil else { return }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+        }
+        
+        guard user.uid != nil else { return }
         updateUser(withValue: [LOGINTIME: user.loginTime + 30])
     }
     

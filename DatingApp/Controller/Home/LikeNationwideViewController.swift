@@ -148,6 +148,40 @@ extension LikeNationwideViewController: UITableViewDelegate, UITableViewDataSour
         cell.user = users[indexPath.row]
         cell.likeNationVC = self
         cell.likeCountUserCell(users[indexPath.row])
+        if indexPath.row == 0 {
+            cell.numberLabel.text = "1"
+            cell.numberLabel.textColor = UIColor(named: O_GREEN)
+
+        } else if indexPath.row == 1 {
+            cell.numberLabel.text = "2"
+            cell.numberLabel.textColor = .systemYellow
+
+        } else if indexPath.row == 2 {
+            cell.numberLabel.text = "3"
+            cell.numberLabel.textColor = .systemPink
+
+        } else if indexPath.row == 3 {
+            cell.numberLabel.text = "4"
+
+        } else if indexPath.row == 4 {
+            cell.numberLabel.text = "5"
+
+        } else if indexPath.row == 5 {
+            cell.numberLabel.text = "6"
+
+        } else if indexPath.row == 6 {
+            cell.numberLabel.text = "7"
+
+        } else if indexPath.row == 7 {
+            cell.numberLabel.text = "8"
+
+        } else if indexPath.row == 8 {
+            cell.numberLabel.text = "9"
+
+        } else if indexPath.row == 9 {
+            cell.numberLabel.text = "10"
+
+        }
         
         return cell
     }

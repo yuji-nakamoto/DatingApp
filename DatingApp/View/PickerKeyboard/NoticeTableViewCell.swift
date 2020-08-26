@@ -18,19 +18,19 @@ class NoticeTableViewCell: UITableViewCell {
     func notice1() {
         titleLabel.text = "重要なお知らせ"
         titleLabel2.text = "通信障害による繋がりにくくなっている不具合について"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n通信障害により、サービス全体が繋がりにくくなっている事象を確認しました。"
+        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能\n・アイテム機能\n・いいねランキング機能"
     }
     
     func notice2() {
         titleLabel.text = "アップデートのお知らせ"
         titleLabel2.text = "新機能を実装しました"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能"
+        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能\n・アイテム機能\n・いいねランキング機能"
     }
     
     func notice3() {
         titleLabel.text = "アップデートのお知らせ"
         titleLabel2.text = "新機能を実装しました"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能"
+        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n通信障害により、サービス全体が繋がりにくくなっている事象を確認しました。"
     }
     
     func notice4() {

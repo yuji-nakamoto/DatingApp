@@ -27,7 +27,6 @@ class SearchCollectionViewController: UIViewController {
     @IBOutlet weak var loginBunusView: UIView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
-    
     private var users = [User]()
     private var user = User()
     private let refresh = UIRefreshControl()
@@ -213,7 +212,7 @@ class SearchCollectionViewController: UIViewController {
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -333,7 +332,7 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
             let bannerView = cell3.viewWithTag(1) as! GADBannerView
             bannerView.layer.cornerRadius = 15
             bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-            //            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+//            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
             bannerView.rootViewController = self
             bannerView.load(GADRequest())
             

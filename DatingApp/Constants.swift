@@ -100,8 +100,6 @@ public let USEDITEM1 = "usedItem1"
 public let USEDITEM2 = "usedItem2"
 public let USEDITEM3 = "usedItem3"
 
-
-
 // MARK: - Counter
 
 public let SHARDS = "shards"

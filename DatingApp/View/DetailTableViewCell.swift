@@ -269,6 +269,8 @@ class DetailTableViewCell: UITableViewCell {
                 if profileImageView1.isHidden == false {
                     profileImageView1.isHidden = true
                     profileImageView2.isHidden = false
+                    profileImageView3.isHidden = true
+                    profileImageView4.isHidden = true
                     segBarFour1.alpha = 0.5
                     segBarFour2.alpha = 1
                 } else if profileImageView3.isHidden == true && profileImageView4.isHidden == false {
@@ -300,6 +302,9 @@ class DetailTableViewCell: UITableViewCell {
                 if profileImageView1.isHidden == false {
                     profileImageView1.isHidden = true
                     profileImageView2.isHidden = false
+                    profileImageView3.isHidden = true
+                    profileImageView4.isHidden = true
+                    profileImageView5.isHidden = true
                     segBarFive1.alpha = 0.5
                     segBarFive2.alpha = 1
                 } else if profileImageView4.isHidden == true && profileImageView5.isHidden == false {
@@ -336,6 +341,10 @@ class DetailTableViewCell: UITableViewCell {
                 if profileImageView1.isHidden == false {
                     profileImageView1.isHidden = true
                     profileImageView2.isHidden = false
+                    profileImageView3.isHidden = true
+                    profileImageView4.isHidden = true
+                    profileImageView5.isHidden = true
+                    profileImageView6.isHidden = true
                     segBarSix1.alpha = 0.5
                     segBarSix2.alpha = 1
 
@@ -419,16 +428,16 @@ class DetailTableViewCell: UITableViewCell {
                 
                 if profileImageView1.isHidden == false {
                     return
+                } else if profileImageView1.isHidden == true && profileImageView3.isHidden == true && profileImageView4.isHidden == true {
+                    profileImageView1.isHidden = false
+                    profileImageView2.isHidden = true
+                    segBarFour1.alpha = 1
+                    segBarFour2.alpha = 0.5
                 } else if profileImageView1.isHidden == true && profileImageView2.isHidden == true && profileImageView3.isHidden == true {
                     profileImageView3.isHidden = false
                     profileImageView4.isHidden = true
                     segBarFour3.alpha = 1
                     segBarFour4.alpha = 0.5
-                } else if profileImageView3.isHidden == true && profileImageView4.isHidden == true {
-                    profileImageView1.isHidden = false
-                    profileImageView2.isHidden = true
-                    segBarFour1.alpha = 1
-                    segBarFour2.alpha = 0.5
                 } else if profileImageView4.isHidden == true {
                     profileImageView2.isHidden = false
                     profileImageView3.isHidden = true
@@ -441,16 +450,16 @@ class DetailTableViewCell: UITableViewCell {
                 
                 if profileImageView1.isHidden == false {
                     return
+                } else if profileImageView1.isHidden == true && profileImageView3.isHidden == true && profileImageView4.isHidden == true && profileImageView5.isHidden == true {
+                    profileImageView1.isHidden = false
+                    profileImageView2.isHidden = true
+                    segBarFive1.alpha = 1
+                    segBarFive2.alpha = 0.5
                 } else if profileImageView1.isHidden == true && profileImageView2.isHidden == true && profileImageView3.isHidden == true && profileImageView4.isHidden == true {
                     profileImageView4.isHidden = false
                     profileImageView5.isHidden = true
                     segBarFive4.alpha = 1
                     segBarFive5.alpha = 0.5
-                } else if profileImageView2.isHidden == false && profileImageView3.isHidden == true && profileImageView4.isHidden == true {
-                    profileImageView1.isHidden = false
-                    profileImageView2.isHidden = true
-                    segBarFive1.alpha = 1
-                    segBarFive2.alpha = 0.5
                 } else if profileImageView3.isHidden == true && profileImageView5.isHidden == true {
                     profileImageView3.isHidden = false
                     profileImageView4.isHidden = true
@@ -540,11 +549,6 @@ class DetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         ageLabel.text = ""
-        segBarDouble1.layer.cornerRadius = 5 / 2
-        segBarDouble2.layer.cornerRadius = 5 / 2
-        segBarTriple1.layer.cornerRadius = 5 / 2
-        segBarTriple2.layer.cornerRadius = 5 / 2
-        segBarTriple3.layer.cornerRadius = 5 / 2
         
         profileImageView1.layer.cornerRadius = 15
         profileImageView2.layer.cornerRadius = 15

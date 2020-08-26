@@ -10,8 +10,10 @@ import Foundation
 import Firebase
 import GoogleSignIn
 
+var appdelegate: AppDelegate?
+
 struct AuthService {
-    
+
     // MARK: - Authentication func
     
     static func testLoginUser(email: String, password: String, comletion: @escaping() -> Void) {
@@ -56,10 +58,24 @@ struct AuthService {
     
     static func logoutUser(completion: @escaping(_ error: Error?) -> Void) {
         
+        User.isOnline(online: "offline")
+        appdelegate?.timer.invalidate()
+        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+        UserDefaults.standard.removeObject(forKey: PINK)
+        UserDefaults.standard.removeObject(forKey: GREEN)
+        UserDefaults.standard.removeObject(forKey: DARK)
+        UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+        UserDefaults.standard.removeObject(forKey: GOOGLE)
+        UserDefaults.standard.removeObject(forKey: FACEBOOK)
+        UserDefaults.standard.removeObject(forKey: APPLE)
+
         do {
             if let providerData = Auth.auth().currentUser?.providerData {
                 let userInfo = providerData[0]
-                
+
                 switch userInfo.providerID {
                 case "google.com":
                     GIDSignIn.sharedInstance()?.signOut()
@@ -67,18 +83,7 @@ struct AuthService {
                     break
                 }
             }
-            User.isOnline(online: "offline")
-            Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
-            Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
-            Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
-            Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-            UserDefaults.standard.removeObject(forKey: PINK)
-            UserDefaults.standard.removeObject(forKey: GREEN)
-            UserDefaults.standard.removeObject(forKey: DARK)
-            UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-            UserDefaults.standard.removeObject(forKey: GOOGLE)
-            UserDefaults.standard.removeObject(forKey: FACEBOOK)
-            UserDefaults.standard.removeObject(forKey: APPLE)
+
             try Auth.auth().signOut()
             
             completion(nil)
@@ -107,7 +112,8 @@ struct AuthService {
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-        
+        appdelegate?.timer.invalidate()
+
         Auth.auth().currentUser?.delete(completion: { (error) in
             
             if error != nil {

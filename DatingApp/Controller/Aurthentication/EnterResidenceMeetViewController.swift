@@ -52,7 +52,7 @@ class EnterResidenceMeetController: UIViewController {
     private func saveUserProfession() {
         
         let day = Date()
-        let oneDayLate = Calendar.current.date(byAdding: .day, value: 1, to: day)!
+        let oneDayLate = Calendar.current.date(byAdding: .hour, value: 12, to: day)!
         let date: Double = Date().timeIntervalSince1970
         let dict = [RESIDENCESEARCH: residenceLabel.text!,
                     SELFINTRO: "はじめまして！",
@@ -73,7 +73,9 @@ class EnterResidenceMeetController: UIViewController {
                     TOBACCO: "未設定",
                     HOBBY1: "",
                     STATUS: "online",
-                    POINTS: 1,
+                    POINTS: 0,
+                    USEDITEM2: 0,
+                    ONEDAY: true,
                     CREATED_AT: date,
                     ONEDAYLATE: oneDayLate,
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]

@@ -328,8 +328,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     private func setupBanner() {
         
         // test adUnitID
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -350,7 +350,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         sendButton.isEnabled = false
         sendButton.alpha = 0.7
         navBar.alpha = 0.85
-        hintLabel.text = "マッチすると2通目以降も送信ができます。\n\nもしくは、アイテムを使用すると送信することができます。"
+        hintLabel.text = "マッチすると2通目以降も送信ができます。\n\nもしくは、アイテムを使用することで送信ができます。"
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
