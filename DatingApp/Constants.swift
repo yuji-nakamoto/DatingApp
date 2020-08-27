@@ -106,6 +106,7 @@ public let USEDITEM4 = "usedItem4"
 public let USEDITEM5 = "usedItem5"
 public let USEDITEM6 = "usedItem6"
 public let VISITED = "visited"
+public let POINTHALFLATE = "pointHalfLate"
 
 // MARK: - Counter
 
@@ -170,6 +171,7 @@ public let LIKE_ON = "like_on"
 public let TYPE_ON = "type_on"
 public let MATCH_ON = "match_on"
 public let MESSAGE_ON = "message_on"
+public let GIFT_ON = "gift_on"
 
 public let LOVER = "lover"
 public let FRIEND = "friend"

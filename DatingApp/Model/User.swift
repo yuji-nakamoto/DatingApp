@@ -68,12 +68,14 @@ class User {
     var item3: Int!
     var item4: Int!
     var item5: Int!
+    var item6: Int!
     var usedItem1: Int!
     var usedItem2: Int!
     var usedItem3: Int!
     var usedItem4: Int!
     var usedItem5: Int!
     var visited: Int!
+    var pointHalfLate: Timestamp!
     
     init() {
     }
@@ -136,12 +138,14 @@ class User {
         item3 = dict[ITEM3] as? Int ?? 0
         item4 = dict[ITEM4] as? Int ?? 0
         item5 = dict[ITEM5] as? Int ?? 0
+        item6 = dict[ITEM6] as? Int ?? 0
         usedItem1 = dict[USEDITEM1] as? Int ?? 0
         usedItem2 = dict[USEDITEM2] as? Int ?? 0
         usedItem3 = dict[USEDITEM3] as? Int ?? 0
         usedItem4 = dict[USEDITEM4] as? Int ?? 0
         usedItem5 = dict[USEDITEM5] as? Int ?? 0
         visited = dict[VISITED] as? Int ?? 0
+        pointHalfLate = dict[POINTHALFLATE] as? Timestamp ?? Timestamp(date: Date())
     }
     
     // MARK: - Return user
@@ -583,6 +587,15 @@ func updateUser(withValue: [String: Any]) {
     COLLECTION_USERS.document(User.currentUserId()).updateData(withValue) { (error) in
         if let error = error {
             print("Error updating user: \(error.localizedDescription)")
+        }
+    }
+}
+
+func updateToUser(_ toUserId: String, withValue: [String: Any]) {
+    
+    COLLECTION_USERS.document(toUserId).updateData(withValue) { (error) in
+        if let error = error {
+            print("Error updating touser: \(error.localizedDescription)")
         }
     }
 }

@@ -64,6 +64,7 @@ struct AuthService {
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
         UserDefaults.standard.removeObject(forKey: PINK)
         UserDefaults.standard.removeObject(forKey: GREEN)
         UserDefaults.standard.removeObject(forKey: DARK)
@@ -112,6 +113,7 @@ struct AuthService {
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
         appdelegate?.timer.invalidate()
 
         Auth.auth().currentUser?.delete(completion: { (error) in

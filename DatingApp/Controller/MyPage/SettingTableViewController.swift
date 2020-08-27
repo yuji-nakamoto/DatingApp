@@ -31,8 +31,9 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var matchLabel: UILabel!
     @IBOutlet weak var matchSwitch: UISwitch!
+    @IBOutlet weak var giftSwitch: UISwitch!
+    @IBOutlet weak var giftLabel: UILabel!
     
-
     private var user: User!
     
     // MARK: - Lifecycle
@@ -80,6 +81,22 @@ class SettingTableViewController: UITableViewController {
             footstepLabel.text = "足あとを残さない"
         }
     }
+    
+    @IBAction func giftSwitched(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            generator.notificationOccurred(.success)
+            UserDefaults.standard.set(true, forKey: GIFT_ON)
+            Messaging.messaging().subscribe(toTopic: "gift\(Auth.auth().currentUser!.uid)")
+            giftLabel.text = "プレゼント通知を受信する"
+        } else {
+            generator.notificationOccurred(.success)
+            UserDefaults.standard.removeObject(forKey: GIFT_ON)
+            Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+            giftLabel.text = "プレゼント通知を受信しない"
+        }
+    }
+    
     
     @IBAction func likeSwitched(_ sender: UISwitch) {
         
@@ -259,6 +276,14 @@ class SettingTableViewController: UITableViewController {
         } else {
             matchSwitch.isOn = false
             matchLabel.text = "マッチング通知を受信しない"
+        }
+        
+        if UserDefaults.standard.object(forKey: GIFT_ON) != nil {
+            giftSwitch.isOn = true
+            giftLabel.text = "プレゼント通知を受信する"
+        } else {
+            giftSwitch.isOn = false
+            giftLabel.text = "プレゼント通知を受信しない"
         }
         
         if UserDefaults.standard.object(forKey: MALE) != nil {

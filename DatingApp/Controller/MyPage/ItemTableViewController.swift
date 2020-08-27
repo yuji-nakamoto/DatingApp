@@ -159,7 +159,7 @@ class ItemTableViewController: UIViewController {
 extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -175,6 +175,8 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
             cell.possessionItem4(self.user)
         } else if indexPath.row == 4 {
             cell.possessionItem5(self.user)
+        } else if indexPath.row == 5 {
+            cell.possessionItem6(self.user)
         }
         return cell
     }

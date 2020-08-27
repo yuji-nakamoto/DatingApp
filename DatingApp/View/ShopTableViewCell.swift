@@ -103,4 +103,20 @@ class ShopTableViewCell: UITableViewCell {
             pointLabel.text = String(user.item5)
         }
     }
+    
+    func shopItem6(_ user: User) {
+        itemImageView.image = UIImage(named: "item6")
+        itemNameLabel.text = "献上"
+        descriptionLabel.text = "気になるお相手にポイントをプレゼントできます"
+        pointLabel.text = "1"
+    }
+    
+    func possessionItem6(_ user: User) {
+        itemImageView.image = UIImage(named: "item6")
+        itemNameLabel.text = "献上"
+        descriptionLabel.text = "気になるお相手にポイントをプレゼントできます"
+        if user.item6 != nil {
+            pointLabel.text = String(user.item6)
+        }
+    }
 }

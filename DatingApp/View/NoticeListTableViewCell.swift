@@ -29,6 +29,7 @@ class NoticeListTableViewCell: UITableViewCell {
         }
         
         let date = notice.time.dateValue()
+        print(date)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         timeLabel.text = dateFormatter.string(from: date)

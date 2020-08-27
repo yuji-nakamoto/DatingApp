@@ -71,6 +71,9 @@ class SearchCollectionViewController: UIViewController {
             if UserDefaults.standard.object(forKey: MATCH_ON) != nil {
                 Messaging.messaging().subscribe(toTopic: "match\(Auth.auth().currentUser!.uid)")
             }
+            if UserDefaults.standard.object(forKey: GIFT_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "gift\(Auth.auth().currentUser!.uid)")
+            }
         }
         
         if UserDefaults.standard.object(forKey: REFRESH) != nil {

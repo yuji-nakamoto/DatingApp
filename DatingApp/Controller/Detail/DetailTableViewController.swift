@@ -11,6 +11,7 @@ import SDWebImage
 import Lottie
 import Firebase
 import GoogleMobileAds
+import JGProgressHUD
 
 class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
@@ -22,6 +23,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var typeBackView: UIView!
     @IBOutlet weak var likeBackView: UIView!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var giftButtonView: UIView!
     @IBOutlet weak var typeButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var messageButton2: UIButton!
@@ -49,6 +51,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var currentUser = User()
     private var typeUser = Type()
     private var interstitial: GADInterstitial!
+    private var hud = JGProgressHUD(style: .dark)
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel, descriptionLabel, descriptionLabel2]
     
@@ -88,6 +91,36 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     @IBAction func reportButtonPressed(_ sender: Any) {
         selectAlert()
+    }
+    
+    @IBAction func giftButtonPressed(_ sender: Any) {
+        
+        let alert: UIAlertController = UIAlertController(title: "献上", message: "アイテムを使用しポイントを送ります。\n送りますか？", preferredStyle: .alert)
+        let send: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
+            if self.currentUser.item6 == 0 {
+                
+                self.hud.show(in: self.view)
+                self.hud.textLabel.text = "アイテムがありません。"
+                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
+            } else {
+                
+                self.hud.show(in: self.view)
+                self.hud.textLabel.text = "献上しました。"
+                self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
+                updateUser(withValue: [ITEM6: self.currentUser.item6 - 1])
+                updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1])
+                self.incrementAppBadgeCount3()
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+        
+        alert.addAction(send)
+        alert.addAction(cancel)
+        
+        self.present(alert,animated: true,completion: nil)
     }
     
     @IBAction func likeButtonPressed(_ sender: Any) {
@@ -166,7 +199,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             self.currentUserView.sd_setImage(with: URL(string: self.currentUser.profileImageUrl1), completed: nil)
         }
     }
-
+    
     private func fetchTypeUser() {
         
         guard toUserId != "" else { return }
@@ -191,7 +224,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         Type.checkIfMatch(toUserId: toUserId) { (type) in
             self.typeUser = type
             self.incrementAppBadgeCount2()
-
+            
             if self.typeUser.isType == 1 {
                 self.matchView()
                 Match.saveMatchUser(forUser: self.user)
@@ -259,7 +292,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func createAndLoadIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        //        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -274,12 +307,16 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     private func incrementAppBadgeCount2() {
-
+        
         if self.typeUser.isType == 1 {
             sendRequestNotification4(toUser: self.user, message: "マッチしました！メッセージを送ってみましょう！", badge: self.user.appBadgeCount + 1)
         } else {
             sendRequestNotification3(toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
         }
+    }
+    
+    private func incrementAppBadgeCount3() {
+        sendRequestNotification5(toUser: self.user, message: "\(self.currentUser.username!)さんからプレゼントです", badge: self.user.appBadgeCount + 1)
     }
     
     func incrementLikeCounter(ref: DocumentReference, numShards: Int) {
@@ -380,13 +417,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         let alert: UIAlertController = UIAlertController(title: "", message: "\(user.username!)さんを", preferredStyle: .actionSheet)
         
         let block: UIAlertAction = UIAlertAction(title: "ブロックする", style: UIAlertAction.Style.default) { (alert) in
-            
             self.performSegue(withIdentifier: "BlockVC", sender: self.user.uid)
         }
         let report: UIAlertAction = UIAlertAction(title: "通報する", style: UIAlertAction.Style.default) { (alert) in
-            
             self.performSegue(withIdentifier: "ReportVC", sender: self.user.uid)
         }
+        
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
         }
         
@@ -427,6 +463,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         likeBackView.layer.cornerRadius = 55 / 2
         typeBackView.layer.cornerRadius = 55 / 2
         messageBackView.layer.cornerRadius = 55 / 2
+        giftButtonView.layer.cornerRadius = 55 / 2
         
         likeBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         likeBackView.layer.shadowColor = UIColor.black.cgColor
@@ -437,6 +474,11 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         typeBackView.layer.shadowColor = UIColor.black.cgColor
         typeBackView.layer.shadowOpacity = 0.3
         typeBackView.layer.shadowRadius = 4
+        
+        giftButtonView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        giftButtonView.layer.shadowColor = UIColor.black.cgColor
+        giftButtonView.layer.shadowOpacity = 0.3
+        giftButtonView.layer.shadowRadius = 4
         
         messageBackView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         messageBackView.layer.shadowColor = UIColor.black.cgColor

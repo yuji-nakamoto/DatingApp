@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func timerMethod() {
         
-        self.timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
     }
     
     private func getLoginBonus() {
@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         guard user.uid != nil else { return }
-        updateUser(withValue: [LOGINTIME: user.loginTime + 30])
+        updateUser(withValue: [LOGINTIME: user.loginTime + 60])
     }
     
     func application(_ application: UIApplication,open url:URL,sourceApplication: String?,annotation: Any) -> Bool {
