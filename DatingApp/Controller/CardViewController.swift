@@ -53,20 +53,23 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         super.viewDidLoad()
         setupUI()
         setupBanner()
+        fetchUser()
         showTutorialView()
         interstitial = createAndLoadIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadAction()
+        if UserDefaults.standard.object(forKey: REFRESH) != nil {
+            reloadAction()
+            UserDefaults.standard.removeObject(forKey: REFRESH)
+        }
         UserDefaults.standard.set(true, forKey: CARDVC)
         self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         self.navigationController?.navigationBar.isHidden = false
     }
     
@@ -539,7 +542,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         
         if UserDefaults.standard.object(forKey: TUTORIAL_END) == nil {
             
-            if UserDefaults.standard.object(forKey: FEMALE) != nil {
+            if UserDefaults.standard.object(forKey: MALE) != nil {
                 placeholderImageView.image = UIImage(named: "cardModel2")
             } else {
                 placeholderImageView.image = UIImage(named: "cardModel1")
@@ -589,7 +592,8 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func setupBanner() {
         
-        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }

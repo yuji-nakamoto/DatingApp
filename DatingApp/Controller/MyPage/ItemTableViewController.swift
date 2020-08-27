@@ -19,6 +19,10 @@ class ItemTableViewController: UIViewController {
     @IBOutlet weak var usedLabel1: UILabel!
     @IBOutlet weak var usedLabel2: UILabel!
     @IBOutlet weak var usedLabel3: UILabel!
+    @IBOutlet weak var usedLabel4: UILabel!
+    @IBOutlet weak var usedLabel5: UILabel!
+    @IBOutlet weak var usedView: UIView!
+    @IBOutlet weak var barViewTopConstraint: NSLayoutConstraint!
     
     private var user = User()
     private var hud = JGProgressHUD(style: .dark)
@@ -36,6 +40,24 @@ class ItemTableViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func viewButtonPressed(_ sender: Any) {
+        
+        if UserDefaults.standard.object(forKey: VIEW_ON) != nil {
+            UIView.animate(withDuration: 0.5) {
+                self.usedView.isHidden = !self.usedView.isHidden
+                self.barViewTopConstraint.constant = 230
+                UserDefaults.standard.removeObject(forKey: VIEW_ON)
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.usedView.isHidden = !self.usedView.isHidden
+                self.barViewTopConstraint.constant = 0
+                UserDefaults.standard.set(true, forKey: VIEW_ON)
+
+            }
+        }
+    }
+    
     // MARK: - Fetch
     
     private func fetchUser() {
@@ -43,6 +65,7 @@ class ItemTableViewController: UIViewController {
         User.fetchUserAddSnapshotListener { (user) in
             self.user = user
             self.usedItems(self.user)
+            self.tableView.reloadData()
         }
     }
     
@@ -74,6 +97,22 @@ class ItemTableViewController: UIViewController {
             self.usedLabel3.textColor = .systemGray
         }
         
+        if self.user.usedItem4 > 0 {
+            self.usedLabel4.text = "\(user.usedItem4!)枚使用中"
+            self.usedLabel4.textColor = UIColor(named: O_GREEN)
+        } else {
+            self.usedLabel4.text = "未使用"
+            self.usedLabel4.textColor = .systemGray
+        }
+        
+        if self.user.usedItem5 > 0 {
+            self.usedLabel5.text = "\(user.usedItem5!)枚使用中"
+            self.usedLabel5.textColor = UIColor(named: O_GREEN)
+        } else {
+            self.usedLabel5.text = "未使用"
+            self.usedLabel5.textColor = .systemGray
+        }
+        
         self.tableView.reloadData()
     }
     
@@ -96,7 +135,7 @@ class ItemTableViewController: UIViewController {
         
         // test adUnitID
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -107,6 +146,12 @@ class ItemTableViewController: UIViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
     }
+    
+    private func hudSuccess2() {
+        hud.textLabel.text = "アイテムを使用しました。効果が反映されました。"
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.dismiss(afterDelay: 2.0)
+    }
 }
 
 // MARK: - Table view
@@ -114,7 +159,7 @@ class ItemTableViewController: UIViewController {
 extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,6 +171,10 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
             cell.possessionItem2(self.user)
         } else if indexPath.row == 2 {
             cell.possessionItem3(self.user)
+        } else if indexPath.row == 3 {
+            cell.possessionItem4(self.user)
+        } else if indexPath.row == 4 {
+            cell.possessionItem5(self.user)
         }
         return cell
     }
@@ -174,11 +223,41 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
                 COLLECTION_SWIPE.document(User.currentUserId()).delete { (error) in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         updateUser(withValue: [USEDITEM3: self.user.usedItem3 - 1])
-                        self.hud.textLabel.text = "アイテムを使用しました。効果が反映されました。"
-                        self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                        self.hud.dismiss(afterDelay: 2.0)
+                        self.hudSuccess2()
                     }
                 }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+            }
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+            
+        } else if indexPath.row == 3 {
+            
+            if user.item4 == 0 { return }
+            let alert: UIAlertController = UIAlertController(title: "開眼", message: "アイテムを使用します。効果は即座に反映されます。使用しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+                
+                self.hud.show(in: self.view)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    updateUser(withValue: [ITEM4: self.user.item4 - 1, USEDITEM4: self.user.usedItem4 + 1])
+                    self.hudSuccess2()
+                }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+            }
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+            
+        } else if indexPath.row == 4 {
+            
+            if user.item5 == 0 { return }
+            let alert: UIAlertController = UIAlertController(title: "割り込み", message: "アイテムを使用します。使用しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+                
+                updateUser(withValue: [ITEM5: self.user.item5 - 1, USEDITEM5: self.user.usedItem5 + 1])
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
             }

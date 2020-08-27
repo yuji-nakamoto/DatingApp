@@ -44,6 +44,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var like = Like()
     private var type = Type()
     private var block = Block()
+    private var footstep = Footstep()
     public var toUserId = ""
     private var currentUser = User()
     private var typeUser = Type()
@@ -208,12 +209,16 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     // MARL: - FootStep
     
-    private func footsteps(_ userId: String) {
+    private func footsteps(_ toUserId: String) {
         
-        guard toUserId != "" else { return }
-        Footstep.saveIsFootstepUser(toUserId: toUserId)
-        if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-            Footstep.saveFootstepedUser(toUserId: toUserId)
+        Footstep.fetchFootstepUser(toUserId) { (footstep) in
+            self.footstep = footstep
+            self.visited()
+            
+            Footstep.saveIsFootstepUser(toUserId: self.toUserId)
+            if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+                Footstep.saveFootstepedUser(toUserId: self.toUserId)
+            }
         }
     }
     
@@ -242,9 +247,19 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     // MARK: - Helpers
     
+    private func visited() {
+        
+        if footstep.isFootStep == 1 {
+            return
+        } else {
+            COLLECTION_USERS.document(toUserId).updateData([VISITED: self.user.visited + 1])
+        }
+    }
+    
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial

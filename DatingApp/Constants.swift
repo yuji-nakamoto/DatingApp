@@ -96,9 +96,16 @@ public let CREATED_AT = "created_at"
 public let ITEM1 = "item1"
 public let ITEM2 = "item2"
 public let ITEM3 = "item3"
+public let ITEM4 = "item4"
+public let ITEM5 = "item5"
+public let ITEM6 = "item6"
 public let USEDITEM1 = "usedItem1"
 public let USEDITEM2 = "usedItem2"
 public let USEDITEM3 = "usedItem3"
+public let USEDITEM4 = "usedItem4"
+public let USEDITEM5 = "usedItem5"
+public let USEDITEM6 = "usedItem6"
+public let VISITED = "visited"
 
 // MARK: - Counter
 
@@ -199,6 +206,7 @@ public let NOTICE2 = "notice2"
 public let NOTICE3 = "notice3"
 public let NOTICE4 = "notice4"
 public let NOTICE5 = "notice5"
+public let VIEW_ON = "view_on"
 
 // MARK: - Notification
 

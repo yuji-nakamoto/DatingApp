@@ -364,6 +364,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="ageBottomConstraint" destination="GPS-oH-sah" id="iHu-ji-CpA"/>
                 <outlet property="ageLabel" destination="Jfi-te-3yD" id="c5S-kW-uJ0"/>
                 <outlet property="likeLabel" destination="1e0-CQ-C84" id="dWQ-oV-0pd"/>
                 <outlet property="likeView" destination="U2T-VS-O1Q" id="Qmj-42-PjA"/>

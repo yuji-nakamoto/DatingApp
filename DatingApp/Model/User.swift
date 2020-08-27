@@ -66,9 +66,14 @@ class User {
     var item1: Int!
     var item2: Int!
     var item3: Int!
+    var item4: Int!
+    var item5: Int!
     var usedItem1: Int!
     var usedItem2: Int!
     var usedItem3: Int!
+    var usedItem4: Int!
+    var usedItem5: Int!
+    var visited: Int!
     
     init() {
     }
@@ -129,9 +134,14 @@ class User {
         item1 = dict[ITEM1] as? Int ?? 0
         item2 = dict[ITEM2] as? Int ?? 0
         item3 = dict[ITEM3] as? Int ?? 0
+        item4 = dict[ITEM4] as? Int ?? 0
+        item5 = dict[ITEM5] as? Int ?? 0
         usedItem1 = dict[USEDITEM1] as? Int ?? 0
         usedItem2 = dict[USEDITEM2] as? Int ?? 0
         usedItem3 = dict[USEDITEM3] as? Int ?? 0
+        usedItem4 = dict[USEDITEM4] as? Int ?? 0
+        usedItem5 = dict[USEDITEM5] as? Int ?? 0
+        visited = dict[VISITED] as? Int ?? 0
     }
     
     // MARK: - Return user

@@ -74,6 +74,8 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var loginBottomConstrait: NSLayoutConstraint!
     @IBOutlet weak var AgeLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var detailMapLabel: UILabel!
+    @IBOutlet weak var visitedLabel: UILabel!
+    @IBOutlet weak var iconEye: UIImageView!
     
     // MARK: - Helpers
     
@@ -92,6 +94,20 @@ class DetailTableViewCell: UITableViewCell {
         if user?.uid != nil {
             getLikeCount(ref: COLLECTION_LIKECOUNTER.document((user?.uid)!))
             getTypeCount(ref: COLLECTION_TYPECOUNTER.document((user?.uid)!))
+        }
+        
+        if user?.visited == nil {
+            return
+        }
+        visitedLabel.text = String(user!.visited)
+        
+        if user?.uid == User.currentUserId() {
+            iconEye.image = UIImage(systemName: "eye.slash.fill")
+            visitedLabel.isHidden = true
+            if user?.usedItem4 == 1 {
+                iconEye.image = UIImage(systemName: "eye.fill")
+                visitedLabel.isHidden = false
+            }
         }
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
@@ -115,7 +131,6 @@ class DetailTableViewCell: UITableViewCell {
             profileImageView5.sd_setImage(with: URL(string: user!.profileImageUrl5), completed: nil)
             profileImageView6.sd_setImage(with: URL(string: user!.profileImageUrl6), completed: nil)
         }
-    
         
         nameLabel.text = user?.username
         nameLabel2.text = user?.username
@@ -149,7 +164,7 @@ class DetailTableViewCell: UITableViewCell {
             detailMapLabel.text = user?.detailArea
         }
         
-        if user!.age == nil {
+        if user?.age == nil {
             return
         }
         ageLabel.text = String(user!.age) + "歳"

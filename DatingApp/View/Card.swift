@@ -49,11 +49,18 @@ class Card: UIView {
     @IBOutlet weak var nopeView: UIView!
     @IBOutlet weak var nopeLabel: UILabel!
     @IBOutlet weak var typeView: UIView!
+    @IBOutlet weak var ageBottomConstraint: NSLayoutConstraint!
     
     var user: User!
     var cardVC: CardViewController?
     
     func configureCell(_ user: User?) {
+        
+        if user?.profileImageUrl2 == "" {
+            ageBottomConstraint.constant = -5
+        } else {
+            ageBottomConstraint.constant = 10
+        }
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(handleChangePhoto))
@@ -412,7 +419,7 @@ class Card: UIView {
         likeLabel.transform = CGAffineTransform(rotationAngle: -.pi / 8)
         nopeLabel.transform = CGAffineTransform(rotationAngle: .pi / 8)
         
-        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: bounds.height)
+        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 650)
         profileImageView1.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
         profileImageView2.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
         profileImageView3.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])

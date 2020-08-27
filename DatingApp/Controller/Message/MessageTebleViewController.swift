@@ -158,11 +158,11 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         if matchUser.isMatch != 1 {
             if self.message.from == User.currentUserId() {
                 if currentUser.usedItem1 > 0 {
-                    let alert: UIAlertController = UIAlertController(title: "メッセージ送信できる券", message: "アイテムを使用してメッセージを送信します。送信しますか？", preferredStyle: .alert)
+                    let alert: UIAlertController = UIAlertController(title: "おかわり", message: "アイテムを使用してメッセージを送信します。送信しますか？", preferredStyle: .alert)
                     let exchange: UIAlertAction = UIAlertAction(title: "送信する", style: UIAlertAction.Style.default) { (alert) in
                         
-                        self.hud.textLabel.text = "アイテムを使用しました。"
                         self.hud.show(in: self.view)
+                        self.hud.textLabel.text = "アイテムを使用しました。"
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 2.0)
                         updateUser(withValue: [USEDITEM1: self.currentUser.usedItem1 - 1])
@@ -171,6 +171,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                         let dict = [MESSAGETEXT: self.textField.text!,
                                     FROM: User.currentUserId(),
                                     TO: self.toUserId,
+                                    USEDITEM5: self.currentUser.usedItem5 as Any,
                                     TIMESTAMP: Timestamp(date: Date()),
                                     DATE: date] as [String : Any]
                         Message.saveMessage(to: self.user, withValue: dict)
@@ -192,6 +193,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         let dict = [MESSAGETEXT: textField.text!,
                     FROM: User.currentUserId(),
                     TO: toUserId,
+                    USEDITEM5: self.currentUser.usedItem5 as Any,
                     TIMESTAMP: Timestamp(date: Date()),
                     DATE: date] as [String : Any]
         Message.saveMessage(to: user, withValue: dict)
@@ -266,7 +268,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -328,8 +331,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     private func setupBanner() {
         
         // test adUnitID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }

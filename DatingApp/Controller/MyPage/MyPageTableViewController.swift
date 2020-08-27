@@ -43,6 +43,7 @@ class MyPageTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UserDefaults.standard.removeObject(forKey: VIEW_ON)
         if segmentControl.selectedSegmentIndex == 1 {
             fetchMyPost()
         }
@@ -162,7 +163,7 @@ class MyPageTableViewController: UIViewController {
         visualEffectView.alpha = 0
         hintView.layer.cornerRadius = 15
         closeButton.layer.cornerRadius = 40 / 2
-        hintLabel.text = "マイページからプロフィールの確認・編集やタイプ等の履歴の確認ができます。\n\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"
+        hintLabel.text = "マイページからプロフの編集やいいね！等の履歴の確認ができます。\n\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"
         if UserDefaults.standard.object(forKey: PINK) != nil {
             backView.backgroundColor = UIColor(named: O_PINK)
             backView.alpha = 0.85
