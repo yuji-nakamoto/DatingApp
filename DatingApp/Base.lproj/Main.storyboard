@@ -6903,7 +6903,7 @@
                                         <rect key="frame" x="0.0" y="1364" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BVY-xN-AFs" id="dwO-3u-NeI">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="395" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="プライバシーポリシー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ue-F9-Vf7">
@@ -7783,8 +7783,8 @@
                                             <outletCollection property="gestureRecognizers" destination="nPi-k6-haJ" appends="YES" id="c2g-Z6-1r7"/>
                                         </connections>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="mMS-oi-0bk">
-                                        <rect key="frame" x="113.5" y="791" width="187" height="55"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="mMS-oi-0bk">
+                                        <rect key="frame" x="74.5" y="791" width="265" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRE-uf-1Ck">
                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
@@ -7799,8 +7799,21 @@
                                                     <action selector="callButtonPressed:" destination="88M-Zg-JyM" eventType="touchUpInside" id="6xX-sH-NDJ"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6z0-b7-oip">
+                                                <rect key="frame" x="105" y="0.0" width="55" height="55"/>
+                                                <color key="backgroundColor" name="original_green"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="7P6-hG-zgA"/>
+                                                    <constraint firstAttribute="width" constant="55" id="lrQ-iV-pzr"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="camera.rotate" catalog="system"/>
+                                                <connections>
+                                                    <action selector="changeButtonPressed:" destination="88M-Zg-JyM" eventType="touchUpInside" id="7Nk-us-E8y"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8O-n4-RU6">
-                                                <rect key="frame" x="132" y="0.0" width="55" height="55"/>
+                                                <rect key="frame" x="210" y="0.0" width="55" height="55"/>
                                                 <color key="backgroundColor" name="original_green"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="7Cs-jb-uZA"/>
@@ -7877,6 +7890,7 @@
                     <navigationItem key="navigationItem" id="ISx-L0-caD"/>
                     <connections>
                         <outlet property="callButton" destination="wRE-uf-1Ck" id="4wG-22-0mC"/>
+                        <outlet property="changeButton" destination="6z0-b7-oip" id="p2S-AT-9FL"/>
                         <outlet property="currentView" destination="xkN-5Q-2oV" id="gYq-W4-cLb"/>
                         <outlet property="endCallButton" destination="x8O-n4-RU6" id="q2S-Vj-zbX"/>
                         <outlet property="nameLabel" destination="EZi-3l-W0r" id="t59-P6-Pw2"/>
@@ -14308,6 +14322,7 @@
         <image name="batu" width="20" height="20"/>
         <image name="batu-1" width="770" height="770"/>
         <image name="bell.fill" catalog="system" width="128" height="124"/>
+        <image name="camera.rotate" catalog="system" width="128" height="96"/>
         <image name="cardModel1" width="990" height="1186"/>
         <image name="checkMark" width="200" height="160"/>
         <image name="circle.grid.2x2.fill" catalog="system" width="128" height="112"/>

@@ -87,8 +87,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             return
         }
         
-        let alert: UIAlertController = UIAlertController(title: "ビデオ通話", message: "3ポイントを使用してビデオ通話をします。", preferredStyle: .alert)
-        let videoChat: UIAlertAction = UIAlertAction(title: "ビデオ通話をする", style: UIAlertAction.Style.default) { (alert) in
+        let alert: UIAlertController = UIAlertController(title: "ビデオ通話", message: "3ポイントを使用して\nビデオ通話をします。", preferredStyle: .alert)
+        let videoChat: UIAlertAction = UIAlertAction(title: "ビデオ通話画面へ移動する", style: UIAlertAction.Style.default) { (alert) in
             
             if self.currentUser.points <= 2 {
                 self.hud.show(in: self.view)
@@ -336,8 +336,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        //        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial

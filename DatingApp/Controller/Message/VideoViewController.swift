@@ -22,6 +22,7 @@ class VideoViewController: UIViewController {
     @IBOutlet weak var onlineView: UIView!
     @IBOutlet weak var onlineLabel: UILabel!
     @IBOutlet weak var signalLabel: UILabel!
+    @IBOutlet weak var changeButton: UIButton!
     
     fileprivate var peer: SKWPeer?
     fileprivate var mediaConnection: SKWMediaConnection?
@@ -36,8 +37,7 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUser()
-        fetchCurrentUser()
+        fetchUserAndValidate()
         setupUI()
         setup()
     }
@@ -50,12 +50,21 @@ class VideoViewController: UIViewController {
     
     // MARK: - Actions
     
+    @IBAction func changeButtonPressed(_ sender: Any) {
+        
+        let position = localStream?.getCameraPosition()
+        if position == SKWCameraPositionEnum.CAMERA_POSITION_BACK {
+            localStream?.setCameraPosition(.CAMERA_POSITION_FRONT)
+        } else {
+            localStream?.setCameraPosition(.CAMERA_POSITION_BACK)
+        }
+    }
+    
     @IBAction func callButtonPressed(_ sender: Any) {
         
         guard let peer = self.peer else{
             return
         }
-        
         self.callPeerIDSelectDialog(peer: peer, myPeerId: peer.identity, toUser: self.user) { (peerId) in
             self.call(targetPeerId: peerId)
         }
@@ -89,27 +98,27 @@ class VideoViewController: UIViewController {
     
     // MARK: - Fetch
     
-    private func fetchUser() {
+    private func fetchUserAndValidate() {
         
         User.fetchToUserAddSnapshotListener(toUserId: toUserId) { (user) in
             self.user = user
             self.nameLabel.text = self.user.username
-            if self.user.called == true {
-                self.onlineView.backgroundColor = .systemGreen
-                self.onlineLabel.text = "オンライン"
-                self.signalLabel.isHidden = true
-            } else {
-                self.onlineView.backgroundColor = .systemOrange
-                self.onlineLabel.text = "オフライン"
-                self.signalLabel.isHidden = false
+
+            User.fetchUser(User.currentUserId()) { (user) in
+                self.currentUser = user
+                
+                if self.user.isCall == true && self.currentUser.isCall == true && self.user.called == true && self.currentUser.called == true {
+                    
+                    self.onlineView.backgroundColor = .systemGreen
+                    self.onlineLabel.text = "オンライン"
+                    self.signalLabel.isHidden = true
+                    
+                } else {
+                    self.onlineView.backgroundColor = .systemOrange
+                    self.onlineLabel.text = "オフライン"
+                    self.signalLabel.isHidden = false
+                }
             }
-        }
-    }
-    
-    private func fetchCurrentUser() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.currentUser = user
         }
     }
     
@@ -119,6 +128,7 @@ class VideoViewController: UIViewController {
         
         callButton.layer.cornerRadius = 55 / 2
         endCallButton.layer.cornerRadius = 55 / 2
+        changeButton.layer.cornerRadius = 55 / 2
         currentView.layer.cornerRadius = 15
         onlineView.layer.cornerRadius = 6
     }
@@ -145,7 +155,16 @@ class VideoViewController: UIViewController {
     
     func showSelectPeerIdDialog(peerIds:[String], toUser: User, handler:@escaping (_ peerId:String)->Void){
         
-        let alert: UIAlertController = UIAlertController(title: "", message: "接続先を選択してください", preferredStyle: .alert)
+        if onlineLabel.text == "オフライン" {
+            let alert: UIAlertController = UIAlertController(title: "確認", message: "接続中のお相手はいません", preferredStyle: .alert)
+            let endCall: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+            
+            alert.addAction(endCall)
+            
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        let alert: UIAlertController = UIAlertController(title: "", message: "接続先を選択してください\n通話を開始するとポイントが使用されます", preferredStyle: .alert)
         
         for peerId in peerIds{
             let peerIdAction = UIAlertAction(title: "\(toUser.username ?? "接続中のお相手はいません")", style: .default, handler: { (alert) in
@@ -241,7 +260,7 @@ extension VideoViewController{
         // MARK: PEER_EVENT_ERROR
         peer.on(SKWPeerEventEnum.PEER_EVENT_ERROR, callback:{ (obj) -> Void in
             if let error = obj as? SKWPeerError{
-                print("\(error)")
+                print("Error:\(error)")
             }
         })
         
@@ -275,6 +294,7 @@ extension VideoViewController{
                 DispatchQueue.main.async {
                     //                    self.targetPeerIdLabel.text = self.remoteStream?.peerId
                     //                    self.targetPeerIdLabel.textColor = UIColor.darkGray
+                    
                     self.remoteStream?.addVideoRenderer(self.toUserView as! SKWVideo, track: 0)
                 }
                 self.changeConnectionStatusUI(connected: true)
