@@ -240,8 +240,10 @@ class SearchCollectionViewController: UIViewController {
         }
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
-            likeLankButton.backgroundColor = .white
-            likeLankButton.setTitleColor(UIColor(named: O_PINK), for: .normal)
+            likeLankButton.layer.borderWidth = 1
+            likeLankButton.layer.borderColor = UIColor.white.cgColor
+            likeLankButton.setTitleColor(UIColor.white, for: .normal)
+            likeLankButton.backgroundColor = UIColor(named: O_PINK)
             titleLabel.textColor = .white
             searchButton.tintColor = .white
             searchMiniButton.tintColor = .white
@@ -267,8 +269,8 @@ class SearchCollectionViewController: UIViewController {
             lankView.backgroundColor = .white
             
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            likeLankButton.backgroundColor = .white
-            likeLankButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+            likeLankButton.backgroundColor = UIColor(named: O_GREEN)
+            likeLankButton.setTitleColor(UIColor.white, for: .normal)
             titleLabel.textColor = .white
             searchButton.tintColor = .white
             searchMiniButton.tintColor = .white

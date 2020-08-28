@@ -293,6 +293,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     }
 }
 
+@available(iOS 13.0, *)
 extension WithdrawViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         

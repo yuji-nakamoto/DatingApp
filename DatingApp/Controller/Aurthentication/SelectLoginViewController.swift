@@ -14,6 +14,7 @@ import JGProgressHUD
 import AuthenticationServices
 import CryptoKit
 
+@available(iOS 13.0, *)
 class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     // MARK: - Properties
@@ -266,6 +267,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension SelectLoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
@@ -342,6 +344,7 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
     }
 }
 
+@available(iOS 13.0, *)
 extension SelectLoginViewController: ASAuthorizationControllerPresentationContextProviding {
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

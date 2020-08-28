@@ -10,8 +10,6 @@ import Foundation
 import Firebase
 import GoogleSignIn
 
-var appdelegate: AppDelegate?
-
 struct AuthService {
 
     // MARK: - Authentication func
@@ -59,7 +57,6 @@ struct AuthService {
     static func logoutUser(completion: @escaping(_ error: Error?) -> Void) {
         
         User.isOnline(online: "offline")
-        appdelegate?.timer.invalidate()
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
@@ -114,7 +111,6 @@ struct AuthService {
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-        appdelegate?.timer.invalidate()
 
         Auth.auth().currentUser?.delete(completion: { (error) in
             

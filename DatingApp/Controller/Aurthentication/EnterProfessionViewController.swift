@@ -9,6 +9,7 @@
 import UIKit
 import JGProgressHUD
 
+@available(iOS 13.0, *)
 class EnterProfessionViewController: UIViewController {
     
     // MARK: - Properties
@@ -107,6 +108,7 @@ class EnterProfessionViewController: UIViewController {
     }
 }
 
+@available(iOS 13.0, *)
 extension EnterProfessionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

@@ -10,6 +10,7 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
+@available(iOS 13.0, *)
 class LikeNationwideViewController: UIViewController {
     
     // MARK: - Properties
@@ -136,6 +137,7 @@ class LikeNationwideViewController: UIViewController {
 
 // MARK: - Table view
 
+@available(iOS 13.0, *)
 extension LikeNationwideViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -242,6 +244,7 @@ extension LikeNationwideViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
+@available(iOS 13.0, *)
 extension LikeNationwideViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class MessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!

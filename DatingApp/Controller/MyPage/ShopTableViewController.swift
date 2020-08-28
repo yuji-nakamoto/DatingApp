@@ -37,13 +37,15 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         interstitial = createAndLoadIntersitial()
     }
     
+    // MARK: - Actions
+    
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func pointButtonPressed(_ sender: Any) {
         
-        let alert: UIAlertController = UIAlertController(title: "広告視聴", message: "広告視聴で1ポイント獲得できます。視聴しますか？", preferredStyle: .alert)
+        let alert: UIAlertController = UIAlertController(title: "", message: "CM視聴で1ポイント獲得できます\n視聴しますか？", preferredStyle: .alert)
         let showAds: UIAlertAction = UIAlertAction(title: "視聴する", style: UIAlertAction.Style.default) { (alert) in
             
             if self.interstitial.isReady {
@@ -142,14 +144,14 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func hudError() {
         hud.show(in: self.view)
-        hud.textLabel.text = "フリマポイントが足りません。"
+        hud.textLabel.text = "フリマポイントが足りません"
         hud.indicatorView = JGProgressHUDErrorIndicatorView()
         hud.dismiss(afterDelay: 2.0)
     }
     
     private func hudSuccess() {
         hud.show(in: self.view)
-        hud.textLabel.text = "アイテムと交換しました。"
+        hud.textLabel.text = "アイテムと交換しました"
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
     }

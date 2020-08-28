@@ -107,6 +107,8 @@ public let USEDITEM5 = "usedItem5"
 public let USEDITEM6 = "usedItem6"
 public let VISITED = "visited"
 public let POINTHALFLATE = "pointHalfLate"
+public let ISCALL = "isCall"
+public let CALLED = "called"
 
 // MARK: - Counter
 

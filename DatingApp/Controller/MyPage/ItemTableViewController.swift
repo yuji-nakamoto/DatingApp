@@ -74,7 +74,7 @@ class ItemTableViewController: UIViewController {
     private func usedItems(_ user: User) {
         
         if self.user.usedItem1 > 0 {
-            self.usedLabel1.text = "\(user.usedItem1!)枚使用中"
+            self.usedLabel1.text = "\(user.usedItem1!)枚使用可"
             self.usedLabel1.textColor = UIColor(named: O_GREEN)
         } else {
             self.usedLabel1.text = "未使用"
@@ -98,7 +98,7 @@ class ItemTableViewController: UIViewController {
         }
         
         if self.user.usedItem4 > 0 {
-            self.usedLabel4.text = "\(user.usedItem4!)枚使用中"
+            self.usedLabel4.text = "有効"
             self.usedLabel4.textColor = UIColor(named: O_GREEN)
         } else {
             self.usedLabel4.text = "未使用"
@@ -141,14 +141,14 @@ class ItemTableViewController: UIViewController {
     }
     
     private func hudSuccess() {
-        hud.textLabel.text = "アイテムを使用しました。"
+        hud.textLabel.text = "アイテムを使用しました"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
     }
     
     private func hudSuccess2() {
-        hud.textLabel.text = "アイテムを使用しました。効果が反映されました。"
+        hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
     }

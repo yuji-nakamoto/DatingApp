@@ -20,7 +20,7 @@ class EnterAgeViewController: UIViewController {
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
-    private var dataArray: [Int] = ([Int])(18...100)
+    private var dataArray: [Int] = ([Int])(18...99)
     
     // MARK: - Lifecycle
     

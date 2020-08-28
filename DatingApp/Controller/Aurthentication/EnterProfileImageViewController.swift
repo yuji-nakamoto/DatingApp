@@ -9,6 +9,7 @@
 import UIKit
 import JGProgressHUD
 
+@available(iOS 13.0, *)
 class EnterProfileImageViewController: UIViewController {
     
     // MARK: - Properties
@@ -176,6 +177,7 @@ class EnterProfileImageViewController: UIViewController {
     }
 }
 
+@available(iOS 13.0, *)
 extension EnterProfileImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

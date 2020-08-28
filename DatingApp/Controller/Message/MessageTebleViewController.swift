@@ -30,6 +30,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var videoButton: UIButton!
     
     private var user = User()
     private var currentUser = User()
@@ -49,7 +50,10 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         super.viewDidLoad()
         setupBanner()
         setupUI()
+        fetchCurrentUser()
         fetchMatchUser()
+        checkIsCall()
+        checkMessage()
         handleTextField()
         interstitial = createAndLoadIntersitial()
     }
@@ -73,76 +77,38 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         removeEffectView()
     }
     
-    // MARK: - Fetch
-    
-    private func fetchUser() {
+    @IBAction func videoButtonPressed(_ sender: Any) {
         
-        guard toUserId != "" else { return }
-        User.fetchUser(toUserId) { (user) in
-            self.user = user
+        if user.isCall == true {
+            hud.show(in: self.view)
+            hud.textLabel.text = "ただいま混み合っております。\nしばらく時間を空けてみてください"
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        }
+        
+        let alert: UIAlertController = UIAlertController(title: "ビデオ通話", message: "3ポイントを使用してビデオ通話をします。", preferredStyle: .alert)
+        let videoChat: UIAlertAction = UIAlertAction(title: "ビデオ通話をする", style: UIAlertAction.Style.default) { (alert) in
             
-            Match.fetchMatchUser(toUserId: self.toUserId) { (match) in
-                self.matchUser = match
-                
-                if self.matchUser.isMatch == 1 {
-                    self.nameLabel.text = "\(self.user.username!)"
-                    self.matchLabel.text = "    マッチング済み✨"
-                    self.nameLabel.isHidden = false
-                    self.matchLabel.isHidden = false
-                    
-                } else {
-                    self.nameLabel.text = "\(self.user.username!)"
-                    self.nameLabel.isHidden = false
-                    self.matchLabel.isHidden = true
-                    self.nameLabelTopConstraint.constant = 60
-                }
+            if self.currentUser.points <= 2 {
+                self.hud.show(in: self.view)
+                self.hud.textLabel.text = "ポイントが足りません"
+                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.dismiss(afterDelay: 2.0)
+                return
             }
-            self.fetchMessage()
+            
+            updateToUser(self.user.uid, withValue: [ISCALL: true])
+            updateUser(withValue: [CALLED: true])
+            self.performSegue(withIdentifier: "VideoVC", sender: self.user.uid)
+            self.checkIsCall()
         }
-    }
-    
-    private func fetchUser2(_ uid: String, completion: @escaping() -> Void) {
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
         
-        User.fetchUser(uid) { (user) in
-            self.users.append(user)
-            completion()
-        }
+        alert.addAction(videoChat)
+        alert.addAction(cancel)
+        self.present(alert,animated: true,completion: nil)
     }
-    
-    private func fetchMessage() {
-        users.removeAll()
-        messages.removeAll()
-        
-        Message.fetchMessage(toUserId: user.uid) { (message) in
-            guard let uid = message.to else { return }
-            self.fetchUser2(uid) {
-                self.messages.append(message)
-                self.tableView.reloadData()
-                self.scrollToBottom()
-            }
-        }
-    }
-    
-    private func fetchMatchUser() {
-        guard toUserId != "" else { return }
-        Match.fetchMatchUser(toUserId: toUserId) { (match) in
-            self.matchUser = match
-            self.checkMessage()
-        }
-    }
-    
-    private func checkFemale() {
-        
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            if self.interstitial.isReady {
-                self.interstitial.present(fromRootViewController: self)
-            } else {
-                print("Error interstitial")
-            }
-        }
-    }
-    
-    // MARK: - Actions
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
@@ -239,7 +205,98 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - Fetch
+    
+    private func fetchUser() {
+        
+        guard toUserId != "" else { return }
+        User.fetchUser(toUserId) { (user) in
+            self.user = user
+            
+            Match.fetchMatchUser(toUserId: self.toUserId) { (match) in
+                self.matchUser = match
+                
+                if self.matchUser.isMatch == 1 {
+                    self.nameLabel.text = "\(self.user.username!)"
+                    self.matchLabel.text = "    マッチング済み✨"
+                    self.nameLabel.isHidden = false
+                    self.matchLabel.isHidden = false
+                    self.videoButton.isHidden = false
+                    
+                } else {
+                    self.nameLabel.text = "\(self.user.username!)"
+                    self.nameLabel.isHidden = false
+                    self.matchLabel.isHidden = true
+                    self.videoButton.isHidden = true
+                    self.nameLabelTopConstraint.constant = 60
+                }
+            }
+            self.fetchMessage()
+        }
+    }
+    
+    private func fetchUser2(_ uid: String, completion: @escaping() -> Void) {
+        
+        User.fetchUser(uid) { (user) in
+            self.users.append(user)
+            completion()
+        }
+    }
+    
+    private func fetchCurrentUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.currentUser = user
+        }
+    }
+    
+    private func fetchMessage() {
+        users.removeAll()
+        messages.removeAll()
+        
+        Message.fetchMessage(toUserId: user.uid) { (message) in
+            guard let uid = message.to else { return }
+            self.fetchUser2(uid) {
+                self.messages.append(message)
+                self.tableView.reloadData()
+                self.scrollToBottom()
+            }
+        }
+    }
+    
+    private func fetchMatchUser() {
+        guard toUserId != "" else { return }
+        
+        Match.fetchMatchUser(toUserId: toUserId) { (match) in
+            self.matchUser = match
+            self.checkMessage()
+        }
+    }
+    
     // MARK: - Helpers
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "VideoVC" {
+            let videoVC = segue.destination as! VideoViewController
+            let toUserId = sender as! String
+            videoVC.toUserId = toUserId
+        }
+    }
+    
+    private func checkIsCall() {
+        guard toUserId != "" else { return }
+        
+        User.fetchToUserAddSnapshotListener (toUserId: toUserId) { (user) in
+            self.user = user
+            
+            if self.user.isCall == true {
+                self.videoButton.setImage(UIImage(systemName: "video.slash.fill"), for: .normal)
+            } else {
+                self.videoButton.setImage(UIImage(systemName: "video.fill"), for: .normal)
+            }
+        }
+    }
     
     private func checkMessage() {
         
@@ -266,10 +323,21 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         }
     }
     
+    private func checkFemale() {
+        
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
+            }
+        }
+    }
+    
     private func createAndLoadIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        //        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -332,13 +400,14 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         
         // test adUnitID
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
     
     private func setupUI() {
         
+        videoButton.isHidden = true
         backView.alpha = 0
         visualEffectView.alpha = 0
         nameLabel.isHidden = true
@@ -363,6 +432,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_PINK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = UIColor(named: O_PINK)
+            videoButton.tintColor = .white
             nameLabel.textColor = .white
             backButton.tintColor = .white
             
@@ -370,6 +440,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = UIColor(named: O_GREEN)
+            videoButton.tintColor = .white
             nameLabel.textColor = .white
             backButton.tintColor = .white
             
@@ -377,6 +448,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = .white
+            videoButton.tintColor = UIColor(named: O_BLACK)
             nameLabel.textColor = UIColor(named: O_BLACK)
             backButton.tintColor = UIColor(named: O_BLACK)
             
@@ -384,6 +456,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
             navBar.backgroundColor = UIColor(named: O_DARK)
+            videoButton.tintColor = .white
             nameLabel.textColor = .white
             backButton.tintColor = .white
         }

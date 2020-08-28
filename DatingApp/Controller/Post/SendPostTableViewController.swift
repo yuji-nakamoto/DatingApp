@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+@available(iOS 13.0, *)
 class SendPostTableViewController: UITableViewController, GADInterstitialDelegate {
     
     // MARK: - Properties
@@ -213,6 +214,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     }
 }
 
+@available(iOS 13.0, *)
 extension SendPostTableViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {

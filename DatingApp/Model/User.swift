@@ -76,6 +76,8 @@ class User {
     var usedItem5: Int!
     var visited: Int!
     var pointHalfLate: Timestamp!
+    var isCall: Bool!
+    var called: Bool!
     
     init() {
     }
@@ -146,6 +148,8 @@ class User {
         usedItem5 = dict[USEDITEM5] as? Int ?? 0
         visited = dict[VISITED] as? Int ?? 0
         pointHalfLate = dict[POINTHALFLATE] as? Timestamp ?? Timestamp(date: Date())
+        isCall = dict[ISCALL] as? Bool ?? false
+        called = dict[CALLED] as? Bool ?? false
     }
     
     // MARK: - Return user
@@ -184,7 +188,19 @@ class User {
         
         COLLECTION_USERS.document(User.currentUserId()).addSnapshotListener { (snapshot, error) in
             if let error = error {
-                print("Error fetch badge count: \(error.localizedDescription)")
+                print("Error fetch user add snapshot listener: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let user = User(dict: dict)
+            completion(user)
+        }
+    }
+    
+    class func fetchToUserAddSnapshotListener(toUserId: String, completion: @escaping(User) -> Void) {
+        
+        COLLECTION_USERS.document(toUserId).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch to user add snapshot listener: \(error.localizedDescription)")
             }
             guard let dict = snapshot?.data() else { return }
             let user = User(dict: dict)

@@ -52,6 +52,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>カメラのアクセスを許可しますか？</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>マイクのアクセスを許可しますか？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>アルバムのアクセスを許可しますか？</string>
 	<key>UIAppFonts</key>
