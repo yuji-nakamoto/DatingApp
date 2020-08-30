@@ -36,7 +36,8 @@ class MyPageTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "マイページ"
         tableView.separatorStyle = .none
-        setupBanner()
+//        setupBanner()
+        testBanner()
         showHintView()
     }
     
@@ -180,10 +181,15 @@ class MyPageTableViewController: UIViewController {
     }
     
     private func setupBanner() {
-        
-        // test adUnitID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+    
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -211,6 +217,7 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! PostTableViewCell
         
         let myPost = myPosts[indexPath.row - 1]
+        cell.myPageVC = self
         cell.post = myPost
         
         if segmentControl.selectedSegmentIndex == 1 {

@@ -17,6 +17,7 @@ class InboxTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
@@ -27,7 +28,8 @@ class InboxTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchInbox()
-        setupBanner()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +56,7 @@ class InboxTableViewController: UIViewController {
 
     private func fetchInbox() {
         
+        indicator.startAnimating()
         Message.fetchInbox { (inboxs) in
             inboxs.forEach { (inbox) in
                 let message = inbox.message
@@ -61,6 +64,7 @@ class InboxTableViewController: UIViewController {
             }
             self.inboxArray = Array(self.inboxArrayDict.values)
             self.tableView.reloadData()
+            self.indicator.stopAnimating()
             self.refresh.endRefreshing()
         }
     }
@@ -85,9 +89,14 @@ class InboxTableViewController: UIViewController {
         
     private func setupBanner() {
         
-        // test adUnitID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -151,8 +160,8 @@ extension InboxTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
-        return NSAttributedString(string: " メッセージを送った\nお相手が、\nこちらに表示されます。", attributes: attributes)
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: " メッセージを送ったお相手が、\nこちらに表示されます。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

@@ -103,7 +103,6 @@ struct AuthService {
         COLLECTION_BLOCK.document(User.currentUserId()).delete()
         COLLECTION_TYPECOUNTER.document(User.currentUserId()).delete()
         COLLECTION_LIKECOUNTER.document(User.currentUserId()).delete()
-        COLLECTION_MYPOST.document(User.currentUserId()).delete()
         COLLECTION_SWIPE.document(User.currentUserId()).delete()
         COLLECTION_INBOX.document(User.currentUserId()).delete()
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")

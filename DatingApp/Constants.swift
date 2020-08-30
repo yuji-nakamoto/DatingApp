@@ -17,7 +17,6 @@ public let COLLECTION_LIKE = Firestore.firestore().collection("like")
 public let COLLECTION_TYPE = Firestore.firestore().collection("type")
 public let COLLECTION_FOOTSTEP = Firestore.firestore().collection("footstep")
 public let COLLECTION_POSTS = Firestore.firestore().collection("posts")
-public let COLLECTION_MYPOST = Firestore.firestore().collection("myPost")
 public let COLLECTION_MESSAGE = Firestore.firestore().collection("message")
 public let COLLECTION_INBOX = Firestore.firestore().collection("inbox")
 public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounter")
@@ -109,6 +108,7 @@ public let VISITED = "visited"
 public let POINTHALFLATE = "pointHalfLate"
 public let ISCALL = "isCall"
 public let CALLED = "called"
+public let POINTBUTTON = "pointButton"
 
 // MARK: - Counter
 

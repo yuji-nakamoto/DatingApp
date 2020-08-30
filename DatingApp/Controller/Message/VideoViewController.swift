@@ -305,6 +305,7 @@ extension VideoViewController{
         mediaConnection.on(SKWMediaConnectionEventEnum.MEDIACONNECTION_EVENT_CLOSE, callback: { (obj) -> Void in
             if let _ = obj as? SKWMediaConnection{
                 DispatchQueue.main.async {
+                    updateToUser(self.toUserId, withValue: [ISCALL: false])
                     self.remoteStream?.removeVideoRenderer(self.toUserView as! SKWVideo, track: 0)
                     self.remoteStream = nil
                     self.mediaConnection = nil

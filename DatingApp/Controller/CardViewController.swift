@@ -25,6 +25,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     @IBOutlet weak var congratsLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionLabel2: UILabel!
+    @IBOutlet weak var descriptionLabel3: UILabel!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyLabel2: UILabel!
@@ -35,7 +36,8 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var nopeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
-
+    @IBOutlet weak var backView: UIView!
+    
     private var cards = [Card]()
     private var users = [User]()
     private var user: User?
@@ -43,8 +45,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private var interstitial: GADInterstitial!
     private var cardInitialLocationCenter: CGPoint!
     private var panInitialLocation: CGPoint!
-
-    lazy var views = [matchLabel, currentUserView, matchedUserView, descriptionLabel, descriptionLabel2, afterMessageButton, congratsLabel]
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     // MARK: - Lifecycle
@@ -52,10 +52,13 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBanner()
         fetchUser()
         showTutorialView()
-        interstitial = createAndLoadIntersitial()
+        
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,7 +213,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 self.updateCards(card: card)
                 return
                 
-            } else if translation.y > 200 && translation.x < 50 && translation.x > -50 {
+            } else if translation.y > 180 && translation.x < 50 && translation.x > -50 {
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: 0, y: self.cardInitialLocationCenter.y + 1000)
                 }) { (bool) in
@@ -271,17 +274,19 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                     self.indicator.stopAnimating()
                     self.emptyLabel.isHidden = false
                     self.emptyLabel2.isHidden = false
+
                     return
                 }
                 self.users.append(user)
                 self.setupCards(user: user)
             }
         } else {
-            User.fetchCardUsers(user.residenceSerch, user) { (user) in
+            User.fetchCardUsers(user) { (user) in
                 if user.uid == "" {
                     self.indicator.stopAnimating()
                     self.emptyLabel.isHidden = false
                     self.emptyLabel2.isHidden = false
+
                     return
                 }
                 self.users.append(user)
@@ -296,7 +301,10 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
             self.typeUser = type
             
             if self.typeUser.isType == 1 {
-                self.matchView(cardUser: cardUser)
+                self.showMatchView(cardUser: cardUser)
+                
+                updateUser(withValue: [POINTS: self.user!.points + 1])
+                updateToUser(cardUser.uid, withValue: [POINTS: cardUser.points + 1])
                 Match.saveMatchUser(forUser: cardUser)
                 sendRequestNotification4(toUser: cardUser, message: "マッチしました！メッセージを送ってみましょう！", badge: (cardUser.appBadgeCount)! + 1)
                 
@@ -310,8 +318,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func reloadAction() {
         
-        emptyLabel.isHidden = true
-        emptyLabel2.isHidden = true
         loadView()
         setupUI()
         fetchUser()
@@ -323,10 +329,12 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private func removeEffectView() {
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.visualEffectView.alpha = 0
-            self.views.forEach({ $0?.alpha = 0 })
+            self.matchViewAlpha0()
+            
         }) { (_) in
-            self.visualEffectView.removeFromSuperview()
+            self.emptyLabel.isHidden = false
+            self.emptyLabel2.isHidden = false
+            self.matchViewIsHiddenTrue()
         }
     }
     
@@ -464,7 +472,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private func setupUI() {
         
         emptyLabel.text = "スワイプできるカードは\nありません。"
-        emptyLabel2.text = "暫くお待ちになるか、\n検索条件を変更してみてください。"
+        emptyLabel2.text = "しばらくお待ちになるか、\n検索条件を変更してみてください。"
         emptyLabel2.textColor = .systemGray
         navigationItem.title = "カードからさがす"
         likeButtonView.layer.cornerRadius = 55 / 2
@@ -496,15 +504,16 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         
         afterMessageButton.isEnabled = false
         afterMessageButton.layer.cornerRadius = 44 / 2
-        afterMessageButton.backgroundColor = .clear
-        afterMessageButton.layer.borderWidth = 2
-        afterMessageButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
-        views.forEach({ $0?.alpha = 0})
+        matchViewIsHiddenTrue()
+        
+        backView.backgroundColor = UIColor(named: O_BLACK)
         descriptionLabel.textColor  = .white
         descriptionLabel2.textColor  = .white
+        descriptionLabel3.textColor  = .white
         matchLabel.textColor = .white
         congratsLabel.textColor = .white
+        
         currentUserView.layer.cornerRadius = 120 / 2
         currentUserView.layer.borderWidth = 5
         currentUserView.layer.borderColor = UIColor.white.cgColor
@@ -513,27 +522,76 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         matchedUserView.layer.borderColor = UIColor.white.cgColor
     }
     
-    private func matchView(cardUser: User) {
+    private func matchViewIsHiddenTrue() {
+        
+        backView.isHidden = true
+        matchLabel.isHidden = true
+        currentUserView.isHidden = true
+        matchedUserView.isHidden = true
+        descriptionLabel.isHidden = true
+        descriptionLabel2.isHidden = true
+        descriptionLabel3.isHidden = true
+        afterMessageButton.isHidden = true
+        congratsLabel.isHidden = true
+    }
+    
+    private func matchViewIsHiddenFalse() {
+        
+        backView.isHidden = false
+        matchLabel.isHidden = false
+        currentUserView.isHidden = false
+        matchedUserView.isHidden = false
+        descriptionLabel.isHidden = false
+        descriptionLabel2.isHidden = false
+        descriptionLabel3.isHidden = false
+        afterMessageButton.isHidden = false
+        congratsLabel.isHidden = false
+    }
+    
+    private func matchViewAlpha1() {
+        
+        matchLabel.alpha = 1
+        currentUserView.alpha = 1
+        matchedUserView.alpha = 1
+        descriptionLabel.alpha = 1
+        descriptionLabel2.alpha = 1
+        descriptionLabel3.alpha = 1
+        afterMessageButton.alpha = 1
+        congratsLabel.alpha = 1
+    }
+    
+    private func matchViewAlpha0() {
+        
+        matchLabel.alpha = 0
+        currentUserView.alpha = 0
+        matchedUserView.alpha = 0
+        descriptionLabel.alpha = 0
+        descriptionLabel2.alpha = 0
+        descriptionLabel3.alpha = 0
+        afterMessageButton.alpha = 0
+        congratsLabel.alpha = 0
+    }
+    
+    private func showMatchView(cardUser: User) {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
         visualEffectView.addGestureRecognizer(tap)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             
-            self.visualEffectView.frame = self.view.frame
-            self.view.addSubview(self.visualEffectView)
-            self.visualEffectView.alpha = 0
-            self.views.forEach { (view) in
-                self.view.addSubview(view!)
-            }
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.visualEffectView.alpha = 1
-                self.views.forEach({ $0?.alpha = 1})
-                self.views.forEach({ $0?.isHidden = false})
                 self.configureAnimations()
-                self.afterMessageButton.isEnabled = true
-                self.matchLabel.text = "\(cardUser.username!)さんとマッチしました！"
-                self.matchedUserView.sd_setImage(with: URL(string: cardUser.profileImageUrl1), completed: nil)
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.backView.alpha = 0.95
+                    self.matchViewAlpha1()
+                    self.matchViewIsHiddenFalse()
+                    self.afterMessageButton.isEnabled = true
+                    self.matchLabel.text = "\(cardUser.username!)さんとマッチしました！"
+                    self.matchedUserView.sd_setImage(with: URL(string: cardUser.profileImageUrl1), completed: nil)
+                    self.emptyLabel.isHidden = true
+                    self.emptyLabel2.isHidden = true
+                }
             }, completion: nil)
         }
     }
@@ -592,8 +650,14 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func setupBanner() {
         
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -601,6 +665,14 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private func createAndLoadIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial

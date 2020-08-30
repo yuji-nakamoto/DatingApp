@@ -22,6 +22,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var shadowView: UIView!
     
     private let userDefaults = UserDefaults.standard
+    var myPageVC: MyPageTableViewController?
     
     func configureUserCell(_ user: User) {
         
@@ -47,6 +48,24 @@ class PostTableViewCell: UITableViewCell {
                 ageLabel.text = String(user.age) + "歳"
             }
         }
+    }
+    
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        
+        let alert: UIAlertController = UIAlertController(title: "削除", message: "投稿を削除しますか？", preferredStyle: .alert)
+        let delete: UIAlertAction = UIAlertAction(title: "削除する", style: UIAlertAction.Style.default) { (alert) in
+           
+            COLLECTION_POSTS.document(User.currentUserId()).delete { (error) in
+                self.myPageVC?.viewWillAppear(true)
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+        
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        myPageVC?.present(alert,animated: true,completion: nil)
     }
     
     var post: Post? {

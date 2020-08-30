@@ -45,6 +45,7 @@ class SearchCollectionViewController: UIViewController {
         
         fetchUser()
         setupBanner()
+        testBanner()
         checkOneDayAndBadge()
     }
     
@@ -151,7 +152,7 @@ class SearchCollectionViewController: UIViewController {
                 self.refresh.endRefreshing()
             }
         } else {
-            User.fetchUserResidenceSort(residence!, user) { (users) in
+            User.fetchUserResidenceSort(user) { (users) in
                 self.users = users
                 self.collectionView.reloadData()
                 self.indicator.stopAnimating()
@@ -214,8 +215,14 @@ class SearchCollectionViewController: UIViewController {
     
     private func setupBanner() {
         
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -332,14 +339,11 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
         
         if indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
-            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath)
+            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-            let bannerView = cell3.viewWithTag(1) as! GADBannerView
-            bannerView.layer.cornerRadius = 15
-//            bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-            bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-            bannerView.rootViewController = self
-            bannerView.load(GADRequest())
+//            cell3.setupBanner()
+            cell3.testBanner()
+            cell3.searchCVC = self
             
             return cell3
         }
@@ -370,11 +374,11 @@ extension SearchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelega
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
-        return NSAttributedString(string: "検索条件の結果から\n登録しているユーザーは\n見つかりませんでした。", attributes: attributes)
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: "登録しているユーザーは\n見つかりませんでした。", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "ユーザーが登録されるまで\n暫くお待ちになるか、\n検索条件を変更してみてください。")
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください。")
     }
 }

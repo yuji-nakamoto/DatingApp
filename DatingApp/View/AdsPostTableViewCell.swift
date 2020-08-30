@@ -23,6 +23,13 @@ class AdsPostTableViewCell: UITableViewCell {
         bannerView.load(GADRequest())
     }
     
+    func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = postVC
+        bannerView.load(GADRequest())
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         bannerLabel.layer.cornerRadius = 18 / 2

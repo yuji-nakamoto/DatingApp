@@ -28,7 +28,8 @@ class LikeNationwideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUser()
-        setupBanner()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +77,13 @@ class LikeNationwideViewController: UIViewController {
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -249,7 +257,7 @@ extension LikeNationwideViewController: EmptyDataSetSource, EmptyDataSetDelegate
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         return NSAttributedString(string: " 全国のいいねランキングが\nこちらに表示されます。", attributes: attributes)
     }
 }

@@ -38,6 +38,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionLabel2: UILabel!
+    @IBOutlet weak var descriptionLabel3: UILabel!
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var typeDoneLabel: UILabel!
     @IBOutlet weak var likeDoneLabel: UILabel!
@@ -53,14 +54,15 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var interstitial: GADInterstitial!
     private var hud = JGProgressHUD(style: .dark)
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel, descriptionLabel, descriptionLabel2]
+    lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel, descriptionLabel, descriptionLabel2, descriptionLabel3]
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        interstitial = createAndLoadIntersitial()
+//        interstitial = createAndLoadIntersitial()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,9 +111,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
                 self.hud.textLabel.text = "献上しました。"
                 self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
+                self.incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(User.currentUserId()), numShards: 10)
+                self.incrementAppBadgeCount3()
                 updateUser(withValue: [ITEM6: self.currentUser.item6 - 1])
                 updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1])
-                self.incrementAppBadgeCount3()
             }
         }
         
@@ -227,6 +230,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             
             if self.typeUser.isType == 1 {
                 self.matchView()
+                updateUser(withValue: [POINTS: self.currentUser.points + 1])
+                updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1])
                 Match.saveMatchUser(forUser: self.user)
             }
         }
@@ -244,14 +249,14 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func footsteps(_ toUserId: String) {
         
+        Footstep.saveIsFootstepUser(toUserId: self.toUserId)
+        if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+            Footstep.saveFootstepedUser(toUserId: self.toUserId)
+        }
+        
         Footstep.fetchFootstepUser(toUserId) { (footstep) in
             self.footstep = footstep
             self.visited()
-            
-            Footstep.saveIsFootstepUser(toUserId: self.toUserId)
-            if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-                Footstep.saveFootstepedUser(toUserId: self.toUserId)
-            }
         }
     }
     
@@ -291,8 +296,15 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
+        
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        //        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial

@@ -78,6 +78,9 @@ class Message {
                 if let error = error {
                     print("Error fetch conversation: \(error.localizedDescription)")
                 }
+                if snapshot?.documents == [] {
+                    completion(inboxArray)
+                }
                 snapshot?.documentChanges.forEach({ (change) in
                     let dict = change.document.data()
                     let message = Message(dict: dict)

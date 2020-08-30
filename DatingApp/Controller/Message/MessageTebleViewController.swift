@@ -48,14 +48,18 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
+        
         setupUI()
         fetchCurrentUser()
         fetchMatchUser()
         checkIsCall()
         checkMessage()
         handleTextField()
-        interstitial = createAndLoadIntersitial()
+        
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -336,8 +340,15 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -398,9 +409,14 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func setupBanner() {
         
-        // test adUnitID
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        //        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }

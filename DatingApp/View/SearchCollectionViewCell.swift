@@ -23,6 +23,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var typeCountLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var miniBackView: UIView!
+    @IBOutlet weak var bannerView: GADBannerView!
+    
+    var searchCVC: SearchCollectionViewController?
     
     // MARK: - Helpers
     
@@ -113,5 +116,21 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 self.typeCountLabel.text = String(totalTypeCount)
             }
         }
+    }
+    
+    func setupBanner() {
+        
+        bannerView.layer.cornerRadius = 15
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+        bannerView.rootViewController = searchCVC
+        bannerView.load(GADRequest())
+    }
+    
+    func testBanner() {
+        
+        bannerView.layer.cornerRadius = 15
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = searchCVC
+        bannerView.load(GADRequest())
     }
 }

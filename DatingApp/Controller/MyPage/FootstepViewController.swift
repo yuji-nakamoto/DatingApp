@@ -28,8 +28,9 @@ class FootstepTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBanner()
         fetchtFootstepedUsers()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,6 +131,13 @@ class FootstepTableViewController: UIViewController {
         bannerView.load(GADRequest())
     }
     
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
     private func setupUI() {
         
         tableView.emptyDataSetSource = self
@@ -182,8 +190,8 @@ extension FootstepTableViewController: EmptyDataSetSource, EmptyDataSetDelegate 
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
-        return NSAttributedString(string: "ユーザーの足あと、\nあなたの足あと履歴が、\nこちらに表示されます。", attributes: attributes)
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: "足あと履歴が、\nこちらに表示されます。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

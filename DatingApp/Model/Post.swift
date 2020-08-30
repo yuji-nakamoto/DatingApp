@@ -31,20 +31,6 @@ class Post {
         date = dict[DATE] as? Double ?? 0
     }
     
-//    class func fetchPost(completion: @escaping(_ post: Post) -> Void) {
-//
-//        COLLECTION_POSTS.getDocuments { (snapshot, error) in
-//            if let error = error {
-//                print("Error fetch post: \(error.localizedDescription)")
-//            }
-//            snapshot?.documents.forEach({ (document) in
-//                let dict = document.data()
-//                let post = Post(dict: dict)
-//                completion(post)
-//            })
-//        }
-//    }
-    
     class func fetchPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {
         
         if UserDefaults.standard.object(forKey: MALE) != nil {
@@ -53,8 +39,8 @@ class Post {
                 let postRef = COLLECTION_POSTS
                     .whereField(GENDER, isEqualTo: "男性")
                     .order(by: TIMESTAMP)
-
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -71,7 +57,7 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -90,7 +76,7 @@ class Post {
                     .order(by: TIMESTAMP)
                     .whereField(GENDER, isEqualTo: "女性")
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -107,7 +93,7 @@ class Post {
                     .whereField(GENDER, isEqualTo: "女性")
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -131,9 +117,9 @@ class Post {
                     .whereField(GENDER, isEqualTo: "男性")
                     .whereField(GENRE, isEqualTo: "恋人募集")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -150,9 +136,9 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .whereField(GENRE, isEqualTo: "恋人募集")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -173,7 +159,7 @@ class Post {
                     .whereField(GENRE, isEqualTo: "恋人募集")
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -191,7 +177,7 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -215,9 +201,9 @@ class Post {
                     .whereField(GENDER, isEqualTo: "男性")
                     .whereField(GENRE, isEqualTo: "友達募集")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -234,9 +220,9 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .whereField(GENRE, isEqualTo: "友達募集")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -257,7 +243,7 @@ class Post {
                     .whereField(GENRE, isEqualTo: "友達募集")
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -275,7 +261,7 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -299,9 +285,9 @@ class Post {
                     .whereField(GENDER, isEqualTo: "男性")
                     .whereField(GENRE, isEqualTo: "メル友募集")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -318,9 +304,9 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .whereField(GENRE, isEqualTo: "メル友募集")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -341,7 +327,7 @@ class Post {
                     .whereField(GENRE, isEqualTo: "メル友募集")
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -359,7 +345,7 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -383,9 +369,9 @@ class Post {
                     .whereField(GENDER, isEqualTo: "男性")
                     .whereField(GENRE, isEqualTo: "遊びたい")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -402,9 +388,9 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .whereField(GENRE, isEqualTo: "遊びたい")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -425,7 +411,7 @@ class Post {
                     .whereField(GENRE, isEqualTo: "遊びたい")
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -443,7 +429,7 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -467,9 +453,9 @@ class Post {
                     .whereField(GENDER, isEqualTo: "男性")
                     .whereField(GENRE, isEqualTo: "ヒマしてる")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -486,9 +472,9 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .whereField(GENRE, isEqualTo: "ヒマしてる")
                     .order(by: TIMESTAMP)
-
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -509,7 +495,7 @@ class Post {
                     .whereField(GENRE, isEqualTo: "ヒマしてる")
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -527,7 +513,7 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .order(by: TIMESTAMP)
                 
-                postRef.addSnapshotListener { (snapshot, error) in
+                postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
@@ -544,65 +530,24 @@ class Post {
     
     class func fetchMyPost(completion: @escaping(_ post: Post) -> Void) {
         
-        COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").order(by: TIMESTAMP).getDocuments { (snapshot, error) in
+        COLLECTION_POSTS.document(User.currentUserId()).getDocument { (snapshot, error) in
             if let error = error {
                 print("ERROR fetch my post: \(error.localizedDescription)")
             }
-            if snapshot?.documents == [] {
+            if snapshot?.data() == nil {
                 completion(Post(dict: [UID: ""]))
             }
-            snapshot?.documents.forEach({ (document) in
-                let dict = document.data()
-                let myPost = Post(dict: dict)
-                completion(myPost)
-            })
+            guard let dict = snapshot?.data() else { return }
+            let myPost = Post(dict: dict)
+            completion(myPost)
         }
     }
     
-    class func fetchFeed(matchedUserId: String, completion: @escaping(_ post: Post) -> Void) {
+    class func savePost(withValue: [String: Any]) {
         
-        COLLECTION_FEED.document(matchedUserId).collection(User.currentUserId()).order(by: DATE).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("ERROR fetch feed: \(error.localizedDescription)")
-            }
-            
-            if snapshot?.documents == [] {
-                completion(Post(dict: [UID: ""]))
-            }
-            snapshot?.documents.forEach({ (document) in
-                let dict = document.data()
-                let feed = Post(dict: dict)
-                completion(feed)
-            })
-        }
-    }
-    
-    class func savePost(_ forPostId: String, withValue: [String: Any]) {
-        
-        COLLECTION_POSTS.document(forPostId).setData(withValue) { (error) in
+        COLLECTION_POSTS.document(User.currentUserId()).setData(withValue) { (error) in
             if let error = error {
                 print("Error save post: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    class func saveFeed(_ forPostId: String, toUserId: String, withValue: [String: Any]) {
-        print(toUserId)
-        COLLECTION_FEED.document(User.currentUserId()).collection(toUserId).document(forPostId).setData(withValue) { (error) in
-            if let error = error {
-                print("Error save feed: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    class func saveMyPost(_ forPostId: String, withValue: [String: Any]) {
-        
-        COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").document(forPostId).getDocument { (snapshot, error) in
-            
-            if snapshot?.exists == true {
-                COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").document(forPostId).updateData(withValue)
-            } else {
-                COLLECTION_MYPOST.document(User.currentUserId()).collection("myPosts").document(forPostId).setData(withValue)
             }
         }
     }

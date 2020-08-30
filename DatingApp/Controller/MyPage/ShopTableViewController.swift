@@ -31,10 +31,13 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBanner()
         fetchUser()
         resetPointButton()
-        interstitial = createAndLoadIntersitial()
+        
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+          testBanner()
+          interstitial = testIntersitial()
     }
     
     // MARK: - Actions
@@ -61,7 +64,6 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         self.present(alert,animated: true,completion: nil)
     }
     
-    
     // MARK: - Fetch
     
     private func fetchUser() {
@@ -77,8 +79,15 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
+        
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        //   let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -91,18 +100,22 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         let pointHalfLate = Calendar.current.date(byAdding: .hour, value: 12, to: day)!
         
         updateUser(withValue: [POINTS: self.user.points + 1, POINTHALFLATE: pointHalfLate])
+        UserDefaults.standard.set(true, forKey: POINTBUTTON)
         
         hud.show(in: self.view)
-        hud.textLabel.text = "ポイント追加しました。\n12時間後に広告を視聴できます。"
+        hud.textLabel.text = "ポイント追加しました。\n12時間後にCMを視聴できます。"
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 3.0)
         
         self.pointButton.isEnabled = false
-        self.pointButton.alpha = 0.9
     }
     
     private func resetPointButton() {
                 
+        if UserDefaults.standard.object(forKey: POINTBUTTON) != nil {
+            self.pointButton.isEnabled = false
+        }
+        
         User.fetchUserAddSnapshotListener { (user) in
             self.user = user
                         
@@ -111,8 +124,8 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
             let pointHalfLate = user.pointHalfLate.dateValue()
             
             if nowDate >= pointHalfLate {
+                UserDefaults.standard.removeObject(forKey: POINTBUTTON)
                 self.pointButton.isEnabled = true
-                self.pointButton.alpha = 1
             }
         }
     }
@@ -134,10 +147,15 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     private func setupBanner() {
-        
-        // test adUnitID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }

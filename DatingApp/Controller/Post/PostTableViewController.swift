@@ -29,8 +29,9 @@ class PostTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        setupBanner()
+        testBanner()
         setupUI()
-        setupBanner()
         fetchPost()
         refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
@@ -52,7 +53,6 @@ class PostTableViewController: UIViewController {
     
     @objc func refreshTableView(){
         fetchPost()
-        refresh.endRefreshing()
     }
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
@@ -63,6 +63,7 @@ class PostTableViewController: UIViewController {
     
     private func fetchPost() {
         guard Auth.auth().currentUser?.uid != nil else { return }
+        
         posts.removeAll()
         users.removeAll()
         tableView.reloadData()
@@ -77,6 +78,7 @@ class PostTableViewController: UIViewController {
                     self.fetchUser(uid) {
                         self.posts.insert(post, at: 0)
                         self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: FRIEND2) != nil {
@@ -85,6 +87,7 @@ class PostTableViewController: UIViewController {
                     self.fetchUser(uid) {
                         self.posts.insert(post, at: 0)
                         self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: MAILFRIEND2) != nil {
@@ -93,6 +96,7 @@ class PostTableViewController: UIViewController {
                     self.fetchUser(uid) {
                         self.posts.insert(post, at: 0)
                         self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: PLAY2) != nil {
@@ -101,6 +105,7 @@ class PostTableViewController: UIViewController {
                     self.fetchUser(uid) {
                         self.posts.insert(post, at: 0)
                         self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: FREE2) != nil {
@@ -109,6 +114,7 @@ class PostTableViewController: UIViewController {
                     self.fetchUser(uid) {
                         self.posts.insert(post, at: 0)
                         self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                     }
                 }
             } else {
@@ -117,9 +123,10 @@ class PostTableViewController: UIViewController {
                     self.fetchUser(uid) {
                         self.posts.insert(post, at: 0)
                         self.tableView.reloadData()
+                        self.refresh.endRefreshing()
                     }
                 }
-            }            
+            }
         }
     }
     
@@ -148,6 +155,13 @@ class PostTableViewController: UIViewController {
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -186,6 +200,8 @@ class PostTableViewController: UIViewController {
     }
 }
 
+// MARK: - Table view
+
 extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,7 +215,8 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
             cell2.postVC = self
-            cell2.setupBanner()
+//            cell2.setupBanner()
+            cell2.testBanner()
             return cell2
         }
         
@@ -220,11 +237,11 @@ extension PostTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
-        return NSAttributedString(string: "検索条件の結果、\n投稿は見つかりませんでした。", attributes: attributes)
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: "投稿は見つかりませんでした。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "投稿されるまで暫くお待ちになるか、\n検索条件を変更してみてください。")
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください。")
     }
 }

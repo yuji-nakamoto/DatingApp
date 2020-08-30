@@ -14,35 +14,11 @@ class NoticeTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel2: UILabel!
     @IBOutlet weak var mainTextLabel: UILabel!
 
-    
-    func notice1() {
-        titleLabel.text = "重要なお知らせ"
-        titleLabel2.text = "通信障害による繋がりにくくなっている不具合について"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能\n・アイテム機能\n・いいねランキング機能"
-    }
-    
-    func notice2() {
-        titleLabel.text = "アップデートのお知らせ"
-        titleLabel2.text = "新機能を実装しました"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能\n・アイテム機能\n・いいねランキング機能"
-    }
-    
-    func notice3() {
-        titleLabel.text = "アップデートのお知らせ"
-        titleLabel2.text = "新機能を実装しました"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n通信障害により、サービス全体が繋がりにくくなっている事象を確認しました。"
-    }
-    
-    func notice4() {
-        titleLabel.text = "通信障害のお知らせ"
-        titleLabel2.text = "通信障害による繋がりにくくなっている不具合について"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n通信障害により、サービス全体が繋がりにくくなっている事象を確認しました。"
-    }
-    
-    func notice5() {
-        titleLabel.text = "アップデートのお知らせ"
-        titleLabel2.text = "新機能を実装しました"
-        mainTextLabel.text = "いつもフリマをご利用いただきまして誠にありがとうございます。\n\n以下の機能を新たに実装しました。\n・ログインボーナス機能\n・ショッピング機能"
+    func notice(_ notice: Notice) {
+        
+        titleLabel.text = notice.title
+        titleLabel2.text = notice.title2
+        mainTextLabel.text = notice.mainText
     }
     
     override func awakeFromNib() {

@@ -34,6 +34,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         setupTextView()
         fetchUser()
         interstitial = createAndLoadIntersitial()
+//        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,33 +80,15 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         }
         sendButton.isEnabled = false
         
-        let date: Double = Date().timeIntervalSince1970
-        let postId = UUID().uuidString
         let dict = [UID: User.currentUserId(),
                     GENDER: user.gender!,
                     RESIDENCE: user.residence!,
                     CAPTION: textView.text!,
                     GENRE: selectLabel.text!,
-                    DATE: date,
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
-        let dict2 = [UID: User.currentUserId(),
-                     CAPTION: textView.text!,
-                     GENRE: selectLabel.text!,
-                     DATE: date,
-                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
-        
-        Post.savePost(postId, withValue: dict)
-        Post.saveMyPost(postId, withValue: dict2)
+        Post.savePost(withValue: dict)
         updateUser(withValue: [POSTCOUNT: user.postCount + 1])
-        Match.fetchMatchUsers { (match) in
-            self.match = match
-            if self.match.uid == "" {
-                return
-            } else {
-                Post.saveFeed(postId, toUserId: match.uid, withValue: dict)
-            }
-        }
         
         userDefaults.removeObject(forKey: LOVER)
         userDefaults.removeObject(forKey: FRIEND)
@@ -143,6 +126,14 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     // MARK: - Helpers
     
     private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
         
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial.delegate = self

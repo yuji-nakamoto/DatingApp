@@ -30,9 +30,12 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
         super.viewDidLoad()
         
         setupUI()
-        setupBanner()
         fetchTypedUsers()
-        interstitial = createAndLoadIntersitial()
+        
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
@@ -133,6 +136,14 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
+        
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial.delegate = self
         interstitial.load(GADRequest())
@@ -146,6 +157,13 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -227,8 +245,8 @@ extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
-        return NSAttributedString(string: "タイプされた、\nタイプした履歴が、\nこちらに表示されます。", attributes: attributes)
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: "タイプ履歴が、\nこちらに表示されます。", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

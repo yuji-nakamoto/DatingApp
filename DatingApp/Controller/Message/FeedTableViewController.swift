@@ -17,18 +17,20 @@ class FeedTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var comments = [Comment]()
     private var users = [User]()
     private var user = User()
     private let refresh = UIRefreshControl()
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchMatchedUser()
-        setupBanner()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +38,7 @@ class FeedTableViewController: UIViewController {
         setupUI()
         tableView.reloadData()
     }
-
+    
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -52,7 +54,7 @@ class FeedTableViewController: UIViewController {
     }
     
     // MARK: - Fetch
-
+    
     private func fetchUsers(_ uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
@@ -62,40 +64,49 @@ class FeedTableViewController: UIViewController {
     }
     
     private func fetchMatchedUser() {
-
+        
+        indicator.startAnimating()
         users.removeAll()
         comments.removeAll()
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
                 self.refresh.endRefreshing()
+                self.indicator.stopAnimating()
                 return
             }
             User.fetchUser(match.uid) { (user) in
                 
                 guard let uid = match.uid else { return }
-                 Comment.fetchComment(toUserId: uid) { (comment) in
+                Comment.fetchComment(toUserId: uid) { (comment) in
                     if comment.uid == "" {
                         self.refresh.endRefreshing()
+                        self.indicator.stopAnimating()
                         return
                     }
-                     self.fetchUsers(uid) {
-                         self.comments.insert(comment, at: 0)
-                         self.tableView.reloadData()
+                    self.fetchUsers(uid) {
+                        self.comments.insert(comment, at: 0)
+                        self.tableView.reloadData()
                         self.refresh.endRefreshing()
-                     }
-                 }
+                        self.indicator.stopAnimating()
+                    }
+                }
             }
         }
     }
     
     // MARK: - Helper
-        
+    
     private func setupBanner() {
         
-        // test adUnitID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -174,10 +185,10 @@ extension FeedTableViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FeedTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         return NSAttributedString(string: " マッチしたお相手のひとことが\nこちらに表示されます。", attributes: attributes)
     }
 }

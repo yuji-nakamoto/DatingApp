@@ -34,8 +34,8 @@ class NoticeListTableViewController: UIViewController {
     
     private func fetchNotice() {
         
-        Notice.fetchNotice { (notice) in
-            self.noticeArray.insert(notice, at: 0)
+        Notice.fetchNoticeList { (notice) in
+            self.noticeArray.append(notice)
             self.tableView.reloadData()
         }
     }
@@ -77,20 +77,15 @@ extension NoticeListTableViewController: UITableViewDelegate, UITableViewDataSou
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == 0 {
-            UserDefaults.standard.set(true, forKey: NOTICE1)
             performSegue(withIdentifier: "NoticeVC", sender: nil)
         } else if indexPath.row == 1 {
-            UserDefaults.standard.set(true, forKey: NOTICE2)
-            performSegue(withIdentifier: "NoticeVC", sender: nil)
+            performSegue(withIdentifier: "Notice2VC", sender: nil)
         } else if indexPath.row == 2 {
-            UserDefaults.standard.set(true, forKey: NOTICE3)
-            performSegue(withIdentifier: "NoticeVC", sender: nil)
+            performSegue(withIdentifier: "Notice3VC", sender: nil)
         } else if indexPath.row == 3 {
-            UserDefaults.standard.set(true, forKey: NOTICE4)
-            performSegue(withIdentifier: "NoticeVC", sender: nil)
+            performSegue(withIdentifier: "Notice4VC", sender: nil)
         } else if indexPath.row == 4 {
-            UserDefaults.standard.set(true, forKey: NOTICE5)
-            performSegue(withIdentifier: "NoticeVC", sender: nil)
+            performSegue(withIdentifier: "Notice5VC", sender: nil)
         }
     }
 }

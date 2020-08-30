@@ -28,16 +28,77 @@ class Notice {
         mainText = dict[MAINTEXT] as? String ?? ""
     }
     
-    class func fetchNotice(comletion: @escaping(Notice) ->Void) {
+    class func fetchNoticeList(comletion: @escaping(Notice) ->Void) {
         
         COLLECTION_NOTICE.getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error fetch notce: \(error.localizedDescription)")
             }
-            snapshot?.documents.forEach({ (document) in
-                let notice = Notice(dict: document.data())
+            snapshot?.documents.forEach({ (documents) in
+                
+                let notice = Notice(dict: documents.data())
                 comletion(notice)
             })
+        }
+    }
+    
+    class func fetchNotice1(comletion: @escaping(Notice) ->Void) {
+        
+        COLLECTION_NOTICE.document("notice1").getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetch notce: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let notice = Notice(dict: dict)
+            comletion(notice)
+        }
+    }
+    
+    class func fetchNotice2(comletion: @escaping(Notice) ->Void) {
+        
+        COLLECTION_NOTICE.document("notice2").getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetch notce: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let notice = Notice(dict: dict)
+            comletion(notice)
+        }
+    }
+    
+    class func fetchNotice3(comletion: @escaping(Notice) ->Void) {
+        
+        COLLECTION_NOTICE.document("notice3").getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetch notce: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let notice = Notice(dict: dict)
+            comletion(notice)
+        }
+    }
+    
+    class func fetchNotice4(comletion: @escaping(Notice) ->Void) {
+        
+        COLLECTION_NOTICE.document("notice4").getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetch notce: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let notice = Notice(dict: dict)
+            comletion(notice)
+        }
+    }
+    
+    class func fetchNotice5(comletion: @escaping(Notice) ->Void) {
+        
+        COLLECTION_NOTICE.document("notice5").getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetch notce: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let notice = Notice(dict: dict)
+            comletion(notice)
         }
     }
 }

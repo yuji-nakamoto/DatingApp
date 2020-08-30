@@ -1,14 +1,14 @@
 //
-//  NoticeTableViewController.swift
+//  Notice5TableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/08/25.
+//  Created by yuji nakamoto on 2020/08/30.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 
-class NoticeTableViewController: UITableViewController {
+class Notice5TableViewController: UITableViewController {
     
     private var notice = Notice()
         
@@ -28,7 +28,7 @@ class NoticeTableViewController: UITableViewController {
     
     private func fetchNotice() {
         
-        Notice.fetchNotice1 { (notice) in
+        Notice.fetchNotice5 { (notice) in
             self.notice = notice
             self.tableView.reloadData()
         }

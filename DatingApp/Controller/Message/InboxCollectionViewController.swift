@@ -18,6 +18,7 @@ class InboxCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var matches = [Match]()
     private var users = [User]()
@@ -29,7 +30,8 @@ class InboxCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBanner()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,18 +68,21 @@ class InboxCollectionViewController: UIViewController {
     
     private func fetchMatchUsers() {
         
+        indicator.startAnimating()
         matches.removeAll()
         users.removeAll()
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
                 self.refresh.endRefreshing()
+                self.indicator.stopAnimating()
                 return
             }
             guard let uid = match.uid else { return }
             self.fetchUser(uid: uid) {
                 self.matches.append(match)
                 self.collectionView.reloadData()
+                self.indicator.stopAnimating()
                 self.refresh.endRefreshing()
             }
         }
@@ -118,9 +123,14 @@ class InboxCollectionViewController: UIViewController {
     
     private func setupBanner() {
         
-        // test adUnitID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -185,7 +195,7 @@ extension InboxCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegat
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         return NSAttributedString(string: "マッチしているお相手が、\nこちらに表示されます。", attributes: attributes)
     }
 

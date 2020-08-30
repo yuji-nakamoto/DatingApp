@@ -99,7 +99,11 @@ class DetailTableViewCell: UITableViewCell {
         if user?.visited == nil {
             return
         }
-        visitedLabel.text = String(user!.visited)
+        if (user?.visited)! > 999 {
+            visitedLabel.text = "999"
+        } else {
+            visitedLabel.text = String(user!.visited)
+        }
         
         if user?.uid == User.currentUserId() {
             iconEye.image = UIImage(systemName: "eye.slash.fill")
