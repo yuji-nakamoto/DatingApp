@@ -53,8 +53,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         fetchCurrentUser()
         fetchMatchUser()
         checkIsCall()
-        checkMessage()
         handleTextField()
+        isRead()
         
 //        setupBanner()
 //        interstitial = createAndLoadIntersitial()
@@ -278,6 +278,17 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     }
     
     // MARK: - Helpers
+    
+    private func isRead() {
+        guard toUserId != "" else { return }
+
+        COLLECTION_MESSAGE.document(toUserId).collection(User.currentUserId()).document(ISREAD).updateData([ISREAD: true])
+        
+        Message.fetchIsRead(toUserId: toUserId) { (message) in
+            self.message = message
+            self.tableView.reloadData()
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -507,6 +518,11 @@ extension MessageTebleViewController: UITableViewDelegate, UITableViewDataSource
         cell.message = message
         cell.configureUser(user)
         cell.timeLabel.isHidden = indexPath.row % 3 == 0 ? false : true
+//        if self.message.isRead == true {
+//            cell.readLabel.text = "既読"
+//        } else {
+//            cell.readLabel.text = "未読"
+//        }
         
         return cell
     }

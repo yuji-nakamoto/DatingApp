@@ -20,7 +20,7 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var pointLabel: UILabel!
     
     var myPageVC: MyPageTableViewController?
-
+    
     func configureCell(_ user: User?) {
         
         if user?.uid != nil {
@@ -37,7 +37,7 @@ class MyPageTableViewCell: UITableViewCell {
             commentLabel.text = comment.text
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         redmark.layer.cornerRadius = 4
@@ -53,6 +53,14 @@ class MyPageTableViewCell: UITableViewCell {
     
     @objc func toCommentVC() {
         myPageVC?.performSegue(withIdentifier: "CommentVC", sender: nil)
+    }
+    
+    
+    @IBAction func toNoticeListVC(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toNoticeListVC = storyboard.instantiateViewController(withIdentifier: "NoticeListVC") as! MyUINavigationViewController
+        myPageVC?.present(toNoticeListVC, animated: true, completion: nil)
     }
     
     func cogAnimation() {

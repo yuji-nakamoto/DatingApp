@@ -19,6 +19,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var bubleLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubleWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubleRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var readLabel: UILabel!
     
     var message: Message? {
         didSet {
@@ -62,6 +63,8 @@ class MessageTableViewCell: UITableViewCell {
             bubleRightConstraint.constant = 8
             bubleLeftConstraint.constant = UIScreen.main.bounds.width - bubleWidthConstraint.constant - bubleRightConstraint.constant
         } else {
+            
+            readLabel.isHidden = true
             messageLabel.textColor = UIColor.black
             profileImageView.isHidden = false
             bubleView.backgroundColor = UIColor.systemGray3

@@ -16,6 +16,7 @@ class Message {
     var messageText: String!
     var timestamp: Timestamp!
     var date: Double!
+    var isRead: Bool!
     var isFromCurrentUser: Bool!
     
     var chatPartnerId: String {
@@ -31,11 +32,12 @@ class Message {
         messageText = dict[MESSAGETEXT] as? String ?? ""
         timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
         date = dict[DATE] as? Double ?? 0
+        isRead = dict[ISREAD] as? Bool ?? false
         
         isFromCurrentUser = from == User.currentUserId()
     }
     
-    class func fetchMessage(toUserId: String, completion: @escaping(_ message: Message) -> Void) {
+    class func fetchMessage(toUserId: String, completion: @escaping(Message) -> Void) {
     
         COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).order(by: TIMESTAMP).addSnapshotListener { (snapshot, error) in
             
@@ -52,12 +54,28 @@ class Message {
         }
     }
     
+    class func fetchIsRead(toUserId: String, completion: @escaping(Message) -> Void) {
+        
+        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).document(ISREAD).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("Error fetch is read: \(error.localizedDescription)")
+            }
+            guard let dict = snapshot?.data() else { return }
+            let isRead = Message(dict:dict)
+            completion(isRead)
+        }
+    }
+    
     class func saveMessage(to user: User, withValue: [String: Any]) {
         
         COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).addDocument(data: withValue) { (_) in
             COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).addDocument(data: withValue)
         }
-                
+        
+        let dict = [ISREAD: false]
+        COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).document(ISREAD).setData(dict)
+        COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).document(ISREAD).setData(dict)
+        
         COLLECTION_INBOX.document(User.currentUserId()).collection("resent-messages").document(user.uid).setData(withValue)
         COLLECTION_INBOX.document(user.uid).collection("resent-messages").document(User.currentUserId()).setData(withValue)
     }

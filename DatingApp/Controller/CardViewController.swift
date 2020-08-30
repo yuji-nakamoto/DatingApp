@@ -330,11 +330,11 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.matchViewAlpha0()
-            
+
         }) { (_) in
+            self.matchViewIsHiddenTrue()
             self.emptyLabel.isHidden = false
             self.emptyLabel2.isHidden = false
-            self.matchViewIsHiddenTrue()
         }
     }
     
@@ -506,13 +506,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         afterMessageButton.layer.cornerRadius = 44 / 2
         
         matchViewIsHiddenTrue()
-        
-        backView.backgroundColor = UIColor(named: O_BLACK)
-        descriptionLabel.textColor  = .white
-        descriptionLabel2.textColor  = .white
-        descriptionLabel3.textColor  = .white
-        matchLabel.textColor = .white
-        congratsLabel.textColor = .white
         
         currentUserView.layer.cornerRadius = 120 / 2
         currentUserView.layer.borderWidth = 5
