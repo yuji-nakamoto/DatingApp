@@ -22,15 +22,16 @@ class DidLikeTableViewController: UIViewController {
     
     private var likeUsers = [Like]()
     private var users = [User]()
+    private var user = User()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
 //        setupBanner()
         testBanner()
         fetchLikedUsers()
+        updateUser(withValue: [NEWLIKE: false])
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
@@ -107,6 +108,7 @@ class DidLikeTableViewController: UIViewController {
     }
     
     // MARK: - Fetch user
+    
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in

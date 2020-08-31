@@ -22,14 +22,17 @@ class InboxTableViewController: UIViewController {
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
     private let refresh = UIRefreshControl()
-
+    private var user = User()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUser()
         fetchInbox()
-//        setupBanner()
+        //  setupBanner()
         testBanner()
+        updateUser(withValue: [NEWMESSAGE: false])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +40,7 @@ class InboxTableViewController: UIViewController {
         setupUI()
         tableView.reloadData()
     }
-
+    
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -53,7 +56,7 @@ class InboxTableViewController: UIViewController {
     }
     
     // MARK: - Fetch
-
+    
     private func fetchInbox() {
         
         indicator.startAnimating()
@@ -68,7 +71,15 @@ class InboxTableViewController: UIViewController {
             self.refresh.endRefreshing()
         }
     }
-
+    
+    private func fetchUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            self.resetBadge(self.user)
+        }
+    }
+    
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,7 +97,15 @@ class InboxTableViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    private func resetBadge(_ user: User) {
         
+        let totalAppBadgeCount = user.appBadgeCount - user.messageBadgeCount
+        
+        updateUser(withValue: [MESSAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
+        UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
+    }
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
@@ -157,13 +176,13 @@ extension InboxTableViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension InboxTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-
+    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
         return NSAttributedString(string: " メッセージを送ったお相手が、\nこちらに表示されます。", attributes: attributes)
     }
-
+    
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         return NSAttributedString(string: "気になった方のプロフィール欄から、\nメッセージを送ってみましょう。")
     }

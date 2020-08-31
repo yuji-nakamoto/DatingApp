@@ -180,7 +180,7 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
 extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -188,17 +188,18 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             cell.shopItem1()
-            
         } else if indexPath.row == 1 {
             cell.shopItem2()
         } else if indexPath.row == 2 {
             cell.shopItem3()
         } else if indexPath.row == 3 {
-            cell.shopItem4(self.user)
+            cell.shopItem4()
         } else if indexPath.row == 4 {
-            cell.shopItem5(self.user)
+            cell.shopItem5()
         } else if indexPath.row == 5 {
             cell.shopItem6(self.user)
+        } else if indexPath.row == 6 {
+            cell.shopItem7(self.user)
         }
         return cell
     }
@@ -206,7 +207,6 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
-            
             let alert: UIAlertController = UIAlertController(title: "おかわり", message: "1ポイントで交換できます。交換しますか？", preferredStyle: .alert)
             let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
                 
@@ -217,8 +217,8 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
                     updateUser(withValue: [POINTS: self.user.points - 1, ITEM1: self.user.item1 + 1])
                 }
             }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
             alert.addAction(exchange)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)
@@ -235,73 +235,13 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
                     updateUser(withValue: [POINTS: self.user.points - 1, ITEM2: self.user.item2 + 1])
                 }
             }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
             alert.addAction(exchange)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)
             
         } else if indexPath.row == 2 {
-            
-            let alert: UIAlertController = UIAlertController(title: "仕切り直し", message: "3ポイントで交換できます。交換しますか？", preferredStyle: .alert)
-            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
-                
-                if self.user.points <= 2 {
-                    self.hudError()
-                } else {
-                    self.hudSuccess()
-                    updateUser(withValue: [POINTS: self.user.points - 3, ITEM3: self.user.item3 + 1])
-                }
-            }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            }
-            alert.addAction(exchange)
-            alert.addAction(cancel)
-            self.present(alert,animated: true,completion: nil)
-            
-        } else if indexPath.row == 3 {
-            
-            if user.item4 == 1 || user.usedItem4 == 1 {
-                return
-            }
-            let alert: UIAlertController = UIAlertController(title: "開眼", message: "10ポイントで交換できます。交換しますか？", preferredStyle: .alert)
-            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
-                
-                if self.user.points <= 9 {
-                    self.hudError()
-                } else {
-                    self.hudSuccess()
-                    updateUser(withValue: [POINTS: self.user.points - 10, ITEM4: self.user.item4 + 1])
-                }
-            }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            }
-            alert.addAction(exchange)
-            alert.addAction(cancel)
-            self.present(alert,animated: true,completion: nil)
-            
-        } else if indexPath.row == 3 {
-            
-            if user.item4 == 1 || user.usedItem4 == 1 {
-                return
-            }
-            let alert: UIAlertController = UIAlertController(title: "開眼", message: "10ポイントで交換できます。交換しますか？", preferredStyle: .alert)
-            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
-                
-                if self.user.points <= 9 {
-                    self.hudError()
-                } else {
-                    self.hudSuccess()
-                    updateUser(withValue: [POINTS: self.user.points - 10, ITEM4: self.user.item4 + 1])
-                }
-            }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            }
-            alert.addAction(exchange)
-            alert.addAction(cancel)
-            self.present(alert,animated: true,completion: nil)
-            
-        } else if indexPath.row == 4 {
             
             let alert: UIAlertController = UIAlertController(title: "割り込み", message: "1ポイントで交換できます。交換しますか？", preferredStyle: .alert)
             let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
@@ -310,16 +250,16 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
                     self.hudError()
                 } else {
                     self.hudSuccess()
-                    updateUser(withValue: [POINTS: self.user.points - 1, ITEM5: self.user.item5 + 1])
+                    updateUser(withValue: [POINTS: self.user.points - 1, ITEM3: self.user.item3 + 1])
                 }
             }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
             alert.addAction(exchange)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)
             
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 3 {
             
             let alert: UIAlertController = UIAlertController(title: "献上", message: "1ポイントで交換できます。交換しますか？", preferredStyle: .alert)
             let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
@@ -328,11 +268,71 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
                     self.hudError()
                 } else {
                     self.hudSuccess()
-                    updateUser(withValue: [POINTS: self.user.points - 1, ITEM6: self.user.item6 + 1])
+                    updateUser(withValue: [POINTS: self.user.points - 1, ITEM4: self.user.item4 + 1])
                 }
             }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+             
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+      
+        } else if indexPath.row == 4 {
+            
+           let alert: UIAlertController = UIAlertController(title: "仕切り直し", message: "3ポイントで交換できます。交換しますか？", preferredStyle: .alert)
+           let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
+               
+               if self.user.points <= 2 {
+                   self.hudError()
+               } else {
+                   self.hudSuccess()
+                   updateUser(withValue: [POINTS: self.user.points - 3, ITEM5: self.user.item5 + 1])
+               }
+           }
+           let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+
+           alert.addAction(exchange)
+           alert.addAction(cancel)
+           self.present(alert,animated: true,completion: nil)
+            
+        } else if indexPath.row == 5 {
+            
+            if user.item6 == 1 || user.usedItem6 == 1 {
+                return
             }
+            let alert: UIAlertController = UIAlertController(title: "開眼", message: "10ポイントで交換できます。交換しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
+                
+                if self.user.points <= 9 {
+                    self.hudError()
+                } else {
+                    self.hudSuccess()
+                    updateUser(withValue: [POINTS: self.user.points - 10, ITEM6: self.user.item6 + 1])
+                }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+            
+        } else if indexPath.row == 6 {
+            
+            if user.item7 == 1 || user.usedItem7 == 1 {
+                return
+            }
+            let alert: UIAlertController = UIAlertController(title: "透視", message: "15ポイントで交換できます。交換しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
+                
+                if self.user.points <= 14 {
+                    self.hudError()
+                } else {
+                    self.hudSuccess()
+                    updateUser(withValue: [POINTS: self.user.points - 15, ITEM7: self.user.item7 + 1])
+                }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
             alert.addAction(exchange)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)

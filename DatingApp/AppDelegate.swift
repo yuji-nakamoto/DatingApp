@@ -100,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.user = user
         }
         
+        
         guard user.uid != nil else { return }
         updateUser(withValue: [LOGINTIME: user.loginTime + 60])
     }

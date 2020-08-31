@@ -34,6 +34,7 @@ class MessageTableViewCell: UITableViewCell {
         messageLabel.isHidden = false
         messageLabel.text = message!.messageText
         dateLabel.textColor = .white
+        readLabel.isHidden = false
         
         if widthValue < 100 {
             bubleWidthConstraint.constant = 100
@@ -57,6 +58,18 @@ class MessageTableViewCell: UITableViewCell {
             } else if UserDefaults.standard.object(forKey: DARK) != nil {
                 bubleView.backgroundColor = UIColor(named: O_DARK)
                 messageLabel.textColor = UIColor.white
+            }
+            
+            if UserDefaults.standard.object(forKey: ISREAD_ON) != nil {
+                readLabel.isHidden = false
+            } else {
+                readLabel.isHidden = true
+            }
+            
+            if message?.isRead == true {
+                readLabel.text = "既読"
+            } else {
+                readLabel.text = "未読"
             }
             
             bubleView.layer.borderColor = UIColor.clear.cgColor

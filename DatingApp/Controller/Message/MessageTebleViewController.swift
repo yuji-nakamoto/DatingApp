@@ -39,9 +39,11 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     private var users = [User]()
     private var messages = [Message]()
     private var message = Message()
+    private var message2 = Message()
     private var interstitial: GADInterstitial!
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private var hud = JGProgressHUD(style: .dark)
+    private var timer = Timer()
     var toUserId = ""
     
     // MARK: - Lifecycle
@@ -54,8 +56,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         fetchMatchUser()
         checkIsCall()
         handleTextField()
-        isRead()
-        
+        fetchIsRead()
+        timerMethod()
 //        setupBanner()
 //        interstitial = createAndLoadIntersitial()
         testBanner()
@@ -125,6 +127,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             return
         }
         
+        let messageId = UUID().uuidString
         if matchUser.isMatch != 1 {
             if self.message.from == User.currentUserId() {
                 if currentUser.usedItem1 > 0 {
@@ -141,10 +144,12 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                         let dict = [MESSAGETEXT: self.textField.text!,
                                     FROM: User.currentUserId(),
                                     TO: self.toUserId,
+                                    MESSAGEID: messageId,
+                                    ISREAD: false,
                                     USEDITEM5: self.currentUser.usedItem5 as Any,
                                     TIMESTAMP: Timestamp(date: Date()),
                                     DATE: date] as [String : Any]
-                        Message.saveMessage(to: self.user, withValue: dict)
+                        Message.saveMessage(to: self.user, messageId: messageId, withValue: dict)
                         
                         self.setupMessage()
                         return
@@ -158,15 +163,16 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                 }
             }
         }
-        
         let date: Double = Date().timeIntervalSince1970
         let dict = [MESSAGETEXT: textField.text!,
                     FROM: User.currentUserId(),
                     TO: toUserId,
+                    MESSAGEID: messageId,
+                    ISREAD: false,
                     USEDITEM5: self.currentUser.usedItem5 as Any,
                     TIMESTAMP: Timestamp(date: Date()),
                     DATE: date] as [String : Any]
-        Message.saveMessage(to: user, withValue: dict)
+        Message.saveMessage(to: user, messageId: messageId, withValue: dict)
         setupMessage()
     }
     
@@ -206,6 +212,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        timer.invalidate()
         navigationController?.popViewController(animated: true)
     }
     
@@ -255,15 +262,34 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     }
     
     private func fetchMessage() {
+        
         users.removeAll()
         messages.removeAll()
+        tableView.reloadData()
         
         Message.fetchMessage(toUserId: user.uid) { (message) in
+            self.message = message
+            
+            guard let uid = message.to else { return }
+            self.fetchUser2(uid) {
+                
+                self.messages.append(message)
+                self.tableView.reloadData()
+                self.scrollToBottom()
+            }
+        }
+    }
+    
+    private func fetchMessage2() {
+        
+        Message.fetchMessage2(toUserId: user.uid) { (message) in
+            self.message = message
+            
             guard let uid = message.to else { return }
             self.fetchUser2(uid) {
                 self.messages.append(message)
                 self.tableView.reloadData()
-                self.scrollToBottom()
+                self.scrollToBottom2()
             }
         }
     }
@@ -277,17 +303,25 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         }
     }
     
-    // MARK: - Helpers
-    
-    private func isRead() {
-        guard toUserId != "" else { return }
-
-        COLLECTION_MESSAGE.document(toUserId).collection(User.currentUserId()).document(ISREAD).updateData([ISREAD: true])
+    private func fetchIsRead() {
         
         Message.fetchIsRead(toUserId: toUserId) { (message) in
-            self.message = message
+            self.message2 = message
+            COLLECTION_MESSAGE.document(self.toUserId).collection(User.currentUserId()).document(self.message2.messageId).updateData([ISREAD: true])
             self.tableView.reloadData()
         }
+    }
+    
+    // MARK: - Helpers
+    
+    private func timerMethod() {
+        
+        timer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+    }
+    
+    @objc func timeCount() {
+        fetchIsRead()
+        fetchMessage2()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -340,13 +374,13 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func checkFemale() {
         
-        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-            if self.interstitial.isReady {
-                self.interstitial.present(fromRootViewController: self)
-            } else {
-                print("Error interstitial")
-            }
-        }
+//        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+//            if self.interstitial.isReady {
+//                self.interstitial.present(fromRootViewController: self)
+//            } else {
+//                print("Error interstitial")
+//            }
+//        }
     }
     
     private func createAndLoadIntersitial() -> GADInterstitial {
@@ -378,6 +412,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                 self.badgeUser = user
                 
                 sendRequestNotification(toUser: self.badgeUser, message: "\(self.currentUser.username!)さんからメッセージが届いています", badge: self.badgeUser.appBadgeCount + 1)
+                updateToUser(self.badgeUser.uid, withValue: [NEWMESSAGE: true])
             }
         }
     }
@@ -496,6 +531,13 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         }
     }
     
+    private func scrollToBottom2() {
+        if messages.count > 0 {
+            let index = IndexPath(row: messages.count - 1, section: 0)
+            tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.bottom, animated: false)
+        }
+    }
+    
     private func handleTextField() {
         textField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
     }
@@ -518,11 +560,6 @@ extension MessageTebleViewController: UITableViewDelegate, UITableViewDataSource
         cell.message = message
         cell.configureUser(user)
         cell.timeLabel.isHidden = indexPath.row % 3 == 0 ? false : true
-//        if self.message.isRead == true {
-//            cell.readLabel.text = "既読"
-//        } else {
-//            cell.readLabel.text = "未読"
-//        }
         
         return cell
     }

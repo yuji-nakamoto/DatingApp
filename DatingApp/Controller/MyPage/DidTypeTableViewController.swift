@@ -36,6 +36,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
 //        interstitial = createAndLoadIntersitial()
         testBanner()
         interstitial = testIntersitial()
+        updateUser(withValue: [NEWTYPE: false])
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     

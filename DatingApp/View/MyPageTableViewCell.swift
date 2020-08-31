@@ -18,6 +18,8 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
+    @IBOutlet weak var typeNewLabel: UILabel!
+    @IBOutlet weak var likeNewLabel: UILabel!
     
     var myPageVC: MyPageTableViewController?
     
@@ -27,6 +29,18 @@ class MyPageTableViewCell: UITableViewCell {
             profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
             nameLabel.text = user!.username
             pointLabel.text = String(user!.points)
+        }
+        
+        if user?.newType == true {
+            typeNewLabel.isHidden = false
+        } else {
+            typeNewLabel.isHidden = true
+        }
+        
+        if user?.newLike == true {
+            likeNewLabel.isHidden = false
+        } else {
+            likeNewLabel.isHidden = true
         }
     }
     
@@ -40,6 +54,8 @@ class MyPageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        typeNewLabel.layer.cornerRadius = 15 / 2
+        likeNewLabel.layer.cornerRadius = 15 / 2
         redmark.layer.cornerRadius = 4
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5

@@ -19,6 +19,8 @@ class InboxCollectionViewController: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var newMessageView: UIView!
+
     
     private var matches = [Match]()
     private var users = [User]()
@@ -39,7 +41,7 @@ class InboxCollectionViewController: UIViewController {
         segmentControl.selectedSegmentIndex = 0
         UserDefaults.standard.removeObject(forKey: CARDVC)
         fetchMatchUsers()
-        resetBadge()
+        fetchUser()
         setupUI()
     }
     
@@ -96,6 +98,18 @@ class InboxCollectionViewController: UIViewController {
         }
     }
     
+    private func fetchUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            if self.user.newMessage == true {
+                self.newMessageView.isHidden = false
+            } else {
+                self.newMessageView.isHidden = true
+            }
+        }
+    }
+    
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -108,18 +122,6 @@ class InboxCollectionViewController: UIViewController {
     }
     
     // MARK: - Helper
-    
-    private func resetBadge() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            let totalAppBadgeCount = user.appBadgeCount - user.messageBadgeCount
-            
-            updateUser(withValue: [MESSAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
-            UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
-            self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
-        }
-    }
     
     private func setupBanner() {
         
@@ -140,6 +142,7 @@ class InboxCollectionViewController: UIViewController {
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
         collectionView.refreshControl = refresh
+        newMessageView.layer.cornerRadius = 4
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
         if UserDefaults.standard.object(forKey: PINK) != nil {

@@ -167,13 +167,18 @@ class SearchCollectionViewController: UIViewController {
             self.user = user
             
             if self.user.messageBadgeCount == 0 {
-                self.tabBarController?.viewControllers?[3].tabBarItem?.badgeValue = nil
+                
+                if user.newMessage == false {
+                    self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
+                }
             } else {
                 self.tabBarController?.viewControllers?[3].tabBarItem?.badgeValue = String(self.user.messageBadgeCount)
             }
             
             if self.user.myPageBadgeCount == 0 {
-                self.tabBarController?.viewControllers?[4].tabBarItem?.badgeValue = nil
+                if user.newLike == false && user.newType == false {
+                    self.tabBarController!.viewControllers![4].tabBarItem.badgeValue = nil
+                }
             } else {
                 self.tabBarController?.viewControllers?[4].tabBarItem?.badgeValue = String(self.user.myPageBadgeCount)
             }

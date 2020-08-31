@@ -17,6 +17,7 @@ class Message {
     var timestamp: Timestamp!
     var date: Double!
     var isRead: Bool!
+    var messageId: String!
     var isFromCurrentUser: Bool!
     
     var chatPartnerId: String {
@@ -33,6 +34,7 @@ class Message {
         timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
         date = dict[DATE] as? Double ?? 0
         isRead = dict[ISREAD] as? Bool ?? false
+        messageId = dict[MESSAGEID] as? String ?? ""
         
         isFromCurrentUser = from == User.currentUserId()
     }
@@ -54,27 +56,49 @@ class Message {
         }
     }
     
-    class func fetchIsRead(toUserId: String, completion: @escaping(Message) -> Void) {
-        
-        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).document(ISREAD).addSnapshotListener { (snapshot, error) in
+    class func fetchMessage2(toUserId: String, completion: @escaping(Message) -> Void) {
+    
+        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).order(by: TIMESTAMP).getDocuments { (snapshot, error) in
+            
             if let error = error {
-                print("Error fetch is read: \(error.localizedDescription)")
+                print("Error fetch message: \(error.localizedDescription)")
             }
-            guard let dict = snapshot?.data() else { return }
-            let isRead = Message(dict:dict)
-            completion(isRead)
+            snapshot?.documentChanges.forEach({ (change) in
+                if change.type == .added {
+                    let dict = change.document.data()
+                    let message = Message(dict: dict)
+                    completion(message)
+                }
+            })
         }
     }
     
-    class func saveMessage(to user: User, withValue: [String: Any]) {
-        
-        COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).addDocument(data: withValue) { (_) in
-            COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).addDocument(data: withValue)
+    class func fetchIsRead(toUserId: String, completion: @escaping(Message) -> Void) {
+    
+        COLLECTION_MESSAGE.document(User.currentUserId()).collection(toUserId).getDocuments { (snapshot, error) in
+            
+            if let error = error {
+                print("Error fetch message: \(error.localizedDescription)")
+            }
+            snapshot?.documentChanges.forEach({ (change) in
+                if change.type == .added {
+                    let dict = change.document.data()
+                    let message = Message(dict: dict)
+                    completion(message)
+                }
+            })
         }
+    }
+    
+    
+    class func saveMessage(to user: User, messageId: String, withValue: [String: Any]) {
         
-        let dict = [ISREAD: false]
-        COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).document(ISREAD).setData(dict)
-        COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).document(ISREAD).setData(dict)
+        COLLECTION_MESSAGE.document(User.currentUserId()).collection(user.uid).document(messageId).setData(withValue) { (error) in
+            if let error = error {
+                print("Error save message: \(error.localizedDescription)")
+            }
+            COLLECTION_MESSAGE.document(user.uid).collection(User.currentUserId()).document(messageId).setData(withValue)
+        }
         
         COLLECTION_INBOX.document(User.currentUserId()).collection("resent-messages").document(user.uid).setData(withValue)
         COLLECTION_INBOX.document(user.uid).collection("resent-messages").document(User.currentUserId()).setData(withValue)

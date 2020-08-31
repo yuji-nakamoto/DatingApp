@@ -1,5 +1,5 @@
 //
-//  InquryInputTableViewController.swift
+//  OpinionInputTableViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/08/11.
@@ -9,7 +9,7 @@
 import UIKit
 import JGProgressHUD
 
-class InquryInputTableViewController: UITableViewController, UITextViewDelegate {
+class OpinionInputTableViewController: UITableViewController, UITextViewDelegate {
     
     // MARK: - Properties
     
@@ -25,7 +25,7 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "お問い合わせ内容"
+        navigationItem.title = "ご意見・ご要望・改善等"
         setupUI()
         fetchUser()
     }
@@ -47,7 +47,7 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            self.textView.text = user.inquiry
+            self.textView.text = user.opinion
             self.tableView.reloadData()
         }
     }
@@ -61,9 +61,8 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-            
         } else {
-            updateUser(withValue: [INQUIRY: textView.text as Any])
+            updateUser(withValue: [OPINION: textView.text as Any])
             navigationController?.popViewController(animated: true)
             dismiss(animated: true, completion: nil)
         }
@@ -82,15 +81,19 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
         if UserDefaults.standard.object(forKey: PINK) != nil {
             saveButton.backgroundColor = UIColor(named: O_PINK)
             saveButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             saveButton.backgroundColor = UIColor(named: O_GREEN)
             saveButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             saveButton.backgroundColor = UIColor(named: O_GREEN)
             saveButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             saveButton.backgroundColor = UIColor(named: O_DARK)
             saveButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         }
     }
     

@@ -108,7 +108,7 @@ class DetailTableViewCell: UITableViewCell {
         if user?.uid == User.currentUserId() {
             iconEye.image = UIImage(systemName: "eye.slash.fill")
             visitedLabel.isHidden = true
-            if user?.usedItem4 == 1 {
+            if user?.usedItem6 == 1 {
                 iconEye.image = UIImage(systemName: "eye.fill")
                 visitedLabel.isHidden = false
             }

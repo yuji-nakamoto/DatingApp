@@ -22,8 +22,7 @@ class MyPageTableViewController: UIViewController {
     @IBOutlet weak var hintView: UIView!
     @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
-
-    private var currentUser = User()
+    
     private var user = User()
     private var myPosts = [Post]()
     private var users = [User]()
@@ -36,7 +35,7 @@ class MyPageTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "マイページ"
         tableView.separatorStyle = .none
-//        setupBanner()
+        //  setupBanner()
         testBanner()
         showHintView()
     }
@@ -48,8 +47,8 @@ class MyPageTableViewController: UIViewController {
         if segmentControl.selectedSegmentIndex == 1 {
             fetchMyPost()
         }
+        fetchUser()
         fetchComment()
-        resetBadge()
         setupUI()
     }
     
@@ -68,7 +67,7 @@ class MyPageTableViewController: UIViewController {
             tableView.reloadData()
         case 1:
             fetchMyPost()
-
+            
         default: break
         }
     }
@@ -80,6 +79,14 @@ class MyPageTableViewController: UIViewController {
         User.fetchUser(uid) { (user) in
             self.users.insert(user, at: 0)
             completion()
+        }
+    }
+    
+    private func fetchUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            self.resetBadge(self.user)
         }
     }
     
@@ -117,17 +124,12 @@ class MyPageTableViewController: UIViewController {
     
     // MARK: - Helpers
     
-    private func resetBadge() {
+    private func resetBadge(_ user: User) {
         
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.currentUser = user
-            self.tableView.reloadData()
-            let totalAppBadgeCount = user.appBadgeCount - user.myPageBadgeCount
-            
-            updateUser(withValue: [MYPAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
-            UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
-            self.tabBarController!.viewControllers![4].tabBarItem.badgeValue = nil
-        }
+        let totalAppBadgeCount = user.appBadgeCount - user.myPageBadgeCount
+        
+        updateUser(withValue: [MYPAGEBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
+        UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
     }
     
     private func showHintView() {
@@ -159,7 +161,7 @@ class MyPageTableViewController: UIViewController {
     }
     
     private func setupUI() {
-                
+        
         hintView.alpha = 0
         visualEffectView.alpha = 0
         hintView.layer.cornerRadius = 15
@@ -181,7 +183,7 @@ class MyPageTableViewController: UIViewController {
     }
     
     private func setupBanner() {
-    
+        
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
@@ -207,10 +209,11 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! MyPageTableViewCell
-            cell.configureCell(currentUser)
+            cell.configureCell(user)
             cell.cogAnimation()
             cell.myPageVC = self
             cell.configureCommentCell(comment)
+            
             return cell
         }
         

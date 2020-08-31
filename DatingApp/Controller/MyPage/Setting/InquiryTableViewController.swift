@@ -1,8 +1,8 @@
 //
-//  OpinionTableViewController.swift
+//  InquiryTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/08/22.
+//  Created by yuji_nakamoto on 2020/08/11.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -10,13 +10,14 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class OpinionTableViewController: UITableViewController {
+class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
+    @IBOutlet weak var inquiryLabel: UILabel!
+    @IBOutlet weak var inputLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var opinionLabel: UILabel!
-    @IBOutlet weak var inputLabel2: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
     
     private var currentUser = User()
     public var hud = JGProgressHUD(style: .dark)
@@ -37,7 +38,7 @@ class OpinionTableViewController: UITableViewController {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
-        if opinionLabel.text == "ご意見・ご要望・改善等" {
+        if inquiryLabel.text == "お問い合わせ内容" {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "内容を入力してください。"
             hud.show(in: self.view)
@@ -45,7 +46,16 @@ class OpinionTableViewController: UITableViewController {
             hud.dismiss(afterDelay: 2.0)
             return
         }
-        saveOpinion()
+        
+        if emailTextField.text == "" {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "メールアドレスを入力してください。"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        }
+        saveInquiry()
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -65,17 +75,18 @@ class OpinionTableViewController: UITableViewController {
     
     // MARK: - Helpers
     
-    private func saveOpinion() {
+    private func saveInquiry() {
         
         let dict = [FROM: currentUser.uid!,
-                     GENDER: currentUser.gender as Any,
-                     USERNAME: currentUser.username as Any,
-                     OPINION: opinionLabel.text!,
-                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+                    GENDER: currentUser.gender as Any,
+                    USERNAME: currentUser.username as Any,
+                    EMAIL: emailTextField.text!,
+                    INQUIRY: inquiryLabel.text!,
+                    TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
-        COLLECTION_OPINION.document(User.currentUserId()).collection("oinions").document().setData(dict)
-        
-        updateUser(withValue: [OPINION: ""])
+        COLLECTION_INQUIRY.document(User.currentUserId()).collection("inquirys").document().setData(dict)
+
+        updateUser(withValue: [INQUIRY: ""])
         hud.textLabel.text = "送信が完了しました。"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -87,33 +98,42 @@ class OpinionTableViewController: UITableViewController {
     }
     
     private func setupUI() {
-        navigationItem.title = "ご意見・ご要望・改善等"
+        navigationItem.title = "お問い合わせ"
         sendButton.layer.cornerRadius = 15
+        emailTextField.delegate = self
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
             sendButton.backgroundColor = UIColor(named: O_PINK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: WHITE) != nil {
             sendButton.backgroundColor = UIColor(named: O_GREEN)
             sendButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
         } else if UserDefaults.standard.object(forKey: DARK) != nil {
             sendButton.backgroundColor = UIColor(named: O_DARK)
             sendButton.setTitleColor(UIColor.white, for: .normal)
+            navigationItem.leftBarButtonItem?.tintColor = .white
         }
     }
     
     private func setupUserInfo(_ currentUser: User) {
         
-        if currentUser.opinion == "" {
-            opinionLabel.text = "ご意見・ご要望・改善等"
-            inputLabel2.isHidden = false
+        if currentUser.inquiry == "" {
+            inquiryLabel.text = "お問い合わせ内容"
+            inputLabel.isHidden = false
         } else {
-            opinionLabel.text = currentUser.opinion
-            inputLabel2.isHidden = true
+            inquiryLabel.text = currentUser.inquiry
+            inputLabel.isHidden = true
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

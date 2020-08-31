@@ -316,6 +316,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func incrementAppBadgeCount() {
         sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがいいねしてくれました", badge: self.user.appBadgeCount + 1)
+        updateToUser(self.user.uid, withValue: [NEWLIKE: true])
     }
     
     private func incrementAppBadgeCount2() {
@@ -324,6 +325,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             sendRequestNotification4(toUser: self.user, message: "マッチしました！メッセージを送ってみましょう！", badge: self.user.appBadgeCount + 1)
         } else {
             sendRequestNotification3(toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
+            updateToUser(self.user.uid, withValue: [NEWTYPE: true])
         }
     }
     

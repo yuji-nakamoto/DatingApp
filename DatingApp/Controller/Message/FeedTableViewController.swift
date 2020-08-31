@@ -18,6 +18,7 @@ class FeedTableViewController: UIViewController {
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var newMessageView: UIView!
     
     private var comments = [Comment]()
     private var users = [User]()
@@ -36,7 +37,7 @@ class FeedTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-        tableView.reloadData()
+        fetchUser()
     }
     
     @IBAction func segmentControl(_ sender: UISegmentedControl) {
@@ -60,6 +61,18 @@ class FeedTableViewController: UIViewController {
         User.fetchUser(uid) { (user) in
             self.users.insert(user, at: 0)
             completion()
+        }
+    }
+    
+    private func fetchUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            if self.user.newMessage == true {
+                self.newMessageView.isHidden = false
+            } else {
+                self.newMessageView.isHidden = true
+            }
         }
     }
     
@@ -118,6 +131,7 @@ class FeedTableViewController: UIViewController {
         tableView.refreshControl = refresh
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        newMessageView.layer.cornerRadius = 4
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
         if UserDefaults.standard.object(forKey: PINK) != nil {

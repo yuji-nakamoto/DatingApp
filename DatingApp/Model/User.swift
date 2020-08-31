@@ -69,15 +69,21 @@ class User {
     var item4: Int!
     var item5: Int!
     var item6: Int!
+    var item7: Int!
     var usedItem1: Int!
     var usedItem2: Int!
     var usedItem3: Int!
     var usedItem4: Int!
     var usedItem5: Int!
+    var usedItem6: Int!
+    var usedItem7: Int!
     var visited: Int!
     var pointHalfLate: Timestamp!
     var isCall: Bool!
     var called: Bool!
+    var newLike: Bool!
+    var newType: Bool!
+    var newMessage: Bool!
     
     init() {
     }
@@ -141,15 +147,21 @@ class User {
         item4 = dict[ITEM4] as? Int ?? 0
         item5 = dict[ITEM5] as? Int ?? 0
         item6 = dict[ITEM6] as? Int ?? 0
+        item7 = dict[ITEM7] as? Int ?? 0
         usedItem1 = dict[USEDITEM1] as? Int ?? 0
         usedItem2 = dict[USEDITEM2] as? Int ?? 0
         usedItem3 = dict[USEDITEM3] as? Int ?? 0
         usedItem4 = dict[USEDITEM4] as? Int ?? 0
         usedItem5 = dict[USEDITEM5] as? Int ?? 0
+        usedItem6 = dict[USEDITEM6] as? Int ?? 0
+        usedItem7 = dict[USEDITEM7] as? Int ?? 0
         visited = dict[VISITED] as? Int ?? 0
         pointHalfLate = dict[POINTHALFLATE] as? Timestamp ?? Timestamp(date: Date())
         isCall = dict[ISCALL] as? Bool ?? false
         called = dict[CALLED] as? Bool ?? false
+        newLike = dict[NEWLIKE] as? Bool ?? false
+        newType = dict[NEWTYPE] as? Bool ?? false
+        newMessage = dict[NEWMESSAGE] as? Bool ?? false
     }
     
     // MARK: - Return user

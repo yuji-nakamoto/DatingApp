@@ -67,5 +67,13 @@ class SelfIntroTableViewController: UITableViewController {
         backView.layer.borderColor = UIColor.systemGray.cgColor
         tableView.separatorStyle = .none
         textView.becomeFirstResponder()
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        }
     }
 }

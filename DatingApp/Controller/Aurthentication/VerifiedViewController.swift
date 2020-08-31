@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import CoreLocation
 
 class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
@@ -22,6 +23,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var resendButton: UIButton!
     
     private var hud = JGProgressHUD(style: .dark)
+    private let manager = CLLocationManager()
     
     // MARK: - Lifecycle
     

@@ -1,30 +1,30 @@
 //
-//  DetailAreaTableViewController.swift
+//  NicknameTableViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/08/07.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
-
 import UIKit
 import JGProgressHUD
 
-class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate {
+class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    @IBOutlet weak var detailMapTextField: UITextField!
+    @IBOutlet weak var nickNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var countLabel: UILabel!
     
     private var user: User!
     private var hud = JGProgressHUD(style: .dark)
+
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "詳細エリア"
+        navigationItem.title = "ニックネーム"
         tableView.separatorStyle = .none
         setupKeyboard()
         fetchUser()
@@ -34,11 +34,19 @@ class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate 
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
-       if detailMapTextField.text!.count > 4 {
+        if nickNameTextField.text == "" {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "4文字以下で入力してください。"
+            hud.textLabel.text = "1文字以上入力してください。"
             hud.show(in: self.view)
-            hud.dismiss()
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        } else if nickNameTextField.text!.count > 10 {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "名前は10文字以下で入力してください。"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
             return
         } else {
             saveTextField()
@@ -62,30 +70,37 @@ class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate 
     // MARK: - Helpers
     
     private func setupUserInfo(_ user: User) {
+        nickNameTextField.text = user.username
         
-        detailMapTextField.text = user.detailArea
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        }
     }
     
     private func saveTextField() {
         
-        updateUser(withValue: [DETAILAREA: detailMapTextField.text as Any])
+        updateUser(withValue: [USERNAME: nickNameTextField.text as Any])
         navigationController?.popViewController(animated: true)
     }
     
     private func setupKeyboard() {
         
-        detailMapTextField.becomeFirstResponder()
-        detailMapTextField.delegate = self
-        detailMapTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        nickNameTextField.becomeFirstResponder()
+        nickNameTextField.delegate = self
+        nickNameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     @objc func textFieldDidChange() {
                 
-        let areaNum = 4 - detailMapTextField.text!.count
-        if areaNum < 0 {
+        let nicknameNum = 10 - nickNameTextField.text!.count
+        if nicknameNum < 0 {
             countLabel.text = "文字数制限です"
         } else {
-            countLabel.text = String(areaNum)
+            countLabel.text = String(nicknameNum)
         }
     }
     

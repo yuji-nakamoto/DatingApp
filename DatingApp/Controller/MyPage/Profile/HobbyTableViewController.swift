@@ -55,6 +55,14 @@ class HobbyTableViewController: UITableViewController, UITextFieldDelegate {
         hobbyTextField1.text = user.hobby1
         hobbyTextField2.text = user.hobby2
         hobbyTextField3.text = user.hobby3
+        
+        if UserDefaults.standard.object(forKey: PINK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: DARK) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
+            navigationItem.leftBarButtonItem?.tintColor = .white
+        }
     }
     
     private func saveTextField() {
