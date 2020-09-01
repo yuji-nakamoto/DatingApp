@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import CoreLocation
 
 class ProfileTableViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class ProfileTableViewController: UIViewController {
     
     var profileImages = [UIImage]()
     var user = User()
+    private var currentLocation: CLLocation?
     
     // MARK: - Lifecycle
     

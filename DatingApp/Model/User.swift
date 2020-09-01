@@ -84,6 +84,8 @@ class User {
     var newLike: Bool!
     var newType: Bool!
     var newMessage: Bool!
+    var latitude: String!
+    var longitude: String!
     
     init() {
     }
@@ -162,6 +164,8 @@ class User {
         newLike = dict[NEWLIKE] as? Bool ?? false
         newType = dict[NEWTYPE] as? Bool ?? false
         newMessage = dict[NEWMESSAGE] as? Bool ?? false
+        latitude = dict[LATITUDE] as? String ?? ""
+        longitude = dict[LONGITUDE] as? String ?? ""
     }
     
     // MARK: - Return user

@@ -9,6 +9,8 @@
 import UIKit
 import JGProgressHUD
 import CoreLocation
+import Geofirestore
+import Firebase
 
 class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
@@ -24,12 +26,15 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
     private var hud = JGProgressHUD(style: .dark)
     private let manager = CLLocationManager()
+    private var userLat = ""
+    private var userLong = ""
+    private let geofirestroe = GeoFirestore(collectionRef: Firestore.firestore().collection("geography"))
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        confifureLocationManager()
         setupUI()
     }
     
@@ -76,6 +81,12 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
+        if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
+            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+            self.userLat = userLat
+            self.userLong = userLong
+        }
+        
 //                AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
 //                    let dict = [UID: User.currentUserId(),
 //                                EMAIL: self.emailTextField.text!] as [String : Any]
@@ -88,6 +99,12 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             if error == nil {
                 
                 if isEmailVerified {
+                    
+                    if !self.userLat.isEmpty && !self.userLong.isEmpty {
+                        let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
+                        self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
+                    }
+                    
                     self.hud.textLabel.text = "メールの認証に成功しました。"
                     self.hud.show(in: self.view)
                     self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -118,6 +135,18 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Helpers
+    
+    private func confifureLocationManager() {
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
+        manager.pausesLocationUpdatesAutomatically = true
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            manager.startUpdatingLocation()
+        }
+    }
     
     private func setupUI() {
         
@@ -155,5 +184,27 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
             self.present(toEnterNameVC, animated: true, completion: nil)
         }
+    }
+}
+
+extension VerifiedViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error location: \(error.localizedDescription) ")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let updateLocation: CLLocation = locations.first!
+        let newCordinate: CLLocationCoordinate2D = updateLocation.coordinate
+        
+        let userDefaults: UserDefaults = UserDefaults.standard
+        userDefaults.set("\(newCordinate.latitude)", forKey: "current_location_latitude")
+        userDefaults.set("\(newCordinate.longitude)", forKey: "current_location_longitude")
+        userDefaults.synchronize()
     }
 }

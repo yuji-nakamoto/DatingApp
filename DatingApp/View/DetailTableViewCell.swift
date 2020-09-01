@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 
 class DetailTableViewCell: UITableViewCell {
     
@@ -76,6 +77,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var detailMapLabel: UILabel!
     @IBOutlet weak var visitedLabel: UILabel!
     @IBOutlet weak var iconEye: UIImageView!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     // MARK: - Helpers
     
@@ -241,6 +243,21 @@ class DetailTableViewCell: UITableViewCell {
                     self.statusView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
                 }
             }
+        }
+    }
+    
+    func currentLocation(_ user: User?, _ currentLocation: CLLocation?) {
+        
+        guard let _ = currentLocation else { return }
+        
+        if user?.latitude != "" && user?.longitude != "" {
+            let userLocation = CLLocation(latitude: Double(user!.latitude)!, longitude: Double(user!.longitude)!)
+            let distanceInKM: CLLocationDistance = userLocation.distance(from: currentLocation!) / 1000
+
+            distanceLabel.text = String(format: "%.f Km", distanceInKM)
+            distanceLabel.isHidden = false
+        } else {
+            distanceLabel.isHidden = true
         }
     }
     

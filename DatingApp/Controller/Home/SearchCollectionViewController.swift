@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import CoreLocation
+import Geofirestore
 
 class SearchCollectionViewController: UIViewController {
     
@@ -31,6 +33,12 @@ class SearchCollectionViewController: UIViewController {
     private var user = User()
     private let refresh = UIRefreshControl()
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let manager = CLLocationManager()
+    private var userLat = ""
+    private var userLong = ""
+    private let geofirestroe = GeoFirestore(collectionRef: Firestore.firestore().collection("geography"))
+    private var myQuery: GFSQuery!
+    private var distance: Double = 500
     
     // MARK: - Lifecycle
     
@@ -47,6 +55,7 @@ class SearchCollectionViewController: UIViewController {
         setupBanner()
         testBanner()
         checkOneDayAndBadge()
+        confifureLocationManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -191,6 +200,36 @@ class SearchCollectionViewController: UIViewController {
     }
     
     // MARK: - Heplers
+    
+//    private func findUser() {
+//
+//        guard let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
+//            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String else { return }
+//
+//        let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
+//
+//        myQuery = geofirestroe.query(withCenter: location, radius: distance)
+//        myQuery.observe(.documentEntered) { (key, location) in
+//
+//            if key != User.currentUserId() {
+//                User.fetchUser(key!) { (user) in
+//
+//                }
+//            }
+//        }
+//    }
+    
+    private func confifureLocationManager() {
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
+        manager.pausesLocationUpdatesAutomatically = true
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            manager.startUpdatingLocation()
+        }
+    }
     
     private func showLoginBunusView() {
         
@@ -385,5 +424,44 @@ extension SearchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelega
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください。")
+    }
+}
+
+extension SearchCollectionViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error location: \(error.localizedDescription) ")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        manager.stopUpdatingLocation()
+        manager.delegate = nil
+        
+        let updateLocation: CLLocation = locations.first!
+        let newCordinate: CLLocationCoordinate2D = updateLocation.coordinate
+        
+        let userDefaults: UserDefaults = UserDefaults.standard
+        userDefaults.set("\(newCordinate.latitude)", forKey: "current_location_latitude")
+        userDefaults.set("\(newCordinate.longitude)", forKey: "current_location_longitude")
+        userDefaults.synchronize()
+        
+        if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
+            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+            
+            updateUser(withValue: [LATITUDE: userLat, LONGITUDE: userLong])
+            
+           let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
+            self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId()) { (error) in
+                if error == nil {
+//                    self.findUser()
+                }
+            }
+        }
     }
 }

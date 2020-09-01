@@ -114,6 +114,8 @@ public let POINTBUTTON = "pointButton"
 public let NEWLIKE = "newLike"
 public let NEWTYPE = "newType"
 public let NEWMESSAGE = "newMessage"
+public let LATITUDE = "latitude"
+public let LONGITUDE = "longitude"
 
 // MARK: - Counter
 

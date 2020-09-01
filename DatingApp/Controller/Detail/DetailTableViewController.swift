@@ -12,6 +12,8 @@ import Lottie
 import Firebase
 import GoogleMobileAds
 import JGProgressHUD
+import CoreLocation
+import Geofirestore
 
 class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
@@ -55,12 +57,20 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var hud = JGProgressHUD(style: .dark)
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     lazy var views = [matchLabel, currentUserView, matchedUserView, sendMessageButton, afterMessageButton, congratsLabel, descriptionLabel, descriptionLabel2, descriptionLabel3]
+    private let manager = CLLocationManager()
+    private var userLat = ""
+    private var userLong = ""
+    private let geofirestroe = GeoFirestore(collectionRef: Firestore.firestore().collection("geography"))
+    private var myQuery: GFSQuery!
+    private var distance: Double = 500
+    private var currentLocation: CLLocation?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        confifureLocationManager()
 //        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
     }
@@ -284,6 +294,18 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     // MARK: - Helpers
+    
+    private func confifureLocationManager() {
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
+        manager.pausesLocationUpdatesAutomatically = true
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            manager.startUpdatingLocation()
+        }
+    }
     
     private func visited() {
         
@@ -575,6 +597,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
 }
 
 // MARK: - UITableViewDelegate
+
 extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -586,6 +609,27 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell.user = self.user
         cell.configureCell(self.user)
+        cell.currentLocation(self.user, self.currentLocation)
         return cell
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension DetailTableViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error location: \(error.localizedDescription) ")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let updateLocation: CLLocation = locations.first!
+        self.currentLocation = updateLocation
     }
 }
