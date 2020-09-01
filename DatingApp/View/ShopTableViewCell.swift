@@ -122,7 +122,7 @@ class ShopTableViewCell: UITableViewCell {
     func shopItem7(_ user: User) {
         itemImageView.image = UIImage(named: "item7")
         itemNameLabel.text = "フリマップ"
-        descriptionLabel.text = "お相手との距離表示が可能になります。効果は永続します"
+        descriptionLabel.text = "お相手との距離表示が可能になります。\n効果は永続します"
         if user.item7 == 1 || user.usedItem7 == 1 {
             pLabel.isHidden = true
             pointLabel.isHidden = true
@@ -135,7 +135,7 @@ class ShopTableViewCell: UITableViewCell {
     func possessionItem7(_ user: User) {
         itemImageView.image = UIImage(named: "item7")
         itemNameLabel.text = "フリマップ"
-        descriptionLabel.text = "お相手との距離表示が可能になります。効果は永続します"
+        descriptionLabel.text = "お相手との距離表示が可能になります。\n効果は永続します"
         if user.item7 != nil {
             pointLabel.text = String(user.item7)
         }
@@ -144,7 +144,7 @@ class ShopTableViewCell: UITableViewCell {
     func shopItem8(_ user: User) {
         itemImageView.image = UIImage(named: "item8")
         itemNameLabel.text = "透視"
-        descriptionLabel.text = "メッセージの既読表示が可能になります。効果は永続します"
+        descriptionLabel.text = "メッセージの既読表示が可能になります。\n効果は永続します"
         if user.item8 == 1 || user.usedItem8 == 1 {
             pLabel.isHidden = true
             pointLabel.isHidden = true
@@ -157,7 +157,7 @@ class ShopTableViewCell: UITableViewCell {
     func possessionItem8(_ user: User) {
         itemImageView.image = UIImage(named: "item8")
         itemNameLabel.text = "透視"
-        descriptionLabel.text = "メッセージの既読表示が可能になります。効果は永続します"
+        descriptionLabel.text = "メッセージの既読表示が可能になります。\n効果は永続します"
         if user.item8 != nil {
             pointLabel.text = String(user.item8)
         }
