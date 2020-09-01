@@ -282,6 +282,9 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func fetchMessage2() {
         
+        users.removeAll()
+        messages.removeAll()
+        
         Message.fetchMessage2(toUserId: user.uid) { (message) in
             self.message = message
             

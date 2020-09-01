@@ -70,6 +70,7 @@ struct AuthService {
         UserDefaults.standard.removeObject(forKey: GOOGLE)
         UserDefaults.standard.removeObject(forKey: FACEBOOK)
         UserDefaults.standard.removeObject(forKey: APPLE)
+        UserDefaults.standard.removeObject(forKey: ISREAD_ON)
 
         do {
             if let providerData = Auth.auth().currentUser?.providerData {
@@ -126,15 +127,13 @@ struct AuthService {
                 UserDefaults.standard.removeObject(forKey: DARK)
                 UserDefaults.standard.removeObject(forKey: RCOMPLETION)
                 UserDefaults.standard.removeObject(forKey: GOOGLE)
-                UserDefaults.standard.removeObject(forKey: GOOGLE2)
                 UserDefaults.standard.removeObject(forKey: FACEBOOK)
-                UserDefaults.standard.removeObject(forKey: FACEBOOK2)
                 UserDefaults.standard.removeObject(forKey: APPLE)
-                UserDefaults.standard.removeObject(forKey: APPLE2)
                 UserDefaults.standard.removeObject(forKey: HINT_END)
                 UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
                 UserDefaults.standard.removeObject(forKey: MALE)
                 UserDefaults.standard.removeObject(forKey: FEMALE)
+                UserDefaults.standard.removeObject(forKey: ISREAD_ON)
 
                 completion(error)
             }

@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import CoreLocation
+import Geofirestore
 
 class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
@@ -46,6 +48,12 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private var cardInitialLocationCenter: CGPoint!
     private var panInitialLocation: CGPoint!
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    private let manager = CLLocationManager()
+    private var userLat = ""
+    private var userLong = ""
+    private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
+    private var myQuery: GFSQuery!
+    private var currentLocation: CLLocation?
     
     // MARK: - Lifecycle
     
@@ -54,6 +62,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         setupUI()
         fetchUser()
         showTutorialView()
+        confifureLocationManager()
         
 //        setupBanner()
 //        interstitial = createAndLoadIntersitial()
@@ -316,6 +325,18 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     // MARK: - Helpers
     
+    private func confifureLocationManager() {
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
+        manager.pausesLocationUpdatesAutomatically = true
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            manager.startUpdatingLocation()
+        }
+    }
+    
     private func reloadAction() {
         
         loadView()
@@ -456,6 +477,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         card.frame = CGRect(x: 0, y: 0, width: cardStack.bounds.width, height: cardStack.bounds.height)
         card.user = user
         card.cardVC = self
+        card.currentLocation(user, self.currentLocation)
         card.configureCell(user)
         cards.append(card)
         cardStack.addSubview(card)
@@ -673,5 +695,25 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadIntersitial()
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension CardViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error location: \(error.localizedDescription) ")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let updateLocation: CLLocation = locations.first!
+        self.currentLocation = updateLocation
     }
 }

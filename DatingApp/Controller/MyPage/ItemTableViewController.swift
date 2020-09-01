@@ -360,6 +360,7 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
                 self.hud.show(in: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     updateUser(withValue: [ITEM8: self.user.item8 - 1, USEDITEM8: self.user.usedItem8 + 1])
+                    UserDefaults.standard.set(true, forKey: ISREAD_ON)
                     self.hudSuccess2()
                 }
             }

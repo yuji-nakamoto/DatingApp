@@ -7491,7 +7491,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xch-7l-0lx">
-                                        <rect key="frame" x="215" y="11.5" width="8" height="8"/>
+                                        <rect key="frame" x="203" y="35" width="8" height="8"/>
                                         <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="8" id="1jm-Ip-baO"/>
@@ -7501,10 +7501,10 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="xch-7l-0lx" firstAttribute="centerY" secondItem="WfP-XH-Cdh" secondAttribute="centerY" id="Lr2-Vd-8sU"/>
+                                    <constraint firstItem="xch-7l-0lx" firstAttribute="top" secondItem="HHv-7M-cjo" secondAttribute="top" constant="35" id="2Xu-IC-JCs"/>
                                     <constraint firstItem="WfP-XH-Cdh" firstAttribute="top" secondItem="HHv-7M-cjo" secondAttribute="top" id="Ng1-U9-dOb"/>
                                     <constraint firstItem="WfP-XH-Cdh" firstAttribute="centerX" secondItem="HHv-7M-cjo" secondAttribute="centerX" id="U0T-hb-UTb"/>
-                                    <constraint firstItem="xch-7l-0lx" firstAttribute="leading" secondItem="HHv-7M-cjo" secondAttribute="leading" constant="215" id="XoB-Zy-opk"/>
+                                    <constraint firstItem="xch-7l-0lx" firstAttribute="centerX" secondItem="HHv-7M-cjo" secondAttribute="centerX" id="iV9-kL-SXG"/>
                                     <constraint firstAttribute="height" constant="50" id="nqh-BP-Bju"/>
                                 </constraints>
                             </view>
@@ -13574,7 +13574,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHF-Z6-aZi">
-                                        <rect key="frame" x="215" y="11.5" width="8" height="8"/>
+                                        <rect key="frame" x="203" y="35" width="8" height="8"/>
                                         <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="8" id="URe-lS-p8t"/>
@@ -13584,11 +13584,11 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="fHF-Z6-aZi" firstAttribute="leading" secondItem="6Re-rZ-TwU" secondAttribute="leading" constant="215" id="3hx-Pb-S02"/>
+                                    <constraint firstItem="fHF-Z6-aZi" firstAttribute="centerX" secondItem="6Re-rZ-TwU" secondAttribute="centerX" id="5Iz-er-fek"/>
                                     <constraint firstAttribute="height" constant="50" id="6E6-cD-swz"/>
                                     <constraint firstItem="MWT-HQ-0L3" firstAttribute="centerX" secondItem="6Re-rZ-TwU" secondAttribute="centerX" id="DdI-gf-Wpp"/>
+                                    <constraint firstItem="fHF-Z6-aZi" firstAttribute="top" secondItem="6Re-rZ-TwU" secondAttribute="top" constant="35" id="IDB-gh-IYP"/>
                                     <constraint firstItem="MWT-HQ-0L3" firstAttribute="top" secondItem="6Re-rZ-TwU" secondAttribute="top" id="odh-c6-KsR"/>
-                                    <constraint firstItem="fHF-Z6-aZi" firstAttribute="centerY" secondItem="MWT-HQ-0L3" secondAttribute="centerY" id="w6l-FZ-NJv"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-sF-u4p">
@@ -14920,7 +14920,7 @@
         <segue reference="2bB-BT-Qe5"/>
         <segue reference="hxo-rm-HDa"/>
         <segue reference="I5d-Mn-j0A"/>
-        <segue reference="ezP-c6-cnr"/>
+        <segue reference="bpl-az-HXS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="apple" width="384" height="512"/>

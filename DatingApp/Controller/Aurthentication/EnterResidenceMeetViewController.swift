@@ -140,7 +140,7 @@ class EnterResidenceMeetController: UIViewController {
     private func toTabBerVC() {
         
         if UserDefaults.standard.object(forKey: FACEBOOK) != nil {
-            UserDefaults.standard.set(true, forKey: FACEBOOK2)
+            
         }
         if UserDefaults.standard.object(forKey: GOOGLE) != nil {
             updateUser(withValue: [ISGOOGLE: true])

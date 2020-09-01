@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class Card: UIView {
     
@@ -50,8 +51,10 @@ class Card: UIView {
     @IBOutlet weak var nopeLabel: UILabel!
     @IBOutlet weak var typeView: UIView!
     @IBOutlet weak var ageBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var user: User!
+    var currentUser = User()
     var cardVC: CardViewController?
     
     func configureCell(_ user: User?) {
@@ -111,6 +114,29 @@ class Card: UIView {
             
         } else {
             profileImageUrlHaveAll()
+        }
+    }
+    
+    func currentLocation(_ user: User?, _ currentLocation: CLLocation?) {
+        
+        guard let _ = currentLocation else { return }
+        
+        if user?.latitude != "" && user?.longitude != "" {
+            let userLocation = CLLocation(latitude: Double(user!.latitude)!, longitude: Double(user!.longitude)!)
+            let distanceInKM: CLLocationDistance = userLocation.distance(from: currentLocation!) / 1000
+
+            User.fetchUser(User.currentUserId()) { (user) in
+                self.currentUser = user
+                if self.currentUser.usedItem7 == 1 {
+                    self.distanceLabel.text = String(format: "%.f Km", distanceInKM)
+                    self.distanceLabel.isHidden = false
+                } else {
+                    self.distanceLabel.isHidden = true
+                }
+            }
+            
+        } else {
+            distanceLabel.isHidden = true
         }
     }
     
