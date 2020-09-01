@@ -13,8 +13,9 @@ import GoogleSignIn
 import JGProgressHUD
 import AuthenticationServices
 import CryptoKit
+import CoreLocation
+import Geofirestore
 
-@available(iOS 13.0, *)
 class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     // MARK: - Properties
@@ -27,12 +28,18 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
+    private let manager = CLLocationManager()
+    private var userLat = ""
+    private var userLong = ""
+    private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
     fileprivate var currentNonce: String?
+    private var user = User()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        confifureLocationManager()
         setupUI()
     }
     
@@ -41,6 +48,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     @IBAction func appleButtonPressed(_ sender: Any) {
         
         UserDefaults.standard.set(true, forKey: APPLE)
+        UserDefaults.standard.removeObject(forKey: GOOGLE)
         let nonce = randomNonceString()
         currentNonce = nonce
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -65,10 +73,11 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     @IBAction func googleButtonPressed(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: GOOGLE)
+        UserDefaults.standard.removeObject(forKey: APPLE)
         GIDSignIn.sharedInstance()?.signIn()
     }
     
-    // MARK: - Helpers
+    // MARK: - Facebook
     
     private func facebookSignIn() {
         
@@ -104,6 +113,8 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         }
     }
     
+    // MARK: - Google
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
             return
@@ -135,6 +146,20 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         print(error.localizedDescription)
     }
     
+    // MARK: - Helpers
+    
+    private func confifureLocationManager() {
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
+        manager.pausesLocationUpdatesAutomatically = true
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            manager.startUpdatingLocation()
+        }
+    }
+    
     private func authResult(authData: AuthDataResult) {
         
         let dict : [String: Any] = [
@@ -143,24 +168,35 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             USERNAME: authData.user.displayName as Any,
             PROFILEIMAGEURL1: authData.user.photoURL?.absoluteString as Any]
         
-        if UserDefaults.standard.object(forKey: FACEBOOK) != nil && UserDefaults.standard.object(forKey: FACEBOOK2) == nil {
-            
-            saveUser(userId: authData.user.uid, withValue: dict)
-            self.toEnterGenderVC()
-            
-        } else if UserDefaults.standard.object(forKey: GOOGLE) != nil && UserDefaults.standard.object(forKey: GOOGLE2) == nil {
-            
-            saveUser(userId: authData.user.uid, withValue: dict)
-            self.toEnterGenderVC()
-            
-        } else if UserDefaults.standard.object(forKey: FACEBOOK) != nil && UserDefaults.standard.object(forKey: FACEBOOK2) != nil || UserDefaults.standard.object(forKey: GOOGLE) != nil && UserDefaults.standard.object(forKey: GOOGLE2) != nil {
-            
-            updateUser(withValue: dict)
-            UserDefaults.standard.set(true, forKey: WHITE)
-            User.isOnline(online: "online")
-            self.toTabBarVC()
+        if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
+            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+            self.userLat = userLat
+            self.userLong = userLong
         }
-        self.indicator.stopAnimating()
+        
+        if !self.userLat.isEmpty && !self.userLong.isEmpty {
+            let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
+            self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
+        }
+        
+        User.fetchUser(authData.user.uid) { (user) in
+            self.user = user
+            
+            if self.user.uid == "" {
+                saveUser(userId: authData.user.uid, withValue: dict)
+                self.toEnterNameVC()
+                self.indicator.stopAnimating()
+                return
+            }
+            
+            if UserDefaults.standard.object(forKey: GOOGLE) != nil && self.user.isGoogle == true {
+                
+                UserDefaults.standard.set(true, forKey: WHITE)
+                User.isOnline(online: "online")
+                self.toTabBarVC()
+            }
+            self.indicator.stopAnimating()
+        }
     }
     
     private func sha256(_ input: String) -> String {
@@ -201,7 +237,6 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
                 }
             }
         }
-        
         return result
     }
     
@@ -267,7 +302,8 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     }
 }
 
-@available(iOS 13.0, *)
+// MARK: - Apple
+
 extension SelectLoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
@@ -302,21 +338,38 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
                     
                 } else if let authData = result {
                     
-                    let dict : [String: Any] = [
+                    let dict: [String: Any] = [
                         UID: authData.user.uid,
                         EMAIL: email as Any]
                     
-                    if UserDefaults.standard.object(forKey: APPLE) != nil && UserDefaults.standard.object(forKey: APPLE2) != nil {
-                        updateUser(withValue: dict)
-                        User.isOnline(online: "online")
-                        UserDefaults.standard.set(true, forKey: WHITE)
-                        self.toTabBarVC()
-                        
-                    } else if UserDefaults.standard.object(forKey: APPLE) != nil {
-                        saveUser(userId: authData.user.uid, withValue: dict)
-                        self.toEnterNameVC()
+                    if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
+                        let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+                        self.userLat = userLat
+                        self.userLong = userLong
                     }
-                    self.indicator.stopAnimating()
+                    
+                    if !self.userLat.isEmpty && !self.userLong.isEmpty {
+                        let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
+                        self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
+                    }
+                    
+                    User.fetchUser(authData.user.uid) { (user) in
+                        self.user = user
+                        if self.user.uid == "" {
+                            saveUser(userId: authData.user.uid, withValue: dict)
+                            self.toEnterNameVC()
+                            self.indicator.stopAnimating()
+                            return
+                        }
+                        
+                        if UserDefaults.standard.object(forKey: APPLE) != nil && self.user.isApple == true {
+                            User.isOnline(online: "online")
+                            UserDefaults.standard.set(true, forKey: WHITE)
+
+                            self.toTabBarVC()
+                        }
+                        self.indicator.stopAnimating()
+                    }
                 }
             }
             
@@ -344,10 +397,37 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
     }
 }
 
-@available(iOS 13.0, *)
 extension SelectLoginViewController: ASAuthorizationControllerPresentationContextProviding {
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension SelectLoginViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error location: \(error.localizedDescription) ")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        manager.stopUpdatingLocation()
+        manager.delegate = nil
+        
+        let updateLocation: CLLocation = locations.first!
+        let newCordinate: CLLocationCoordinate2D = updateLocation.coordinate
+        
+        let userDefaults: UserDefaults = UserDefaults.standard
+        userDefaults.set("\(newCordinate.latitude)", forKey: "current_location_latitude")
+        userDefaults.set("\(newCordinate.longitude)", forKey: "current_location_longitude")
+        userDefaults.synchronize()
     }
 }

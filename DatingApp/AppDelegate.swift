@@ -21,14 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var skywayDomain:String? = "furima.io"
     var user = User()
     let gcmMessageIDKey = "gcm.message_id"
-    var timer = Timer()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         fetchUser()
-        timerMethod()
         getLoginBonus()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
@@ -68,11 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func timerMethod() {
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
-    }
-    
     private func getLoginBonus() {
         guard Auth.auth().currentUser != nil else { return }
         
@@ -91,18 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 updateUser(withValue: [ONEDAY: true, ONEDAYLATE: oneDayLate])
             }
         }
-    }
-    
-    @objc func timeCount() {
-        
-        guard Auth.auth().currentUser != nil else { return }
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-        }
-        
-        
-        guard user.uid != nil else { return }
-        updateUser(withValue: [LOGINTIME: user.loginTime + 60])
     }
     
     func application(_ application: UIApplication,open url:URL,sourceApplication: String?,annotation: Any) -> Bool {

@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import GoogleSignIn
+import Geofirestore
 
 struct AuthService {
 
@@ -83,7 +84,6 @@ struct AuthService {
             }
 
             try Auth.auth().signOut()
-            
             completion(nil)
             
         } catch let error as NSError {
@@ -92,7 +92,8 @@ struct AuthService {
     }
     
     static func withdrawUser(completion: @escaping(_ error: Error?) -> Void) {
-        
+        let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
+
         COLLECTION_USERS.document(User.currentUserId()).delete()
         COLLECTION_FEED.document(User.currentUserId()).delete()
         COLLECTION_MATCH.document(User.currentUserId()).delete()
@@ -105,6 +106,9 @@ struct AuthService {
         COLLECTION_LIKECOUNTER.document(User.currentUserId()).delete()
         COLLECTION_SWIPE.document(User.currentUserId()).delete()
         COLLECTION_INBOX.document(User.currentUserId()).delete()
+        geofirestroe.removeLocation(forDocumentWithID: User.currentUserId())
+        COLLECTION_GEO.document(User.currentUserId()).delete()
+
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")

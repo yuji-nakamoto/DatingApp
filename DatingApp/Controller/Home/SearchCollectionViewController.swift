@@ -36,7 +36,7 @@ class SearchCollectionViewController: UIViewController {
     private let manager = CLLocationManager()
     private var userLat = ""
     private var userLong = ""
-    private let geofirestroe = GeoFirestore(collectionRef: Firestore.firestore().collection("geography"))
+    private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
     private var myQuery: GFSQuery!
     private var distance: Double = 500
     
@@ -450,6 +450,9 @@ extension SearchCollectionViewController: CLLocationManagerDelegate {
         userDefaults.set("\(newCordinate.latitude)", forKey: "current_location_latitude")
         userDefaults.set("\(newCordinate.longitude)", forKey: "current_location_longitude")
         userDefaults.synchronize()
+        
+        print(newCordinate.latitude)
+        print(newCordinate.longitude)
         
         if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
             let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {

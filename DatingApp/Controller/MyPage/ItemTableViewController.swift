@@ -22,6 +22,8 @@ class ItemTableViewController: UIViewController {
     @IBOutlet weak var usedLabel4: UILabel!
     @IBOutlet weak var usedLabel5: UILabel!
     @IBOutlet weak var usedLabel6: UILabel!
+    @IBOutlet weak var usedLabel7: UILabel!
+    
     @IBOutlet weak var usedView: UIView!
     @IBOutlet weak var barViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var isReadSwitch: UISwitch!
@@ -49,7 +51,7 @@ class ItemTableViewController: UIViewController {
         if UserDefaults.standard.object(forKey: VIEW_ON) != nil {
             UIView.animate(withDuration: 0.5) {
                 self.usedView.isHidden = !self.usedView.isHidden
-                self.barViewTopConstraint.constant = 240
+                self.barViewTopConstraint.constant = 275
                 UserDefaults.standard.removeObject(forKey: VIEW_ON)
             }
         } else {
@@ -67,9 +69,9 @@ class ItemTableViewController: UIViewController {
         
         User.fetchUserAddSnapshotListener { (user) in
             self.user = user
-            self.usedItems(self.user)
             self.tableView.reloadData()
-            self.setupUserInfo(self.user)
+            self.usedItems(self.user)
+            self.setupIsRead(self.user)
         }
     }
     
@@ -133,21 +135,28 @@ class ItemTableViewController: UIViewController {
         }
         
         if self.user.usedItem7 > 0 {
-            self.usedLabel6.text = "\(user.usedItem7!)枚使用中"
+            self.usedLabel6.text = "使用中"
             self.usedLabel6.textColor = UIColor(named: O_GREEN)
         } else {
             self.usedLabel6.text = "未使用"
             self.usedLabel6.textColor = .systemGray
         }
         
+        if self.user.usedItem8 > 0 {
+            self.usedLabel7.isHidden = true
+        } else {
+            self.usedLabel7.isHidden = false
+            self.usedLabel7.text = "未使用"
+            self.usedLabel7.textColor = .systemGray
+        }
+        
         self.tableView.reloadData()
     }
         
-    private func setupUserInfo(_ user: User) {
+    private func setupIsRead(_ user: User) {
         
-        if self.user.usedItem7 == 1 {
+        if self.user.usedItem8 == 1 {
             self.isReadSwitch.isHidden = false
-            self.usedLabel6.isHidden = true
             self.isReadLabel.text = "既読表示をする"
             
             if UserDefaults.standard.object(forKey: ISREAD_ON) != nil {
@@ -160,7 +169,6 @@ class ItemTableViewController: UIViewController {
             
         } else {
             self.isReadSwitch.isHidden = true
-            self.usedLabel6.isHidden = false
             self.isReadLabel.text = "透視"
         }
     }
@@ -213,7 +221,7 @@ class ItemTableViewController: UIViewController {
 extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -233,6 +241,8 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
             cell.possessionItem6(self.user)
         } else if indexPath.row == 6 {
             cell.possessionItem7(self.user)
+        } else if indexPath.row == 7 {
+            cell.possessionItem8(self.user)
         }
         return cell
     }
@@ -326,7 +336,7 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 6 {
             
             if user.item7 == 0 { return }
-            let alert: UIAlertController = UIAlertController(title: "透視", message: "アイテムを使用します。効果は即座に反映されます。使用しますか？", preferredStyle: .alert)
+            let alert: UIAlertController = UIAlertController(title: "フリマップ", message: "アイテムを使用します。効果は即座に反映されます。使用しますか？", preferredStyle: .alert)
             let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
                 self.hud.show(in: self.view)
@@ -340,6 +350,25 @@ extension ItemTableViewController: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(exchange)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)
+            
+        } else if indexPath.row == 7 {
+            
+            if user.item8 == 0 { return }
+            let alert: UIAlertController = UIAlertController(title: "透視", message: "アイテムを使用します。効果は即座に反映されます。使用しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+                
+                self.hud.show(in: self.view)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    updateUser(withValue: [ITEM8: self.user.item8 - 1, USEDITEM8: self.user.usedItem8 + 1])
+                    self.hudSuccess2()
+                }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
         }
+        
     }
 }

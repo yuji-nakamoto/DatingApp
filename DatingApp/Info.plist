@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>フリマがあなたの現在地を知ることを許可しますか？</string>
+	<string>お相手との距離を計測するために使用します</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>フリマが常にあなたの現在地を知ることを許可しますか？</string>
+	<string>フリマがあなたの現在地を知ることを許可しますか？</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

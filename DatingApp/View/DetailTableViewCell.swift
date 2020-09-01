@@ -82,6 +82,7 @@ class DetailTableViewCell: UITableViewCell {
     // MARK: - Helpers
     
     var user: User!
+    var currentUser = User()
     
     func configureCell(_ user: User?) {
         
@@ -254,8 +255,16 @@ class DetailTableViewCell: UITableViewCell {
             let userLocation = CLLocation(latitude: Double(user!.latitude)!, longitude: Double(user!.longitude)!)
             let distanceInKM: CLLocationDistance = userLocation.distance(from: currentLocation!) / 1000
 
-            distanceLabel.text = String(format: "%.f Km", distanceInKM)
-            distanceLabel.isHidden = false
+            User.fetchUser(User.currentUserId()) { (user) in
+                self.currentUser = user
+                if self.currentUser.usedItem7 == 1 {
+                    self.distanceLabel.text = String(format: "%.f Km", distanceInKM)
+                    self.distanceLabel.isHidden = false
+                } else {
+                    self.distanceLabel.isHidden = true
+                }
+            }
+            
         } else {
             distanceLabel.isHidden = true
         }

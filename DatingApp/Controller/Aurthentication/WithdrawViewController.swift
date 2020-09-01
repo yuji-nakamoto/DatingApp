@@ -31,6 +31,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     
     private var hud = JGProgressHUD(style: .dark)
     fileprivate var currentNonce: String?
+    private var user = User()
     
     // MARK: - Lifecycle
     
@@ -114,8 +115,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
             }
         })
     }
-    
-    // MARK: - Helpers
+        
+    // MARK: - Google
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
@@ -160,6 +161,9 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
         print(error.localizedDescription)
     }
     
+    // MARK: - Helpers
+
+    
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
@@ -198,40 +202,44 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
                 }
             }
         }
-        
         return result
     }
     
     private func setupUI() {
         
-        if UserDefaults.standard.object(forKey: APPLE) != nil && UserDefaults.standard.object(forKey: APPLE2) != nil {
-            appleButton.isHidden = false
-            iconApple.isHidden = false
-            iconGoogle.isHidden = true
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+            
+            if UserDefaults.standard.object(forKey: APPLE) != nil && self.user.isApple == true {
+                self.appleButton.isHidden = false
+                self.iconApple.isHidden = false
+                self.iconGoogle.isHidden = true
 
-        } else {
-            appleButton.isHidden = true
-            iconApple.isHidden = true
+            } else {
+                self.appleButton.isHidden = true
+                self.iconApple.isHidden = true
+            }
+            
+            if UserDefaults.standard.object(forKey: GOOGLE) != nil && self.user.isGoogle == true {
+                self.googleButton.isHidden = false
+                self.iconGoogle.isHidden = false
+                self.iconApple.isHidden = true
+
+            } else {
+                self.googleButton.isHidden = true
+                self.iconGoogle.isHidden = true
+            }
+            
+            if UserDefaults.standard.object(forKey: APPLE) != nil || UserDefaults.standard.object(forKey: GOOGLE) != nil {
+                self.descriptionlabel.text = "退会ボタンを押すとアカウントが削除されます。"
+                self.emailTextField.isHidden = true
+                self.passwordTextField.isHidden = true
+                self.doneButton.isHidden = true
+            } else {
+                self.descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
+            }
         }
         
-        if UserDefaults.standard.object(forKey: GOOGLE) != nil && UserDefaults.standard.object(forKey: GOOGLE2) != nil {
-            googleButton.isHidden = false
-            iconGoogle.isHidden = false
-            iconApple.isHidden = true
-
-        } else {
-            googleButton.isHidden = true
-            iconGoogle.isHidden = true
-        }
-        
-        if UserDefaults.standard.object(forKey: APPLE) != nil && UserDefaults.standard.object(forKey: APPLE2) != nil || UserDefaults.standard.object(forKey: GOOGLE) != nil && UserDefaults.standard.object(forKey: GOOGLE2) != nil {
-            descriptionlabel.text = "退会ボタンを押すとアカウントが削除されます。"
-            emailTextField.isHidden = true
-            passwordTextField.isHidden = true
-            doneButton.isHidden = true
-        } else {
-            descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
-        }
         doneButton.layer.cornerRadius = 44 / 2
         backButton.layer.cornerRadius = 44 / 2
         appleButton.layer.cornerRadius = 44 / 2
@@ -293,7 +301,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     }
 }
 
-@available(iOS 13.0, *)
+// MARK: - Apple
+
 extension WithdrawViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         

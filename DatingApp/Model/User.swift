@@ -70,6 +70,7 @@ class User {
     var item5: Int!
     var item6: Int!
     var item7: Int!
+    var item8: Int!
     var usedItem1: Int!
     var usedItem2: Int!
     var usedItem3: Int!
@@ -77,6 +78,7 @@ class User {
     var usedItem5: Int!
     var usedItem6: Int!
     var usedItem7: Int!
+    var usedItem8: Int!
     var visited: Int!
     var pointHalfLate: Timestamp!
     var isCall: Bool!
@@ -86,6 +88,8 @@ class User {
     var newMessage: Bool!
     var latitude: String!
     var longitude: String!
+    var isApple: Bool!
+    var isGoogle: Bool!
     
     init() {
     }
@@ -150,6 +154,7 @@ class User {
         item5 = dict[ITEM5] as? Int ?? 0
         item6 = dict[ITEM6] as? Int ?? 0
         item7 = dict[ITEM7] as? Int ?? 0
+        item8 = dict[ITEM8] as? Int ?? 0
         usedItem1 = dict[USEDITEM1] as? Int ?? 0
         usedItem2 = dict[USEDITEM2] as? Int ?? 0
         usedItem3 = dict[USEDITEM3] as? Int ?? 0
@@ -157,6 +162,7 @@ class User {
         usedItem5 = dict[USEDITEM5] as? Int ?? 0
         usedItem6 = dict[USEDITEM6] as? Int ?? 0
         usedItem7 = dict[USEDITEM7] as? Int ?? 0
+        usedItem8 = dict[USEDITEM8] as? Int ?? 0
         visited = dict[VISITED] as? Int ?? 0
         pointHalfLate = dict[POINTHALFLATE] as? Timestamp ?? Timestamp(date: Date())
         isCall = dict[ISCALL] as? Bool ?? false
@@ -166,6 +172,8 @@ class User {
         newMessage = dict[NEWMESSAGE] as? Bool ?? false
         latitude = dict[LATITUDE] as? String ?? ""
         longitude = dict[LONGITUDE] as? String ?? ""
+        isApple = dict[ISAPPLE] as? Bool ?? false
+        isGoogle = dict[ISGOOGLE] as? Bool ?? false
     }
     
     // MARK: - Return user
@@ -182,7 +190,9 @@ class User {
             if error != nil {
                 print(error!.localizedDescription)
             }
-            //            print("DEBUG: snapshot data \(snapshot?.data())")
+            if snapshot?.data() == nil {
+                completion(User(dict: [UID: ""]))
+            }
             guard let dict = snapshot?.data() else { return }
             let user = User(dict: dict)
             completion(user)

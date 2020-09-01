@@ -28,7 +28,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     private let manager = CLLocationManager()
     private var userLat = ""
     private var userLong = ""
-    private let geofirestroe = GeoFirestore(collectionRef: Firestore.firestore().collection("geography"))
+    private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
     
     // MARK: - Lifecycle
     

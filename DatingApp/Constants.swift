@@ -30,6 +30,7 @@ public let COLLECTION_OPINION = Firestore.firestore().collection("opinion")
 public let COLLECTION_BLOCK = Firestore.firestore().collection("block")
 public let COLLECTION_COMMENT = Firestore.firestore().collection("comment")
 public let COLLECTION_NOTICE = Firestore.firestore().collection("notice")
+public let COLLECTION_GEO = Firestore.firestore().collection("geography")
 
 // MARK: - Color
 
@@ -99,6 +100,7 @@ public let ITEM4 = "item4"
 public let ITEM5 = "item5"
 public let ITEM6 = "item6"
 public let ITEM7 = "item7"
+public let ITEM8 = "item8"
 public let USEDITEM1 = "usedItem1"
 public let USEDITEM2 = "usedItem2"
 public let USEDITEM3 = "usedItem3"
@@ -106,6 +108,7 @@ public let USEDITEM4 = "usedItem4"
 public let USEDITEM5 = "usedItem5"
 public let USEDITEM6 = "usedItem6"
 public let USEDITEM7 = "usedItem7"
+public let USEDITEM8 = "usedItem8"
 public let VISITED = "visited"
 public let POINTHALFLATE = "pointHalfLate"
 public let ISCALL = "isCall"
@@ -116,6 +119,8 @@ public let NEWTYPE = "newType"
 public let NEWMESSAGE = "newMessage"
 public let LATITUDE = "latitude"
 public let LONGITUDE = "longitude"
+public let ISAPPLE = "isApple"
+public let ISGOOGLE = "isGoogle"
 
 // MARK: - Counter
 

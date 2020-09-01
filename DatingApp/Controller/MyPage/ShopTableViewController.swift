@@ -180,7 +180,7 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
 extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -200,6 +200,8 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
             cell.shopItem6(self.user)
         } else if indexPath.row == 6 {
             cell.shopItem7(self.user)
+        } else if indexPath.row == 7 {
+            cell.shopItem8(self.user)
         }
         return cell
     }
@@ -321,7 +323,7 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
             if user.item7 == 1 || user.usedItem7 == 1 {
                 return
             }
-            let alert: UIAlertController = UIAlertController(title: "透視", message: "15ポイントで交換できます。交換しますか？", preferredStyle: .alert)
+            let alert: UIAlertController = UIAlertController(title: "フリマップ", message: "15ポイントで交換できます。交換しますか？", preferredStyle: .alert)
             let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
                 
                 if self.user.points <= 14 {
@@ -329,6 +331,27 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     self.hudSuccess()
                     updateUser(withValue: [POINTS: self.user.points - 15, ITEM7: self.user.item7 + 1])
+                }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+            
+        } else if indexPath.row == 7 {
+            
+            if user.item8 == 1 || user.usedItem8 == 1 {
+                return
+            }
+            let alert: UIAlertController = UIAlertController(title: "透視", message: "15ポイントで交換できます。交換しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
+                
+                if self.user.points <= 14 {
+                    self.hudError()
+                } else {
+                    self.hudSuccess()
+                    updateUser(withValue: [POINTS: self.user.points - 15, ITEM8: self.user.item8 + 1])
                 }
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)

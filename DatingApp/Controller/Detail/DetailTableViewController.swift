@@ -60,7 +60,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private let manager = CLLocationManager()
     private var userLat = ""
     private var userLong = ""
-    private let geofirestroe = GeoFirestore(collectionRef: Firestore.firestore().collection("geography"))
+    private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
     private var myQuery: GFSQuery!
     private var distance: Double = 500
     private var currentLocation: CLLocation?

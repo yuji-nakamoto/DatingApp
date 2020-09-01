@@ -88,7 +88,7 @@ class EnterGenderViewController: UIViewController {
         genderLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        descriptionLabel.text = "性別を選択してください。\n性別はあとで変更することができません。"
+        descriptionLabel.text = "あなたの性別を選択してください。\n性別はあとで変更することができません。"
         nextButton.layer.cornerRadius = 44 / 2
         backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
