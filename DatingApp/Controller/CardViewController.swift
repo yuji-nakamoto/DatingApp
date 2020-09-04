@@ -598,7 +598,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 self.configureAnimations()
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.backView.alpha = 0.95
+                    self.backView.alpha = 0.9
                     self.matchViewAlpha1()
                     self.matchViewIsHiddenFalse()
                     self.afterMessageButton.isEnabled = true

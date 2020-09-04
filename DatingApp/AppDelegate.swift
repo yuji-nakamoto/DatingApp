@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var skywayAPIKey:String? = "94f937ed-cb17-4d76-9157-113d21f51991"
     var skywayDomain:String? = "furima.io"
     var user = User()
+    var timer = Timer()
     let gcmMessageIDKey = "gcm.message_id"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         fetchUser()
         getLoginBonus()
+        timerMethod()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         
@@ -83,6 +85,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let oneDayLate = Calendar.current.date(byAdding: .hour, value: 12, to: day)!
                 updateUser(withValue: [ONEDAY: true, ONEDAYLATE: oneDayLate])
             }
+        }
+    }
+    
+    private func timerMethod() {
+        
+        if UserDefaults.standard.object(forKey: NEWUSER) != nil {
+            self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func timeCount() {
+        
+        guard Auth.auth().currentUser != nil else { return }
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+        }
+        
+        guard user.uid != nil else { return }
+        
+        updateUser(withValue: [LOGINTIME: user.loginTime + 60])
+        if user.loginTime >= 100000 {
+            UserDefaults.standard.removeObject(forKey: NEWUSER)
+            self.timer.invalidate()
         }
     }
     

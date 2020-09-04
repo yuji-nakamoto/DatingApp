@@ -90,6 +90,8 @@ class User {
     var longitude: String!
     var isApple: Bool!
     var isGoogle: Bool!
+    var searchMini: Bool!
+    var selectGender: String!
     
     init() {
     }
@@ -174,6 +176,8 @@ class User {
         longitude = dict[LONGITUDE] as? String ?? ""
         isApple = dict[ISAPPLE] as? Bool ?? false
         isGoogle = dict[ISGOOGLE] as? Bool ?? false
+        searchMini = dict[SEARCHMINI] as? Bool ?? false
+        
     }
     
     // MARK: - Return user
@@ -492,7 +496,119 @@ class User {
         }
     }
     
-    class func likeCountSort(_ residenceSearch: String, _ currentUser: User, completion: @escaping([User]) -> Void) {
+    class func fetchNewUserSort(_ currentUser: User, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            
+            let usersRef = COLLECTION_USERS
+                .order(by: LASTCHANGE)
+
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard user.gender == "男性" else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard user.residence == currentUser.residenceSerch else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+            
+        } else {
+            let usersRef = COLLECTION_USERS
+                .order(by: LASTCHANGE)
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard user.gender == "女性" else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard user.residence == currentUser.residenceSerch else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func fetchNewUserAll(_ currentUser: User, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            
+            let usersRef = COLLECTION_USERS
+                .order(by: LASTCHANGE)
+
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard user.gender == "男性" else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+            
+        } else {
+            let usersRef = COLLECTION_USERS
+                .order(by: LASTCHANGE)
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                usersRef.getDocuments { (snapshot, error) in
+                    
+                    if let error = error {
+                        print("Error gender sort: \(error.localizedDescription)")
+                    } else {
+                        snapshot?.documents.forEach({ (document) in
+                            let dict = document.data()
+                            let user = User(dict: dict as [String: Any])
+                            guard user.uid != User.currentUserId() else { return }
+                            guard user.age <= currentUser.maxAge else { return }
+                            guard user.age >= currentUser.minAge else { return }
+                            guard user.gender == "女性" else { return }
+                            guard blockUserIDs[user.uid] == nil else { return }
+                            users.append(user)
+                        })
+                        completion(users)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func likeCountSort(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
         
         if UserDefaults.standard.object(forKey: MALE) != nil {

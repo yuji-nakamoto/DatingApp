@@ -25,6 +25,9 @@ class MyPageTableViewCell: UITableViewCell {
     
     func configureCell(_ user: User?) {
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(profileImageViewTap))
+        profileImageView.addGestureRecognizer(tap)
+        
         if user?.uid != nil {
             profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
             nameLabel.text = user!.username
@@ -50,6 +53,10 @@ class MyPageTableViewCell: UITableViewCell {
         } else {
             commentLabel.text = comment.text
         }
+    }
+    
+    @objc func profileImageViewTap() {
+        myPageVC?.performSegue(withIdentifier: "ProfileVC", sender: nil)
     }
     
     override func awakeFromNib() {

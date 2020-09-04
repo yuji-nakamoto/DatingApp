@@ -11,6 +11,7 @@ import JGProgressHUD
 import CoreLocation
 import Geofirestore
 import Firebase
+import TextFieldEffects
 
 class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
@@ -19,8 +20,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var resendButton: UIButton!
     
@@ -29,6 +28,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     private var userLat = ""
     private var userLong = ""
     private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 140, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 200, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -149,6 +150,22 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setupUI() {
+        
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "メールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
+        
+        passwordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        passwordTextField.borderActiveColor = UIColor(named: O_RED)
+        passwordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        passwordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholder = "パスワード"
+        self.view.addSubview(passwordTextField)
         
         descriptionLabel.text = "メールに記載しているURLを開き、認証を完了させてください。"
         loginButton.layer.cornerRadius = 44 / 2

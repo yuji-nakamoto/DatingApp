@@ -8,21 +8,21 @@
 
 import UIKit
 import JGProgressHUD
+import TextFieldEffects
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var descriptionlabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var hud = JGProgressHUD(style: .dark)
-    
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 204, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 269, width: 300, height: 60))
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -43,15 +43,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-        }
-    }
-    
-    @IBAction func segmentedTaped(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: UserDefaults.standard.removeObject(forKey: MALE)
-        case 1: UserDefaults.standard.set(true, forKey: MALE)
-        default: break
         }
     }
     
@@ -101,17 +92,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func setupUI() {
         
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "メールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
+        
+        passwordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        passwordTextField.borderActiveColor = UIColor(named: O_RED)
+        passwordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        passwordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholder = "パスワード"
+        self.view.addSubview(passwordTextField)
+        
         descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
         loginButton.layer.cornerRadius = 44 / 2
         dismissButton.layer.cornerRadius = 44 / 2
         dismissButton.layer.borderWidth = 1
         dismissButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-        
-        if UserDefaults.standard.object(forKey: MALE) != nil {
-            segmentControl.selectedSegmentIndex = 1
-        } else {
-            segmentControl.selectedSegmentIndex = 0
-        }
         
         emailTextField.delegate = self
         passwordTextField.delegate = self

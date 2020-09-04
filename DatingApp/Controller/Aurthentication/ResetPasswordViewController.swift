@@ -8,17 +8,18 @@
 
 import UIKit
 import JGProgressHUD
+import TextFieldEffects
 
 class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
 
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
     private var hud = JGProgressHUD(style: .dark)
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 250, width: 300, height: 60))
     
     // MARK: - Lifecycle
 
@@ -75,6 +76,14 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     }
 
     private func setupUI() {
+        
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "メールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
         
         descriptionLabel.text = "リセットメールを送信後、届いたメールに記載しているURLを開いて、新しいパスワードを登録してください。"
         sendButton.isEnabled = true

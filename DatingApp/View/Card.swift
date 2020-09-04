@@ -52,6 +52,9 @@ class Card: UIView {
     @IBOutlet weak var typeView: UIView!
     @IBOutlet weak var ageBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var hobbyLbl1: UILabel!
+    @IBOutlet weak var hobbyLbl2: UILabel!
+    @IBOutlet weak var hobbyLbl3: UILabel!
     
     var user: User!
     var currentUser = User()
@@ -114,6 +117,48 @@ class Card: UIView {
             
         } else {
             profileImageUrlHaveAll()
+        }
+        
+        if user?.hobby1 != "" && user?.hobby2 != "" && user?.hobby3 != "" {
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl3.text = "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = false
+
+        } else if user?.hobby1 != "" && user?.hobby2 != "" {
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = true
+            
+        } else if user?.hobby2 != "" && user?.hobby3 != "" {
+            hobbyLbl1.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = true
+            
+        } else if user?.hobby1 != "" && user?.hobby3 != "" {
+
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = true
+            
+        } else if user?.hobby1 != "" || user?.hobby2 != "" || user?.hobby3 != "" {
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  " + "  \(user?.hobby2 ?? "")  " + "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = true
+            hobbyLbl3.isHidden = true
+
+        } else {
+            hobbyLbl1.isHidden = true
+            hobbyLbl2.isHidden = true
+            hobbyLbl3.isHidden = true
         }
     }
     
@@ -444,6 +489,16 @@ class Card: UIView {
         
         likeLabel.transform = CGAffineTransform(rotationAngle: -.pi / 8)
         nopeLabel.transform = CGAffineTransform(rotationAngle: .pi / 8)
+        
+        hobbyLbl1.layer.cornerRadius = 24 / 2
+        hobbyLbl2.layer.cornerRadius = 24 / 2
+        hobbyLbl3.layer.cornerRadius = 24 / 2
+        hobbyLbl1.backgroundColor = .systemGreen
+        hobbyLbl2.backgroundColor = .systemBlue
+        hobbyLbl3.backgroundColor = .systemPink
+        hobbyLbl1.textColor = .white
+        hobbyLbl2.textColor = .white
+        hobbyLbl3.textColor = .white
         
         let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 650)
         profileImageView1.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])

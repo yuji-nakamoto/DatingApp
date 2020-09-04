@@ -9,20 +9,21 @@
 import UIKit
 import JGProgressHUD
 import Firebase
+import TextFieldEffects
 
 class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var descriptionlabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var newPasswordTextField: UITextField!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 225, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 285, width: 300, height: 60))
+    private let newPasswordTextField = HoshiTextField(frame: CGRect(x: 40, y: 345, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -95,6 +96,30 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Helpers
     
     private func setupUI() {
+        
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "今までメールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
+        
+        passwordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        passwordTextField.borderActiveColor = UIColor(named: O_RED)
+        passwordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        passwordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholder = "今までパスワード"
+        self.view.addSubview(passwordTextField)
+        
+        newPasswordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        newPasswordTextField.borderActiveColor = UIColor(named: O_RED)
+        newPasswordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        newPasswordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        newPasswordTextField.placeholder = "新しいパスワード"
+        newPasswordTextField.keyboardType = .emailAddress
+        self.view.addSubview(newPasswordTextField)
         
         descriptionlabel.text = "今までのメールアドレス、\n今までのパスワード、\n新しいパスワードを入力してください。"
         doneButton.layer.cornerRadius = 44 / 2

@@ -9,20 +9,21 @@
 import UIKit
 import JGProgressHUD
 import Firebase
+import TextFieldEffects
 
 class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var descriptionlabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var newEmailTextField: UITextField!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 225, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 285, width: 300, height: 60))
+    private let newEmailTextField = HoshiTextField(frame: CGRect(x: 40, y: 345, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -64,7 +65,7 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
-                self.hud.textLabel.text = "メメールアドレス、もしくはパスワードが間違えています。"
+                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています。"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
@@ -94,6 +95,30 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Helpers
     
     private func setupUI() {
+        
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "今までメールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
+        
+        passwordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        passwordTextField.borderActiveColor = UIColor(named: O_RED)
+        passwordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        passwordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholder = "今までパスワード"
+        self.view.addSubview(passwordTextField)
+        
+        newEmailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        newEmailTextField.borderActiveColor = UIColor(named: O_RED)
+        newEmailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        newEmailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        newEmailTextField.placeholder = "新しいメールアドレス"
+        newEmailTextField.keyboardType = .emailAddress
+        self.view.addSubview(newEmailTextField)
         
         descriptionlabel.text = "今までのメールアドレス、\n今までパスワード、\n新しいメールアドレスを入力してください。"
         doneButton.layer.cornerRadius = 44 / 2

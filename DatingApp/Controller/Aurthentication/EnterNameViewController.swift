@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import TextFieldEffects
 
 class EnterNameViewController: UIViewController {
     
@@ -15,14 +16,14 @@ class EnterNameViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var requiredLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
-    
+    private let nameTextField = HoshiTextField(frame: CGRect(x: 40, y: 205, width: 300, height: 60))
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -87,7 +88,14 @@ class EnterNameViewController: UIViewController {
     
     private func setupUI() {
         
-        nameTextField.becomeFirstResponder()
+        nameTextField.placeholderColor = UIColor(named: O_GREEN)!
+        nameTextField.borderActiveColor = UIColor(named: O_RED)
+        nameTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        nameTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        nameTextField.placeholder = "ニックネーム"
+        nameTextField.keyboardType = .emailAddress
+        self.view.addSubview(nameTextField)
+        
         nameLabel.text = "-"
         requiredLabel.layer.borderWidth = 1
         requiredLabel.layer.borderColor = UIColor(named: O_GREEN)?.cgColor

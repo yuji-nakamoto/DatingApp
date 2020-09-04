@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import JGProgressHUD
+import TextFieldEffects
 
 class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -17,10 +18,10 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var inquiryLabel: UILabel!
     @IBOutlet weak var inputLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
     
     private var currentUser = User()
     public var hud = JGProgressHUD(style: .dark)
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 20, y: 250, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -101,6 +102,14 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
         navigationItem.title = "お問い合わせ"
         sendButton.layer.cornerRadius = 15
         emailTextField.delegate = self
+        
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "メールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
         
         if UserDefaults.standard.object(forKey: PINK) != nil {
             sendButton.backgroundColor = UIColor(named: O_PINK)

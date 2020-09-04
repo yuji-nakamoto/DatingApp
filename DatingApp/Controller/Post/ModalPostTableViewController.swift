@@ -71,9 +71,11 @@ class ModalPostTableViewController: UITableViewController {
     private func selectedPickerKeyboard() {
         
         if genderLabel.text == "男性" {
+            updateUser(withValue: [SELECTGENDER: "男性"])
             UserDefaults.standard.set(true, forKey: MALE)
             UserDefaults.standard.set(true, forKey: REFRESH)
-        } else {
+        } else if genderLabel.text == "女性" {
+            updateUser(withValue: [SELECTGENDER: "女性"])
             UserDefaults.standard.removeObject(forKey: MALE)
             UserDefaults.standard.set(true, forKey: REFRESH)
         }

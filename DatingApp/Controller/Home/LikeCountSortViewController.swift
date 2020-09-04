@@ -14,9 +14,9 @@ class LikeCountSortViewController: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var users = [User]()
     private var user = User()
@@ -26,27 +26,17 @@ class LikeCountSortViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchUser()
 //        setupBanner()
         testBanner()
+        addSnapshotListener()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-        self.navigationController?.navigationBar.isHidden = false
+        fetchUser()
     }
-    
-    @IBAction func segmentControl(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: toSearchVC()
-        case 1: toLikeNationVC()
-        case 2: break
-        default: break
-        }
-    }
-    
+
     @objc func refreshCollectionView(){
         fetchUsers(self.user)
     }
@@ -58,25 +48,36 @@ class LikeCountSortViewController: UIViewController {
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
             self.fetchUsers(self.user)
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
     
     private func fetchUsers(_ user: User) {
         
+        indicator.startAnimating()
         let residence = user.residenceSerch
         if residence == "こだわらない" {
             User.likeCountSortNationwide(user) { (users) in
                 self.users = users
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
                 self.refresh.endRefreshing()
+                self.indicator.stopAnimating()
             }
         } else {
-            User.likeCountSort(residence!, user) { (users) in
+            User.likeCountSort(user) { (users) in
                 self.users = users
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
                 self.refresh.endRefreshing()
+                self.indicator.stopAnimating()
             }
+        }
+    }
+    
+    private func addSnapshotListener() {
+        
+        User.fetchUserAddSnapshotListener() { (user) in
+            self.user = user
+            self.fetchUsers(self.user)
         }
     }
     
@@ -98,77 +99,70 @@ class LikeCountSortViewController: UIViewController {
     
     private func setupUI() {
         
-        UserDefaults.standard.set(true, forKey: LANKBAR)
-        navigationItem.title = "いいねランキング"
-        tableView.tableFooterView = UIView()
-        tableView.separatorStyle = .none
-        tableView.refreshControl = refresh
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
+        collectionView.refreshControl = refresh
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "MessageVC" {
-            let messageVC = segue.destination as! MessageTebleViewController
-            let toUserId = sender as! String
-            messageVC.toUserId = toUserId
-        }
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
             let toUserId = sender as! String
             detailVC.toUserId = toUserId
         }
     }
-    
-    private func toSearchVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toSearchVC = storyboard.instantiateViewController(withIdentifier: "SearchVC") as! SearchCollectionViewController
-        navigationController?.pushViewController(toSearchVC, animated: false)
-    }
-    
-    private func toLikeNationVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toLikeNationVC = storyboard.instantiateViewController(withIdentifier: "LikeNationVC") as! LikeNationwideViewController
-        navigationController?.pushViewController(toLikeNationVC, animated: false)
-    }
 }
 
-// MARK: - Table view
+//MARK: CollectionView
 
-extension LikeCountSortViewController: UITableViewDelegate, UITableViewDataSource {
+extension LikeCountSortViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
+            return UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 10)
+        }
+        return UIEdgeInsets(top: 30, left: 25, bottom: 0, right: 25)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FeedTableViewCell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        cell.user = users[indexPath.row]
-        cell.likeCountVC = self
-        cell.likeCountUserCell(users[indexPath.row])
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
+            return 10
+        }
+        return 25
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150, height: 230)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return users.count == 0 ? 0 : users.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
+            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as! SearchCollectionViewCell
+            
+            cell2.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+            cell2.layer.shadowColor = UIColor.black.cgColor
+            cell2.layer.shadowOpacity = 0.3
+            cell2.layer.shadowRadius = 4
+            cell2.layer.masksToBounds = false
+            cell2.configureMiniCell(users[indexPath.row])
+            return cell2
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
+        cell.configureCell(users[indexPath.row])
+        
         if indexPath.row == 0 {
             cell.numberLabel.text = "1"
             cell.numberLabel.textColor = UIColor(named: O_GREEN)
-
         } else if indexPath.row == 1 {
             cell.numberLabel.text = "2"
             cell.numberLabel.textColor = .systemYellow
@@ -254,8 +248,11 @@ extension LikeCountSortViewController: UITableViewDelegate, UITableViewDataSourc
             cell.numberLabel.text = "30"
             cell.numberLabel.textColor = UIColor(named: O_BLACK)
         }
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row].uid)
     }
 }
 

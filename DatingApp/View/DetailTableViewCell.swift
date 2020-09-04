@@ -78,6 +78,9 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var visitedLabel: UILabel!
     @IBOutlet weak var iconEye: UIImageView!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var hobbyLbl1: UILabel!
+    @IBOutlet weak var hobbyLbl2: UILabel!
+    @IBOutlet weak var hobbyLbl3: UILabel!
     
     // MARK: - Helpers
     
@@ -192,21 +195,54 @@ class DetailTableViewCell: UITableViewCell {
         if user?.hobby1 != "" && user?.hobby2 != "" && user?.hobby3 != "" {
             hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)! + "," + (user?.hobby3)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 12)
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl3.text = "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = false
+
         } else if user?.hobby1 != "" && user?.hobby2 != "" {
             hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 15)
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = true
+            
         } else if user?.hobby2 != "" && user?.hobby3 != "" {
             hobbyLabel.text = (user?.hobby2)! + "," + (user?.hobby3)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 15)
+            hobbyLbl1.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = true
+            
         } else if user?.hobby1 != "" && user?.hobby3 != "" {
             hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby3)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 15)
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl2.text = "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = false
+            hobbyLbl3.isHidden = true
+            
         } else if user?.hobby1 != "" || user?.hobby2 != "" || user?.hobby3 != "" {
             hobbyLabel.text = (user?.hobby1)! + (user?.hobby2)! + (user?.hobby3)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 17)
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  " + "  \(user?.hobby2 ?? "")  " + "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = true
+            hobbyLbl3.isHidden = true
+
         } else {
             hobbyLabel.text = "未設定"
             hobbyLabel.font = UIFont.systemFont(ofSize: 17)
+            hobbyLbl1.isHidden = true
+            hobbyLbl2.isHidden = true
+            hobbyLbl3.isHidden = true
         }
         
         if timeLabel != nil {
@@ -595,6 +631,16 @@ class DetailTableViewCell: UITableViewCell {
         
         ageLabel.text = ""
         
+        hobbyLbl1.layer.cornerRadius = 24 / 2
+        hobbyLbl2.layer.cornerRadius = 24 / 2
+        hobbyLbl3.layer.cornerRadius = 24 / 2
+        hobbyLbl1.backgroundColor = .systemGreen
+        hobbyLbl2.backgroundColor = .systemBlue
+        hobbyLbl3.backgroundColor = .systemPink
+        hobbyLbl1.textColor = .white
+        hobbyLbl2.textColor = .white
+        hobbyLbl3.textColor = .white
+
         profileImageView1.layer.cornerRadius = 15
         profileImageView2.layer.cornerRadius = 15
         profileImageView3.layer.cornerRadius = 15

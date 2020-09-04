@@ -20,14 +20,8 @@ class SearchCollectionViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var lankView: UIView!
-    @IBOutlet weak var likeLankButton: UIButton!
-    @IBOutlet weak var navBarView: UIView!
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var searchMiniButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loginBunusView: UIView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var backView: UIView!
     
     private var users = [User]()
     private var user = User()
@@ -50,9 +44,8 @@ class SearchCollectionViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-        
-        fetchUser()
-        setupBanner()
+        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+        //  setupBanner()
         testBanner()
         checkOneDayAndBadge()
         confifureLocationManager()
@@ -61,8 +54,8 @@ class SearchCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configure()
+        fetchUser()
         UserDefaults.standard.removeObject(forKey: CARDVC)
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,19 +87,6 @@ class SearchCollectionViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction func miniCollectionButtonPressed(_ sender: Any) {
-        
-        if UserDefaults.standard.object(forKey: SEARCH_MINI) == nil {
-            UserDefaults.standard.set(true, forKey: SEARCH_MINI)
-            searchMiniButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
-            fetchUsers(user)
-        } else {
-            UserDefaults.standard.removeObject(forKey: SEARCH_MINI)
-            searchMiniButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
-            fetchUsers(user)
-        }
-    }
-    
     @objc func handleDismissal() {
         removeEffectView()
     }
@@ -115,37 +95,26 @@ class SearchCollectionViewController: UIViewController {
         fetchUsers(user)
     }
     
-    @IBAction func likelankButtonPressed(_ sender: Any) {
-        
-        UIView.animate(withDuration: 0.5) {
-            self.lankView.isHidden = !self.lankView.isHidden
-        }
-    }
-    
-    @IBAction func segmentControlled(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: break
-        case 1: performSegue(withIdentifier: "LikeNationVC", sender: nil)
-        case 2: performSegue(withIdentifier: "LikeCountVC", sender: nil)
-        default: break
-        }
-    }
-    
     // MARK: - Fetch
     
     private func fetchUser() {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            self.fetchUsers(self.user)
-            self.collectionView.reloadData()
             
+            if self.user.selectGender == "男性" {
+                UserDefaults.standard.set(true, forKey: MALE)
+            } else {
+                UserDefaults.standard.removeObject(forKey: MALE)
+            }
             if self.user.gender == "女性" {
                 UserDefaults.standard.set(true, forKey: FEMALE)
             } else {
                 UserDefaults.standard.removeObject(forKey: FEMALE)
             }
+            
+            self.fetchUsers(self.user)
+            self.collectionView.reloadData()
         }
     }
     
@@ -174,11 +143,12 @@ class SearchCollectionViewController: UIViewController {
         
         User.fetchUserAddSnapshotListener() { (user) in
             self.user = user
+            self.fetchUsers(self.user)
             
             if self.user.messageBadgeCount == 0 {
                 
                 if user.newMessage == false {
-                    self.tabBarController!.viewControllers![3].tabBarItem.badgeValue = nil
+                    self.tabBarController?.viewControllers?[3].tabBarItem.badgeValue = nil
                 }
             } else {
                 self.tabBarController?.viewControllers?[3].tabBarItem?.badgeValue = String(self.user.messageBadgeCount)
@@ -186,7 +156,7 @@ class SearchCollectionViewController: UIViewController {
             
             if self.user.myPageBadgeCount == 0 {
                 if user.newLike == false && user.newType == false {
-                    self.tabBarController!.viewControllers![4].tabBarItem.badgeValue = nil
+                    self.tabBarController?.viewControllers?[4].tabBarItem.badgeValue = nil
                 }
             } else {
                 self.tabBarController?.viewControllers?[4].tabBarItem?.badgeValue = String(self.user.myPageBadgeCount)
@@ -201,23 +171,23 @@ class SearchCollectionViewController: UIViewController {
     
     // MARK: - Heplers
     
-//    private func findUser() {
-//
-//        guard let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
-//            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String else { return }
-//
-//        let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
-//
-//        myQuery = geofirestroe.query(withCenter: location, radius: distance)
-//        myQuery.observe(.documentEntered) { (key, location) in
-//
-//            if key != User.currentUserId() {
-//                User.fetchUser(key!) { (user) in
-//
-//                }
-//            }
-//        }
-//    }
+    //    private func findUser() {
+    //
+    //        guard let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
+    //            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String else { return }
+    //
+    //        let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
+    //
+    //        myQuery = geofirestroe.query(withCenter: location, radius: distance)
+    //        myQuery.observe(.documentEntered) { (key, location) in
+    //
+    //            if key != User.currentUserId() {
+    //                User.fetchUser(key!) { (user) in
+    //
+    //                }
+    //            }
+    //        }
+    //    }
     
     private func confifureLocationManager() {
         
@@ -234,27 +204,24 @@ class SearchCollectionViewController: UIViewController {
     private func showLoginBunusView() {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
-        visualEffectView.addGestureRecognizer(tap)
-        
-        visualEffectView.frame = self.view.frame
-        visualEffectView.alpha = 0
-        view.addSubview(self.visualEffectView)
-        view.addSubview(self.loginBunusView)
+        backView.addGestureRecognizer(tap)
+        loginBunusView.addGestureRecognizer(tap)
+       
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.visualEffectView.alpha = 1
+   
             self.loginBunusView.alpha = 1
+            self.backView.alpha = 0.9
             
         }, completion: nil)
     }
     
     private func removeEffectView() {
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.visualEffectView.alpha = 0
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
             self.loginBunusView.alpha = 0
-        }) { (_) in
-            self.visualEffectView.removeFromSuperview()
-        }
+            self.backView.alpha = 0
+        })
     }
     
     private func setupBanner() {
@@ -273,67 +240,15 @@ class SearchCollectionViewController: UIViewController {
     
     private func configure() {
         
-        segmentControl.selectedSegmentIndex = 0
         loginBunusView.alpha = 0
-        lankView.alpha = 0.85
-        navBarView.alpha = 0.85
+        backView.alpha = 0
         loginBunusView.layer.cornerRadius = 15
-        likeLankButton.layer.cornerRadius = 27 / 2
         collectionView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
-        
-        if UserDefaults.standard.object(forKey: LANKBAR) != nil {
-            lankView.isHidden = false
-        }
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            likeLankButton.layer.borderWidth = 1
-            likeLankButton.layer.borderColor = UIColor.white.cgColor
-            likeLankButton.setTitleColor(UIColor.white, for: .normal)
-            likeLankButton.backgroundColor = UIColor(named: O_PINK)
-            titleLabel.textColor = .white
-            searchButton.tintColor = .white
-            searchMiniButton.tintColor = .white
-            navBarView.backgroundColor = UIColor(named: O_PINK)
-            lankView.backgroundColor = UIColor(named: O_PINK)
-            
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            likeLankButton.backgroundColor = UIColor.white
-            likeLankButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            titleLabel.textColor = UIColor.white
-            searchButton.tintColor = UIColor.white
-            searchMiniButton.tintColor = UIColor.white
-            navBarView.backgroundColor = UIColor(named: O_GREEN)
-            lankView.backgroundColor = UIColor(named: O_GREEN)
-            
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            likeLankButton.backgroundColor = UIColor(named: O_GREEN)
-            likeLankButton.setTitleColor(UIColor.white, for: .normal)
-            titleLabel.textColor = UIColor(named: O_BLACK)
-            searchButton.tintColor = UIColor(named: O_BLACK)
-            searchMiniButton.tintColor = UIColor(named: O_BLACK)
-            navBarView.backgroundColor = .white
-            lankView.backgroundColor = .white
-            
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            likeLankButton.backgroundColor = UIColor(named: O_GREEN)
-            likeLankButton.setTitleColor(UIColor.white, for: .normal)
-            titleLabel.textColor = .white
-            searchButton.tintColor = .white
-            searchMiniButton.tintColor = .white
-            navBarView.backgroundColor = UIColor(named: O_DARK)
-            lankView.backgroundColor = UIColor(named: O_DARK)
-        }
-        
-        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
-            searchMiniButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
-        } else {
-            searchMiniButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -352,7 +267,7 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
             return UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 10)
         }
         return UIEdgeInsets(top: 30, left: 25, bottom: 0, right: 25)
@@ -360,7 +275,7 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
             return 10
         }
         return 25
@@ -385,14 +300,14 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-//            cell3.setupBanner()
+            //            cell3.setupBanner()
             cell3.testBanner()
             cell3.searchCVC = self
             
             return cell3
         }
         
-        if UserDefaults.standard.object(forKey: SEARCH_MINI) != nil {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as! SearchCollectionViewCell
             
             cell2.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -419,7 +334,7 @@ extension SearchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelega
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: "登録しているユーザーは\n見つかりませんでした。", attributes: attributes)
+        return NSAttributedString(string: "ユーザーは見つかりませんでした。", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
@@ -459,10 +374,10 @@ extension SearchCollectionViewController: CLLocationManagerDelegate {
             
             updateUser(withValue: [LATITUDE: userLat, LONGITUDE: userLong])
             
-           let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
+            let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
             self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId()) { (error) in
                 if error == nil {
-//                    self.findUser()
+                    //                    self.findUser()
                 }
             }
         }

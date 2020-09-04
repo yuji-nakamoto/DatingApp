@@ -70,8 +70,10 @@ class ModalSearchTableViewController: UITableViewController {
                     MAXAGE: Int(maxLabel.text!)!] as [String : Any]
         
         if genderLabel.text == "男性" {
+            updateUser(withValue: [SELECTGENDER: "男性"])
             UserDefaults.standard.set(true, forKey: MALE)
         } else if genderLabel.text == "女性" {
+            updateUser(withValue: [SELECTGENDER: "女性"])
             UserDefaults.standard.removeObject(forKey: MALE)
         }
         

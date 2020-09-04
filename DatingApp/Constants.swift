@@ -39,6 +39,7 @@ public let O_GREEN = "original_green"
 public let O_BLACK = "original_black"
 public let O_PINK = "original_pink"
 public let O_DARK = "original_dark"
+public let O_RED = "original_red"
 
 // MARK: - User
 
@@ -121,6 +122,8 @@ public let LATITUDE = "latitude"
 public let LONGITUDE = "longitude"
 public let ISAPPLE = "isApple"
 public let ISGOOGLE = "isGoogle"
+public let SEARCHMINI = "searchMini"
+public let SELECTGENDER = "selectGender"
 
 // MARK: - Counter
 
@@ -213,7 +216,7 @@ public let ALL = "all"
 public let HINT_END = "hint_end"
 public let TUTORIAL_END = "tutorial_end"
 public let MATCHING = "matching"
-public let SEARCH_MINI = "search_mini"
+public let SEARCH_MINI_ON = "search_mini_on"
 public let LANKBAR = "lankBar"
 public let FROM_SEARCHVC = "from_searchVC"
 public let NOTICE1 = "notice1"
@@ -222,6 +225,7 @@ public let NOTICE3 = "notice3"
 public let NOTICE4 = "notice4"
 public let NOTICE5 = "notice5"
 public let VIEW_ON = "view_on"
+public let NEWUSER = "newUser"
 
 // MARK: - Notification
 

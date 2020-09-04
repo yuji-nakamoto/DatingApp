@@ -1,8 +1,8 @@
 //
-//  LikeNationwideViewController.swift
+//  NewUserCollectionViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/08/23.
+//  Created by yuji nakamoto on 2020/09/04.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class LikeNationwideViewController: UIViewController {
+class NewUserCollectionViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -27,7 +27,7 @@ class LikeNationwideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSnapshotListener()
-        //        setupBanner()
+//        setupBanner()
         testBanner()
     }
     
@@ -53,12 +53,25 @@ class LikeNationwideViewController: UIViewController {
     }
     
     private func fetchUsers(_ user: User) {
+        
+        if UserDefaults.standard.object(forKey: NEWUSER) == nil { return }
+        
         indicator.startAnimating()
-        User.likeCountSortNationwide(user) { (users) in
-            self.users = users
-            self.collectionView.reloadData()
-            self.refresh.endRefreshing()
-            self.indicator.stopAnimating()
+        let residence = user.residenceSerch
+        if residence == "こだわらない" {
+            User.fetchNewUserAll(user) { (users) in
+                self.users = users
+                self.collectionView.reloadData()
+                self.refresh.endRefreshing()
+                self.indicator.stopAnimating()
+            }
+        } else {
+            User.fetchNewUserSort(user) { (users) in
+                self.users = users
+                self.collectionView.reloadData()
+                self.refresh.endRefreshing()
+                self.indicator.stopAnimating()
+            }
         }
     }
     
@@ -106,7 +119,7 @@ class LikeNationwideViewController: UIViewController {
 
 //MARK: CollectionView
 
-extension LikeNationwideViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension NewUserCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
@@ -148,95 +161,6 @@ extension LikeNationwideViewController: UICollectionViewDataSource, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
         cell.configureCell(users[indexPath.row])
-        
-        if indexPath.row == 0 {
-            cell.numberLabel.text = "1"
-            cell.numberLabel.textColor = UIColor(named: O_GREEN)
-        } else if indexPath.row == 1 {
-            cell.numberLabel.text = "2"
-            cell.numberLabel.textColor = .systemYellow
-        } else if indexPath.row == 2 {
-            cell.numberLabel.text = "3"
-            cell.numberLabel.textColor = .systemPink
-        } else if indexPath.row == 3 {
-            cell.numberLabel.text = "4"
-            cell.numberLabel.textColor = .systemBlue
-        } else if indexPath.row == 4 {
-            cell.numberLabel.text = "5"
-            cell.numberLabel.textColor = .systemOrange
-        } else if indexPath.row == 5 {
-            cell.numberLabel.text = "6"
-            cell.numberLabel.textColor = .systemTeal
-        } else if indexPath.row == 6 {
-            cell.numberLabel.text = "7"
-            cell.numberLabel.textColor = .systemPurple
-        } else if indexPath.row == 7 {
-            cell.numberLabel.text = "8"
-            cell.numberLabel.textColor = .systemGreen
-        } else if indexPath.row == 8 {
-            cell.numberLabel.text = "9"
-            cell.numberLabel.textColor = UIColor(named: O_PINK)
-        } else if indexPath.row == 9 {
-            cell.numberLabel.text = "10"
-            cell.numberLabel.textColor = .systemFill
-        } else if indexPath.row == 10 {
-            cell.numberLabel.text = "11"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 11 {
-            cell.numberLabel.text = "12"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 12 {
-            cell.numberLabel.text = "13"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 13 {
-            cell.numberLabel.text = "14"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 14 {
-            cell.numberLabel.text = "15"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 15 {
-            cell.numberLabel.text = "16"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 16 {
-            cell.numberLabel.text = "17"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 17 {
-            cell.numberLabel.text = "18"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 18 {
-            cell.numberLabel.text = "19"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 20 {
-            cell.numberLabel.text = "21"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 21 {
-            cell.numberLabel.text = "22"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 22 {
-            cell.numberLabel.text = "23"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 23 {
-            cell.numberLabel.text = "24"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 24 {
-            cell.numberLabel.text = "25"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 25 {
-            cell.numberLabel.text = "26"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 26 {
-            cell.numberLabel.text = "27"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 27 {
-            cell.numberLabel.text = "28"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 28 {
-            cell.numberLabel.text = "29"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        } else if indexPath.row == 29 {
-            cell.numberLabel.text = "30"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
-        }
         return cell
     }
     
@@ -245,11 +169,15 @@ extension LikeNationwideViewController: UICollectionViewDataSource, UICollection
     }
 }
 
-extension LikeNationwideViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+extension NewUserCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: " 全国のいいねランキングが\nこちらに表示されます。", attributes: attributes)
+        return NSAttributedString(string: "ユーザーは見つかりませんでした。", attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください。")
     }
 }

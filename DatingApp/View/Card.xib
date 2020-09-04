@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -217,8 +217,8 @@
                         </view>
                     </subviews>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SNt-Vm-cxM">
-                    <rect key="frame" x="20" y="813" width="148" height="24"/>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SNt-Vm-cxM">
+                    <rect key="frame" x="20" y="813" width="142" height="24"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AgeLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfi-te-3yD">
                             <rect key="frame" x="0.0" y="0.0" width="64.5" height="24"/>
@@ -227,7 +227,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ResiLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-kW-Rqk">
-                            <rect key="frame" x="80.5" y="0.0" width="67.5" height="24"/>
+                            <rect key="frame" x="74.5" y="0.0" width="67.5" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -237,6 +237,33 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQJ-pA-adc">
                     <rect key="frame" x="20" y="775.5" width="109.5" height="32.5"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HobbyLbl3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VdT-DX-kx2">
+                    <rect key="frame" x="20" y="701" width="81.5" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="zjy-1I-wAf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HobbyLbl1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLT-6h-FhR">
+                    <rect key="frame" x="20" y="739" width="79" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="1Wi-tg-dDX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HobbyLbl2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYd-ad-Iba">
+                    <rect key="frame" x="109" y="739" width="81.5" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="OdW-GZ-A6I"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -310,12 +337,14 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="FUt-Zv-bN7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="07y-cL-Rgy"/>
+                <constraint firstItem="cYd-ad-Iba" firstAttribute="centerY" secondItem="hLT-6h-FhR" secondAttribute="centerY" id="39K-1G-xQI"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2Al-OS-TtI" secondAttribute="trailing" id="3gZ-jj-2b6"/>
                 <constraint firstItem="Q7W-6A-HMc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="3qT-VX-eh8"/>
                 <constraint firstItem="oJq-pi-AT8" firstAttribute="leading" secondItem="HQJ-pA-adc" secondAttribute="trailing" constant="10" id="4CI-kq-48i"/>
                 <constraint firstItem="OEm-n9-ehz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4Ib-bj-a4f"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="tOo-Yz-LLi" secondAttribute="bottom" id="5Ov-oh-68B"/>
                 <constraint firstItem="0hC-ag-Y2c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6lB-Rd-HAm"/>
+                <constraint firstItem="VdT-DX-kx2" firstAttribute="leading" secondItem="hLT-6h-FhR" secondAttribute="leading" id="8ha-dN-Kkw"/>
                 <constraint firstItem="2Al-OS-TtI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9Z7-UV-TAR"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="2Al-OS-TtI" secondAttribute="bottom" id="An0-3M-e5V"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="uho-q0-pr2" secondAttribute="trailing" constant="18" id="B2X-Sm-C8x"/>
@@ -323,6 +352,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Obd-vg-oge" secondAttribute="trailing" constant="19" id="E1V-zN-kjI"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0hC-ag-Y2c" secondAttribute="bottom" id="F4o-w6-Teg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="8ew-U2-2yD" secondAttribute="bottom" id="FFT-Zx-XBr"/>
+                <constraint firstItem="cYd-ad-Iba" firstAttribute="leading" secondItem="hLT-6h-FhR" secondAttribute="trailing" constant="10" id="Fae-VX-rZF"/>
                 <constraint firstItem="uho-q0-pr2" firstAttribute="top" secondItem="SNt-Vm-cxM" secondAttribute="bottom" constant="10" id="GPS-oH-sah"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="U2T-VS-O1Q" secondAttribute="trailing" id="GPz-ME-nqI"/>
                 <constraint firstItem="8ew-U2-2yD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="GlL-8c-WGT"/>
@@ -350,13 +380,16 @@
                 <constraint firstItem="SNt-Vm-cxM" firstAttribute="top" secondItem="HQJ-pA-adc" secondAttribute="bottom" constant="5" id="eaJ-rH-XRs"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="uho-q0-pr2" secondAttribute="bottom" constant="10" id="efe-j4-TCX"/>
                 <constraint firstItem="U2T-VS-O1Q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="g7V-HX-vqu"/>
+                <constraint firstItem="HQJ-pA-adc" firstAttribute="top" secondItem="hLT-6h-FhR" secondAttribute="bottom" constant="8.5" id="gW9-ar-EdY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="qZs-9H-hf9" secondAttribute="bottom" constant="10" id="hze-m3-F2m"/>
                 <constraint firstItem="qlN-Pp-KvD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jJD-7u-CJV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qZs-9H-hf9" secondAttribute="trailing" constant="20" id="jdP-Jh-qCc"/>
                 <constraint firstItem="2Al-OS-TtI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kGr-tO-e6J"/>
                 <constraint firstItem="vpX-1F-LXK" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="kqs-k4-g7s"/>
                 <constraint firstItem="qlN-Pp-KvD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nk0-hU-EsV"/>
+                <constraint firstItem="hLT-6h-FhR" firstAttribute="leading" secondItem="HQJ-pA-adc" secondAttribute="leading" id="oWm-fH-XRD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="FUt-Zv-bN7" secondAttribute="bottom" id="pXV-Md-MAc"/>
+                <constraint firstItem="hLT-6h-FhR" firstAttribute="top" secondItem="VdT-DX-kx2" secondAttribute="bottom" constant="10" id="qmg-0o-GsA"/>
                 <constraint firstItem="FUt-Zv-bN7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="u1e-YP-bzi"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8ew-U2-2yD" secondAttribute="trailing" id="u1n-23-3dR"/>
                 <constraint firstItem="Obd-vg-oge" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="19" id="u4M-B5-AHv"/>
@@ -375,6 +408,9 @@
                 <outlet property="ageBottomConstraint" destination="GPS-oH-sah" id="iHu-ji-CpA"/>
                 <outlet property="ageLabel" destination="Jfi-te-3yD" id="c5S-kW-uJ0"/>
                 <outlet property="distanceLabel" destination="oJq-pi-AT8" id="1Re-uP-9f1"/>
+                <outlet property="hobbyLbl1" destination="hLT-6h-FhR" id="fWN-ZS-jIp"/>
+                <outlet property="hobbyLbl2" destination="cYd-ad-Iba" id="Eke-oE-RmS"/>
+                <outlet property="hobbyLbl3" destination="VdT-DX-kx2" id="Qqh-bp-i4z"/>
                 <outlet property="likeLabel" destination="1e0-CQ-C84" id="dWQ-oV-0pd"/>
                 <outlet property="likeView" destination="U2T-VS-O1Q" id="Qmj-42-PjA"/>
                 <outlet property="nameLabel" destination="HQJ-pA-adc" id="zjy-DY-gMX"/>

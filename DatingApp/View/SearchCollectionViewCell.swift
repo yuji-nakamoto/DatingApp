@@ -24,6 +24,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var miniBackView: UIView!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var newLabel: UILabel!
+    @IBOutlet weak var miniNewLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
     
     var searchCVC: SearchCollectionViewController?
     
@@ -53,6 +56,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
+        
+        guard newLabel != nil else { return }
+        newLabel.layer.cornerRadius = 25 / 2
     }
     
     func configureMiniCell(_ user: User) {
@@ -76,6 +82,9 @@ class SearchCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
+        
+        guard miniNewLabel != nil else { return }
+        miniNewLabel.layer.cornerRadius = 18 / 2
     }
     
     func getLikeCount(ref: DocumentReference, _ user: User) {

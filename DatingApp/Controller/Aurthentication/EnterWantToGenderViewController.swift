@@ -54,9 +54,11 @@ class EnterWantToGenderViewController: UIViewController {
         indicator.stopAnimating()
 
         if genderLabel.text == "男性" {
+            updateUser(withValue: [SELECTGENDER: "男性"])
             UserDefaults.standard.set(true, forKey: MALE)
             toEnterProfessionVC()
         } else {
+            updateUser(withValue: [SELECTGENDER: "女性"])
             toEnterProfessionVC()
         }
     }

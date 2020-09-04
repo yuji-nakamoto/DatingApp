@@ -13,14 +13,13 @@ import FBSDKLoginKit
 import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
+import TextFieldEffects
 
 class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDelegate {
     
     // MARK: - Properties
     
     @IBOutlet weak var descriptionlabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var doneButton: UIButton!
@@ -32,6 +31,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     private var hud = JGProgressHUD(style: .dark)
     fileprivate var currentNonce: String?
     private var user = User()
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 160, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 220, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -239,6 +240,22 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
                 self.descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
             }
         }
+        
+        emailTextField.placeholderColor = UIColor(named: O_GREEN)!
+        emailTextField.borderActiveColor = UIColor(named: O_RED)
+        emailTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        emailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        emailTextField.placeholder = "メールアドレス"
+        emailTextField.keyboardType = .emailAddress
+        self.view.addSubview(emailTextField)
+        
+        passwordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        passwordTextField.borderActiveColor = UIColor(named: O_RED)
+        passwordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        passwordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholder = "パスワード"
+        self.view.addSubview(passwordTextField)
         
         doneButton.layer.cornerRadius = 44 / 2
         backButton.layer.cornerRadius = 44 / 2
