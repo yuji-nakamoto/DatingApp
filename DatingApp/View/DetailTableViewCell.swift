@@ -229,10 +229,26 @@ class DetailTableViewCell: UITableViewCell {
             hobbyLbl2.isHidden = false
             hobbyLbl3.isHidden = true
             
-        } else if user?.hobby1 != "" || user?.hobby2 != "" || user?.hobby3 != "" {
-            hobbyLabel.text = (user?.hobby1)! + (user?.hobby2)! + (user?.hobby3)!
+        } else if user?.hobby1 != "" {
+            hobbyLabel.text = (user?.hobby1)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 17)
-            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  " + "  \(user?.hobby2 ?? "")  " + "  \(user?.hobby3 ?? "")  "
+            hobbyLbl1.text = "  \(user?.hobby1 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = true
+            hobbyLbl3.isHidden = true
+
+        } else if user?.hobby2 != "" {
+            hobbyLabel.text = (user?.hobby2)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 17)
+            hobbyLbl1.text = "  \(user?.hobby2 ?? "")  "
+            hobbyLbl1.isHidden = false
+            hobbyLbl2.isHidden = true
+            hobbyLbl3.isHidden = true
+
+        } else if user?.hobby3 != "" {
+            hobbyLabel.text = (user?.hobby3)!
+            hobbyLabel.font = UIFont.systemFont(ofSize: 17)
+            hobbyLbl1.text = "  \(user?.hobby3 ?? "")  "
             hobbyLbl1.isHidden = false
             hobbyLbl2.isHidden = true
             hobbyLbl3.isHidden = true

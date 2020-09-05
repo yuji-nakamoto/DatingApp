@@ -58,37 +58,38 @@ struct AuthService {
     static func logoutUser(completion: @escaping(_ error: Error?) -> Void) {
         
         User.isOnline(online: "offline")
-        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-        UserDefaults.standard.removeObject(forKey: PINK)
-        UserDefaults.standard.removeObject(forKey: GREEN)
-        UserDefaults.standard.removeObject(forKey: DARK)
-        UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-        UserDefaults.standard.removeObject(forKey: GOOGLE)
-        UserDefaults.standard.removeObject(forKey: FACEBOOK)
-        UserDefaults.standard.removeObject(forKey: APPLE)
-        UserDefaults.standard.removeObject(forKey: ISREAD_ON)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+            UserDefaults.standard.removeObject(forKey: PINK)
+            UserDefaults.standard.removeObject(forKey: GREEN)
+            UserDefaults.standard.removeObject(forKey: DARK)
+            UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+            UserDefaults.standard.removeObject(forKey: GOOGLE)
+            UserDefaults.standard.removeObject(forKey: FACEBOOK)
+            UserDefaults.standard.removeObject(forKey: APPLE)
+            UserDefaults.standard.removeObject(forKey: ISREAD_ON)
 
-        do {
-            if let providerData = Auth.auth().currentUser?.providerData {
-                let userInfo = providerData[0]
+            do {
+                if let providerData = Auth.auth().currentUser?.providerData {
+                    let userInfo = providerData[0]
 
-                switch userInfo.providerID {
-                case "google.com":
-                    GIDSignIn.sharedInstance()?.signOut()
-                default:
-                    break
+                    switch userInfo.providerID {
+                    case "google.com":
+                        GIDSignIn.sharedInstance()?.signOut()
+                    default:
+                        break
+                    }
                 }
+                try Auth.auth().signOut()
+                completion(nil)
+                
+            } catch let error as NSError {
+                completion(error)
             }
-
-            try Auth.auth().signOut()
-            completion(nil)
-            
-        } catch let error as NSError {
-            completion(error)
         }
     }
     
@@ -115,30 +116,31 @@ struct AuthService {
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-
-        Auth.auth().currentUser?.delete(completion: { (error) in
-            
-            if error != nil {
-                print("Error withdraw user: \(error!.localizedDescription)")
-                completion(error)
-            } else {
-                UserDefaults.standard.removeObject(forKey: PINK)
-                UserDefaults.standard.removeObject(forKey: GREEN)
-                UserDefaults.standard.removeObject(forKey: DARK)
-                UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-                UserDefaults.standard.removeObject(forKey: GOOGLE)
-                UserDefaults.standard.removeObject(forKey: FACEBOOK)
-                UserDefaults.standard.removeObject(forKey: APPLE)
-                UserDefaults.standard.removeObject(forKey: HINT_END)
-                UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
-                UserDefaults.standard.removeObject(forKey: MALE)
-                UserDefaults.standard.removeObject(forKey: FEMALE)
-                UserDefaults.standard.removeObject(forKey: ISREAD_ON)
-                UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
-
-                completion(error)
-            }
-        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            Auth.auth().currentUser?.delete(completion: { (error) in
+                
+                if error != nil {
+                    print("Error withdraw user: \(error!.localizedDescription)")
+                    completion(error)
+                } else {
+                    UserDefaults.standard.removeObject(forKey: PINK)
+                    UserDefaults.standard.removeObject(forKey: GREEN)
+                    UserDefaults.standard.removeObject(forKey: DARK)
+                    UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+                    UserDefaults.standard.removeObject(forKey: GOOGLE)
+                    UserDefaults.standard.removeObject(forKey: FACEBOOK)
+                    UserDefaults.standard.removeObject(forKey: APPLE)
+                    UserDefaults.standard.removeObject(forKey: HINT_END)
+                    UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
+                    UserDefaults.standard.removeObject(forKey: MALE)
+                    UserDefaults.standard.removeObject(forKey: FEMALE)
+                    UserDefaults.standard.removeObject(forKey: ISREAD_ON)
+                    UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
+                    completion(error)
+                }
+            })
+        }
     }
     
     static func resendVerificaitionEmail(email: String, completion: @escaping (_ error: Error?) -> Void) {

@@ -28,8 +28,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     private var userLat = ""
     private var userLong = ""
     private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 140, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 200, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 150, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 210, width: 300, height: 60))
     
     // MARK: - Lifecycle
     

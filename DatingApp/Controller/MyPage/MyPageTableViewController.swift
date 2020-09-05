@@ -35,7 +35,7 @@ class MyPageTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "マイページ"
         tableView.separatorStyle = .none
-        //  setupBanner()
+//          setupBanner()
         testBanner()
         showHintView()
     }

@@ -27,7 +27,7 @@ class LikeNationwideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSnapshotListener()
-        //        setupBanner()
+//        setupBanner()
         testBanner()
         fetchUser()
         setupUI()

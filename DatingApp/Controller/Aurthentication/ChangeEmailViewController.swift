@@ -21,9 +21,9 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 225, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 285, width: 300, height: 60))
-    private let newEmailTextField = HoshiTextField(frame: CGRect(x: 40, y: 345, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 290, width: 300, height: 60))
+    private let newEmailTextField = HoshiTextField(frame: CGRect(x: 40, y: 350, width: 300, height: 60))
     
     // MARK: - Lifecycle
     

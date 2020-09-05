@@ -24,7 +24,6 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
         autoLogin()
 //        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
-        UserDefaults.standard.removeObject(forKey: LANKBAR)
     }
     
     // MARK: - Helpers

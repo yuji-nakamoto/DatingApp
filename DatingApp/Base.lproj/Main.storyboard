@@ -62,9 +62,6 @@
                                 <color key="textColor" name="original_black"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="i9d-rJ-YOs">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAm-jc-Bhf">
                                 <rect key="frame" x="107.5" y="718" width="199" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -75,6 +72,9 @@
                                     <segue destination="xJN-vF-iKn" kind="presentation" id="I5d-Mn-j0A"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="i9d-rJ-YOs">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -1867,9 +1867,6 @@
                                     <segue destination="EBm-LB-Uu2" kind="presentation" id="FcO-So-iES"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LsQ-LR-kCx">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Uk-s3-oX4">
                                 <rect key="frame" x="40" y="334" width="334" height="44"/>
                                 <color key="backgroundColor" name="original_green"/>
@@ -1885,6 +1882,9 @@
                                     <action selector="termsButtonPressed:" destination="kH0-a1-L0Q" eventType="touchUpInside" id="UJU-Ap-dXs"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LsQ-LR-kCx">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -1990,9 +1990,6 @@
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="1WH-MX-RXP"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-A3-CEh">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6b-UW-Ggf">
                                 <rect key="frame" x="115" y="738" width="184" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
@@ -2003,6 +2000,9 @@
                                     <segue destination="1eS-K7-dwz" kind="presentation" id="ze3-fH-Oor"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-A3-CEh">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -12290,7 +12290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peW-jd-Sob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832" y="-938"/>
+            <point key="canvasLocation" x="1774" y="-938"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="C2W-cr-j6D">
@@ -15598,7 +15598,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ztd-W0-RhI"/>
         <segue reference="ocR-CG-CJl"/>
-        <segue reference="6ka-hs-TM9"/>
+        <segue reference="FcO-So-iES"/>
         <segue reference="2bB-BT-Qe5"/>
         <segue reference="hxo-rm-HDa"/>
         <segue reference="J3S-eW-uAj"/>

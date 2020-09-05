@@ -29,15 +29,14 @@ class InboxTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchUser()
-        fetchInbox()
-        //  setupBanner()
+//          setupBanner()
         testBanner()
         updateUser(withValue: [NEWMESSAGE: false])
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        fetchInbox()
     }
     
     @objc func refreshCollectionView(){

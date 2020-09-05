@@ -30,12 +30,11 @@ class MatchCollectionViewController: UIViewController {
         setupUI()
 //        setupBanner()
         testBanner()
-        fetchMatchUsers()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionView.reloadData()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchMatchUsers()
     }
     
     // MARK: - Actions

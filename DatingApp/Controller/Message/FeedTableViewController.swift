@@ -28,14 +28,13 @@ class FeedTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        fetchMatchedUser()
 //        setupBanner()
         testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        fetchMatchedUser()
     }
 
     @objc func refreshCollectionView(){

@@ -377,13 +377,13 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func checkFemale() {
         
-//        if UserDefaults.standard.object(forKey: FEMALE) == nil {
-//            if self.interstitial.isReady {
-//                self.interstitial.present(fromRootViewController: self)
-//            } else {
-//                print("Error interstitial")
-//            }
-//        }
+        if UserDefaults.standard.object(forKey: FEMALE) == nil {
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            } else {
+                print("Error interstitial")
+            }
+        }
     }
     
     private func createAndLoadIntersitial() -> GADInterstitial {

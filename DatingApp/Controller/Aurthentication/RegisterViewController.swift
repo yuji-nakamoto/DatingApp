@@ -20,8 +20,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var termsButton: UIButton!
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 204, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 269, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 290, width: 300, height: 60))
     
     private var hud = JGProgressHUD(style: .dark)
     

@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>お相手との距離を計測するために使用します</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>フリマがあなたの現在地を知ることを許可しますか？</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -56,6 +52,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>カメラのアクセスを許可しますか？</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>フリマがあなたの現在地を知ることを許可しますか？</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>お相手との距離を計測するために使用します</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>マイクのアクセスを許可しますか？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
