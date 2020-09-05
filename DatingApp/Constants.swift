@@ -228,7 +228,6 @@ public let NOTICE3 = "notice3"
 public let NOTICE4 = "notice4"
 public let NOTICE5 = "notice5"
 public let VIEW_ON = "view_on"
-public let NEW_USER = "new_User"
 public let REFRESH_ON = "refresh_on"
 
 // MARK: - Notification

@@ -135,7 +135,6 @@ struct AuthService {
                 UserDefaults.standard.removeObject(forKey: FEMALE)
                 UserDefaults.standard.removeObject(forKey: ISREAD_ON)
                 UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
-                UserDefaults.standard.removeObject(forKey: NEW_USER)
 
                 completion(error)
             }

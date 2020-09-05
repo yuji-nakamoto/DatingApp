@@ -153,7 +153,7 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return users.count == 0 ? 0 : users.count
+        return users.count == 0 ? 0 : 1 + users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -177,17 +177,17 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
             cell2.layer.shadowOpacity = 0.3
             cell2.layer.shadowRadius = 4
             cell2.layer.masksToBounds = false
-            cell2.configureMiniCell(users[indexPath.row])
+            cell2.configureMiniCell(users[indexPath.row - 1])
             return cell2
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
-        cell.configureCell(users[indexPath.row])
+        cell.configureCell(users[indexPath.row - 1])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
     }
 }
 

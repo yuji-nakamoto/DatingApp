@@ -15587,6 +15587,7 @@
                         <outlet property="bannerView" destination="yOt-VF-03L" id="1TE-vb-Ft7"/>
                         <outlet property="collectionView" destination="OQt-wb-kEP" id="Fdt-eo-8z5"/>
                         <outlet property="indicator" destination="ENH-lv-kbb" id="FmX-wu-8ic"/>
+                        <segue destination="JJI-ii-Pv5" kind="show" identifier="DetailVC" id="GyH-uc-TtM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yw1-KA-4Rn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -15602,7 +15603,7 @@
         <segue reference="hxo-rm-HDa"/>
         <segue reference="J3S-eW-uAj"/>
         <segue reference="I5d-Mn-j0A"/>
-        <segue reference="PPE-aA-1pm"/>
+        <segue reference="GyH-uc-TtM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="apple" width="384" height="512"/>
