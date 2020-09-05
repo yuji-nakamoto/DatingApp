@@ -1,8 +1,8 @@
 //
-//  NewUserCollectionViewController.swift
+//  NewLoginCollectionViewController.swift
 //  DatingApp
 //
-//  Created by yuji nakamoto on 2020/09/04.
+//  Created by yuji nakamoto on 2020/09/05.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class NewUserCollectionViewController: UIViewController {
+class NewLoginCollectionViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -65,7 +65,7 @@ class NewUserCollectionViewController: UIViewController {
         }
         let residence = user.residenceSerch
         if residence == "こだわらない" {
-            User.fetchNewUserAll(user) { (users) in
+            User.fetchNewLoginAll(user) { (users) in
                 self.users = users
                 self.collectionView.reloadData()
                 self.refresh.endRefreshing()
@@ -73,7 +73,7 @@ class NewUserCollectionViewController: UIViewController {
                 UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
         } else {
-            User.fetchNewUserSort(user) { (users) in
+            User.fetchNewLoginSort(user) { (users) in
                 self.users = users
                 self.collectionView.reloadData()
                 self.refresh.endRefreshing()
@@ -127,7 +127,7 @@ class NewUserCollectionViewController: UIViewController {
 
 //MARK: CollectionView
 
-extension NewUserCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
@@ -162,9 +162,9 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-            //  cell3.setupBanner3()
-            cell3.testBanner3()
-            cell3.newUserCVC = self
+            //  cell3.setupBanner2()
+            cell3.testBanner2()
+            cell3.newLoginCVC = self
             
             return cell3
         }
@@ -191,7 +191,7 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
     }
 }
 
-extension NewUserCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+extension NewLoginCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         

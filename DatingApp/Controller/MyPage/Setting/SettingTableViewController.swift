@@ -327,13 +327,13 @@ class SettingTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if indexPath.section == 5 && indexPath.row == 0 {
+        if indexPath.section == 4 && indexPath.row == 0 {
             toChangeEmailVC()
-        } else if indexPath.section == 5 && indexPath.row == 1 {
+        } else if indexPath.section == 4 && indexPath.row == 1 {
             toChangePasswordVC()
-        } else if indexPath.section == 6 && indexPath.row == 4 {
+        } else if indexPath.section == 5 && indexPath.row == 4 {
             withdraw()
-        } else if indexPath.section == 7 {
+        } else if indexPath.section == 6 {
             logoutUser()
         }
     }

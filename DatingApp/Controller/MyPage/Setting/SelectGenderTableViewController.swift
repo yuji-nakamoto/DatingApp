@@ -51,12 +51,12 @@ class SelectGenderTableViewController: UITableViewController {
         if indexPath.row == 0 {
             UserDefaults.standard.set(true, forKey: REFRESH)
             UserDefaults.standard.removeObject(forKey: MALE)
-            updateUser(withValue: [SELECTGENDER: "男性"])
+            updateUser(withValue: [SELECTGENDER: "女性"])
             setupUI()
         } else {
             UserDefaults.standard.set(true, forKey: REFRESH)
             UserDefaults.standard.set(true, forKey: MALE)
-            updateUser(withValue: [SELECTGENDER: "女性"])
+            updateUser(withValue: [SELECTGENDER: "男性"])
             setupUI()
         }
     }

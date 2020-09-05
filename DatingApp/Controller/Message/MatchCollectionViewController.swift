@@ -1,5 +1,5 @@
 //
-//  InboxTableViewController.swift
+//  MatchCollectionViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/07/31.
@@ -10,18 +10,14 @@ import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
 
-class InboxCollectionViewController: UIViewController {
+class MatchCollectionViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
-    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    @IBOutlet weak var newMessageView: UIView!
 
-    
     private var matches = [Match]()
     private var users = [User]()
     private var user = User()
@@ -34,15 +30,7 @@ class InboxCollectionViewController: UIViewController {
         setupUI()
 //        setupBanner()
         testBanner()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        segmentControl.selectedSegmentIndex = 0
-        UserDefaults.standard.removeObject(forKey: CARDVC)
         fetchMatchUsers()
-        fetchUser()
-        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,24 +41,17 @@ class InboxCollectionViewController: UIViewController {
     // MARK: - Actions
     
     @objc func refreshCollectionView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
         fetchMatchUsers()
-    }
-    
-    @IBAction func segmentControled(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: break
-        case 1: performSegue(withIdentifier: "InboxVC", sender: nil)
-        case 2: performSegue(withIdentifier: "FeedVC", sender: nil)
-        default: break
-        }
     }
     
     // MARK: - Fetch
     
     private func fetchMatchUsers() {
         
-        indicator.startAnimating()
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
         matches.removeAll()
         users.removeAll()
         
@@ -86,6 +67,7 @@ class InboxCollectionViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.indicator.stopAnimating()
                 self.refresh.endRefreshing()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
         }
     }
@@ -97,19 +79,7 @@ class InboxCollectionViewController: UIViewController {
             completion()
         }
     }
-    
-    private func fetchUser() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            if self.user.newMessage == true {
-                self.newMessageView.isHidden = false
-            } else {
-                self.newMessageView.isHidden = true
-            }
-        }
-    }
-    
+
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -142,28 +112,13 @@ class InboxCollectionViewController: UIViewController {
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
         collectionView.refreshControl = refresh
-        newMessageView.layer.cornerRadius = 4
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
-        }
     }
 }
 
 // MARK: - CollectionView
 
-extension InboxCollectionViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MatchCollectionViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -194,7 +149,7 @@ extension InboxCollectionViewController:  UICollectionViewDataSource, UICollecti
     }
 }
 
-extension InboxCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+extension MatchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         

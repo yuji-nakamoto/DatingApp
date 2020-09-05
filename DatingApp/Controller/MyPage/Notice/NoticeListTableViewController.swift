@@ -68,7 +68,7 @@ extension NoticeListTableViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NoticeListTableViewCell
-        
+
         cell.configureCell(noticeArray[indexPath.row])
         return cell
     }

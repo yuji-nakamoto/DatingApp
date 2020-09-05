@@ -27,8 +27,11 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var newLabel: UILabel!
     @IBOutlet weak var miniNewLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var miniNumberLabel: UILabel!
     
     var searchCVC: SearchCollectionViewController?
+    var newLoginCVC: NewLoginCollectionViewController?
+    var newUserCVC: NewUserCollectionViewController?
     
     // MARK: - Helpers
     
@@ -58,7 +61,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         guard newLabel != nil else { return }
-        newLabel.layer.cornerRadius = 25 / 2
+        newLabel.layer.cornerRadius = 33 / 2
     }
     
     func configureMiniCell(_ user: User) {
@@ -127,7 +130,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setupBanner() {
+    func setupBanner1() {
         
         bannerView.layer.cornerRadius = 15
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
@@ -135,11 +138,43 @@ class SearchCollectionViewCell: UICollectionViewCell {
         bannerView.load(GADRequest())
     }
     
-    func testBanner() {
+    func testBanner1() {
         
         bannerView.layer.cornerRadius = 15
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = searchCVC
+        bannerView.load(GADRequest())
+    }
+    
+    func setupBanner2() {
+        
+        bannerView.layer.cornerRadius = 15
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+        bannerView.rootViewController = newLoginCVC
+        bannerView.load(GADRequest())
+    }
+    
+    func testBanner2() {
+        
+        bannerView.layer.cornerRadius = 15
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = newLoginCVC
+        bannerView.load(GADRequest())
+    }
+    
+    func setupBanner3() {
+        
+        bannerView.layer.cornerRadius = 15
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+        bannerView.rootViewController = newUserCVC
+        bannerView.load(GADRequest())
+    }
+    
+    func testBanner3() {
+        
+        bannerView.layer.cornerRadius = 15
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = newUserCVC
         bannerView.load(GADRequest())
     }
 }

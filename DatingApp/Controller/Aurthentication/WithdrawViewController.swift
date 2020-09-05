@@ -31,8 +31,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     private var hud = JGProgressHUD(style: .dark)
     fileprivate var currentNonce: String?
     private var user = User()
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 160, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 220, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 170, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
     
     // MARK: - Lifecycle
     

@@ -47,6 +47,7 @@ class SearchCollectionViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
         //  setupBanner()
         testBanner()
+        fetchUser()
         checkOneDayAndBadge()
         confifureLocationManager()
     }
@@ -54,7 +55,6 @@ class SearchCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configure()
-        fetchUser()
         UserDefaults.standard.removeObject(forKey: CARDVC)
     }
     
@@ -92,6 +92,7 @@ class SearchCollectionViewController: UIViewController {
     }
     
     @objc func refreshCollectionView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
         fetchUsers(user)
     }
     
@@ -101,7 +102,7 @@ class SearchCollectionViewController: UIViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            
+
             if self.user.selectGender == "男性" {
                 UserDefaults.standard.set(true, forKey: MALE)
             } else {
@@ -119,7 +120,9 @@ class SearchCollectionViewController: UIViewController {
     }
     
     private func fetchUsers(_ user: User) {
-        indicator.startAnimating()
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
         
         let residence = user.residenceSerch
         if residence == "こだわらない" {
@@ -128,6 +131,7 @@ class SearchCollectionViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.indicator.stopAnimating()
                 self.refresh.endRefreshing()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
         } else {
             User.fetchUserResidenceSort(user) { (users) in
@@ -135,6 +139,7 @@ class SearchCollectionViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.indicator.stopAnimating()
                 self.refresh.endRefreshing()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
         }
     }
@@ -163,8 +168,11 @@ class SearchCollectionViewController: UIViewController {
             }
             
             if self.user.oneDay == true {
-                updateUser(withValue: [POINTS: self.user.points + 1, ONEDAY: false])
+                updateUser(withValue: [POINTS: self.user.points + 1, ONEDAY: false, DAY: self.user.day + 0.5])
                 self.showLoginBunusView()
+                if self.user.day >= 14 {
+                    UserDefaults.standard.removeObject(forKey: NEWUSER)
+                }
             }
         }
     }
@@ -300,8 +308,8 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-            //            cell3.setupBanner()
-            cell3.testBanner()
+            //  cell3.setupBanner1()
+            cell3.testBanner1()
             cell3.searchCVC = self
             
             return cell3

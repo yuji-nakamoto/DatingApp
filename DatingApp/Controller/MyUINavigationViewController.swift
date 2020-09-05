@@ -32,7 +32,7 @@ class MyUINavigationViewController: UINavigationController {
             navigationItem.rightBarButtonItem?.tintColor = .white
             
         } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
-            navigationBar.barTintColor = UIColor(named: O_GREEN)
+            navigationBar.barTintColor = UIColor(named: O_BLUE)
             navigationBar.tintColor = UIColor.white
             navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navigationItem.leftBarButtonItem?.tintColor = .white

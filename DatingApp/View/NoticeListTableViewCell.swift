@@ -15,7 +15,7 @@ class NoticeListTableViewCell: UITableViewCell {
     @IBOutlet weak var genreLabel: UILabel!
     
     func configureCell(_ notice: Notice) {
-        
+
         titleLabel.text = notice.title
         
         if notice.genre == "重要" {

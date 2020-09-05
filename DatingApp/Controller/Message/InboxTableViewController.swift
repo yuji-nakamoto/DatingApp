@@ -16,7 +16,6 @@ class InboxTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var inboxArray = [Inbox]()
@@ -28,6 +27,7 @@ class InboxTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         fetchUser()
         fetchInbox()
         //  setupBanner()
@@ -37,21 +37,11 @@ class InboxTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupUI()
         tableView.reloadData()
     }
     
-    @IBAction func segmentControl(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: toInboxCVC()
-        case 1: break
-        case 2: performSegue(withIdentifier: "FeedVC", sender: nil)
-        default: break
-        }
-    }
-    
     @objc func refreshCollectionView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
         fetchInbox()
     }
     
@@ -59,7 +49,9 @@ class InboxTableViewController: UIViewController {
     
     private func fetchInbox() {
         
-        indicator.startAnimating()
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
         Message.fetchInbox { (inboxs) in
             inboxs.forEach { (inbox) in
                 let message = inbox.message
@@ -69,6 +61,7 @@ class InboxTableViewController: UIViewController {
             self.tableView.reloadData()
             self.indicator.stopAnimating()
             self.refresh.endRefreshing()
+            UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
     }
     
@@ -128,27 +121,6 @@ class InboxTableViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
-        }
-    }
-    
-    private func toInboxCVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let inboxCVC = storyboard.instantiateViewController(withIdentifier: "InboxCVC") as! InboxCollectionViewController
-        navigationController?.pushViewController(inboxCVC, animated: false)
     }
 }
 

@@ -12,6 +12,8 @@
 		6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */; };
 		6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */; };
 		6E74739F24F8254D00D14945 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74739E24F8254D00D14945 /* VideoViewController.swift */; };
+		6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */; };
+		6E7766B02503116200ABDCB9 /* NewLoginCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */; };
 		6E7C0FDE2500965E00E7A7B7 /* ParchmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */; };
 		6ECF471D2501A26B00735F14 /* NewUserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */; };
 		830AF02E24EEE8140043827B /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830AF02D24EEE8140043827B /* HelpViewController.swift */; };
@@ -87,7 +89,7 @@
 		834C32D424E3BD10003330B1 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D324E3BD10003330B1 /* Block.swift */; };
 		834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */; };
 		834FD55624E973D900E4BDCB /* EnterWantToGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */; };
-		835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */; };
+		835013FC24D40F79008D1170 /* MatchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* MatchCollectionViewController.swift */; };
 		835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FD24D41458008D1170 /* MessageTebleViewController.swift */; };
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
 		8350140224D49E94008D1170 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8350140124D49E94008D1170 /* Message.swift */; };
@@ -145,6 +147,8 @@
 		6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice4TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice5TableViewController.swift; sourceTree = "<group>"; };
 		6E74739E24F8254D00D14945 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentMessageViewController.swift; sourceTree = "<group>"; };
+		6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginCollectionViewController.swift; sourceTree = "<group>"; };
 		6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentViewController.swift; sourceTree = "<group>"; };
 		6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCollectionViewController.swift; sourceTree = "<group>"; };
 		708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,7 +225,7 @@
 		834C32D324E3BD10003330B1 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotVerifiedViewController.swift; sourceTree = "<group>"; };
 		834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWantToGenderViewController.swift; sourceTree = "<group>"; };
-		835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxCollectionViewController.swift; sourceTree = "<group>"; };
+		835013FB24D40F79008D1170 /* MatchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewController.swift; sourceTree = "<group>"; };
 		835013FD24D41458008D1170 /* MessageTebleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTebleViewController.swift; sourceTree = "<group>"; };
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		8350140124D49E94008D1170 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -531,6 +535,7 @@
 			children = (
 				6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */,
 				834912FD24C75B90002990F8 /* SearchCollectionViewController.swift */,
+				6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */,
 				6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */,
 				83AD3D2624F20DD400C02365 /* LikeNationwideViewController.swift */,
 				83AD3D2824F2161200C02365 /* LikeCountSortViewController.swift */,
@@ -553,7 +558,8 @@
 		83B6232424E2E1DF00363548 /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				835013FB24D40F79008D1170 /* InboxCollectionViewController.swift */,
+				6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */,
+				835013FB24D40F79008D1170 /* MatchCollectionViewController.swift */,
 				834966C324DC25E200C9B7DD /* InboxTableViewController.swift */,
 				8348826724EABAFE00054DF7 /* FeedTableViewController.swift */,
 				835013FD24D41458008D1170 /* MessageTebleViewController.swift */,
@@ -582,8 +588,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				191B922044445A9F822A2B82 /* [CP] Embed Pods Frameworks */,
-				93AD536B97219E40FA5A0106 /* [CP] Copy Pods Resources */,
+				BE09580BDFABA4E3F4F11AD6 /* [CP] Embed Pods Frameworks */,
+				96D24F26784A5015ADD47733 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -646,23 +652,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		191B922044445A9F822A2B82 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		28E854B72C9C509B1B1E6AC6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -685,7 +674,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		93AD536B97219E40FA5A0106 /* [CP] Copy Pods Resources */ = {
+		96D24F26784A5015ADD47733 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -700,6 +689,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE09580BDFABA4E3F4F11AD6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -762,7 +768,7 @@
 				8348E3FD24D10F90001D59C0 /* Footstep.swift in Sources */,
 				8350E4B324D9AE1500487DB9 /* PIckerKeyboard7.swift in Sources */,
 				8350E4B724D9AE2600487DB9 /* PIckerKeyboard9.swift in Sources */,
-				835013FC24D40F79008D1170 /* InboxCollectionViewController.swift in Sources */,
+				835013FC24D40F79008D1170 /* MatchCollectionViewController.swift in Sources */,
 				8348E76924E7CCEC0046C6DE /* TermsTableViewController.swift in Sources */,
 				83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */,
 				6E46F66D24FBA15C000B1DAC /* Notice2TableViewController.swift in Sources */,
@@ -800,12 +806,14 @@
 				834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */,
 				83AD3D2924F2161200C02365 /* LikeCountSortViewController.swift in Sources */,
 				83B6231724E23B4E00363548 /* PickerKeyboard17.swift in Sources */,
+				6E7766B02503116200ABDCB9 /* NewLoginCollectionViewController.swift in Sources */,
 				83B6232624E2E22900363548 /* BlockTableViewController.swift in Sources */,
 				8348B5E324D2A4A20000A187 /* Post.swift in Sources */,
 				834966D024DEE07B00C9B7DD /* CardViewController.swift in Sources */,
 				834959B724F4828800CD052E /* ItemTableViewController.swift in Sources */,
 				8348E3E924CE0E3A001D59C0 /* Like.swift in Sources */,
 				8350E4B124D9AE0C00487DB9 /* PIckerKeyboard6.swift in Sources */,
+				6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */,
 				8348E3F924D0EC09001D59C0 /* MyTabBarController.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
 				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,

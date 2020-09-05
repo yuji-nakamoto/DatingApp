@@ -21,7 +21,7 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     
     private var currentUser = User()
     public var hud = JGProgressHUD(style: .dark)
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 20, y: 250, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 20, y: 250, width: 400, height: 60))
     
     // MARK: - Lifecycle
     

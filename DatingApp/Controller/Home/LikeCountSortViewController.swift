@@ -28,16 +28,22 @@ class LikeCountSortViewController: UIViewController {
         super.viewDidLoad()
 //        setupBanner()
         testBanner()
+        fetchUser()
+        setupUI()
         addSnapshotListener()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
-        fetchUser()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+        if UserDefaults.standard.object(forKey: REFRESH) != nil {
+            fetchUsers(user)
+            UserDefaults.standard.removeObject(forKey: REFRESH)
+        }
     }
 
     @objc func refreshCollectionView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
         fetchUsers(self.user)
     }
     
@@ -54,7 +60,9 @@ class LikeCountSortViewController: UIViewController {
     
     private func fetchUsers(_ user: User) {
         
-        indicator.startAnimating()
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
         let residence = user.residenceSerch
         if residence == "こだわらない" {
             User.likeCountSortNationwide(user) { (users) in
@@ -62,6 +70,7 @@ class LikeCountSortViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.refresh.endRefreshing()
                 self.indicator.stopAnimating()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
         } else {
             User.likeCountSort(user) { (users) in
@@ -69,6 +78,7 @@ class LikeCountSortViewController: UIViewController {
                 self.collectionView.reloadData()
                 self.refresh.endRefreshing()
                 self.indicator.stopAnimating()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
         }
     }
@@ -154,6 +164,95 @@ extension LikeCountSortViewController: UICollectionViewDataSource, UICollectionV
             cell2.layer.shadowRadius = 4
             cell2.layer.masksToBounds = false
             cell2.configureMiniCell(users[indexPath.row])
+            
+            if indexPath.row == 0 {
+                cell2.miniNumberLabel.text = "1"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_GREEN)
+            } else if indexPath.row == 1 {
+                cell2.miniNumberLabel.text = "2"
+                cell2.miniNumberLabel.textColor = .systemYellow
+            } else if indexPath.row == 2 {
+                cell2.miniNumberLabel.text = "3"
+                cell2.miniNumberLabel.textColor = .systemPink
+            } else if indexPath.row == 3 {
+                cell2.miniNumberLabel.text = "4"
+                cell2.miniNumberLabel.textColor = .systemBlue
+            } else if indexPath.row == 4 {
+                cell2.miniNumberLabel.text = "5"
+                cell2.miniNumberLabel.textColor = .systemOrange
+            } else if indexPath.row == 5 {
+                cell2.miniNumberLabel.text = "6"
+                cell2.miniNumberLabel.textColor = .systemTeal
+            } else if indexPath.row == 6 {
+                cell2.miniNumberLabel.text = "7"
+                cell2.miniNumberLabel.textColor = .systemPurple
+            } else if indexPath.row == 7 {
+                cell2.miniNumberLabel.text = "8"
+                cell2.miniNumberLabel.textColor = .systemGreen
+            } else if indexPath.row == 8 {
+                cell2.miniNumberLabel.text = "9"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_PINK)
+            } else if indexPath.row == 9 {
+                cell2.miniNumberLabel.text = "10"
+                cell2.miniNumberLabel.textColor = .systemFill
+            } else if indexPath.row == 10 {
+                cell2.miniNumberLabel.text = "11"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 11 {
+                cell2.miniNumberLabel.text = "12"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 12 {
+                cell2.miniNumberLabel.text = "13"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 13 {
+                cell2.miniNumberLabel.text = "14"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 14 {
+                cell2.miniNumberLabel.text = "15"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 15 {
+                cell2.miniNumberLabel.text = "16"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 16 {
+                cell2.miniNumberLabel.text = "17"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 17 {
+                cell2.miniNumberLabel.text = "18"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 18 {
+                cell2.miniNumberLabel.text = "19"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 20 {
+                cell2.miniNumberLabel.text = "21"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 21 {
+                cell2.miniNumberLabel.text = "22"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 22 {
+                cell2.miniNumberLabel.text = "23"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 23 {
+                cell2.miniNumberLabel.text = "24"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 24 {
+                cell2.miniNumberLabel.text = "25"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 25 {
+                cell2.miniNumberLabel.text = "26"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 26 {
+                cell2.miniNumberLabel.text = "27"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 27 {
+                cell2.miniNumberLabel.text = "28"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 28 {
+                cell2.miniNumberLabel.text = "29"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            } else if indexPath.row == 29 {
+                cell2.miniNumberLabel.text = "30"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
+            }
             return cell2
         }
         

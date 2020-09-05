@@ -16,9 +16,7 @@ class FeedTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    @IBOutlet weak var newMessageView: UIView!
     
     private var comments = [Comment]()
     private var users = [User]()
@@ -29,6 +27,7 @@ class FeedTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         fetchMatchedUser()
 //        setupBanner()
         testBanner()
@@ -36,21 +35,11 @@ class FeedTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupUI()
-        fetchUser()
+        tableView.reloadData()
     }
-    
-    @IBAction func segmentControl(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: toInboxCVC()
-        case 1: toInboxVC()
-        case 2: break
-        default: break
-        }
-    }
-    
+
     @objc func refreshCollectionView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
         fetchMatchedUser()
     }
     
@@ -64,21 +53,11 @@ class FeedTableViewController: UIViewController {
         }
     }
     
-    private func fetchUser() {
-        
-        User.fetchUser(User.currentUserId()) { (user) in
-            self.user = user
-            if self.user.newMessage == true {
-                self.newMessageView.isHidden = false
-            } else {
-                self.newMessageView.isHidden = true
-            }
-        }
-    }
-    
     private func fetchMatchedUser() {
         
-        indicator.startAnimating()
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
         users.removeAll()
         comments.removeAll()
         
@@ -86,6 +65,7 @@ class FeedTableViewController: UIViewController {
             if match.uid == "" {
                 self.refresh.endRefreshing()
                 self.indicator.stopAnimating()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
                 return
             }
             User.fetchUser(match.uid) { (user) in
@@ -95,6 +75,7 @@ class FeedTableViewController: UIViewController {
                     if comment.uid == "" {
                         self.refresh.endRefreshing()
                         self.indicator.stopAnimating()
+                        UserDefaults.standard.removeObject(forKey: REFRESH_ON)
                         return
                     }
                     self.fetchUsers(uid) {
@@ -102,6 +83,7 @@ class FeedTableViewController: UIViewController {
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                         self.indicator.stopAnimating()
+                        UserDefaults.standard.removeObject(forKey: REFRESH_ON)
                     }
                 }
             }
@@ -131,22 +113,7 @@ class FeedTableViewController: UIViewController {
         tableView.refreshControl = refresh
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        newMessageView.layer.cornerRadius = 4
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -161,20 +128,6 @@ class FeedTableViewController: UIViewController {
             let toUserId = sender as! String
             detailVC.toUserId = toUserId
         }
-    }
-    
-    private func toInboxVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let inboxVC = storyboard.instantiateViewController(withIdentifier: "InboxVC") as! InboxTableViewController
-        navigationController?.pushViewController(inboxVC, animated: false)
-    }
-    
-    private func toInboxCVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let inboxCVC = storyboard.instantiateViewController(withIdentifier: "InboxCVC") as! InboxCollectionViewController
-        navigationController?.pushViewController(inboxCVC, animated: false)
     }
 }
 

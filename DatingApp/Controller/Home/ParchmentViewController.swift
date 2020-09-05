@@ -22,16 +22,18 @@ class ParchmentViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let searchVC = storyboard.instantiateViewController(withIdentifier: "SearchVC")
+        let newLoginVC = storyboard.instantiateViewController(withIdentifier: "NewLoginVC")
         let newUserVC = storyboard.instantiateViewController(withIdentifier: "NewUserVC")
         let likeNationVC = storyboard.instantiateViewController(withIdentifier: "LikeNationVC")
         let likeCountVC = storyboard.instantiateViewController(withIdentifier: "LikeCountVC")
         
         searchVC.title = "さがす"
+        newLoginVC.title = "ログイン順"
         newUserVC.title = "新規"
         likeNationVC.title = "全国いいね"
         likeCountVC.title = "地域いいね"
         
-        let pagingVC = PagingViewController(viewControllers: [searchVC, newUserVC, likeNationVC, likeCountVC])
+        let pagingVC = PagingViewController(viewControllers: [searchVC, newLoginVC, newUserVC, likeNationVC, likeCountVC])
         addChild(pagingVC)
         view.addSubview(pagingVC.view)
         pagingVC.didMove(toParent: self)
@@ -47,7 +49,7 @@ class ParchmentViewController: UIViewController {
         pagingVC.font = UIFont.systemFont(ofSize: 11, weight: .medium)
         pagingVC.selectedFont = UIFont.systemFont(ofSize: 13, weight: .medium)
         pagingVC.selectedTextColor = .black
-        pagingVC.indicatorColor = UIColor(named: O_GREEN)!
+        pagingVC.indicatorColor = UIColor(named: O_RED)!
         pagingVC.menuItemSize = .fixed(width: 110, height: 40)
         pagingVC.menuHorizontalAlignment = .center
     }
