@@ -20,6 +20,10 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     @IBOutlet weak var pointLabel: UILabel!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var pointButton: UIButton!
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var hintView: UIView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
     
     private var user = User()
     private var hud = JGProgressHUD(style: .dark)
@@ -32,18 +36,23 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         super.viewDidLoad()
         setupUI()
         fetchUser()
+        showHintView()
         resetPointButton()
         
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
-          testBanner()
-          interstitial = testIntersitial()
+        //  setupBanner()
+        //  interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        removeEffectView()
     }
     
     @IBAction func pointButtonPressed(_ sender: Any) {
@@ -76,6 +85,30 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     // MARK: - Helpers
+    
+    private func showHintView() {
+        
+        if UserDefaults.standard.object(forKey: HINT_END2) == nil {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    
+                    self.hintView.alpha = 1
+                    self.backView.alpha = 0.9
+                }, completion: nil)
+            }
+        }
+    }
+    
+    private func removeEffectView() {
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            self.hintView.alpha = 0
+            self.backView.alpha = 0
+            UserDefaults.standard.set(true, forKey: HINT_END2)
+        })
+    }
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
@@ -111,14 +144,14 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     private func resetPointButton() {
-                
+        
         if UserDefaults.standard.object(forKey: POINTBUTTON) != nil {
             self.pointButton.isEnabled = false
         }
         
         User.fetchUserAddSnapshotListener { (user) in
             self.user = user
-                        
+            
             let now = Timestamp()
             let nowDate = now.dateValue()
             let pointHalfLate = user.pointHalfLate.dateValue()
@@ -135,6 +168,12 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         navigationItem.title = "ショップ"
         pointButton.layer.cornerRadius = 23 / 2
         tableView.tableFooterView = UIView()
+        hintView.alpha = 0
+        backView.alpha = 0
+        hintView.layer.cornerRadius = 15
+        closeButton.layer.cornerRadius = 40 / 2
+        descriptionLabel.text = "ログインボーナス等で獲得したポイントをアイテムと交換しよう！\n\nアイテムを活用するとマッチしやすくなるかも！？"
+        
         if UserDefaults.standard.object(forKey: PINK) != nil {
             navigationItem.leftBarButtonItem?.tintColor = .white
         } else if UserDefaults.standard.object(forKey: GREEN) != nil {
@@ -147,7 +186,7 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     private func setupBanner() {
-
+        
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
@@ -274,28 +313,28 @@ extension ShopTableViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
-             
+            
             alert.addAction(exchange)
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)
-      
+            
         } else if indexPath.row == 4 {
             
-           let alert: UIAlertController = UIAlertController(title: "仕切り直し", message: "3ポイントで交換できます。交換しますか？", preferredStyle: .alert)
-           let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
-               
-               if self.user.points <= 2 {
-                   self.hudError()
-               } else {
-                   self.hudSuccess()
-                   updateUser(withValue: [POINTS: self.user.points - 3, ITEM5: self.user.item5 + 1])
-               }
-           }
-           let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
-
-           alert.addAction(exchange)
-           alert.addAction(cancel)
-           self.present(alert,animated: true,completion: nil)
+            let alert: UIAlertController = UIAlertController(title: "仕切り直し", message: "3ポイントで交換できます。交換しますか？", preferredStyle: .alert)
+            let exchange: UIAlertAction = UIAlertAction(title: "交換する", style: UIAlertAction.Style.default) { (alert) in
+                
+                if self.user.points <= 2 {
+                    self.hudError()
+                } else {
+                    self.hudSuccess()
+                    updateUser(withValue: [POINTS: self.user.points - 3, ITEM5: self.user.item5 + 1])
+                }
+            }
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+            
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
             
         } else if indexPath.row == 5 {
             

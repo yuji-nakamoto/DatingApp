@@ -61,7 +61,13 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         guard newLabel != nil else { return }
-        newLabel.layer.cornerRadius = 33 / 2
+        if user.newUser == true {
+            newLabel.layer.cornerRadius = 33 / 2
+            newLabel.isHidden = false
+        } else {
+            newLabel.layer.cornerRadius = 33 / 2
+            newLabel.isHidden = true
+        }
     }
     
     func configureMiniCell(_ user: User) {
@@ -87,7 +93,13 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         guard miniNewLabel != nil else { return }
-        miniNewLabel.layer.cornerRadius = 18 / 2
+        if user.newUser == true {
+            miniNewLabel.isHidden = false
+            miniNewLabel.layer.cornerRadius = 18 / 2
+        } else {
+            miniNewLabel.isHidden = true
+            miniNewLabel.layer.cornerRadius = 18 / 2
+        }
     }
     
     func getLikeCount(ref: DocumentReference, _ user: User) {

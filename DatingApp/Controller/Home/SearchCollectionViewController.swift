@@ -171,7 +171,8 @@ class SearchCollectionViewController: UIViewController {
                 updateUser(withValue: [POINTS: self.user.points + 1, ONEDAY: false, DAY: self.user.day + 0.5])
                 self.showLoginBunusView()
                 if self.user.day >= 14 {
-                    UserDefaults.standard.removeObject(forKey: NEWUSER)
+                    UserDefaults.standard.removeObject(forKey: NEW_USER)
+                    updateUser(withValue: [NEWUSER: false])
                 }
             }
         }

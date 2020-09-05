@@ -76,6 +76,7 @@ class EnterResidenceMeetController: UIViewController {
                     POINTS: 0,
                     USEDITEM2: 0,
                     ONEDAY: true,
+                    NEWUSER: true,
                     CREATED_AT: date,
                     ONEDAYLATE: oneDayLate,
                     LASTCHANGE: Timestamp(date: Date())] as [String : Any]
@@ -157,7 +158,7 @@ class EnterResidenceMeetController: UIViewController {
             UserDefaults.standard.set(true, forKey: MATCH_ON)
             UserDefaults.standard.set(true, forKey: GIFT_ON)
             UserDefaults.standard.set(true, forKey: WHITE)
-            UserDefaults.standard.set(true, forKey: NEWUSER)
+            UserDefaults.standard.set(true, forKey: NEW_USER)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
             self.present(toTabBerVC, animated: true, completion: nil)

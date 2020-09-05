@@ -61,8 +61,8 @@ class MyPageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        typeNewLabel.layer.cornerRadius = 15 / 2
-        likeNewLabel.layer.cornerRadius = 15 / 2
+        typeNewLabel.layer.cornerRadius = 25 / 2
+        likeNewLabel.layer.cornerRadius = 25 / 2
         redmark.layer.cornerRadius = 4
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5

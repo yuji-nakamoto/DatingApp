@@ -125,6 +125,7 @@ public let ISGOOGLE = "isGoogle"
 public let SEARCHMINI = "searchMini"
 public let SELECTGENDER = "selectGender"
 public let DAY = "day"
+public let NEWUSER = "newUser"
 
 // MARK: - Counter
 
@@ -215,6 +216,7 @@ public let APPLE = "apple"
 public let DELETE = "delete"
 public let ALL = "all"
 public let HINT_END = "hint_end"
+public let HINT_END2 = "hint_end2"
 public let TUTORIAL_END = "tutorial_end"
 public let MATCHING = "matching"
 public let SEARCH_MINI_ON = "search_mini_on"
@@ -226,7 +228,7 @@ public let NOTICE3 = "notice3"
 public let NOTICE4 = "notice4"
 public let NOTICE5 = "notice5"
 public let VIEW_ON = "view_on"
-public let NEWUSER = "newUser"
+public let NEW_USER = "new_User"
 public let REFRESH_ON = "refresh_on"
 
 // MARK: - Notification

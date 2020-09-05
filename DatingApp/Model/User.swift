@@ -93,6 +93,7 @@ class User {
     var searchMini: Bool!
     var selectGender: String!
     var day: Double!
+    var newUser: Bool!
     
     init() {
     }
@@ -180,6 +181,7 @@ class User {
         searchMini = dict[SEARCHMINI] as? Bool ?? false
         selectGender = dict[SELECTGENDER] as? String ?? ""
         day = dict[DAY] as? Double ?? 0
+        newUser = dict[NEWUSER] as? Bool ?? false
     }
     
     // MARK: - Return user
@@ -625,7 +627,7 @@ class User {
                         snapshot?.documents.forEach({ (document) in
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
-                            guard UserDefaults.standard.object(forKey: NEWUSER) != nil else { return }
+                            guard UserDefaults.standard.object(forKey: NEW_USER) != nil else { return }
                             guard user.uid != User.currentUserId() else { return }
                             guard user.gender == "男性" else { return }
                             guard user.age <= currentUser.maxAge else { return }
@@ -651,7 +653,7 @@ class User {
                         snapshot?.documents.forEach({ (document) in
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
-                            guard UserDefaults.standard.object(forKey: NEWUSER) != nil else { return }
+                            guard UserDefaults.standard.object(forKey: NEW_USER) != nil else { return }
                             guard user.uid != User.currentUserId() else { return }
                             guard user.gender == "女性" else { return }
                             guard user.age <= currentUser.maxAge else { return }
@@ -682,7 +684,7 @@ class User {
                         snapshot?.documents.forEach({ (document) in
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
-                            guard UserDefaults.standard.object(forKey: NEWUSER) != nil else { return }
+                            guard UserDefaults.standard.object(forKey: NEW_USER) != nil else { return }
                             guard user.uid != User.currentUserId() else { return }
                             guard user.age <= currentUser.maxAge else { return }
                             guard user.age >= currentUser.minAge else { return }
@@ -707,7 +709,7 @@ class User {
                         snapshot?.documents.forEach({ (document) in
                             let dict = document.data()
                             let user = User(dict: dict as [String: Any])
-                            guard UserDefaults.standard.object(forKey: NEWUSER) != nil else { return }
+                            guard UserDefaults.standard.object(forKey: NEW_USER) != nil else { return }
                             guard user.uid != User.currentUserId() else { return }
                             guard user.age <= currentUser.maxAge else { return }
                             guard user.age >= currentUser.minAge else { return }
