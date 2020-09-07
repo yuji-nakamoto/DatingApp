@@ -39,10 +39,10 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         showHintView()
         resetPointButton()
         
-//          setupBanner()
-//          interstitial = createAndLoadIntersitial()
-        testBanner()
-        interstitial = testIntersitial()
+          setupBanner()
+          interstitial = createAndLoadIntersitial()
+//        testBanner()
+//        interstitial = testIntersitial()
     }
     
     // MARK: - Actions

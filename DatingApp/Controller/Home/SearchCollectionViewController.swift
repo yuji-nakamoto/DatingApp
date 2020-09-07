@@ -45,8 +45,8 @@ class SearchCollectionViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-//          setupBanner()
-        testBanner()
+          setupBanner()
+//        testBanner()
         fetchUser()
         checkOneDayAndBadge()
         confifureLocationManager()
@@ -308,8 +308,8 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-//              cell3.setupBanner1()
-            cell3.testBanner1()
+              cell3.setupBanner1()
+//            cell3.testBanner1()
             cell3.searchCVC = self
             
             return cell3

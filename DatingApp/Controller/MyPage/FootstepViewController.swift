@@ -29,13 +29,8 @@ class FootstepTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchtFootstepedUsers()
-//        setupBanner()
-        testBanner()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
+        setupBanner()
+//        testBanner()
     }
     
     // MARK: - Actions

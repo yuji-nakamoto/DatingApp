@@ -58,10 +58,10 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         handleTextField()
         fetchIsRead()
         timerMethod()
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
-        testBanner()
-        interstitial = testIntersitial()
+        setupBanner()
+        interstitial = createAndLoadIntersitial()
+//        testBanner()
+//        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -28,16 +28,12 @@ class DidLikeTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupUI()
+        setupBanner()
+//        testBanner()
         fetchLikedUsers()
         updateUser(withValue: [NEWLIKE: false])
         UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
     }
     
     // MARK: - Actions

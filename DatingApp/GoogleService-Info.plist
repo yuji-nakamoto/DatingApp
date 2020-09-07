@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>491236392277-3po87hp3kare8msdpec3suu7ihhog3r9.apps.googleusercontent.com</string>
+	<string>491236392277-vvju8m0c0reqkie5623t7vjantmo8q0s.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.491236392277-3po87hp3kare8msdpec3suu7ihhog3r9</string>
+	<string>com.googleusercontent.apps.491236392277-vvju8m0c0reqkie5623t7vjantmo8q0s</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAi9kVmCMseqz6T8WGFPaHyLwQzmi14HRY</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,23 +13,23 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>yncompany.DatingApp</string>
+	<string>ynstore.furima</string>
 	<key>PROJECT_ID</key>
 	<string>datingapp-d0f98</string>
 	<key>STORAGE_BUCKET</key>
 	<string>datingapp-d0f98.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:491236392277:ios:52d0baa323351e17a703dc</string>
+	<string>1:491236392277:ios:c9dfd3e368af8114a703dc</string>
 	<key>DATABASE_URL</key>
 	<string>https://datingapp-d0f98.firebaseio.com</string>
 </dict>

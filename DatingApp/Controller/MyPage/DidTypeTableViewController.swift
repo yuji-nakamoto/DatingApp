@@ -28,23 +28,17 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         fetchTypedUsers()
         
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
-        testBanner()
-        interstitial = testIntersitial()
+        setupBanner()
+        interstitial = createAndLoadIntersitial()
+//        testBanner()
+//        interstitial = testIntersitial()
         updateUser(withValue: [NEWTYPE: false])
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
-    }
-    
+
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {

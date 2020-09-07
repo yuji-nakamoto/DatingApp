@@ -27,8 +27,8 @@ class NewLoginCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSnapshotListener()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         fetchUser()
         setupUI()
     }
@@ -162,8 +162,8 @@ extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollec
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-//              cell3.setupBanner2()
-            cell3.testBanner2()
+              cell3.setupBanner2()
+//            cell3.testBanner2()
             cell3.newLoginCVC = self
             
             return cell3

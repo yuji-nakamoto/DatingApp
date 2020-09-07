@@ -71,8 +71,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         setupUI()
         confifureLocationManager()
-//        interstitial = createAndLoadIntersitial()
-        interstitial = testIntersitial()
+        interstitial = createAndLoadIntersitial()
+//        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -261,6 +261,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         Footstep.saveIsFootstepUser(toUserId: self.toUserId)
         if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
+            print("aaaa")
             Footstep.saveFootstepedUser(toUserId: self.toUserId)
         }
         

@@ -27,8 +27,8 @@ class NewUserCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSnapshotListener()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         fetchUser()
         setupUI()
     }
@@ -162,8 +162,8 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
             
-//              cell3.setupBanner3()
-            cell3.testBanner3()
+              cell3.setupBanner3()
+//            cell3.testBanner3()
             cell3.newUserCVC = self
             
             return cell3

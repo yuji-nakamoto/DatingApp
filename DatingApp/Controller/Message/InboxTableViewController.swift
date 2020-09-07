@@ -29,8 +29,8 @@ class InboxTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchUser()
-//          setupBanner()
-        testBanner()
+          setupBanner()
+//        testBanner()
         updateUser(withValue: [NEWMESSAGE: false])
     }
     

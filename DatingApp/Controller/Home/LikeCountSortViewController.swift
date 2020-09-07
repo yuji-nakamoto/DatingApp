@@ -27,8 +27,8 @@ class LikeCountSortViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBanner()
-        testBanner()
-//        fetchUser()
+//        testBanner()
+        fetchUser()
         setupUI()
         addSnapshotListener()
     }
