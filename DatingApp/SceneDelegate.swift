@@ -40,13 +40,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        User.isOnline(online: "online")
+        User.isOnline(online: "online") {}
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        User.isOnline(online: "offline")
+        User.isOnline(online: "offline") {}
 //        updateUser(withValue: [CALLED: false])
 
         // Called when the scene will move from an active state to an inactive state.
@@ -59,7 +59,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        User.isOnline(online: "offline")
+        User.isOnline(online: "offline") {}
 //        updateUser(withValue: [CALLED: false])
 
         // Called as the scene transitions from the foreground to the background.

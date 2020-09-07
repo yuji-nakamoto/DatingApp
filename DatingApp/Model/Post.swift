@@ -17,6 +17,8 @@ class Post {
     var genre: String!
     var timestamp: Timestamp!
     var date: Double!
+    var oneDay: Bool!
+    var oneDayLate: Timestamp!
     
     init() {
     }
@@ -29,6 +31,8 @@ class Post {
         genre = dict[GENRE] as? String ?? ""
         timestamp = dict[TIMESTAMP] as? Timestamp ?? Timestamp(date: Date())
         date = dict[DATE] as? Double ?? 0
+        oneDay = dict[ONEDAY] as? Bool ?? false
+        oneDayLate = dict[ONEDAYLATE] as? Timestamp ?? Timestamp(date: Date())
     }
     
     class func fetchPosts(_ residenceSearch: String, completion: @escaping(_ post: Post) -> Void) {

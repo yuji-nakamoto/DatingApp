@@ -78,24 +78,6 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
         backView.layer.borderColor = UIColor.systemGray.cgColor
         tableView.separatorStyle = .none
         textView.delegate = self
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            saveButton.backgroundColor = UIColor(named: O_PINK)
-            saveButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            saveButton.backgroundColor = UIColor(named: O_GREEN)
-            saveButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            saveButton.backgroundColor = UIColor(named: O_GREEN)
-            saveButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            saveButton.backgroundColor = UIColor(named: O_DARK)
-            saveButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
     
     func textViewDidChange(_ textView: UITextView) {

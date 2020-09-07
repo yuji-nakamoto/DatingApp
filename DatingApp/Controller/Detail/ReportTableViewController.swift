@@ -110,20 +110,6 @@ class ReportTableViewController: UITableViewController {
         navigationItem.title = "通報"
         profileImageView.layer.cornerRadius = 80 / 2
         sendButton.layer.cornerRadius = 15
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            sendButton.backgroundColor = UIColor(named: O_PINK)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            sendButton.backgroundColor = UIColor(named: O_DARK)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-        }        
     }
     
     private func setupUserInfo(_ user: User, _ currentUser: User) {

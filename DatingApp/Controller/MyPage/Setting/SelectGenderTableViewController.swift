@@ -35,14 +35,6 @@ class SelectGenderTableViewController: UITableViewController {
             checkMark2.isHidden = true
             checkMark1.isHidden = false
         }
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

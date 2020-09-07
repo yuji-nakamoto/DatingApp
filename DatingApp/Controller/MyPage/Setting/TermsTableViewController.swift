@@ -18,8 +18,6 @@ class TermsTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
         navigationItem.title = "利用規約"
         tableView.delegate = self
         tableView.dataSource = self
@@ -29,19 +27,6 @@ class TermsTableViewController: UIViewController {
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    private func setupUI() {
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
 }
 

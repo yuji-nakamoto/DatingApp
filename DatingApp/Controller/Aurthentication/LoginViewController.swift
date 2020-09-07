@@ -68,8 +68,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.hud.show(in: self.view)
                     self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                     self.hud.dismiss(afterDelay: 2.0)
-                    User.isOnline(online: "online")
-                    UserDefaults.standard.set(true, forKey: WHITE)
+                    User.isOnline(online: "online") {}
                     self.toTabBerVC()
                 } else {
                     generator.notificationOccurred(.error)

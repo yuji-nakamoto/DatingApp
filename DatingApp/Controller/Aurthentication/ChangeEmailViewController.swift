@@ -127,31 +127,6 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            doneButton.backgroundColor = UIColor(named: O_PINK)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_PINK)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_PINK), for: .normal)
-            
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            doneButton.backgroundColor = UIColor(named: O_GREEN)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            doneButton.backgroundColor = UIColor(named: O_GREEN)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            doneButton.backgroundColor = UIColor(named: O_DARK)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_DARK)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_DARK), for: .normal)
-        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

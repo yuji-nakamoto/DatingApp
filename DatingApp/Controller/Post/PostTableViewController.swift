@@ -180,15 +180,6 @@ class PostTableViewController: UIViewController {
         plusButton.layer.shadowColor = UIColor.black.cgColor
         plusButton.layer.shadowOpacity = 0.3
         plusButton.layer.shadowRadius = 4
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            plusButton.tintColor = UIColor(named: O_PINK)
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
-            plusButton.tintColor = UIColor(named: O_GREEN)
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            plusButton.tintColor = UIColor(named: O_GREEN)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            plusButton.tintColor = UIColor(named: O_DARK)
-        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

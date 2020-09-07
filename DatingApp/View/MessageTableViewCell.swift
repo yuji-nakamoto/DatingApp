@@ -44,22 +44,6 @@ class MessageTableViewCell: UITableViewCell {
         
         if User.currentUserId() == message!.from {
             
-            if UserDefaults.standard.object(forKey: PINK) != nil {
-                bubleView.backgroundColor = UIColor(named: O_PINK)
-                messageLabel.textColor = UIColor.white
-
-            } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-                bubleView.backgroundColor = UIColor(named: O_GREEN)
-                messageLabel.textColor = UIColor.white
-
-            } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-                bubleView.backgroundColor = UIColor(named: O_GREEN)
-                
-            } else if UserDefaults.standard.object(forKey: DARK) != nil {
-                bubleView.backgroundColor = UIColor(named: O_DARK)
-                messageLabel.textColor = UIColor.white
-            }
-            
             if UserDefaults.standard.object(forKey: ISREAD_ON) != nil {
                 readLabel.isHidden = false
             } else {

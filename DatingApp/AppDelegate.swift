@@ -19,15 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var skywayAPIKey:String? = "94f937ed-cb17-4d76-9157-113d21f51991"
     var skywayDomain:String? = "furima.io"
-    var user = User()
     let gcmMessageIDKey = "gcm.message_id"
+    var user = User()
+    var post = Post()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         fetchUser()
-        getLoginBonus()
+        timeMethod()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         
@@ -66,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func getLoginBonus() {
+    private func timeMethod() {
         guard Auth.auth().currentUser != nil else { return }
         
         User.fetchUserAddSnapshotListener { (user) in
@@ -82,6 +83,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let day = Date()
                 let oneDayLate = Calendar.current.date(byAdding: .hour, value: 12, to: day)!
                 updateUser(withValue: [ONEDAY: true, ONEDAYLATE: oneDayLate])
+            }
+            
+            Post.fetchMyPost { (post) in
+                self.post = post
+                if self.post.uid == "" { return }
+                let postOneDayLate = self.post.oneDayLate.dateValue()
+                if nowDate >= postOneDayLate {
+                    COLLECTION_POSTS.document(User.currentUserId()).delete()
+                }
             }
         }
     }

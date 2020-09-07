@@ -492,39 +492,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            sendButton.backgroundColor = UIColor(named: O_PINK)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navBar.backgroundColor = UIColor(named: O_PINK)
-            videoButton.tintColor = .white
-            nameLabel.textColor = .white
-            backButton.tintColor = .white
-            
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navBar.backgroundColor = UIColor(named: O_GREEN)
-            videoButton.tintColor = .white
-            nameLabel.textColor = .white
-            backButton.tintColor = .white
-            
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navBar.backgroundColor = .white
-            videoButton.tintColor = UIColor(named: O_BLACK)
-            nameLabel.textColor = UIColor(named: O_BLACK)
-            backButton.tintColor = UIColor(named: O_BLACK)
-            
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            sendButton.backgroundColor = UIColor(named: O_DARK)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navBar.backgroundColor = UIColor(named: O_DARK)
-            videoButton.tintColor = .white
-            nameLabel.textColor = .white
-            backButton.tintColor = .white
-        }
+
     }
     
     private func scrollToBottom() {

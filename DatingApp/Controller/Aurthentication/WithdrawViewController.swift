@@ -31,8 +31,8 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     private var hud = JGProgressHUD(style: .dark)
     fileprivate var currentNonce: String?
     private var user = User()
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 170, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 180, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 240, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -262,6 +262,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
         appleButton.layer.cornerRadius = 44 / 2
         googleButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
+        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -269,31 +270,6 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.delegate = self
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            doneButton.backgroundColor = UIColor(named: O_PINK)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_PINK)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_PINK), for: .normal)
-            
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            doneButton.backgroundColor = UIColor(named: O_GREEN)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            doneButton.backgroundColor = UIColor(named: O_GREEN)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            doneButton.backgroundColor = UIColor(named: O_DARK)
-            doneButton.setTitleColor(UIColor.white, for: .normal)
-            backButton.layer.borderColor = UIColor(named: O_DARK)?.cgColor
-            backButton.setTitleColor(UIColor(named: O_DARK), for: .normal)
-        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

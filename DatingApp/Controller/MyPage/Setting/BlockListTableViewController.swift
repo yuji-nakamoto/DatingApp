@@ -98,13 +98,6 @@ class BlockListTableViewController: UIViewController {
         navigationItem.title = "ブロック"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
         navigationItem.rightBarButtonItem = editButtonItem
         self.editButtonItem.title = "取り消す"
     }

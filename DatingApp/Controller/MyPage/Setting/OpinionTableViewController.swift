@@ -89,24 +89,6 @@ class OpinionTableViewController: UITableViewController {
     private func setupUI() {
         navigationItem.title = "ご意見・ご要望・改善等"
         sendButton.layer.cornerRadius = 15
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            sendButton.backgroundColor = UIColor(named: O_PINK)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            sendButton.backgroundColor = UIColor(named: O_GREEN)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            sendButton.backgroundColor = UIColor(named: O_DARK)
-            sendButton.setTitleColor(UIColor.white, for: .normal)
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
     
     private func setupUserInfo(_ currentUser: User) {

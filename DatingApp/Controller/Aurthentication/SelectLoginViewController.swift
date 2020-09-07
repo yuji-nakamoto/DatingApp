@@ -191,8 +191,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             
             if UserDefaults.standard.object(forKey: GOOGLE) != nil && self.user.isGoogle == true {
                 
-                UserDefaults.standard.set(true, forKey: WHITE)
-                User.isOnline(online: "online")
+                User.isOnline(online: "online") {}
                 self.toTabBarVC()
             }
             self.indicator.stopAnimating()
@@ -242,7 +241,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     private func setupUI() {
         
-        descriptionLabel.text = "フリーでマッチしちゃおう！\n完全無料のマッチングアプリ、\nフリマへようこそ！"
+        descriptionLabel.text = "フリーでマッチしちゃおう！\n完全無料のマッチングアプリ\nフリマへようこそ！"
         appleButton.layer.cornerRadius = 44 / 2
         googleButton.layer.cornerRadius = 44 / 2
         mailButton.layer.cornerRadius = 44 / 2
@@ -363,9 +362,7 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
                         }
                         
                         if UserDefaults.standard.object(forKey: APPLE) != nil && self.user.isApple == true {
-                            User.isOnline(online: "online")
-                            UserDefaults.standard.set(true, forKey: WHITE)
-
+                            User.isOnline(online: "online") {}
                             self.toTabBarVC()
                         }
                         self.indicator.stopAnimating()

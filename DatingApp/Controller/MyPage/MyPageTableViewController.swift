@@ -167,19 +167,6 @@ class MyPageTableViewController: UIViewController {
         hintView.layer.cornerRadius = 15
         closeButton.layer.cornerRadius = 40 / 2
         hintLabel.text = "マイページからプロフの編集やいいね！等の履歴の確認ができます。\n\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            backView.backgroundColor = UIColor(named: O_PINK)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            backView.backgroundColor = UIColor(named: O_GREEN)
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backView.backgroundColor = UIColor.white
-            backView.alpha = 0.85
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            backView.backgroundColor = UIColor(named: O_DARK)
-            backView.alpha = 0.85
-        }
     }
     
     private func setupBanner() {

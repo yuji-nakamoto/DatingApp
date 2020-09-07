@@ -14,13 +14,15 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     // MARK: - Lifecycle
     
     @IBOutlet weak var logoLabel: UILabel!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var iconLeft: UIImageView!
+    @IBOutlet weak var iconRight: UIImageView!
+    
     private var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupColor()
+        animationView()
         autoLogin()
 //        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
@@ -29,7 +31,6 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     // MARK: - Helpers
     
     private func autoLogin() {
-        indicator.startAnimating()
         if UserDefaults.standard.object(forKey: RCOMPLETION) != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 if self.interstitial.isReady {
@@ -41,19 +42,24 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
             }
             return
         }
-        indicator.stopAnimating()
         toSelectLoginVC()
     }
     
-    private func setupColor() {
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            logoLabel.textColor = UIColor(named: O_PINK)
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            logoLabel.textColor = UIColor(named: O_GREEN)
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            logoLabel.textColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            logoLabel.textColor = UIColor(named: O_DARK)
+    private func animationView() {
+        
+        logoLabel.alpha = 0
+        iconLeft.transform = CGAffineTransform(translationX: -200, y: 0)
+        iconRight.transform = CGAffineTransform(translationX: 200, y: 0)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            UIView.animate(withDuration: 1.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+               self.iconLeft.transform = .identity
+               self.iconRight.transform = .identity
+            }, completion: nil)
+
+            UIView.animate(withDuration: 1, delay: 0.7, animations: {
+                self.logoLabel.alpha = 1
+            })
         }
     }
     
@@ -91,7 +97,6 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadIntersitial()
-        indicator.stopAnimating()
         toTabBerVC()
     }
 }

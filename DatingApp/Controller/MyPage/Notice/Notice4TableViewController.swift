@@ -35,18 +35,8 @@ class Notice4TableViewController: UITableViewController {
     }
     
     private func setupUI () {
-        
         navigationItem.title = "お知らせ"
         tableView.tableFooterView = UIView()
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
     
     // MARK: - Table view data source

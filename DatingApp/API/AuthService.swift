@@ -57,16 +57,12 @@ struct AuthService {
     
     static func logoutUser(completion: @escaping(_ error: Error?) -> Void) {
         
-        User.isOnline(online: "offline")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        User.isOnline(online: "offline") {
             Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
             Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
             Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
             Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
             Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-            UserDefaults.standard.removeObject(forKey: PINK)
-            UserDefaults.standard.removeObject(forKey: GREEN)
-            UserDefaults.standard.removeObject(forKey: DARK)
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             UserDefaults.standard.removeObject(forKey: GOOGLE)
             UserDefaults.standard.removeObject(forKey: FACEBOOK)
@@ -90,56 +86,47 @@ struct AuthService {
             } catch let error as NSError {
                 completion(error)
             }
-        }
+        }    
     }
     
     static func withdrawUser(completion: @escaping(_ error: Error?) -> Void) {
         let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
-
-        COLLECTION_USERS.document(User.currentUserId()).delete()
-        COLLECTION_FEED.document(User.currentUserId()).delete()
-        COLLECTION_MATCH.document(User.currentUserId()).delete()
-        COLLECTION_LIKE.document(User.currentUserId()).delete()
-        COLLECTION_TYPE.document(User.currentUserId()).delete()
-        COLLECTION_FOOTSTEP.document(User.currentUserId()).delete()
-        COLLECTION_MESSAGE.document(User.currentUserId()).delete()
-        COLLECTION_BLOCK.document(User.currentUserId()).delete()
-        COLLECTION_TYPECOUNTER.document(User.currentUserId()).delete()
-        COLLECTION_LIKECOUNTER.document(User.currentUserId()).delete()
-        COLLECTION_SWIPE.document(User.currentUserId()).delete()
-        COLLECTION_INBOX.document(User.currentUserId()).delete()
         geofirestroe.removeLocation(forDocumentWithID: User.currentUserId())
-        COLLECTION_GEO.document(User.currentUserId()).delete()
 
-        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            Auth.auth().currentUser?.delete(completion: { (error) in
-                
-                if error != nil {
-                    print("Error withdraw user: \(error!.localizedDescription)")
-                    completion(error)
-                } else {
-                    UserDefaults.standard.removeObject(forKey: PINK)
-                    UserDefaults.standard.removeObject(forKey: GREEN)
-                    UserDefaults.standard.removeObject(forKey: DARK)
-                    UserDefaults.standard.removeObject(forKey: RCOMPLETION)
-                    UserDefaults.standard.removeObject(forKey: GOOGLE)
-                    UserDefaults.standard.removeObject(forKey: FACEBOOK)
-                    UserDefaults.standard.removeObject(forKey: APPLE)
-                    UserDefaults.standard.removeObject(forKey: HINT_END)
-                    UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
-                    UserDefaults.standard.removeObject(forKey: MALE)
-                    UserDefaults.standard.removeObject(forKey: FEMALE)
-                    UserDefaults.standard.removeObject(forKey: ISREAD_ON)
-                    UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
-                    completion(error)
+        COLLECTION_USERS.document(User.currentUserId()).delete() { (_) in
+            COLLECTION_COMMENT.document(User.currentUserId()).delete { (_) in
+                COLLECTION_SWIPE.document(User.currentUserId()).delete { (_) in
+                    COLLECTION_GEO.document(User.currentUserId()).delete { (_) in
+                        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+                        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+                        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+                        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+                        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            Auth.auth().currentUser?.delete(completion: { (error) in
+                                
+                                if error != nil {
+                                    print("Error withdraw user: \(error!.localizedDescription)")
+                                    completion(error)
+                                } else {
+                                    UserDefaults.standard.removeObject(forKey: RCOMPLETION)
+                                    UserDefaults.standard.removeObject(forKey: GOOGLE)
+                                    UserDefaults.standard.removeObject(forKey: FACEBOOK)
+                                    UserDefaults.standard.removeObject(forKey: APPLE)
+                                    UserDefaults.standard.removeObject(forKey: HINT_END)
+                                    UserDefaults.standard.removeObject(forKey: HINT_END2)
+                                    UserDefaults.standard.removeObject(forKey: TUTORIAL_END)
+                                    UserDefaults.standard.removeObject(forKey: MALE)
+                                    UserDefaults.standard.removeObject(forKey: FEMALE)
+                                    UserDefaults.standard.removeObject(forKey: ISREAD_ON)
+                                    UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
+                                    completion(error)
+                                }
+                            })
+                        }
+                    }
                 }
-            })
+            }
         }
     }
     

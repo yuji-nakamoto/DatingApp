@@ -22,7 +22,6 @@ public let COLLECTION_INBOX = Firestore.firestore().collection("inbox")
 public let COLLECTION_LIKECOUNTER = Firestore.firestore().collection("likeCounter")
 public let COLLECTION_TYPECOUNTER = Firestore.firestore().collection("typeCounter")
 public let COLLECTION_MATCH = Firestore.firestore().collection("match")
-public let COLLECTION_FEED = Firestore.firestore().collection("feed")
 public let COLLECTION_SWIPE = Firestore.firestore().collection("swipe")
 public let COLLECTION_REPORT = Firestore.firestore().collection("report")
 public let COLLECTION_INQUIRY = Firestore.firestore().collection("inquiry")
@@ -126,6 +125,7 @@ public let SEARCHMINI = "searchMini"
 public let SELECTGENDER = "selectGender"
 public let DAY = "day"
 public let NEWUSER = "newUser"
+public let MONTHLATE = "monthLate"
 
 // MARK: - Counter
 
@@ -204,10 +204,6 @@ public let FRIEND2 = "friend2"
 public let MAILFRIEND2 = "mailfriend2"
 public let PLAY2 = "play2"
 public let FREE2 = "free2"
-public let WHITE = "white"
-public let PINK = "pink"
-public let GREEN = "green"
-public let DARK = "dark"
 public let REFRESH = "refresh"
 public let CARDVC = "cardVC"
 public let FACEBOOK = "facebook"

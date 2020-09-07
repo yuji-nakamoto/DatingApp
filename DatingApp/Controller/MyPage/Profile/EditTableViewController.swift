@@ -97,7 +97,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupColor()
         setupUI()
     }
     
@@ -659,19 +658,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         hud.dismiss(afterDelay: 2.0)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    private func setupColor() {
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            backButton.tintColor = UIColor.white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil  {
-            backButton.tintColor = UIColor.white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            backButton.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            backButton.tintColor = UIColor.white
         }
     }
     

@@ -152,21 +152,6 @@ class DidLikeTableViewController: UIViewController {
         navigationItem.title = "いいね"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        backView.alpha = 0.85
-
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-            backView.backgroundColor = UIColor(named: O_PINK)
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-            backView.backgroundColor = UIColor(named: O_GREEN)
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-            backView.backgroundColor = UIColor.white
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-            backView.backgroundColor = UIColor(named: O_DARK)
-        }
     }
 }
 

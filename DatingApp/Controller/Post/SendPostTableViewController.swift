@@ -79,12 +79,14 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
             return
         }
         sendButton.isEnabled = false
-        
+        let day = Date()
+        let oneDayLate = Calendar.current.date(byAdding: .day, value: 1, to: day)!
         let dict = [UID: User.currentUserId(),
                     GENDER: user.gender!,
                     RESIDENCE: user.residence!,
                     CAPTION: textView.text!,
                     GENRE: selectLabel.text!,
+                    ONEDAYLATE: oneDayLate,
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         Post.savePost(withValue: dict)
@@ -183,24 +185,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     }
     
     private func setupUI() {
-        
         sendButton.isEnabled = true
-        if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.rightBarButtonItem?.tintColor = .white
-            navigationItem.leftBarButtonItem?.tintColor = .white
-
-        } else if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.rightBarButtonItem?.tintColor = .white
-            navigationItem.leftBarButtonItem?.tintColor = .white
-
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.rightBarButtonItem?.tintColor = .white
-            navigationItem.leftBarButtonItem?.tintColor = .white
-
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            navigationItem.rightBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        }
     }
 }
 

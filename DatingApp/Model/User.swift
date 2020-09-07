@@ -61,8 +61,8 @@ class User {
     var isBlock: Int!
     var points: Int!
     var oneDay: Bool!
-    var loginTime: Double!
     var oneDayLate: Timestamp!
+    var loginTime: Double!
     var item1: Int!
     var item2: Int!
     var item3: Int!
@@ -94,6 +94,7 @@ class User {
     var selectGender: String!
     var day: Double!
     var newUser: Bool!
+    var monthLate: Timestamp!
     
     init() {
     }
@@ -149,8 +150,8 @@ class User {
         isBlock = dict[ISBLOCK] as? Int ?? 0
         points = dict[POINTS] as? Int ?? 0
         oneDay = dict[ONEDAY] as? Bool ?? false
-        loginTime = dict[LOGINTIME] as? Double ?? 0
         oneDayLate = dict[ONEDAYLATE] as? Timestamp ?? Timestamp(date: Date())
+        loginTime = dict[LOGINTIME] as? Double ?? 0
         item1 = dict[ITEM1] as? Int ?? 0
         item2 = dict[ITEM2] as? Int ?? 0
         item3 = dict[ITEM3] as? Int ?? 0
@@ -182,6 +183,7 @@ class User {
         selectGender = dict[SELECTGENDER] as? String ?? ""
         day = dict[DAY] as? Double ?? 0
         newUser = dict[NEWUSER] as? Bool ?? false
+        monthLate = dict[MONTHLATE] as? Timestamp ?? Timestamp(date: Date())
     }
     
     // MARK: - Return user
@@ -832,12 +834,14 @@ class User {
         }
     }
     
-    class func isOnline(online: String) {
+    class func isOnline(online: String, completion: @escaping() -> Void) {
         
         guard Auth.auth().currentUser?.uid != nil else { return }
         let date: Double = Date().timeIntervalSince1970
         let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date()), DATE: date] as [String : Any]
-        COLLECTION_USERS.document(User.currentUserId()).updateData(dict)
+        COLLECTION_USERS.document(User.currentUserId()).updateData(dict) { (error) in
+            completion()
+        }
     }
 }
 

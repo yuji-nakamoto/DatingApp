@@ -45,16 +45,6 @@ class NoticeListTableViewController: UIViewController {
     private func setupUI() {
         tableView.tableFooterView = UIView()
         navigationItem.title = "お知らせ"
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-           navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
 }
 

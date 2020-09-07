@@ -62,6 +62,7 @@ class BlockTableViewController: UITableViewController {
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
+        UserDefaults.standard.set(true, forKey: REFRESH)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.navigationController?.popViewController(animated: true)
         }
@@ -71,20 +72,6 @@ class BlockTableViewController: UITableViewController {
         navigationItem.title = "ブロック"
         profileImageView.layer.cornerRadius = 80 / 2
         blockButton.layer.cornerRadius = 15
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            blockButton.backgroundColor = UIColor(named: O_PINK)
-            blockButton.setTitleColor(UIColor.white, for: .normal)
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            blockButton.backgroundColor = UIColor(named: O_GREEN)
-            blockButton.setTitleColor(UIColor.white, for: .normal)
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            blockButton.backgroundColor = UIColor(named: O_GREEN)
-            blockButton.setTitleColor(UIColor.white, for: .normal)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            blockButton.backgroundColor = UIColor(named: O_DARK)
-            blockButton.setTitleColor(UIColor.white, for: .normal)
-        }
     }
     
     private func setupUserInfo(_ user: User) {

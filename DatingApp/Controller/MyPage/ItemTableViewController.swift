@@ -174,18 +174,8 @@ class ItemTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        
         navigationItem.title = "所持アイテム"
         tableView.tableFooterView = UIView()
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: WHITE) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = UIColor(named: O_BLACK)
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
     
     private func setupBanner() {

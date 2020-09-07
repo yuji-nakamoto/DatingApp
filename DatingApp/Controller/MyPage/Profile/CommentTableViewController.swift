@@ -63,14 +63,6 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func setupUserInfo(_ user: User) {
         commentTextField.text = user.comment
-        
-        if UserDefaults.standard.object(forKey: PINK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: DARK) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        } else if UserDefaults.standard.object(forKey: GREEN) != nil {
-            navigationItem.leftBarButtonItem?.tintColor = .white
-        }
     }
     
     private func saveTextField() {
