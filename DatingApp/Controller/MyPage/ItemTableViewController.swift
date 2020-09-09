@@ -38,8 +38,8 @@ class ItemTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchUser()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

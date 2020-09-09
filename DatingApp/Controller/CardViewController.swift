@@ -64,10 +64,10 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         showTutorialView()
         confifureLocationManager()
         
-        setupBanner()
-        interstitial = createAndLoadIntersitial()
-//        testBanner()
-//        interstitial = testIntersitial()
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {

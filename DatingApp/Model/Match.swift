@@ -64,6 +64,17 @@ class Match {
         }
     }
     
+    class func fetchMatch(completion: @escaping([String: Bool]) -> Void) {
+        
+        COLLECTION_MATCH.document(User.currentUserId()).getDocument { (snapshot, error) in
+            guard let data = snapshot?.data() as? [String: Bool] else  {
+                completion([String: Bool]())
+                return
+            }
+            completion(data)
+        }
+    }
+    
     // MARK: - Save
     
     class func saveMatchUser(forUser user: User) {
@@ -71,27 +82,33 @@ class Match {
         COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).document(user.uid).getDocument { (snapshot, error) in
             
             let date: Double = Date().timeIntervalSince1970
+            let data = [user.uid: true]
             let dict = [UID: user.uid!,
                         DATE: date,
                         ISMATCH: 1] as [String : Any]
             
             if snapshot?.exists == true {
                 COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).document(user.uid).updateData(dict as [AnyHashable : Any])
+                COLLECTION_MATCH.document(User.currentUserId()).updateData(data)
             } else {
                 COLLECTION_MATCH.document(User.currentUserId()).collection(ISMATCH).document(user.uid).setData(dict as [String : Any])
+                COLLECTION_MATCH.document(User.currentUserId()).setData(data as! [String : Any])
             }
         }
         COLLECTION_MATCH.document(user.uid).collection(ISMATCH).document(User.currentUserId()).getDocument { (snapshot, error) in
             
             let date: Double = Date().timeIntervalSince1970
+            let data = [User.currentUserId(): true]
             let dict = [UID: User.currentUserId(),
                         DATE: date,
                         ISMATCH: 1] as [String : Any]
             
             if snapshot?.exists == true {
                 COLLECTION_MATCH.document(user.uid).collection(ISMATCH).document(User.currentUserId()).updateData(dict)
+                COLLECTION_MATCH.document(user.uid).updateData(data)
             } else {
                 COLLECTION_MATCH.document(user.uid).collection(ISMATCH).document(User.currentUserId()).setData(dict)
+                COLLECTION_MATCH.document(user.uid).setData(data as [String : Any])
             }
         }
     }

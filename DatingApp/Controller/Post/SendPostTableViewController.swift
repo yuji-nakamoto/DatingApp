@@ -33,8 +33,8 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         
         setupTextView()
         fetchUser()
-        interstitial = createAndLoadIntersitial()
-//        interstitial = testIntersitial()
+//        interstitial = createAndLoadIntersitial()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {

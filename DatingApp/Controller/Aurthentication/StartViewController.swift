@@ -24,8 +24,8 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
         
         animationView()
         autoLogin()
-        interstitial = createAndLoadIntersitial()
-//        interstitial = testIntersitial()
+//        interstitial = createAndLoadIntersitial()
+        interstitial = testIntersitial()
     }
     
     // MARK: - Helpers

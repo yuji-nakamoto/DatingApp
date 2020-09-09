@@ -29,8 +29,8 @@ class FootstepTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchtFootstepedUsers()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
     }
     
     // MARK: - Actions

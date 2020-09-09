@@ -187,6 +187,7 @@ class Card: UIView {
     
     @IBAction func infoImageTapped(_ sender: Any) {
         
+        guard user != nil else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailTableViewController
         detailVC.toUserId = user.uid

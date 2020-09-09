@@ -1,5 +1,5 @@
 //
-//  ChangeEmailViewController.swift
+//  ChangePasswordViewController.swift
 //  DatingApp
 //
 //  Created by yuji_nakamoto on 2020/08/14.
@@ -11,7 +11,7 @@ import JGProgressHUD
 import Firebase
 import TextFieldEffects
 
-class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
+class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
@@ -23,7 +23,7 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     private var hud = JGProgressHUD(style: .dark)
     private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
     private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 290, width: 300, height: 60))
-    private let newEmailTextField = HoshiTextField(frame: CGRect(x: 40, y: 350, width: 300, height: 60))
+    private let newPasswordTextField = HoshiTextField(frame: CGRect(x: 40, y: 350, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -36,10 +36,11 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         doneButton.isEnabled = false
-        
+
         if textFieldHaveText() {
             indicator.startAnimating()
-            changeEmail()
+
+            withdrawUser()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください。"
@@ -53,13 +54,13 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Change email
+    // MARK: - Withdraw
     
-    private func changeEmail() {
-        
+    private func withdrawUser() {
+                
         let email = emailTextField.text
         let password = passwordTextField.text
-        let newEmail = newEmailTextField.text
+        let newPassword = newPasswordTextField.text
         let credential = EmailAuthProvider.credential(withEmail: email!, password: password!)
         
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
@@ -69,21 +70,21 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
-                self.doneButton.isEnabled = true
                 self.indicator.stopAnimating()
+                self.doneButton.isEnabled = true
             } else {
                 
-                AuthService.changeEmail(email: newEmail!) { (error) in
+                AuthService.changePassword(password: newPassword!) { (error) in
                     if let error = error {
-                        print("Error change email: \(error.localizedDescription)")
+                        print("Error change password: \(error.localizedDescription)")
                     } else {
-                        self.hud.textLabel.text = "メールアドレスを変更しました"
+                        self.hud.textLabel.text = "パスワードを変更しました"
                         self.hud.show(in: self.view)
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 2.0)
                         self.doneButton.isEnabled = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            self.dismiss(animated: true, completion: nil)
+                            self.dismiss(animated: true)
                         }
                     }
                     self.indicator.stopAnimating()
@@ -112,18 +113,19 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.placeholder = "今までパスワード"
         self.view.addSubview(passwordTextField)
         
-        newEmailTextField.placeholderColor = UIColor(named: O_GREEN)!
-        newEmailTextField.borderActiveColor = UIColor(named: O_RED)
-        newEmailTextField.borderInactiveColor = UIColor(named: O_GREEN)
-        newEmailTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
-        newEmailTextField.placeholder = "新しいメールアドレス"
-        newEmailTextField.keyboardType = .emailAddress
-        self.view.addSubview(newEmailTextField)
+        newPasswordTextField.placeholderColor = UIColor(named: O_GREEN)!
+        newPasswordTextField.borderActiveColor = UIColor(named: O_RED)
+        newPasswordTextField.borderInactiveColor = UIColor(named: O_GREEN)
+        newPasswordTextField.font = UIFont(name: "HiraMaruProN-W4", size: 18)
+        newPasswordTextField.isSecureTextEntry = true
+        newPasswordTextField.placeholder = "新しいパスワード"
+        self.view.addSubview(newPasswordTextField)
         
-        descriptionlabel.text = "今までのメールアドレス、\n今までパスワード、\n新しいメールアドレスを入力してください。"
+        descriptionlabel.text = "今までのメールアドレス、\n今までのパスワード、\n新しいパスワードを入力してください。"
         doneButton.layer.cornerRadius = 44 / 2
         backButton.layer.cornerRadius = 44 / 2
         backButton.layer.borderWidth = 1
+        backButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -138,6 +140,6 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func textFieldHaveText() -> Bool {
-        return (emailTextField.text != "" && passwordTextField.text != "" && newEmailTextField.text != "")
+        return (emailTextField.text != "" && passwordTextField.text != "" && newPasswordTextField.text != "")
     }
 }

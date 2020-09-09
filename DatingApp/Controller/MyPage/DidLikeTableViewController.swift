@@ -29,8 +29,8 @@ class DidLikeTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         fetchLikedUsers()
         updateUser(withValue: [NEWLIKE: false])
         UIApplication.shared.applicationIconBadgeNumber = 0

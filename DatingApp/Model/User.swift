@@ -252,28 +252,37 @@ class User {
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
-                    usersRef.getDocuments { (snapshot, error) in
-                        if let error = error {
-                            print("Error card sort: \(error.localizedDescription)")
-                        } else {
-                            if snapshot?.documents == [] {
-                                completion(User(dict: [UID: ""]))
-                            }
-                            snapshot?.documents.forEach({ (document) in
-                                let dict = document.data()
-                                let user = User(dict: dict as [String: Any])
-                                guard user.uid != User.currentUserId() else { return }
-                                guard user.gender == "男性" else { return }
-                                guard user.age <= currentUser.maxAge else { return }
-                                guard user.age >= currentUser.minAge else { return }
-                                guard user.residence == currentUser.residenceSerch else { return }
-                                guard swipeUserIDs[user.uid] == nil else {
+                    Match.fetchMatch { (matchUserIDs) in
+                        usersRef.getDocuments { (snapshot, error) in
+                            if let error = error {
+                                print("Error card sort: \(error.localizedDescription)")
+                            } else {
+                                if snapshot?.documents == [] {
                                     completion(User(dict: [UID: ""]))
-                                    return
                                 }
-                                guard blockUserIDs[user.uid] == nil else { return }
-                                completion(user)
-                            })
+                                snapshot?.documents.forEach({ (document) in
+                                    let dict = document.data()
+                                    let user = User(dict: dict as [String: Any])
+                                    guard user.uid != User.currentUserId() else { return }
+                                    guard user.gender == "男性" else { return }
+                                    guard user.age <= currentUser.maxAge else { return }
+                                    guard user.age >= currentUser.minAge else { return }
+                                    guard user.residence == currentUser.residenceSerch else { return }
+                                    guard swipeUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard blockUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard matchUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    completion(user)
+                                })
+                            }
                         }
                     }
                 }
@@ -285,30 +294,39 @@ class User {
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
-                    usersRef.getDocuments { (snapshot, error) in
+                    Match.fetchMatch { (matchUserIDs) in
+                        usersRef.getDocuments { (snapshot, error) in
 
-                        if let error = error {
-                            print("Error card sort: \(error.localizedDescription)")
-                        } else {
-                            if snapshot?.documents == [] {
-                                completion(User(dict: [UID: ""]))
-                            }
-                            snapshot?.documents.forEach({ (document) in
-                                let dict = document.data()
-                                let user = User(dict: dict as [String: Any])
-
-                                guard user.uid != User.currentUserId() else { return }
-                                guard user.age <= currentUser.maxAge else { return }
-                                guard user.age >= currentUser.minAge else { return }
-                                guard user.gender == "女性" else { return }
-                                guard user.residence == currentUser.residenceSerch else { return }
-                                guard swipeUserIDs[user.uid] == nil else {
+                            if let error = error {
+                                print("Error card sort: \(error.localizedDescription)")
+                            } else {
+                                if snapshot?.documents == [] {
                                     completion(User(dict: [UID: ""]))
-                                    return
                                 }
-                                guard blockUserIDs[user.uid] == nil else { return }
-                                completion(user)
-                            })
+                                snapshot?.documents.forEach({ (document) in
+                                    let dict = document.data()
+                                    let user = User(dict: dict as [String: Any])
+
+                                    guard user.uid != User.currentUserId() else { return }
+                                    guard user.age <= currentUser.maxAge else { return }
+                                    guard user.age >= currentUser.minAge else { return }
+                                    guard user.gender == "女性" else { return }
+                                    guard user.residence == currentUser.residenceSerch else { return }
+                                    guard swipeUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard blockUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard matchUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    completion(user)
+                                })
+                            }
                         }
                     }
                 }
@@ -324,28 +342,37 @@ class User {
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
-                    usersRef.getDocuments { (snapshot, error) in
-                        
-                        if let error = error {
-                            print("Error card sort: \(error.localizedDescription)")
-                        } else {
-                            if snapshot?.documents == [] {
-                                completion(User(dict: [UID: ""]))
-                            }
-                            snapshot?.documents.forEach({ (document) in
-                                let dict = document.data()
-                                let user = User(dict: dict as [String: Any])
-                                guard user.uid != User.currentUserId() else { return }
-                                guard user.gender == "男性" else { return }
-                                guard user.age <= currentUser.maxAge else { return }
-                                guard user.age >= currentUser.minAge else { return }
-                                guard swipeUserIDs[user.uid] == nil else {
+                    Match.fetchMatch { (matchUserIDs) in
+                        usersRef.getDocuments { (snapshot, error) in
+                            
+                            if let error = error {
+                                print("Error card sort: \(error.localizedDescription)")
+                            } else {
+                                if snapshot?.documents == [] {
                                     completion(User(dict: [UID: ""]))
-                                    return
                                 }
-                                guard blockUserIDs[user.uid] == nil else { return }
-                                completion(user)
-                            })
+                                snapshot?.documents.forEach({ (document) in
+                                    let dict = document.data()
+                                    let user = User(dict: dict as [String: Any])
+                                    guard user.uid != User.currentUserId() else { return }
+                                    guard user.gender == "男性" else { return }
+                                    guard user.age <= currentUser.maxAge else { return }
+                                    guard user.age >= currentUser.minAge else { return }
+                                    guard swipeUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard blockUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard matchUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    completion(user)
+                                })
+                            }
                         }
                     }
                 }
@@ -357,28 +384,37 @@ class User {
             
             Service.fetchSwipe { (swipeUserIDs) in
                 Block.fetchBlockSwipe { (blockUserIDs) in
-                    usersRef.getDocuments { (snapshot, error) in
-                        
-                        if let error = error {
-                            print("Error card sort: \(error.localizedDescription)")
-                        } else {
-                            if snapshot?.documents == [] {
-                                completion(User(dict: [UID: ""]))
-                            }
-                            snapshot?.documents.forEach({ (document) in
-                                let dict = document.data()
-                                let user = User(dict: dict as [String: Any])
-                                guard user.uid != User.currentUserId() else { return }
-                                guard user.gender == "女性" else { return }
-                                guard user.age <= currentUser.maxAge else { return }
-                                guard user.age >= currentUser.minAge else { return }
-                                guard swipeUserIDs[user.uid] == nil else {
+                    Match.fetchMatch { (matchUserIDs) in
+                        usersRef.getDocuments { (snapshot, error) in
+                            
+                            if let error = error {
+                                print("Error card sort: \(error.localizedDescription)")
+                            } else {
+                                if snapshot?.documents == [] {
                                     completion(User(dict: [UID: ""]))
-                                    return
                                 }
-                                guard blockUserIDs[user.uid] == nil else { return }
-                                completion(user)
-                            })
+                                snapshot?.documents.forEach({ (document) in
+                                    let dict = document.data()
+                                    let user = User(dict: dict as [String: Any])
+                                    guard user.uid != User.currentUserId() else { return }
+                                    guard user.gender == "女性" else { return }
+                                    guard user.age <= currentUser.maxAge else { return }
+                                    guard user.age >= currentUser.minAge else { return }
+                                    guard swipeUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard blockUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    guard matchUserIDs[user.uid] == nil else {
+                                        completion(User(dict: [UID: ""]))
+                                        return
+                                    }
+                                    completion(user)
+                                })
+                            }
                         }
                     }
                 }
@@ -396,22 +432,25 @@ class User {
                 .order(by: LASTCHANGE)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "男性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.residence == currentUser.residenceSerch else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "男性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -422,23 +461,26 @@ class User {
                 .order(by: LASTCHANGE)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "女性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.residence == currentUser.residenceSerch else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "女性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -455,21 +497,24 @@ class User {
                 .order(by: LASTCHANGE)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "男性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "男性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -480,22 +525,25 @@ class User {
                 .order(by: LASTCHANGE)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "女性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        
+                        if let error = error {
+                            print("Error sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "女性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -511,22 +559,25 @@ class User {
                 .order(by: LASTCHANGE)
 
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "男性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.residence == currentUser.residenceSerch else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "男性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -536,23 +587,26 @@ class User {
                 .order(by: LASTCHANGE)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "女性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.residence == currentUser.residenceSerch else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "女性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -568,21 +622,24 @@ class User {
                 .order(by: LASTCHANGE)
 
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.gender == "男性" else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.gender == "男性" else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -592,22 +649,25 @@ class User {
                 .order(by: LASTCHANGE)
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.gender == "女性" else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.gender == "女性" else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -622,23 +682,26 @@ class User {
             let usersRef = COLLECTION_USERS
 
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.newUser == true else { return }
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "男性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.residence == currentUser.residenceSerch else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.newUser == true else { return }
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "男性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -647,24 +710,27 @@ class User {
             let usersRef = COLLECTION_USERS
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.newUser == true else { return }
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.gender == "女性" else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.residence == currentUser.residenceSerch else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.newUser == true else { return }
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "女性" else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.residence == currentUser.residenceSerch else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -679,22 +745,25 @@ class User {
             let usersRef = COLLECTION_USERS
 
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.newUser == true else { return }
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.gender == "男性" else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.newUser == true else { return }
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.gender == "男性" else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }
@@ -703,23 +772,26 @@ class User {
             let usersRef = COLLECTION_USERS
             
             Block.fetchBlockSwipe { (blockUserIDs) in
-                usersRef.getDocuments { (snapshot, error) in
-                    
-                    if let error = error {
-                        print("Error gender sort: \(error.localizedDescription)")
-                    } else {
-                        snapshot?.documents.forEach({ (document) in
-                            let dict = document.data()
-                            let user = User(dict: dict as [String: Any])
-                            guard user.newUser == true else { return }
-                            guard user.uid != User.currentUserId() else { return }
-                            guard user.age <= currentUser.maxAge else { return }
-                            guard user.age >= currentUser.minAge else { return }
-                            guard user.gender == "女性" else { return }
-                            guard blockUserIDs[user.uid] == nil else { return }
-                            users.append(user)
-                        })
-                        completion(users)
+                Match.fetchMatch { (matchUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        
+                        if let error = error {
+                            print("Error gender sort: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.newUser == true else { return }
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.age <= currentUser.maxAge else { return }
+                                guard user.age >= currentUser.minAge else { return }
+                                guard user.gender == "女性" else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard matchUserIDs[user.uid] == nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }

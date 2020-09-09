@@ -27,8 +27,8 @@ class NewLoginCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSnapshotListener()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         fetchUser()
         setupUI()
     }
@@ -59,7 +59,7 @@ class NewLoginCollectionViewController: UIViewController {
     }
     
     private func fetchUsers(_ user: User) {
-                
+        
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
             indicator.startAnimating()
         }
@@ -144,26 +144,24 @@ extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollec
         }
         return 25
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
-            return CGSize(width: 300, height: 250)
-        }
-        return CGSize(width: 150, height: 230)
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
+            return users.count == 0 ? 0 : users.count
+        }
         return users.count == 0 ? 0 : 1 + users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-            
-              cell3.setupBanner2()
-//            cell3.testBanner2()
+//            cell3.layer.cornerRadius = 15
+//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+//            cell3.bannerView.rootViewController = self
+//            cell3.bannerView.load(GADRequest())
+            cell3.testBanner2()
             cell3.newLoginCVC = self
             
             return cell3
@@ -177,6 +175,10 @@ extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollec
             cell2.layer.shadowOpacity = 0.3
             cell2.layer.shadowRadius = 4
             cell2.layer.masksToBounds = false
+            if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
+                cell2.configureMiniCell(users[indexPath.row])
+                return cell2
+            }
             cell2.configureMiniCell(users[indexPath.row - 1])
             return cell2
         }
@@ -187,6 +189,10 @@ extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
+            performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row].uid)
+            return
+        }
         performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EmptyDataSet_Swift
 
 class NoticeListTableViewController: UIViewController {
     
@@ -45,6 +46,8 @@ class NoticeListTableViewController: UIViewController {
     private func setupUI() {
         tableView.tableFooterView = UIView()
         navigationItem.title = "お知らせ"
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
 }
 
@@ -77,5 +80,12 @@ extension NoticeListTableViewController: UITableViewDelegate, UITableViewDataSou
         } else if indexPath.row == 4 {
             performSegue(withIdentifier: "Notice5VC", sender: nil)
         }
+    }
+}
+
+extension NoticeListTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "お知らせはありません")
     }
 }

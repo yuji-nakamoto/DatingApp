@@ -58,10 +58,10 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         handleTextField()
         fetchIsRead()
         timerMethod()
-        setupBanner()
-        interstitial = createAndLoadIntersitial()
-//        testBanner()
-//        interstitial = testIntersitial()
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -272,7 +272,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
             
             guard let uid = message.to else { return }
             self.fetchUser2(uid) {
-                
                 self.messages.append(message)
                 self.tableView.reloadData()
                 self.scrollToBottom()
