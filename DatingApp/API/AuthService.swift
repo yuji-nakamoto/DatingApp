@@ -82,8 +82,8 @@ struct AuthService {
                 }
                 try Auth.auth().signOut()
                 completion(nil)
-                
             } catch let error as NSError {
+                print("Error sign out: \(error.localizedDescription)")
                 completion(error)
             }
         }    

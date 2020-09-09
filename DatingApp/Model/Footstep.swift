@@ -31,6 +31,9 @@ class Footstep {
             if error != nil {
                 print(error!.localizedDescription)
             }
+            if snapshot?.data() == nil {
+                completion(Footstep(dict: [UID: ""]))
+            }
             guard snapshot?.data() != nil else { return }
             let footStep = Footstep(dict: snapshot!.data()! as [String: Any])
             completion(footStep)

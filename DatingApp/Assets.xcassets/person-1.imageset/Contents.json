@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "yrr90faFxvKjbfA1595538011_1595538021.png",
+      "filename" : "icons8-customer-25.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,8 +17,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

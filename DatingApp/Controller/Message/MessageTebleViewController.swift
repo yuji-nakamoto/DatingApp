@@ -138,7 +138,8 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                         self.hud.textLabel.text = "アイテムを使用しました。"
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 2.0)
-                        updateUser(withValue: [USEDITEM1: self.currentUser.usedItem1 - 1])
+                        updateUser(withValue: [USEDITEM1: self.currentUser.usedItem1 - 1,
+                                               MMESSAGECOUNT: self.currentUser.mMessageCount + 1])
                         
                         let date: Double = Date().timeIntervalSince1970
                         let dict = [MESSAGETEXT: self.textField.text!,
@@ -173,6 +174,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                     TIMESTAMP: Timestamp(date: Date()),
                     DATE: date] as [String : Any]
         Message.saveMessage(to: user, messageId: messageId, withValue: dict)
+        updateUser(withValue: [MMESSAGECOUNT: self.user.mMessageCount + 1])
         setupMessage()
     }
     

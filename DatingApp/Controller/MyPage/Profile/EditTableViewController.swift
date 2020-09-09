@@ -92,6 +92,8 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     private var profileImage5: UIImage?
     private var profileImage6: UIImage?
     private var hud = JGProgressHUD(style: .dark)
+    lazy var labels = [heightSettingLabel,bodySizeSettingLabel,bloodSetLbl,professionSettingLabel,birthplaceLbl,educationalSetLbl,marriageHistoryLbl,marriageLbl,childLbl1,childLbl2,houseMateLbl,holidayLbl,liquorLbl,tobaccoLbl]
+    lazy var setLabels = [hobbySetLbl,commentSetLbl,selfIntroSetLbl,detailMapSetLbl]
     
     // MARK: - Lifecycle
     
@@ -576,6 +578,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             plusImageView5.isHidden = true
             plusImageView6.isHidden = false
             backView6.backgroundColor = UIColor(named: O_GREEN)
+        }
+        
+        if heightSettingLabel.text != "設定する" && bodySizeSettingLabel .text != "設定する" && bloodSetLbl.text != "設定する" && professionSettingLabel.text != "設定する" && birthplaceLbl.text != "設定する" && educationalSetLbl.text != "設定する" && marriageHistoryLbl.text != "設定する" && marriageLbl.text != "設定する" && childLbl1.text != "設定する" && childLbl2.text != "設定する" && houseMateLbl.text != "設定する" && holidayLbl.text != "設定する" && liquorLbl.text != "設定する" && tobaccoLbl.text != "設定する" && hobbySetLbl.text != "入力する" && commentSetLbl.text != "入力する" && selfIntroLabl.text != "入力する" && detailMapSetLbl.text != "入力する" {
+            updateUser(withValue: [MPROFILE: true])
         }
     }
     

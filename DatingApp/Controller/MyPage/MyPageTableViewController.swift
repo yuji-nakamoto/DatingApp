@@ -16,8 +16,6 @@ class MyPageTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var hintView: UIView!
     @IBOutlet weak var hintLabel: UILabel!
@@ -43,10 +41,7 @@ class MyPageTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UserDefaults.standard.removeObject(forKey: VIEW_ON)
-        if segmentControl.selectedSegmentIndex == 1 {
-            fetchMyPost()
-        }
+        fetchMyPost()
         fetchUser()
         fetchComment()
         setupUI()
@@ -57,21 +52,7 @@ class MyPageTableViewController: UIViewController {
     @IBAction func closeButtonPressed(_ sender: Any) {
         removeEffectView()
     }
-    
-    @IBAction func segmentControl(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0:
-            users.removeAll()
-            myPosts.removeAll()
-            tableView.reloadData()
-        case 1:
-            fetchMyPost()
-            
-        default: break
-        }
-    }
-    
+  
     // MARK: - Fetch
     
     private func fetchUsers(_ uid: String, completion: @escaping() -> Void) {
@@ -93,14 +74,12 @@ class MyPageTableViewController: UIViewController {
     private func fetchMyPost() {
         
         indicator.startAnimating()
-        segmentControl.isEnabled = false
         users.removeAll()
         myPosts.removeAll()
         tableView.reloadData()
         
         Post.fetchMyPost() { (post) in
             if post.uid == "" {
-                self.segmentControl.isEnabled = true
                 self.indicator.stopAnimating()
                 return
             }
@@ -109,7 +88,6 @@ class MyPageTableViewController: UIViewController {
                 self.myPosts.insert(post, at: 0)
                 self.tableView.reloadData()
                 self.indicator.stopAnimating()
-                self.segmentControl.isEnabled = true
             }
         }
     }
@@ -209,10 +187,8 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
         let myPost = myPosts[indexPath.row - 1]
         cell.myPageVC = self
         cell.post = myPost
+        cell.configureUserCell(users[indexPath.row - 1])
         
-        if segmentControl.selectedSegmentIndex == 1 {
-            cell.configureUserCell(users[indexPath.row - 1])
-        } 
         return cell
     }
 }

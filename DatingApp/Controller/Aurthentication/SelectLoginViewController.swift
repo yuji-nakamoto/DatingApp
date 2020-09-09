@@ -249,7 +249,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         mailButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         registertButton.layer.cornerRadius = 44 / 2
         registertButton.layer.borderWidth = 1
-        registertButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
+        registertButton.layer.borderColor = UIColor(named: O_RED)?.cgColor
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.delegate = self

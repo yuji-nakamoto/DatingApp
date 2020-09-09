@@ -41,16 +41,10 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pickerKeyboard.delegate = self
         setupUI()
         fetchUser()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
-    }
-    
+
     // MARK: - Actions
     
     @IBAction func minSlider(_ sender: UISlider) {
@@ -177,7 +171,7 @@ class SettingTableViewController: UITableViewController {
     // MARK: - Fetch user
     
     private func fetchUser() {
-        
+        guard Auth.auth().currentUser != nil else { return }
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
             self.setupUserInfo(user)
@@ -199,18 +193,17 @@ class SettingTableViewController: UITableViewController {
                 }
             }
         }
-        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
         alert.addAction(logout)
         alert.addAction(cancel)
-        self.present(alert,animated: true,completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Withdraw
     
     private func withdraw() {
         
-        let alert: UIAlertController = UIAlertController(title: "", message: "退会するとアカウント・プロフィール情報がすべて削除されます。元に戻すことはできません。", preferredStyle: .actionSheet)
+        let alert: UIAlertController = UIAlertController(title: "", message: "退会するとプロフィール情報がすべて削除されます。\n元に戻すことはできません。", preferredStyle: .actionSheet)
         let logout: UIAlertAction = UIAlertAction(title: "退会を進める", style: UIAlertAction.Style.default) { (alert) in
             self.toWithdrawVC()
         }
@@ -235,6 +228,7 @@ class SettingTableViewController: UITableViewController {
     
     private func setupUI() {
         
+        pickerKeyboard.delegate = self
         genderLabel.text = ""
         navigationItem.title = "設定"
         

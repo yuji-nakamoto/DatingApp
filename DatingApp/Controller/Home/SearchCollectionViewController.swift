@@ -45,8 +45,8 @@ class SearchCollectionViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-          setupBanner()
-//        testBanner()
+//          setupBanner()
+        testBanner()
         fetchUser()
         checkOneDayAndBadge()
         confifureLocationManager()
@@ -99,7 +99,8 @@ class SearchCollectionViewController: UIViewController {
     // MARK: - Fetch
     
     private func fetchUser() {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
 
@@ -145,7 +146,8 @@ class SearchCollectionViewController: UIViewController {
     }
     
     private func checkOneDayAndBadge() {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         User.fetchUserAddSnapshotListener() { (user) in
             self.user = user
             self.fetchUsers(self.user)

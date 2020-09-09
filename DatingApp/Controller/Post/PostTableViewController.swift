@@ -206,8 +206,8 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
             cell2.postVC = self
-            cell2.setupBanner()
-//            cell2.testBanner()
+//            cell2.setupBanner()
+            cell2.testBanner()
             return cell2
         }
         

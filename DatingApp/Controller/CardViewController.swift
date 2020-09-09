@@ -42,7 +42,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private var cards = [Card]()
     private var users = [User]()
-    private var user: User?
+    private var user = User()
     private var typeUser = Type()
     private var interstitial: GADInterstitial!
     private var cardInitialLocationCenter: CGPoint!
@@ -102,7 +102,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         Type.saveTypedUser(forUser: firstCard.user!)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(firstCard.user.uid), numShards: 10)
         Service.saveSwipe(toUserId: firstCard.user.uid)
-        
+        updateUser(withValue: [MTYPECOUNT: self.user.mTypeCount + 1])
         checkIfMatch(firstCard.user.uid, cardUser: firstCard.user)
         swipeAnimationY(translation: 1000)
         
@@ -129,7 +129,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(firstCard.user.uid), numShards: 10)
         incrementAppBadgeCount()
         Service.saveSwipe(toUserId: firstCard.user.uid)
-        
+        updateUser(withValue: [MLIKECOUNT: self.user.mLikeCount + 1])
         swipeAnimationX(translation: 750)
     }
     
@@ -202,7 +202,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(card.user.uid), numShards: 10)
                 incrementAppBadgeCount()
                 Service.saveSwipe(toUserId: card.user.uid)
-                
+                updateUser(withValue: [MLIKECOUNT: self.user.mLikeCount + 1])
                 self.updateCards(card: card)
                 return
                 
@@ -236,7 +236,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
                 Type.saveTypedUser(forUser: card.user!)
                 incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(card.user.uid), numShards: 10)
                 Service.saveSwipe(toUserId: card.user.uid)
-                
+                updateUser(withValue: [MTYPECOUNT: self.user.mTypeCount + 1])
                 checkIfMatch(card.user.uid, cardUser: card.user)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -312,8 +312,10 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
             if self.typeUser.isType == 1 {
                 self.showMatchView(cardUser: cardUser)
                 
-                updateUser(withValue: [POINTS: self.user!.points + 1])
-                updateToUser(cardUser.uid, withValue: [POINTS: cardUser.points + 1])
+                updateUser(withValue: [POINTS: self.user.points + 1,
+                                       MMATCHCOUNT: self.user.mMatchCount + 1])
+                updateToUser(cardUser.uid, withValue: [POINTS: cardUser.points + 1,
+                                                       MMATCHCOUNT: cardUser.mMatchCount + 1])
                 Match.saveMatchUser(forUser: cardUser)
                 sendRequestNotification4(toUser: cardUser, message: "マッチしました！メッセージを送ってみましょう！", badge: (cardUser.appBadgeCount)! + 1)
                 
@@ -392,7 +394,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func incrementAppBadgeCount() {
         guard let firstCard = cards.first else { return }
-        sendRequestNotification2(toUser: firstCard.user, message: "\(self.user!.username!)さんがいいねしてくれました", badge: firstCard.user.appBadgeCount + 1)
+        sendRequestNotification2(toUser: firstCard.user, message: "\(self.user.username!)さんがいいねしてくれました", badge: firstCard.user.appBadgeCount + 1)
     }
     
     private func updateCards(card: Card) {
@@ -507,9 +509,9 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         likeLabel.backgroundColor = .systemOrange
         nopeLabel.backgroundColor = .systemIndigo
         typeLabel.backgroundColor = .systemPink
-        likeLabel.layer.cornerRadius = 31.5 / 2
-        nopeLabel.layer.cornerRadius = 31.5 / 2
-        typeLabel.layer.cornerRadius = 30 / 2
+        likeLabel.layer.cornerRadius = 35 / 2
+        nopeLabel.layer.cornerRadius = 35 / 2
+        typeLabel.layer.cornerRadius = 35 / 2
         
         likeButtonView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         likeButtonView.layer.shadowColor = UIColor.black.cgColor

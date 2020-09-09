@@ -94,8 +94,24 @@ class User {
     var selectGender: String!
     var day: Double!
     var newUser: Bool!
-    var monthLate: Timestamp!
-    
+    var mLikeCount: Int!
+    var mTypeCount: Int!
+    var mMessageCount: Int!
+    var mMatchCount: Int!
+    var mFootCount: Int!
+    var mProfile: Bool!
+    var likeGetPt1: Bool!
+    var likeGetPt2: Bool!
+    var typeGetPt1: Bool!
+    var typeGetPt2: Bool!
+    var messageGetPt1: Bool!
+    var messageGetPt2: Bool!
+    var matchGetPt1: Bool!
+    var matchGetPt2: Bool!
+    var footGetPt1: Bool!
+    var footGetPt2: Bool!
+    var profileGetPt1: Bool!
+
     init() {
     }
         
@@ -183,19 +199,38 @@ class User {
         selectGender = dict[SELECTGENDER] as? String ?? ""
         day = dict[DAY] as? Double ?? 0
         newUser = dict[NEWUSER] as? Bool ?? false
-        monthLate = dict[MONTHLATE] as? Timestamp ?? Timestamp(date: Date())
+        mLikeCount = dict[MLIKECOUNT] as? Int ?? 0
+        mTypeCount = dict[MTYPECOUNT] as? Int ?? 0
+        mMessageCount = dict[MMESSAGECOUNT] as? Int ?? 0
+        mMatchCount = dict[MMATCHCOUNT] as? Int ?? 0
+        mFootCount = dict[MFOOTCOUNT] as? Int ?? 0
+        mProfile = dict[MPROFILE] as? Bool ?? false
+        likeGetPt1 = dict[LIKEGETPT1] as? Bool ?? false
+        likeGetPt2 = dict[LIKEGETPT2] as? Bool ?? false
+        typeGetPt1 = dict[TYPEGETPT1] as? Bool ?? false
+        typeGetPt2 = dict[TYPEGETPT2] as? Bool ?? false
+        messageGetPt1 = dict[MESSAGEGETPT1] as? Bool ?? false
+        messageGetPt2 = dict[MESSAGEGETPT2] as? Bool ?? false
+        matchGetPt1 = dict[MATCHGETPT1] as? Bool ?? false
+        matchGetPt2 = dict[MATCHGETPT2] as? Bool ?? false
+        footGetPt1 = dict[FOOTGETPT1] as? Bool ?? false
+        footGetPt2 = dict[FOOTGETPT2] as? Bool ?? false
+        profileGetPt1 = dict[PROFILEGETPT1] as? Bool ?? false
     }
     
     // MARK: - Return user
     
     class func currentUserId() -> String {
+        guard Auth.auth().currentUser != nil else { return "nhkjq8e4x4PseANTFdMM1YQQuk83" }
+
         return Auth.auth().currentUser!.uid
     }
     
     // MARK: - Fetch user
     
     class func fetchUser(_ currentUserId: String, completion: @escaping(_ user: User) -> Void) {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         COLLECTION_USERS.document(currentUserId).getDocument { (snapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
@@ -210,7 +245,8 @@ class User {
     }
     
     class func fetchUsers(completion: @escaping(User) -> Void) {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         COLLECTION_USERS.getDocuments { (snapshot, error) in
             snapshot?.documents.forEach({ (document) in
                 let dictionary = document.data()
@@ -221,7 +257,8 @@ class User {
     }
     
     class func fetchUserAddSnapshotListener(completion: @escaping(User) -> Void) {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         COLLECTION_USERS.document(User.currentUserId()).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 print("Error fetch user add snapshot listener: \(error.localizedDescription)")
@@ -233,7 +270,8 @@ class User {
     }
     
     class func fetchToUserAddSnapshotListener(toUserId: String, completion: @escaping(User) -> Void) {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         COLLECTION_USERS.document(toUserId).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 print("Error fetch to user add snapshot listener: \(error.localizedDescription)")
@@ -245,7 +283,8 @@ class User {
     }
     
     class func fetchCardUsers(_ currentUser: User, completion: @escaping(User) -> Void) {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             let usersRef = COLLECTION_USERS
                 .order(by: LASTCHANGE)
@@ -335,7 +374,8 @@ class User {
     }
     
     class func fetchCardAllUsers(_ currentUser: User, completion: @escaping(User) -> Void) {
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             let usersRef = COLLECTION_USERS
                 .order(by: LASTCHANGE)
@@ -424,6 +464,7 @@ class User {
     
     class func fetchUserResidenceSort(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
+        guard Auth.auth().currentUser != nil else { return }
         
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
@@ -489,7 +530,8 @@ class User {
     
     class func fetchNationwide(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
@@ -552,7 +594,8 @@ class User {
     
     class func fetchNewLoginSort(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
@@ -615,7 +658,8 @@ class User {
     
     class func fetchNewLoginAll(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
@@ -676,7 +720,8 @@ class User {
     
     class func fetchNewUserSort(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
@@ -739,7 +784,8 @@ class User {
     
     class func fetchNewUserAll(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
@@ -800,7 +846,8 @@ class User {
     
     class func likeCountSort(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
@@ -855,7 +902,8 @@ class User {
     
     class func likeCountSortNationwide(_ currentUser: User, completion: @escaping([User]) -> Void) {
         var users: [User] = []
-        
+        guard Auth.auth().currentUser != nil else { return }
+
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS

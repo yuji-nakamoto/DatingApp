@@ -71,7 +71,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         setupUI()
         confifureLocationManager()
-//        interstitial = createAndLoadIntersitial()
+        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
     }
     
@@ -147,6 +147,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         Like.saveLikedUser(forUser: user)
         incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(user.uid), numShards: 10)
         incrementAppBadgeCount()
+        updateUser(withValue: [MLIKECOUNT: currentUser.mLikeCount + 1])
         likeButton.isEnabled = false
         likeButton2.isEnabled = false
     }
@@ -161,6 +162,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         Type.saveTypedUser(forUser: user)
         incrementTypeCounter(ref: COLLECTION_TYPECOUNTER.document(user.uid), numShards: 10)
         
+        updateUser(withValue: [MTYPECOUNT: currentUser.mTypeCount + 1])
         typeButton.isEnabled = false
         typeButton2.isEnabled = false
         
@@ -240,8 +242,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             
             if self.typeUser.isType == 1 {
                 self.matchView()
-                updateUser(withValue: [POINTS: self.currentUser.points + 1])
-                updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1])
+                updateUser(withValue: [POINTS: self.currentUser.points + 1,
+                                       MMATCHCOUNT: self.currentUser.mMatchCount + 1])
+                updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1,
+                                                        MMATCHCOUNT: self.user.mMatchCount + 1])
                 Match.saveMatchUser(forUser: self.user)
             }
         }
@@ -266,7 +270,11 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         Footstep.fetchFootstepUser(toUserId) { (footstep) in
             self.footstep = footstep
-            self.visited()
+            if footstep.uid == "" {
+                self.visited(self.footstep)
+                return
+            }
+            self.visited(self.footstep)
         }
     }
     
@@ -307,12 +315,14 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
     }
     
-    private func visited() {
+    private func visited(_ footstep: Footstep) {
         
-        if footstep.isFootStep == 1 {
-            return
-        } else {
+        if footstep.isFootStep != 1 {
             COLLECTION_USERS.document(toUserId).updateData([VISITED: self.user.visited + 1])
+            User.fetchUser(User.currentUserId()) { (user) in
+                self.currentUser = user
+                updateUser(withValue: [MFOOTCOUNT: self.currentUser.mFootCount + 1])
+            }
         }
     }
     
