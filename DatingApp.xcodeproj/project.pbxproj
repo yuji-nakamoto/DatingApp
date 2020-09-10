@@ -11,11 +11,11 @@
 		6E46F66F24FBA17E000B1DAC /* Notice3TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */; };
 		6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */; };
 		6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */; };
-		6E6621E825085D7200F15A52 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E6621E725085D7200F15A52 /* GoogleService-Info.plist */; };
 		6E74739F24F8254D00D14945 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74739E24F8254D00D14945 /* VideoViewController.swift */; };
 		6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */; };
 		6E7766B02503116200ABDCB9 /* NewLoginCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */; };
 		6E7C0FDE2500965E00E7A7B7 /* ParchmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */; };
+		6EA145822509D83C004AB06C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA145812509D83C004AB06C /* GoogleService-Info.plist */; };
 		6EA585B12508E36700C4C586 /* MissionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA585B02508E36700C4C586 /* MissionTableViewController.swift */; };
 		6ECF471D2501A26B00735F14 /* NewUserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */; };
 		830AF02E24EEE8140043827B /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830AF02D24EEE8140043827B /* HelpViewController.swift */; };
@@ -145,11 +145,11 @@
 		6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice3TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice4TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice5TableViewController.swift; sourceTree = "<group>"; };
-		6E6621E725085D7200F15A52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E74739E24F8254D00D14945 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentMessageViewController.swift; sourceTree = "<group>"; };
 		6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginCollectionViewController.swift; sourceTree = "<group>"; };
 		6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentViewController.swift; sourceTree = "<group>"; };
+		6EA145812509D83C004AB06C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6EA585B02508E36700C4C586 /* MissionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTableViewController.swift; sourceTree = "<group>"; };
 		6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCollectionViewController.swift; sourceTree = "<group>"; };
 		708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -432,7 +432,7 @@
 				8348E3E024CDD48E001D59C0 /* like.json */,
 				8348E3DC24CDD378001D59C0 /* type.json */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
-				6E6621E725085D7200F15A52 /* GoogleService-Info.plist */,
+				6EA145812509D83C004AB06C /* GoogleService-Info.plist */,
 				838071D724C608FA008BAA2C /* Info.plist */,
 			);
 			path = DatingApp;
@@ -635,6 +635,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EA145822509D83C004AB06C /* GoogleService-Info.plist in Resources */,
 				8348E3DD24CDD378001D59C0 /* type.json in Resources */,
 				838071D624C608FA008BAA2C /* LaunchScreen.storyboard in Resources */,
 				8348E3E124CDD48E001D59C0 /* like.json in Resources */,
@@ -642,7 +643,6 @@
 				838071D124C608F5008BAA2C /* Main.storyboard in Resources */,
 				8348826424EA95E300054DF7 /* corp_round_v1.ttf in Resources */,
 				834966D224DEE10C00C9B7DD /* Card.xib in Resources */,
-				6E6621E825085D7200F15A52 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,7 +987,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app1;
+				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app2;
 				PRODUCT_NAME = "フリマ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1009,7 +1009,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app1;
+				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app2;
 				PRODUCT_NAME = "フリマ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

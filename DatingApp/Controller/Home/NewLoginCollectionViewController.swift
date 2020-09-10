@@ -157,7 +157,6 @@ extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollec
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-//            cell3.layer.cornerRadius = 15
 //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
 //            cell3.bannerView.rootViewController = self
 //            cell3.bannerView.load(GADRequest())

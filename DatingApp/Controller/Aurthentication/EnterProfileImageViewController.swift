@@ -9,7 +9,6 @@
 import UIKit
 import JGProgressHUD
 
-@available(iOS 13.0, *)
 class EnterProfileImageViewController: UIViewController {
     
     // MARK: - Properties
@@ -78,9 +77,7 @@ class EnterProfileImageViewController: UIViewController {
         
         Service.uploadImage(image: profileImage!) { (imageUrl) in
             
-            let dict = [PROFILEIMAGEURL1: imageUrl,
-                        PROFILEIMAGEURL2: "",
-                        PROFILEIMAGEURL3: ""]
+            let dict = [PROFILEIMAGEURL1: imageUrl]
             
             updateUser(withValue: dict)
             self.hudSetup()
@@ -89,9 +86,7 @@ class EnterProfileImageViewController: UIViewController {
     
     private func addPlaceholederImage() {
         
-        let dict = [PROFILEIMAGEURL1: PLACEHOLDERIMAGEURL,
-                    PROFILEIMAGEURL2: "",
-                    PROFILEIMAGEURL3: ""]
+        let dict = [PROFILEIMAGEURL1: PLACEHOLDERIMAGEURL]
         
         updateUser(withValue: dict)
         indicator.stopAnimating()
@@ -177,7 +172,6 @@ class EnterProfileImageViewController: UIViewController {
     }
 }
 
-@available(iOS 13.0, *)
 extension EnterProfileImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

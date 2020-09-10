@@ -49,7 +49,6 @@ class User {
     var liquor: String!
     var tobacco: String!
     var birthplace: String!
-    var postCount: Int!
     var hobby1: String!
     var hobby2: String!
     var hobby3: String!
@@ -62,7 +61,6 @@ class User {
     var points: Int!
     var oneDay: Bool!
     var oneDayLate: Timestamp!
-    var loginTime: Double!
     var item1: Int!
     var item2: Int!
     var item3: Int!
@@ -85,7 +83,6 @@ class User {
     var called: Bool!
     var newLike: Bool!
     var newType: Bool!
-    var newMessage: Bool!
     var latitude: String!
     var longitude: String!
     var isApple: Bool!
@@ -153,7 +150,6 @@ class User {
         tobacco = dict[TOBACCO] as? String ?? ""
         houseMate = dict[HOUSEMATE] as? String ?? ""
         holiday = dict[HOLIDAY] as? String ?? ""
-        postCount = dict[POSTCOUNT] as? Int ?? 0
         hobby1 = dict[HOBBY1] as? String ?? ""
         hobby2 = dict[HOBBY2] as? String ?? ""
         hobby3 = dict[HOBBY3] as? String ?? ""
@@ -167,7 +163,6 @@ class User {
         points = dict[POINTS] as? Int ?? 0
         oneDay = dict[ONEDAY] as? Bool ?? false
         oneDayLate = dict[ONEDAYLATE] as? Timestamp ?? Timestamp(date: Date())
-        loginTime = dict[LOGINTIME] as? Double ?? 0
         item1 = dict[ITEM1] as? Int ?? 0
         item2 = dict[ITEM2] as? Int ?? 0
         item3 = dict[ITEM3] as? Int ?? 0
@@ -190,7 +185,6 @@ class User {
         called = dict[CALLED] as? Bool ?? false
         newLike = dict[NEWLIKE] as? Bool ?? false
         newType = dict[NEWTYPE] as? Bool ?? false
-        newMessage = dict[NEWMESSAGE] as? Bool ?? false
         latitude = dict[LATITUDE] as? String ?? ""
         longitude = dict[LONGITUDE] as? String ?? ""
         isApple = dict[ISAPPLE] as? Bool ?? false
@@ -221,7 +215,7 @@ class User {
     // MARK: - Return user
     
     class func currentUserId() -> String {
-        guard Auth.auth().currentUser != nil else { return "nhkjq8e4x4PseANTFdMM1YQQuk83" }
+        guard Auth.auth().currentUser != nil else { return "fCaTJRVce0eDLoxZAe2xLubNy893" }
 
         return Auth.auth().currentUser!.uid
     }
@@ -957,8 +951,7 @@ class User {
     class func isOnline(online: String, completion: @escaping() -> Void) {
         
         guard Auth.auth().currentUser?.uid != nil else { return }
-        let date: Double = Date().timeIntervalSince1970
-        let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date()), DATE: date] as [String : Any]
+        let dict = [STATUS: online, LASTCHANGE: Timestamp(date: Date())] as [String : Any]
         COLLECTION_USERS.document(User.currentUserId()).updateData(dict) { (error) in
             completion()
         }

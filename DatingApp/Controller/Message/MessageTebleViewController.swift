@@ -58,6 +58,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         handleTextField()
         fetchIsRead()
         timerMethod()
+        
 //        setupBanner()
 //        interstitial = createAndLoadIntersitial()
         testBanner()
@@ -416,7 +417,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                 self.badgeUser = user
                 
                 sendRequestNotification(toUser: self.badgeUser, message: "\(self.currentUser.username!)さんからメッセージが届いています", badge: self.badgeUser.appBadgeCount + 1)
-                updateToUser(self.badgeUser.uid, withValue: [NEWMESSAGE: true])
             }
         }
     }

@@ -84,7 +84,7 @@ class DetailTableViewCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    var user: User!
+    var user = User()
     var currentUser = User()
     
     func configureCell(_ user: User?) {
@@ -146,13 +146,24 @@ class DetailTableViewCell: UITableViewCell {
         nameLabel2.text = user?.username
         residenceLabel.text = user?.residence
         residenceLabel2.text = user?.residence
+        
         if user?.profession == "" {
             professionLabel.text = "未設定"
         } else {
             professionLabel.text = user?.profession
         }
-        bodyLabel.text = user?.bodySize
-        heightLabel.text = user?.height
+        
+        if user?.bodySize == "" {
+            bodyLabel.text = "未設定"
+        } else {
+            bodyLabel.text = user?.bodySize
+        }
+        
+        if user?.height == "" {
+            heightLabel.text = "未設定"
+        } else {
+            heightLabel.text = user?.height
+        }
         
         if user?.selfIntro == "" {
             selfIntrolabel.text = "未入力"
@@ -179,18 +190,72 @@ class DetailTableViewCell: UITableViewCell {
         }
         ageLabel.text = String(user!.age) + "歳"
         ageLabel2.text = String(user!.age) + "歳"
-        bloodLabel.text = user?.blood
-        birthplaceLabel.text = user?.birthplace
-        educationLabel.text = user?.education
-        marriageHistoyLabel.text = user?.marriageHistory
-        marriageLabel.text = user?.marriage
-        child1Label.text = user?.child1
-        child2Label.text = user?.child2
-        hobbyLabel.text = user?.hobby1
-        housemateLabel.text = user?.houseMate
-        holidayLabel.text = user?.holiday
-        liquorlabel.text = user?.liquor
-        tobaccoLabel.text = user?.tobacco
+        
+        if user?.blood == "" {
+            bloodLabel.text = "未設定"
+        } else {
+            bloodLabel.text = user?.blood
+        }
+        
+        if user?.birthplace == "" {
+            birthplaceLabel.text = "未設定"
+        } else {
+            birthplaceLabel.text = user?.birthplace
+        }
+        
+        if user?.education == "" {
+            educationLabel.text = "未設定"
+        } else {
+            educationLabel.text = user?.education
+        }
+        
+        if user?.marriageHistory == "" {
+            marriageHistoyLabel.text = "未設定"
+        } else {
+            marriageHistoyLabel.text = user?.marriageHistory
+        }
+        
+        if user?.marriage == "" {
+            marriageLabel.text = "未設定"
+        } else {
+            marriageLabel.text = user?.marriage
+        }
+        
+        if user?.child1 == "" {
+            child1Label.text = "未設定"
+        } else {
+            child1Label.text = user?.child1
+        }
+        
+        if user?.child2 == "" {
+            child2Label.text = "未設定"
+        } else {
+            child2Label.text = user?.child2
+        }
+        
+        if user?.houseMate == "" {
+            housemateLabel.text = "未設定"
+        } else {
+            housemateLabel.text = user?.houseMate
+        }
+        
+        if user?.holiday == "" {
+            holidayLabel.text = "未設定"
+        } else {
+            holidayLabel.text = user?.holiday
+        }
+        
+        if user?.liquor == "" {
+            liquorlabel.text = "未設定"
+        } else {
+            liquorlabel.text = user?.liquor
+        }
+        
+        if user?.tobacco == "" {
+            tobaccoLabel.text = "未設定"
+        } else {
+            tobaccoLabel.text = user?.tobacco
+        }
         
         if user?.hobby1 != "" && user?.hobby2 != "" && user?.hobby3 != "" {
             hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)! + "," + (user?.hobby3)!

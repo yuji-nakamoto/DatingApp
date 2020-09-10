@@ -50,6 +50,14 @@
 				<string>com.googleusercontent.apps.491236392277-juhp9p6njj6a9bj044plllm0me1nse06</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.491236392277-dvsqq9hg8mhuclp502aj9dr2l4h418c0</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>

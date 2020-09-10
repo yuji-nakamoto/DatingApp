@@ -394,9 +394,11 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         residenceSettingLabel.text = user.residence
         residenceSettingLabel.textColor = UIColor(named: O_GREEN)
         
+        nicknameSetLbl.text = user.username
+        
         if user.profession == "" {
             professionSettingLabel.text = "設定する"
-            bodySizeSettingLabel.textColor = .systemGray
+            professionSettingLabel.textColor = .systemGray
         } else {
             professionSettingLabel.text = user.profession
             professionSettingLabel.textColor = UIColor(named: O_GREEN)
@@ -410,101 +412,111 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             selfIntroLabl.text = "自己紹介"
             selfIntroSetLbl.isHidden = false
         }
-
-        if user.height != "未設定" {
+        
+        if user.height == "" {
+            heightSettingLabel.text = "設定する"
+            heightSettingLabel.textColor = .systemGray
+        } else {
             heightSettingLabel.text = user.height
             heightSettingLabel.textColor = UIColor(named: O_GREEN)
-        } else {
-
-            heightSettingLabel.textColor = .systemGray
         }
-        
-        if user.bodySize != "未設定" {
+
+        if user.bodySize == "" {
+            bodySizeSettingLabel.text = "設定する"
+            bodySizeSettingLabel.textColor = .systemGray
+        } else {
             bodySizeSettingLabel.text = user.bodySize
             bodySizeSettingLabel.textColor = UIColor(named: O_GREEN)
-        } else {
-            bodySizeSettingLabel.textColor = .systemGray
         }
         
-        if user.blood != "未設定" {
+        if user.blood == "" {
+            bloodSetLbl.text = "設定する"
+            bloodSetLbl.textColor = .systemGray
+        } else {
             bloodSetLbl.text = user.blood
             bloodSetLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            bloodSetLbl.textColor = .systemGray
         }
-        
-        if user.birthplace != "未設定" {
+   
+        if user.birthplace == "" {
+            birthplaceLbl.text = "設定する"
+            birthplaceLbl.textColor = .systemGray
+        } else {
             birthplaceLbl.text = user.birthplace
             birthplaceLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            birthplaceLbl.textColor = .systemGray
         }
         
-        if user.education != "未設定" {
+        if user.education == "" {
+            educationalSetLbl.text = "設定する"
+            educationalSetLbl.textColor = .systemGray
+        } else {
             educationalSetLbl.text = user.education
             educationalSetLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            educationalSetLbl.textColor = .systemGray
         }
         
-        if user.marriageHistory != "未設定" {
+        if user.marriageHistory == "" {
+            marriageHistoryLbl.text = "設定する"
+            marriageHistoryLbl.textColor = .systemGray
+        } else {
             marriageHistoryLbl.text = user.marriageHistory
             marriageHistoryLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            marriageHistoryLbl.textColor = .systemGray
         }
         
-        if user.marriage != "未設定" {
+        if user.marriage == "" {
+            marriageLbl.text = "設定する"
+            marriageLbl.textColor = .systemGray
+        } else {
             marriageLbl.text = user.marriage
             marriageLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            marriageLbl.textColor = .systemGray
         }
         
-        if user.child1 != "未設定" {
+        if user.child1 == "" {
+            childLbl1.text = "設定する"
+            childLbl1.textColor = .systemGray
+        } else {
             childLbl1.text = user.child1
             childLbl1.textColor = UIColor(named: O_GREEN)
-        } else {
-            childLbl1.textColor = .systemGray
         }
         
-        if user.child2 != "未設定" {
+        if user.child2 == "" {
+            childLbl2.text = "設定する"
+            childLbl2.textColor = .systemGray
+        } else {
             childLbl2.text = user.child2
             childLbl2.textColor = UIColor(named: O_GREEN)
-        } else {
-            childLbl2.textColor = .systemGray
         }
         
-        if user.houseMate != "未設定" {
+        if user.houseMate == "" {
+            houseMateLbl.text = "設定する"
+            houseMateLbl.textColor = .systemGray
+        } else {
             houseMateLbl.text = user.houseMate
             houseMateLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            houseMateLbl.textColor = .systemGray
         }
         
-        if user.holiday != "未設定" {
+        if user.holiday == "" {
+            holidayLbl.text = "設定する"
+            holidayLbl.textColor = .systemGray
+        } else {
             holidayLbl.text = user.holiday
             holidayLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            holidayLbl.textColor = .systemGray
         }
         
-        if user.liquor != "未設定" {
+        if user.liquor == "" {
+            liquorLbl.text = "設定する"
+            liquorLbl.textColor = .systemGray
+        } else {
             liquorLbl.text = user.liquor
             liquorLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            liquorLbl.textColor = .systemGray
         }
         
-        if user.tobacco != "未設定" {
+        if user.tobacco == "" {
+            tobaccoLbl.text = "設定する"
+            tobaccoLbl.textColor = .systemGray
+        } else {
             tobaccoLbl.text = user.tobacco
             tobaccoLbl.textColor = UIColor(named: O_GREEN)
-        } else {
-            tobaccoLbl.textColor = .systemGray
         }
-        
-        nicknameSetLbl.text = user.username
-        
+                
         if user.comment != "" {
             commentSetLbl.text = user.comment
         } else {

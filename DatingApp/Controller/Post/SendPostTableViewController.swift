@@ -90,7 +90,6 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
         Post.savePost(withValue: dict)
-        updateUser(withValue: [POSTCOUNT: user.postCount + 1])
         
         userDefaults.removeObject(forKey: LOVER)
         userDefaults.removeObject(forKey: FRIEND)

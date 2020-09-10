@@ -79,7 +79,6 @@ public let HOLIDAY = "holiday"
 public let LIQUOR = "liquor"
 public let TOBACCO = "tobacco"
 public let BIRTHPLACE = "birthplace"
-public let POSTCOUNT = "postCount"
 public let HOBBY1 = "hobby1"
 public let HOBBY2 = "hobby2"
 public let HOBBY3 = "hobby3"
@@ -90,7 +89,6 @@ public let INQUIRY = "inquiry"
 public let OPINION = "opinion"
 public let POINTS = "points"
 public let ONEDAY = "oneDay"
-public let LOGINTIME = "loginTime"
 public let ONEDAYLATE = "oneDaylate"
 public let CREATED_AT = "created_at"
 public let ITEM1 = "item1"
@@ -116,7 +114,6 @@ public let CALLED = "called"
 public let POINTBUTTON = "pointButton"
 public let NEWLIKE = "newLike"
 public let NEWTYPE = "newType"
-public let NEWMESSAGE = "newMessage"
 public let LATITUDE = "latitude"
 public let LONGITUDE = "longitude"
 public let ISAPPLE = "isApple"
@@ -143,7 +140,6 @@ public let FOOTGETPT1 = "footGetPt1"
 public let FOOTGETPT2 = "footGetPt2"
 public let PROFILEGETPT1 = "profileGetPt1"
 
-
 // MARK: - Counter
 
 public let SHARDS = "shards"
@@ -165,7 +161,6 @@ public let LIKED = "liked"
 public let ISTYPE = "isType"
 public let TYPED = "typed"
 public let ISMATCH = "isMatch"
-
 
 // MARK: - Footstep
 
