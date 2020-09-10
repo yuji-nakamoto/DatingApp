@@ -71,7 +71,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         setupUI()
         confifureLocationManager()
-        interstitial = createAndLoadIntersitial()
+//        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
     }
     

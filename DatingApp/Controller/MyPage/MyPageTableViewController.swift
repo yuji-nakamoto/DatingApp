@@ -31,8 +31,7 @@ class MyPageTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "マイページ"
-        tableView.separatorStyle = .none
+        
 //        setupBanner()
         testBanner()
         showHintView()
@@ -139,7 +138,8 @@ class MyPageTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        
+        navigationItem.title = "マイページ"
+        tableView.separatorStyle = .none
         hintView.alpha = 0
         visualEffectView.alpha = 0
         hintView.layer.cornerRadius = 15

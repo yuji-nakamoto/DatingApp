@@ -28,9 +28,9 @@ class PostTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 //        setupBanner()
         testBanner()
+        
         setupUI()
         fetchPost()
         refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)

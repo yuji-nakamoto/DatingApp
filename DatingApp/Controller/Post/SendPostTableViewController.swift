@@ -30,9 +30,9 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTextView()
         fetchUser()
+        
 //        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
     }

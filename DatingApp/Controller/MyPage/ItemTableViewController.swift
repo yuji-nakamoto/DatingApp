@@ -38,6 +38,7 @@ class ItemTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchUser()
+        
 //        setupBanner()
         testBanner()
     }

@@ -114,6 +114,7 @@ public let CALLED = "called"
 public let POINTBUTTON = "pointButton"
 public let NEWLIKE = "newLike"
 public let NEWTYPE = "newType"
+public let NEWMESSAGE = "newMessage"
 public let LATITUDE = "latitude"
 public let LONGITUDE = "longitude"
 public let ISAPPLE = "isApple"
@@ -140,6 +141,7 @@ public let FOOTGETPT1 = "footGetPt1"
 public let FOOTGETPT2 = "footGetPt2"
 public let PROFILEGETPT1 = "profileGetPt1"
 
+
 // MARK: - Counter
 
 public let SHARDS = "shards"
@@ -161,6 +163,7 @@ public let LIKED = "liked"
 public let ISTYPE = "isType"
 public let TYPED = "typed"
 public let ISMATCH = "isMatch"
+
 
 // MARK: - Footstep
 
