@@ -11,11 +11,11 @@
 		6E46F66F24FBA17E000B1DAC /* Notice3TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */; };
 		6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */; };
 		6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */; };
+		6E696EDE251085DD00B012AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E696EDD251085DC00B012AD /* GoogleService-Info.plist */; };
 		6E74739F24F8254D00D14945 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74739E24F8254D00D14945 /* VideoViewController.swift */; };
 		6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */; };
 		6E7766B02503116200ABDCB9 /* NewLoginCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */; };
 		6E7C0FDE2500965E00E7A7B7 /* ParchmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */; };
-		6EA145822509D83C004AB06C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA145812509D83C004AB06C /* GoogleService-Info.plist */; };
 		6EA585B12508E36700C4C586 /* MissionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA585B02508E36700C4C586 /* MissionTableViewController.swift */; };
 		6ECF471D2501A26B00735F14 /* NewUserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */; };
 		830AF02E24EEE8140043827B /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830AF02D24EEE8140043827B /* HelpViewController.swift */; };
@@ -139,17 +139,272 @@
 		BEA72603F135CFE06F286361 /* Pods_DatingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8332D7D4250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF96B57ADE05E8909F823BDF6868B3E3;
+			remoteInfo = abseil;
+		};
+		8332D7D6250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3FD1B4C1246D643E9476438C28048FA8;
+			remoteInfo = AppAuth;
+		};
+		8332D7D8250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 514D7742C6CBB0BDBD9984AEE97DDFDE;
+			remoteInfo = "BoringSSL-GRPC";
+		};
+		8332D7DA250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CF8D19DFCF0FADE0AFA804F44FA81E75;
+			remoteInfo = "EmptyDataSet-Swift";
+		};
+		8332D7DC250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC8F4D0BE3B0C192EBA4A93F8887D89F;
+			remoteInfo = FBSDKCoreKit;
+		};
+		8332D7DE250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DE0FEFC3995E740EC1AE2611D0AEFB0;
+			remoteInfo = FBSDKLoginKit;
+		};
+		8332D7E0250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 43B1E4CD7B30B9FD278100133C2AC788;
+			remoteInfo = FirebaseAuth;
+		};
+		8332D7E2250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2B63D462DB7F827C4B11FD51E4F8E2D;
+			remoteInfo = FirebaseCore;
+		};
+		8332D7E4250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8CC9178C366942FD6FF6A115604EAD58;
+			remoteInfo = FirebaseCoreDiagnostics;
+		};
+		8332D7E6250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51671C73F008B5C0C3751B3855999213;
+			remoteInfo = FirebaseDatabase;
+		};
+		8332D7E8250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92000153CD73F7FC2DBAB4AB708269F3;
+			remoteInfo = FirebaseFirestore;
+		};
+		8332D7EA250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13C8C8B254851998F9289F71229B28A2;
+			remoteInfo = FirebaseInstallations;
+		};
+		8332D7EC250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2DA0D814DFCB860D31D7BCD63D795858;
+			remoteInfo = FirebaseInstanceID;
+		};
+		8332D7EE250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B654B4B042BA7DC93766943A643E42B;
+			remoteInfo = FirebaseMessaging;
+		};
+		8332D7F0250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9CF8FA5F01F446F01AAC7331075452AD;
+			remoteInfo = FirebaseStorage;
+		};
+		8332D7F2250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D449099C9456E9F8C3CDC1324C09DF0B;
+			remoteInfo = GeoFire;
+		};
+		8332D7F4250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A5475743E0A006463184E8D0BBE6E11;
+			remoteInfo = Geofirestore;
+		};
+		8332D7F6250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 856B5CD56F194FAD26EA91620B66D614;
+			remoteInfo = GoogleDataTransport;
+		};
+		8332D7F8250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B43874C6CBB50E7134FBEC24BABFE14F;
+			remoteInfo = GoogleUtilities;
+		};
+		8332D7FA250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1911113E0FBF13CFF9132E5FF7685228;
+			remoteInfo = "gRPC-C++";
+		};
+		8332D7FC250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7C87B5D0A6752AFA2642F1BCA967A3;
+			remoteInfo = "gRPC-C++-gRPCCertificates-Cpp";
+		};
+		8332D7FE250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B471867C535B02FA55D87E260F6480F8;
+			remoteInfo = "gRPC-Core";
+		};
+		8332D800250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6FD122EA0AB9AB2A8FFA5F676C795DF0;
+			remoteInfo = GTMAppAuth;
+		};
+		8332D802250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C1998E0D8085221AD87F89B614C10E52;
+			remoteInfo = GTMSessionFetcher;
+		};
+		8332D804250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7FBAFAA66E9C7401884F439AE8BC662C;
+			remoteInfo = JGProgressHUD;
+		};
+		8332D806250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0A9F46A999C47653013D3AD854352507;
+			remoteInfo = "leveldb-library";
+		};
+		8332D808250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 51BA97E8B5085EFFB47BC9C0B785CEA7;
+			remoteInfo = "lottie-ios";
+		};
+		8332D80A250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06FC5C9CF96D60C50FCD47D339C91951;
+			remoteInfo = nanopb;
+		};
+		8332D80C250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A1B9F27862201CD82B398E0B35B14128;
+			remoteInfo = NVActivityIndicatorView;
+		};
+		8332D80E250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BDD18ACB625B597CC06D7006C44D7FE5;
+			remoteInfo = Parchment;
+		};
+		8332D810250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6332E2E7AAA3EA67BFB0A007C87FBAEC;
+			remoteInfo = "Pods-DatingApp";
+		};
+		8332D812250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3347A1AB6546F0A3977529B8F199DC41;
+			remoteInfo = PromisesObjC;
+		};
+		8332D814250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C2105C94812B6214B154F54DCEDB72AC;
+			remoteInfo = Protobuf;
+		};
+		8332D816250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6803A26D713572B4FCF211333F946956;
+			remoteInfo = RAMAnimatedTabBarController;
+		};
+		8332D818250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B0B214D775196BA7CA8E17E53048A493;
+			remoteInfo = SDWebImage;
+		};
+		8332D81A250A59E800C06022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9506DA724C6F10EF01A979CAA24AB55D;
+			remoteInfo = TextFieldEffects;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		20119206395B34005853DB9C /* Pods-DatingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.debug.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6E46F66C24FBA15C000B1DAC /* Notice2TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice2TableViewController.swift; sourceTree = "<group>"; };
 		6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice3TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice4TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice5TableViewController.swift; sourceTree = "<group>"; };
+		6E696EDD251085DC00B012AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E74739E24F8254D00D14945 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentMessageViewController.swift; sourceTree = "<group>"; };
 		6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginCollectionViewController.swift; sourceTree = "<group>"; };
 		6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentViewController.swift; sourceTree = "<group>"; };
-		6EA145812509D83C004AB06C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6EA585B02508E36700C4C586 /* MissionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTableViewController.swift; sourceTree = "<group>"; };
 		6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCollectionViewController.swift; sourceTree = "<group>"; };
 		708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +413,7 @@
 		831E392324C9CBE00043AA76 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		8332D7A6250A59E700C06022 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		8348826324EA95E300054DF7 /* corp_round_v1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = corp_round_v1.ttf; sourceTree = "<group>"; };
 		8348826524EAA42000054DF7 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8348826724EABAFE00054DF7 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +548,7 @@
 		192A468B98B0E43A9264BED4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8332D7A6250A59E700C06022 /* Pods.xcodeproj */,
 				708D59BDDEE246A2102B7A29 /* Pods_DatingApp.framework */,
 			);
 			name = Frameworks;
@@ -341,6 +598,49 @@
 				6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */,
 			);
 			path = Notice;
+			sourceTree = "<group>";
+		};
+		8332D7A7250A59E700C06022 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8332D7D5250A59E800C06022 /* absl.framework */,
+				8332D7D7250A59E800C06022 /* AppAuth.framework */,
+				8332D7D9250A59E800C06022 /* openssl_grpc.framework */,
+				8332D7DB250A59E800C06022 /* EmptyDataSet_Swift.framework */,
+				8332D7DD250A59E800C06022 /* FBSDKCoreKit.framework */,
+				8332D7DF250A59E800C06022 /* FBSDKLoginKit.framework */,
+				8332D7E1250A59E800C06022 /* FirebaseAuth.framework */,
+				8332D7E3250A59E800C06022 /* FirebaseCore.framework */,
+				8332D7E5250A59E800C06022 /* FirebaseCoreDiagnostics.framework */,
+				8332D7E7250A59E800C06022 /* FirebaseDatabase.framework */,
+				8332D7E9250A59E800C06022 /* FirebaseFirestore.framework */,
+				8332D7EB250A59E800C06022 /* FirebaseInstallations.framework */,
+				8332D7ED250A59E800C06022 /* FirebaseInstanceID.framework */,
+				8332D7EF250A59E800C06022 /* FirebaseMessaging.framework */,
+				8332D7F1250A59E800C06022 /* FirebaseStorage.framework */,
+				8332D7F3250A59E800C06022 /* GeoFire.framework */,
+				8332D7F5250A59E800C06022 /* Geofirestore.framework */,
+				8332D7F7250A59E800C06022 /* GoogleDataTransport.framework */,
+				8332D7F9250A59E800C06022 /* GoogleUtilities.framework */,
+				8332D7FB250A59E800C06022 /* grpcpp.framework */,
+				8332D7FD250A59E800C06022 /* gRPCCertificates-Cpp.bundle */,
+				8332D7FF250A59E800C06022 /* grpc.framework */,
+				8332D801250A59E800C06022 /* GTMAppAuth.framework */,
+				8332D803250A59E800C06022 /* GTMSessionFetcher.framework */,
+				8332D805250A59E800C06022 /* JGProgressHUD.framework */,
+				8332D807250A59E800C06022 /* leveldb.framework */,
+				8332D809250A59E800C06022 /* Lottie.framework */,
+				8332D80B250A59E800C06022 /* nanopb.framework */,
+				8332D80D250A59E800C06022 /* NVActivityIndicatorView.framework */,
+				8332D80F250A59E800C06022 /* Parchment.framework */,
+				8332D811250A59E800C06022 /* Pods_DatingApp.framework */,
+				8332D813250A59E800C06022 /* FBLPromises.framework */,
+				8332D815250A59E800C06022 /* Protobuf.framework */,
+				8332D817250A59E800C06022 /* RAMAnimatedTabBarController.framework */,
+				8332D819250A59E800C06022 /* SDWebImage.framework */,
+				8332D81B250A59E800C06022 /* TextFieldEffects.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		834966BE24DBC81400C9B7DD /* PickerKeyboard */ = {
@@ -432,7 +732,7 @@
 				8348E3E024CDD48E001D59C0 /* like.json */,
 				8348E3DC24CDD378001D59C0 /* type.json */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
-				6EA145812509D83C004AB06C /* GoogleService-Info.plist */,
+				6E696EDD251085DC00B012AD /* GoogleService-Info.plist */,
 				838071D724C608FA008BAA2C /* Info.plist */,
 			);
 			path = DatingApp;
@@ -585,8 +885,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				F7F10AF4E0A065795B62890F /* [CP] Embed Pods Frameworks */,
-				0E21C60DCDAD3D4D06056FB6 /* [CP] Copy Pods Resources */,
+				52D519D2F13AD6724F03DE2E /* [CP] Embed Pods Frameworks */,
+				AAA15415D87AB16942933430 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -623,6 +923,12 @@
 			mainGroup = 838071BD24C608F5008BAA2C;
 			productRefGroup = 838071C724C608F5008BAA2C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8332D7A7250A59E700C06022 /* Products */;
+					ProjectRef = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				838071C524C608F5008BAA2C /* DatingApp */,
@@ -630,12 +936,266 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		8332D7D5250A59E800C06022 /* absl.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = absl.framework;
+			remoteRef = 8332D7D4250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7D7250A59E800C06022 /* AppAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AppAuth.framework;
+			remoteRef = 8332D7D6250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7D9250A59E800C06022 /* openssl_grpc.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = openssl_grpc.framework;
+			remoteRef = 8332D7D8250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7DB250A59E800C06022 /* EmptyDataSet_Swift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EmptyDataSet_Swift.framework;
+			remoteRef = 8332D7DA250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7DD250A59E800C06022 /* FBSDKCoreKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FBSDKCoreKit.framework;
+			remoteRef = 8332D7DC250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7DF250A59E800C06022 /* FBSDKLoginKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FBSDKLoginKit.framework;
+			remoteRef = 8332D7DE250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7E1250A59E800C06022 /* FirebaseAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseAuth.framework;
+			remoteRef = 8332D7E0250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7E3250A59E800C06022 /* FirebaseCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCore.framework;
+			remoteRef = 8332D7E2250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7E5250A59E800C06022 /* FirebaseCoreDiagnostics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCoreDiagnostics.framework;
+			remoteRef = 8332D7E4250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7E7250A59E800C06022 /* FirebaseDatabase.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseDatabase.framework;
+			remoteRef = 8332D7E6250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7E9250A59E800C06022 /* FirebaseFirestore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseFirestore.framework;
+			remoteRef = 8332D7E8250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7EB250A59E800C06022 /* FirebaseInstallations.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseInstallations.framework;
+			remoteRef = 8332D7EA250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7ED250A59E800C06022 /* FirebaseInstanceID.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseInstanceID.framework;
+			remoteRef = 8332D7EC250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7EF250A59E800C06022 /* FirebaseMessaging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseMessaging.framework;
+			remoteRef = 8332D7EE250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7F1250A59E800C06022 /* FirebaseStorage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseStorage.framework;
+			remoteRef = 8332D7F0250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7F3250A59E800C06022 /* GeoFire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GeoFire.framework;
+			remoteRef = 8332D7F2250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7F5250A59E800C06022 /* Geofirestore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Geofirestore.framework;
+			remoteRef = 8332D7F4250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7F7250A59E800C06022 /* GoogleDataTransport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransport.framework;
+			remoteRef = 8332D7F6250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7F9250A59E800C06022 /* GoogleUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleUtilities.framework;
+			remoteRef = 8332D7F8250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7FB250A59E800C06022 /* grpcpp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = grpcpp.framework;
+			remoteRef = 8332D7FA250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7FD250A59E800C06022 /* gRPCCertificates-Cpp.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "gRPCCertificates-Cpp.bundle";
+			remoteRef = 8332D7FC250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D7FF250A59E800C06022 /* grpc.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = grpc.framework;
+			remoteRef = 8332D7FE250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D801250A59E800C06022 /* GTMAppAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTMAppAuth.framework;
+			remoteRef = 8332D800250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D803250A59E800C06022 /* GTMSessionFetcher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTMSessionFetcher.framework;
+			remoteRef = 8332D802250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D805250A59E800C06022 /* JGProgressHUD.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JGProgressHUD.framework;
+			remoteRef = 8332D804250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D807250A59E800C06022 /* leveldb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = leveldb.framework;
+			remoteRef = 8332D806250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D809250A59E800C06022 /* Lottie.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Lottie.framework;
+			remoteRef = 8332D808250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D80B250A59E800C06022 /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = 8332D80A250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D80D250A59E800C06022 /* NVActivityIndicatorView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NVActivityIndicatorView.framework;
+			remoteRef = 8332D80C250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D80F250A59E800C06022 /* Parchment.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Parchment.framework;
+			remoteRef = 8332D80E250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D811250A59E800C06022 /* Pods_DatingApp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_DatingApp.framework;
+			remoteRef = 8332D810250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D813250A59E800C06022 /* FBLPromises.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FBLPromises.framework;
+			remoteRef = 8332D812250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D815250A59E800C06022 /* Protobuf.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Protobuf.framework;
+			remoteRef = 8332D814250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D817250A59E800C06022 /* RAMAnimatedTabBarController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RAMAnimatedTabBarController.framework;
+			remoteRef = 8332D816250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D819250A59E800C06022 /* SDWebImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SDWebImage.framework;
+			remoteRef = 8332D818250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8332D81B250A59E800C06022 /* TextFieldEffects.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TextFieldEffects.framework;
+			remoteRef = 8332D81A250A59E800C06022 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		838071C424C608F5008BAA2C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EA145822509D83C004AB06C /* GoogleService-Info.plist in Resources */,
 				8348E3DD24CDD378001D59C0 /* type.json in Resources */,
 				838071D624C608FA008BAA2C /* LaunchScreen.storyboard in Resources */,
 				8348E3E124CDD48E001D59C0 /* like.json in Resources */,
@@ -643,29 +1203,13 @@
 				838071D124C608F5008BAA2C /* Main.storyboard in Resources */,
 				8348826424EA95E300054DF7 /* corp_round_v1.ttf in Resources */,
 				834966D224DEE10C00C9B7DD /* Card.xib in Resources */,
+				6E696EDE251085DD00B012AD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E21C60DCDAD3D4D06056FB6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		28E854B72C9C509B1B1E6AC6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -688,7 +1232,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F7F10AF4E0A065795B62890F /* [CP] Embed Pods Frameworks */ = {
+		52D519D2F13AD6724F03DE2E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -703,6 +1247,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAA15415D87AB16942933430 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -979,7 +1540,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
@@ -987,7 +1548,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app2;
+				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app3;
 				PRODUCT_NAME = "フリマ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1001,7 +1562,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
@@ -1009,7 +1570,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app2;
+				PRODUCT_BUNDLE_IDENTIFIER = ynstore.app3;
 				PRODUCT_NAME = "フリマ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

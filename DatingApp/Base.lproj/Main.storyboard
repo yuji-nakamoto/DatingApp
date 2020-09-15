@@ -9569,16 +9569,16 @@
                                 <color key="backgroundColor" name="original_black"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D49-SS-qWU">
-                                <rect key="frame" x="87" y="333" width="240" height="230"/>
+                                <rect key="frame" x="87" y="323" width="240" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGD-fA-3Fd">
-                                        <rect key="frame" x="13" y="15" width="215" height="140"/>
+                                        <rect key="frame" x="13" y="15" width="215" height="160"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-pC-XLT">
-                                        <rect key="frame" x="20" y="170" width="200" height="40"/>
+                                        <rect key="frame" x="20" y="190" width="200" height="40"/>
                                         <color key="backgroundColor" name="original_green"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="RGv-aJ-hcY"/>
@@ -9599,7 +9599,7 @@
                                     <constraint firstItem="WGD-fA-3Fd" firstAttribute="top" secondItem="D49-SS-qWU" secondAttribute="top" constant="15" id="OAW-pf-Lia"/>
                                     <constraint firstItem="WGD-fA-3Fd" firstAttribute="leading" secondItem="D49-SS-qWU" secondAttribute="leading" constant="13" id="Qmn-FE-Sdu"/>
                                     <constraint firstItem="FRF-pC-XLT" firstAttribute="leading" secondItem="D49-SS-qWU" secondAttribute="leading" constant="20" id="RLT-0u-KQw"/>
-                                    <constraint firstAttribute="height" constant="230" id="UPp-Tv-fca"/>
+                                    <constraint firstAttribute="height" constant="250" id="UPp-Tv-fca"/>
                                     <constraint firstAttribute="bottom" secondItem="FRF-pC-XLT" secondAttribute="bottom" constant="20" id="b5P-Q6-a77"/>
                                     <constraint firstAttribute="trailing" secondItem="FRF-pC-XLT" secondAttribute="trailing" constant="20" id="lHB-Rc-JM1"/>
                                 </constraints>
