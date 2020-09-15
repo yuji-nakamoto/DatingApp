@@ -167,91 +167,66 @@ extension LikeCountSortViewController: UICollectionViewDataSource, UICollectionV
             
             if indexPath.row == 0 {
                 cell2.miniNumberLabel.text = "1"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_GREEN)
+                cell2.miniNumberLabel.textColor = UIColor(named: "original_gold")
             } else if indexPath.row == 1 {
                 cell2.miniNumberLabel.text = "2"
-                cell2.miniNumberLabel.textColor = .systemYellow
+                cell2.miniNumberLabel.textColor = UIColor(named: "original_silver")
             } else if indexPath.row == 2 {
                 cell2.miniNumberLabel.text = "3"
-                cell2.miniNumberLabel.textColor = .systemPink
+                cell2.miniNumberLabel.textColor = UIColor(named: "original_brown")
             } else if indexPath.row == 3 {
                 cell2.miniNumberLabel.text = "4"
-                cell2.miniNumberLabel.textColor = .systemBlue
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 4 {
                 cell2.miniNumberLabel.text = "5"
-                cell2.miniNumberLabel.textColor = .systemOrange
             } else if indexPath.row == 5 {
                 cell2.miniNumberLabel.text = "6"
-                cell2.miniNumberLabel.textColor = .systemTeal
             } else if indexPath.row == 6 {
                 cell2.miniNumberLabel.text = "7"
-                cell2.miniNumberLabel.textColor = .systemPurple
             } else if indexPath.row == 7 {
                 cell2.miniNumberLabel.text = "8"
-                cell2.miniNumberLabel.textColor = .systemGreen
             } else if indexPath.row == 8 {
                 cell2.miniNumberLabel.text = "9"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_PINK)
             } else if indexPath.row == 9 {
                 cell2.miniNumberLabel.text = "10"
-                cell2.miniNumberLabel.textColor = .systemFill
             } else if indexPath.row == 10 {
                 cell2.miniNumberLabel.text = "11"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 11 {
                 cell2.miniNumberLabel.text = "12"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 12 {
                 cell2.miniNumberLabel.text = "13"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 13 {
                 cell2.miniNumberLabel.text = "14"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 14 {
                 cell2.miniNumberLabel.text = "15"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 15 {
                 cell2.miniNumberLabel.text = "16"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 16 {
                 cell2.miniNumberLabel.text = "17"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 17 {
                 cell2.miniNumberLabel.text = "18"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 18 {
                 cell2.miniNumberLabel.text = "19"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 20 {
                 cell2.miniNumberLabel.text = "21"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 21 {
                 cell2.miniNumberLabel.text = "22"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 22 {
                 cell2.miniNumberLabel.text = "23"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 23 {
                 cell2.miniNumberLabel.text = "24"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 24 {
                 cell2.miniNumberLabel.text = "25"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 25 {
                 cell2.miniNumberLabel.text = "26"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 26 {
                 cell2.miniNumberLabel.text = "27"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 27 {
                 cell2.miniNumberLabel.text = "28"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 28 {
                 cell2.miniNumberLabel.text = "29"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 29 {
                 cell2.miniNumberLabel.text = "30"
-                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             }
             return cell2
         }
@@ -261,91 +236,66 @@ extension LikeCountSortViewController: UICollectionViewDataSource, UICollectionV
         
         if indexPath.row == 0 {
             cell.numberLabel.text = "1"
-            cell.numberLabel.textColor = UIColor(named: O_GREEN)
+            cell.numberLabel.textColor = UIColor(named: "original_gold")
         } else if indexPath.row == 1 {
             cell.numberLabel.text = "2"
-            cell.numberLabel.textColor = .systemYellow
+            cell.numberLabel.textColor = UIColor(named: "original_silver")
         } else if indexPath.row == 2 {
             cell.numberLabel.text = "3"
-            cell.numberLabel.textColor = .systemPink
+            cell.numberLabel.textColor = UIColor(named: "original_brown")
         } else if indexPath.row == 3 {
             cell.numberLabel.text = "4"
-            cell.numberLabel.textColor = .systemBlue
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 4 {
             cell.numberLabel.text = "5"
-            cell.numberLabel.textColor = .systemOrange
         } else if indexPath.row == 5 {
             cell.numberLabel.text = "6"
-            cell.numberLabel.textColor = .systemTeal
         } else if indexPath.row == 6 {
             cell.numberLabel.text = "7"
-            cell.numberLabel.textColor = .systemPurple
         } else if indexPath.row == 7 {
             cell.numberLabel.text = "8"
-            cell.numberLabel.textColor = .systemGreen
         } else if indexPath.row == 8 {
             cell.numberLabel.text = "9"
-            cell.numberLabel.textColor = UIColor(named: O_PINK)
         } else if indexPath.row == 9 {
             cell.numberLabel.text = "10"
-            cell.numberLabel.textColor = .systemFill
         } else if indexPath.row == 10 {
             cell.numberLabel.text = "11"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 11 {
             cell.numberLabel.text = "12"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 12 {
             cell.numberLabel.text = "13"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 13 {
             cell.numberLabel.text = "14"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 14 {
             cell.numberLabel.text = "15"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 15 {
             cell.numberLabel.text = "16"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 16 {
             cell.numberLabel.text = "17"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 17 {
             cell.numberLabel.text = "18"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 18 {
             cell.numberLabel.text = "19"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 20 {
             cell.numberLabel.text = "21"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 21 {
             cell.numberLabel.text = "22"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 22 {
             cell.numberLabel.text = "23"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 23 {
             cell.numberLabel.text = "24"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 24 {
             cell.numberLabel.text = "25"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 25 {
             cell.numberLabel.text = "26"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 26 {
             cell.numberLabel.text = "27"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 27 {
             cell.numberLabel.text = "28"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 28 {
             cell.numberLabel.text = "29"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 29 {
             cell.numberLabel.text = "30"
-            cell.numberLabel.textColor = UIColor(named: O_BLACK)
         }
         return cell
     }

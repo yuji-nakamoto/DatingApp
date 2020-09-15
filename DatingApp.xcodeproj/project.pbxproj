@@ -885,8 +885,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				52D519D2F13AD6724F03DE2E /* [CP] Embed Pods Frameworks */,
-				AAA15415D87AB16942933430 /* [CP] Copy Pods Resources */,
+				9B5ECAB33B7D22EF712A1B03 /* [CP] Embed Pods Frameworks */,
+				20AD7815334845E4038AA06D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1210,6 +1210,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		20AD7815334845E4038AA06D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		28E854B72C9C509B1B1E6AC6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1232,7 +1249,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		52D519D2F13AD6724F03DE2E /* [CP] Embed Pods Frameworks */ = {
+		9B5ECAB33B7D22EF712A1B03 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1247,23 +1264,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AAA15415D87AB16942933430 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
