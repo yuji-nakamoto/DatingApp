@@ -10,13 +10,42 @@ import UIKit
 import Parchment
 
 class ParchmentViewController: UIViewController {
-
+    
+    @IBOutlet weak var switchButton: UIButton!
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPagingVC()
         setupUI()
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "icon50"))
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func changeCollectionButtonPressed(_ sender: Any) {
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil {
+            UserDefaults.standard.set(true, forKey: SEARCH_MINI_ON)
+            switchButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
+            updateUser(withValue: [SEARCHMINI: true])
+        } else {
+            UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
+            switchButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
+            updateUser(withValue: [SEARCHMINI: false])
+        }
+    }
+    
+    @IBAction func cardButtonPressed(_ sender: Any) {
+        toCardVC()
+    }
+    
+    // MARK: - Helpers
     
     private func initPagingVC() {
         
@@ -57,22 +86,16 @@ class ParchmentViewController: UIViewController {
     private func setupUI() {
         
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) != nil {
-            self.navigationItem.leftBarButtonItem?.image = UIImage(systemName: "circle.grid.2x2.fill")
+            switchButton.setImage(UIImage(systemName: "circle.grid.2x2.fill"), for: .normal)
         } else {
-            self.navigationItem.leftBarButtonItem?.image = UIImage(systemName: "square.grid.4x3.fill")
+            switchButton.setImage(UIImage(systemName: "square.grid.4x3.fill"), for: .normal)
         }
     }
     
-    @IBAction func changeCollectionButtonPressed(_ sender: Any) {
+    private func toCardVC() {
         
-        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil {
-            UserDefaults.standard.set(true, forKey: SEARCH_MINI_ON)
-            self.navigationItem.leftBarButtonItem?.image = UIImage(systemName: "circle.grid.2x2.fill")
-            updateUser(withValue: [SEARCHMINI: true])
-        } else {
-            UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
-            self.navigationItem.leftBarButtonItem?.image = UIImage(systemName: "square.grid.4x3.fill")
-            updateUser(withValue: [SEARCHMINI: false])
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toCardVC = storyboard.instantiateViewController(withIdentifier: "CardVC")
+        self.present(toCardVC, animated: false, completion: nil)
     }
 }

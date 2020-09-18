@@ -64,6 +64,9 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var myQuery: GFSQuery!
     private var distance: Double = 500
     private var currentLocation: CLLocation?
+    private var community1 = Community()
+    private var community2 = Community()
+    private var community3 = Community()
     
     // MARK: - Lifecycle
     
@@ -203,6 +206,9 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         
         User.fetchUser(toUserId) { (user) in
             self.user = user
+            self.fetchCommunity1(self.user)
+            self.fetchCommunity2(self.user)
+            self.fetchCommunity3(self.user)
             self.tableView.reloadData()
         }
     }
@@ -259,6 +265,30 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
     }
     
+    private func fetchCommunity1(_ user: User) {
+        
+        Community.fetchCommunity(communityId: user.community1) { (community) in
+            self.community1 = community
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchCommunity2(_ user: User) {
+        
+        Community.fetchCommunity(communityId: user.community2) { (community) in
+            self.community2 = community
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchCommunity3(_ user: User) {
+        
+        Community.fetchCommunity(communityId: user.community3) { (community) in
+            self.community3 = community
+            self.tableView.reloadData()
+        }
+    }
+    
     // MARL: - FootStep
     
     private func footsteps(_ toUserId: String) {
@@ -298,6 +328,12 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
             let blockVC = segue.destination as! BlockTableViewController
             let userId = sender as! String
             blockVC.userId = userId
+        }
+        
+        if segue.identifier == "CommunityUsersVC" {
+            let communityUsersVC = segue.destination as! CommunityUsersViewController
+            let communityId = sender as! String
+            communityUsersVC.communityId = communityId
         }
     }
     
@@ -617,9 +653,13 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
         
+        cell.detailVC = self
         cell.user = self.user
         cell.configureCell(self.user)
         cell.currentLocation(self.user, self.currentLocation)
+        cell.configureCommunity1(self.user, self.community1)
+        cell.configureCommunity2(self.user, self.community2)
+        cell.configureCommunity3(self.user, self.community3)
         return cell
     }
 }

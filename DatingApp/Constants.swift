@@ -30,6 +30,7 @@ public let COLLECTION_BLOCK = Firestore.firestore().collection("block")
 public let COLLECTION_COMMENT = Firestore.firestore().collection("comment")
 public let COLLECTION_NOTICE = Firestore.firestore().collection("notice")
 public let COLLECTION_GEO = Firestore.firestore().collection("geography")
+public let COLLECTION_COMMUNITY = Firestore.firestore().collection("community")
 
 // MARK: - Color
 
@@ -140,7 +141,10 @@ public let MATCHGETPT2 = "matchGetPt2"
 public let FOOTGETPT1 = "footGetPt1"
 public let FOOTGETPT2 = "footGetPt2"
 public let PROFILEGETPT1 = "profileGetPt1"
-
+public let COMMUNITY1 = "community1"
+public let COMMUNITY2 = "community2"
+public let COMMUNITY3 = "community3"
+public let CREATECOMMUNITY = "createCommunity"
 
 // MARK: - Counter
 
@@ -186,10 +190,15 @@ public let ISBLOCK = "isBlock"
 // MARK: - Comment
 public let TEXT = "text"
 
-// MARL: - Notice
+// MARK: - Notice
 public let TITLE = "title"
 public let TITLE2 = "title2"
 public let MAINTEXT = "mainText"
+
+// MARK: - Community
+public let CONTENTSIMAGEURL = "contentsImageUrl"
+public let NUMBER = "number"
+public let COMMUNITYID = "communityId"
 
 // MARK: - Placeholder image
 
@@ -240,6 +249,9 @@ public let NOTICE4 = "notice4"
 public let NOTICE5 = "notice5"
 public let VIEW_ON = "view_on"
 public let REFRESH_ON = "refresh_on"
+public let C_NUMBER_ON = "cNumber_on"
+public let C_CREATED_ON = "cCreated_on"
+public let C_ALL_ON = "cAll_on"
 
 // MARK: - Notification
 

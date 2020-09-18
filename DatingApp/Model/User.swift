@@ -109,7 +109,11 @@ class User {
     var footGetPt1: Bool!
     var footGetPt2: Bool!
     var profileGetPt1: Bool!
-
+    var community1: String!
+    var community2: String!
+    var community3: String!
+    var createCommunity: Bool!
+    
     init() {
     }
         
@@ -212,6 +216,10 @@ class User {
         footGetPt1 = dict[FOOTGETPT1] as? Bool ?? false
         footGetPt2 = dict[FOOTGETPT2] as? Bool ?? false
         profileGetPt1 = dict[PROFILEGETPT1] as? Bool ?? false
+        community1 = dict[COMMUNITY1] as? String ?? ""
+        community2 = dict[COMMUNITY2] as? String ?? ""
+        community3 = dict[COMMUNITY3] as? String ?? ""
+        createCommunity = dict[CREATECOMMUNITY] as? Bool ?? false
     }
     
     // MARK: - Return user
@@ -595,7 +603,7 @@ class User {
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
-                .order(by: LASTCHANGE)
+                .order(by: LASTCHANGE, descending: true)
 
             Block.fetchBlockSwipe { (blockUserIDs) in
                 Match.fetchMatch { (matchUserIDs) in
@@ -623,8 +631,8 @@ class User {
             
         } else {
             let usersRef = COLLECTION_USERS
-                .order(by: LASTCHANGE)
-            
+                .order(by: LASTCHANGE, descending: true)
+
             Block.fetchBlockSwipe { (blockUserIDs) in
                 Match.fetchMatch { (matchUserIDs) in
                     usersRef.getDocuments { (snapshot, error) in
@@ -659,7 +667,7 @@ class User {
         if UserDefaults.standard.object(forKey: MALE) != nil {
             
             let usersRef = COLLECTION_USERS
-                .order(by: LASTCHANGE)
+                .order(by: LASTCHANGE, descending: true)
 
             Block.fetchBlockSwipe { (blockUserIDs) in
                 Match.fetchMatch { (matchUserIDs) in
@@ -686,8 +694,8 @@ class User {
             
         } else {
             let usersRef = COLLECTION_USERS
-                .order(by: LASTCHANGE)
-            
+                .order(by: LASTCHANGE, descending: true)
+
             Block.fetchBlockSwipe { (blockUserIDs) in
                 Match.fetchMatch { (matchUserIDs) in
                     usersRef.getDocuments { (snapshot, error) in
@@ -944,6 +952,61 @@ class User {
                             users.append(user)
                         })
                         completion(users)
+                    }
+                }
+            }
+        }
+    }
+    
+    class func fetchCommunityUsers(communityId: String, completion: @escaping([User]) -> Void) {
+        var users: [User] = []
+        guard Auth.auth().currentUser != nil else { return }
+
+        if UserDefaults.standard.object(forKey: MALE) != nil {
+            
+            let usersRef = COLLECTION_USERS
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                Community.checkCommunity(communityId: communityId) { (communityUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error fetch community: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "男性" else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard communityUserIDs[user.uid] != nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
+                    }
+                }
+            }
+            
+        } else {
+            let usersRef = COLLECTION_USERS
+            
+            Block.fetchBlockSwipe { (blockUserIDs) in
+                Community.checkCommunity(communityId: communityId) { (communityUserIDs) in
+                    usersRef.getDocuments { (snapshot, error) in
+                        if let error = error {
+                            print("Error fetch community: \(error.localizedDescription)")
+                        } else {
+                            snapshot?.documents.forEach({ (document) in
+                                let dict = document.data()
+                                let user = User(dict: dict as [String: Any])
+                                guard user.uid != User.currentUserId() else { return }
+                                guard user.gender == "女性" else { return }
+                                guard blockUserIDs[user.uid] == nil else { return }
+                                guard communityUserIDs[user.uid] != nil else { return }
+                                users.append(user)
+                            })
+                            completion(users)
+                        }
                     }
                 }
             }

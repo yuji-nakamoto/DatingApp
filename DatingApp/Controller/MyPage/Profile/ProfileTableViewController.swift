@@ -18,8 +18,11 @@ class ProfileTableViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var profileImages = [UIImage]()
-    var user = User()
+    private var profileImages = [UIImage]()
+    private var user = User()
+    private var community1 = Community()
+    private var community2 = Community()
+    private var community3 = Community()
     private var currentLocation: CLLocation?
     
     // MARK: - Lifecycle
@@ -50,12 +53,39 @@ class ProfileTableViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - Fetch user
+    // MARK: - Fetch
     
     private func fetchUser() {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
+            self.fetchCommunity1(self.user)
+            self.fetchCommunity2(self.user)
+            self.fetchCommunity3(self.user)
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchCommunity1(_ user: User) {
+        
+        Community.fetchCommunity(communityId: user.community1) { (community) in
+            self.community1 = community
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchCommunity2(_ user: User) {
+        
+        Community.fetchCommunity(communityId: user.community2) { (community) in
+            self.community2 = community
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchCommunity3(_ user: User) {
+        
+        Community.fetchCommunity(communityId: user.community3) { (community) in
+            self.community3 = community
             self.tableView.reloadData()
         }
     }
@@ -72,6 +102,15 @@ class ProfileTableViewController: UIViewController {
         editButton.layer.shadowOpacity = 0.3
         editButton.layer.shadowRadius = 4
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "CommunityUsersVC" {
+            let communityUsersVC = segue.destination as! CommunityUsersViewController
+            let communityId = sender as! String
+            communityUsersVC.communityId = communityId
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -84,8 +123,13 @@ extension ProfileTableViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DetailTableViewCell
  
+        cell.profileVC = self
         cell.user = self.user
         cell.configureCell(self.user)
+        cell.configureCommunity1(self.user, self.community1)
+        cell.configureCommunity2(self.user, self.community2)
+        cell.configureCommunity3(self.user, self.community3)
+        
         return cell
     }
 }

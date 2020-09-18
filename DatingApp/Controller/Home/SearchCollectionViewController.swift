@@ -40,11 +40,15 @@ class SearchCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaults.standard.set(true, forKey: RCOMPLETION)
+        UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
+        UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
+        UserDefaults.standard.removeObject(forKey: C_ALL_ON)
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+        
 //          setupBanner()
         testBanner()
         fetchUser()
@@ -340,7 +344,9 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
             performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row].uid)
             return
         }
-        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
+        if indexPath.row != 0 {
+            performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
+        }
     }
 }
 

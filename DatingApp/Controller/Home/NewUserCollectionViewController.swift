@@ -26,9 +26,10 @@ class NewUserCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSnapshotListener()
 //        setupBanner()
         testBanner()
+        
+        addSnapshotListener()
         fetchUser()
         setupUI()
     }
@@ -192,7 +193,9 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
             performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row].uid)
             return
         }
-        performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
+        if indexPath.row != 0 {
+            performSegue(withIdentifier: "DetailVC", sender: users[indexPath.row - 1].uid)
+        }
     }
 }
 

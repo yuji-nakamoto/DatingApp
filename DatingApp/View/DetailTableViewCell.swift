@@ -81,11 +81,22 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var hobbyLbl1: UILabel!
     @IBOutlet weak var hobbyLbl2: UILabel!
     @IBOutlet weak var hobbyLbl3: UILabel!
+    @IBOutlet weak var communityImageView1: UIImageView!
+    @IBOutlet weak var communityImageView2: UIImageView!
+    @IBOutlet weak var communityImageView3: UIImageView!
+    @IBOutlet weak var communityLabel1: UILabel!
+    @IBOutlet weak var communityLabel2: UILabel!
+    @IBOutlet weak var communityLabel3: UILabel!
+    @IBOutlet weak var numberLabel1: UILabel!
+    @IBOutlet weak var numberLabel2: UILabel!
+    @IBOutlet weak var numberLabel3: UILabel!
     
-    // MARK: - Helpers
+    // MARK: - User
     
     var user = User()
     var currentUser = User()
+    var profileVC: ProfileTableViewController?
+    var detailVC: DetailTableViewController?
     
     func configureCell(_ user: User?) {
         
@@ -185,9 +196,7 @@ class DetailTableViewCell: UITableViewCell {
             detailMapLabel.text = user?.detailArea
         }
         
-        if user?.age == nil {
-            return
-        }
+        if user?.age == nil { return }
         ageLabel.text = String(user!.age) + "歳"
         ageLabel2.text = String(user!.age) + "歳"
         
@@ -266,7 +275,7 @@ class DetailTableViewCell: UITableViewCell {
             hobbyLbl1.isHidden = false
             hobbyLbl2.isHidden = false
             hobbyLbl3.isHidden = false
-
+            
         } else if user?.hobby1 != "" && user?.hobby2 != "" {
             hobbyLabel.text = (user?.hobby1)! + "," + (user?.hobby2)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 15)
@@ -301,7 +310,7 @@ class DetailTableViewCell: UITableViewCell {
             hobbyLbl1.isHidden = false
             hobbyLbl2.isHidden = true
             hobbyLbl3.isHidden = true
-
+            
         } else if user?.hobby2 != "" {
             hobbyLabel.text = (user?.hobby2)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 17)
@@ -309,7 +318,7 @@ class DetailTableViewCell: UITableViewCell {
             hobbyLbl1.isHidden = false
             hobbyLbl2.isHidden = true
             hobbyLbl3.isHidden = true
-
+            
         } else if user?.hobby3 != "" {
             hobbyLabel.text = (user?.hobby3)!
             hobbyLabel.font = UIFont.systemFont(ofSize: 17)
@@ -317,7 +326,7 @@ class DetailTableViewCell: UITableViewCell {
             hobbyLbl1.isHidden = false
             hobbyLbl2.isHidden = true
             hobbyLbl3.isHidden = true
-
+            
         } else {
             hobbyLabel.text = "未設定"
             hobbyLabel.font = UIFont.systemFont(ofSize: 17)
@@ -364,6 +373,68 @@ class DetailTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Community
+    
+    func configureCommunity1(_ user: User, _ community1: Community) {
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(tapCommunityLbl1))
+        
+        if user.community1 == "" {
+            self.communityLabel1.isUserInteractionEnabled = false
+            self.communityLabel1.textColor = UIColor(named: O_BLACK)
+            self.communityLabel1.text = "参加していません"
+            self.numberLabel1.isHidden = true
+        } else {
+            self.communityLabel1.isUserInteractionEnabled = true
+            self.communityLabel1.textColor = UIColor(named: O_GREEN)
+            self.communityLabel1.addGestureRecognizer(tap1)
+            self.communityLabel1.text = community1.title
+            self.numberLabel1.isHidden = false
+            if community1.number == nil { return }
+            self.numberLabel1.text = String(community1.number) + "人"
+            self.communityImageView1.sd_setImage(with: URL(string: community1.contentsImageUrl), completed: nil)
+        }
+    }
+    
+    func configureCommunity2(_ user: User, _ community2: Community) {
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapCommunityLbl2))
+
+        if user.community2 == "" {
+            self.communityLabel2.isUserInteractionEnabled = false
+            self.communityLabel2.textColor = UIColor(named: O_BLACK)
+            self.communityLabel2.text = "参加していません"
+            self.numberLabel2.isHidden = true
+        } else {
+            self.communityLabel2.isUserInteractionEnabled = true
+            self.communityLabel2.textColor = UIColor(named: O_GREEN)
+            self.communityLabel2.addGestureRecognizer(tap2)
+            self.communityLabel2.text = community2.title
+            self.numberLabel2.isHidden = false
+            if community2.number == nil { return }
+            self.numberLabel2.text = String(community2.number) + "人"
+            self.communityImageView2.sd_setImage(with: URL(string: community2.contentsImageUrl), completed: nil)
+        }
+    }
+    
+    func configureCommunity3(_ user: User, _ community3: Community) {
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(tapCommunityLbl3))
+
+        if user.community3 == "" {
+            self.communityLabel3.isUserInteractionEnabled = false
+            self.communityLabel3.textColor = UIColor(named: O_BLACK)
+            self.communityLabel3.text = "参加していません"
+            self.numberLabel3.isHidden = true
+        } else {
+            self.communityLabel3.isUserInteractionEnabled = true
+            self.communityLabel3.textColor = UIColor(named: O_GREEN)
+            self.communityLabel3.addGestureRecognizer(tap3)
+            self.communityLabel3.text = community3.title
+            self.numberLabel3.isHidden = false
+            if community3.number == nil { return }
+            self.numberLabel3.text = String(community3.number) + "人"
+            self.communityImageView3.sd_setImage(with: URL(string: community3.contentsImageUrl), completed: nil)
+        }
+    }
+    
     func currentLocation(_ user: User?, _ currentLocation: CLLocation?) {
         
         guard let _ = currentLocation else { return }
@@ -371,7 +442,7 @@ class DetailTableViewCell: UITableViewCell {
         if user?.latitude != "" && user?.longitude != "" {
             let userLocation = CLLocation(latitude: Double(user!.latitude)!, longitude: Double(user!.longitude)!)
             let distanceInKM: CLLocationDistance = userLocation.distance(from: currentLocation!) / 1000
-
+            
             User.fetchUser(User.currentUserId()) { (user) in
                 self.currentUser = user
                 if self.currentUser.usedItem7 == 1 {
@@ -384,6 +455,32 @@ class DetailTableViewCell: UITableViewCell {
             
         } else {
             distanceLabel.isHidden = true
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @objc func tapCommunityLbl1() {
+        
+        if let communityId1 = user.community1 {
+            profileVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId1)
+            detailVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId1)
+        }
+    }
+    
+    @objc func tapCommunityLbl2() {
+
+        if let communityId2 = user.community2 {
+            profileVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId2)
+            detailVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId2)
+        }
+    }
+    
+    @objc func tapCommunityLbl3() {
+
+        if let communityId3 = user.community3 {
+            profileVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId3)
+            detailVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId3)
         }
     }
     
@@ -509,7 +606,7 @@ class DetailTableViewCell: UITableViewCell {
                     profileImageView6.isHidden = true
                     segBarSix1.alpha = 0.5
                     segBarSix2.alpha = 1
-
+                    
                 } else if profileImageView5.isHidden == true && profileImageView6.isHidden == false {
                     return
                 } else if profileImageView1.isHidden == true && profileImageView2.isHidden == false && profileImageView3.isHidden == true {
@@ -669,6 +766,8 @@ class DetailTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Get count
+    
     func getLikeCount(ref: DocumentReference) {
         ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
             var totalLikeCount = 0
@@ -707,6 +806,8 @@ class DetailTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Awake from nib
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -721,7 +822,7 @@ class DetailTableViewCell: UITableViewCell {
         hobbyLbl1.textColor = .white
         hobbyLbl2.textColor = .white
         hobbyLbl3.textColor = .white
-
+        
         profileImageView1.layer.cornerRadius = 15
         profileImageView2.layer.cornerRadius = 15
         profileImageView3.layer.cornerRadius = 15
@@ -737,7 +838,13 @@ class DetailTableViewCell: UITableViewCell {
         profileImageView6.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
         
         statusView.layer.cornerRadius = 12 / 2
+        
+        communityImageView1.layer.cornerRadius = 15
+        communityImageView2.layer.cornerRadius = 15
+        communityImageView3.layer.cornerRadius = 15
     }
+    
+    // MARK: - Helpers
     
     func profileImageUrl_23456Nil() {
         stackViewDouble.isHidden = true

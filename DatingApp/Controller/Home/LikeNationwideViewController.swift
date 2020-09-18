@@ -26,9 +26,10 @@ class LikeNationwideViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSnapshotListener()
 //        setupBanner()
         testBanner()
+        
+        addSnapshotListener()
         fetchUser()
         setupUI()
     }
@@ -168,53 +169,78 @@ extension LikeNationwideViewController: UICollectionViewDataSource, UICollection
                 cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 4 {
                 cell2.miniNumberLabel.text = "5"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 5 {
                 cell2.miniNumberLabel.text = "6"
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
             } else if indexPath.row == 6 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "7"
             } else if indexPath.row == 7 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "8"
             } else if indexPath.row == 8 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "9"
             } else if indexPath.row == 9 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "10"
             } else if indexPath.row == 10 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "11"
             } else if indexPath.row == 11 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "12"
             } else if indexPath.row == 12 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "13"
             } else if indexPath.row == 13 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "14"
             } else if indexPath.row == 14 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "15"
             } else if indexPath.row == 15 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "16"
             } else if indexPath.row == 16 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "17"
             } else if indexPath.row == 17 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "18"
             } else if indexPath.row == 18 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "19"
             } else if indexPath.row == 20 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "21"
             } else if indexPath.row == 21 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "22"
             } else if indexPath.row == 22 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "23"
             } else if indexPath.row == 23 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "24"
             } else if indexPath.row == 24 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "25"
             } else if indexPath.row == 25 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "26"
             } else if indexPath.row == 26 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "27"
             } else if indexPath.row == 27 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "28"
             } else if indexPath.row == 28 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "29"
             } else if indexPath.row == 29 {
+                cell2.miniNumberLabel.textColor = UIColor(named: O_BLACK)
                 cell2.miniNumberLabel.text = "30"
             }
             return cell2
@@ -236,54 +262,79 @@ extension LikeNationwideViewController: UICollectionViewDataSource, UICollection
             cell.numberLabel.text = "4"
             cell.numberLabel.textColor = UIColor(named: O_BLACK)
         } else if indexPath.row == 4 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "5"
         } else if indexPath.row == 5 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "6"
         } else if indexPath.row == 6 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "7"
         } else if indexPath.row == 7 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "8"
         } else if indexPath.row == 8 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "9"
         } else if indexPath.row == 9 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "10"
         } else if indexPath.row == 10 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "11"
         } else if indexPath.row == 11 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "12"
         } else if indexPath.row == 12 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "13"
         } else if indexPath.row == 13 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "14"
         } else if indexPath.row == 14 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "15"
         } else if indexPath.row == 15 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "16"
         } else if indexPath.row == 16 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "17"
         } else if indexPath.row == 17 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "18"
         } else if indexPath.row == 18 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "19"
         } else if indexPath.row == 20 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "21"
         } else if indexPath.row == 21 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "22"
         } else if indexPath.row == 22 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "23"
         } else if indexPath.row == 23 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "24"
         } else if indexPath.row == 24 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "25"
         } else if indexPath.row == 25 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "26"
         } else if indexPath.row == 26 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "27"
         } else if indexPath.row == 27 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "28"
         } else if indexPath.row == 28 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "29"
         } else if indexPath.row == 29 {
+            cell.numberLabel.textColor = UIColor(named: O_BLACK)
             cell.numberLabel.text = "30"
         }
         return cell

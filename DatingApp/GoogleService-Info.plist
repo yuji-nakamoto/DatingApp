@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>491236392277-jjr86e7eui5o4e3rcrpffcecbfd55vn0.apps.googleusercontent.com</string>
+	<string>491236392277-a6nvrtbmcpviamcrkkhr83dp36d7o5ub.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.491236392277-jjr86e7eui5o4e3rcrpffcecbfd55vn0</string>
+	<string>com.googleusercontent.apps.491236392277-a6nvrtbmcpviamcrkkhr83dp36d7o5ub</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAi9kVmCMseqz6T8WGFPaHyLwQzmi14HRY</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>ynstore.app3</string>
+	<string>ynstore.app4</string>
 	<key>PROJECT_ID</key>
 	<string>datingapp-d0f98</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:491236392277:ios:73b4054d6e7aad53a703dc</string>
+	<string>1:491236392277:ios:ab8782239d09033fa703dc</string>
 	<key>DATABASE_URL</key>
 	<string>https://datingapp-d0f98.firebaseio.com</string>
 </dict>

@@ -87,6 +87,11 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     // MARK: - Actions
     
+    
+    @IBAction func dismissButtonPressed(_ sender: Any) {
+        dismiss(animated: false, completion: nil)
+    }
+    
     @IBAction func reloadButtonPressed(_ sender: Any) {
         reloadAction()
     }
