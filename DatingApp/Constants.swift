@@ -252,6 +252,7 @@ public let REFRESH_ON = "refresh_on"
 public let C_NUMBER_ON = "cNumber_on"
 public let C_CREATED_ON = "cCreated_on"
 public let C_ALL_ON = "cAll_on"
+public let C_SEARCH_ON = "cSearch_on"
 
 // MARK: - Notification
 

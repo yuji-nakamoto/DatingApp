@@ -11,9 +11,10 @@ import Firebase
 import JGProgressHUD
 
 class CommunityUsersViewController: UIViewController {
-
+    
     // MARK: - Properties
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var communityButton: UIButton!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
@@ -30,7 +31,7 @@ class CommunityUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setup()
         fetchCurrentUser()
         fetchCommunity()
@@ -109,7 +110,7 @@ class CommunityUsersViewController: UIViewController {
         Community.fetchCommunity(communityId: self.communityId) { (community) in
             self.community = community
             self.navigationItem.title = "\(self.community.title ?? "")"
-            self.collectionView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -179,7 +180,7 @@ class CommunityUsersViewController: UIViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < -100 {
             navigationController?.navigationBar.isHidden = false
         } else {
@@ -205,15 +206,33 @@ class CommunityUsersViewController: UIViewController {
     }
 }
 
+extension CommunityUsersViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CommunityUsersTableViewCell
+        cell.configureCell(self.community)
+        
+        return cell
+    }
+}
+
 // MARK: - Collection view
 
 extension CommunityUsersViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 30, left: 25, bottom: 0, right: 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 25
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.row == 0 {
-            return CGSize(width: 414, height: 300)
-        }
-        return CGSize(width: 180, height: 220)
+        return CGSize(width: 150, height: 260)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -221,15 +240,21 @@ extension CommunityUsersViewController:  UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == 0 {
-            let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as! CommunityUsersCollectionViewCell
-            cell2.configureCell(self.community)
+        
+        if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
-            return cell2
+            let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
+//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+//            cell3.bannerView.rootViewController = self
+//            cell3.bannerView.load(GADRequest())
+            cell3.testBanner4()
+            cell3.communityUsersCVC = self
+            
+            return cell3
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SearchCollectionViewCell
-        cell.configureCommunityCell(users[indexPath.row - 1])
+        cell.configureCell(users[indexPath.row - 1])
         
         return cell
     }

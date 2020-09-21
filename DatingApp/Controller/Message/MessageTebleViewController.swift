@@ -423,14 +423,16 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func showHintView() {
         
-        visualEffectView.frame = self.view.frame
-        visualEffectView.alpha = 0
-        view.addSubview(self.visualEffectView)
-        view.addSubview(self.backView)
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.visualEffectView.alpha = 1
-            self.backView.alpha = 1
-        }, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.visualEffectView.frame = self.view.frame
+            self.visualEffectView.alpha = 0
+            self.view.addSubview(self.visualEffectView)
+            self.view.addSubview(self.backView)
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.visualEffectView.alpha = 1
+                self.backView.alpha = 1
+            }, completion: nil)
+        }
     }
     
     private func removeEffectView() {

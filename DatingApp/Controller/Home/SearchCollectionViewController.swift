@@ -40,9 +40,6 @@ class SearchCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaults.standard.set(true, forKey: RCOMPLETION)
-        UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
-        UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
-        UserDefaults.standard.removeObject(forKey: C_ALL_ON)
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
@@ -312,7 +309,7 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
 //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
 //            cell3.bannerView.rootViewController = self
 //            cell3.bannerView.load(GADRequest())
-            cell3.testBanner1()
+//            cell3.testBanner1()
             cell3.searchCVC = self
             
             return cell3
@@ -355,11 +352,11 @@ extension SearchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelega
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: "ユーザーは見つかりませんでした。", attributes: attributes)
+        return NSAttributedString(string: "ユーザーは見つかりませんでした", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください。")
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください")
     }
 }
 

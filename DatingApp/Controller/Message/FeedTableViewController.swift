@@ -155,6 +155,6 @@ extension FeedTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: " マッチしたお相手のひとことが\nこちらに表示されます。", attributes: attributes)
+        return NSAttributedString(string: " マッチしたお相手のひとことが\nこちらに表示されます", attributes: attributes)
     }
 }

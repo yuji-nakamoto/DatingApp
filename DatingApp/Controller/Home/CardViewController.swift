@@ -500,8 +500,8 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func setupUI() {
         
-        emptyLabel.text = "スワイプできるカードは\nありません。"
-        emptyLabel2.text = "しばらくお待ちになるか、\n検索条件を変更してみてください。"
+        emptyLabel.text = "スワイプできるカードは\nありません"
+        emptyLabel2.text = "しばらくお待ちになるか、\n検索条件を変更してみてください"
         emptyLabel2.textColor = .systemGray
         navigationItem.title = "カードからさがす"
         likeButtonView.layer.cornerRadius = 55 / 2

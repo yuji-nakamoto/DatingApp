@@ -33,6 +33,10 @@ class CommunityTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
+        UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
+        UserDefaults.standard.removeObject(forKey: C_ALL_ON)
+        UserDefaults.standard.removeObject(forKey: C_SEARCH_ON)
         fetchCurrentUser()
         fetchCommunity()
         fetchNumberCommunity()
@@ -63,7 +67,7 @@ class CommunityTableViewController: UIViewController {
         indicator.startAnimating()
         communityArray1.removeAll()
         Community.fetchNumberCommunity { (community) in
-            self.communityArray1.append(community)
+            self.communityArray1 = community
             self.collectionView1.reloadData()
             self.indicator.stopAnimating()
         }
@@ -74,7 +78,7 @@ class CommunityTableViewController: UIViewController {
         indicator.startAnimating()
         communityArray2.removeAll()
         Community.fetchCreatedCommunity { (community) in
-            self.communityArray2.append(community)
+            self.communityArray2 = community
             self.collectionView2.reloadData()
             self.indicator.stopAnimating()
         }
@@ -85,27 +89,32 @@ class CommunityTableViewController: UIViewController {
         indicator.startAnimating()
         communityArray3.removeAll()
         Community.fetchAllCommunity { (community) in
-            self.communityArray3.append(community)
+            self.communityArray3 = community
+            self.communityArray3.shuffle()
             self.collectionView3.reloadData()
             self.indicator.stopAnimating()
         }
     }
     
     // MARK: - Actions
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: C_SEARCH_ON)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
+    }
     
     @IBAction func allButton1Pressed(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: C_NUMBER_ON)
-        performSegue(withIdentifier: "CommunityAllVC", sender: nil)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
     }
     
     @IBAction func allButton2Pressed(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: C_CREATED_ON)
-        performSegue(withIdentifier: "CommunityAllVC", sender: nil)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
     }
     
     @IBAction func allButton3Pressed(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: C_ALL_ON)
-        performSegue(withIdentifier: "CommunityAllVC", sender: nil)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
     }
     
     // MARK: - Helpers

@@ -13,16 +13,12 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     // MARK: - Lifecycle
     
-    @IBOutlet weak var logoLabel: UILabel!
-    @IBOutlet weak var iconLeft: UIImageView!
-    @IBOutlet weak var iconRight: UIImageView!
     
     private var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        animationView()
         autoLogin()
 //        interstitial = createAndLoadIntersitial()
         interstitial = testIntersitial()
@@ -43,24 +39,6 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
             return
         }
         toSelectLoginVC()
-    }
-    
-    private func animationView() {
-        
-        logoLabel.alpha = 0
-        iconLeft.transform = CGAffineTransform(translationX: -200, y: 0)
-        iconRight.transform = CGAffineTransform(translationX: 200, y: 0)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-            UIView.animate(withDuration: 1.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-               self.iconLeft.transform = .identity
-               self.iconRight.transform = .identity
-            }, completion: nil)
-
-            UIView.animate(withDuration: 1, delay: 0.7, animations: {
-                self.logoLabel.alpha = 1
-            })
-        }
     }
     
     private func toTabBerVC() {

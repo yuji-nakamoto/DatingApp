@@ -226,10 +226,10 @@ extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: "タイプ履歴が、\nこちらに表示されます。", attributes: attributes)
+        return NSAttributedString(string: "タイプ履歴が、\nこちらに表示されます", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "気になった方にタイプを送り、\nアプローチをしてみましょう。")
+        return NSAttributedString(string: "気になった方にタイプを送り、\nアプローチをしてみましょう")
     }
 }

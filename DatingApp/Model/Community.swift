@@ -63,7 +63,9 @@ class Community {
         }
     }
     
-    class func fetchAllCommunity(completion: @escaping(Community) -> Void) {
+    class func fetchAllCommunity(completion: @escaping([Community]) -> Void) {
+        var communityArray = [Community]()
+
         COLLECTION_COMMUNITY.limit(to: 10).getDocuments { (snapshot,error) in
             if let error = error {
                 print("Error fetch community: \(error.localizedDescription)")
@@ -71,12 +73,15 @@ class Community {
             snapshot?.documents.forEach({ (documents) in
                 let dict = documents.data()
                 let community = Community(dict: dict)
-                completion(community)
+                communityArray.append(community)
             })
+            completion(communityArray)
         }
     }
     
-    class func fetchCreatedCommunity(completion: @escaping(Community) -> Void) {
+    class func fetchCreatedCommunity(completion: @escaping([Community]) -> Void) {
+        var communityArray = [Community]()
+
         COLLECTION_COMMUNITY.order(by: CREATED_AT, descending: true).limit(to: 10).getDocuments { (snapshot,error) in
             if let error = error {
                 print("Error fetch community: \(error.localizedDescription)")
@@ -84,12 +89,15 @@ class Community {
             snapshot?.documents.forEach({ (documents) in
                 let dict = documents.data()
                 let community = Community(dict: dict)
-                completion(community)
+                communityArray.append(community)
             })
+            completion(communityArray)
         }
     }
     
-    class func fetchNumberCommunity(completion: @escaping(Community) -> Void) {
+    class func fetchNumberCommunity(completion: @escaping([Community]) -> Void) {
+        var communityArray = [Community]()
+
         COLLECTION_COMMUNITY.order(by: NUMBER, descending: true).limit(to: 10).getDocuments { (snapshot,error) in
             if let error = error {
                 print("Error fetch community: \(error.localizedDescription)")
@@ -97,8 +105,31 @@ class Community {
             snapshot?.documents.forEach({ (documents) in
                 let dict = documents.data()
                 let community = Community(dict: dict)
-                completion(community)
+                communityArray.append(community)
             })
+            completion(communityArray)
+        }
+    }
+    
+    class func communitySearch(text: String, completion: @escaping([Community]) -> Void) {
+        var communityArray = [Community]()
+        
+        if text == "" {
+            completion(communityArray)
+            return
+        }
+        
+        COLLECTION_COMMUNITY.whereField(TITLE, isGreaterThanOrEqualTo: text).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetch community search: \(error.localizedDescription)")
+            }
+            
+            snapshot?.documents.forEach({ (documents) in
+                let dict = documents.data()
+                let community = Community(dict: dict)
+                communityArray.append(community)
+            })
+            completion(communityArray)
         }
     }
 }

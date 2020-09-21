@@ -14,7 +14,11 @@ class ParchmentMessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPagingVC()
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "icon50"))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func initPagingVC() {

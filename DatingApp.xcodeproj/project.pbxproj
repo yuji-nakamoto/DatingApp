@@ -11,13 +11,13 @@
 		6E46F66F24FBA17E000B1DAC /* Notice3TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */; };
 		6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */; };
 		6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */; };
-		6E5043DA251509A500049E14 /* CommunityAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5043D9251509A500049E14 /* CommunityAllViewController.swift */; };
+		6E5043DA251509A500049E14 /* CommunityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5043D9251509A500049E14 /* CommunityListViewController.swift */; };
 		6E696F0D2511AFAE00B012AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E696F0C2511AFAD00B012AD /* GoogleService-Info.plist */; };
 		6E696F3B2513736E00B012AD /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F3A2513736E00B012AD /* CommunityTableViewController.swift */; };
 		6E696F402513CA2A00B012AD /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F3F2513CA2A00B012AD /* Community.swift */; };
 		6E696F6D2513CFC600B012AD /* CreateCommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F6C2513CFC600B012AD /* CreateCommunityTableViewController.swift */; };
 		6E696F6F2513F0F600B012AD /* CommunityUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F6E2513F0F600B012AD /* CommunityUsersViewController.swift */; };
-		6E696F712513F15600B012AD /* CommunityUsersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F702513F15600B012AD /* CommunityUsersCollectionViewCell.swift */; };
+		6E696F712513F15600B012AD /* CommunityUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F702513F15600B012AD /* CommunityUsersTableViewCell.swift */; };
 		6E74739F24F8254D00D14945 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74739E24F8254D00D14945 /* VideoViewController.swift */; };
 		6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */; };
 		6E7766B02503116200ABDCB9 /* NewLoginCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */; };
@@ -407,13 +407,14 @@
 		6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice3TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice4TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice5TableViewController.swift; sourceTree = "<group>"; };
-		6E5043D9251509A500049E14 /* CommunityAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityAllViewController.swift; sourceTree = "<group>"; };
+		6E5043D9251509A500049E14 /* CommunityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityListViewController.swift; sourceTree = "<group>"; };
 		6E696F0C2511AFAD00B012AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E696F3A2513736E00B012AD /* CommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		6E696F3F2513CA2A00B012AD /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		6E696F6C2513CFC600B012AD /* CreateCommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommunityTableViewController.swift; sourceTree = "<group>"; };
 		6E696F6E2513F0F600B012AD /* CommunityUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUsersViewController.swift; sourceTree = "<group>"; };
-		6E696F702513F15600B012AD /* CommunityUsersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUsersCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E696F702513F15600B012AD /* CommunityUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUsersTableViewCell.swift; sourceTree = "<group>"; };
+		6E70D19625192AB2000C266F /* GAGAGAGA-FREE.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GAGAGAGA-FREE.otf"; sourceTree = "<group>"; };
 		6E74739E24F8254D00D14945 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentMessageViewController.swift; sourceTree = "<group>"; };
 		6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginCollectionViewController.swift; sourceTree = "<group>"; };
@@ -620,7 +621,7 @@
 				6E696F3A2513736E00B012AD /* CommunityTableViewController.swift */,
 				6E696F6C2513CFC600B012AD /* CreateCommunityTableViewController.swift */,
 				6E696F6E2513F0F600B012AD /* CommunityUsersViewController.swift */,
-				6E5043D9251509A500049E14 /* CommunityAllViewController.swift */,
+				6E5043D9251509A500049E14 /* CommunityListViewController.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -754,6 +755,7 @@
 				8348E3D624CD658B001D59C0 /* DataArray.swift */,
 				838071D224C608FA008BAA2C /* Assets.xcassets */,
 				8348826324EA95E300054DF7 /* corp_round_v1.ttf */,
+				6E70D19625192AB2000C266F /* GAGAGAGA-FREE.otf */,
 				8348E3E024CDD48E001D59C0 /* like.json */,
 				8348E3DC24CDD378001D59C0 /* type.json */,
 				838071D424C608FA008BAA2C /* LaunchScreen.storyboard */,
@@ -817,7 +819,7 @@
 				834959AA24F4056000CD052E /* NoticeListTableViewCell.swift */,
 				834959B424F46DB500CD052E /* ShopTableViewCell.swift */,
 				6E7D4A8B2514D03800361FE8 /* CommunityTableViewCell.swift */,
-				6E696F702513F15600B012AD /* CommunityUsersCollectionViewCell.swift */,
+				6E696F702513F15600B012AD /* CommunityUsersTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -914,8 +916,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				F43DF094749FAF135DD481E3 /* [CP] Embed Pods Frameworks */,
-				B4FA1EBE64469FB706D84611 /* [CP] Copy Pods Resources */,
+				FB75BCFB6610D25474C3DB2E /* [CP] Embed Pods Frameworks */,
+				1999570408A3E207B53C916C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1239,6 +1241,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1999570408A3E207B53C916C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		28E854B72C9C509B1B1E6AC6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1261,24 +1280,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B4FA1EBE64469FB706D84611 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F43DF094749FAF135DD481E3 /* [CP] Embed Pods Frameworks */ = {
+		FB75BCFB6610D25474C3DB2E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1350,7 +1352,7 @@
 				6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */,
-				6E5043DA251509A500049E14 /* CommunityAllViewController.swift in Sources */,
+				6E5043DA251509A500049E14 /* CommunityListViewController.swift in Sources */,
 				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
@@ -1428,7 +1430,7 @@
 				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,
 				834C32D424E3BD10003330B1 /* Block.swift in Sources */,
 				83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */,
-				6E696F712513F15600B012AD /* CommunityUsersCollectionViewCell.swift in Sources */,
+				6E696F712513F15600B012AD /* CommunityUsersTableViewCell.swift in Sources */,
 				83B6232124E2BA9100363548 /* OpinionInputTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

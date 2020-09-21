@@ -229,10 +229,10 @@ extension PostTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: "投稿は見つかりませんでした。", attributes: attributes)
+        return NSAttributedString(string: "投稿は見つかりませんでした", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください。")
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください")
     }
 }

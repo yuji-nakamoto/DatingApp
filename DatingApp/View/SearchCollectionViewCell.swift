@@ -105,42 +105,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCommunityCell(_ user: User) {
-        guard Auth.auth().currentUser != nil else { return }
-
-        getLikeCount(ref: COLLECTION_LIKECOUNTER.document(user.uid), user)
-        getTypeCount(ref: COLLECTION_TYPECOUNTER.document(user.uid), user)
-        backView.layer.cornerRadius = 5
-        profileImageView.layer.cornerRadius = 130 / 2
-        statusView.layer.cornerRadius = 10 / 2
-        
-        ageLabel.text = String(user.age) + "歳"
-        residenceLabel.text = user.residence
-        selfIntroLabel.text = user.selfIntro
-        
-        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
-        
-        COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                print("Error fetch is online: \(error.localizedDescription)")
-            }
-            if let dict = snapshot?.data() {
-                if let active = dict[STATUS] as? String {
-                    self.statusView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
-                }
-            }
-        }
-        
-        guard newLabel != nil else { return }
-        if user.newUser == true {
-            newLabel.layer.cornerRadius = 33 / 2
-            newLabel.isHidden = false
-        } else {
-            newLabel.layer.cornerRadius = 33 / 2
-            newLabel.isHidden = true
-        }
-    }
-    
     func getLikeCount(ref: DocumentReference, _ user: User) {
         ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
             var totalLikeCount = 0
