@@ -39,7 +39,7 @@ class CommunityListViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
         UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
-        UserDefaults.standard.removeObject(forKey: C_ALL_ON)
+        UserDefaults.standard.removeObject(forKey: C_RECOMMENDED_ON)
         UserDefaults.standard.removeObject(forKey: C_SEARCH_ON)
         navigationController?.popViewController(animated: true)
     }
@@ -68,12 +68,13 @@ class CommunityListViewController: UIViewController {
         }
     }
     
-    private func fetchCommunity() {
+    private func fetchRecommendedCommunity() {
         
         indicator.startAnimating()
         communityArray.removeAll()
-        Community.fetchAllCommunity { (community) in
+        Community.fetchRecommendedCommunity { (community) in
             self.communityArray = community
+            self.communityArray.shuffle()
             self.collectionView.reloadData()
             self.indicator.stopAnimating()
         }
@@ -129,8 +130,8 @@ class CommunityListViewController: UIViewController {
         } else if UserDefaults.standard.object(forKey: C_CREATED_ON) != nil {
             fetchCreatedCommunity()
             navigationItem.title = "新規"
-        } else if UserDefaults.standard.object(forKey: C_ALL_ON) != nil {
-            fetchCommunity()
+        } else if UserDefaults.standard.object(forKey: C_RECOMMENDED_ON) != nil {
+            fetchRecommendedCommunity()
             navigationItem.title = "おすすめ"
         }
     }
@@ -154,7 +155,7 @@ extension CommunityListViewController:  UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 140)
+        return CGSize(width: 100, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

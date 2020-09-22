@@ -97,6 +97,8 @@ class User {
     var mMessageCount: Int!
     var mMatchCount: Int!
     var mFootCount: Int!
+    var mCommunityCount: Int!
+    var mCommunity: Bool!
     var mProfile: Bool!
     var likeGetPt1: Bool!
     var likeGetPt2: Bool!
@@ -108,6 +110,9 @@ class User {
     var matchGetPt2: Bool!
     var footGetPt1: Bool!
     var footGetPt2: Bool!
+    var communityGetPt1: Bool!
+    var communityGetPt2: Bool!
+    var communityGetPt3: Bool!
     var profileGetPt1: Bool!
     var community1: String!
     var community2: String!
@@ -204,6 +209,8 @@ class User {
         mMessageCount = dict[MMESSAGECOUNT] as? Int ?? 0
         mMatchCount = dict[MMATCHCOUNT] as? Int ?? 0
         mFootCount = dict[MFOOTCOUNT] as? Int ?? 0
+        mCommunityCount = dict[MCOMMUNITYCOUNT] as? Int ?? 0
+        mCommunity = dict[MCOMMUNITY] as? Bool ?? false
         mProfile = dict[MPROFILE] as? Bool ?? false
         likeGetPt1 = dict[LIKEGETPT1] as? Bool ?? false
         likeGetPt2 = dict[LIKEGETPT2] as? Bool ?? false
@@ -215,6 +222,9 @@ class User {
         matchGetPt2 = dict[MATCHGETPT2] as? Bool ?? false
         footGetPt1 = dict[FOOTGETPT1] as? Bool ?? false
         footGetPt2 = dict[FOOTGETPT2] as? Bool ?? false
+        communityGetPt1 = dict[COMMUNITYGETPT1] as? Bool ?? false
+        communityGetPt2 = dict[COMMUNITYGETPT2] as? Bool ?? false
+        communityGetPt3 = dict[COMMUNITYGETPT3] as? Bool ?? false
         profileGetPt1 = dict[PROFILEGETPT1] as? Bool ?? false
         community1 = dict[COMMUNITY1] as? String ?? ""
         community2 = dict[COMMUNITY2] as? String ?? ""

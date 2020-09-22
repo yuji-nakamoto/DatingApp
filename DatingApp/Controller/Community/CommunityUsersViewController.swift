@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import JGProgressHUD
+import GoogleMobileAds
 
 class CommunityUsersViewController: UIViewController {
     
@@ -20,6 +21,7 @@ class CommunityUsersViewController: UIViewController {
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var withdrawButton: UIButton!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var users = [User]()
     private var user = User()
@@ -31,6 +33,8 @@ class CommunityUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        setupBanner()
+        testBanner()
         
         setup()
         fetchCurrentUser()
@@ -116,14 +120,28 @@ class CommunityUsersViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
     private func setupParticipation() {
         
         if user.community1 == "" {
-            updateUser(withValue: [COMMUNITY1: self.communityId])
+            updateUser(withValue: [COMMUNITY1: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
         } else if user.community2 == "" {
-            updateUser(withValue: [COMMUNITY2: self.communityId])
+            updateUser(withValue: [COMMUNITY2: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
         } else if user.community3 == "" {
-            updateUser(withValue: [COMMUNITY3: self.communityId])
+            updateUser(withValue: [COMMUNITY3: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
         } else {
             hud.textLabel.text = "これ以上、参加できません"
             hud.show(in: self.view)

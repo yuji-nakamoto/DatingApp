@@ -22,6 +22,9 @@ class MissionTableViewController: UITableViewController {
     @IBOutlet weak var matchCountLbl2: UILabel!
     @IBOutlet weak var footCountLbl1: UILabel!
     @IBOutlet weak var footCountLbl2: UILabel!
+    @IBOutlet weak var communityCountLbl1: UILabel!
+    @IBOutlet weak var communityCountLbl2: UILabel!
+    @IBOutlet weak var communityCountLbl3: UILabel!
     @IBOutlet weak var likeButton1: UIButton!
     @IBOutlet weak var likeButton2: UIButton!
     @IBOutlet weak var typeButton1: UIButton!
@@ -32,6 +35,9 @@ class MissionTableViewController: UITableViewController {
     @IBOutlet weak var matchButton2: UIButton!
     @IBOutlet weak var footButton1: UIButton!
     @IBOutlet weak var footButton2: UIButton!
+    @IBOutlet weak var communityButton1: UIButton!
+    @IBOutlet weak var communityButton2: UIButton!
+    @IBOutlet weak var communityButton3: UIButton!
     @IBOutlet weak var profileButton1: UIButton!
     @IBOutlet weak var likeAchievementLbl1: UILabel!
     @IBOutlet weak var likeAchievementLbl2: UILabel!
@@ -44,8 +50,11 @@ class MissionTableViewController: UITableViewController {
     @IBOutlet weak var footAchievementLbl1: UILabel!
     @IBOutlet weak var footAchievementLbl2: UILabel!
     @IBOutlet weak var profileAchievementLbl1: UILabel!
-
-    lazy var buttons = [likeButton1,likeButton2,typeButton1,typeButton2,messageButton1,messageButton2,matchButton1,matchButton2,footButton1,footButton2,profileButton1]
+    @IBOutlet weak var communityAchievementLbl1: UILabel!
+    @IBOutlet weak var communityAchievementLbl2: UILabel!
+    @IBOutlet weak var communityAchievementLbl3: UILabel!
+    
+    lazy var buttons = [likeButton1,likeButton2,typeButton1,typeButton2,messageButton1,messageButton2,matchButton1,matchButton2,footButton1,footButton2,profileButton1,communityButton1,communityButton2,communityButton3]
     private var user = User()
     
     // MARK: - Lifecycle
@@ -151,6 +160,30 @@ class MissionTableViewController: UITableViewController {
         updateUser(withValue: [POINTS: self.user.points + 2, FOOTGETPT2: true])
         fetchUser()
 
+    }
+    @IBAction func communityButtonPressed1(_ sender: Any) {
+        communityButton1.setTitle("  受け取り済み  ", for: .normal)
+        communityButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
+        communityButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+        communityButton1.isEnabled = false
+        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT1: true])
+        fetchUser()
+    }
+    @IBAction func communityButtonPressed2(_ sender: Any) {
+        communityButton2.setTitle("  受け取り済み  ", for: .normal)
+        communityButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
+        communityButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+        communityButton2.isEnabled = false
+        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT2: true])
+        fetchUser()
+    }
+    @IBAction func communityButtonPressed3(_ sender: Any) {
+        communityButton3.setTitle("  受け取り済み  ", for: .normal)
+        communityButton3.setTitleColor(UIColor(named: O_RED), for: .normal)
+        communityButton3.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+        communityButton3.isEnabled = false
+        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT3: true])
+        fetchUser()
     }
     @IBAction func profileButtonPressed1(_ sender: Any) {
         profileButton1.setTitle("  受け取り済み  ", for: .normal)
@@ -292,12 +325,44 @@ class MissionTableViewController: UITableViewController {
             footCountLbl2.text = String(100 - user.mFootCount) + "人"
         }
         
+        if user.mCommunityCount >= 1 {
+            communityCountLbl1.text = "0人"
+            communityCountLbl1.textColor = UIColor(named: O_RED)
+            communityButton1.setTitle("  受け取る  ", for: .normal)
+            communityButton1.setTitleColor(UIColor(named: O_GREEN), for: .normal)
+            communityButton1.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
+            communityButton1.isEnabled = true
+
+        } else {
+            communityCountLbl1.text = String(1 - user.mCommunityCount) + "つ"
+        }
+        if user.mCommunityCount >= 3 {
+            communityCountLbl2.text = "0人"
+            communityCountLbl2.textColor = UIColor(named: O_RED)
+            communityButton2.setTitle("  受け取る  ", for: .normal)
+            communityButton2.setTitleColor(UIColor(named: O_GREEN), for: .normal)
+            communityButton2.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
+            communityButton2.isEnabled = true
+
+        } else {
+            communityCountLbl2.text = String(3 - user.mCommunityCount) + "つ"
+        }
+        
+        if user.mCommunity == true {
+            communityButton3.setTitle("  受け取る  ", for: .normal)
+            communityButton3.setTitleColor(UIColor(named: O_GREEN), for: .normal)
+            communityButton3.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
+            communityButton3.isEnabled = true
+        }
+        
         if user.mProfile == true {
             profileButton1.setTitle("  受け取る  ", for: .normal)
             profileButton1.setTitleColor(UIColor(named: O_GREEN), for: .normal)
             profileButton1.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
             profileButton1.isEnabled = true
         }
+        
+        // MARK: - Get point
         
         if user.likeGetPt1 == true {
             likeButton1.setTitle("  受け取り済み  ", for: .normal)
@@ -372,6 +437,28 @@ class MissionTableViewController: UITableViewController {
             footButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
             footButton2.isEnabled = false
             footAchievementLbl2.isHidden = true
+        }
+        
+        if user.communityGetPt1 == true {
+            communityButton1.setTitle("  受け取り済み  ", for: .normal)
+            communityButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
+            communityButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+            communityButton1.isEnabled = false
+            communityAchievementLbl1.isHidden = true
+        }
+        if user.communityGetPt2 == true {
+            communityButton2.setTitle("  受け取り済み  ", for: .normal)
+            communityButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
+            communityButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+            communityButton2.isEnabled = false
+            communityAchievementLbl2.isHidden = true
+        }
+        if user.communityGetPt3 == true {
+            communityButton3.setTitle("  受け取り済み  ", for: .normal)
+            communityButton3.setTitleColor(UIColor(named: O_RED), for: .normal)
+            communityButton3.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+            communityButton3.isEnabled = false
+            communityAchievementLbl3.isHidden = true
         }
         
         if user.profileGetPt1 == true {

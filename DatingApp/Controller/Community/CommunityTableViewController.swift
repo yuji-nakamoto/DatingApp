@@ -35,7 +35,7 @@ class CommunityTableViewController: UIViewController {
         super.viewWillAppear(animated)
         UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
         UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
-        UserDefaults.standard.removeObject(forKey: C_ALL_ON)
+        UserDefaults.standard.removeObject(forKey: C_RECOMMENDED_ON)
         UserDefaults.standard.removeObject(forKey: C_SEARCH_ON)
         fetchCurrentUser()
         fetchCommunity()
@@ -88,7 +88,7 @@ class CommunityTableViewController: UIViewController {
         
         indicator.startAnimating()
         communityArray3.removeAll()
-        Community.fetchAllCommunity { (community) in
+        Community.fetchRecommendedCommunity { (community) in
             self.communityArray3 = community
             self.communityArray3.shuffle()
             self.collectionView3.reloadData()
@@ -113,7 +113,7 @@ class CommunityTableViewController: UIViewController {
     }
     
     @IBAction func allButton3Pressed(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: C_ALL_ON)
+        UserDefaults.standard.set(true, forKey: C_RECOMMENDED_ON)
         performSegue(withIdentifier: "CommunityListVC", sender: nil)
     }
     
@@ -155,7 +155,7 @@ extension CommunityTableViewController:  UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 140)
+        return CGSize(width: 100, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -87,7 +87,7 @@ class CreateCommunityTableViewController: UITableViewController {
                         TITLE: self.textField.text as Any] as [String : Any]
             
             Community.saveCommunity(communityId: communityId, withValue: dict)
-            updateUser(withValue: [CREATECOMMUNITY: true])
+            updateUser(withValue: [CREATECOMMUNITY: true, MCOMMUNITY: true])
             
             if self.user.community1 == "" {
                 updateUser(withValue: [COMMUNITY1: communityId])

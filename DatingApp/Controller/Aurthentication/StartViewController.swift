@@ -10,11 +10,13 @@ import UIKit
 import GoogleMobileAds
 
 class StartViewController: UIViewController, GADInterstitialDelegate {
+
+    // MARK: - Properties
+    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    private var interstitial: GADInterstitial!
     
     // MARK: - Lifecycle
-    
-    
-    private var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,8 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     // MARK: - Helpers
     
     private func autoLogin() {
+        
+        indicator.startAnimating()
         if UserDefaults.standard.object(forKey: RCOMPLETION) != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 if self.interstitial.isReady {
@@ -75,6 +79,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadIntersitial()
+        indicator.stopAnimating()
         toTabBerVC()
     }
 }

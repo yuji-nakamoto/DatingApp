@@ -220,7 +220,9 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: posts[indexPath.row - 1].uid)
+        if indexPath.row != 0 {
+            performSegue(withIdentifier: "DetailVC", sender: posts[indexPath.row - 1].uid)
+        }
     }
 }
 
