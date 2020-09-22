@@ -156,7 +156,7 @@ extension BlockListTableViewController: EmptyDataSetSource, EmptyDataSetDelegate
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .medium)]
-        return NSAttributedString(string: "ブロックしたお相手は\nまだいません。", attributes: attributes)
+        return NSAttributedString(string: "ブロックしたお相手はまだいません", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {

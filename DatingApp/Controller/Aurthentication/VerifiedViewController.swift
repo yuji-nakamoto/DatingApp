@@ -28,8 +28,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     private var userLat = ""
     private var userLong = ""
     private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 150, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 210, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 170, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
     
     // MARK: - Lifecycle
     
@@ -54,7 +54,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             loginUser()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "入力欄を全て埋めてください。"
+            hud.textLabel.text = "入力欄を全て埋めてください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -66,7 +66,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         AuthService.resendVerificaitionEmail(email: emailTextField.text!) { (error) in
             print("Error: \(String(describing: error?.localizedDescription))")
         }
-        hud.textLabel.text = "認証のメールを再送信しました。"
+        hud.textLabel.text = "認証のメールを再送信しました"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
@@ -88,13 +88,20 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
             self.userLong = userLong
         }
         
-//                AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-//                    let dict = [UID: User.currentUserId(),
-//                                EMAIL: self.emailTextField.text!] as [String : Any]
-//                    saveUser(userId: User.currentUserId(), withValue: dict)
-//                    self.toEnterNameVC()
-//                    self.activityIndicator.stopAnimating()
-//                }
+//        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+//            let dict = [UID: User.currentUserId(),
+//                        EMAIL: self.emailTextField.text!] as [String : Any]
+//            saveUser(userId: User.currentUserId(), withValue: dict)
+//
+//            if !self.userLat.isEmpty && !self.userLong.isEmpty {
+//                let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
+//                self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
+//            }
+//
+//            self.toEnterNameVC()
+//            self.activityIndicator.stopAnimating()
+//            return
+//        }
         
         AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
             if error == nil {
@@ -106,7 +113,7 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                         self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
                     }
                     
-                    self.hud.textLabel.text = "メールの認証に成功しました。"
+                    self.hud.textLabel.text = "メールの認証に成功しました"
                     self.hud.show(in: self.view)
                     self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                     self.hud.dismiss(afterDelay: 2.0)
@@ -119,14 +126,14 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     generator.notificationOccurred(.error)
                     self.loginButton.isEnabled = true
-                    self.hud.textLabel.text = "メールを確認してください。"
+                    self.hud.textLabel.text = "メールを確認してください"
                     self.hud.show(in: self.view)
                     self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                     self.hud.dismiss(afterDelay: 2.0)
                 }
             } else {
                 self.loginButton.isEnabled = true
-                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています。"
+                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)

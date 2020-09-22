@@ -70,7 +70,7 @@ class EnterProfessionViewController: UIViewController {
             saveUserProfession()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "職業を選択してください。"
+            hud.textLabel.text = "職業を選択してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

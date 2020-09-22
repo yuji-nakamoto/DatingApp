@@ -309,7 +309,7 @@ extension SearchCollectionViewController:  UICollectionViewDataSource, UICollect
 //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
 //            cell3.bannerView.rootViewController = self
 //            cell3.bannerView.load(GADRequest())
-//            cell3.testBanner1()
+            cell3.testBanner1()
             cell3.searchCVC = self
             
             return cell3

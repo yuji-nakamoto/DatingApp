@@ -67,7 +67,7 @@ class EnterNameViewController: UIViewController {
             
             if nameTextField.text!.count > 10 {
                 generator.notificationOccurred(.error)
-                hud.textLabel.text = "10文字以下で入力してください。"
+                hud.textLabel.text = "10文字以下で入力してください"
                 hud.show(in: self.view)
                 hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 hud.dismiss(afterDelay: 2.0)
@@ -78,7 +78,7 @@ class EnterNameViewController: UIViewController {
             saveUserName()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "名前を入力してください。"
+            hud.textLabel.text = "名前を入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

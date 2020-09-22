@@ -72,7 +72,7 @@ class EnterWantToGenderViewController: UIViewController {
             saveUserDefault()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "出会いたい人の性別を選択してください。"
+            hud.textLabel.text = "出会いたい人の性別を選択してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

@@ -39,7 +39,7 @@ class HobbyTableViewController: UITableViewController, UITextFieldDelegate {
         
         if hobbyTextField1.text!.count > 10 || hobbyTextField2.text!.count > 10 || hobbyTextField3.text!.count > 10 {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "趣味は10文字以下で入力してください。"
+            hud.textLabel.text = "趣味は10文字以下で入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

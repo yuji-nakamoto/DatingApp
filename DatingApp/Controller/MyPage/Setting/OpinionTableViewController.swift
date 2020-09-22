@@ -39,7 +39,7 @@ class OpinionTableViewController: UITableViewController {
         
         if opinionLabel.text == "ご意見・ご要望・改善等" {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "内容を入力してください。"
+            hud.textLabel.text = "内容を入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -76,7 +76,7 @@ class OpinionTableViewController: UITableViewController {
         COLLECTION_OPINION.document(User.currentUserId()).collection("oinions").document().setData(dict)
         
         updateUser(withValue: [OPINION: ""])
-        hud.textLabel.text = "送信が完了しました。"
+        hud.textLabel.text = "送信が完了しました"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)

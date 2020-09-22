@@ -12,6 +12,7 @@
 		6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */; };
 		6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */; };
 		6E5043DA251509A500049E14 /* CommunityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5043D9251509A500049E14 /* CommunityListViewController.swift */; };
+		6E504792251A46A3007B6A59 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E504791251A46A3007B6A59 /* Comment.swift */; };
 		6E696F0D2511AFAE00B012AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E696F0C2511AFAD00B012AD /* GoogleService-Info.plist */; };
 		6E696F3B2513736E00B012AD /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F3A2513736E00B012AD /* CommunityTableViewController.swift */; };
 		6E696F402513CA2A00B012AD /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F3F2513CA2A00B012AD /* Community.swift */; };
@@ -31,7 +32,6 @@
 		831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392524C9CBFE0043AA76 /* DetailTableViewCell.swift */; };
 		831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E392B24CA46260043AA76 /* ProfileTableViewController.swift */; };
 		8348826424EA95E300054DF7 /* corp_round_v1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8348826324EA95E300054DF7 /* corp_round_v1.ttf */; };
-		8348826624EAA42000054DF7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826524EAA42000054DF7 /* Comment.swift */; };
 		8348826824EABAFE00054DF7 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826724EABAFE00054DF7 /* FeedTableViewController.swift */; };
 		8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */; };
 		8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */; };
@@ -408,6 +408,7 @@
 		6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice4TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67224FBA199000B1DAC /* Notice5TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice5TableViewController.swift; sourceTree = "<group>"; };
 		6E5043D9251509A500049E14 /* CommunityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityListViewController.swift; sourceTree = "<group>"; };
+		6E504791251A46A3007B6A59 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		6E696F0C2511AFAD00B012AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E696F3A2513736E00B012AD /* CommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		6E696F3F2513CA2A00B012AD /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
@@ -430,7 +431,6 @@
 		831E392B24CA46260043AA76 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8332D7A6250A59E700C06022 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		8348826324EA95E300054DF7 /* corp_round_v1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = corp_round_v1.ttf; sourceTree = "<group>"; };
-		8348826524EAA42000054DF7 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8348826724EABAFE00054DF7 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderTableViewController.swift; sourceTree = "<group>"; };
@@ -786,12 +786,12 @@
 				838071E724C627E0008BAA2C /* User.swift */,
 				8348E3E824CE0E3A001D59C0 /* Like.swift */,
 				8348E3EA24CE283C001D59C0 /* Type.swift */,
+				6E504791251A46A3007B6A59 /* Comment.swift */,
 				8348E3FC24D10F90001D59C0 /* Footstep.swift */,
 				8348B5E224D2A4A20000A187 /* Post.swift */,
 				8350140124D49E94008D1170 /* Message.swift */,
 				834966BF24DC0B9600C9B7DD /* Match.swift */,
 				834C32D324E3BD10003330B1 /* Block.swift */,
-				8348826524EAA42000054DF7 /* Comment.swift */,
 				834959AC24F406C600CD052E /* Notice.swift */,
 				6E696F3F2513CA2A00B012AD /* Community.swift */,
 			);
@@ -1348,7 +1348,6 @@
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
 				837C563124F078B400956FDC /* OpinionTableViewController.swift in Sources */,
 				834959B524F46DB500CD052E /* ShopTableViewCell.swift in Sources */,
-				8348826624EAA42000054DF7 /* Comment.swift in Sources */,
 				6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */,
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */,
@@ -1364,6 +1363,7 @@
 				83B6231524E238D900363548 /* ModalPostTableViewController.swift in Sources */,
 				6E46F66D24FBA15C000B1DAC /* Notice2TableViewController.swift in Sources */,
 				8350E4C124D9AE7B00487DB9 /* PIckerKeyboard14.swift in Sources */,
+				6E504792251A46A3007B6A59 /* Comment.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
@@ -1578,7 +1578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
@@ -1600,7 +1600,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;

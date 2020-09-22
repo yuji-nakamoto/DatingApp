@@ -177,7 +177,6 @@ extension MyPageTableViewController: UITableViewDelegate, UITableViewDataSource 
             cell.configureCell(user)
             cell.cogAnimation()
             cell.myPageVC = self
-            cell.configureCommentCell(comment)
             
             return cell
         }

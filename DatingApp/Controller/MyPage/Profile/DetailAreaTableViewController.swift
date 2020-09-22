@@ -36,7 +36,7 @@ class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate 
         
        if detailMapTextField.text!.count > 4 {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "4文字以下で入力してください。"
+            hud.textLabel.text = "4文字以下で入力してください"
             hud.show(in: self.view)
             hud.dismiss()
             return

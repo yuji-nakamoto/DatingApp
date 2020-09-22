@@ -42,7 +42,7 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
             changeEmail()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "入力欄を全て埋めてください。"
+            hud.textLabel.text = "入力欄を全て埋めてください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -65,7 +65,7 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
-                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています。"
+                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)

@@ -20,8 +20,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var termsButton: UIButton!
     
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 210, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 270, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 225, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 285, width: 300, height: 60))
     private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
@@ -51,7 +51,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             createUser()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "入力欄を全て埋めてください。"
+            hud.textLabel.text = "入力欄を全て埋めてください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -70,7 +70,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         AuthService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
             if error != nil {
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = "既に登録されているアドレスか、アドレスが無効です。"
+                self.hud.textLabel.text = "既に登録されているアドレスか、アドレスが無効です"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
@@ -78,7 +78,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             self.activityIndicator.stopAnimating()
-            self.hud.textLabel.text = "認証のメールを送りました。\nメールを確認しログインしてください。"
+            self.hud.textLabel.text = "認証のメールを送りました。\nメールを確認しログインしてください"
             self.hud.show(in: self.view)
             self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
             self.hud.dismiss(afterDelay: 3.0)

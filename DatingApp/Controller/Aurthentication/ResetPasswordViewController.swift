@@ -39,7 +39,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             resetPassword()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "メールアドレスを入力してください。"
+            hud.textLabel.text = "メールアドレスを入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

@@ -57,7 +57,7 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
     private func saveTextView() {
         
         if textView.text.count > 500 {
-            hud.textLabel.text = "文字数制限になりました。"
+            hud.textLabel.text = "文字数制限になりました"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

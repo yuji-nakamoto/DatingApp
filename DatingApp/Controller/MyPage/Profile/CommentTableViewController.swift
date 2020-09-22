@@ -35,7 +35,7 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
         
         if commentTextField.text!.count > 20 {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "ひとことは20文字以下で入力してください。"
+            hud.textLabel.text = "ひとことは20文字以下で入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

@@ -45,13 +45,11 @@ class MyPageTableViewCell: UITableViewCell {
         } else {
             likeNewLabel.isHidden = true
         }
-    }
-    
-    func configureCommentCell(_ comment: Comment) {
-        if comment.text == "" {
+        
+        if user?.comment == "" {
             commentLabel.text = "挨拶や今日の出来事など入力してみよう"
         } else {
-            commentLabel.text = comment.text
+            commentLabel.text = user?.comment
         }
     }
     

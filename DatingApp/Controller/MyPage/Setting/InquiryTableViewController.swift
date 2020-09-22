@@ -41,7 +41,7 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
         
         if inquiryLabel.text == "お問い合わせ内容" {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "内容を入力してください。"
+            hud.textLabel.text = "内容を入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -50,7 +50,7 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
         
         if emailTextField.text == "" {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "メールアドレスを入力してください。"
+            hud.textLabel.text = "メールアドレスを入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -88,7 +88,7 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
         COLLECTION_INQUIRY.document(User.currentUserId()).collection("inquirys").document().setData(dict)
 
         updateUser(withValue: [INQUIRY: ""])
-        hud.textLabel.text = "送信が完了しました。"
+        hud.textLabel.text = "送信が完了しました"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)

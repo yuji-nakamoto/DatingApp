@@ -36,14 +36,14 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
         
         if nickNameTextField.text == "" {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "1文字以上入力してください。"
+            hud.textLabel.text = "1文字以上入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             return
         } else if nickNameTextField.text!.count > 10 {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "名前は10文字以下で入力してください。"
+            hud.textLabel.text = "名前は10文字以下で入力してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)

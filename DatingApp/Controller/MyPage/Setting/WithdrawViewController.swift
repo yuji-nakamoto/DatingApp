@@ -51,7 +51,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
             withdrawUser()
         } else {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "入力欄を全て埋めてください。"
+            hud.textLabel.text = "入力欄を全て埋めてください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -93,7 +93,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています。"
+                self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 3.0)
@@ -104,7 +104,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
                     if let error = error {
                         print("Error withdraw: \(error.localizedDescription)")
                     } else {
-                        self.hud.textLabel.text = "アカウントを削除しました。"
+                        self.hud.textLabel.text = "アカウントを削除しました"
                         self.hud.show(in: self.view)
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 3.0)
@@ -133,7 +133,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = "アカウントが間違えています。"
+                self.hud.textLabel.text = "アカウントが間違えています"
                 self.hud.show(in: self.view)
                 self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 3.0)
@@ -144,7 +144,7 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
                     if let error = error {
                         print("Error withdraw: \(error.localizedDescription)")
                     } else {
-                        self.hud.textLabel.text = "アカウントを削除しました。"
+                        self.hud.textLabel.text = "アカウントを削除しました"
                         self.hud.show(in: self.view)
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 3.0)
@@ -232,12 +232,12 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
             }
             
             if UserDefaults.standard.object(forKey: APPLE) != nil || UserDefaults.standard.object(forKey: GOOGLE) != nil {
-                self.descriptionlabel.text = "退会ボタンを押すとアカウントが削除されます。"
+                self.descriptionlabel.text = "退会ボタンを押すとアカウントが削除されます"
                 self.emailTextField.isHidden = true
                 self.passwordTextField.isHidden = true
                 self.doneButton.isHidden = true
             } else {
-                self.descriptionlabel.text = "メールアドレスとパスワードを\n入力してください。"
+                self.descriptionlabel.text = "メールアドレスとパスワードを\n入力してください"
             }
         }
         
@@ -320,7 +320,7 @@ extension WithdrawViewController: ASAuthorizationControllerDelegate {
                 if let error = error {
                     print("Error reauth: \(error.localizedDescription)")
                     generator.notificationOccurred(.error)
-                    self.hud.textLabel.text = "エラーが発生しました。"
+                    self.hud.textLabel.text = "エラーが発生しました"
                     self.hud.show(in: self.view)
                     self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                     self.hud.dismiss(afterDelay: 3.0)
@@ -331,7 +331,7 @@ extension WithdrawViewController: ASAuthorizationControllerDelegate {
                         if let error = error {
                             print("Error withdraw: \(error.localizedDescription)")
                         } else {
-                            self.hud.textLabel.text = "アカウントを削除しました。"
+                            self.hud.textLabel.text = "アカウントを削除しました"
                             self.hud.show(in: self.view)
                             self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                             self.hud.dismiss(afterDelay: 3.0)

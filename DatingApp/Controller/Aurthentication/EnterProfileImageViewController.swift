@@ -45,7 +45,7 @@ class EnterProfileImageViewController: UIViewController {
         
         if profileImage == nil {
             generator.notificationOccurred(.error)
-            hud.textLabel.text = "プロフィール画像を設定してください。"
+            hud.textLabel.text = "プロフィール画像を設定してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -152,7 +152,7 @@ class EnterProfileImageViewController: UIViewController {
     
     private func hudSetup() {
         
-        hud.textLabel.text = "保存が成功しました。"
+        hud.textLabel.text = "保存が成功しました"
         self.indicator.stopAnimating()
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
