@@ -19,9 +19,15 @@ class CommunityUsersViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var communityButton: UIButton!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var withdrawButton: UIButton!
+    @IBOutlet weak var withdrawButton1: UIButton!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var withdrawButton2: UIButton!
+    @IBOutlet weak var backButton1: UIButton!
+    @IBOutlet weak var tweetButton1: UIButton!
+    @IBOutlet weak var tweetButton2: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     private var users = [User]()
     private var user = User()
@@ -33,7 +39,7 @@ class CommunityUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
+        //        setupBanner()
         testBanner()
         
         setup()
@@ -52,6 +58,10 @@ class CommunityUsersViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    @IBAction func tweetButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "TweetVC", sender: communityId)
+    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -96,6 +106,7 @@ class CommunityUsersViewController: UIViewController {
                 self.setupCommunityButton()
             }
             self.fetchUsers(self.user)
+            self.tableView.reloadData()
         }
     }
     
@@ -113,7 +124,7 @@ class CommunityUsersViewController: UIViewController {
         guard communityId != "" else { return }
         Community.fetchCommunity(communityId: self.communityId) { (community) in
             self.community = community
-            self.navigationItem.title = "\(self.community.title ?? "")"
+            self.titleLabel.text = "\(self.community.title ?? "")"
             self.tableView.reloadData()
         }
     }
@@ -150,24 +161,36 @@ class CommunityUsersViewController: UIViewController {
             return
         }
         
-        Community.updateCommunity(communityId: self.communityId,
-                                  value1: [NUMBER: self.community.number + 1],
-                                  value2: [User.currentUserId(): true])
+        if user.gender == "男性" {
+            Community.updateCommunity(communityId: self.communityId,
+                                      value1: [ALL_NUMBER: self.community.allNumber + 1,
+                                               MALE_NUMBER: self.community.maleNumber + 1 ],
+                                      value2: [User.currentUserId(): true])
+        } else {
+            Community.updateCommunity(communityId: self.communityId,
+                                      value1: [ALL_NUMBER: self.community.allNumber + 1,
+                                               FEMALE_NUMBER: self.community.femaleNumber + 1 ],
+                                      value2: [User.currentUserId(): true])
+        }
+        
         fetchCurrentUser()
         fetchCommunity()
-        communityButton.setTitle("参加中", for: .normal)
-        communityButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
-        communityButton.backgroundColor = UIColor.systemGray2
-        communityButton.isEnabled = false
-        withdrawButton.isHidden = false
-        widthConstraint.constant = 150
+        setupParticipationButton()
     }
     
     private func setupWithdraw() {
         
-        Community.updateCommunity(communityId: self.communityId,
-                                  value1: [NUMBER: self.community.number - 1],
-                                  value2: [User.currentUserId(): FieldValue.delete()])
+        if user.gender == "男性" {
+            Community.updateCommunity(communityId: self.communityId,
+                                      value1: [ALL_NUMBER: self.community.allNumber - 1,
+                                               MALE_NUMBER: self.community.maleNumber - 1],
+                                      value2: [User.currentUserId(): FieldValue.delete()])
+        } else {
+            Community.updateCommunity(communityId: self.communityId,
+                                      value1: [ALL_NUMBER: self.community.allNumber - 1,
+                                               FEMALE_NUMBER: self.community.femaleNumber - 1],
+                                      value2: [User.currentUserId(): FieldValue.delete()])
+        }
         
         if user.community1 == self.communityId {
             updateUser(withValue: [COMMUNITY1: ""])
@@ -179,17 +202,15 @@ class CommunityUsersViewController: UIViewController {
         
         fetchCurrentUser()
         fetchCommunity()
-        communityButton.setTitle("コミュニティに参加する", for: .normal)
-        communityButton.setTitleColor(UIColor.white, for: .normal)
-        communityButton.backgroundColor = UIColor(named: O_GREEN)
-        communityButton.isEnabled = true
-        withdrawButton.isHidden = true
-        widthConstraint.constant = 300
+        setupWithdrawButton()
     }
     
     private func setupCommunityButton() {
         
-        withdrawButton.isHidden = false
+        withdrawButton1.isHidden = false
+        withdrawButton2.isHidden = false
+        tweetButton1.isHidden = false
+        tweetButton2.isHidden = false
         communityButton.setTitle("参加中", for: .normal)
         communityButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
         communityButton.backgroundColor = UIColor.systemGray2
@@ -197,12 +218,51 @@ class CommunityUsersViewController: UIViewController {
         widthConstraint.constant = 150
     }
     
+    private func setupParticipationButton() {
+        
+        communityButton.setTitle("参加中", for: .normal)
+        communityButton.setTitleColor(UIColor(named: O_BLACK), for: .normal)
+        communityButton.backgroundColor = UIColor.systemGray2
+        communityButton.isEnabled = false
+        withdrawButton1.isHidden = false
+        tweetButton1.isHidden = false
+        widthConstraint.constant = 150
+    }
+    
+    private func setupWithdrawButton() {
+        
+        communityButton.setTitle("コミュニティに参加する", for: .normal)
+        communityButton.setTitleColor(UIColor.white, for: .normal)
+        communityButton.backgroundColor = UIColor(named: O_GREEN)
+        communityButton.isEnabled = true
+        withdrawButton1.isHidden = true
+        withdrawButton2.isHidden = true
+        tweetButton1.isHidden = true
+        tweetButton2.isHidden = true
+        widthConstraint.constant = 300
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.panGestureRecognizer.translation(in: scrollView).y < -100 {
-            navigationController?.navigationBar.isHidden = false
+            topView.isHidden = false
+            backButton1.isHidden = true
+            withdrawButton1.isHidden = true
+            tweetButton1.isHidden = true
         } else {
-            navigationController?.navigationBar.isHidden = true
+            topView.isHidden = true
+            backButton1.isHidden = false
+            
+            if self.user.community1 == self.communityId {
+                withdrawButton1.isHidden = false
+                tweetButton1.isHidden = false
+            } else if self.user.community2 == self.communityId {
+                withdrawButton1.isHidden = false
+                tweetButton1.isHidden = false
+            } else if self.user.community3 == self.communityId {
+                withdrawButton1.isHidden = false
+                tweetButton1.isHidden = false
+            }
         }
     }
     
@@ -213,16 +273,29 @@ class CommunityUsersViewController: UIViewController {
             let toUserId = sender as! String
             detailVC.toUserId = toUserId
         }
+        
+        if segue.identifier == "TweetVC" {
+            let tweetVC = segue.destination as! TweetTableViewController
+            let communityId = sender as! String
+            tweetVC.communityId = communityId
+        }
     }
     
     private func setup() {
         
-        withdrawButton.isHidden = true
+        topView.backgroundColor = .white
+        withdrawButton1.isHidden = true
+        withdrawButton2.isHidden = true
+        tweetButton1.isHidden = true
+        tweetButton2.isHidden = true
         communityButton.layer.cornerRadius = 44 / 2
         collectionView.delegate = self
         collectionView.dataSource = self
     }
 }
+
+
+// MARK: - Table view
 
 extension CommunityUsersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -231,7 +304,7 @@ extension CommunityUsersViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CommunityUsersTableViewCell
-        cell.configureCell(self.community)
+        cell.configureCell(self.community, self.user)
         
         return cell
     }
@@ -262,9 +335,9 @@ extension CommunityUsersViewController:  UICollectionViewDataSource, UICollectio
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-//            cell3.bannerView.rootViewController = self
-//            cell3.bannerView.load(GADRequest())
+            //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+            //            cell3.bannerView.rootViewController = self
+            //            cell3.bannerView.load(GADRequest())
             cell3.testBanner4()
             cell3.communityUsersCVC = self
             

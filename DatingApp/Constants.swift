@@ -63,7 +63,11 @@ public let BODYSIZE = "bodySize"
 public let HEIGHT = "height"
 public let MINAGE = "minAge"
 public let MAXAGE = "maxAge"
-public let RESIDENCESEARCH = "residenceSerch"
+public let S_RESIDENCE = "sResidence"
+public let S_HEIGHT = "sHeight"
+public let S_BODY = "sBody"
+public let S_BLOOD = "sBlood"
+public let S_PROFESSION = "sProfession"
 public let STATUS = "status"
 public let LASTCHANGE = "lastChanged"
 public let MESSAGEBADGECOUNT = "messageBadgeCount"
@@ -202,8 +206,14 @@ public let MAINTEXT = "mainText"
 
 // MARK: - Community
 public let CONTENTSIMAGEURL = "contentsImageUrl"
-public let NUMBER = "number"
 public let COMMUNITYID = "communityId"
+public let ALL_NUMBER = "all_number"
+public let MALE_NUMBER = "male_number"
+public let FEMALE_NUMBER = "female_number"
+
+// MARK: - Tweet
+public let TWEET = "tweet"
+public let TWEETID = "tweetId"
 
 // MARK: - Placeholder image
 
@@ -240,6 +250,7 @@ public let GOOGLE = "google"
 public let APPLE = "apple"
 public let DELETE = "delete"
 public let ALL = "all"
+public let SORTLIKE = "sortLike"
 public let HINT_END = "hint_end"
 public let HINT_END2 = "hint_end2"
 public let TUTORIAL_END = "tutorial_end"

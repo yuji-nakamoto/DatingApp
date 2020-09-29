@@ -70,7 +70,7 @@ class PostTableViewController: UIViewController {
     
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            let residence = user.residenceSerch
+            let residence = user.sResidence
             
             if UserDefaults.standard.object(forKey: LOVER2) != nil {
                 Post.fetchGenreLoverPosts(residence!) { (post) in
@@ -175,11 +175,6 @@ class PostTableViewController: UIViewController {
         tableView.refreshControl = refresh
         tableView.tableFooterView = UIView()
         navigationItem.title = "投稿"
-        
-        plusButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        plusButton.layer.shadowColor = UIColor.black.cgColor
-        plusButton.layer.shadowOpacity = 0.3
-        plusButton.layer.shadowRadius = 4
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

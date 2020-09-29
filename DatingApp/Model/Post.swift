@@ -458,7 +458,6 @@ class Post {
                     .whereField(GENRE, isEqualTo: "ヒマしてる")
                     .order(by: TIMESTAMP)
                 
-                
                 postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
@@ -476,7 +475,6 @@ class Post {
                     .whereField(RESIDENCE, isEqualTo: residenceSearch)
                     .whereField(GENRE, isEqualTo: "ヒマしてる")
                     .order(by: TIMESTAMP)
-                
                 
                 postRef.getDocuments { (snapshot, error) in
                     if let error = error {

@@ -156,7 +156,7 @@ class SettingTableViewController: UITableViewController {
         
         let dict = [MINAGE: Int(minLabel.text!)!,
                     MAXAGE: Int(maxLabel.text!)!,
-                    RESIDENCESEARCH: residenceLabel.text!] as [String : Any]
+                    S_RESIDENCE: residenceLabel.text!] as [String : Any]
         
         if residenceLabel.text == "こだわらない" {
             UserDefaults.standard.set(true, forKey: ALL)
@@ -223,7 +223,7 @@ class SettingTableViewController: UITableViewController {
         maxLabel.text = String(user.maxAge)
         minSlider.value = Float(user.minAge)
         maxSlider.value = Float(user.maxAge)
-        residenceLabel.text = user.residenceSerch
+        residenceLabel.text = user.sResidence
     }
     
     private func setupUI() {

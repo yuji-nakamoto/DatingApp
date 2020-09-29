@@ -54,7 +54,7 @@ class EnterResidenceMeetController: UIViewController {
         let day = Date()
         let oneDayLate = Calendar.current.date(byAdding: .hour, value: 12, to: day)!
         let date: Double = Date().timeIntervalSince1970
-        let dict = [RESIDENCESEARCH: residenceLabel.text!,
+        let dict = [S_RESIDENCE: residenceLabel.text!,
                     SELFINTRO: "はじめまして！",
                     STATUS: "online",
                     POINTS: 0,

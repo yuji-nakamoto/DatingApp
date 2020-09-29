@@ -80,13 +80,27 @@ class CreateCommunityTableViewController: UITableViewController {
         Service.uploadImage(image: contentsImage!) { (imageUrl) in
             
             let communityId = UUID().uuidString
-            let dict = [CONTENTSIMAGEURL: imageUrl,
-                        COMMUNITYID: communityId,
-                        NUMBER: 1,
-                        CREATED_AT: Timestamp(date: Date()),
-                        TITLE: self.textField.text as Any] as [String : Any]
+
+            if self.user.gender == "男性" {
+                
+                let dict = [CONTENTSIMAGEURL: imageUrl,
+                COMMUNITYID: communityId,
+                ALL_NUMBER: 1,
+                MALE_NUMBER: 1,
+                CREATED_AT: Timestamp(date: Date()),
+                TITLE: self.textField.text as Any] as [String : Any]
+                Community.saveCommunity(communityId: communityId, withValue: dict)
+            } else {
+                
+                let dict = [CONTENTSIMAGEURL: imageUrl,
+                COMMUNITYID: communityId,
+                ALL_NUMBER: 1,
+                FEMALE_NUMBER: 1,
+                CREATED_AT: Timestamp(date: Date()),
+                TITLE: self.textField.text as Any] as [String : Any]
+                Community.saveCommunity(communityId: communityId, withValue: dict)
+            }
             
-            Community.saveCommunity(communityId: communityId, withValue: dict)
             updateUser(withValue: [CREATECOMMUNITY: true, MCOMMUNITY: true])
             
             if self.user.community1 == "" {

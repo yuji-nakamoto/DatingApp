@@ -48,7 +48,7 @@ class ModalPostTableViewController: UITableViewController {
             return
         }
         
-        let dict = [RESIDENCESEARCH: residenceLabel.text!,
+        let dict = [S_RESIDENCE: residenceLabel.text!,
                     SELECTEDGENRE: genreLabel.text!] as [String : Any]
         
         selectedPickerKeyboard()
@@ -132,7 +132,7 @@ class ModalPostTableViewController: UITableViewController {
         } else {
             genderLabel.text = "女性"
         }
-        residenceLabel.text = user.residenceSerch
+        residenceLabel.text = user.sResidence
         genreLabel.text = user.selectedGenre
     }
 

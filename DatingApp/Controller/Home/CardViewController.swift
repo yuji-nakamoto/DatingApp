@@ -64,16 +64,24 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         showTutorialView()
         confifureLocationManager()
         
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
+        //        setupBanner()
+        //        interstitial = createAndLoadIntersitial()
         testBanner()
         interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
-            reloadAction()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                self.loadView()
+                self.setupUI()
+                self.fetchUser()
+                self.setupBanner()
+                self.users.removeAll()
+                self.cards.removeAll()
+            }
             UserDefaults.standard.removeObject(forKey: REFRESH)
         }
         UserDefaults.standard.set(true, forKey: CARDVC)
@@ -86,7 +94,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     }
     
     // MARK: - Actions
-    
     
     @IBAction func dismissButtonPressed(_ sender: Any) {
         dismiss(animated: false, completion: nil)
@@ -282,30 +289,15 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func fetchUsers(_ user: User) {
         
-        if user.residenceSerch == "こだわらない" {
-            User.fetchCardAllUsers(user) { (user) in
-                if user.uid == "" {
-                    self.indicator.stopAnimating()
-                    self.emptyLabel.isHidden = false
-                    self.emptyLabel2.isHidden = false
-
-                    return
-                }
-                self.users.append(user)
-                self.setupCards(user: user)
+        User.fetchCardUsers(user) { (user) in
+            if user.uid == "" {
+                self.indicator.stopAnimating()
+                self.emptyLabel.isHidden = false
+                self.emptyLabel2.isHidden = false
+                return
             }
-        } else {
-            User.fetchCardUsers(user) { (user) in
-                if user.uid == "" {
-                    self.indicator.stopAnimating()
-                    self.emptyLabel.isHidden = false
-                    self.emptyLabel2.isHidden = false
-
-                    return
-                }
-                self.users.append(user)
-                self.setupCards(user: user)
-            }
+            self.users.append(user)
+            self.setupCards(user: user)
         }
     }
     
@@ -358,7 +350,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.matchViewAlpha0()
-
+            
         }) { (_) in
             self.matchViewIsHiddenTrue()
             self.emptyLabel.isHidden = false
@@ -603,7 +595,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
             
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.configureAnimations()
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.backView.alpha = 0.9
                     self.matchViewAlpha1()

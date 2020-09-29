@@ -39,8 +39,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
     func configureCell(_ user: User) {
         guard Auth.auth().currentUser != nil else { return }
 
-        getLikeCount(ref: COLLECTION_LIKECOUNTER.document(user.uid), user)
-        getTypeCount(ref: COLLECTION_TYPECOUNTER.document(user.uid), user)
+        getLikeCount(ref: COLLECTION_LIKECOUNTER.document(user.uid), user: user)
+        getTypeCount(ref: COLLECTION_TYPECOUNTER.document(user.uid), user: user)
         backView.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 150 / 2
         statusView.layer.cornerRadius = 12 / 2
@@ -105,7 +105,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func getLikeCount(ref: DocumentReference, _ user: User) {
+    func getLikeCount(ref: DocumentReference, user: User) {
         ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
             var totalLikeCount = 0
             if  let err = err {
@@ -125,7 +125,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func getTypeCount(ref: DocumentReference, _ user: User) {
+    func getTypeCount(ref: DocumentReference, user: User) {
         ref.collection(SHARDS).getDocuments() { (querySnapshot, err) in
             var totalTypeCount = 0
             if  let err = err {

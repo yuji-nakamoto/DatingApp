@@ -413,11 +413,11 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             selfIntroSetLbl.isHidden = false
         }
         
-        if user.height == "" {
+        if user.height <= 129 {
             heightSettingLabel.text = "設定する"
             heightSettingLabel.textColor = .systemGray
         } else {
-            heightSettingLabel.text = user.height
+            heightSettingLabel.text = String(user.height) + "cm"
             heightSettingLabel.textColor = UIColor(named: O_GREEN)
         }
 
@@ -721,12 +721,18 @@ extension EditTableViewController: UIImagePickerControllerDelegate, UINavigation
 
 extension EditTableViewController: PickerKeyboard1Delegate {
     func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard1) -> Array<String> {
-        return dataArray1
+        return dataArray19
     }
     
     func didDone(_ pickerKeyboard: PickerKeyboard1, selectData: String) {
-        heightSettingLabel.text = selectData
-        updateUser(withValue: [HEIGHT: heightSettingLabel.text as Any])
+        if selectData == "未設定" {
+            heightSettingLabel.text = "設定する"
+            heightSettingLabel.textColor = .systemGray
+        } else {
+            heightSettingLabel.text = selectData + "cm"
+            heightSettingLabel.textColor = UIColor(named: O_GREEN)
+        }
+        updateUser(withValue: [HEIGHT: Int(selectData) as Any])
     }
 }
 

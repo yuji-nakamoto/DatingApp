@@ -34,18 +34,15 @@ class LikeCountSortViewController: UIViewController {
         addSnapshotListener()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionView.reloadData()
-        if UserDefaults.standard.object(forKey: REFRESH) != nil {
-            fetchUsers(user)
-            UserDefaults.standard.removeObject(forKey: REFRESH)
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UserDefaults.standard.removeObject(forKey: SORTLIKE)
+        fetchUsers(user)
     }
 
     @objc func refreshCollectionView(){
         UserDefaults.standard.set(true, forKey: REFRESH_ON)
-        fetchUsers(self.user)
+        fetchUsers(user)
     }
     
     // MARK: - Fetch
@@ -64,23 +61,13 @@ class LikeCountSortViewController: UIViewController {
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
             indicator.startAnimating()
         }
-        let residence = user.residenceSerch
-        if residence == "こだわらない" {
-            User.likeCountSortNationwide(user) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.refresh.endRefreshing()
-                self.indicator.stopAnimating()
-                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
-            }
-        } else {
-            User.likeCountSort(user) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.refresh.endRefreshing()
-                self.indicator.stopAnimating()
-                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
-            }
+        
+        User.likeCountSort(user) { (users) in
+            self.users = users
+            self.collectionView.reloadData()
+            self.refresh.endRefreshing()
+            self.indicator.stopAnimating()
+            UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
     }
     

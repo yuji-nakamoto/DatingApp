@@ -170,10 +170,10 @@ class DetailTableViewCell: UITableViewCell {
             bodyLabel.text = user?.bodySize
         }
         
-        if user?.height == "" {
+        if user!.height <= 129 {
             heightLabel.text = "未設定"
         } else {
-            heightLabel.text = user?.height
+            heightLabel.text = String(user!.height) + "cm"
         }
         
         if user?.selfIntro == "" {
@@ -389,8 +389,8 @@ class DetailTableViewCell: UITableViewCell {
             self.communityLabel1.addGestureRecognizer(tap1)
             self.communityLabel1.text = community1.title
             self.numberLabel1.isHidden = false
-            if community1.number == nil { return }
-            self.numberLabel1.text = String(community1.number) + "人"
+            if community1.allNumber == nil { return }
+            self.numberLabel1.text = String(community1.allNumber) + "人"
             self.communityImageView1.sd_setImage(with: URL(string: community1.contentsImageUrl), completed: nil)
         }
     }
@@ -409,8 +409,8 @@ class DetailTableViewCell: UITableViewCell {
             self.communityLabel2.addGestureRecognizer(tap2)
             self.communityLabel2.text = community2.title
             self.numberLabel2.isHidden = false
-            if community2.number == nil { return }
-            self.numberLabel2.text = String(community2.number) + "人"
+            if community2.allNumber == nil { return }
+            self.numberLabel2.text = String(community2.allNumber) + "人"
             self.communityImageView2.sd_setImage(with: URL(string: community2.contentsImageUrl), completed: nil)
         }
     }
@@ -429,8 +429,8 @@ class DetailTableViewCell: UITableViewCell {
             self.communityLabel3.addGestureRecognizer(tap3)
             self.communityLabel3.text = community3.title
             self.numberLabel3.isHidden = false
-            if community3.number == nil { return }
-            self.numberLabel3.text = String(community3.number) + "人"
+            if community3.allNumber == nil { return }
+            self.numberLabel3.text = String(community3.allNumber) + "人"
             self.communityImageView3.sd_setImage(with: URL(string: community3.contentsImageUrl), completed: nil)
         }
     }

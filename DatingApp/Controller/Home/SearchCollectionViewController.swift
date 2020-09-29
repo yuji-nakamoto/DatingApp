@@ -126,23 +126,12 @@ class SearchCollectionViewController: UIViewController {
             indicator.startAnimating()
         }
         
-        let residence = user.residenceSerch
-        if residence == "こだわらない" {
-            User.fetchNationwide(user) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.indicator.stopAnimating()
-                self.refresh.endRefreshing()
-                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
-            }
-        } else {
-            User.fetchUserResidenceSort(user) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.indicator.stopAnimating()
-                self.refresh.endRefreshing()
-                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
-            }
+        User.fetchUserSort(user) { (users) in
+            self.users = users
+            self.collectionView.reloadData()
+            self.indicator.stopAnimating()
+            self.refresh.endRefreshing()
+            UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
     }
     

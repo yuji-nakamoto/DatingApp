@@ -64,23 +64,13 @@ class NewLoginCollectionViewController: UIViewController {
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
             indicator.startAnimating()
         }
-        let residence = user.residenceSerch
-        if residence == "こだわらない" {
-            User.fetchNewLoginAll(user) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.refresh.endRefreshing()
-                self.indicator.stopAnimating()
-                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
-            }
-        } else {
-            User.fetchNewLoginSort(user) { (users) in
-                self.users = users
-                self.collectionView.reloadData()
-                self.refresh.endRefreshing()
-                self.indicator.stopAnimating()
-                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
-            }
+        
+        User.fetchNewLoginSort(user) { (users) in
+            self.users = users
+            self.collectionView.reloadData()
+            self.refresh.endRefreshing()
+            self.indicator.stopAnimating()
+            UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
     }
     

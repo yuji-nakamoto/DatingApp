@@ -15,6 +15,15 @@ class ModalSearchTableViewController: UITableViewController {
     
     @IBOutlet weak var pickerKeyBoard16: PickerKeyboard16!
     @IBOutlet weak var pickerKeyBoard3: PickerKeyboard3!
+    @IBOutlet weak var pickerKeyBoard1: PickerKeyboard1!
+    @IBOutlet weak var pickerKeyBoard2: PickerKeyboard2!
+    @IBOutlet weak var pickerKeyBoard6: PickerKeyboard6!
+    @IBOutlet weak var pickerKeyBoard4: PickerKeyboard4!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var heightLabel2: UILabel!
+    @IBOutlet weak var bodyLabel: UILabel!
+    @IBOutlet weak var bloodLabel: UILabel!
+    @IBOutlet weak var professionLabel: UILabel!
     @IBOutlet weak var minLabel: UILabel!
     @IBOutlet weak var maxLabel: UILabel!
     @IBOutlet weak var minSlider: UISlider!
@@ -25,6 +34,7 @@ class ModalSearchTableViewController: UITableViewController {
     
     private var user = User()
     private var hud = JGProgressHUD(style: .dark)
+    private var dataArray: [Int] = ([Int])(130...200)
     
     // MARK: - Lifecycle
     
@@ -65,7 +75,11 @@ class ModalSearchTableViewController: UITableViewController {
             return
         }
         
-        let dict = [RESIDENCESEARCH: residenceLabel.text!,
+        let dict = [S_RESIDENCE: residenceLabel.text!,
+                    S_BODY: bodyLabel.text!,
+                    S_BLOOD: bloodLabel.text!,
+                    S_HEIGHT: Int(heightLabel2.text!) as Any,
+                    S_PROFESSION: professionLabel.text!,
                     MINAGE: Int(minLabel.text!)!,
                     MAXAGE: Int(maxLabel.text!)!] as [String : Any]
         
@@ -83,6 +97,29 @@ class ModalSearchTableViewController: UITableViewController {
             UserDefaults.standard.removeObject(forKey: ALL)
         }
         
+        if heightLabel.text == "未設定" {
+            UserDefaults.standard.removeObject(forKey: HEIGHT)
+        } else {
+            UserDefaults.standard.set(true, forKey: HEIGHT)
+        }
+        
+        if bodyLabel.text == "未設定" {
+            UserDefaults.standard.removeObject(forKey: BODYSIZE)
+        } else {
+            UserDefaults.standard.set(true, forKey: BODYSIZE)
+        }
+        
+        if bloodLabel.text == "未設定" {
+            UserDefaults.standard.removeObject(forKey: BLOOD)
+        } else {
+            UserDefaults.standard.set(true, forKey: BLOOD)
+        }
+        
+        if professionLabel.text == "未設定" {
+            UserDefaults.standard.removeObject(forKey: PROFESSION)
+        } else {
+            UserDefaults.standard.set(true, forKey: PROFESSION)
+        }
         updateUser(withValue: dict as [String : Any])
         UserDefaults.standard.set(true, forKey: REFRESH)
         dismiss(animated: true, completion: nil)
@@ -105,19 +142,56 @@ class ModalSearchTableViewController: UITableViewController {
         } else {
             genderLabel.text = "女性"
         }
-        self.residenceLabel.text = user.residenceSerch
-        self.minLabel.text = String(user.minAge)
-        self.maxLabel.text = String(user.maxAge)
-        self.minSlider.value = Float(user.minAge)
-        self.maxSlider.value = Float(user.maxAge)
+        residenceLabel.text = user.sResidence
+        bodyLabel.text = user.sBody
+        bloodLabel.text = user.sBlood
+        professionLabel.text = user.sProfession
+        minLabel.text = String(user.minAge)
+        maxLabel.text = String(user.maxAge)
+        minSlider.value = Float(user.minAge)
+        maxSlider.value = Float(user.maxAge)
+        if user.sHeight <= 129 {
+            heightLabel.text = "未設定"
+        } else {
+            heightLabel.text = String(user.sHeight) + "cm〜"
+        }
     }
     
     private func setupUI() {
+        pickerKeyBoard1.delegate = self
+        pickerKeyBoard2.delegate = self
         pickerKeyBoard3.delegate = self
+        pickerKeyBoard4.delegate = self
+        pickerKeyBoard6.delegate = self
         pickerKeyBoard16.delegate = self
         tableView.tableFooterView = UIView()
         navigationItem.title = "検索条件"
         doneButton.layer.cornerRadius = 44 / 2
+    }
+}
+
+extension ModalSearchTableViewController: PickerKeyboard1Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard1) -> Array<String> {
+        return dataArray19
+    }
+
+    func didDone(_ pickerKeyboard: PickerKeyboard1, selectData: String) {
+        heightLabel2.text = selectData
+        if selectData == "未設定" {
+            heightLabel.text = "未設定"
+        } else {
+            heightLabel.text = selectData + "cm〜"
+        }
+    }
+}
+
+extension ModalSearchTableViewController: PickerKeyboard2Delegate {
+    func titlesOfPickerViewKeyboard2(_ pickerKeyboard: PickerKeyboard2) -> Array<String> {
+        return dataArray2
+    }
+    
+    func didDone2(_ pickerKeyboard: PickerKeyboard2, selectData: String) {
+        bodyLabel.text = selectData
     }
 }
 
@@ -128,6 +202,26 @@ extension ModalSearchTableViewController: PickerKeyboard3Delegate {
     
     func didDone3(_ pickerKeyboard: PickerKeyboard3, selectData: String) {
         residenceLabel.text = selectData
+    }
+}
+
+extension ModalSearchTableViewController: PickerKeyboard4Delegate {
+    func titlesOfPickerViewKeyboard4(_ pickerKeyboard: PickerKeyboard4) -> Array<String> {
+        return dataArray4
+    }
+    
+    func didDone4(_ pickerKeyboard: PickerKeyboard4, selectData: String) {
+        professionLabel.text = selectData
+    }
+}
+
+extension ModalSearchTableViewController: PickerKeyboard6Delegate {
+    func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard6) -> Array<String> {
+        return dataArray6
+    }
+    
+    func didDone(_ pickerKeyboard: PickerKeyboard6, selectData: String) {
+        bloodLabel.text = selectData
     }
 }
 
