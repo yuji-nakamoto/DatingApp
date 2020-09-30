@@ -71,10 +71,14 @@ class CreateTweetViewController: UIViewController {
             let dict = [TWEETID: tweetId,
                         UID: User.currentUserId(),
                         DATE: date,
+                        COMMUNITYID: communityId,
                         TEXT: self.textView.text as Any] as [String : Any]
             
-            Tweet.saveTweet(communityId: self.communityId, withValue: dict)
+            Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
+            Tweet.saveTweetCommunityId(tweetId: tweetId, withValue: [COMMUNITYID: self.communityId,
+                                                                     UID: User.currentUserId()])
             self.indicator.stopAnimating()
+            UserDefaults.standard.set(true, forKey: REFRESH)
             self.navigationController?.popViewController(animated: true)
             
         } else {
@@ -83,11 +87,15 @@ class CreateTweetViewController: UIViewController {
                 let dict = [TWEETID: tweetId,
                             UID: User.currentUserId(),
                             DATE: date,
+                            COMMUNITYID: self.communityId,
                             CONTENTSIMAGEURL: imageUrl,
                             TEXT: self.textView.text as Any] as [String : Any]
-                
-                Tweet.saveTweet(communityId: self.communityId, withValue: dict)
+            
+                Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
+                Tweet.saveTweetCommunityId(tweetId: tweetId, withValue: [COMMUNITYID: self.communityId,
+                                                                         UID: User.currentUserId()])
                 self.indicator.stopAnimating()
+                UserDefaults.standard.set(true, forKey: REFRESH)
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -202,19 +210,17 @@ extension CreateTweetViewController: UITextViewDelegate {
             pleaceholderLbl.isHidden = false
         }
         
-        if textView.text == "" {
-            sendButton.isEnabled = false
-        } else {
-            sendButton.isEnabled = true
-        }
-        
         let tweetNum = 40 - textView.text.count
         if tweetNum < 0 {
             countLabel.text = "文字数制限です"
             sendButton.isEnabled = false
         } else {
             countLabel.text = String(tweetNum)
-            sendButton.isEnabled = true
+            if textView.text == "" {
+                sendButton.isEnabled = false
+            } else {
+                sendButton.isEnabled = true
+            }
         }
     }
 }

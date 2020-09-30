@@ -59,12 +59,10 @@ class PostTableViewCell: UITableViewCell {
                 self.myPageVC?.viewWillAppear(true)
             }
         }
-        
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
         
         alert.addAction(delete)
         alert.addAction(cancel)
-        
         myPageVC?.present(alert,animated: true,completion: nil)
     }
     

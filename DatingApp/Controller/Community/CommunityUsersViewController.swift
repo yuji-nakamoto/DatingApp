@@ -304,8 +304,9 @@ extension CommunityUsersViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CommunityUsersTableViewCell
-        cell.configureCell(self.community, self.user)
         
+        cell.configureCell(self.community, self.user)
+        cell.communityUserVC = self
         return cell
     }
 }

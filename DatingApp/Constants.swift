@@ -31,6 +31,7 @@ public let COLLECTION_COMMENT = Firestore.firestore().collection("comment")
 public let COLLECTION_NOTICE = Firestore.firestore().collection("notice")
 public let COLLECTION_GEO = Firestore.firestore().collection("geography")
 public let COLLECTION_COMMUNITY = Firestore.firestore().collection("community")
+public let COLLECTION_TWEET = Firestore.firestore().collection("tweet")
 
 // MARK: - Color
 
@@ -214,6 +215,8 @@ public let FEMALE_NUMBER = "female_number"
 // MARK: - Tweet
 public let TWEET = "tweet"
 public let TWEETID = "tweetId"
+public let COMMENTCOUNT = "commentCount"
+public let COMMENTID = "commentId"
 
 // MARK: - Placeholder image
 
@@ -244,6 +247,7 @@ public let MAILFRIEND2 = "mailfriend2"
 public let PLAY2 = "play2"
 public let FREE2 = "free2"
 public let REFRESH = "refresh"
+public let REFRESH2 = "refresh2"
 public let CARDVC = "cardVC"
 public let FACEBOOK = "facebook"
 public let GOOGLE = "google"
@@ -269,6 +273,7 @@ public let C_NUMBER_ON = "cNumber_on"
 public let C_CREATED_ON = "cCreated_on"
 public let C_RECOMMENDED_ON = "cRecommended_on"
 public let C_SEARCH_ON = "cSearch_on"
+public let RESIZE = "resize"
 
 // MARK: - Notification
 

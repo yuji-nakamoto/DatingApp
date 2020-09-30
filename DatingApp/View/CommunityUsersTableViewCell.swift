@@ -15,6 +15,9 @@ class CommunityUsersTableViewCell: UITableViewCell {
     @IBOutlet weak var titlteLabel: UILabel!
     @IBOutlet weak var numberLabel1: UILabel!
     @IBOutlet weak var numberLabel2: UILabel!
+    @IBOutlet weak var communityButton: UIButton!
+    
+    var communityUserVC: CommunityUsersViewController?
     
     func configureCell(_ community: Community, _ user: User) {
         guard community.communityId != nil else { return }
@@ -29,6 +32,16 @@ class CommunityUsersTableViewCell: UITableViewCell {
         } else {
             numberLabel2.text = "( 男性\(String(community.maleNumber))人 )"
         }
+        
+        if user.community1 == communityUserVC?.communityId {
+            communityButton.isHidden = false
+        } else if user.community2 == communityUserVC?.communityId {
+            communityButton.isHidden = false
+        } else if user.community3 == communityUserVC?.communityId {
+            communityButton.isHidden = false
+        } else {
+            communityButton.isHidden = true
+        }
     }
     
     override func awakeFromNib() {
@@ -40,6 +53,10 @@ class CommunityUsersTableViewCell: UITableViewCell {
         visualEffectView.frame = self.backContentsImageView.frame
         self.backContentsImageView.addSubview(visualEffectView)
         contentsImageView.layer.cornerRadius = 15
+        communityButton.layer.cornerRadius = 30 / 2
+        communityButton.layer.borderWidth = 1
+        communityButton.layer.borderColor = UIColor.white.cgColor
+        communityButton.isHidden = true
         titlteLabel.text = ""
         numberLabel1.text = ""
         numberLabel2.text = ""

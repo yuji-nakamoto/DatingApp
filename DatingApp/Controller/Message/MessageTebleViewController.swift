@@ -495,7 +495,6 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-
     }
     
     private func scrollToBottom() {
