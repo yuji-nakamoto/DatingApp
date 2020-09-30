@@ -136,7 +136,7 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         UserDefaults.standard.set(true, forKey: POINTBUTTON)
         
         hud.show(in: self.view)
-        hud.textLabel.text = "ポイント追加しました。\n12時間後にCMを視聴できます。"
+        hud.textLabel.text = "ポイント追加しました\n12時間後にCMを視聴できます"
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 3.0)
         

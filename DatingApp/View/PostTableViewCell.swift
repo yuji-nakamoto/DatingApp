@@ -37,24 +37,11 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCurrentUserCell(_ user: User) {
-        
-        if user.uid != nil {
-            profileImageView.layer.cornerRadius = 10
-            profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
-            nameLabel.text = user.username
-            residenceLabel.text = user.residence
-            if user.age != nil {
-                ageLabel.text = String(user.age) + "歳"
-            }
-        }
-    }
-    
     @IBAction func deleteButtonPressed(_ sender: Any) {
         
         let alert: UIAlertController = UIAlertController(title: "削除", message: "投稿を削除しますか？", preferredStyle: .alert)
         let delete: UIAlertAction = UIAlertAction(title: "削除する", style: UIAlertAction.Style.default) { (alert) in
-           
+            UserDefaults.standard.set(true, forKey: REFRESH3)
             COLLECTION_POSTS.document(User.currentUserId()).delete { (error) in
                 self.myPageVC?.viewWillAppear(true)
             }

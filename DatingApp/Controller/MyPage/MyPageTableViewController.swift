@@ -34,16 +34,26 @@ class MyPageTableViewController: UIViewController {
         
 //        setupBanner()
         testBanner()
+        
         showHintView()
+        if UserDefaults.standard.object(forKey: REFRESH3) == nil {
+            fetchMyPost()
+            fetchUser()
+            fetchComment()
+            setupUI()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchMyPost()
-        fetchUser()
-        fetchComment()
-        setupUI()
+        if UserDefaults.standard.object(forKey: REFRESH3) != nil {
+            fetchMyPost()
+            fetchUser()
+            fetchComment()
+            setupUI()
+            UserDefaults.standard.removeObject(forKey: REFRESH3)
+        }
     }
     
     // MARK: - Action

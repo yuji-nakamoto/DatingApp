@@ -96,6 +96,7 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
         userDefaults.removeObject(forKey: MAILFRIEND)
         userDefaults.removeObject(forKey: PLAY)
         userDefaults.removeObject(forKey: FREE)
+        UserDefaults.standard.set(true, forKey: REFRESH3)
         
         if UserDefaults.standard.object(forKey: FEMALE) == nil {
             if interstitial.isReady {

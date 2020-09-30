@@ -50,6 +50,7 @@ class ProfileTableViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: REFRESH3)
         self.navigationController?.popViewController(animated: true)
     }
     

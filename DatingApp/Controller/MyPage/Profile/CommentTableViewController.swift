@@ -70,6 +70,7 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
         updateUser(withValue: [COMMENT: commentTextField.text as Any])
         Comment.saveComment(comment: commentTextField.text!)
         navigationController?.popViewController(animated: true)
+        UserDefaults.standard.set(true, forKey: REFRESH3)
     }
     
     private func setupKeyboard() {
