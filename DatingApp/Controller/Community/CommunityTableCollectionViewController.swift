@@ -1,33 +1,27 @@
 //
-//  CommunityTableViewController.swift
+//  CommunityTableCollectionViewController.swift
 //  DatingApp
 //
-//  Created by yuji nakamoto on 2020/09/17.
+//  Created by yuji nakamoto on 2020/10/04.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 
-class CommunityTableViewController: UIViewController {
-    
-    // MARK: - Properties
-    
+class CommunityTableCollectionViewController: UITableViewController {
+
     @IBOutlet weak var collectionView1: UICollectionView!
     @IBOutlet weak var collectionView2: UICollectionView!
     @IBOutlet weak var collectionView3: UICollectionView!
     @IBOutlet weak var createButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var communityArray1 = [Community]()
     private var communityArray2 = [Community]()
     private var communityArray3 = [Community]()
     private var user = User()
     
-    // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,16 +40,11 @@ class CommunityTableViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Actions
-    
-    @IBAction func myCommunityButtonPressed(_ sender: Any) {
-        
-    }
-    
+  
     @IBAction func searchButtonPressed(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: C_SEARCH_ON)
         performSegue(withIdentifier: "CommunityListVC", sender: nil)
@@ -97,50 +86,34 @@ class CommunityTableViewController: UIViewController {
     
     private func fetchNumberCommunity() {
         
-        indicator.startAnimating()
         communityArray1.removeAll()
         Community.fetchNumberCommunity { (community) in
             self.communityArray1 = community
             self.collectionView1.reloadData()
-            self.indicator.stopAnimating()
         }
     }
     
     private func fetchCreatedCommunity() {
         
-        indicator.startAnimating()
         communityArray2.removeAll()
         Community.fetchCreatedCommunity { (community) in
             self.communityArray2 = community
             self.collectionView2.reloadData()
-            self.indicator.stopAnimating()
         }
     }
     
     private func fetchCommunity() {
         
-        indicator.startAnimating()
         communityArray3.removeAll()
         Community.fetchRecommendedCommunity { (community) in
             self.communityArray3 = community
             self.communityArray3.shuffle()
             self.collectionView3.reloadData()
-            self.indicator.stopAnimating()
         }
     }
     
     // MARK: - Helpers
-    
-    private func setupCollectionView() {
-        
-        collectionView1.delegate = self
-        collectionView1.dataSource = self
-        collectionView2.delegate = self
-        collectionView2.dataSource = self
-        collectionView3.delegate = self
-        collectionView3.dataSource = self
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "CommunityUsersVC" {
@@ -151,9 +124,7 @@ class CommunityTableViewController: UIViewController {
     }
 }
 
-//MARK: CollectionView
-
-extension CommunityTableViewController:  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension CommunityTableCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
