@@ -30,7 +30,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         itemImageView.image = UIImage(named: "item2")
        
         if user.item2 != nil {
-            remainLabel.text = String(user.item2)
+            remainLabel.text = "×" + String(user.item2)
         } else {
             remainLabel.text = "×0"
         }

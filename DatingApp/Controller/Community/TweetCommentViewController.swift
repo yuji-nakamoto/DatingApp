@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import GoogleMobileAds
 
 class TweetCommentViewController: UIViewController, UITextFieldDelegate {
@@ -19,12 +20,16 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var tweet = Tweet()
     private var tweet2 = Tweet()
     private var tweetComments = [Tweet]()
+    private var tweetComment = Tweet()
     private var user = User()
+    private var reply = Tweet()
     private var users = [User]()
+    private let refresh = UIRefreshControl()
     var tweetId = ""
     
     // MARK: - Lifecycle
@@ -32,22 +37,27 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupBanner()
+        //        setupBanner()
         testBanner()
         
         setup()
-        fetchCommunityId()
+        fetchTweet()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if UserDefaults.standard.object(forKey: REFRESH2) != nil {
-            fetchCommunityId()
+            fetchTweet()
             UserDefaults.standard.removeObject(forKey: REFRESH2)
         }
     }
     
     // MARK: - Actions
+    
+    @objc func refreshTableView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
+        fetchTweetComment(tweet)
+    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -61,30 +71,22 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         let dict = [UID: User.currentUserId(),
                     COMMENT: textField.text as Any,
                     DATE: date,
+                    TIMESTAMP: Timestamp(date: Date()),
+                    TWEETID: tweetId,
                     COMMUNITYID: tweet.communityId as Any,
                     COMMENTID: commentId] as [String : Any]
+        Tweet.saveTweetComment(tweetId: tweetId, commentId: commentId, withValue: dict)
+        Tweet.updateCommentCount(communityId: tweet.communityId,
+                                 tweetId: tweetId,
+                                 withValue: [COMMENTCOUNT: tweet2.commentCount + 1])
         
-        Tweet.saveTweetComment(communityId: tweet.communityId, tweetId: tweetId, commentId: commentId, withValue: dict)
-        Tweet.updateCommentCount(communityId: tweet.communityId, tweetId: tweetId, withValue: [COMMENTCOUNT: tweet.commentCount + 1])
-        sendButton.isEnabled = true
         textField.resignFirstResponder()
         textField.text = ""
+        fetchCommentCount(tweet)
         fetchTweetComment(tweet)
-        UserDefaults.standard.set(true, forKey: REFRESH)
     }
     
     // MARK: - Fetch
-    
-    private func fetchCommunityId() {
-        
-        Tweet.fetchCommunityId(tweetId: tweetId) { (tweet) in
-            self.tweet = tweet
-            self.fetchUser(self.tweet)
-            self.fetchTweet(self.tweet)
-            self.fetchTweetComment(self.tweet)
-            self.tableView.reloadData()
-        }
-    }
     
     private func fetchUser(_ tweet: Tweet) {
         
@@ -94,34 +96,51 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func fetchTweet(_ tweet: Tweet) {
+    private func fetchTweet() {
         
-        Tweet.fetchTweet(communityId: tweet.communityId, tweetId: tweetId) { (tweet) in
+        Tweet.fetchTweet(tweetId: tweetId) { (tweet) in
             self.tweet = tweet
-            self.tweet2 = tweet
+            self.fetchUser(self.tweet)
+            self.fetchTweetComment(self.tweet)
+            self.fetchCommentCount(self.tweet)
             self.tableView.reloadData()
         }
     }
     
     private func fetchTweetComment(_ tweet: Tweet) {
         
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
+        
         tweetComments.removeAll()
         users.removeAll()
         
-        Tweet.fetchTweetComment(communityId: tweet.communityId, tweetId: tweetId) { (tweet) in
+        Tweet.fetchTweetComments(tweetId: tweetId) { (tweet) in
             
             self.fetchUser(tweet.uid) {
+                self.tweetComment = tweet
                 self.tweetComments.append(tweet)
+                self.indicator.stopAnimating()
+                self.refresh.endRefreshing()
                 self.tableView.reloadData()
             }
         }
     }
-    
+
     private func fetchUser(_ uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
             self.users.append(user)
             completion()
+        }
+    }
+    
+    private func fetchCommentCount(_ tweet: Tweet) {
+        
+        Tweet.fetchTweetCommentCount(communityId: tweet.communityId, tweetId: tweetId) { (tweet2) in
+            self.tweet2 = tweet2
+            self.tableView.reloadData()
         }
     }
     
@@ -150,6 +169,8 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -201,7 +222,13 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
-            detailVC.toUserId = userId
+            detailVC.userId = userId
+        }
+        
+        if segue.identifier == "ReplyVC" {
+            let replyVC = segue.destination as! ReplyViewController
+            let commentId = sender as! String
+            replyVC.commentId = commentId
         }
     }
 }
@@ -229,8 +256,9 @@ extension TweetCommentViewController: UITableViewDelegate, UITableViewDataSource
         cell2.tweetCommentVC = self
         cell2.tweet2 = tweet2
         cell2.tweet = tweetComments[indexPath.row - 1]
-        cell2.user = users[indexPath.row - 1]
-        cell2.configureCell(tweetComments[indexPath.row - 1], users[indexPath.row - 1])
+        cell2.configureCell(tweetComments[indexPath.row - 1], users[indexPath.row - 1], self.tweet)
+        cell2.configureReplyCell(tweetComments[indexPath.row - 1], user)
+        cell2.configureIsLikeCount()
         return cell2
     }
 }

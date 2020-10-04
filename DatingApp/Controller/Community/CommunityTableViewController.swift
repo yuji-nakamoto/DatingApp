@@ -15,7 +15,7 @@ class CommunityTableViewController: UIViewController {
     @IBOutlet weak var collectionView1: UICollectionView!
     @IBOutlet weak var collectionView2: UICollectionView!
     @IBOutlet weak var collectionView3: UICollectionView!
-    @IBOutlet weak var createButton: UIBarButtonItem!
+    @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var communityArray1 = [Community]()
@@ -27,12 +27,13 @@ class CommunityTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "コミュニティ"
         setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = true
         UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
         UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
         UserDefaults.standard.removeObject(forKey: C_RECOMMENDED_ON)
@@ -41,6 +42,38 @@ class CommunityTableViewController: UIViewController {
         fetchCommunity()
         fetchNumberCommunity()
         fetchCreatedCommunity()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func myCommunityButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: C_SEARCH_ON)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
+    }
+    
+    @IBAction func allButton1Pressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: C_NUMBER_ON)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
+    }
+    
+    @IBAction func allButton2Pressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: C_CREATED_ON)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
+    }
+    
+    @IBAction func allButton3Pressed(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: C_RECOMMENDED_ON)
+        performSegue(withIdentifier: "CommunityListVC", sender: nil)
     }
     
     // MARK: - Fetch
@@ -57,7 +90,7 @@ class CommunityTableViewController: UIViewController {
             }
             
             if self.user.createCommunity == true {
-                self.createButton.isEnabled = false
+                self.createButton.isHidden = true
             }
         }
     }
@@ -94,27 +127,6 @@ class CommunityTableViewController: UIViewController {
             self.collectionView3.reloadData()
             self.indicator.stopAnimating()
         }
-    }
-    
-    // MARK: - Actions
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: C_SEARCH_ON)
-        performSegue(withIdentifier: "CommunityListVC", sender: nil)
-    }
-    
-    @IBAction func allButton1Pressed(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: C_NUMBER_ON)
-        performSegue(withIdentifier: "CommunityListVC", sender: nil)
-    }
-    
-    @IBAction func allButton2Pressed(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: C_CREATED_ON)
-        performSegue(withIdentifier: "CommunityListVC", sender: nil)
-    }
-    
-    @IBAction func allButton3Pressed(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: C_RECOMMENDED_ON)
-        performSegue(withIdentifier: "CommunityListVC", sender: nil)
     }
     
     // MARK: - Helpers

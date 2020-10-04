@@ -90,6 +90,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var numberLabel1: UILabel!
     @IBOutlet weak var numberLabel2: UILabel!
     @IBOutlet weak var numberLabel3: UILabel!
+    @IBOutlet weak var crown: UIImageView!
     
     // MARK: - User
     
@@ -99,6 +100,12 @@ class DetailTableViewCell: UITableViewCell {
     var detailVC: DetailTableViewController?
     
     func configureCell(_ user: User?) {
+        
+        if user?.mMissionClear == true {
+            crown.isHidden = false
+        } else {
+            crown.isHidden = true
+        }
         
         if user?.profileImageUrl2 == "" {
             loginBottomConstrait.constant = -10

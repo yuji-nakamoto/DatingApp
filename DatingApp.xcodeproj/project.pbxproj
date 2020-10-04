@@ -27,10 +27,13 @@
 		6E696F6F2513F0F600B012AD /* CommunityUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F6E2513F0F600B012AD /* CommunityUsersViewController.swift */; };
 		6E696F712513F15600B012AD /* CommunityUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F702513F15600B012AD /* CommunityUsersTableViewCell.swift */; };
 		6E74739F24F8254D00D14945 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74739E24F8254D00D14945 /* VideoViewController.swift */; };
+		6E7764A42526C4E5008FD424 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7764A32526C4E5008FD424 /* ReplyViewController.swift */; };
 		6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */; };
 		6E7766B02503116200ABDCB9 /* NewLoginCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */; };
 		6E7C0FDE2500965E00E7A7B7 /* ParchmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */; };
 		6E7D4A8C2514D03800361FE8 /* CommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D4A8B2514D03800361FE8 /* CommunityTableViewCell.swift */; };
+		6E7FB9342529703600DE275C /* MyCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FB9332529703600DE275C /* MyCommunityViewController.swift */; };
+		6E7FB9612529705200DE275C /* MyCommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7FB9602529705200DE275C /* MyCommunityTableViewCell.swift */; };
 		6EA585B12508E36700C4C586 /* MissionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA585B02508E36700C4C586 /* MissionTableViewController.swift */; };
 		6ECF471D2501A26B00735F14 /* NewUserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */; };
 		6ED794942523C0670019795E /* TweetCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED794932523C0670019795E /* TweetCommentViewController.swift */; };
@@ -433,10 +436,13 @@
 		6E696F702513F15600B012AD /* CommunityUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityUsersTableViewCell.swift; sourceTree = "<group>"; };
 		6E70D19625192AB2000C266F /* GAGAGAGA-FREE.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GAGAGAGA-FREE.otf"; sourceTree = "<group>"; };
 		6E74739E24F8254D00D14945 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		6E7764A32526C4E5008FD424 /* ReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		6E7766AD2503061900ABDCB9 /* ParchmentMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentMessageViewController.swift; sourceTree = "<group>"; };
 		6E7766AF2503116200ABDCB9 /* NewLoginCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginCollectionViewController.swift; sourceTree = "<group>"; };
 		6E7C0FDD2500965E00E7A7B7 /* ParchmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentViewController.swift; sourceTree = "<group>"; };
 		6E7D4A8B2514D03800361FE8 /* CommunityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewCell.swift; sourceTree = "<group>"; };
+		6E7FB9332529703600DE275C /* MyCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCommunityViewController.swift; sourceTree = "<group>"; };
+		6E7FB9602529705200DE275C /* MyCommunityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCommunityTableViewCell.swift; sourceTree = "<group>"; };
 		6EA585B02508E36700C4C586 /* MissionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTableViewController.swift; sourceTree = "<group>"; };
 		6ECF471C2501A26B00735F14 /* NewUserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCollectionViewController.swift; sourceTree = "<group>"; };
 		6ED794932523C0670019795E /* TweetCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCommentViewController.swift; sourceTree = "<group>"; };
@@ -643,6 +649,8 @@
 				6E504795251AA870007B6A59 /* TweetTableViewController.swift */,
 				6E5047C2251AA88E007B6A59 /* CreateTweetViewController.swift */,
 				6ED794932523C0670019795E /* TweetCommentViewController.swift */,
+				6E7764A32526C4E5008FD424 /* ReplyViewController.swift */,
+				6E7FB9332529703600DE275C /* MyCommunityViewController.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -723,8 +731,8 @@
 				8348E3EC24CE2B3B001D59C0 /* DidTypeTableViewController.swift */,
 				8348E3F624D0E123001D59C0 /* FootstepViewController.swift */,
 				834959B224F46D9600CD052E /* ShopTableViewController.swift */,
-				6EA585B02508E36700C4C586 /* MissionTableViewController.swift */,
 				6E500C1C2524982100BF390F /* ItemCollectionViewController.swift */,
+				6EA585B02508E36700C4C586 /* MissionTableViewController.swift */,
 				6E5ADA7D24FD25E50028F23E /* Profile */,
 				6E5ADA7C24FD25A50028F23E /* Setting */,
 				6E5ADA7E24FD26180028F23E /* Notice */,
@@ -841,12 +849,13 @@
 				834959B024F455E500CD052E /* NoticeTableViewCell.swift */,
 				834959AA24F4056000CD052E /* NoticeListTableViewCell.swift */,
 				834959B424F46DB500CD052E /* ShopTableViewCell.swift */,
+				6E500C49252498B400BF390F /* ItemTableViewCell.swift */,
+				6E500C4B252498CB00BF390F /* ItemCollectionViewCell.swift */,
 				6E7D4A8B2514D03800361FE8 /* CommunityTableViewCell.swift */,
 				6E696F702513F15600B012AD /* CommunityUsersTableViewCell.swift */,
 				6E5047C4251AA8DD007B6A59 /* TweetTableViewCell.swift */,
 				6ED794C02523C0890019795E /* TweetCommentTableViewCell.swift */,
-				6E500C49252498B400BF390F /* ItemTableViewCell.swift */,
-				6E500C4B252498CB00BF390F /* ItemCollectionViewCell.swift */,
+				6E7FB9602529705200DE275C /* MyCommunityTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1344,6 +1353,7 @@
 				8350E4B524D9AE1E00487DB9 /* PIckerKeyboard8.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
+				6E7FB9342529703600DE275C /* MyCommunityViewController.swift in Sources */,
 				8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */,
 				6E7D4A8C2514D03800361FE8 /* CommunityTableViewCell.swift in Sources */,
 				834912FE24C75B90002990F8 /* SearchCollectionViewController.swift in Sources */,
@@ -1386,6 +1396,7 @@
 				8350140224D49E94008D1170 /* Message.swift in Sources */,
 				8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */,
 				6E5043DA251509A500049E14 /* CommunityListViewController.swift in Sources */,
+				6E7764A42526C4E5008FD424 /* ReplyViewController.swift in Sources */,
 				8348E3E724CE0BC4001D59C0 /* DidLikeTableViewCell.swift in Sources */,
 				838071CC24C608F5008BAA2C /* SceneDelegate.swift in Sources */,
 				8348FFBB24CAFFEC00C37009 /* EditTableViewController.swift in Sources */,
@@ -1464,6 +1475,7 @@
 				83B6231B24E2854400363548 /* WriteReportTableViewController.swift in Sources */,
 				83545E4F24E67F8D003BA06D /* ChangePasswordViewController.swift in Sources */,
 				8348E3D124CD3ED4001D59C0 /* PickerKeyboard2.swift in Sources */,
+				6E7FB9612529705200DE275C /* MyCommunityTableViewCell.swift in Sources */,
 				834C32D424E3BD10003330B1 /* Block.swift in Sources */,
 				83B6231924E2713E00363548 /* ReportTableViewController.swift in Sources */,
 				6E696F712513F15600B012AD /* CommunityUsersTableViewCell.swift in Sources */,

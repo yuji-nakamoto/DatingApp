@@ -31,15 +31,16 @@ class CommunityUsersViewController: UIViewController {
     
     private var users = [User]()
     private var user = User()
+    private var hud = JGProgressHUD(style: .dark)
+    private let refresh = UIRefreshControl()
     var community = Community()
     var communityId = ""
-    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        setupBanner()
+        //  setupBanner()
         testBanner()
         
         setup()
@@ -58,6 +59,10 @@ class CommunityUsersViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    @objc func refreshCollectionView(){
+        fetchUsers(user)
+    }
     
     @IBAction func tweetButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "TweetVC", sender: communityId)
@@ -117,11 +122,13 @@ class CommunityUsersViewController: UIViewController {
             self.users = user
             self.collectionView.reloadData()
             self.indicator.stopAnimating()
+            self.refresh.endRefreshing()
         }
     }
     
     private func fetchCommunity() {
         guard communityId != "" else { return }
+        
         Community.fetchCommunity(communityId: self.communityId) { (community) in
             self.community = community
             self.titleLabel.text = "\(self.community.title ?? "")"
@@ -154,7 +161,7 @@ class CommunityUsersViewController: UIViewController {
         } else if user.community3 == "" {
             updateUser(withValue: [COMMUNITY3: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
         } else {
-            hud.textLabel.text = "これ以上、参加できません"
+            hud.textLabel.text = "これ以上、参加できません\n他のコミュニティを退会してください"
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
@@ -270,8 +277,8 @@ class CommunityUsersViewController: UIViewController {
         
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
-            let toUserId = sender as! String
-            detailVC.toUserId = toUserId
+            let userId = sender as! String
+            detailVC.userId = userId
         }
         
         if segue.identifier == "TweetVC" {
@@ -291,6 +298,8 @@ class CommunityUsersViewController: UIViewController {
         communityButton.layer.cornerRadius = 44 / 2
         collectionView.delegate = self
         collectionView.dataSource = self
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
     }
 }
 

@@ -46,7 +46,7 @@ class SearchCollectionViewController: UIViewController {
         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
         
-//          setupBanner()
+        //          setupBanner()
         testBanner()
         fetchUser()
         checkOneDayAndBadge()
@@ -101,10 +101,10 @@ class SearchCollectionViewController: UIViewController {
     
     private func fetchUser() {
         guard Auth.auth().currentUser != nil else { return }
-
+        
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-
+            
             if self.user.selectGender == "男性" {
                 UserDefaults.standard.set(true, forKey: MALE)
             } else {
@@ -137,7 +137,7 @@ class SearchCollectionViewController: UIViewController {
     
     private func checkOneDayAndBadge() {
         guard Auth.auth().currentUser != nil else { return }
-
+        
         User.fetchUserAddSnapshotListener() { (user) in
             self.user = user
             self.fetchUsers(self.user)
@@ -161,7 +161,10 @@ class SearchCollectionViewController: UIViewController {
             
             if self.user.oneDay == true {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    updateUser(withValue: [POINTS: self.user.points + 1, ONEDAY: false, DAY: self.user.day + 0.5])
+                    updateUser(withValue: [POINTS: self.user.points + 1,
+                                           ONEDAY: false,
+                                           DAY: self.user.day + 0.5,
+                                           MLOGINCOUNT: self.user.mLoginCount + 1])
                     self.showLoginBunusView()
                     if self.user.day >= 14 {
                         updateUser(withValue: [NEWUSER: false])
@@ -208,9 +211,9 @@ class SearchCollectionViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
         backView.addGestureRecognizer(tap)
         loginBunusView.addGestureRecognizer(tap)
-       
+        
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-   
+            
             self.loginBunusView.alpha = 1
             self.backView.alpha = 0.9
             
@@ -257,8 +260,8 @@ class SearchCollectionViewController: UIViewController {
         
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
-            let toUserId = sender as! String
-            detailVC.toUserId = toUserId
+            let userId = sender as! String
+            detailVC.userId = userId
         }
     }
 }
@@ -295,9 +298,9 @@ extension SearchCollectionViewController: UICollectionViewDataSource, UICollecti
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-//            cell3.bannerView.rootViewController = self
-//            cell3.bannerView.load(GADRequest())
+            //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+            //            cell3.bannerView.rootViewController = self
+            //            cell3.bannerView.load(GADRequest())
             cell3.testBanner1()
             cell3.searchCVC = self
             

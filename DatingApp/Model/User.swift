@@ -96,14 +96,22 @@ class User {
     var selectGender: String!
     var day: Double!
     var newUser: Bool!
+    var mLoginCount: Int!
     var mLikeCount: Int!
     var mTypeCount: Int!
     var mMessageCount: Int!
     var mMatchCount: Int!
     var mFootCount: Int!
     var mCommunityCount: Int!
-    var mCommunity: Bool!
+    var mCommunity1: Bool!
+    var mCommunity2: Bool!
     var mProfile: Bool!
+    var mKaigan: Bool!
+    var mToshi: Bool!
+    var mFurimap: Bool!
+    var mMissionClear: Bool!
+    var loginGetPt1: Bool!
+    var loginGetPt2: Bool!
     var likeGetPt1: Bool!
     var likeGetPt2: Bool!
     var typeGetPt1: Bool!
@@ -117,7 +125,12 @@ class User {
     var communityGetPt1: Bool!
     var communityGetPt2: Bool!
     var communityGetPt3: Bool!
+    var communityGetPt4: Bool!
     var profileGetPt1: Bool!
+    var kaiganGetPt: Bool!
+    var toshiGetPt: Bool!
+    var furimapGetPt: Bool!
+    var missionClearGetItem: Bool!
     var community1: String!
     var community2: String!
     var community3: String!
@@ -212,14 +225,22 @@ class User {
         selectGender = dict[SELECTGENDER] as? String ?? ""
         day = dict[DAY] as? Double ?? 0
         newUser = dict[NEWUSER] as? Bool ?? false
+        mLoginCount = dict[MLOGINCOUNT] as? Int ?? 0
         mLikeCount = dict[MLIKECOUNT] as? Int ?? 0
         mTypeCount = dict[MTYPECOUNT] as? Int ?? 0
         mMessageCount = dict[MMESSAGECOUNT] as? Int ?? 0
         mMatchCount = dict[MMATCHCOUNT] as? Int ?? 0
         mFootCount = dict[MFOOTCOUNT] as? Int ?? 0
         mCommunityCount = dict[MCOMMUNITYCOUNT] as? Int ?? 0
-        mCommunity = dict[MCOMMUNITY] as? Bool ?? false
+        mCommunity1 = dict[MCOMMUNITY1] as? Bool ?? false
+        mCommunity2 = dict[MCOMMUNITY2] as? Bool ?? false
         mProfile = dict[MPROFILE] as? Bool ?? false
+        mKaigan = dict[MKAIGAN] as? Bool ?? false
+        mToshi = dict[MTOSHI] as? Bool ?? false
+        mFurimap = dict[MFURIMAP] as? Bool ?? false
+        mMissionClear = dict[MMISSIONCLEAR] as? Bool ?? false
+        loginGetPt1 = dict[LOGINGETPT1]as? Bool ?? false
+        loginGetPt2 = dict[LOGINGETPT2]as? Bool ?? false
         likeGetPt1 = dict[LIKEGETPT1] as? Bool ?? false
         likeGetPt2 = dict[LIKEGETPT2] as? Bool ?? false
         typeGetPt1 = dict[TYPEGETPT1] as? Bool ?? false
@@ -233,7 +254,12 @@ class User {
         communityGetPt1 = dict[COMMUNITYGETPT1] as? Bool ?? false
         communityGetPt2 = dict[COMMUNITYGETPT2] as? Bool ?? false
         communityGetPt3 = dict[COMMUNITYGETPT3] as? Bool ?? false
+        communityGetPt4 = dict[COMMUNITYGETPT4] as? Bool ?? false
         profileGetPt1 = dict[PROFILEGETPT1] as? Bool ?? false
+        kaiganGetPt = dict[KAIGANGETPT] as? Bool ?? false
+        toshiGetPt = dict[TOSHIGETPT] as? Bool ?? false
+        furimapGetPt = dict[FURIMAPGETPT] as? Bool ?? false
+        missionClearGetItem = dict[MISSIONCLEARGETITEM] as? Bool ?? false
         community1 = dict[COMMUNITY1] as? String ?? ""
         community2 = dict[COMMUNITY2] as? String ?? ""
         community3 = dict[COMMUNITY3] as? String ?? ""

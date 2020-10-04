@@ -72,11 +72,12 @@ class CreateTweetViewController: UIViewController {
                         UID: User.currentUserId(),
                         DATE: date,
                         COMMUNITYID: communityId,
+                        ISREPLY: false,
                         TEXT: self.textView.text as Any] as [String : Any]
             
             Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
-            Tweet.saveTweetCommunityId(tweetId: tweetId, withValue: [COMMUNITYID: self.communityId,
-                                                                     UID: User.currentUserId()])
+          
+            updateUser(withValue: [MCOMMUNITY2: true])
             self.indicator.stopAnimating()
             UserDefaults.standard.set(true, forKey: REFRESH)
             self.navigationController?.popViewController(animated: true)
@@ -87,13 +88,14 @@ class CreateTweetViewController: UIViewController {
                 let dict = [TWEETID: tweetId,
                             UID: User.currentUserId(),
                             DATE: date,
+                            ISREPLY: false,
                             COMMUNITYID: self.communityId,
                             CONTENTSIMAGEURL: imageUrl,
                             TEXT: self.textView.text as Any] as [String : Any]
             
                 Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
-                Tweet.saveTweetCommunityId(tweetId: tweetId, withValue: [COMMUNITYID: self.communityId,
-                                                                         UID: User.currentUserId()])
+              
+                updateUser(withValue: [MCOMMUNITY2: true])
                 self.indicator.stopAnimating()
                 UserDefaults.standard.set(true, forKey: REFRESH)
                 self.navigationController?.popViewController(animated: true)

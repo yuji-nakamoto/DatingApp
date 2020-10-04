@@ -18,6 +18,7 @@ class Community {
     var femaleNumber: Int!
     var communityId: String!
     var created_at: Timestamp!
+    var communityLeader: String!
     
     init() {
     }
@@ -30,6 +31,7 @@ class Community {
         femaleNumber = dict[FEMALE_NUMBER] as? Int ?? 0
         communityId = dict[COMMUNITYID] as? String ?? ""
         created_at = dict[CREATED_AT] as? Timestamp ?? Timestamp(date: Date())
+        communityLeader = dict[COMMUNITYLEADER] as? String ?? ""
     }
     
     // MARK: - Save
@@ -64,7 +66,6 @@ class Community {
             if let error = error {
                 print("Error fetch community: \(error.localizedDescription)")
             }
-            
             guard let dict = snapshot?.data() else { return }
             let community = Community(dict: dict)
             completion(community)

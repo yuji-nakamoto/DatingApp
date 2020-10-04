@@ -50,7 +50,15 @@ class CreateCommunityTableViewController: UITableViewController {
             hud.dismiss(afterDelay: 2.0)
             return
         }
-        saveContentsImage()
+        
+        let alert: UIAlertController = UIAlertController(title: textField.text, message: "コミュニティを作成しますか？", preferredStyle: .alert)
+        let save: UIAlertAction = UIAlertAction(title: "作成する", style: UIAlertAction.Style.default) { (alert) in
+            self.saveContentsImage()
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+        alert.addAction(save)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -87,6 +95,7 @@ class CreateCommunityTableViewController: UITableViewController {
                 COMMUNITYID: communityId,
                 ALL_NUMBER: 1,
                 MALE_NUMBER: 1,
+                COMMUNITYLEADER: self.user.username as Any,
                 CREATED_AT: Timestamp(date: Date()),
                 TITLE: self.textField.text as Any] as [String : Any]
                 Community.saveCommunity(communityId: communityId, withValue: dict)
@@ -96,12 +105,13 @@ class CreateCommunityTableViewController: UITableViewController {
                 COMMUNITYID: communityId,
                 ALL_NUMBER: 1,
                 FEMALE_NUMBER: 1,
+                COMMUNITYLEADER: self.user.username as Any,
                 CREATED_AT: Timestamp(date: Date()),
                 TITLE: self.textField.text as Any] as [String : Any]
                 Community.saveCommunity(communityId: communityId, withValue: dict)
             }
             
-            updateUser(withValue: [CREATECOMMUNITY: true, MCOMMUNITY: true])
+            updateUser(withValue: [CREATECOMMUNITY: true, MCOMMUNITY1: true])
             
             if self.user.community1 == "" {
                 updateUser(withValue: [COMMUNITY1: communityId])

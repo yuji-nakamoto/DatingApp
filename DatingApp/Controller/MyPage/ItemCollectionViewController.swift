@@ -145,8 +145,9 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
+                updateUser(withValue: [ITEM1: self.user.item1 - 1,
+                                       USEDITEM1: self.user.usedItem1 + 1])
                 self.hudSuccess()
-                updateUser(withValue: [ITEM1: self.user.item1 - 1, USEDITEM1: self.user.usedItem1 + 1])
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             
@@ -165,8 +166,9 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
+                updateUser(withValue: [ITEM2: self.user.item2 - 1,
+                                       USEDITEM2: self.user.usedItem2 + 1])
                 self.hudSuccess()
-                updateUser(withValue: [ITEM2: self.user.item2 - 1, USEDITEM2: self.user.usedItem2 + 1])
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             
@@ -184,7 +186,8 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             let alert = UIAlertController(title: "割り込み", message: "あなたが送ったメッセージが上位に表示されるようになります\n効果は重複します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
-                updateUser(withValue: [ITEM3: self.user.item3 - 1, USEDITEM3: self.user.usedItem3 + 1])
+                updateUser(withValue: [ITEM3: self.user.item3 - 1,
+                                       USEDITEM3: self.user.usedItem3 + 1])
                 self.hudSuccess()
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
@@ -211,7 +214,8 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             let alert: UIAlertController = UIAlertController(title: "仕切り直し", message: "スワイプでいなくなったユーザーが復活します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
-                updateUser(withValue: [ITEM5: self.user.item5 - 1, USEDITEM5: self.user.usedItem5 + 1])
+                updateUser(withValue: [ITEM5: self.user.item5 - 1,
+                                       USEDITEM5: self.user.usedItem5 + 1])
                 self.hud.show(in: self.view)
                 
                 COLLECTION_SWIPE.document(User.currentUserId()).delete { (error) in
@@ -234,13 +238,15 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
 
         } else if indexPath.row == 5 {
             
-            let alert: UIAlertController = UIAlertController(title: "開眼", message: "あなたのプロフィールに訪れた人数を確認できます\n効果は永続します", preferredStyle: .alert)
+            let alert: UIAlertController = UIAlertController(title: "開眼", message: "あなたのプロフィールに訪れた人数を確認できます。効果は永続します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
                 self.hud.show(in: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    updateUser(withValue: [ITEM6: self.user.item6 - 1, USEDITEM6: self.user.usedItem6 + 1])
+                    updateUser(withValue: [ITEM6: self.user.item6 - 1,
+                                           USEDITEM6: self.user.usedItem6 + 1,
+                                           MKAIGAN: true])
                     self.hudSuccess2()
                 }
             }
@@ -264,7 +270,9 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
                 
                 self.hud.show(in: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    updateUser(withValue: [ITEM7: self.user.item7 - 1, USEDITEM7: self.user.usedItem7 + 1])
+                    updateUser(withValue: [ITEM7: self.user.item7 - 1,
+                                           USEDITEM7: self.user.usedItem7 + 1,
+                                           MFURIMAP: true])
                     self.hudSuccess2()
                 }
             }
@@ -287,7 +295,9 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
                 
                 self.hud.show(in: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    updateUser(withValue: [ITEM8: self.user.item8 - 1, USEDITEM8: self.user.usedItem8 + 1])
+                    updateUser(withValue: [ITEM8: self.user.item8 - 1,
+                                           USEDITEM8: self.user.usedItem8 + 1,
+                                           MTOSHI: true])
                     UserDefaults.standard.set(true, forKey: ISREAD_ON)
                     self.hudSuccess2()
                 }

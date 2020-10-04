@@ -32,6 +32,8 @@ public let COLLECTION_NOTICE = Firestore.firestore().collection("notice")
 public let COLLECTION_GEO = Firestore.firestore().collection("geography")
 public let COLLECTION_COMMUNITY = Firestore.firestore().collection("community")
 public let COLLECTION_TWEET = Firestore.firestore().collection("tweet")
+public let COLLECTION_REPLY = Firestore.firestore().collection("reply")
+public let COLLECTION_TWEET_COMMENT = Firestore.firestore().collection("tweet_comment")
 
 // MARK: - Color
 
@@ -129,14 +131,22 @@ public let SEARCHMINI = "searchMini"
 public let SELECTGENDER = "selectGender"
 public let DAY = "day"
 public let NEWUSER = "newUser"
+public let MLOGINCOUNT = "mLoginCount"
 public let MLIKECOUNT = "mLikeCount"
 public let MTYPECOUNT = "mTypeCount"
 public let MMESSAGECOUNT = "mMessageCount"
 public let MMATCHCOUNT = "mMatchCount"
 public let MFOOTCOUNT = "mFootCount"
 public let MCOMMUNITYCOUNT = "mCommunityCount"
-public let MCOMMUNITY = "mCommunity"
+public let MCOMMUNITY1 = "mCommunity1"
+public let MCOMMUNITY2 = "mCommunity2"
 public let MPROFILE = "mProfile"
+public let MKAIGAN = "mKaigan"
+public let MTOSHI = "mToshi"
+public let MFURIMAP = "mFurimap"
+public let MMISSIONCLEAR = "mMissionClear"
+public let LOGINGETPT1 = "loginGetPt1"
+public let LOGINGETPT2 = "loginGetPt2"
 public let LIKEGETPT1 = "likeGetPt1"
 public let LIKEGETPT2 = "likeGetPt2"
 public let TYPEGETPT1 = "typeGetPt1"
@@ -150,7 +160,12 @@ public let FOOTGETPT2 = "footGetPt2"
 public let COMMUNITYGETPT1 = "communityGetPt1"
 public let COMMUNITYGETPT2 = "communityGetPt2"
 public let COMMUNITYGETPT3 = "communityGetPt3"
+public let COMMUNITYGETPT4 = "communityGetPt4"
 public let PROFILEGETPT1 = "profileGetPt1"
+public let KAIGANGETPT = "kaiganGetPt"
+public let TOSHIGETPT = "toshiGetPt"
+public let FURIMAPGETPT = "furimapGetPt"
+public let MISSIONCLEARGETITEM = "missionClearGetItem"
 public let COMMUNITY1 = "community1"
 public let COMMUNITY2 = "community2"
 public let COMMUNITY3 = "community3"
@@ -211,12 +226,20 @@ public let COMMUNITYID = "communityId"
 public let ALL_NUMBER = "all_number"
 public let MALE_NUMBER = "male_number"
 public let FEMALE_NUMBER = "female_number"
+public let COMMUNITYLEADER = "communityLeader"
 
 // MARK: - Tweet
 public let TWEET = "tweet"
 public let TWEETID = "tweetId"
 public let COMMENTCOUNT = "commentCount"
 public let COMMENTID = "commentId"
+public let REPLY = "reply"
+public let REPLYID = "replyId"
+public let DATE2 = "date2"
+public let ISREPLY = "isReply"
+public let REPLYUSERID = "replyUserId"
+public let LIKECOUNT2 = "likeCount2"
+public let ISLIKE2 = "isLike2"
 
 // MARK: - Placeholder image
 

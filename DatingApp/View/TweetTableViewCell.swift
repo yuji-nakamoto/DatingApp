@@ -86,7 +86,7 @@ class TweetTableViewCell: UITableViewCell {
     
     func configureLikeCount() {
         
-        Tweet.checkLikeTweet(communityId: community.communityId, tweetId: tweet.tweetId) { (likeUserIDs) in
+        Tweet.checkIsLikeTweet(communityId: community.communityId, tweetId: tweet.tweetId) { (likeUserIDs) in
             if likeUserIDs[User.currentUserId()] == nil {
                 self.likeButton.setImage(UIImage(named: "heart2"), for: .normal)
             } else {
@@ -99,26 +99,14 @@ class TweetTableViewCell: UITableViewCell {
     
     @IBAction func likeButtonPressed(_ sender: Any) {
         
-        Tweet.checkLikeTweet(communityId: self.community.communityId, tweetId: tweet.tweetId) { (likeUserIDs) in
+        Tweet.checkIsLikeTweet(communityId: self.community.communityId, tweetId: tweet.tweetId) { (likeUserIDs) in
             if likeUserIDs[User.currentUserId()] == nil {
                 
-                UserDefaults.standard.set(true, forKey: "likeButtonOn")
                 self.likeButton.setImage(UIImage(named: "heart3"), for: .normal)
                 self.likeCountLabel.text = String(self.tweet.likeCount + 1)
-                Tweet.updateTweet(communityId: self.community.communityId, tweetId: self.tweet.tweetId,
+                Tweet.updateIsLikeTweet(communityId: self.community.communityId, tweetId: self.tweet.tweetId,
                                   value1: [LIKECOUNT: self.tweet.likeCount + 1],
                                   value2: [User.currentUserId(): true])
-                self.tweetVC?.viewWillAppear(true)
-                
-            } else {
-                
-                UserDefaults.standard.set(true, forKey: "likeButtonOn")
-                self.likeButton.setImage(UIImage(named: "heart2"), for: .normal)
-                self.likeCountLabel.text = String(self.tweet.likeCount - 1)
-                Tweet.updateTweet(communityId: self.community.communityId, tweetId: self.tweet.tweetId,
-                                  value1: [LIKECOUNT: self.tweet.likeCount - 1],
-                                  value2: [User.currentUserId(): FieldValue.delete()])
-                self.tweetVC?.viewWillAppear(true)
             }
         }
     }

@@ -121,8 +121,8 @@ class DidLikeTableViewController: UIViewController {
         if segue.identifier == "DetailVC" {
 
             let detailVC = segue.destination as! DetailTableViewController
-            let toUserId = sender as! String
-            detailVC.toUserId = toUserId
+            let userId = sender as! String
+            detailVC.userId = userId
         }
     }
     

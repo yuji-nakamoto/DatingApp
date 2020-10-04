@@ -190,7 +190,7 @@ class Card: UIView {
         guard user != nil else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailVC") as! DetailTableViewController
-        detailVC.toUserId = user.uid
+        detailVC.userId = user.uid
         
         cardVC?.present(detailVC, animated: true, completion: nil)
     }

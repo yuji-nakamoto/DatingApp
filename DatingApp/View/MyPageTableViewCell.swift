@@ -20,6 +20,7 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var pointLabel: UILabel!
     @IBOutlet weak var typeNewLabel: UILabel!
     @IBOutlet weak var likeNewLabel: UILabel!
+    @IBOutlet weak var crown: UIImageView!
     
     var myPageVC: MyPageTableViewController?
     
@@ -51,6 +52,12 @@ class MyPageTableViewCell: UITableViewCell {
         } else {
             commentLabel.text = user?.comment
         }
+        
+        if user?.mMissionClear == true {
+            crown.isHidden = false
+        } else {
+            crown.isHidden = true
+        }
     }
     
     @objc func profileImageViewTap() {
@@ -59,6 +66,7 @@ class MyPageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        crown.isHidden = true
         typeNewLabel.layer.cornerRadius = 25 / 2
         likeNewLabel.layer.cornerRadius = 25 / 2
         redmark.layer.cornerRadius = 4

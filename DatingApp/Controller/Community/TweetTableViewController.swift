@@ -8,9 +8,10 @@
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
 class TweetTableViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
@@ -21,37 +22,36 @@ class TweetTableViewController: UIViewController {
     private var tweet = Tweet()
     private var users = [User]()
     private var community = Community()
+    private let refresh = UIRefreshControl()
     var communityId = ""
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
+        //        setupBanner()
         testBanner()
         
         fetchTweet()
         fetchCommunity()
         tableView.tableFooterView = UIView()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         UserDefaults.standard.removeObject(forKey: RESIZE)
-        
-        if UserDefaults.standard.object(forKey: "likeButtonOn") != nil {
-            fetchTweet2()
-            UserDefaults.standard.removeObject(forKey: "likeButtonOn")
-            return
-        }
-        if UserDefaults.standard.object(forKey: REFRESH) != nil {
-            fetchTweet()
-            UserDefaults.standard.removeObject(forKey: REFRESH)
-        }
     }
     
     // MARK: - Actions
+    
+    @objc func refreshTableView(){
+        UserDefaults.standard.set(true, forKey: REFRESH_ON)
+        fetchTweet()
+    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -65,13 +65,18 @@ class TweetTableViewController: UIViewController {
     
     private func fetchTweet() {
         
-        indicator.startAnimating()
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            indicator.startAnimating()
+        }
         tweets.removeAll()
         users.removeAll()
+        tableView.reloadData()
         
         Tweet.fetchTweets(communityId: communityId) { (tweet) in
             if tweet.uid == "" {
                 self.indicator.stopAnimating()
+                self.refresh.endRefreshing()
+                self.tableView.reloadData()
                 return
             }
             
@@ -79,18 +84,8 @@ class TweetTableViewController: UIViewController {
                 self.tweets.append(tweet)
                 self.tableView.reloadData()
                 self.indicator.stopAnimating()
+                self.refresh.endRefreshing()
             }
-        }
-    }
-    
-    private func fetchTweet2() {
-        
-        tweets.removeAll()
-
-        Tweet.fetchTweets(communityId: communityId) { (tweet) in
-            if tweet.uid == "" { return }
-            self.tweets.append(tweet)
-            self.tableView.reloadData()
         }
     }
     
@@ -121,7 +116,7 @@ class TweetTableViewController: UIViewController {
         if segue.identifier == "DetailVC" {
             let detailVC = segue.destination as! DetailTableViewController
             let userId = sender as! String
-            detailVC.toUserId = userId
+            detailVC.userId = userId
         }
         if segue.identifier == "TweetCommentVC" {
             let tweetCommentVC = segue.destination as! TweetCommentViewController
@@ -163,5 +158,18 @@ extension TweetTableViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureLikeCount()
         
         return cell
+    }
+}
+
+extension TweetTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: "コミュニティ投稿はありません", attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "右下のプラスボタンから投稿してみよう！")
     }
 }

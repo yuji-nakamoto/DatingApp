@@ -74,7 +74,7 @@ class ShopTableViewCell: UITableViewCell {
             pointLabel.isHidden = true
             soldoutLabel.isHidden = false
         } else {
-            pointLabel.text = "15"
+            pointLabel.text = "20"
         }
     }
 
@@ -87,7 +87,7 @@ class ShopTableViewCell: UITableViewCell {
             pointLabel.isHidden = true
             soldoutLabel.isHidden = false
         } else {
-            pointLabel.text = "15"
+            pointLabel.text = "20"
         }
     }
 }

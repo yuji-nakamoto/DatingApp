@@ -50,7 +50,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var type = Type()
     private var block = Block()
     private var footstep = Footstep()
-    public var toUserId = ""
+    public var userId = ""
     private var currentUser = User()
     private var typeUser = Type()
     private var interstitial: GADInterstitial!
@@ -201,10 +201,10 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     // MARK: - Fetch
     
     private func fetchUserId() {
-        guard toUserId != "" else { return }
-        footsteps(toUserId)
+        guard userId != "" else { return }
+        footsteps(userId)
         
-        User.fetchUser(toUserId) { (user) in
+        User.fetchUser(userId) { (user) in
             self.user = user
             self.fetchCommunity1(self.user)
             self.fetchCommunity2(self.user)
@@ -223,8 +223,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func fetchTypeUser() {
         
-        guard toUserId != "" else { return }
-        Type.fetchTypeUser(toUserId) { (type) in
+        guard userId != "" else { return }
+        Type.fetchTypeUser(userId) { (type) in
             self.type = type
             self.validateTypeButton(type: type)
         }
@@ -232,8 +232,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func fetchLikeUser() {
         
-        guard toUserId != "" else { return }
-        Like.fetchLikeUser(toUserId) { (like) in
+        guard userId != "" else { return }
+        Like.fetchLikeUser(userId) { (like) in
             self.like = like
             self.validateLikeButton(like: like)
         }
@@ -242,7 +242,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func checkIfMatch() {
         
         guard user.uid != nil else { return }
-        Type.checkIfMatch(toUserId: toUserId) { (type) in
+        Type.checkIfMatch(toUserId: userId) { (type) in
             self.typeUser = type
             self.incrementAppBadgeCount2()
             
@@ -259,8 +259,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func fetchBlockUser() {
         
-        guard toUserId != "" else { return }
-        Block.fetchBlockUser(toUserId: toUserId) { (block) in
+        guard userId != "" else { return }
+        Block.fetchBlockUser(toUserId: userId) { (block) in
             self.block = block
         }
     }
@@ -293,9 +293,9 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     private func footsteps(_ toUserId: String) {
         
-        Footstep.saveIsFootstepUser(toUserId: self.toUserId)
+        Footstep.saveIsFootstepUser(toUserId: self.userId)
         if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
-            Footstep.saveFootstepedUser(toUserId: self.toUserId)
+            Footstep.saveFootstepedUser(toUserId: self.userId)
         }
         
         Footstep.fetchFootstepUser(toUserId) { (footstep) in
@@ -354,7 +354,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func visited(_ footstep: Footstep) {
         
         if footstep.isFootStep != 1 {
-            COLLECTION_USERS.document(toUserId).updateData([VISITED: self.user.visited + 1])
+            COLLECTION_USERS.document(userId).updateData([VISITED: self.user.visited + 1])
             User.fetchUser(User.currentUserId()) { (user) in
                 self.currentUser = user
                 updateUser(withValue: [MFOOTCOUNT: self.currentUser.mFootCount + 1])
