@@ -29,21 +29,22 @@ class TweetTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         fetchTweet()
         fetchCommunity()
-        tableView.tableFooterView = UIView()
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
-        tableView.refreshControl = refresh
-        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UserDefaults.standard.removeObject(forKey: RESIZE)
+        if UserDefaults.standard.object(forKey: REFRESH) != nil {
+            fetchTweet()
+            fetchCommunity()
+            UserDefaults.standard.removeObject(forKey: REFRESH)
+        }
     }
     
     // MARK: - Actions
@@ -123,6 +124,15 @@ class TweetTableViewController: UIViewController {
             let tweetId = sender as! String
             tweetCommentVC.tweetId = tweetId
         }
+    }
+    
+    private func setup() {
+        
+        tableView.tableFooterView = UIView()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
     private func setupBanner() {

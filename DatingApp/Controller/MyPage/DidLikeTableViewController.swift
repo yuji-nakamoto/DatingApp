@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMobileAds
-import EmptyDataSet_Swift
 
 class DidLikeTableViewController: UIViewController {
     
@@ -22,19 +21,17 @@ class DidLikeTableViewController: UIViewController {
     
     private var likeUsers = [Like]()
     private var users = [User]()
-    private var user = User()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupUI()
         fetchLikedUsers()
         updateUser(withValue: [NEWLIKE: false])
-        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     // MARK: - Actions
@@ -52,7 +49,7 @@ class DidLikeTableViewController: UIViewController {
         }
     }
     
-    // MARK: - Fetch like
+    // MARK: - Fetch
     
     private func fetchLikeUsers() {
         
@@ -77,9 +74,7 @@ class DidLikeTableViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Fetch liekd
-    
+        
     private func fetchLikedUsers() {
         
         indicator.startAnimating()
@@ -103,9 +98,7 @@ class DidLikeTableViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Fetch user
-    
+        
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
@@ -143,22 +136,17 @@ class DidLikeTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         navigationItem.title = "いいね"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
     }
 }
 
-// MARK: - Table view data source
-
+// MARK: - Table view
 
 extension DidLikeTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return likeUsers.count
     }
     
@@ -173,18 +161,5 @@ extension DidLikeTableViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: likeUsers[indexPath.row].uid)
-    }
-}
-
-extension DidLikeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-
-    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: "いいね履歴が、\nこちらに表示されます", attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "気になった方にいいねを送り、\nアプローチをしてみましょう")
     }
 }

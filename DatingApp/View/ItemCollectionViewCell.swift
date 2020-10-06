@@ -96,6 +96,16 @@ class ItemCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func possessionItem9(_ user: User) {
+        itemImageView.image = UIImage(named: "item9")
+        
+        if user.item9 != nil {
+            remainLabel.text = "×" + String(user.item9)
+        } else {
+            remainLabel.text = "×0"
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backView.layer.cornerRadius = 5

@@ -819,13 +819,21 @@ class DetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         ageLabel.text = ""
+        nameLabel.text = ""
+        residenceLabel.text = ""
+        hobbyLbl1.text = ""
+        hobbyLbl2.text = ""
+        hobbyLbl3.text = ""
+        if distanceLabel != nil {
+            distanceLabel.text = ""
+        }
         
         hobbyLbl1.layer.cornerRadius = 24 / 2
         hobbyLbl2.layer.cornerRadius = 24 / 2
         hobbyLbl3.layer.cornerRadius = 24 / 2
-        hobbyLbl1.backgroundColor = .systemGreen
-        hobbyLbl2.backgroundColor = .systemBlue
-        hobbyLbl3.backgroundColor = .systemPink
+        hobbyLbl1.backgroundColor = UIColor(named: O_GREEN)
+        hobbyLbl2.backgroundColor = .systemOrange
+        hobbyLbl3.backgroundColor = UIColor(named: O_RED)
         hobbyLbl1.textColor = .white
         hobbyLbl2.textColor = .white
         hobbyLbl3.textColor = .white

@@ -146,7 +146,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
-    @available(iOS 10, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -173,10 +172,15 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
                 let dict = [MESSAGEBADGECOUNT: user.messageBadgeCount + 1,
                             APPBADGECOUNT: user.appBadgeCount + 1]
                 updateUser(withValue: dict)
+            } else if notification.request.content.title == "コミュニティ" {
+                
+                let dict = [COMMUNITYBADGECOUNT: user.communityBadgeCount + 1,
+                            APPBADGECOUNT: user.appBadgeCount + 1]
+                updateUser(withValue: dict)
             }
         }
         
-        completionHandler([.sound, .badge, .alert])
+        completionHandler([.sound, .badge, .banner, .list])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -205,11 +209,15 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
                 let dict = [MESSAGEBADGECOUNT: user.messageBadgeCount + 1,
                             APPBADGECOUNT: user.appBadgeCount + 1]
                 updateUser(withValue: dict)
+            } else if response.notification.request.content.title == "コミュニティ" {
+                
+                let dict = [COMMUNITYBADGECOUNT: user.communityBadgeCount + 1,
+                            APPBADGECOUNT: user.appBadgeCount + 1]
+                updateUser(withValue: dict)
             }
         }
         
         print(userInfo)
-        
         completionHandler()
     }
     
@@ -218,6 +226,5 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate {
         
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        
     }
 }

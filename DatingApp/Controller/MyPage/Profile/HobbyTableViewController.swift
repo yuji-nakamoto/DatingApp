@@ -70,6 +70,9 @@ class HobbyTableViewController: UITableViewController, UITextFieldDelegate {
         hobbyTextField1.text = user.hobby1
         hobbyTextField2.text = user.hobby2
         hobbyTextField3.text = user.hobby3
+        hobbyCountLabel1.text = String(10 - hobbyTextField1.text!.count)
+        hobbyCountLabel2.text = String(10 - hobbyTextField2.text!.count)
+        hobbyCountLabel3.text = String(10 - hobbyTextField3.text!.count)
     }
     
     private func saveTextField() {

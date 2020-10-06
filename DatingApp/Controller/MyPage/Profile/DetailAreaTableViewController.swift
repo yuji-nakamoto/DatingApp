@@ -64,6 +64,7 @@ class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate 
     private func setupUserInfo(_ user: User) {
         
         detailMapTextField.text = user.detailArea
+        countLabel.text = String(4 - detailMapTextField.text!.count)
     }
     
     private func saveTextField() {

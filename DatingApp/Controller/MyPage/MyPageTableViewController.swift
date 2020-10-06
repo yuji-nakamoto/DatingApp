@@ -16,10 +16,10 @@ class MyPageTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var hintView: UIView!
     @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var redMarkView: UIView!
     
     private var user = User()
     private var myPosts = [Post]()
@@ -32,28 +32,23 @@ class MyPageTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupBanner()
-        testBanner()
-        
+        setupBanner()
+//        testBanner()
         showHintView()
-        if UserDefaults.standard.object(forKey: REFRESH3) == nil {
-            fetchMyPost()
-            fetchUser()
-            fetchComment()
-            setupUI()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if UserDefaults.standard.object(forKey: REFRESH3) != nil {
-            fetchMyPost()
-            fetchUser()
-            fetchComment()
-            setupUI()
-            UserDefaults.standard.removeObject(forKey: REFRESH3)
-        }
+        fetchMyPost()
+        fetchUser()
+        fetchComment()
+        setupUI()
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Action
@@ -61,7 +56,7 @@ class MyPageTableViewController: UIViewController {
     @IBAction func closeButtonPressed(_ sender: Any) {
         removeEffectView()
     }
-  
+    
     // MARK: - Fetch
     
     private func fetchUsers(_ uid: String, completion: @escaping() -> Void) {
@@ -74,29 +69,27 @@ class MyPageTableViewController: UIViewController {
     
     private func fetchUser() {
         
-        User.fetchUser(User.currentUserId()) { (user) in
+        User.fetchUserAddSnapshotListener { (user) in
             self.user = user
             self.resetBadge(self.user)
+            self.checkMission(self.user)
         }
     }
     
     private func fetchMyPost() {
         
-        indicator.startAnimating()
         users.removeAll()
         myPosts.removeAll()
         tableView.reloadData()
         
         Post.fetchMyPost() { (post) in
             if post.uid == "" {
-                self.indicator.stopAnimating()
                 return
             }
             guard let uid = post.uid else { return }
             self.fetchUsers(uid) {
                 self.myPosts.insert(post, at: 0)
                 self.tableView.reloadData()
-                self.indicator.stopAnimating()
             }
         }
     }
@@ -147,11 +140,135 @@ class MyPageTableViewController: UIViewController {
         }
     }
     
+    private func checkMission(_ user: User) {
+        
+        if user.loginGetPt1 != true {
+            if user.mLoginCount >= 14 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.loginGetPt2 != true {
+            if user.mLoginCount >= 28 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.likeGetPt1 != true {
+            if user.mLikeCount >= 25 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.likeGetPt2 != true {
+            if user.mLikeCount >= 50 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.typeGetPt1 != true {
+            if user.mTypeCount >= 10 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.typeGetPt2 != true {
+            if user.mTypeCount >= 30 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.messageGetPt1 != true {
+            if user.mMessageCount >= 5 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.messageGetPt2 != true {
+            if user.mMessageCount >= 15 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.matchGetPt1 != true {
+            if user.mMatchCount >= 1 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.matchGetPt2 != true {
+            if user.mMatchCount >= 5 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.footGetPt1 != true {
+            if user.mFootCount >= 50 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.footGetPt2 != true {
+            if user.mFootCount >= 100 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.communityGetPt1 != true {
+            if user.mCommunityCount >= 1 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.communityGetPt2 != true {
+            if user.mCommunityCount >= 3 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.communityGetPt3 != true {
+            if user.createCommunityCount >= 1 {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.communityGetPt4 != true {
+            if user.mCommunity == true {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.profileGetPt1 != true {
+            if user.mProfile == true {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.kaiganGetPt != true {
+            if user.mKaigan == true {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+
+        if user.toshiGetPt != true {
+            if user.mToshi == true {
+                updateUser(withValue: [NEWMISSION: true])
+            }
+        }
+        
+        if user.missionClearGetItem != true {
+            if user.mLoginCount >= 28 && user.mLikeCount >= 50 && user.mTypeCount >= 30 && user.mMessageCount >= 15 && user.mMatchCount >= 5 && user.mFootCount >= 100 && user.mCommunityCount >= 3 && user.mCommunity == true && user.createCommunityCount >= 1 && user.mProfile == true && user.mKaigan == true && user.mToshi == true {
+                updateUser(withValue: [MMISSIONCLEAR: true, NEWMISSION: true])
+            }
+        }
+    }
+    
     private func setupUI() {
-        navigationItem.title = "マイページ"
+        
         tableView.separatorStyle = .none
         hintView.alpha = 0
         visualEffectView.alpha = 0
+        redMarkView.layer.cornerRadius = 4
         hintView.layer.cornerRadius = 15
         closeButton.layer.cornerRadius = 40 / 2
         hintLabel.text = "マイページからプロフの編集やいいね！等の履歴の確認ができます。\n\n足あとを残したくない、通知を止めたい場合は歯車マークの設定画面で行えます。"

@@ -40,8 +40,8 @@ class CommunityUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //  setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setup()
         fetchCurrentUser()
@@ -169,12 +169,12 @@ class CommunityUsersViewController: UIViewController {
         }
         
         if user.gender == "男性" {
-            Community.updateCommunity(communityId: self.communityId,
+            Community.updateCommunity1(communityId: self.communityId,
                                       value1: [ALL_NUMBER: self.community.allNumber + 1,
                                                MALE_NUMBER: self.community.maleNumber + 1 ],
                                       value2: [User.currentUserId(): true])
         } else {
-            Community.updateCommunity(communityId: self.communityId,
+            Community.updateCommunity1(communityId: self.communityId,
                                       value1: [ALL_NUMBER: self.community.allNumber + 1,
                                                FEMALE_NUMBER: self.community.femaleNumber + 1 ],
                                       value2: [User.currentUserId(): true])
@@ -188,12 +188,12 @@ class CommunityUsersViewController: UIViewController {
     private func setupWithdraw() {
         
         if user.gender == "男性" {
-            Community.updateCommunity(communityId: self.communityId,
+            Community.updateCommunity1(communityId: self.communityId,
                                       value1: [ALL_NUMBER: self.community.allNumber - 1,
                                                MALE_NUMBER: self.community.maleNumber - 1],
                                       value2: [User.currentUserId(): FieldValue.delete()])
         } else {
-            Community.updateCommunity(communityId: self.communityId,
+            Community.updateCommunity1(communityId: self.communityId,
                                       value1: [ALL_NUMBER: self.community.allNumber - 1,
                                                FEMALE_NUMBER: self.community.femaleNumber - 1],
                                       value2: [User.currentUserId(): FieldValue.delete()])
@@ -345,10 +345,10 @@ extension CommunityUsersViewController:  UICollectionViewDataSource, UICollectio
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-            //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-            //            cell3.bannerView.rootViewController = self
-            //            cell3.bannerView.load(GADRequest())
-            cell3.testBanner4()
+            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+            cell3.bannerView.rootViewController = self
+            cell3.bannerView.load(GADRequest())
+//            cell3.testBanner4()
             cell3.communityUsersCVC = self
             
             return cell3

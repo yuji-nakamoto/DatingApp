@@ -25,8 +25,8 @@ class CommunityListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setSearchBar()
         fetchCommunities()
@@ -184,10 +184,11 @@ extension CommunityListViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = true
         return true
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = true
         searchBar.text = ""
-        searchBar.resignFirstResponder()
+        searchCommunity()
     }
 }
 

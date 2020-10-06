@@ -20,6 +20,7 @@ class CreateTweetViewController: UIViewController {
     @IBOutlet weak var countLabel: UILabel!
     
     private var user = User()
+    private var community = Community()
     private var pleaceholderLbl = UILabel()
     private var contentsImage: UIImage?
     var communityId = ""
@@ -31,6 +32,7 @@ class CreateTweetViewController: UIViewController {
         setup()
         setupTextView()
         fetchUser()
+        fetchCommunity(communityId: communityId)
     }
     
     // MARK: - Actions
@@ -59,6 +61,14 @@ class CreateTweetViewController: UIViewController {
         }
     }
     
+    private func fetchCommunity(communityId: String) {
+        guard communityId != "" else { return }
+        
+        Community.fetchCommunity(communityId: communityId) { (community) in
+            self.community = community
+        }
+    }
+    
     // MARK: - Helpers
     
     private func saveTweet() {
@@ -76,8 +86,12 @@ class CreateTweetViewController: UIViewController {
                         TEXT: self.textView.text as Any] as [String : Any]
             
             Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
+            Community.updateCommunity2(communityId: self.communityId,
+                                       value: [TWEETCOUNT: self.community.tweetCount + 1])
           
-            updateUser(withValue: [MCOMMUNITY2: true])
+            if user.communityGetPt4 != true {
+                updateUser(withValue: [MCOMMUNITY: true])
+            }
             self.indicator.stopAnimating()
             UserDefaults.standard.set(true, forKey: REFRESH)
             self.navigationController?.popViewController(animated: true)
@@ -95,7 +109,7 @@ class CreateTweetViewController: UIViewController {
             
                 Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
               
-                updateUser(withValue: [MCOMMUNITY2: true])
+                updateUser(withValue: [MCOMMUNITY: true])
                 self.indicator.stopAnimating()
                 UserDefaults.standard.set(true, forKey: REFRESH)
                 self.navigationController?.popViewController(animated: true)

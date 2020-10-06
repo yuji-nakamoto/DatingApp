@@ -15,12 +15,11 @@ class ShopTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
     @IBOutlet weak var pLabel: UILabel!
-    @IBOutlet weak var soldoutLabel: UILabel!
     
     func shopItem1() {
         itemImageView.image = UIImage(named: "item1")
         itemNameLabel.text = "おかわり"
-        descriptionLabel.text = "マッチしていなくてもメッセージを追加で1通送信できます"
+        descriptionLabel.text = "マッチしていなくてもメッセージを追加で送信できます"
         pointLabel.text = "1"
     }
     
@@ -52,42 +51,31 @@ class ShopTableViewCell: UITableViewCell {
         pointLabel.text = "3"
     }
  
-    func shopItem6(_ user: User) {
+    func shopItem6() {
         itemImageView.image = UIImage(named: "item6")
         itemNameLabel.text = "開眼"
         descriptionLabel.text = "あなたのプロフィールに訪れた人数を確認できます。効果は永続します"
-        if user.item6 == 1 || user.usedItem6 == 1 {
-            pLabel.isHidden = true
-            pointLabel.isHidden = true
-            soldoutLabel.isHidden = false
-        } else {
-            pointLabel.text = "10"
-        }
+        pointLabel.text = "10"
     }
 
-    func shopItem7(_ user: User) {
+    func shopItem7() {
         itemImageView.image = UIImage(named: "item7")
         itemNameLabel.text = "フリマップ"
         descriptionLabel.text = "お相手との距離表示が可能になります。\n効果は永続します"
-        if user.item7 == 1 || user.usedItem7 == 1 {
-            pLabel.isHidden = true
-            pointLabel.isHidden = true
-            soldoutLabel.isHidden = false
-        } else {
-            pointLabel.text = "20"
-        }
+        pointLabel.text = "20"
     }
 
-    func shopItem8(_ user: User) {
+    func shopItem8() {
         itemImageView.image = UIImage(named: "item8")
         itemNameLabel.text = "透視"
         descriptionLabel.text = "メッセージの既読表示が可能になります\n効果は永続します"
-        if user.item8 == 1 || user.usedItem8 == 1 {
-            pLabel.isHidden = true
-            pointLabel.isHidden = true
-            soldoutLabel.isHidden = false
-        } else {
-            pointLabel.text = "20"
-        }
+        pointLabel.text = "20"
+    }
+    
+    func shopItem9() {
+        itemImageView.image = UIImage(named: "item9")
+        itemNameLabel.text = "お気に入り"
+        descriptionLabel.text = "気になるお相手をお気に入り登録できます"
+        pointLabel.text = "2"
     }
 }

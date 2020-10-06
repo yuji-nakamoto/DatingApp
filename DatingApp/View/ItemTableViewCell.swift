@@ -10,7 +10,6 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var usedLabel1: UILabel!
     @IBOutlet weak var usedLabel2: UILabel!
     @IBOutlet weak var usedLabel3: UILabel!
     @IBOutlet weak var usedLabel4: UILabel!
@@ -19,17 +18,11 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var usedLabel7: UILabel!
     @IBOutlet weak var isReadSwitch: UISwitch!
     @IBOutlet weak var isReadLabel: UILabel!
-
+    
+    var itemVC: ItemCollectionViewController?
+    
     func usedItems(_ user: User) {
-        
         guard user.uid != nil else { return }
-        if user.usedItem1 > 0 {
-            self.usedLabel1.text = "\(user.usedItem1!)枚使用可"
-            self.usedLabel1.textColor = UIColor(named: O_GREEN)
-        } else {
-            self.usedLabel1.text = "未使用"
-            self.usedLabel1.textColor = .systemGray
-        }
         
         if user.usedItem2 > 0 {
             self.usedLabel2.text = "\(user.usedItem2!)枚使用中"

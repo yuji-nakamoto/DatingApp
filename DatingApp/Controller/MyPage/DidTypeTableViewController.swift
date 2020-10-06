@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMobileAds
-import EmptyDataSet_Swift
 
 class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
@@ -31,12 +30,11 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
         setupUI()
         fetchTypedUsers()
         updateUser(withValue: [NEWTYPE: false])
-        UIApplication.shared.applicationIconBadgeNumber = 0
         
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
-        testBanner()
-        interstitial = testIntersitial()
+        setupBanner()
+        interstitial = createAndLoadIntersitial()
+//        testBanner()
+//        interstitial = testIntersitial()
     }
 
     // MARK: - Actions
@@ -54,7 +52,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
         }
     }
 
-    // MARK: - Fetch isLike
+    // MARK: - Fetch
     
     private func fetchTypeUsers() {
         
@@ -79,8 +77,6 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
             }
         }
     }
-
-    // MARK: - Fetch liekd
     
     private func fetchTypedUsers() {
         
@@ -105,9 +101,7 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
             }
         }
     }
-    
-    // MARK: - Fetch user
-    
+        
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
@@ -164,17 +158,13 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     private func setupUI() {
-        
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
         navigationItem.title = "タイプ"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
     }
 }
 
-// MARK: - Table view data source
-
+// MARK: - Table view
 
 extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -218,18 +208,5 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
             return
         }
         performSegue(withIdentifier: "DetailVC", sender: typeUsers[indexPath.row].uid)
-    }
-}
-
-extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-
-    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: "タイプ履歴が、\nこちらに表示されます", attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "気になった方にタイプを送り、\nアプローチをしてみましょう")
     }
 }

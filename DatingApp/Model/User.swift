@@ -42,6 +42,7 @@ class User {
     var messageBadgeCount: Int!
     var appBadgeCount: Int!
     var myPageBadgeCount: Int!
+    var communityBadgeCount: Int!
     var blood: String!
     var education: String!
     var marriageHistory: String!
@@ -73,10 +74,9 @@ class User {
     var item6: Int!
     var item7: Int!
     var item8: Int!
-    var usedItem1: Int!
+    var item9: Int!
     var usedItem2: Int!
     var usedItem3: Int!
-    var usedItem4: Int!
     var usedItem5: Int!
     var usedItem6: Int!
     var usedItem7: Int!
@@ -87,7 +87,10 @@ class User {
     var called: Bool!
     var newLike: Bool!
     var newType: Bool!
+    var newMission: Bool!
     var newMessage: Bool!
+    var newReply: Bool!
+    var newComment: Bool!
     var latitude: String!
     var longitude: String!
     var isApple: Bool!
@@ -103,8 +106,7 @@ class User {
     var mMatchCount: Int!
     var mFootCount: Int!
     var mCommunityCount: Int!
-    var mCommunity1: Bool!
-    var mCommunity2: Bool!
+    var mCommunity: Bool!
     var mProfile: Bool!
     var mKaigan: Bool!
     var mToshi: Bool!
@@ -134,7 +136,7 @@ class User {
     var community1: String!
     var community2: String!
     var community3: String!
-    var createCommunity: Bool!
+    var createCommunityCount: Int!
     
     init() {
     }
@@ -170,6 +172,7 @@ class User {
         messageBadgeCount = dict[MESSAGEBADGECOUNT] as? Int ?? 0
         appBadgeCount = dict[APPBADGECOUNT] as? Int ?? 0
         myPageBadgeCount = dict[MYPAGEBADGECOUNT] as? Int ?? 0
+        communityBadgeCount = dict[COMMUNITYBADGECOUNT] as? Int ?? 0
         birthplace = dict[BIRTHPLACE] as? String ?? ""
         blood = dict[BLOOD] as? String ?? ""
         education = dict[EDUCATION] as? String ?? ""
@@ -202,10 +205,9 @@ class User {
         item6 = dict[ITEM6] as? Int ?? 0
         item7 = dict[ITEM7] as? Int ?? 0
         item8 = dict[ITEM8] as? Int ?? 0
-        usedItem1 = dict[USEDITEM1] as? Int ?? 0
+        item9 = dict[ITEM9] as? Int ?? 0
         usedItem2 = dict[USEDITEM2] as? Int ?? 0
         usedItem3 = dict[USEDITEM3] as? Int ?? 0
-        usedItem4 = dict[USEDITEM4] as? Int ?? 0
         usedItem5 = dict[USEDITEM5] as? Int ?? 0
         usedItem6 = dict[USEDITEM6] as? Int ?? 0
         usedItem7 = dict[USEDITEM7] as? Int ?? 0
@@ -217,6 +219,9 @@ class User {
         newLike = dict[NEWLIKE] as? Bool ?? false
         newType = dict[NEWTYPE] as? Bool ?? false
         newMessage = dict[NEWMESSAGE] as? Bool ?? false
+        newMission = dict[NEWMISSION] as? Bool ?? false
+        newReply = dict[NEWREPLY] as? Bool ?? false
+        newComment = dict[NEWCOMMENT] as? Bool ?? false
         latitude = dict[LATITUDE] as? String ?? ""
         longitude = dict[LONGITUDE] as? String ?? ""
         isApple = dict[ISAPPLE] as? Bool ?? false
@@ -232,8 +237,7 @@ class User {
         mMatchCount = dict[MMATCHCOUNT] as? Int ?? 0
         mFootCount = dict[MFOOTCOUNT] as? Int ?? 0
         mCommunityCount = dict[MCOMMUNITYCOUNT] as? Int ?? 0
-        mCommunity1 = dict[MCOMMUNITY1] as? Bool ?? false
-        mCommunity2 = dict[MCOMMUNITY2] as? Bool ?? false
+        mCommunity = dict[MCOMMUNITY] as? Bool ?? false
         mProfile = dict[MPROFILE] as? Bool ?? false
         mKaigan = dict[MKAIGAN] as? Bool ?? false
         mToshi = dict[MTOSHI] as? Bool ?? false
@@ -263,7 +267,7 @@ class User {
         community1 = dict[COMMUNITY1] as? String ?? ""
         community2 = dict[COMMUNITY2] as? String ?? ""
         community3 = dict[COMMUNITY3] as? String ?? ""
-        createCommunity = dict[CREATECOMMUNITY] as? Bool ?? false
+        createCommunityCount = dict[CREATECOMMUNITYCOUNT] as? Int ?? 0
     }
     
     // MARK: - Return user

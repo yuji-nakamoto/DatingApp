@@ -125,6 +125,9 @@ class TweetTableViewCell: UITableViewCell {
         let delete: UIAlertAction = UIAlertAction(title: "削除する", style: UIAlertAction.Style.default) { (alert) in
             UserDefaults.standard.set(true, forKey: REFRESH)
             Tweet.deleteTweet(communityId: self.tweetVC!.communityId, tweetId: self.tweet.tweetId)
+            Community.updateCommunity2(communityId: self.community.communityId,
+                                       value: [TWEETCOUNT: self.community.tweetCount - 1])
+            UserDefaults.standard.set(true, forKey: REFRESH)
             self.tweetVC?.viewWillAppear(true)
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel)

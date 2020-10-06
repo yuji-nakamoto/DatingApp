@@ -26,8 +26,8 @@ class NewLoginCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         addSnapshotListener()
         fetchUser()
@@ -148,10 +148,10 @@ extension NewLoginCollectionViewController: UICollectionViewDataSource, UICollec
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-//            cell3.bannerView.rootViewController = self
-//            cell3.bannerView.load(GADRequest())
-            cell3.testBanner2()
+            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+            cell3.bannerView.rootViewController = self
+            cell3.bannerView.load(GADRequest())
+//            cell3.testBanner2()
             cell3.newLoginCVC = self
             
             return cell3

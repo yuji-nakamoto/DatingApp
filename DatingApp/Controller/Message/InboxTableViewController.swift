@@ -31,8 +31,8 @@ class InboxTableViewController: UIViewController {
         fetchUser()
         updateUser(withValue: [NEWMESSAGE: false])
         
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -84,9 +84,12 @@ class Tweet {
     
     class func fetchTweetComments(tweetId: String, completion: @escaping(Tweet) -> Void) {
         
-        COLLECTION_TWEET.document(tweetId).collection("comments").order(by: DATE, descending: true).getDocuments { (snapshot, error) in
+        COLLECTION_TWEET.document(tweetId).collection("comments").order(by: DATE, descending: true).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 print("Error fetch tweet comment: \(error.localizedDescription)")
+            }
+            if snapshot?.documents == [] {
+                completion(Tweet(dict: [UID: ""]))
             }
             snapshot?.documents.forEach({ (documents) in
                 let dict = documents.data()
@@ -236,10 +239,9 @@ class Tweet {
         COLLECTION_TWEET.document(tweetId).delete()
     }
     
-    class func deleteComment(tweetId: String, commentId: String, completion: @escaping() -> Void) {
-        COLLECTION_TWEET.document(tweetId).collection("comments").document(commentId).delete { (error) in
-            COLLECTION_TWEET_COMMENT.document(commentId).delete()
-            completion()
-        }
+    class func deleteComment(tweetId: String, commentId: String) {
+        COLLECTION_TWEET.document(tweetId).collection("comments").document(commentId).delete()
+        
+        COLLECTION_TWEET_COMMENT.document(commentId).delete()
     }
 }

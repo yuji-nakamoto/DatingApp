@@ -34,6 +34,7 @@ public let COLLECTION_COMMUNITY = Firestore.firestore().collection("community")
 public let COLLECTION_TWEET = Firestore.firestore().collection("tweet")
 public let COLLECTION_REPLY = Firestore.firestore().collection("reply")
 public let COLLECTION_TWEET_COMMENT = Firestore.firestore().collection("tweet_comment")
+public let COLLECTION_FAVORITE = Firestore.firestore().collection("favorite")
 
 // MARK: - Color
 
@@ -76,6 +77,7 @@ public let LASTCHANGE = "lastChanged"
 public let MESSAGEBADGECOUNT = "messageBadgeCount"
 public let MYPAGEBADGECOUNT = "myPageBadgeCount"
 public let APPBADGECOUNT = "appBadgeCount"
+public let COMMUNITYBADGECOUNT = "communityBadgeCount"
 public let BLOOD = "blood"
 public let EDUCATION = "education"
 public let MARRIAGEHISTORY = "marriageHistory"
@@ -107,10 +109,9 @@ public let ITEM5 = "item5"
 public let ITEM6 = "item6"
 public let ITEM7 = "item7"
 public let ITEM8 = "item8"
-public let USEDITEM1 = "usedItem1"
+public let ITEM9 = "item9"
 public let USEDITEM2 = "usedItem2"
 public let USEDITEM3 = "usedItem3"
-public let USEDITEM4 = "usedItem4"
 public let USEDITEM5 = "usedItem5"
 public let USEDITEM6 = "usedItem6"
 public let USEDITEM7 = "usedItem7"
@@ -123,6 +124,9 @@ public let POINTBUTTON = "pointButton"
 public let NEWLIKE = "newLike"
 public let NEWTYPE = "newType"
 public let NEWMESSAGE = "newMessage"
+public let NEWMISSION = "newMission"
+public let NEWREPLY = "newReply"
+public let NEWCOMMENT = "newComment"
 public let LATITUDE = "latitude"
 public let LONGITUDE = "longitude"
 public let ISAPPLE = "isApple"
@@ -138,8 +142,7 @@ public let MMESSAGECOUNT = "mMessageCount"
 public let MMATCHCOUNT = "mMatchCount"
 public let MFOOTCOUNT = "mFootCount"
 public let MCOMMUNITYCOUNT = "mCommunityCount"
-public let MCOMMUNITY1 = "mCommunity1"
-public let MCOMMUNITY2 = "mCommunity2"
+public let MCOMMUNITY = "mCommunity"
 public let MPROFILE = "mProfile"
 public let MKAIGAN = "mKaigan"
 public let MTOSHI = "mToshi"
@@ -169,7 +172,7 @@ public let MISSIONCLEARGETITEM = "missionClearGetItem"
 public let COMMUNITY1 = "community1"
 public let COMMUNITY2 = "community2"
 public let COMMUNITY3 = "community3"
-public let CREATECOMMUNITY = "createCommunity"
+public let CREATECOMMUNITYCOUNT = "createCommunityCount"
 
 // MARK: - Counter
 
@@ -192,7 +195,6 @@ public let LIKED = "liked"
 public let ISTYPE = "isType"
 public let TYPED = "typed"
 public let ISMATCH = "isMatch"
-
 
 // MARK: - Footstep
 
@@ -231,6 +233,7 @@ public let COMMUNITYLEADER = "communityLeader"
 // MARK: - Tweet
 public let TWEET = "tweet"
 public let TWEETID = "tweetId"
+public let TWEETCOUNT = "tweetCount"
 public let COMMENTCOUNT = "commentCount"
 public let COMMENTID = "commentId"
 public let REPLY = "reply"
@@ -240,6 +243,9 @@ public let ISREPLY = "isReply"
 public let REPLYUSERID = "replyUserId"
 public let LIKECOUNT2 = "likeCount2"
 public let ISLIKE2 = "isLike2"
+
+//MARK: - Favorite
+public let ISFAVORITE = "isFavorite"
 
 // MARK: - Placeholder image
 
@@ -257,6 +263,8 @@ public let TYPE_ON = "type_on"
 public let MATCH_ON = "match_on"
 public let MESSAGE_ON = "message_on"
 public let GIFT_ON = "gift_on"
+public let REPLY_ON = "reply_on"
+public let COMMENT_ON = "comment_on"
 public let ISREAD_ON = "isRead_on"
 
 public let LOVER = "lover"

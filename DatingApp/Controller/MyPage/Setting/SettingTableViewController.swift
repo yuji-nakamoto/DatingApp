@@ -23,16 +23,6 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var pickerKeyboard: PickerKeyboard3!
     @IBOutlet weak var footstepSwitch: UISwitch!
     @IBOutlet weak var footstepLabel: UILabel!
-    @IBOutlet weak var likeSwitch: UISwitch!
-    @IBOutlet weak var typeSwitch: UISwitch!
-    @IBOutlet weak var messageSwitch: UISwitch!
-    @IBOutlet weak var likeLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var matchLabel: UILabel!
-    @IBOutlet weak var matchSwitch: UISwitch!
-    @IBOutlet weak var giftSwitch: UISwitch!
-    @IBOutlet weak var giftLabel: UILabel!
     
     private var user: User!
     
@@ -40,7 +30,6 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         fetchUser()
     }
@@ -75,82 +64,6 @@ class SettingTableViewController: UITableViewController {
             footstepLabel.text = "足あとを残さない"
         }
     }
-    
-    @IBAction func giftSwitched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.set(true, forKey: GIFT_ON)
-            Messaging.messaging().subscribe(toTopic: "gift\(Auth.auth().currentUser!.uid)")
-            giftLabel.text = "プレゼント通知を受信する"
-        } else {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.removeObject(forKey: GIFT_ON)
-            Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-            giftLabel.text = "プレゼント通知を受信しない"
-        }
-    }
-    
-    
-    @IBAction func likeSwitched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.set(true, forKey: LIKE_ON)
-            Messaging.messaging().subscribe(toTopic: "like\(Auth.auth().currentUser!.uid)")
-            likeLabel.text = "いいね通知を受信する"
-        } else {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.removeObject(forKey: LIKE_ON)
-            Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
-            likeLabel.text = "いいね通知を受信しない"
-        }
-    }
-    
-    @IBAction func typeSwitched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.set(true, forKey: TYPE_ON)
-            Messaging.messaging().subscribe(toTopic: "type\(Auth.auth().currentUser!.uid)")
-            typeLabel.text = "タイプ通知を受信する"
-        } else {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.removeObject(forKey: TYPE_ON)
-            Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
-            typeLabel.text = "タイプ通知を受信しない"
-        }
-    }
-    
-    @IBAction func messageSwitched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.set(true, forKey: MESSAGE_ON)
-            Messaging.messaging().subscribe(toTopic: "message\(Auth.auth().currentUser!.uid)")
-            messageLabel.text = "メッセージ通知を受信する"
-        } else {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.removeObject(forKey: MESSAGE_ON)
-            Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
-            messageLabel.text = "メッセージ通知を受信しない"
-        }
-    }
-    
-    @IBAction func matchSwitched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.set(true, forKey: MATCH_ON)
-            Messaging.messaging().subscribe(toTopic: "match\(Auth.auth().currentUser!.uid)")
-            matchLabel.text = "マッチング通知を受信する"
-        } else {
-            generator.notificationOccurred(.success)
-            UserDefaults.standard.removeObject(forKey: MATCH_ON)
-            Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-            matchLabel.text = "マッチング通知を受信しない"
-        }
-    }
 
     @IBAction func completionButtonPressed(_ sender: Any) {
         
@@ -168,7 +81,7 @@ class SettingTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Fetch user
+    // MARK: - Fetch
     
     private func fetchUser() {
         guard Auth.auth().currentUser != nil else { return }
@@ -238,46 +151,6 @@ class SettingTableViewController: UITableViewController {
         } else {
             footstepSwitch.isOn = false
             footstepLabel.text = "足あとを残さない"
-        }
-        
-        if UserDefaults.standard.object(forKey: LIKE_ON) != nil {
-            likeSwitch.isOn = true
-            likeLabel.text = "いいね通知を受信する"
-        } else {
-            likeSwitch.isOn = false
-            likeLabel.text = "いいね通知を受信しない"
-        }
-        
-        if UserDefaults.standard.object(forKey: TYPE_ON) != nil {
-            typeSwitch.isOn = true
-            typeLabel.text = "タイプ通知を受信する"
-        } else {
-            typeSwitch.isOn = false
-            typeLabel.text = "タイプ通知を受信しない"
-        }
-        
-        if UserDefaults.standard.object(forKey: MESSAGE_ON) != nil {
-            messageSwitch.isOn = true
-            messageLabel.text = "メッセージ通知を受信する"
-        } else {
-            messageSwitch.isOn = false
-            messageLabel.text = "メッセージ通知を受信しない"
-        }
-        
-        if UserDefaults.standard.object(forKey: MATCH_ON) != nil {
-            matchSwitch.isOn = true
-            matchLabel.text = "マッチング通知を受信する"
-        } else {
-            matchSwitch.isOn = false
-            matchLabel.text = "マッチング通知を受信しない"
-        }
-        
-        if UserDefaults.standard.object(forKey: GIFT_ON) != nil {
-            giftSwitch.isOn = true
-            giftLabel.text = "プレゼント通知を受信する"
-        } else {
-            giftSwitch.isOn = false
-            giftLabel.text = "プレゼント通知を受信しない"
         }
         
         if UserDefaults.standard.object(forKey: MALE) != nil {

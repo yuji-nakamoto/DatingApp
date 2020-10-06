@@ -9,7 +9,7 @@
 import UIKit
 
 class ReplyViewController: UIViewController, UITextFieldDelegate {
-
+    
     // MARK: - Properties
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -23,6 +23,7 @@ class ReplyViewController: UIViewController, UITextFieldDelegate {
     
     private var tweet = Tweet()
     private var user = User()
+    private var currentUser = User()
     var commentId = ""
     var timestamp: String {
         let date = tweet.timestamp.dateValue()
@@ -31,15 +32,16 @@ class ReplyViewController: UIViewController, UITextFieldDelegate {
         dateFormatter.dateFormat = "M月d日(EEEEE) H時m分"
         return dateFormatter.string(from: date)
     }
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         fetchTweetComment()
+        fetchCurrentUser()
     }
-
+    
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -59,6 +61,7 @@ class ReplyViewController: UIViewController, UITextFieldDelegate {
                     ISREPLY: true] as [String : Any]
         
         Tweet.updateTweetComment(tweetId: tweet.tweetId, commentId: commentId, withValue: dict)
+        incrementAppBadgeCount()
         UserDefaults.standard.set(true, forKey: REFRESH2)
         textField.text = ""
         navigationController?.popViewController(animated: true)
@@ -88,7 +91,22 @@ class ReplyViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    private func fetchCurrentUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.currentUser = user
+        }
+    }
+    
     // MARK: - Helpers
+    
+    private func incrementAppBadgeCount() {
+   
+        sendRequestNotification6(toUser: self.user,
+                                message: "\(self.currentUser.username!)さんからリプライです",
+                                badge: self.user.appBadgeCount + 1)
+        updateToUser(self.user.uid, withValue: [NEWREPLY: true])
+    }
     
     private func setup() {
         navigationItem.title = "リプライ"
@@ -125,7 +143,7 @@ class ReplyViewController: UIViewController, UITextFieldDelegate {
     
     @objc func textFieldDidChange() {
         
-        let commentNum = 20 - textField.text!.count
+        let commentNum = 30 - textField.text!.count
         if commentNum < 0 {
             countLabel.text = "×"
             sendButton.isEnabled = false

@@ -7,27 +7,31 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class CommunityTableCollectionViewController: UITableViewController {
 
     @IBOutlet weak var collectionView1: UICollectionView!
     @IBOutlet weak var collectionView2: UICollectionView!
     @IBOutlet weak var collectionView3: UICollectionView!
+    @IBOutlet weak var communityButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var newLabel: UILabel!
     
     private var communityArray1 = [Community]()
     private var communityArray2 = [Community]()
     private var communityArray3 = [Community]()
+    private var hud = JGProgressHUD(style: .dark)
     private var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.isHidden = true
         UserDefaults.standard.removeObject(forKey: C_NUMBER_ON)
         UserDefaults.standard.removeObject(forKey: C_CREATED_ON)
         UserDefaults.standard.removeObject(forKey: C_RECOMMENDED_ON)
@@ -38,13 +42,12 @@ class CommunityTableCollectionViewController: UITableViewController {
         fetchCreatedCommunity()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = false
+    // MARK: - Actions
+    
+    @IBAction func createButtonPressed(_ sender: Any) {
+        setupCreateButton(self.user)
     }
     
-    // MARK: - Actions
-  
     @IBAction func searchButtonPressed(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: C_SEARCH_ON)
         performSegue(withIdentifier: "CommunityListVC", sender: nil)
@@ -72,14 +75,10 @@ class CommunityTableCollectionViewController: UITableViewController {
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
             
-            if self.user.community1 != "" && self.user.community2 != "" && self.user.community3 != "" {
-                self.createButton.isEnabled = false
+            if self.user.newReply == true {
+                self.newLabel.isHidden = false
             } else {
-                self.createButton.isEnabled = true
-            }
-            
-            if self.user.createCommunity == true {
-                self.createButton.isHidden = true
+                self.newLabel.isHidden = true
             }
         }
     }
@@ -122,7 +121,40 @@ class CommunityTableCollectionViewController: UITableViewController {
             communityUsersVC.communityId = communityId
         }
     }
+    
+    private func setupCreateButton(_ user: User) {
+        
+        if user.community1 != "" && user.community2 != "" && user.community3 != "" && user.createCommunityCount >= 3 {
+            hud.show(in: self.view)
+            hud.textLabel.text = "作成数の上限に達しました"
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        } else if user.community1 != "" && user.community2 != "" && user.community3 != "" {
+            hud.show(in: self.view)
+            hud.textLabel.text = "作成するには、参加中のコミュニティをどれか1つ退会してください"
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        } else if user.createCommunityCount >= 3 {
+            hud.show(in: self.view)
+            hud.textLabel.text = "作成数の上限に達しました"
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
+            return
+        }
+        performSegue(withIdentifier: "CreateComVC", sender: nil)
+    }
+    
+    private func setup() {
+        navigationItem.title = "コミュニティ"
+        communityButton.layer.cornerRadius = 10
+        createButton.layer.cornerRadius = 10
+        newLabel.layer.cornerRadius = 9
+    }
 }
+
+// MARK: - Collection view
 
 extension CommunityTableCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     

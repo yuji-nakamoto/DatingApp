@@ -58,10 +58,10 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         fetchIsRead()
         timerMethod()
         
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
-        testBanner()
-        interstitial = testIntersitial()
+        setupBanner()
+        interstitial = createAndLoadIntersitial()
+//        testBanner()
+//        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +130,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         let messageId = UUID().uuidString
         if matchUser.isMatch != 1 {
             if self.message.from == User.currentUserId() {
-                if currentUser.usedItem1 > 0 {
+                if currentUser.item1 > 0 {
                     let alert: UIAlertController = UIAlertController(title: "おかわり", message: "アイテムを使用してメッセージを送信します。送信しますか？", preferredStyle: .alert)
                     let exchange: UIAlertAction = UIAlertAction(title: "送信する", style: UIAlertAction.Style.default) { (alert) in
                         
@@ -138,7 +138,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                         self.hud.textLabel.text = "アイテムを使用しました。"
                         self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 2.0)
-                        updateUser(withValue: [USEDITEM1: self.currentUser.usedItem1 - 1,
+                        updateUser(withValue: [ITEM1: self.currentUser.item1 - 1,
                                                MMESSAGECOUNT: self.currentUser.mMessageCount + 1])
                         
                         let date: Double = Date().timeIntervalSince1970
@@ -364,7 +364,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                     if self.message.from == User.currentUserId() {
                         
                         self.currentUser = user
-                        if self.currentUser.usedItem1 > 0 {
+                        if self.currentUser.item1 > 0 {
                             self.bottomView.isHidden = false
                         } else {
                             self.bottomView.isHidden = true

@@ -111,7 +111,7 @@ class CreateCommunityTableViewController: UITableViewController {
                 Community.saveCommunity(communityId: communityId, withValue: dict)
             }
             
-            updateUser(withValue: [CREATECOMMUNITY: true, MCOMMUNITY1: true])
+            updateUser(withValue: [CREATECOMMUNITYCOUNT: self.user.createCommunityCount + 1])
             
             if self.user.community1 == "" {
                 updateUser(withValue: [COMMUNITY1: communityId])

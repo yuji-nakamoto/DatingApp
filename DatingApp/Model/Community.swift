@@ -19,6 +19,7 @@ class Community {
     var communityId: String!
     var created_at: Timestamp!
     var communityLeader: String!
+    var tweetCount: Int!
     
     init() {
     }
@@ -32,6 +33,7 @@ class Community {
         communityId = dict[COMMUNITYID] as? String ?? ""
         created_at = dict[CREATED_AT] as? Timestamp ?? Timestamp(date: Date())
         communityLeader = dict[COMMUNITYLEADER] as? String ?? ""
+        tweetCount = dict[TWEETCOUNT] as? Int ?? 0
     }
     
     // MARK: - Save
@@ -41,9 +43,13 @@ class Community {
         COLLECTION_COMMUNITY.document(communityId).collection("member").document(communityId).setData([User.currentUserId(): true])
     }
     
-    class func updateCommunity(communityId: String, value1: [String: Any], value2: [String: Any]) {
+    class func updateCommunity1(communityId: String, value1: [String: Any], value2: [String: Any]) {
         COLLECTION_COMMUNITY.document(communityId).updateData(value1)
         COLLECTION_COMMUNITY.document(communityId).collection("member").document(communityId).updateData(value2)
+    }
+    
+    class func updateCommunity2(communityId: String, value: [String: Any]) {
+        COLLECTION_COMMUNITY.document(communityId).updateData(value)
     }
     
     // MARK: - Fetch

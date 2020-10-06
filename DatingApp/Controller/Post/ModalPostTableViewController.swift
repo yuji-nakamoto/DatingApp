@@ -48,8 +48,8 @@ class ModalPostTableViewController: UITableViewController {
             return
         }
         
-        let dict = [S_RESIDENCE: residenceLabel.text!,
-                    SELECTEDGENRE: genreLabel.text!] as [String : Any]
+        let dict = [S_RESIDENCE: residenceLabel.text as Any,
+                    SELECTEDGENRE: genreLabel.text as Any] as [String : Any]
         
         selectedPickerKeyboard()
         
@@ -133,7 +133,12 @@ class ModalPostTableViewController: UITableViewController {
             genderLabel.text = "女性"
         }
         residenceLabel.text = user.sResidence
-        genreLabel.text = user.selectedGenre
+        
+        if user.selectedGenre != "" {
+            genreLabel.text = user.selectedGenre
+        } else {
+            genreLabel.text = "すべて"
+        }
     }
 
     private func setupUI() {
@@ -141,7 +146,6 @@ class ModalPostTableViewController: UITableViewController {
         pickerKeyBoard16.delegate = self
         pickerKeyBoard17.delegate = self
         tableView.tableFooterView = UIView()
-        genreLabel.text = "すべて"
         doneButton.layer.cornerRadius = 44 / 2
     }
 }

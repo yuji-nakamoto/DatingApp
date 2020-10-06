@@ -63,6 +63,8 @@ struct AuthService {
             Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
             Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
             Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "comment\(Auth.auth().currentUser!.uid)")
+            Messaging.messaging().unsubscribe(fromTopic: "reply\(Auth.auth().currentUser!.uid)")
             UserDefaults.standard.removeObject(forKey: RCOMPLETION)
             UserDefaults.standard.removeObject(forKey: GOOGLE)
             UserDefaults.standard.removeObject(forKey: FACEBOOK)
@@ -102,6 +104,8 @@ struct AuthService {
                         Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
                         Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
                         Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+                        Messaging.messaging().unsubscribe(fromTopic: "comment\(Auth.auth().currentUser!.uid)")
+                        Messaging.messaging().unsubscribe(fromTopic: "reply\(Auth.auth().currentUser!.uid)")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             Auth.auth().currentUser?.delete(completion: { (error) in
                                 

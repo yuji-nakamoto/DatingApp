@@ -19,7 +19,6 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
     private var user: User!
     private var hud = JGProgressHUD(style: .dark)
 
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -71,6 +70,7 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func setupUserInfo(_ user: User) {
         nickNameTextField.text = user.username
+        countLabel.text = String(10 - nickNameTextField.text!.count)
     }
     
     private func saveTextField() {

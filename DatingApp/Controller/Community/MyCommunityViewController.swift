@@ -29,15 +29,12 @@ class MyCommunityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         if UserDefaults.standard.object(forKey: REFRESH2) == nil {
             fetchUser()
         }
-        navigationItem.title = "マイコミュニティ"
-        tableView.tableFooterView = UIView()
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +57,7 @@ class MyCommunityViewController: UIViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
+            self.resetBadge(self.user)
             self.fetchCommunity1(self.user)
             self.fetchCommunity2(self.user)
             self.fetchCommunity3(self.user)
@@ -130,6 +128,22 @@ class MyCommunityViewController: UIViewController {
             let communityId = sender as! String
             communityUsersVC.communityId = communityId
         }
+    }
+    
+    private func setup() {
+        navigationItem.title = "マイコミュニティ"
+        tableView.tableFooterView = UIView()
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        updateUser(withValue: [NEWREPLY: false])
+    }
+    
+    private func resetBadge(_ user: User) {
+        
+        let totalAppBadgeCount = user.appBadgeCount - user.communityBadgeCount
+        
+        updateUser(withValue: [COMMUNITYBADGECOUNT: 0, APPBADGECOUNT: totalAppBadgeCount])
+        UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
     }
 }
 

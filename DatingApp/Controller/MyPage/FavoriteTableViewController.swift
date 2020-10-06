@@ -1,36 +1,46 @@
 //
-//  FootstepTableViewController.swift
+//  FavoriteTableViewController.swift
 //  DatingApp
 //
-//  Created by yuji_nakamoto on 2020/07/29.
+//  Created by yuji nakamoto on 2020/10/04.
 //  Copyright © 2020 yuji_nakamoto. All rights reserved.
 //
 
 import UIKit
 import GoogleMobileAds
+import EmptyDataSet_Swift
 
-class FootstepTableViewController: UIViewController {
+class FavoriteTableViewController: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    @IBOutlet weak var segmentControl: UISegmentedControl!
     
-    private var footsteps = [Footstep]()
+    private var favoArray = [Favorite]()
     private var users = [User]()
+    private var user = User()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        fetchtFootstepedUsers()
-        
         setupBanner()
 //        testBanner()
+        
+        setupUI()
+        if UserDefaults.standard.object(forKey: REFRESH2) == nil {
+            fetchFavoriteUsers()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UserDefaults.standard.object(forKey: REFRESH2) != nil {
+            fetchFavoriteUsers()
+            UserDefaults.standard.removeObject(forKey: REFRESH2)
+        }
     }
     
     // MARK: - Actions
@@ -38,66 +48,30 @@ class FootstepTableViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
-    @IBAction func segmentControlled(_ sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0: fetchtFootstepedUsers()
-        case 1: fetchIsFootstepUsers()
-        default: break
-        }
-    }
-
+ 
     // MARK: - Fetch
     
-    private func fetchIsFootstepUsers() {
-        
+    private func fetchFavoriteUsers() {
+     
         indicator.startAnimating()
-        segmentControl.isEnabled = false
-        footsteps.removeAll()
+        favoArray.removeAll()
         users.removeAll()
-        tableView.reloadData()
         
-        Footstep.fetchFootstepUsers { (footstep) in
-            if footstep.uid == "" {
-                self.segmentControl.isEnabled = true
+        Favorite.fetchFavoriteUsers { (favorite) in
+            if favorite.uid == "" {
                 self.indicator.stopAnimating()
+                self.tableView.reloadData()
                 return
             }
-            guard let uid = footstep.uid else { return }
+            guard let uid = favorite.uid else { return }
             self.fetchUser(uid: uid) {
-                self.footsteps.insert(footstep, at: 0)
-                self.segmentControl.isEnabled = true
+                self.favoArray.insert(favorite, at: 0)
                 self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
     }
     
-    private func fetchtFootstepedUsers() {
-        
-        indicator.startAnimating()
-        segmentControl.isEnabled = false
-        footsteps.removeAll()
-        users.removeAll()
-        tableView.reloadData()
-        
-        Footstep.fetchFootstepedUsers { (footstep) in
-            if footstep.uid == "" {
-                self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
-                return
-            }
-            guard let uid = footstep.uid else { return }
-            self.fetchUser(uid: uid) {
-                self.footsteps.insert(footstep, at: 0)
-                self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
-                self.tableView.reloadData()
-            }
-        }
-    }
-        
     private func fetchUser(uid: String, completion: @escaping() -> Void) {
         
         User.fetchUser(uid) { (user) in
@@ -107,7 +81,7 @@ class FootstepTableViewController: UIViewController {
     }
     
     // MARK: - Segue
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailVC" {
@@ -134,31 +108,45 @@ class FootstepTableViewController: UIViewController {
     }
     
     private func setupUI() {
-        navigationItem.title = "足あと"
+        
+        navigationItem.title = "お気に入り"
         tableView.tableFooterView = UIView()
-        tableView.separatorStyle = .none
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
     }
 }
 
 // MARK: - Table view data source
 
-extension FootstepTableViewController: UITableViewDelegate, UITableViewDataSource {
+extension FavoriteTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return footsteps.count
+        return favoArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FavoriteTableViewCell
         
-        let footstep = footsteps[indexPath.row]
-        cell.footstep = footstep
+        cell.favoriteVC = self
+        cell.user = users[indexPath.row]
         cell.configureCell(users[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: footsteps[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: favoArray[indexPath.row].uid)
+    }
+}
+
+extension FavoriteTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        return NSAttributedString(string: "お気に入り登録したお相手はいません", attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "ショップでアイテム交換を行い、気になったお相手を登録しよう")
     }
 }

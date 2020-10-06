@@ -26,8 +26,8 @@ class LikeCountAllViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         addSnapshotListener()
         fetchUser()

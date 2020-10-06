@@ -20,14 +20,13 @@ class ItemCollectionViewController: UIViewController {
     
     private var user = User()
     private var hud = JGProgressHUD(style: .dark)
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         fetchUser()
         navigationItem.title = "所持アイテム"
@@ -70,13 +69,13 @@ class ItemCollectionViewController: UIViewController {
         hud.textLabel.text = "アイテムを使用しました"
         hud.show(in: self.view)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 2.0)
+        hud.dismiss(afterDelay: 1.5)
     }
     
     private func hudSuccess2() {
         hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 2.0)
+        hud.dismiss(afterDelay: 1.5)
     }
 }
 
@@ -89,6 +88,7 @@ extension ItemCollectionViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! ItemTableViewCell
+        cell.itemVC = self
         cell.usedItems(self.user)
         cell.setupIsRead(self.user)
         return cell
@@ -99,7 +99,7 @@ extension ItemCollectionViewController: UITableViewDelegate, UITableViewDataSour
 
 extension ItemCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -133,6 +133,8 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             cell.possessionItem7(self.user)
         } else if indexPath.row == 7 {
             cell.possessionItem8(self.user)
+        } else if indexPath.row == 8 {
+            cell.possessionItem9(self.user)
         }
         return cell
     }
@@ -141,28 +143,15 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
         
         if indexPath.row == 0 {
             
-            let alert = UIAlertController(title: "おかわり", message: "マッチしていなくてもメッセージを追加で1通送信できます", preferredStyle: .alert)
+            let alert = UIAlertController(title: "おかわり", message: "マッチしていなくてもメッセージを追加で送信できます", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
-            let exchange = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
-                
-                updateUser(withValue: [ITEM1: self.user.item1 - 1,
-                                       USEDITEM1: self.user.usedItem1 + 1])
-                self.hudSuccess()
-            }
-            let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             
-            if user.item1 == 0 {
-                alert.addAction(verification)
-                self.present(alert,animated: true,completion: nil)
-            } else {
-                alert.addAction(exchange)
-                alert.addAction(cancel)
-                self.present(alert,animated: true,completion: nil)
-            }
+            alert.addAction(verification)
+            self.present(alert,animated: true,completion: nil)
             
         } else if indexPath.row == 1 {
             
-            let alert = UIAlertController(title: "目立ちたがり屋", message: "あなたのプロフィールが上位に表示されるようになります\n効果は重複します", preferredStyle: .alert)
+            let alert = UIAlertController(title: "目立ちたがり屋", message: "あなたのプロフィールが上位に表示されるようになります。効果は重複します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
@@ -183,7 +172,7 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             
         } else if indexPath.row == 2 {
             
-            let alert = UIAlertController(title: "割り込み", message: "あなたが送ったメッセージが上位に表示されるようになります\n効果は重複します", preferredStyle: .alert)
+            let alert = UIAlertController(title: "割り込み", message: "あなたが送ったメッセージが上位に表示されるようになります。効果は重複します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 updateUser(withValue: [ITEM3: self.user.item3 - 1,
@@ -208,7 +197,7 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             
             alert.addAction(cancel)
             self.present(alert,animated: true,completion: nil)
-
+            
         } else if indexPath.row == 4 {
             
             let alert: UIAlertController = UIAlertController(title: "仕切り直し", message: "スワイプでいなくなったユーザーが復活します", preferredStyle: .alert)
@@ -235,7 +224,7 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
                 alert.addAction(cancel)
                 self.present(alert,animated: true,completion: nil)
             }
-
+            
         } else if indexPath.row == 5 {
             
             let alert: UIAlertController = UIAlertController(title: "開眼", message: "あなたのプロフィールに訪れた人数を確認できます。効果は永続します", preferredStyle: .alert)
@@ -263,9 +252,9 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             
         } else if indexPath.row == 6 {
             
-            let alert: UIAlertController = UIAlertController(title: "フリマップ", message: "お相手との距離表示が可能になります\n効果は永続します", preferredStyle: .alert)
+            let alert: UIAlertController = UIAlertController(title: "フリマップ", message: "お相手との距離表示が可能になります。効果は永続します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
-
+            
             let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
                 self.hud.show(in: self.view)
@@ -288,8 +277,8 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             }
             
         } else if indexPath.row == 7 {
-
-            let alert: UIAlertController = UIAlertController(title: "透視", message: "メッセージの既読表示が可能になります\n効果は永続します", preferredStyle: .alert)
+            
+            let alert: UIAlertController = UIAlertController(title: "透視", message: "メッセージの既読表示が可能になります。効果は永続します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 
@@ -312,6 +301,14 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
                 alert.addAction(cancel)
                 self.present(alert,animated: true,completion: nil)
             }
+            
+        } else if indexPath.row == 8 {
+            
+            let alert: UIAlertController = UIAlertController(title: "お気に入り", message: "気になるお相手をお気に入り登録できます", preferredStyle: .alert)
+            let verification = UIAlertAction(title: "確認", style: .cancel)
+                      
+            alert.addAction(verification)
+            self.present(alert,animated: true,completion: nil)
         }
     }
 }

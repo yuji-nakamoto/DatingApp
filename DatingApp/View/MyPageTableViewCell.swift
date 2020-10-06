@@ -13,7 +13,6 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var redmark: UIView!
     @IBOutlet weak var cogImageView: UIImageView!
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentLabel: UILabel!
@@ -21,42 +20,53 @@ class MyPageTableViewCell: UITableViewCell {
     @IBOutlet weak var typeNewLabel: UILabel!
     @IBOutlet weak var likeNewLabel: UILabel!
     @IBOutlet weak var crown: UIImageView!
+    @IBOutlet weak var missionNewLabel: UILabel!
+    @IBOutlet weak var missionTopLabel: UILabel!
     
     var myPageVC: MyPageTableViewController?
     
-    func configureCell(_ user: User?) {
+    func configureCell(_ user: User) {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(profileImageViewTap))
         profileImageView.addGestureRecognizer(tap)
         
-        if user?.uid != nil {
-            profileImageView.sd_setImage(with: URL(string: user!.profileImageUrl1), completed: nil)
-            nameLabel.text = user!.username
-            pointLabel.text = String(user!.points)
+        if user.uid != nil {
+            profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+            nameLabel.text = user.username
+            pointLabel.text = String(user.points)
         }
         
-        if user?.newType == true {
+        if user.newType == true {
             typeNewLabel.isHidden = false
         } else {
             typeNewLabel.isHidden = true
         }
         
-        if user?.newLike == true {
+        if user.newLike == true {
             likeNewLabel.isHidden = false
         } else {
             likeNewLabel.isHidden = true
         }
         
-        if user?.comment == "" {
-            commentLabel.text = "挨拶や今日の出来事など入力してみよう"
+        if user.newMission == true {
+            missionTopLabel.text = "ミッション報酬が獲得できます！"
+            missionNewLabel.isHidden = false
         } else {
-            commentLabel.text = user?.comment
+            missionTopLabel.text = "ミッションでフリマポイントを獲得しよう！"
+            missionNewLabel.isHidden = true
         }
         
-        if user?.mMissionClear == true {
+        if user.mMissionClear == true {
+            missionTopLabel.text = "全ミッションクリアおめでとう！"
             crown.isHidden = false
         } else {
             crown.isHidden = true
+        }
+        
+        if user.comment == "" {
+            commentLabel.text = "挨拶や今日の出来事など入力してみよう"
+        } else {
+            commentLabel.text = user.comment
         }
     }
     
@@ -69,7 +79,7 @@ class MyPageTableViewCell: UITableViewCell {
         crown.isHidden = true
         typeNewLabel.layer.cornerRadius = 25 / 2
         likeNewLabel.layer.cornerRadius = 25 / 2
-        redmark.layer.cornerRadius = 4
+        missionNewLabel.layer.cornerRadius = 25 / 2
         nameLabel.text = ""
         profileButton.layer.cornerRadius = 5
         profileImageView.layer.cornerRadius = 100 / 2

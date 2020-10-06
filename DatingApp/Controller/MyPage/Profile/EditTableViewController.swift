@@ -592,8 +592,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             backView6.backgroundColor = UIColor(named: O_GREEN)
         }
         
-        if heightSettingLabel.text != "設定する" && bodySizeSettingLabel .text != "設定する" && bloodSetLbl.text != "設定する" && professionSettingLabel.text != "設定する" && birthplaceLbl.text != "設定する" && educationalSetLbl.text != "設定する" && marriageHistoryLbl.text != "設定する" && marriageLbl.text != "設定する" && childLbl1.text != "設定する" && childLbl2.text != "設定する" && houseMateLbl.text != "設定する" && holidayLbl.text != "設定する" && liquorLbl.text != "設定する" && tobaccoLbl.text != "設定する" && hobbySetLbl.text != "入力する" && commentSetLbl.text != "入力する" && selfIntroLabl.text != "入力する" && detailMapSetLbl.text != "入力する" {
-            updateUser(withValue: [MPROFILE: true])
+        if user.profileGetPt1 != true {
+            if heightSettingLabel.text != "設定する" && bodySizeSettingLabel .text != "設定する" && bloodSetLbl.text != "設定する" && professionSettingLabel.text != "設定する" && birthplaceLbl.text != "設定する" && educationalSetLbl.text != "設定する" && marriageHistoryLbl.text != "設定する" && marriageLbl.text != "設定する" && childLbl1.text != "設定する" && childLbl2.text != "設定する" && houseMateLbl.text != "設定する" && holidayLbl.text != "設定する" && liquorLbl.text != "設定する" && tobaccoLbl.text != "設定する" && hobbySetLbl.text != "入力する" && commentSetLbl.text != "入力する" && selfIntroLabl.text != "入力する" && detailMapSetLbl.text != "入力する" {
+                updateUser(withValue: [MPROFILE: true])
+            }
         }
     }
     

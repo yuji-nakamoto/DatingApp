@@ -38,19 +38,14 @@ class SearchCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBanner()
+//        testBanner()
         
-        UserDefaults.standard.set(true, forKey: RCOMPLETION)
-        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
-        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
-        
-        //          setupBanner()
-        testBanner()
         fetchUser()
         checkOneDayAndBadge()
         confifureLocationManager()
+        messagingUnsubscribe()
+        UserDefaults.standard.set(true, forKey: RCOMPLETION)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,24 +57,7 @@ class SearchCollectionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         collectionView.reloadData()
-        if !Auth.auth().currentUser!.uid.isEmpty {
-            if UserDefaults.standard.object(forKey: LIKE_ON) != nil {
-                Messaging.messaging().subscribe(toTopic: "like\(Auth.auth().currentUser!.uid)")
-            }
-            if UserDefaults.standard.object(forKey: TYPE_ON) != nil {
-                Messaging.messaging().subscribe(toTopic: "type\(Auth.auth().currentUser!.uid)")
-            }
-            if UserDefaults.standard.object(forKey: MESSAGE_ON) != nil {
-                Messaging.messaging().subscribe(toTopic: "message\(Auth.auth().currentUser!.uid)")
-            }
-            if UserDefaults.standard.object(forKey: MATCH_ON) != nil {
-                Messaging.messaging().subscribe(toTopic: "match\(Auth.auth().currentUser!.uid)")
-            }
-            if UserDefaults.standard.object(forKey: GIFT_ON) != nil {
-                Messaging.messaging().subscribe(toTopic: "gift\(Auth.auth().currentUser!.uid)")
-            }
-        }
-        
+        messagingSubscribe()
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
             fetchUsers(user)
             UserDefaults.standard.removeObject(forKey: REFRESH)
@@ -141,6 +119,14 @@ class SearchCollectionViewController: UIViewController {
         User.fetchUserAddSnapshotListener() { (user) in
             self.user = user
             self.fetchUsers(self.user)
+
+            if self.user.communityBadgeCount == 0 {
+                if user.newReply == false {
+                    self.tabBarController?.viewControllers?[1].tabBarItem.badgeValue = nil
+                }
+            } else {
+                self.tabBarController?.viewControllers?[1].tabBarItem?.badgeValue = String(self.user.communityBadgeCount)
+            }
             
             if self.user.messageBadgeCount == 0 {
                 
@@ -193,6 +179,44 @@ class SearchCollectionViewController: UIViewController {
     //            }
     //        }
     //    }
+    
+    private func messagingUnsubscribe() {
+        
+        Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "like\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "type\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "match\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "gift\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "reply\(Auth.auth().currentUser!.uid)")
+        Messaging.messaging().unsubscribe(fromTopic: "comment\(Auth.auth().currentUser!.uid)")
+    }
+    
+    private func messagingSubscribe() {
+        
+        if !Auth.auth().currentUser!.uid.isEmpty {
+            if UserDefaults.standard.object(forKey: LIKE_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "like\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: TYPE_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "type\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: MESSAGE_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "message\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: MATCH_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "match\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: GIFT_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "gift\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: REPLY_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "reply\(Auth.auth().currentUser!.uid)")
+            }
+            if UserDefaults.standard.object(forKey: COMMENT_ON) != nil {
+                Messaging.messaging().subscribe(toTopic: "comment\(Auth.auth().currentUser!.uid)")
+            }
+        }
+    }
     
     private func confifureLocationManager() {
         
@@ -298,10 +322,10 @@ extension SearchCollectionViewController: UICollectionViewDataSource, UICollecti
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-            //            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-            //            cell3.bannerView.rootViewController = self
-            //            cell3.bannerView.load(GADRequest())
-            cell3.testBanner1()
+                        cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+                        cell3.bannerView.rootViewController = self
+                        cell3.bannerView.load(GADRequest())
+//            cell3.testBanner1()
             cell3.searchCVC = self
             
             return cell3

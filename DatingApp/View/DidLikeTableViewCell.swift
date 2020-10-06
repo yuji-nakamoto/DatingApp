@@ -52,7 +52,7 @@ class DidLikeTableViewCell: UITableViewCell {
             blackLine2.isHidden = false
             blackLine1.layer.cornerRadius = 16 / 2
             blackLine2.layer.cornerRadius = 16 / 2
-            mozaicView.layer.cornerRadius = 70 / 2
+            mozaicView.layer.cornerRadius = 60 / 2
             nameLabel.layer.shouldRasterize = true
             nameLabel.layer.rasterizationScale = 0.35
         } else {
@@ -160,6 +160,12 @@ class DidLikeTableViewCell: UITableViewCell {
         }
     }
     
+    var favorite: Favorite? {
+        didSet {
+            timestampLabel.text = timestamp4
+        }
+    }
+    
     var timestamp1: String {
         let date = like?.timestamp.dateValue()
         let dateFormatter = DateFormatter()
@@ -184,9 +190,17 @@ class DidLikeTableViewCell: UITableViewCell {
         return dateFormatter.string(from: date!)
     }
     
+    var timestamp4: String {
+        let date = favorite?.timestamp.dateValue()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.dateFormat = "M月d日(EEEEE) H時m分"
+        return dateFormatter.string(from: date!)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        profileImageView.layer.cornerRadius = 70 / 2
+        profileImageView.layer.cornerRadius = 60 / 2
         onlineView.layer.cornerRadius = 15 / 2
         onlineView.layer.borderWidth = 2
         onlineView.layer.borderColor = UIColor.white.cgColor

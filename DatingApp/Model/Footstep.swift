@@ -43,7 +43,7 @@ class Footstep {
     class func fetchFootstepUsers(completion: @escaping(Footstep) -> Void) {
 
         Block.fetchBlockSwipe { (blockUserIDs) in
-            COLLECTION_FOOTSTEP.document(User.currentUserId()).collection(ISFOOTSTEP).order(by: DATE).limit(to: 10).getDocuments { (snapshot, error) in
+            COLLECTION_FOOTSTEP.document(User.currentUserId()).collection(ISFOOTSTEP).order(by: DATE).limit(to: 5).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription) ")
                 }
@@ -66,7 +66,7 @@ class Footstep {
     class func fetchFootstepedUsers(completion: @escaping(Footstep) -> Void) {
         
         Block.fetchBlockSwipe { (blockUserIDs) in
-            COLLECTION_FOOTSTEP.document(User.currentUserId()).collection(FOOTSTEPED).order(by: DATE).limit(to: 10).getDocuments { (snapshot, error) in
+            COLLECTION_FOOTSTEP.document(User.currentUserId()).collection(FOOTSTEPED).order(by: DATE).limit(to: 5).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription) ")
                 }

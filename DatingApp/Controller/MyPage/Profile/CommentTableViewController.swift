@@ -63,6 +63,7 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func setupUserInfo(_ user: User) {
         commentTextField.text = user.comment
+        countLabel.text = String(20 - commentTextField.text!.count)
     }
     
     private func saveTextField() {

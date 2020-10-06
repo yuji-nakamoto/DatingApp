@@ -28,12 +28,11 @@ class PostTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupUI()
         fetchPost()
-        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,6 +174,7 @@ class PostTableViewController: UIViewController {
         tableView.refreshControl = refresh
         tableView.tableFooterView = UIView()
         navigationItem.title = "投稿"
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -201,8 +201,8 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
             cell2.postVC = self
-//            cell2.setupBanner()
-            cell2.testBanner()
+            cell2.setupBanner()
+//            cell2.testBanner()
             return cell2
         }
         

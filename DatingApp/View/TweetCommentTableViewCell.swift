@@ -82,7 +82,9 @@ class TweetCommentTableViewCell: UITableViewCell {
             replyNameLabel.text = user.username
             replyTimeLabel.text = dateString
             likeCountLabel2.text = String(tweet.likeCount2)
-            replyUserImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+            if user.profileImageUrl1 != nil {
+                replyUserImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+            }
             
             if tweet.replyUserId == User.currentUserId() {
                 deleteButton2.isHidden = false
@@ -136,10 +138,7 @@ class TweetCommentTableViewCell: UITableViewCell {
         let alert = UIAlertController(title: "削除", message: "コメントを削除しますか？", preferredStyle: .alert)
         let delete = UIAlertAction(title: "削除する", style: UIAlertAction.Style.default) { (alert) in
 
-            Tweet.deleteComment(tweetId: self.tweetCommentVC!.tweetId, commentId: self.tweet.commentId) {
-                UserDefaults.standard.set(true, forKey: REFRESH2)
-                self.tweetCommentVC?.viewWillAppear(true)
-            }
+            Tweet.deleteComment(tweetId: self.tweetCommentVC!.tweetId, commentId: self.tweet.commentId)
             Tweet.updateCommentCount(communityId: self.tweet.communityId,
                                      tweetId: self.tweetCommentVC!.tweetId,
                                      withValue: [COMMENTCOUNT: self.tweet2.commentCount - 1])
@@ -162,8 +161,6 @@ class TweetCommentTableViewCell: UITableViewCell {
                         ISREPLY: false] as [String : Any]
             
             Tweet.updateTweetComment(tweetId: self.tweet.tweetId, commentId: self.tweet.commentId, withValue: dict)
-            UserDefaults.standard.set(true, forKey: REFRESH2)
-            self.tweetCommentVC?.viewWillAppear(true)
             self.setupUIHiddien()
         }
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel)

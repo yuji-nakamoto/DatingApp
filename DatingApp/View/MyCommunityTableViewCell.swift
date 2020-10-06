@@ -11,12 +11,12 @@ import Firebase
 
 class MyCommunityTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var communityImageView: UIImageView!
     @IBOutlet weak var communityPostButton: UIButton!
     @IBOutlet weak var communityButton: UIButton!
     @IBOutlet weak var communityTitleLbl: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var tweetCountLabel: UILabel!
     
     var myCommunityVC: MyCommunityViewController?
     var community = Community()
@@ -25,19 +25,9 @@ class MyCommunityTableViewCell: UITableViewCell {
     func configureCell(_ community: Community) {
         
         communityTitleLbl.text = community.title
-        numberLabel.text = "参加人数: \(String(community.allNumber))" + "人"
+        numberLabel.text = String(community.allNumber) + "人" + "(女性: \(String(community.femaleNumber))人, 男性: \(String(community.maleNumber))人)"
         communityImageView.sd_setImage(with: URL(string: community.contentsImageUrl), completed: nil)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapCommunityImageView))
-        communityImageView.addGestureRecognizer(tap)
-        backView.layer.cornerRadius = 10
-        communityImageView.layer.cornerRadius = 10
-        communityPostButton.layer.cornerRadius = 5
-        communityButton.layer.cornerRadius = 5
+        tweetCountLabel.text = String(community.tweetCount) + "投稿"
     }
     
     @objc func tapCommunityImageView() {
@@ -67,12 +57,12 @@ class MyCommunityTableViewCell: UITableViewCell {
     private func setupWithdraw() {
         
         if user.gender == "男性" {
-            Community.updateCommunity(communityId: self.community.communityId,
+            Community.updateCommunity1(communityId: self.community.communityId,
                                       value1: [ALL_NUMBER: self.community.allNumber - 1,
                                                MALE_NUMBER: self.community.maleNumber - 1],
                                       value2: [User.currentUserId(): FieldValue.delete()])
         } else {
-            Community.updateCommunity(communityId: self.community.communityId,
+            Community.updateCommunity1(communityId: self.community.communityId,
                                       value1: [ALL_NUMBER: self.community.allNumber - 1,
                                                FEMALE_NUMBER: self.community.femaleNumber - 1],
                                       value2: [User.currentUserId(): FieldValue.delete()])
@@ -87,5 +77,15 @@ class MyCommunityTableViewCell: UITableViewCell {
         }
         UserDefaults.standard.set(true, forKey: REFRESH2)
         myCommunityVC?.viewWillAppear(true)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapCommunityImageView))
+        communityImageView.addGestureRecognizer(tap)
+        communityImageView.layer.cornerRadius = 70 / 2
+        communityPostButton.layer.cornerRadius = 10
+        communityButton.layer.cornerRadius = 10
     }
 }

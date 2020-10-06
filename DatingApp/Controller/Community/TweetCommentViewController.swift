@@ -27,6 +27,7 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     private var tweetComments = [Tweet]()
     private var tweetComment = Tweet()
     private var user = User()
+    private var currentUser = User()
     private var reply = Tweet()
     private var users = [User]()
     private let refresh = UIRefreshControl()
@@ -37,27 +38,15 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setup()
         fetchTweet()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if UserDefaults.standard.object(forKey: REFRESH2) != nil {
-            fetchTweet()
-            UserDefaults.standard.removeObject(forKey: REFRESH2)
-        }
+        fetchCurrentUser()
     }
     
     // MARK: - Actions
-    
-    @objc func refreshTableView(){
-        UserDefaults.standard.set(true, forKey: REFRESH_ON)
-        fetchTweetComment(tweet)
-    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -82,8 +71,8 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         
         textField.resignFirstResponder()
         textField.text = ""
+        incrementAppBadgeCount()
         fetchCommentCount(tweet)
-        fetchTweetComment(tweet)
     }
     
     // MARK: - Fetch
@@ -108,21 +97,24 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func fetchTweetComment(_ tweet: Tweet) {
-        
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
             indicator.startAnimating()
         }
-        
-        tweetComments.removeAll()
-        users.removeAll()
-        
         Tweet.fetchTweetComments(tweetId: tweetId) { (tweet) in
+            self.fetchCommentCount(self.tweet)
+            self.tweetComments.removeAll()
+            self.users.removeAll()
+            self.tableView.reloadData()
             
+            if tweet.uid == "" {
+                self.indicator.stopAnimating()
+                self.tableView.reloadData()
+                return
+            }
             self.fetchUser(tweet.uid) {
                 self.tweetComment = tweet
                 self.tweetComments.append(tweet)
                 self.indicator.stopAnimating()
-                self.refresh.endRefreshing()
                 self.tableView.reloadData()
             }
         }
@@ -144,7 +136,24 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    private func fetchCurrentUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.currentUser = user
+        }
+    }
+    
     // MARK: - Helpers
+    
+    private func incrementAppBadgeCount() {
+   
+        if user.uid != User.currentUserId() {
+            sendRequestNotification7(toUser: self.user,
+                                    message: "\(self.currentUser.username!)さんからコメントです",
+                                    badge: self.user.appBadgeCount + 1)
+            updateToUser(self.user.uid, withValue: [NEWREPLY: true])
+        }
+    }
     
     private func setupBanner() {
         
@@ -169,8 +178,6 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        tableView.refreshControl = refresh
-        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -196,7 +203,7 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     
     @objc func textFieldDidChange() {
         
-        let commentNum = 20 - textField.text!.count
+        let commentNum = 30 - textField.text!.count
         if commentNum < 0 {
             countLabel.text = "×"
             sendButton.isEnabled = false

@@ -49,6 +49,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private var like = Like()
     private var type = Type()
     private var block = Block()
+    private var favorite = Favorite()
     private var footstep = Footstep()
     public var userId = ""
     private var currentUser = User()
@@ -74,8 +75,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         setupUI()
         confifureLocationManager()
-//        interstitial = createAndLoadIntersitial()
-        interstitial = testIntersitial()
+        interstitial = createAndLoadIntersitial()
+//        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +87,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         fetchLikeUser()
         fetchTypeUser()
         fetchBlockUser()
+        fetchIsFavorite()
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -108,41 +110,72 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         selectAlert()
     }
     
-    @IBAction func giftButtonPressed(_ sender: Any) {
+    @IBAction func favoriteButtonPressed(_ sender: Any) {
         
-        let alert: UIAlertController = UIAlertController(title: "献上", message: "アイテムを使用しポイントを送ります。\n送りますか？", preferredStyle: .alert)
-        let send: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
-            if self.currentUser.item6 == 0 {
-                
-                self.hud.show(in: self.view)
-                self.hud.textLabel.text = "アイテムがありません。"
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
-                self.hud.dismiss(afterDelay: 2.0)
-            } else {
-                
-                self.hud.show(in: self.view)
-                self.hud.textLabel.text = "献上しました。"
-                self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                self.hud.dismiss(afterDelay: 2.0)
-                self.incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(User.currentUserId()), numShards: 10)
-                self.incrementAppBadgeCount3()
-                updateUser(withValue: [ITEM6: self.currentUser.item6 - 1])
-                updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1])
-            }
+        let alert: UIAlertController = UIAlertController(title: "お気に入り", message: "アイテムを使用することでお気に入り登録できます", preferredStyle: .alert)
+        let verification = UIAlertAction(title: "確認", style: .cancel)
+        let caution = UIAlertAction(title: "お気に入り登録済みです", style: .cancel)
+        let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+            
+            updateUser(withValue: [ITEM9: self.currentUser.item9 - 1])
+            let dict = [UID: self.user.uid as Any,
+                        ISFAVORITE: true,
+                        TIMESTAMP: Timestamp(date: Date())] as [String : Any]
+            Favorite.saveFavorite(forUser: self.user, dict: dict)
+            
+            self.hud.show(in: self.view)
+            self.hud.textLabel.text = "お気に入り登録しました"
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
         }
-        
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
         
-        alert.addAction(send)
-        alert.addAction(cancel)
+        if favorite.isFavorite == true {
+            alert.addAction(caution)
+            self.present(alert,animated: true,completion: nil)
+            return
+        }
         
-        self.present(alert,animated: true,completion: nil)
+        if currentUser.item9 == 0 {
+            alert.addAction(verification)
+            self.present(alert,animated: true,completion: nil)
+        } else {
+            alert.addAction(exchange)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+        }
+    }
+    
+    @IBAction func giftButtonPressed(_ sender: Any) {
+        
+        let alert: UIAlertController = UIAlertController(title: "献上", message: "アイテムを使用しフリマポイントを送ります", preferredStyle: .alert)
+        let verification = UIAlertAction(title: "確認", style: .cancel)
+        let send: UIAlertAction = UIAlertAction(title: "送る", style: UIAlertAction.Style.default) { (alert) in
+            self.hud.show(in: self.view)
+            self.hud.textLabel.text = "献上しました"
+            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            self.hud.dismiss(afterDelay: 2.0)
+            self.incrementLikeCounter(ref: COLLECTION_LIKECOUNTER.document(User.currentUserId()), numShards: 10)
+            self.incrementAppBadgeCount3()
+            updateUser(withValue: [ITEM6: self.currentUser.item6 - 1])
+            updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1])
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
+        
+        if self.currentUser.item6 == 0 {
+            alert.addAction(verification)
+            self.present(alert,animated: true,completion: nil)
+        } else {
+            alert.addAction(send)
+            alert.addAction(cancel)
+            self.present(alert,animated: true,completion: nil)
+        }
     }
     
     @IBAction func likeButtonPressed(_ sender: Any) {
         
         showLikeAnimation()
-        let dict = [UID: user.uid!,
+        let dict = [UID: user.uid as Any,
                     ISLIKE: 1,
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
@@ -157,7 +190,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     
     @IBAction func typeButtonPressed(_ sender: Any) {
         
-        let dict = [UID: user.uid!,
+        let dict = [UID: user.uid as Any,
                     ISTYPE: 1,
                     TIMESTAMP: Timestamp(date: Date())] as [String : Any]
         
@@ -239,6 +272,14 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
     }
     
+    private func fetchIsFavorite() {
+        
+        guard userId != "" else { return }
+        Favorite.fetchIsFavariteUser(userId) { (favorite) in
+            self.favorite = favorite
+        }
+    }
+    
     private func checkIfMatch() {
         
         guard user.uid != nil else { return }
@@ -289,7 +330,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
     }
     
-    // MARL: - FootStep
+    // MARK: - FootStep
     
     private func footsteps(_ toUserId: String) {
         
@@ -337,6 +378,49 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         }
     }
     
+    // MARK: - Google Ads
+    
+    private func createAndLoadIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    private func testIntersitial() -> GADInterstitial {
+        
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadIntersitial()
+    }
+    
+    // MARK: - Badge
+    
+    private func incrementAppBadgeCount() {
+        sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがいいねしてくれました", badge: self.user.appBadgeCount + 1)
+        updateToUser(self.user.uid, withValue: [NEWLIKE: true])
+    }
+    
+    private func incrementAppBadgeCount2() {
+        
+        if self.typeUser.isType == 1 {
+            sendRequestNotification4(toUser: self.user, message: "マッチしました！メッセージを送ってみましょう！", badge: self.user.appBadgeCount + 1)
+        } else {
+            sendRequestNotification3(toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
+            updateToUser(self.user.uid, withValue: [NEWTYPE: true])
+        }
+    }
+    
+    private func incrementAppBadgeCount3() {
+        sendRequestNotification5(toUser: self.user, message: "\(self.currentUser.username!)さんからプレゼントです", badge: self.user.appBadgeCount + 1)
+    }
+    
     // MARK: - Helpers
     
     private func confifureLocationManager() {
@@ -360,45 +444,6 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
                 updateUser(withValue: [MFOOTCOUNT: self.currentUser.mFootCount + 1])
             }
         }
-    }
-    
-    private func createAndLoadIntersitial() -> GADInterstitial {
-        
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-4750883229624981/4674347886")
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
-    
-    private func testIntersitial() -> GADInterstitial {
-        
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
-    
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitial = createAndLoadIntersitial()
-    }
-    
-    private func incrementAppBadgeCount() {
-        sendRequestNotification2(toUser: self.user, message: "\(self.currentUser.username!)さんがいいねしてくれました", badge: self.user.appBadgeCount + 1)
-        updateToUser(self.user.uid, withValue: [NEWLIKE: true])
-    }
-    
-    private func incrementAppBadgeCount2() {
-        
-        if self.typeUser.isType == 1 {
-            sendRequestNotification4(toUser: self.user, message: "マッチしました！メッセージを送ってみましょう！", badge: self.user.appBadgeCount + 1)
-        } else {
-            sendRequestNotification3(toUser: self.user, message: "誰かがタイプと言っています", badge: self.user.appBadgeCount + 1)
-            updateToUser(self.user.uid, withValue: [NEWTYPE: true])
-        }
-    }
-    
-    private func incrementAppBadgeCount3() {
-        sendRequestNotification5(toUser: self.user, message: "\(self.currentUser.username!)さんからプレゼントです", badge: self.user.appBadgeCount + 1)
     }
     
     func incrementLikeCounter(ref: DocumentReference, numShards: Int) {

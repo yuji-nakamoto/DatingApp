@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MissionTableViewController: UITableViewController {
     
@@ -44,7 +45,6 @@ class MissionTableViewController: UITableViewController {
     @IBOutlet weak var communityButton4: UIButton!
     @IBOutlet weak var profileButton1: UIButton!
     @IBOutlet weak var kaiganButton: UIButton!
-    @IBOutlet weak var furimapButton: UIButton!
     @IBOutlet weak var toshiButton: UIButton!
     @IBOutlet weak var missionClearButton: UIButton!
     @IBOutlet weak var loginAchievementLbl1: UILabel!
@@ -65,11 +65,10 @@ class MissionTableViewController: UITableViewController {
     @IBOutlet weak var communityAchievementLbl3: UILabel!
     @IBOutlet weak var communityAchievementLbl4: UILabel!
     @IBOutlet weak var kaiganAchievementLbl: UILabel!
-    @IBOutlet weak var furimapAchievementLbl: UILabel!
     @IBOutlet weak var toshiAchievementLbl: UILabel!
     @IBOutlet weak var missionClearAchievementLbl: UILabel!
     
-    lazy var buttons = [loginButton1,loginButton2,likeButton1,likeButton2,typeButton1,typeButton2,messageButton1,messageButton2,matchButton1,matchButton2,footButton1,footButton2,profileButton1,communityButton1,communityButton2,communityButton3,communityButton4,kaiganButton,furimapButton,toshiButton,missionClearButton]
+    lazy var buttons = [loginButton1,loginButton2,likeButton1,likeButton2,typeButton1,typeButton2,messageButton1,messageButton2,matchButton1,matchButton2,footButton1,footButton2,profileButton1,communityButton1,communityButton2,communityButton3,communityButton4,kaiganButton,toshiButton,missionClearButton]
     private var user = User()
     
     // MARK: - Lifecycle
@@ -85,13 +84,14 @@ class MissionTableViewController: UITableViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func loginButtonPressed1(_ sender: Any) {
         loginButton1.setTitle("  受け取り済み  ", for: .normal)
         loginButton1.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
         loginButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         loginButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         loginButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, LOGINGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, LOGINGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -101,7 +101,7 @@ class MissionTableViewController: UITableViewController {
         loginButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         loginButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         loginButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, LOGINGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, LOGINGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -111,7 +111,7 @@ class MissionTableViewController: UITableViewController {
         likeButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         likeButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         likeButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, LIKEGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, LIKEGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -121,7 +121,7 @@ class MissionTableViewController: UITableViewController {
         likeButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         likeButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         likeButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, LIKEGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, LIKEGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -131,7 +131,7 @@ class MissionTableViewController: UITableViewController {
         typeButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         typeButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         typeButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, TYPEGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, TYPEGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -141,7 +141,7 @@ class MissionTableViewController: UITableViewController {
         typeButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         typeButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         typeButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 3, TYPEGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 3, TYPEGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -151,7 +151,7 @@ class MissionTableViewController: UITableViewController {
         messageButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         messageButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         messageButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, MESSAGEGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, MESSAGEGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -161,7 +161,7 @@ class MissionTableViewController: UITableViewController {
         messageButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         messageButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         messageButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 4, MESSAGEGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 4, MESSAGEGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -171,7 +171,7 @@ class MissionTableViewController: UITableViewController {
         matchButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         matchButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         matchButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, MATCHGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, MATCHGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -181,7 +181,7 @@ class MissionTableViewController: UITableViewController {
         matchButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         matchButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         matchButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 8, MATCHGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 8, MATCHGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -191,7 +191,7 @@ class MissionTableViewController: UITableViewController {
         footButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         footButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         footButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, FOOTGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, FOOTGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -201,7 +201,7 @@ class MissionTableViewController: UITableViewController {
         footButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         footButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         footButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 2, FOOTGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 2, FOOTGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -211,7 +211,7 @@ class MissionTableViewController: UITableViewController {
         communityButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         communityButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         communityButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT1: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -221,7 +221,7 @@ class MissionTableViewController: UITableViewController {
         communityButton2.setTitleColor(UIColor(named: O_RED), for: .normal)
         communityButton2.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         communityButton2.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT2: true])
+        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT2: true, NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -231,7 +231,9 @@ class MissionTableViewController: UITableViewController {
         communityButton3.setTitleColor(UIColor(named: O_RED), for: .normal)
         communityButton3.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         communityButton3.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT3: true])
+        updateUser(withValue: [POINTS: self.user.points + 1,
+                               COMMUNITYGETPT3: true,
+                               NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -241,7 +243,10 @@ class MissionTableViewController: UITableViewController {
         communityButton4.setTitleColor(UIColor(named: O_RED), for: .normal)
         communityButton4.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         communityButton4.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, COMMUNITYGETPT4: true])
+        updateUser(withValue: [POINTS: self.user.points + 1,
+                               COMMUNITYGETPT4: true,
+                               MCOMMUNITY: FieldValue.delete(),
+                               NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -251,7 +256,10 @@ class MissionTableViewController: UITableViewController {
         profileButton1.setTitleColor(UIColor(named: O_RED), for: .normal)
         profileButton1.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         profileButton1.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 3, PROFILEGETPT1: true])
+        updateUser(withValue: [POINTS: self.user.points + 3,
+                               PROFILEGETPT1: true,
+                               MPROFILE: FieldValue.delete(),
+                               NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -261,17 +269,10 @@ class MissionTableViewController: UITableViewController {
         kaiganButton.setTitleColor(UIColor(named: O_RED), for: .normal)
         kaiganButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         kaiganButton.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, KAIGANGETPT: true])
-        UserDefaults.standard.set(true, forKey: REFRESH3)
-        fetchUser()
-    }
-    @IBAction func furimapButtonPressed(_ sender: Any) {
-        furimapButton.setTitle("  受け取り済み  ", for: .normal)
-        furimapButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
-        furimapButton.setTitleColor(UIColor(named: O_RED), for: .normal)
-        furimapButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
-        furimapButton.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, FURIMAPGETPT: true])
+        updateUser(withValue: [POINTS: self.user.points + 1,
+                               KAIGANGETPT: true,
+                               MKAIGAN: FieldValue.delete(),
+                               NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
@@ -281,12 +282,22 @@ class MissionTableViewController: UITableViewController {
         toshiButton.setTitleColor(UIColor(named: O_RED), for: .normal)
         toshiButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
         toshiButton.isEnabled = false
-        updateUser(withValue: [POINTS: self.user.points + 1, TOSHIGETPT: true])
+        updateUser(withValue: [POINTS: self.user.points + 1,
+                               TOSHIGETPT: true,
+                               MTOSHI: FieldValue.delete(),
+                               NEWMISSION: false])
         UserDefaults.standard.set(true, forKey: REFRESH3)
         fetchUser()
     }
     @IBAction func missionClearButtonPressed(_ sender: Any) {
-        
+        missionClearButton.setTitle("  受け取り済み  ", for: .normal)
+        missionClearButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
+        missionClearButton.setTitleColor(UIColor(named: O_RED), for: .normal)
+        missionClearButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+        missionClearButton.isEnabled = false
+        updateUser(withValue: [ITEM7: 1, MISSIONCLEARGETITEM: true, NEWMISSION: false])
+        UserDefaults.standard.set(true, forKey: REFRESH3)
+        fetchUser()
     }
     
     // MARK: - Fetch
@@ -314,6 +325,7 @@ class MissionTableViewController: UITableViewController {
         } else {
             loginCountLbl1.text = String(14 - user.mLoginCount) + "回"
         }
+        
         if user.mLoginCount >= 28 {
             loginCountLbl2.text = "0人"
             loginCountLbl2.textColor = UIColor(named: O_RED)
@@ -465,14 +477,14 @@ class MissionTableViewController: UITableViewController {
             communityCountLbl2.text = String(3 - user.mCommunityCount) + "つ"
         }
         
-        if user.mCommunity1 == true {
+        if user.createCommunityCount >= 1 {
             communityButton3.setTitle("  受け取る  ", for: .normal)
             communityButton3.setTitleColor(UIColor(named: O_GREEN), for: .normal)
             communityButton3.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
             communityButton3.isEnabled = true
         }
         
-        if user.mCommunity2 == true {
+        if user.mCommunity == true {
             communityButton4.setTitle("  受け取る  ", for: .normal)
             communityButton4.setTitleColor(UIColor(named: O_GREEN), for: .normal)
             communityButton4.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
@@ -493,13 +505,6 @@ class MissionTableViewController: UITableViewController {
             kaiganButton.isEnabled = true
         }
         
-        if user.mFurimap == true {
-            furimapButton.setTitle("  受け取る  ", for: .normal)
-            furimapButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-            furimapButton.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
-            furimapButton.isEnabled = true
-        }
-        
         if user.mToshi == true {
             toshiButton.setTitle("  受け取る  ", for: .normal)
             toshiButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
@@ -507,12 +512,12 @@ class MissionTableViewController: UITableViewController {
             toshiButton.isEnabled = true
         }
         
-//        if user.mMissionClear == true {
-//            missionClearButton.setTitle("  受け取る  ", for: .normal)
-//            missionClearButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
-//            missionClearButton.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
-//            missionClearButton.isEnabled = true
-//        }
+        if user.mMissionClear == true {
+            missionClearButton.setTitle("  受け取る  ", for: .normal)
+            missionClearButton.setTitleColor(UIColor(named: O_GREEN), for: .normal)
+            missionClearButton.layer.borderColor = (UIColor(named: O_GREEN)?.cgColor)
+            missionClearButton.isEnabled = true
+        }
         
         // MARK: - Get point
         
@@ -668,16 +673,7 @@ class MissionTableViewController: UITableViewController {
             kaiganButton.isEnabled = false
             kaiganAchievementLbl.isHidden = true
         }
-        
-        if user.furimapGetPt == true {
-            furimapButton.setTitle("  受け取り済み  ", for: .normal)
-            furimapButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
-            furimapButton.setTitleColor(UIColor(named: O_RED), for: .normal)
-            furimapButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
-            furimapButton.isEnabled = false
-            furimapAchievementLbl.isHidden = true
-        }
-        
+                
         if user.toshiGetPt == true {
             toshiButton.setTitle("  受け取り済み  ", for: .normal)
             toshiButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
@@ -687,14 +683,14 @@ class MissionTableViewController: UITableViewController {
             toshiAchievementLbl.isHidden = true
         }
         
-//        if user.missionClearGetItem == true {
-//            missionClearButton.setTitle("  受け取り済み  ", for: .normal)
-//            missionClearButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
-//            missionClearButton.setTitleColor(UIColor(named: O_RED), for: .normal)
-//            missionClearButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
-//            missionClearButton.isEnabled = false
-//            missionClearAchievementLbl.isHidden = true
-//        }
+        if user.missionClearGetItem == true {
+            missionClearButton.setTitle("  受け取り済み  ", for: .normal)
+            missionClearButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
+            missionClearButton.setTitleColor(UIColor(named: O_RED), for: .normal)
+            missionClearButton.layer.borderColor = (UIColor(named: O_RED)?.cgColor)
+            missionClearButton.isEnabled = false
+            missionClearAchievementLbl.isHidden = true
+        }
     }
     
     private func setupUI() {

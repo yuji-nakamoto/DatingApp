@@ -42,7 +42,7 @@ class Type {
     class func fetchTypeUsers(completion: @escaping(Type) -> Void) {
         
         Block.fetchBlockSwipe { (blockUserIDs) in
-            COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).order(by: TIMESTAMP).limit(to: 10).getDocuments { (snapshot, error) in
+            COLLECTION_TYPE.document(User.currentUserId()).collection(ISTYPE).order(by: TIMESTAMP).limit(to: 5).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription) ")
                 }
@@ -65,7 +65,7 @@ class Type {
     class func fetchTypedUsers(completion: @escaping(Type) -> Void) {
         
         Block.fetchBlockSwipe { (blockUserIDs) in
-            COLLECTION_TYPE.document(User.currentUserId()).collection(TYPED).order(by: TIMESTAMP).limit(to: 10).getDocuments { (snapshot, error) in
+            COLLECTION_TYPE.document(User.currentUserId()).collection(TYPED).order(by: TIMESTAMP).limit(to: 5).getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription) ")
                 }
