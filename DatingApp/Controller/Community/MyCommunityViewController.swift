@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class MyCommunityViewController: UIViewController {
     
@@ -16,24 +17,25 @@ class MyCommunityViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var user = User()
     private var community1 = Community()
     private var community2 = Community()
     private var community3 = Community()
     private var commuArray = [Community]()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         if UserDefaults.standard.object(forKey: REFRESH2) == nil {
             fetchUser()
         }
+        setupIndicator()
         setup()
     }
     
@@ -67,12 +69,10 @@ class MyCommunityViewController: UIViewController {
     
     private func fetchCommunity1(_ user: User) {
         
-        indicator.startAnimating()
         Community.fetchCommunity(communityId: user.community1) { (community) in
-            
+          
             self.community1 = community
             self.commuArray.append(self.community1)
-            self.indicator.stopAnimating()
             self.tableView.reloadData()
         }
     }
@@ -80,10 +80,9 @@ class MyCommunityViewController: UIViewController {
     private func fetchCommunity2(_ user: User) {
         
         Community.fetchCommunity(communityId: user.community2) { (community) in
-       
+  
             self.community2 = community
             self.commuArray.append(self.community2)
-            self.indicator.stopAnimating()
             self.tableView.reloadData()
         }
     }
@@ -91,15 +90,35 @@ class MyCommunityViewController: UIViewController {
     private func fetchCommunity3(_ user: User) {
         
         Community.fetchCommunity(communityId: user.community3) { (community) in
-       
+        
             self.community3 = community
             self.commuArray.append(self.community3)
-            self.indicator.stopAnimating()
             self.tableView.reloadData()
         }
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func setupBanner() {
         
@@ -168,11 +187,12 @@ extension MyCommunityViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "参加しているコミュニティはありません", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "気になるコミュニティに参加してみよう！")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 13) as Any]
+        return NSAttributedString(string: "気になるコミュニティに参加してみよう！", attributes: attributes)
     }
 }

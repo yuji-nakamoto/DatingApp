@@ -12,12 +12,12 @@ import GoogleMobileAds
 import EmptyDataSet_Swift
 import CoreLocation
 import Geofirestore
+import NVActivityIndicatorView
 
 class SearchCollectionViewController: UIViewController {
     
     // MARK:  - Properties
     
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var loginBunusView: UIView!
@@ -33,14 +33,16 @@ class SearchCollectionViewController: UIViewController {
     private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
     private var myQuery: GFSQuery!
     private var distance: Double = 500
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
+        setupIndicator()
         fetchUser()
         checkOneDayAndBadge()
         confifureLocationManager()
@@ -100,14 +102,17 @@ class SearchCollectionViewController: UIViewController {
     }
     
     private func fetchUsers(_ user: User) {
+        users.removeAll()
+        collectionView.reloadData()
+
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
+            showLoadingIndicator()
         }
         
         User.fetchUserSort(user) { (users) in
             self.users = users
             self.collectionView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
             self.refresh.endRefreshing()
             UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
@@ -161,6 +166,22 @@ class SearchCollectionViewController: UIViewController {
     }
     
     // MARK: - Heplers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
     
     //    private func findUser() {
     //
@@ -280,6 +301,11 @@ class SearchCollectionViewController: UIViewController {
         collectionView.emptyDataSetDelegate = self
     }
     
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 250, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailVC" {
@@ -322,10 +348,10 @@ extension SearchCollectionViewController: UICollectionViewDataSource, UICollecti
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-                        cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-                        cell3.bannerView.rootViewController = self
-                        cell3.bannerView.load(GADRequest())
-//            cell3.testBanner1()
+//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+//            cell3.bannerView.rootViewController = self
+//            cell3.bannerView.load(GADRequest())
+            cell3.testBanner1()
             cell3.searchCVC = self
             
             return cell3
@@ -363,18 +389,23 @@ extension SearchCollectionViewController: UICollectionViewDataSource, UICollecti
     }
 }
 
+// MARK: - Empth data set
+
 extension SearchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "ユーザーは見つかりませんでした", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 13) as Any]
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください", attributes: attributes)
     }
 }
+
+// MARK: - CLLocationManagerDelegate
 
 extension SearchCollectionViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class InboxTableViewController: UIViewController {
     
@@ -16,41 +17,76 @@ class InboxTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     private var inboxArray = [Inbox]()
     private var inboxArrayDict = [String: Inbox]()
     private let refresh = UIRefreshControl()
     private var user = User()
+    private var users = [User]()
+    private var matches = [Match]()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupIndicator()
         fetchUser()
+        fetchInbox()
+        fetchMatchUsers()
         updateUser(withValue: [NEWMESSAGE: false])
         
-        setupBanner()
-//        testBanner()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchInbox()
+//        setupBanner()
+        testBanner()
     }
     
     @objc func refreshCollectionView(){
         UserDefaults.standard.set(true, forKey: REFRESH_ON)
+        fetchMatchUsers()
         fetchInbox()
     }
     
     // MARK: - Fetch
     
+    private func fetchMatchUsers() {
+        
+        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
+            showLoadingIndicator()
+        }
+        matches.removeAll()
+        users.removeAll()
+        
+        Match.fetchMatchUsers { (match) in
+            if match.uid == "" {
+                self.refresh.endRefreshing()
+                self.hideLoadingIndicator()
+                return
+            }
+            guard let uid = match.uid else { return }
+            self.fetchUser(uid: uid) {
+                self.matches.append(match)
+                self.collectionView.reloadData()
+                self.hideLoadingIndicator()
+                self.refresh.endRefreshing()
+                UserDefaults.standard.removeObject(forKey: REFRESH_ON)
+            }
+        }
+    }
+
+    private func fetchUser(uid: String, completion: @escaping() -> Void) {
+        
+        User.fetchUser(uid) { (user) in
+            self.users.append(user)
+            completion()
+        }
+    }
+    
     private func fetchInbox() {
         
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
+            showLoadingIndicator()
         }
         Message.fetchInbox { (inboxs) in
             inboxs.forEach { (inbox) in
@@ -59,7 +95,7 @@ class InboxTableViewController: UIViewController {
             }
             self.inboxArray = Array(self.inboxArrayDict.values)
             self.tableView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
             self.refresh.endRefreshing()
             UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
@@ -99,6 +135,27 @@ class InboxTableViewController: UIViewController {
         UIApplication.shared.applicationIconBadgeNumber = totalAppBadgeCount
     }
     
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 250, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
@@ -118,9 +175,33 @@ class InboxTableViewController: UIViewController {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
-        tableView.separatorStyle = .none
         tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
+    }
+}
+
+// MARK: - Collection view
+
+extension InboxTableViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 60, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return matches.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MatchCollectionViewCell
+        
+        cell.configureMacthCell(users[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "MessageVC", sender: users[indexPath.row].uid)
     }
 }
 
@@ -151,11 +232,7 @@ extension InboxTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
-        return NSAttributedString(string: " メッセージを送ったお相手が、\nこちらに表示されます", attributes: attributes)
-    }
-    
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "気になった方のプロフィール欄から、\nメッセージを送ってみましょう")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
+        return NSAttributedString(string: "上部にマッチしたお相手が、\n下部にメッセージを送ったお相手が\n表示されます", attributes: attributes)
     }
 }

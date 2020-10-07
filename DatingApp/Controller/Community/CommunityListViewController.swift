@@ -9,25 +9,27 @@
 import UIKit
 import EmptyDataSet_Swift
 import GoogleMobileAds
+import NVActivityIndicatorView
 
 class CommunityListViewController: UIViewController {
     
     // MARK: - Properties
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var bannerView: GADBannerView!
     
     private var communityArray = [Community]()
+    private var activityIndicator: NVActivityIndicatorView?
     lazy var searchBar: UISearchBar = UISearchBar(frame: navigationController!.navigationBar.bounds)
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
+        setupIndicator()
         setSearchBar()
         fetchCommunities()
         collectionView.emptyDataSetSource = self
@@ -48,50 +50,71 @@ class CommunityListViewController: UIViewController {
     
     private func fetchNumberCommunity() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         communityArray.removeAll()
         Community.fetchNumberCommunity { (community) in
             self.communityArray = community
             self.collectionView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
         }
     }
     
     private func fetchCreatedCommunity() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         communityArray.removeAll()
         Community.fetchCreatedCommunity { (community) in
             self.communityArray = community
             self.collectionView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
         }
     }
     
     private func fetchRecommendedCommunity() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         communityArray.removeAll()
         Community.fetchRecommendedCommunity { (community) in
             self.communityArray = community
             self.communityArray.shuffle()
             self.collectionView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
         }
     }
     
     private func searchCommunity() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         communityArray.removeAll()
         Community.communitySearch(text: searchBar.text!) { (community) in
             self.communityArray = community
             self.collectionView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
         }
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 250, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func setupBanner() {
         

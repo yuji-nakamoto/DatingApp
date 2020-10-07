@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import NVActivityIndicatorView
 
 class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     
@@ -20,7 +21,6 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var viewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var tweet = Tweet()
     private var tweet2 = Tweet()
@@ -31,6 +31,7 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     private var reply = Tweet()
     private var users = [User]()
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
     var tweetId = ""
     
     // MARK: - Lifecycle
@@ -38,10 +39,11 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
         setup()
+        setupIndicator()
         fetchTweet()
         fetchCurrentUser()
     }
@@ -87,19 +89,19 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     
     private func fetchTweet() {
         
+        showLoadingIndicator()
         Tweet.fetchTweet(tweetId: tweetId) { (tweet) in
             self.tweet = tweet
             self.fetchUser(self.tweet)
             self.fetchTweetComment(self.tweet)
             self.fetchCommentCount(self.tweet)
+            self.hideLoadingIndicator()
             self.tableView.reloadData()
         }
     }
     
     private func fetchTweetComment(_ tweet: Tweet) {
-        if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
-        }
+      
         Tweet.fetchTweetComments(tweetId: tweetId) { (tweet) in
             self.fetchCommentCount(self.tweet)
             self.tweetComments.removeAll()
@@ -107,14 +109,12 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
             self.tableView.reloadData()
             
             if tweet.uid == "" {
-                self.indicator.stopAnimating()
                 self.tableView.reloadData()
                 return
             }
             self.fetchUser(tweet.uid) {
                 self.tweetComment = tweet
                 self.tweetComments.append(tweet)
-                self.indicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
@@ -144,6 +144,27 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 100, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func incrementAppBadgeCount() {
    

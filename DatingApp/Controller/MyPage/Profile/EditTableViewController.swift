@@ -109,6 +109,13 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Actions
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -183,18 +190,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         indicator1.startAnimating()
         
         Service.uploadImage(image: profileImage1!) { (imageUrl) in
-            let dict = [PROFILEIMAGEURL1: imageUrl]
-            updateUser(withValue: dict)
+            updateUser(withValue: [PROFILEIMAGEURL1: imageUrl])
             
             self.profileImage1 = nil
             UserDefaults.standard.removeObject(forKey: "image1")
             self.indicator1.stopAnimating()
-            
-            self.hud.textLabel.text = "プロフィール画像を保存しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
-            self.selectButtonIsEnabled()
+            self.setupHud()
         }
     }
     
@@ -205,19 +206,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         indicator2.startAnimating()
         
         Service.uploadImage(image: profileImage2!) { (imageUrl) in
-            let dict = [PROFILEIMAGEURL2: imageUrl]
-            updateUser(withValue: dict)
+            updateUser(withValue: [PROFILEIMAGEURL2: imageUrl])
             
             self.profileImage2 = nil
             UserDefaults.standard.removeObject(forKey: "image2")
             self.indicator2.stopAnimating()
-            
-            self.hud.textLabel.text = "プロフィール画像を保存しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
-            self.fetchUser()
-            self.selectButtonIsEnabled()
+            self.setupHud()
         }
     }
     
@@ -228,19 +222,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         validateSelectButton()
         
         Service.uploadImage(image: profileImage3!) { (imageUrl) in
-            let dict = [PROFILEIMAGEURL3: imageUrl]
-            updateUser(withValue: dict)
+            updateUser(withValue: [PROFILEIMAGEURL3: imageUrl])
             
             self.profileImage3 = nil
             UserDefaults.standard.removeObject(forKey: "image3")
             self.indicator3.stopAnimating()
-            
-            self.hud.textLabel.text = "プロフィール画像を保存しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
-            self.fetchUser()
-            self.selectButtonIsEnabled()
+            self.setupHud()
         }
     }
     
@@ -251,19 +238,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         validateSelectButton()
         
         Service.uploadImage(image: profileImage4!) { (imageUrl) in
-            let dict = [PROFILEIMAGEURL4: imageUrl]
-            updateUser(withValue: dict)
+            updateUser(withValue: [PROFILEIMAGEURL4: imageUrl])
             
             self.profileImage4 = nil
             UserDefaults.standard.removeObject(forKey: "image4")
             self.indicator4.stopAnimating()
-            
-            self.hud.textLabel.text = "プロフィール画像を保存しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
-            self.fetchUser()
-            self.selectButtonIsEnabled()
+            self.setupHud()
         }
     }
     
@@ -274,19 +254,12 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         validateSelectButton()
         
         Service.uploadImage(image: profileImage5!) { (imageUrl) in
-            let dict = [PROFILEIMAGEURL5: imageUrl]
-            updateUser(withValue: dict)
+            updateUser(withValue: [PROFILEIMAGEURL5: imageUrl])
             
             self.profileImage5 = nil
             UserDefaults.standard.removeObject(forKey: "image5")
             self.indicator5.stopAnimating()
-            
-            self.hud.textLabel.text = "プロフィール画像を保存しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
-            self.fetchUser()
-            self.selectButtonIsEnabled()
+            self.setupHud()
         }
     }
     
@@ -297,22 +270,25 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         validateSelectButton()
         
         Service.uploadImage(image: profileImage6!) { (imageUrl) in
-            let dict = [PROFILEIMAGEURL6: imageUrl]
-            updateUser(withValue: dict)
+            updateUser(withValue: [PROFILEIMAGEURL6: imageUrl])
             
             self.profileImage6 = nil
             UserDefaults.standard.removeObject(forKey: "image6")
             self.indicator6.stopAnimating()
-            
-            self.hud.textLabel.text = "プロフィール画像を保存しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            self.hud.dismiss(afterDelay: 2.0)
-            self.selectButtonIsEnabled()
+            self.setupHud()
         }
     }
     
     // MARK: - Helpers
+    
+    private func setupHud() {
+        hud.textLabel.text = "プロフィール画像を保存しました"
+        hud.show(in: self.view)
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.dismiss(afterDelay: 2.0)
+        fetchUser()
+        selectButtonIsEnabled()
+    }
     
     private func setupUI() {
         navigationItem.title = "プロフィール編集"
@@ -592,8 +568,10 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             backView6.backgroundColor = UIColor(named: O_GREEN)
         }
         
+        if user.missionClearGetItem { return }
+        
         if user.profileGetPt1 != true {
-            if heightSettingLabel.text != "設定する" && bodySizeSettingLabel .text != "設定する" && bloodSetLbl.text != "設定する" && professionSettingLabel.text != "設定する" && birthplaceLbl.text != "設定する" && educationalSetLbl.text != "設定する" && marriageHistoryLbl.text != "設定する" && marriageLbl.text != "設定する" && childLbl1.text != "設定する" && childLbl2.text != "設定する" && houseMateLbl.text != "設定する" && holidayLbl.text != "設定する" && liquorLbl.text != "設定する" && tobaccoLbl.text != "設定する" && hobbySetLbl.text != "入力する" && commentSetLbl.text != "入力する" && selfIntroLabl.text != "入力する" && detailMapSetLbl.text != "入力する" {
+            if heightSettingLabel.text != "設定する" && bodySizeSettingLabel .text != "設定する" && bloodSetLbl.text != "設定する" && professionSettingLabel.text != "設定する" && birthplaceLbl.text != "設定する" && educationalSetLbl.text != "設定する" && marriageHistoryLbl.text != "設定する" && marriageLbl.text != "設定する" && childLbl1.text != "設定する" && childLbl2.text != "設定する" && houseMateLbl.text != "設定する" && holidayLbl.text != "設定する" && liquorLbl.text != "設定する" && tobaccoLbl.text != "設定する" && hobbySetLbl.text != "入力する" && commentSetLbl.text != "入力する" && selfIntroLabl.text != "入力する" {
                 updateUser(withValue: [MPROFILE: true])
             }
         }
@@ -620,7 +598,6 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     private func settingPhoto(didSelect index: Int) {
-        
         self.imageIndex = index
         alertCamera()
     }
@@ -631,8 +608,8 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     
     private func alertCamera() {
         
-        let alert: UIAlertController = UIAlertController(title: "", message: "選択してください", preferredStyle: .actionSheet)
-        let cameraAction: UIAlertAction = UIAlertAction(title: "カメラで撮影", style: .default, handler:{ [weak self]
+        let alert = UIAlertController(title: "", message: "選択してください", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "カメラで撮影", style: .default, handler:{ [weak self]
                 (action: UIAlertAction!) -> Void in
             guard let this = self else { return }
             let sourceType:UIImagePickerController.SourceType = UIImagePickerController.SourceType.camera
@@ -645,7 +622,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             }
         })
         
-        let galleryAction: UIAlertAction = UIAlertAction(title: "アルバムから選択", style: .default, handler:{ [weak self]
+        let galleryAction = UIAlertAction(title: "アルバムから選択", style: .default, handler:{ [weak self]
             (action: UIAlertAction!) -> Void in
             guard let this = self else { return }
             let sourceType:UIImagePickerController.SourceType = UIImagePickerController.SourceType.photoLibrary
@@ -658,10 +635,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
             }
         })
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
-            (action: UIAlertAction!) -> Void in
-            print("キャンセル")
-        })
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
         alert.addAction(cancelAction)
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)

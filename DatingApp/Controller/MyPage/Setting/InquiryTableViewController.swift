@@ -20,7 +20,7 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var sendButton: UIButton!
     
     private var currentUser = User()
-    public var hud = JGProgressHUD(style: .dark)
+    private var hud = JGProgressHUD(style: .dark)
     private let emailTextField = HoshiTextField(frame: CGRect(x: 20, y: 250, width: 400, height: 60))
     
     // MARK: - Lifecycle
@@ -39,11 +39,11 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if inquiryLabel.text == "お問い合わせ内容" {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "内容を入力してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             return
         }
@@ -51,8 +51,6 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
         if emailTextField.text == "" {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "メールアドレスを入力してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             return
         }
@@ -89,10 +87,8 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
 
         updateUser(withValue: [INQUIRY: ""])
         hud.textLabel.text = "送信が完了しました"
-        hud.show(in: self.view)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 2.0)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+            hud.dismiss()
             self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         }

@@ -97,25 +97,25 @@ class ModalSearchTableViewController: UITableViewController {
             UserDefaults.standard.removeObject(forKey: ALL)
         }
         
-        if heightLabel.text == "未設定" {
+        if heightLabel.text == "こだわらない" {
             UserDefaults.standard.removeObject(forKey: HEIGHT)
         } else {
             UserDefaults.standard.set(true, forKey: HEIGHT)
         }
         
-        if bodyLabel.text == "未設定" {
+        if bodyLabel.text == "こだわらない" {
             UserDefaults.standard.removeObject(forKey: BODYSIZE)
         } else {
             UserDefaults.standard.set(true, forKey: BODYSIZE)
         }
         
-        if bloodLabel.text == "未設定" {
+        if bloodLabel.text == "こだわらない" {
             UserDefaults.standard.removeObject(forKey: BLOOD)
         } else {
             UserDefaults.standard.set(true, forKey: BLOOD)
         }
         
-        if professionLabel.text == "未設定" {
+        if professionLabel.text == "こだわらない" {
             UserDefaults.standard.removeObject(forKey: PROFESSION)
         } else {
             UserDefaults.standard.set(true, forKey: PROFESSION)
@@ -143,18 +143,35 @@ class ModalSearchTableViewController: UITableViewController {
             genderLabel.text = "女性"
         }
         residenceLabel.text = user.sResidence
-        bodyLabel.text = user.sBody
-        bloodLabel.text = user.sBlood
-        professionLabel.text = user.sProfession
+        
+        if user.sBody == "" {
+            bodyLabel.text = "こだわらない"
+        } else {
+            bodyLabel.text = user.sBody
+        }
+        
+        if user.sBlood == "" {
+            bloodLabel.text = "こだわらない"
+        } else {
+            bloodLabel.text = user.sBlood
+        }
+        
+        if user.sProfession == "" {
+            professionLabel.text = "こだわらない"
+        } else {
+            professionLabel.text = user.sProfession
+        }
+        
+        if user.sHeight <= 129 {
+            heightLabel.text = "こだわらない"
+        } else {
+            heightLabel.text = String(user.sHeight) + "cm〜"
+        }
+        
         minLabel.text = String(user.minAge)
         maxLabel.text = String(user.maxAge)
         minSlider.value = Float(user.minAge)
         maxSlider.value = Float(user.maxAge)
-        if user.sHeight <= 129 {
-            heightLabel.text = "未設定"
-        } else {
-            heightLabel.text = String(user.sHeight) + "cm〜"
-        }
     }
     
     private func setupUI() {
@@ -177,8 +194,8 @@ extension ModalSearchTableViewController: PickerKeyboard1Delegate {
 
     func didDone(_ pickerKeyboard: PickerKeyboard1, selectData: String) {
         heightLabel2.text = selectData
-        if selectData == "未設定" {
-            heightLabel.text = "未設定"
+        if selectData == "こだわらない" {
+            heightLabel.text = "こだわらない"
         } else {
             heightLabel.text = selectData + "cm〜"
         }
@@ -187,7 +204,7 @@ extension ModalSearchTableViewController: PickerKeyboard1Delegate {
 
 extension ModalSearchTableViewController: PickerKeyboard2Delegate {
     func titlesOfPickerViewKeyboard2(_ pickerKeyboard: PickerKeyboard2) -> Array<String> {
-        return dataArray2
+        return dataArray22
     }
     
     func didDone2(_ pickerKeyboard: PickerKeyboard2, selectData: String) {
@@ -207,7 +224,7 @@ extension ModalSearchTableViewController: PickerKeyboard3Delegate {
 
 extension ModalSearchTableViewController: PickerKeyboard4Delegate {
     func titlesOfPickerViewKeyboard4(_ pickerKeyboard: PickerKeyboard4) -> Array<String> {
-        return dataArray4
+        return dataArray20
     }
     
     func didDone4(_ pickerKeyboard: PickerKeyboard4, selectData: String) {
@@ -217,7 +234,7 @@ extension ModalSearchTableViewController: PickerKeyboard4Delegate {
 
 extension ModalSearchTableViewController: PickerKeyboard6Delegate {
     func titlesOfPickerViewKeyboard(_ pickerKeyboard: PickerKeyboard6) -> Array<String> {
-        return dataArray6
+        return dataArray21
     }
     
     func didDone(_ pickerKeyboard: PickerKeyboard6, selectData: String) {

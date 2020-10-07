@@ -20,7 +20,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var resendButton: UIButton!
     
     private var hud = JGProgressHUD(style: .dark)
@@ -48,6 +47,8 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if textFieldHaveText() {
             
             loginButton.isEnabled = false
@@ -55,7 +56,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
         }
@@ -79,29 +79,26 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
     // MARK: - User
     
     private func loginUser() {
-        
-        self.activityIndicator.startAnimating()
-        
+                
         if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
-            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+           let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
             self.userLat = userLat
             self.userLong = userLong
         }
         
-//        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-//            let dict = [UID: User.currentUserId(),
-//                        EMAIL: self.emailTextField.text!] as [String : Any]
-//            saveUser(userId: User.currentUserId(), withValue: dict)
-//
-//            if !self.userLat.isEmpty && !self.userLong.isEmpty {
-//                let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
-//                self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
-//            }
-//
-//            self.toEnterNameVC()
-//            self.activityIndicator.stopAnimating()
-//            return
-//        }
+        //        AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+        //            let dict = [UID: User.currentUserId(),
+        //                        EMAIL: self.emailTextField.text!] as [String : Any]
+        //            saveUser(userId: User.currentUserId(), withValue: dict)
+        //
+        //            if !self.userLat.isEmpty && !self.userLong.isEmpty {
+        //                let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
+        //                self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId())
+        //            }
+        //
+        //            self.toEnterNameVC()
+        //            return
+        //        }
         
         AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
             if error == nil {
@@ -114,31 +111,23 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
                     }
                     
                     self.hud.textLabel.text = "メールの認証に成功しました"
-                    self.hud.show(in: self.view)
-                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                     self.hud.dismiss(afterDelay: 2.0)
                     
-                    let dict = [UID: User.currentUserId(),
-                                EMAIL: self.emailTextField.text!] as [String : Any]
-                    saveUser(userId: User.currentUserId(), withValue: dict)
-                    
+                    saveUser(userId: User.currentUserId(),
+                             withValue: [UID: User.currentUserId(),EMAIL: self.emailTextField.text!] as [String : Any])
                     self.toEnterNameVC()
+                    
                 } else {
                     generator.notificationOccurred(.error)
                     self.loginButton.isEnabled = true
                     self.hud.textLabel.text = "メールを確認してください"
-                    self.hud.show(in: self.view)
-                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                     self.hud.dismiss(afterDelay: 2.0)
                 }
             } else {
                 self.loginButton.isEnabled = true
                 self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
             }
-            self.activityIndicator.stopAnimating()
         }
     }
     

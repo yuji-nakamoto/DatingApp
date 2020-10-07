@@ -21,7 +21,6 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var appleButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
@@ -44,16 +43,15 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
     // MARK: - Actions
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        doneButton.isEnabled = false
         
+        doneButton.isEnabled = false
+        hud.show(in: self.view)
+        hud.textLabel.text = ""
         if textFieldHaveText() {
-            indicator.startAnimating()
             withdrawUser()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             doneButton.isEnabled = true
         }
@@ -94,23 +92,17 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
                 print("Error reauth: \(error.localizedDescription)")
                 generator.notificationOccurred(.error)
                 self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 3.0)
                 self.doneButton.isEnabled = true
-                self.indicator.stopAnimating()
             } else {
                 AuthService.withdrawUser { (error) in
                     if let error = error {
                         print("Error withdraw: \(error.localizedDescription)")
                     } else {
                         self.hud.textLabel.text = "アカウントを削除しました"
-                        self.hud.show(in: self.view)
-                        self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 3.0)
                         self.toSelectLoginVC()
                         self.doneButton.isEnabled = true
-                        self.indicator.stopAnimating()
                     }
                 }
             }
@@ -126,7 +118,10 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
         guard let authentication = user.authentication else {
             return
         }
-        indicator.startAnimating()
+        
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
+
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
@@ -134,23 +129,17 @@ class WithdrawViewController: UIViewController, UITextFieldDelegate, GIDSignInDe
                 print("Error reauth: \(error.localizedDescription)")
                 generator.notificationOccurred(.error)
                 self.hud.textLabel.text = "アカウントが間違えています"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 3.0)
                 self.doneButton.isEnabled = true
-                self.indicator.stopAnimating()
             } else {
                 AuthService.withdrawUser { (error) in
                     if let error = error {
                         print("Error withdraw: \(error.localizedDescription)")
                     } else {
                         self.hud.textLabel.text = "アカウントを削除しました"
-                        self.hud.show(in: self.view)
-                        self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 3.0)
                         self.toSelectLoginVC()
                         self.doneButton.isEnabled = true
-                        self.indicator.stopAnimating()
                     }
                 }
             }
@@ -313,7 +302,8 @@ extension WithdrawViewController: ASAuthorizationControllerDelegate {
                 return
             }
             
-            indicator.startAnimating()
+            hud.show(in: self.view)
+            hud.textLabel.text = ""
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
             Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (result, error) in
@@ -321,23 +311,17 @@ extension WithdrawViewController: ASAuthorizationControllerDelegate {
                     print("Error reauth: \(error.localizedDescription)")
                     generator.notificationOccurred(.error)
                     self.hud.textLabel.text = "エラーが発生しました"
-                    self.hud.show(in: self.view)
-                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                     self.hud.dismiss(afterDelay: 3.0)
                     self.appleButton.isEnabled = true
-                    self.indicator.stopAnimating()
                 } else {
                     AuthService.withdrawUser { (error) in
                         if let error = error {
                             print("Error withdraw: \(error.localizedDescription)")
                         } else {
                             self.hud.textLabel.text = "アカウントを削除しました"
-                            self.hud.show(in: self.view)
-                            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                             self.hud.dismiss(afterDelay: 3.0)
                             self.toSelectLoginVC()
                             self.appleButton.isEnabled = true
-                            self.indicator.stopAnimating()
                         }
                     }
                 }

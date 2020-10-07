@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMobileAds
+import NVActivityIndicatorView
+import EmptyDataSet_Swift
 
 class DidLikeTableViewController: UIViewController {
     
@@ -16,20 +18,21 @@ class DidLikeTableViewController: UIViewController {
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
-    private var likeUsers = [Like]()
+    private var likeArray = [Like]()
     private var users = [User]()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
         setupUI()
+        setupIndicator()
         fetchLikedUsers()
         updateUser(withValue: [NEWLIKE: false])
     }
@@ -44,32 +47,32 @@ class DidLikeTableViewController: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0: fetchLikedUsers()
-        case 1: fetchLikeUsers()
+        case 1: fetchIsLikeUsers()
         default: break
         }
     }
     
     // MARK: - Fetch
     
-    private func fetchLikeUsers() {
+    private func fetchIsLikeUsers() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         segmentControl.isEnabled = false
-        likeUsers.removeAll()
+        likeArray.removeAll()
         users.removeAll()
         tableView.reloadData()
         
-        Like.fetchLikeUsers { (like) in
+        Like.fetchIsLikeUsers { (like) in
             if like.uid == "" {
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = like.uid else { return }
             self.fetchUser(uid: uid) {
-                self.likeUsers.insert(like, at: 0)
+                self.likeArray.insert(like, at: 0)
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -77,23 +80,23 @@ class DidLikeTableViewController: UIViewController {
         
     private func fetchLikedUsers() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         segmentControl.isEnabled = false
-        likeUsers.removeAll()
+        likeArray.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Like.fetchLikedUsers { (like) in
             if like.uid == "" {
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = like.uid else { return }
             self.fetchUser(uid: uid) {
-                self.likeUsers.insert(like, at: 0)
+                self.likeArray.insert(like, at: 0)
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -121,6 +124,27 @@ class DidLikeTableViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
@@ -139,6 +163,8 @@ class DidLikeTableViewController: UIViewController {
         navigationItem.title = "いいね"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
 }
 
@@ -147,19 +173,27 @@ class DidLikeTableViewController: UIViewController {
 extension DidLikeTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return likeUsers.count
+        return likeArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
-        let like = likeUsers[indexPath.row]
-        cell.like = like
+        cell.like = likeArray[indexPath.row]
         cell.configureCell(users[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailVC", sender: likeUsers[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: likeArray[indexPath.row].uid)
+    }
+}
+
+extension DidLikeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
+        return NSAttributedString(string: "いいね履歴はありません", attributes: attributes)
     }
 }

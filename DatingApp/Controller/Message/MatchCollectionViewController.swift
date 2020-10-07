@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class MatchCollectionViewController: UIViewController {
     
@@ -16,20 +17,21 @@ class MatchCollectionViewController: UIViewController {
     
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     private var matches = [Match]()
     private var users = [User]()
     private var user = User()
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupIndicator()
         setupUI()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,22 +51,23 @@ class MatchCollectionViewController: UIViewController {
     private func fetchMatchUsers() {
         
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
+            showLoadingIndicator()
         }
         matches.removeAll()
         users.removeAll()
+        collectionView.reloadData()
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
                 self.refresh.endRefreshing()
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = match.uid else { return }
             self.fetchUser(uid: uid) {
                 self.matches.append(match)
                 self.collectionView.reloadData()
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.refresh.endRefreshing()
                 UserDefaults.standard.removeObject(forKey: REFRESH_ON)
             }
@@ -91,6 +94,27 @@ class MatchCollectionViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 250, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func setupBanner() {
         
@@ -152,11 +176,7 @@ extension MatchCollectionViewController: EmptyDataSetSource, EmptyDataSetDelegat
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "マッチしているお相手が、\nこちらに表示されます", attributes: attributes)
-    }
-
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "お互いがタイプになると\nマッチングが成立します")
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class NewUserCollectionViewController: UIViewController {
     
@@ -16,19 +17,20 @@ class NewUserCollectionViewController: UIViewController {
     
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var users = [User]()
     private var user = User()
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
+        setupIndicator()
         addSnapshotListener()
         fetchUser()
         setupUI()
@@ -61,15 +63,17 @@ class NewUserCollectionViewController: UIViewController {
     
     private func fetchUsers(_ user: User) {
         
+        users.removeAll()
+        collectionView.reloadData()
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
+            showLoadingIndicator()
         }
         
         User.fetchNewUserSort(user) { (users) in
             self.users = users
             self.collectionView.reloadData()
             self.refresh.endRefreshing()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
             UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         }
     }
@@ -83,6 +87,27 @@ class NewUserCollectionViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 250, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
     
     private func setupBanner() {
         
@@ -148,10 +173,10 @@ extension NewUserCollectionViewController: UICollectionViewDataSource, UICollect
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-            cell3.bannerView.rootViewController = self
-            cell3.bannerView.load(GADRequest())
-//            cell3.testBanner3()
+//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+//            cell3.bannerView.rootViewController = self
+//            cell3.bannerView.load(GADRequest())
+            cell3.testBanner3()
             cell3.newUserCVC = self
             
             return cell3
@@ -193,11 +218,12 @@ extension NewUserCollectionViewController: EmptyDataSetSource, EmptyDataSetDeleg
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "ユーザーは見つかりませんでした", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 13) as Any]
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください", attributes: attributes)
     }
 }

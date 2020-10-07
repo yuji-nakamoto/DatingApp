@@ -19,8 +19,8 @@ class OpinionTableViewController: UITableViewController {
     @IBOutlet weak var inputLabel2: UILabel!
     
     private var currentUser = User()
-    public var hud = JGProgressHUD(style: .dark)
-    
+    private var hud = JGProgressHUD(style: .dark)
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -37,11 +37,11 @@ class OpinionTableViewController: UITableViewController {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if opinionLabel.text == "ご意見・ご要望・改善等" {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "内容を入力してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             return
         }
@@ -77,10 +77,8 @@ class OpinionTableViewController: UITableViewController {
         
         updateUser(withValue: [OPINION: ""])
         hud.textLabel.text = "送信が完了しました"
-        hud.show(in: self.view)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 2.0)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+            hud.dismiss()
             self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         }

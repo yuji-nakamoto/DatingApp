@@ -32,8 +32,8 @@ class MyPageTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         showHintView()
     }
     
@@ -141,6 +141,11 @@ class MyPageTableViewController: UIViewController {
     }
     
     private func checkMission(_ user: User) {
+        
+        if user.missionClearGetItem {
+            updateUser(withValue: [NEWMISSION: false])
+            return
+        }
         
         if user.loginGetPt1 != true {
             if user.mLoginCount >= 14 {

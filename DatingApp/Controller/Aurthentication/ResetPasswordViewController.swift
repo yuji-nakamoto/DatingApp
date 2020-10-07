@@ -33,6 +33,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if textFieldHaveText() {
             
             sendButton.isEnabled = false
@@ -40,8 +42,6 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "メールアドレスを入力してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
         }
     }
@@ -58,15 +58,11 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             
             if error != nil {
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = error!.localizedDescription
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud.textLabel.text = "登録されていないメールアドレスか、メールアドレスが無効です"
                 self.hud.dismiss(afterDelay: 2.0)
                 return
             }
             self.hud.textLabel.text = "リセットメールを送信しました"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
             self.hud.dismiss(afterDelay: 2.0)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.view.endEditing(true)

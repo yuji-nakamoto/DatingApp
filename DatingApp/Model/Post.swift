@@ -48,6 +48,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -65,6 +70,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -84,6 +94,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -101,6 +116,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -122,11 +142,15 @@ class Post {
                     .whereField(GENRE, isEqualTo: "恋人募集")
                     .order(by: TIMESTAMP)
                 
-                
                 postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -141,11 +165,15 @@ class Post {
                     .whereField(GENRE, isEqualTo: "恋人募集")
                     .order(by: TIMESTAMP)
                 
-                
                 postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -167,6 +195,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -185,6 +218,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -211,6 +249,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -230,6 +273,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -251,6 +299,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -269,6 +322,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -295,6 +353,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -309,11 +372,15 @@ class Post {
                     .whereField(GENRE, isEqualTo: "メル友募集")
                     .order(by: TIMESTAMP)
                 
-                
                 postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -335,6 +402,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -353,6 +425,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -379,6 +456,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -393,11 +475,15 @@ class Post {
                     .whereField(GENRE, isEqualTo: "遊びたい")
                     .order(by: TIMESTAMP)
                 
-                
                 postRef.getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -419,6 +505,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -437,6 +528,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -462,6 +558,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -480,6 +581,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -501,6 +607,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)
@@ -519,6 +630,11 @@ class Post {
                     if let error = error {
                         print("Error fetch posts: \(error.localizedDescription)")
                     }
+                    
+                    if snapshot?.documents == [] {
+                        completion(Post(dict: [UID: ""]))
+                    }
+                    
                     snapshot?.documentChanges.forEach({ (change) in
                         let dict = change.document.data()
                         let post = Post(dict: dict)

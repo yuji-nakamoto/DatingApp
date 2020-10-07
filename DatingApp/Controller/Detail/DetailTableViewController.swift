@@ -75,8 +75,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         setupUI()
         confifureLocationManager()
-        interstitial = createAndLoadIntersitial()
-//        interstitial = testIntersitial()
+//        interstitial = createAndLoadIntersitial()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -247,7 +247,7 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     }
     
     private func fetchCurrentUser() {
-        guard Auth.auth().currentUser?.uid != nil else { return }
+        
         User.fetchUser(User.currentUserId()) { (user) in
             self.currentUser = user
             self.currentUserView.sd_setImage(with: URL(string: self.currentUser.profileImageUrl1), completed: nil)
@@ -283,17 +283,18 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
     private func checkIfMatch() {
         
         guard user.uid != nil else { return }
-        Type.checkIfMatch(toUserId: userId) { (type) in
-            self.typeUser = type
-            self.incrementAppBadgeCount2()
+        Type.checkIfMatch(toUserId: userId) { [self] (type) in
+            typeUser = type
+            incrementAppBadgeCount2()
             
-            if self.typeUser.isType == 1 {
-                self.matchView()
-                updateUser(withValue: [POINTS: self.currentUser.points + 1,
-                                       MMATCHCOUNT: self.currentUser.mMatchCount + 1])
-                updateToUser(self.user.uid, withValue: [POINTS: self.user.points + 1,
-                                                        MMATCHCOUNT: self.user.mMatchCount + 1])
-                Match.saveMatchUser(forUser: self.user)
+            if typeUser.isType == 1 {
+                matchView()
+                updateUser(withValue: [POINTS: currentUser.points + 1,
+                                       MMATCHCOUNT: currentUser.mMatchCount + 1])
+                updateToUser(user.uid, withValue: [POINTS: user.points + 1,
+                                                   MMATCHCOUNT: user.mMatchCount + 1])
+                Match.saveMatchUser(forUser: user)
+                fetchCurrentUser()
             }
         }
     }

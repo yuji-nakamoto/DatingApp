@@ -52,7 +52,6 @@
 		8348826824EABAFE00054DF7 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826724EABAFE00054DF7 /* FeedTableViewController.swift */; };
 		8348826A24EABC3C00054DF7 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */; };
 		8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */; };
-		8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */; };
 		8348B5DF24D2A0B90000A187 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */; };
 		8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5E024D2A1560000A187 /* PostTableViewCell.swift */; };
 		8348B5E324D2A4A20000A187 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348B5E224D2A4A20000A187 /* Post.swift */; };
@@ -111,7 +110,6 @@
 		834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */; };
 		834C32D424E3BD10003330B1 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D324E3BD10003330B1 /* Block.swift */; };
 		834C32D624E4535E003330B1 /* NotVerifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */; };
-		834FD55624E973D900E4BDCB /* EnterWantToGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */; };
 		835013FC24D40F79008D1170 /* MatchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FB24D40F79008D1170 /* MatchCollectionViewController.swift */; };
 		835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FD24D41458008D1170 /* MessageTebleViewController.swift */; };
 		8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835013FF24D414C4008D1170 /* MessageTableViewCell.swift */; };
@@ -467,7 +465,6 @@
 		8348826724EABAFE00054DF7 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		8348826924EABC3C00054DF7 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		8348B5DA24D1D51C0000A187 /* SelectGenderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderTableViewController.swift; sourceTree = "<group>"; };
-		8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceMeetViewController.swift; sourceTree = "<group>"; };
 		8348B5DE24D2A0B90000A187 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 		8348B5E024D2A1560000A187 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		8348B5E224D2A4A20000A187 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -526,7 +523,6 @@
 		834C32D124E3AFCE003330B1 /* BlockListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewController.swift; sourceTree = "<group>"; };
 		834C32D324E3BD10003330B1 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		834C32D524E4535E003330B1 /* NotVerifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotVerifiedViewController.swift; sourceTree = "<group>"; };
-		834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterWantToGenderViewController.swift; sourceTree = "<group>"; };
 		835013FB24D40F79008D1170 /* MatchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewController.swift; sourceTree = "<group>"; };
 		835013FD24D41458008D1170 /* MessageTebleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTebleViewController.swift; sourceTree = "<group>"; };
 		835013FF24D414C4008D1170 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -897,10 +893,8 @@
 				834912F324C711CA002990F8 /* EnterProfileImageViewController.swift */,
 				834912F124C70B7C002990F8 /* EnterGenderViewController.swift */,
 				838071F624C6F2F6008BAA2C /* EnterAgeViewController.swift */,
-				834FD55524E973D900E4BDCB /* EnterWantToGenderViewController.swift */,
 				834912F724C74254002990F8 /* EnterProfessionViewController.swift */,
 				834912F924C74A2D002990F8 /* EnterResidenceViewController.swift */,
-				8348B5DC24D2227C0000A187 /* EnterResidenceMeetViewController.swift */,
 			);
 			path = Aurthentication;
 			sourceTree = "<group>";
@@ -1470,9 +1464,7 @@
 				8350E4B124D9AE0C00487DB9 /* PIckerKeyboard6.swift in Sources */,
 				6E7766AE2503061900ABDCB9 /* ParchmentMessageViewController.swift in Sources */,
 				831E392C24CA46260043AA76 /* ProfileTableViewController.swift in Sources */,
-				8348B5DD24D2227C0000A187 /* EnterResidenceMeetViewController.swift in Sources */,
 				838071EE24C6338E008BAA2C /* Extension.swift in Sources */,
-				834FD55624E973D900E4BDCB /* EnterWantToGenderViewController.swift in Sources */,
 				83AD3D2724F20DD400C02365 /* LikeCountAllViewController.swift in Sources */,
 				834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
@@ -1644,7 +1636,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1666,7 +1658,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

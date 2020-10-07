@@ -146,6 +146,7 @@ class ModalPostTableViewController: UITableViewController {
         pickerKeyBoard16.delegate = self
         pickerKeyBoard17.delegate = self
         tableView.tableFooterView = UIView()
+        navigationItem.title = "検索条件"
         doneButton.layer.cornerRadius = 44 / 2
     }
 }

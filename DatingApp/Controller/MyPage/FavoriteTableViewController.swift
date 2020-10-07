@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class FavoriteTableViewController: UIViewController {
     
@@ -16,19 +17,20 @@ class FavoriteTableViewController: UIViewController {
     
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var favoArray = [Favorite]()
     private var users = [User]()
     private var user = User()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
+        setupIndicator()
         setupUI()
         if UserDefaults.standard.object(forKey: REFRESH2) == nil {
             fetchFavoriteUsers()
@@ -53,20 +55,20 @@ class FavoriteTableViewController: UIViewController {
     
     private func fetchFavoriteUsers() {
      
-        indicator.startAnimating()
+        showLoadingIndicator()
         favoArray.removeAll()
         users.removeAll()
         
         Favorite.fetchFavoriteUsers { (favorite) in
             if favorite.uid == "" {
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
                 return
             }
             guard let uid = favorite.uid else { return }
             self.fetchUser(uid: uid) {
                 self.favoArray.insert(favorite, at: 0)
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -93,6 +95,27 @@ class FavoriteTableViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
@@ -111,8 +134,8 @@ class FavoriteTableViewController: UIViewController {
         
         navigationItem.title = "お気に入り"
         tableView.tableFooterView = UIView()
-        self.tableView.emptyDataSetSource = self
-        self.tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
 }
 
@@ -142,11 +165,12 @@ extension FavoriteTableViewController: EmptyDataSetSource, EmptyDataSetDelegate 
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "お気に入り登録したお相手はいません", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "ショップでアイテム交換を行い、気になったお相手を登録しよう")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 13) as Any]
+        return NSAttributedString(string: "ショップでアイテム交換を行い、\n気になったお相手を登録しよう", attributes: attributes)
     }
 }

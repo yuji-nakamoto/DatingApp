@@ -19,7 +19,6 @@ class EnterGenderViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var dataArray = ["-", "男性", "女性"]
     private var hud = JGProgressHUD(style: .dark)
@@ -39,8 +38,17 @@ class EnterGenderViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        indicator.startAnimating()
-        self.prepareSave()
+        
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
+        if genderLabel.text != "-" {
+            nextButton.isEnabled = false
+            saveUserGender()
+        } else {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "性別を選択してください"
+            hud.dismiss(afterDelay: 2.0)
+        }
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -51,34 +59,18 @@ class EnterGenderViewController: UIViewController {
     
     private func saveUserGender() {
         
-        let dict = [GENDER: genderLabel.text]
-        updateUser(withValue: dict as [String : Any])
-        indicator.stopAnimating()
-
         if genderLabel.text == "女性" {
+            updateUser(withValue: [GENDER: genderLabel.text as Any, SELECTGENDER: "男性"])
             UserDefaults.standard.set(true, forKey: FEMALE)
             toEnterAgeVC()
         } else {
+            updateUser(withValue: [GENDER: genderLabel.text as Any, SELECTGENDER: "女性"])
+            UserDefaults.standard.set(true, forKey: MALE)
             toEnterAgeVC()
         }
     }
     
     // MARK: - Helpers
-    
-    private func prepareSave() {
-        
-        if genderLabel.text != "-" {
-            nextButton.isEnabled = false
-            saveUserGender()
-        } else {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "性別を選択してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
-            hud.dismiss(afterDelay: 2.0)
-            indicator.stopAnimating()
-        }
-    }
     
     private func setupUI() {
         
@@ -105,7 +97,8 @@ class EnterGenderViewController: UIViewController {
     
     private func toEnterAgeVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            hud.dismiss()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toEnterAgeVC = storyboard.instantiateViewController(withIdentifier: "EnterAgeVC")
             self.present(toEnterAgeVC, animated: true, completion: nil)

@@ -24,7 +24,7 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var footstepSwitch: UISwitch!
     @IBOutlet weak var footstepLabel: UILabel!
     
-    private var user: User!
+    private var user = User()
     
     // MARK: - Lifecycle
     
@@ -95,8 +95,8 @@ class SettingTableViewController: UITableViewController {
     
     private func logoutUser() {
         
-        let alert: UIAlertController = UIAlertController(title: "", message: "ログアウトしてもよろしいですか？", preferredStyle: .actionSheet)
-        let logout: UIAlertAction = UIAlertAction(title: "ログアウト", style: UIAlertAction.Style.default) { (alert) in
+        let alert = UIAlertController(title: "", message: "ログアウトしてもよろしいですか？", preferredStyle: .actionSheet)
+        let logout = UIAlertAction(title: "ログアウト", style: UIAlertAction.Style.default) { (alert) in
             
             AuthService.logoutUser { (error) in
                 if error != nil {

@@ -25,7 +25,6 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var mailButton: UIButton!
     @IBOutlet weak var registertButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     private let manager = CLLocationManager()
@@ -88,13 +87,11 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             if let error = error {
                 generator.notificationOccurred(.error)
                 self.hud.textLabel.text = error.localizedDescription
-                self.setupHud()
                 print("Error email", error.localizedDescription)
                 return
             }
             guard let accessToken = AccessToken.current else {
                 self.hud.textLabel.text = "Faild to get access token"
-                self.setupHud()
                 return
             }
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
@@ -103,7 +100,6 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
                     generator.notificationOccurred(.error)
                     self.hud.textLabel.text = error.localizedDescription
                     print("Error credential", error.localizedDescription)
-                    self.setupHud()
                     return
                 }
                 if let authData = result {
@@ -123,14 +119,15 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             return
         }
         
-        indicator.startAnimating()
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
+
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (result, error) in
             if let error = error {
                 generator.notificationOccurred(.error)
-                self.hud.textLabel.text = error.localizedDescription
-                self.setupHud()
-                self.indicator.stopAnimating()
+                self.hud.textLabel.text = "予期せぬエラーが発生しました"
+                self.hud.dismiss(afterDelay: 2.0)
                 print(error.localizedDescription)
                 return
             }
@@ -141,13 +138,14 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        self.hud.textLabel.text = error.localizedDescription
-        self.setupHud()
+        hud.textLabel.text = "通信エラーが発生しました"
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 2.0)
         print(error.localizedDescription)
     }
     
     // MARK: - Helpers
-    
+
     private func confifureLocationManager() {
         
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -169,7 +167,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             PROFILEIMAGEURL1: authData.user.photoURL?.absoluteString as Any]
         
         if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
-            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+           let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
             self.userLat = userLat
             self.userLong = userLong
         }
@@ -184,8 +182,8 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
             
             if self.user.uid == "" {
                 saveUser(userId: authData.user.uid, withValue: dict)
+                self.hud.dismiss()
                 self.toEnterNameVC()
-                self.indicator.stopAnimating()
                 return
             }
             
@@ -194,7 +192,7 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
                 User.isOnline(online: "online") {}
                 self.toTabBarVC()
             }
-            self.indicator.stopAnimating()
+            self.hud.dismiss()
         }
     }
     
@@ -256,13 +254,6 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
     }
     
-    private func setupHud() {
-        
-        self.hud.show(in: self.view)
-        self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
-        self.hud.dismiss(afterDelay: 2.0)
-    }
-    
     // MARK: - Navigation
     
     private func toVerifiedVC() {
@@ -279,12 +270,6 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
         self.present(toLoginVC, animated: true, completion: nil)
     }
     
-    private func toEnterGenderVC() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toEnterGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterGenderVC")
-        self.present(toEnterGenderVC, animated: true, completion: nil)
-    }
-    
     private func toTabBarVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")
@@ -293,7 +278,8 @@ class SelectLoginViewController: UIViewController, GIDSignInDelegate {
     
     private func toEnterNameVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            hud.dismiss()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toEnterNameVC = storyboard.instantiateViewController(withIdentifier: "EnterNameVC")
             self.present(toEnterNameVC, animated: true, completion: nil)
@@ -322,16 +308,17 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
             
             //            let userIdentifier = appleIDCredential.user
             //            let fullName = appleIDCredential.fullName
-            indicator.startAnimating()
+            
+            hud.textLabel.text = ""
+            hud.show(in: self.view)
             let email = appleIDCredential.email
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
             Auth.auth().signIn(with: credential) { (result, error) in
                 if let error = error {
                     generator.notificationOccurred(.error)
-                    self.hud.textLabel.text = error.localizedDescription
-                    self.setupHud()
-                    self.indicator.stopAnimating()
+                    self.hud.textLabel.text = "予期せぬエラーが発生しました"
+                    self.hud.dismiss(afterDelay: 2.0)
                     print("Error sing in apple", error.localizedDescription)
                     return
                     
@@ -342,7 +329,7 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
                         EMAIL: email as Any]
                     
                     if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
-                        let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
+                       let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
                         self.userLat = userLat
                         self.userLong = userLong
                     }
@@ -357,7 +344,6 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
                         if self.user.uid == "" {
                             saveUser(userId: authData.user.uid, withValue: dict)
                             self.toEnterNameVC()
-                            self.indicator.stopAnimating()
                             return
                         }
                         
@@ -365,7 +351,7 @@ extension SelectLoginViewController: ASAuthorizationControllerDelegate {
                             User.isOnline(online: "online") {}
                             self.toTabBarVC()
                         }
-                        self.indicator.stopAnimating()
+                        self.hud.dismiss()
                     }
                 }
             }

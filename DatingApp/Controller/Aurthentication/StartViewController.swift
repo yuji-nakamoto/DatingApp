@@ -8,13 +8,14 @@
 
 import UIKit
 import GoogleMobileAds
+import NVActivityIndicatorView
 
 class StartViewController: UIViewController, GADInterstitialDelegate {
-
+    
     // MARK: - Properties
     
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     private var interstitial: GADInterstitial!
+    lazy var activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 + 100, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
     
     // MARK: - Lifecycle
     
@@ -22,21 +23,34 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
         super.viewDidLoad()
         
         autoLogin()
-        interstitial = createAndLoadIntersitial()
-//        interstitial = testIntersitial()
+        //  interstitial = createAndLoadIntersitial()
+        interstitial = testIntersitial()
     }
     
     // MARK: - Helpers
     
+    private func showLoadingIndicator() {
+        
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        activityIndicator.removeFromSuperview()
+        activityIndicator.stopAnimating()
+    }
+    
     private func autoLogin() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         if UserDefaults.standard.object(forKey: RCOMPLETION) != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 if self.interstitial.isReady {
                     self.interstitial.present(fromRootViewController: self)
                 } else {
                     print("Error interstitial")
+                    self.hideLoadingIndicator()
                     self.toTabBerVC()
                 }
             }
@@ -57,6 +71,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toSelectLoginVC = storyboard.instantiateViewController(withIdentifier: "SelectLoginVC")
+            self.hideLoadingIndicator()
             self.present(toSelectLoginVC, animated: true, completion: nil)
         }
     }
@@ -79,7 +94,7 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadIntersitial()
-        indicator.stopAnimating()
+        hideLoadingIndicator()
         toTabBerVC()
     }
 }

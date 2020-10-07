@@ -14,7 +14,6 @@ class EnterProfileImageViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var anyLabel: UILabel!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
@@ -43,11 +42,11 @@ class EnterProfileImageViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if profileImage == nil {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "プロフィール画像を設定してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             return
         }
@@ -73,14 +72,13 @@ class EnterProfileImageViewController: UIViewController {
     // MARK: - Save
     
     private func saveProfileImage() {
-        indicator.startAnimating()
         
-        Service.uploadImage(image: profileImage!) { (imageUrl) in
+        Service.uploadImage(image: profileImage!) { [self] (imageUrl) in
             
             let dict = [PROFILEIMAGEURL1: imageUrl]
             
             updateUser(withValue: dict)
-            self.hudSetup()
+            toEnterGenderVC()
         }
     }
     
@@ -89,7 +87,6 @@ class EnterProfileImageViewController: UIViewController {
         let dict = [PROFILEIMAGEURL1: PLACEHOLDERIMAGEURL]
         
         updateUser(withValue: dict)
-        indicator.stopAnimating()
         toEnterGenderVC()
     }
     
@@ -150,21 +147,12 @@ class EnterProfileImageViewController: UIViewController {
         profileImageView.layer.cornerRadius = 150 / 2
     }
     
-    private func hudSetup() {
-        
-        hud.textLabel.text = "保存が成功しました"
-        self.indicator.stopAnimating()
-        hud.show(in: self.view)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 2.0)
-        self.toEnterGenderVC()
-    }
-    
     // MARK: - Navigation
 
     private func toEnterGenderVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            hud.dismiss()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toEnterGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterGenderVC")
             self.present(toEnterGenderVC, animated: true, completion: nil)

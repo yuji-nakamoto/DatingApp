@@ -40,7 +40,6 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
         navigationController?.popViewController(animated: true)
     }
     
-    
     // MARK: - Fetch
 
     private func fetchUser() {
@@ -61,7 +60,11 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
-            
+        } else if textView.text.count == 0 {
+            hud.textLabel.text = "未入力です"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
         } else {
             updateUser(withValue: [INQUIRY: textView.text as Any])
             navigationController?.popViewController(animated: true)

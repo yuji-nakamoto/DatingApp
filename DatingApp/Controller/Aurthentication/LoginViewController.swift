@@ -17,12 +17,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 204, width: 300, height: 60))
     private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 269, width: 300, height: 60))
-
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -34,14 +33,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if textFieldHaveText() {
-            
             loginUser()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
         }
     }
@@ -50,40 +48,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func loginUser() {
         
-        self.activityIndicator.startAnimating()
-        
-//                AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
-//                    UserDefaults.standard.set(true, forKey: WHITE)
-//
-//                    User.isOnline(online: "online")
-//                    self.toTabBerVC()
-//                    self.activityIndicator.stopAnimating()
-//                }
+        //                AuthService.testLoginUser(email: emailTextField.text!, password: passwordTextField.text!) {
+        //                    UserDefaults.standard.set(true, forKey: WHITE)
+        //
+        //                    User.isOnline(online: "online")
+        //                    self.toTabBerVC()
+        //                }
         
         AuthService.loginUser(email: emailTextField.text!, password: passwordTextField.text!) { (error, isEmailVerified) in
             if error == nil {
-
+                
                 if isEmailVerified {
-                    self.hud.textLabel.text = "ログインに成功しました"
-                    self.hud.show(in: self.view)
-                    self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                    self.hud.dismiss(afterDelay: 2.0)
                     User.isOnline(online: "online") {}
                     self.toTabBerVC()
                 } else {
                     generator.notificationOccurred(.error)
                     self.hud.textLabel.text = "認証メールを確認してください"
-                    self.hud.show(in: self.view)
-                    self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                     self.hud.dismiss(afterDelay: 2.0)
                 }
             } else {
                 self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
             }
-            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -133,7 +119,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func toTabBerVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            hud.dismiss()
             UserDefaults.standard.set(true, forKey: RCOMPLETION)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toTabBerVC = storyboard.instantiateViewController(withIdentifier: "TabBerVC")

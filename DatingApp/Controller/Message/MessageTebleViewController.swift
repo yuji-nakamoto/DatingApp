@@ -58,10 +58,10 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
         fetchIsRead()
         timerMethod()
         
-        setupBanner()
-        interstitial = createAndLoadIntersitial()
-//        testBanner()
-//        interstitial = testIntersitial()
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,7 +174,7 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
                     TIMESTAMP: Timestamp(date: Date()),
                     DATE: date] as [String : Any]
         Message.saveMessage(to: user, messageId: messageId, withValue: dict)
-        updateUser(withValue: [MMESSAGECOUNT: self.user.mMessageCount + 1])
+        updateUser(withValue: [MMESSAGECOUNT: self.currentUser.mMessageCount + 1])
         setupMessage()
     }
     
@@ -448,15 +448,16 @@ class MessageTebleViewController: UIViewController, UITextFieldDelegate, GADInte
     
     private func setupMessage() {
         
-        self.incrementAppBadgeCount()
-        self.scrollToBottom()
-        self.textField.text = ""
-        self.sendButton.isEnabled = false
-        self.sendButton.alpha = 0.7
-        self.countLabel.text = "60"
-        self.textField.resignFirstResponder()
-        self.checkFemale()
-        self.checkMessage()
+        incrementAppBadgeCount()
+        scrollToBottom()
+        textField.text = ""
+        sendButton.isEnabled = false
+        sendButton.alpha = 0.7
+        countLabel.text = "60"
+        textField.resignFirstResponder()
+        checkFemale()
+        checkMessage()
+        fetchCurrentUser()
     }
     
     private func setupBanner() {

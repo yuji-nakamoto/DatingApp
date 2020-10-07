@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class PostTableViewController: UIViewController {
     
@@ -23,15 +24,17 @@ class PostTableViewController: UIViewController {
     private var users = [User]()
     private var user: User?
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
         setupUI()
+        setupIndicator()
         fetchPost()
     }
     
@@ -63,6 +66,7 @@ class PostTableViewController: UIViewController {
     private func fetchPost() {
         guard Auth.auth().currentUser?.uid != nil else { return }
         
+        showLoadingIndicator()
         posts.removeAll()
         users.removeAll()
         tableView.reloadData()
@@ -73,54 +77,78 @@ class PostTableViewController: UIViewController {
             
             if UserDefaults.standard.object(forKey: LOVER2) != nil {
                 Post.fetchGenreLoverPosts(residence!) { (post) in
-                    guard let uid = post.uid else { return }
-                    self.fetchUser(uid) {
+                    if post.uid == "" {
+                        self.hideLoadingIndicator()
+                        return
+                    }
+                    self.fetchUser(post.uid) {
                         self.posts.insert(post, at: 0)
+                        self.hideLoadingIndicator()
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: FRIEND2) != nil {
                 Post.fetchGenreFriendPosts(residence!) { (post) in
-                    guard let uid = post.uid else { return }
-                    self.fetchUser(uid) {
+                    if post.uid == "" {
+                        self.hideLoadingIndicator()
+                        return
+                    }
+                    self.fetchUser(post.uid) {
                         self.posts.insert(post, at: 0)
+                        self.hideLoadingIndicator()
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: MAILFRIEND2) != nil {
                 Post.fetchGenreMailFriendPosts(residence!) { (post) in
-                    guard let uid = post.uid else { return }
-                    self.fetchUser(uid) {
+                    if post.uid == "" {
+                        self.hideLoadingIndicator()
+                        return
+                    }
+                    self.fetchUser(post.uid) {
                         self.posts.insert(post, at: 0)
+                        self.hideLoadingIndicator()
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: PLAY2) != nil {
                 Post.fetchGenrePlayPosts(residence!) { (post) in
-                    guard let uid = post.uid else { return }
-                    self.fetchUser(uid) {
+                    if post.uid == "" {
+                        self.hideLoadingIndicator()
+                        return
+                    }
+                    self.fetchUser(post.uid) {
                         self.posts.insert(post, at: 0)
+                        self.hideLoadingIndicator()
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                     }
                 }
             } else if UserDefaults.standard.object(forKey: FREE2) != nil {
                 Post.fetchGenreFreePosts(residence!) { (post) in
-                    guard let uid = post.uid else { return }
-                    self.fetchUser(uid) {
+                    if post.uid == "" {
+                        self.hideLoadingIndicator()
+                        return
+                    }
+                    self.fetchUser(post.uid) {
                         self.posts.insert(post, at: 0)
+                        self.hideLoadingIndicator()
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                     }
                 }
             } else {
                 Post.fetchPosts(residence!) { (post) in
-                    guard let uid = post.uid else { return }
-                    self.fetchUser(uid) {
+                    if post.uid == "" {
+                        self.hideLoadingIndicator()
+                        return
+                    }
+                    self.fetchUser(post.uid) {
                         self.posts.insert(post, at: 0)
+                        self.hideLoadingIndicator()
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
                     }
@@ -150,6 +178,27 @@ class PostTableViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func setupBanner() {
         
@@ -201,8 +250,8 @@ extension PostTableViewController: UITableViewDelegate, UITableViewDataSource {
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath) as! AdsPostTableViewCell
             
             cell2.postVC = self
-            cell2.setupBanner()
-//            cell2.testBanner()
+//            cell2.setupBanner()
+            cell2.testBanner()
             return cell2
         }
         
@@ -225,11 +274,12 @@ extension PostTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "投稿は見つかりませんでした", attributes: attributes)
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 13) as Any]
+        return NSAttributedString(string: "しばらくお待ちになるか、\n検索条件を変更してみてください", attributes: attributes)
     }
 }

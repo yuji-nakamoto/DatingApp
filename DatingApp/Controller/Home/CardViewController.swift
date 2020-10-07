@@ -11,6 +11,7 @@ import Firebase
 import GoogleMobileAds
 import CoreLocation
 import Geofirestore
+import NVActivityIndicatorView
 
 class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerViewDelegate {
     
@@ -32,7 +33,6 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyLabel2: UILabel!
     @IBOutlet weak var buttonStackView: UIStackView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var placeholderImageView: UIImageView!
     @IBOutlet weak var tutorialSwipeView: UIView!
     @IBOutlet weak var likeLabel: UILabel!
@@ -54,6 +54,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     private let geofirestroe = GeoFirestore(collectionRef: COLLECTION_GEO)
     private var myQuery: GFSQuery!
     private var currentLocation: CLLocation?
+    lazy var activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
     
     // MARK: - Lifecycle
     
@@ -64,10 +65,10 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         showTutorialView()
         confifureLocationManager()
         
-                setupBanner()
-                interstitial = createAndLoadIntersitial()
-//        testBanner()
-//        interstitial = testIntersitial()
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -278,8 +279,15 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     // MARK: - Fetch
     
+    private func fetchCurrentUser() {
+        
+        User.fetchUser(User.currentUserId()) { (user) in
+            self.user = user
+        }
+    }
+    
     private func fetchUser() {
-        indicator.startAnimating()
+        showLoadingIndicator()
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
             self.currentUserView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
@@ -291,7 +299,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         
         User.fetchCardUsers(user) { (user) in
             if user.uid == "" {
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.emptyLabel.isHidden = false
                 self.emptyLabel2.isHidden = false
                 return
@@ -303,18 +311,21 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     
     private func checkIfMatch(_ userId: String, cardUser: User) {
         
-        Type.checkIfMatch(toUserId: userId) { (type) in
-            self.typeUser = type
+        Type.checkIfMatch(toUserId: userId) { [self] (type) in
+            typeUser = type
             
-            if self.typeUser.isType == 1 {
-                self.showMatchView(cardUser: cardUser)
+            if typeUser.isType == 1 {
+                showMatchView(cardUser: cardUser)
                 
-                updateUser(withValue: [POINTS: self.user.points + 1,
-                                       MMATCHCOUNT: self.user.mMatchCount + 1])
+                updateUser(withValue: [POINTS: user.points + 1,
+                                       MMATCHCOUNT: user.mMatchCount + 1])
                 updateToUser(cardUser.uid, withValue: [POINTS: cardUser.points + 1,
                                                        MMATCHCOUNT: cardUser.mMatchCount + 1])
                 Match.saveMatchUser(forUser: cardUser)
-                sendRequestNotification4(toUser: cardUser, message: "マッチしました！メッセージを送ってみましょう！", badge: (cardUser.appBadgeCount)! + 1)
+                sendRequestNotification4(toUser: cardUser,
+                                         message: "マッチしました！メッセージを送ってみましょう！",
+                                         badge: (cardUser.appBadgeCount)! + 1)
+                fetchCurrentUser()
                 
             } else {
                 sendRequestNotification3(toUser: cardUser, message: "誰かがタイプと言っています", badge: cardUser.appBadgeCount + 1)
@@ -323,6 +334,18 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        activityIndicator.removeFromSuperview()
+        activityIndicator.stopAnimating()
+    }
     
     private func confifureLocationManager() {
         
@@ -481,7 +504,7 @@ class CardViewController: UIViewController, GADInterstitialDelegate, GADBannerVi
         cards.append(card)
         cardStack.addSubview(card)
         cardStack.sendSubviewToBack(card)
-        indicator.stopAnimating()
+        hideLoadingIndicator()
         emptyLabel.isHidden = false
         emptyLabel2.isHidden = false
         if cards.count == 1 {

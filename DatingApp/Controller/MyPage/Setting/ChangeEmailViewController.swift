@@ -18,7 +18,6 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
@@ -35,16 +34,16 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Actions
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        
         doneButton.isEnabled = false
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         
         if textFieldHaveText() {
-            indicator.startAnimating()
             changeEmail()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             doneButton.isEnabled = true
         }
@@ -66,11 +65,8 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
                 self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
                 self.doneButton.isEnabled = true
-                self.indicator.stopAnimating()
             } else {
                 
                 AuthService.changeEmail(email: newEmail!) { (error) in
@@ -78,15 +74,12 @@ class ChangeEmailViewController: UIViewController, UITextFieldDelegate {
                         print("Error change email: \(error.localizedDescription)")
                     } else {
                         self.hud.textLabel.text = "メールアドレスを変更しました"
-                        self.hud.show(in: self.view)
-                        self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 2.0)
                         self.doneButton.isEnabled = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                             self.dismiss(animated: true, completion: nil)
                         }
                     }
-                    self.indicator.stopAnimating()
                 }
             }
         })

@@ -61,6 +61,11 @@ class OpinionInputTableViewController: UITableViewController, UITextViewDelegate
             hud.show(in: self.view)
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
+        } else if textView.text.count == 0 {
+            hud.textLabel.text = "未入力です"
+            hud.show(in: self.view)
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.dismiss(afterDelay: 2.0)
         } else {
             updateUser(withValue: [OPINION: textView.text as Any])
             navigationController?.popViewController(animated: true)

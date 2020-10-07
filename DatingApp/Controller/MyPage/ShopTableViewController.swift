@@ -39,10 +39,10 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
         showHintView()
         resetPointButton()
         
-        setupBanner()
-        interstitial = createAndLoadIntersitial()
-//        testBanner()
-//        interstitial = testIntersitial()
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
     
     // MARK: - Actions
@@ -190,16 +190,16 @@ class ShopTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     private func hudError() {
-        hud.show(in: self.view)
         hud.textLabel.text = "フリマポイントが足りません"
         hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        hud.show(in: self.view)
         hud.dismiss(afterDelay: 1.5)
     }
     
     private func hudSuccess() {
-        hud.show(in: self.view)
         hud.textLabel.text = "アイテムと交換しました"
         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.show(in: self.view)
         hud.dismiss(afterDelay: 1.5)
     }
 }

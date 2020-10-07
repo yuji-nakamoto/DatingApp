@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class TweetTableViewController: UIViewController {
     
@@ -16,22 +17,23 @@ class TweetTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var tweets = [Tweet]()
     private var tweet = Tweet()
     private var users = [User]()
     private var community = Community()
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
     var communityId = ""
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
+        setupIndicator()
         fetchTweet()
         fetchCommunity()
         setup()
@@ -67,7 +69,7 @@ class TweetTableViewController: UIViewController {
     private func fetchTweet() {
         
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
+            showLoadingIndicator()
         }
         tweets.removeAll()
         users.removeAll()
@@ -75,7 +77,7 @@ class TweetTableViewController: UIViewController {
         
         Tweet.fetchTweets(communityId: communityId) { (tweet) in
             if tweet.uid == "" {
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.refresh.endRefreshing()
                 self.tableView.reloadData()
                 return
@@ -84,7 +86,7 @@ class TweetTableViewController: UIViewController {
             self.fetchUser(tweet.uid) {
                 self.tweets.append(tweet)
                 self.tableView.reloadData()
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.refresh.endRefreshing()
             }
         }
@@ -106,6 +108,27 @@ class TweetTableViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -175,11 +198,12 @@ extension TweetTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: "コミュニティ投稿はありません", attributes: attributes)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "右下のプラスボタンから投稿してみよう！")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 13) as Any]
+        return NSAttributedString(string: "右下のプラスボタンから投稿してみよう！", attributes: attributes)
     }
 }

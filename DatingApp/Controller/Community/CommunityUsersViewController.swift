@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 import GoogleMobileAds
+import NVActivityIndicatorView
 
 class CommunityUsersViewController: UIViewController {
     
@@ -20,7 +21,6 @@ class CommunityUsersViewController: UIViewController {
     @IBOutlet weak var communityButton: UIButton!
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var withdrawButton1: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var withdrawButton2: UIButton!
@@ -33,6 +33,7 @@ class CommunityUsersViewController: UIViewController {
     private var user = User()
     private var hud = JGProgressHUD(style: .dark)
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
     var community = Community()
     var communityId = ""
     
@@ -40,9 +41,10 @@ class CommunityUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
+        setupIndicator()
         setup()
         fetchCurrentUser()
         fetchCommunity()
@@ -117,11 +119,11 @@ class CommunityUsersViewController: UIViewController {
     
     private func fetchUsers(_ user: User) {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         User.fetchCommunityUsers(communityId: self.communityId) { (user) in
             self.users = user
             self.collectionView.reloadData()
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
             self.refresh.endRefreshing()
         }
     }
@@ -137,6 +139,27 @@ class CommunityUsersViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 100, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func setupBanner() {
         
@@ -155,11 +178,23 @@ class CommunityUsersViewController: UIViewController {
     private func setupParticipation() {
         
         if user.community1 == "" {
-            updateUser(withValue: [COMMUNITY1: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
+            if user.missionClearGetItem == true {
+                updateUser(withValue: [COMMUNITY1: self.communityId])
+            } else {
+                updateUser(withValue: [COMMUNITY1: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
+            }
         } else if user.community2 == "" {
-            updateUser(withValue: [COMMUNITY2: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
+            if user.missionClearGetItem == true {
+                updateUser(withValue: [COMMUNITY2: self.communityId])
+            } else {
+                updateUser(withValue: [COMMUNITY2: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
+            }
         } else if user.community3 == "" {
-            updateUser(withValue: [COMMUNITY3: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
+            if user.missionClearGetItem == true {
+                updateUser(withValue: [COMMUNITY3: self.communityId])
+            } else {
+                updateUser(withValue: [COMMUNITY3: self.communityId, MCOMMUNITYCOUNT: self.user.mCommunityCount + 1])
+            }
         } else {
             hud.textLabel.text = "これ以上、参加できません\n他のコミュニティを退会してください"
             hud.show(in: self.view)
@@ -345,10 +380,10 @@ extension CommunityUsersViewController:  UICollectionViewDataSource, UICollectio
         if UserDefaults.standard.object(forKey: SEARCH_MINI_ON) == nil && indexPath.row == 0 || indexPath.row == 19 || indexPath.row == 38 || indexPath.row == 57 || indexPath.row == 76 || indexPath.row == 95 || indexPath.row == 114 || indexPath.row == 133 {
             
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell3", for: indexPath) as! SearchCollectionViewCell
-            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
-            cell3.bannerView.rootViewController = self
-            cell3.bannerView.load(GADRequest())
-//            cell3.testBanner4()
+//            cell3.bannerView.adUnitID = "ca-app-pub-4750883229624981/8611268051"
+//            cell3.bannerView.rootViewController = self
+//            cell3.bannerView.load(GADRequest())
+            cell3.testBanner4()
             cell3.communityUsersCVC = self
             
             return cell3

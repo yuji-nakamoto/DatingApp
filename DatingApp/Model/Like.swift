@@ -38,7 +38,7 @@ class Like {
         }
     }
     
-    class func fetchLikeUsers(completion: @escaping(Like) -> Void) {
+    class func fetchIsLikeUsers(completion: @escaping(Like) -> Void) {
         
         Block.fetchBlockSwipe { (blockUserIDs) in
             COLLECTION_LIKE.document(User.currentUserId()).collection(ISLIKE).order(by: TIMESTAMP).limit(to: 5).getDocuments { (snapshot, error) in

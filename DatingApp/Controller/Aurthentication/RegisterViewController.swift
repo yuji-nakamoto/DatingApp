@@ -17,7 +17,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var termsButton: UIButton!
     
     private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 225, width: 300, height: 60))
@@ -46,41 +45,29 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if textFieldHaveText() {
-            
             createUser()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
         }
     }
-    
-    @IBAction func termsButtonPressed(_ sender: Any) {
-    }
-    
     
     // MARK: - User
     
     private func createUser() {
         
-        self.activityIndicator.startAnimating()
         AuthService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
             if error != nil {
                 generator.notificationOccurred(.error)
                 self.hud.textLabel.text = "既に登録されているアドレスか、アドレスが無効です"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
-                self.activityIndicator.stopAnimating()
                 return
             }
-            self.activityIndicator.stopAnimating()
             self.hud.textLabel.text = "認証のメールを送りました。\nメールを確認しログインしてください"
-            self.hud.show(in: self.view)
-            self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
             self.hud.dismiss(afterDelay: 3.0)
             UserDefaults.standard.set(true, forKey: TO_VERIFIED_VC)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -118,7 +105,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         termsButton.layer.cornerRadius = 44 / 2
         termsButton.layer.borderWidth = 1
         termsButton.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
-
+        
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -136,7 +123,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Navigation
-
+    
     private func toVerifiedVC() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

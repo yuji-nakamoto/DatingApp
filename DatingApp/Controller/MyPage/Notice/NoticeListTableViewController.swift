@@ -86,6 +86,7 @@ extension NoticeListTableViewController: UITableViewDelegate, UITableViewDataSou
 extension NoticeListTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: "お知らせはありません")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
+        return NSAttributedString(string: "お知らせはありません", attributes: attributes)
     }
 }

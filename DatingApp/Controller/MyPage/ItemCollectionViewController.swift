@@ -25,8 +25,8 @@ class ItemCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
         
         fetchUser()
         navigationItem.title = "所持アイテム"
@@ -67,15 +67,9 @@ class ItemCollectionViewController: UIViewController {
     
     private func hudSuccess() {
         hud.textLabel.text = "アイテムを使用しました"
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.show(in: self.view)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 1.5)
-    }
-    
-    private func hudSuccess2() {
-        hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-        hud.dismiss(afterDelay: 1.5)
+        hud.dismiss(afterDelay: 1)
     }
 }
 
@@ -205,13 +199,13 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
                 updateUser(withValue: [ITEM5: self.user.item5 - 1,
                                        USEDITEM5: self.user.usedItem5 + 1])
+                self.hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
                 self.hud.show(in: self.view)
                 
-                COLLECTION_SWIPE.document(User.currentUserId()).delete { (error) in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        updateUser(withValue: [USEDITEM5: self.user.usedItem5 - 1])
-                        self.hudSuccess2()
-                    }
+                COLLECTION_SWIPE.document(User.currentUserId()).delete { [self] (error) in
+                    updateUser(withValue: [USEDITEM5: self.user.usedItem5 - 1])
+                    hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud.dismiss(afterDelay: 1.5)
                 }
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
@@ -229,15 +223,15 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             
             let alert: UIAlertController = UIAlertController(title: "開眼", message: "あなたのプロフィールに訪れた人数を確認できます。効果は永続します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
-            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { [self] (alert) in
                 
-                self.hud.show(in: self.view)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    updateUser(withValue: [ITEM6: self.user.item6 - 1,
-                                           USEDITEM6: self.user.usedItem6 + 1,
-                                           MKAIGAN: true])
-                    self.hudSuccess2()
-                }
+                hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
+                hud.show(in: self.view)
+                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud.dismiss(afterDelay: 1.5)
+                updateUser(withValue: [ITEM6: self.user.item6 - 1,
+                                       USEDITEM6: self.user.usedItem6 + 1,
+                                       MKAIGAN: true])
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             
@@ -255,15 +249,15 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             let alert: UIAlertController = UIAlertController(title: "フリマップ", message: "お相手との距離表示が可能になります。効果は永続します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
             
-            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { [self] (alert) in
                 
-                self.hud.show(in: self.view)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    updateUser(withValue: [ITEM7: self.user.item7 - 1,
-                                           USEDITEM7: self.user.usedItem7 + 1,
-                                           MFURIMAP: true])
-                    self.hudSuccess2()
-                }
+                hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
+                hud.show(in: self.view)
+                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud.dismiss(afterDelay: 1.5)
+                updateUser(withValue: [ITEM7: self.user.item7 - 1,
+                                       USEDITEM7: self.user.usedItem7 + 1,
+                                       MFURIMAP: true])
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             
@@ -280,16 +274,16 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
             
             let alert: UIAlertController = UIAlertController(title: "透視", message: "メッセージの既読表示が可能になります。効果は永続します", preferredStyle: .alert)
             let verification = UIAlertAction(title: "確認", style: .cancel)
-            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { (alert) in
+            let exchange: UIAlertAction = UIAlertAction(title: "使用する", style: UIAlertAction.Style.default) { [self] (alert) in
                 
-                self.hud.show(in: self.view)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    updateUser(withValue: [ITEM8: self.user.item8 - 1,
-                                           USEDITEM8: self.user.usedItem8 + 1,
-                                           MTOSHI: true])
-                    UserDefaults.standard.set(true, forKey: ISREAD_ON)
-                    self.hudSuccess2()
-                }
+                hud.textLabel.text = "アイテムを使用しました。効果が反映されました"
+                hud.show(in: self.view)
+                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud.dismiss(afterDelay: 1.5)
+                updateUser(withValue: [ITEM8: self.user.item8 - 1,
+                                       USEDITEM8: self.user.usedItem8 + 1,
+                                       MTOSHI: true])
+                UserDefaults.standard.set(true, forKey: ISREAD_ON)
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             

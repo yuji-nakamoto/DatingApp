@@ -19,7 +19,6 @@ class EnterNameViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var requiredLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     private let nameTextField = HoshiTextField(frame: CGRect(x: 40, y: 205, width: 300, height: 60))
@@ -40,51 +39,33 @@ class EnterNameViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        indicator.startAnimating()
-        self.prepareSave()
+        
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
+        if textFieldHaveText() {
+            
+            if nameTextField.text!.count > 10 {
+                generator.notificationOccurred(.error)
+                hud.textLabel.text = "10文字以下で入力してください"
+                hud.dismiss(afterDelay: 2.0)
+            } else {
+                nextButton.isEnabled = false
+                updateUser(withValue: [USERNAME: nameLabel.text as Any])
+                toEnterProfileImageVC()
+            }
+            
+        } else {
+            generator.notificationOccurred(.error)
+            hud.textLabel.text = "名前を入力してください"
+            hud.dismiss(afterDelay: 2.0)
+        }
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Save
-    
-    private func saveUserName() {
-        
-        let dict = [USERNAME: nameLabel.text]
-        updateUser(withValue: dict as [String : Any])
-        indicator.stopAnimating()
-        
-        toEnterProfileImageVC()
-    }
-    
     // MARK: - Helpers
-    
-    private func prepareSave() {
-        
-        if textFieldHaveText() {
-            
-            if nameTextField.text!.count > 10 {
-                generator.notificationOccurred(.error)
-                hud.textLabel.text = "10文字以下で入力してください"
-                hud.show(in: self.view)
-                hud.indicatorView = JGProgressHUDErrorIndicatorView()
-                hud.dismiss(afterDelay: 2.0)
-                indicator.stopAnimating()
-                return
-            }
-            nextButton.isEnabled = false
-            saveUserName()
-        } else {
-            generator.notificationOccurred(.error)
-            hud.textLabel.text = "名前を入力してください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
-            hud.dismiss(afterDelay: 2.0)
-            indicator.stopAnimating()
-        }
-    }
     
     private func setupUI() {
         
@@ -118,7 +99,6 @@ class EnterNameViewController: UIViewController {
     }
     
     private func textFieldHaveText() -> Bool {
-        
         return nameTextField.text != ""
     }
     
@@ -126,7 +106,8 @@ class EnterNameViewController: UIViewController {
     
     private func toEnterProfileImageVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            hud.dismiss()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let toEnterProfileImageVC = storyboard.instantiateViewController(withIdentifier: "EnterProfileImageVC")
             self.present(toEnterProfileImageVC, animated: true, completion: nil)

@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import EmptyDataSet_Swift
+import NVActivityIndicatorView
 
 class FeedTableViewController: UIViewController {
     
@@ -16,20 +17,21 @@ class FeedTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var comments = [Comment]()
     private var users = [User]()
     private var user = User()
     private let refresh = UIRefreshControl()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupBanner()
-//        testBanner()
+        setupIndicator()
+//        setupBanner()
+        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,15 +57,16 @@ class FeedTableViewController: UIViewController {
     private func fetchMatchedUser() {
         
         if UserDefaults.standard.object(forKey: REFRESH_ON) == nil {
-            indicator.startAnimating()
+            showLoadingIndicator()
         }
         users.removeAll()
         comments.removeAll()
+        tableView.reloadData()
         
         Match.fetchMatchUsers { (match) in
             if match.uid == "" {
                 self.refresh.endRefreshing()
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 UserDefaults.standard.removeObject(forKey: REFRESH_ON)
                 return
             }
@@ -73,7 +76,7 @@ class FeedTableViewController: UIViewController {
                 Comment.fetchComment(toUserId: uid) { (comment) in
                     if comment.uid == "" {
                         self.refresh.endRefreshing()
-                        self.indicator.stopAnimating()
+                        self.hideLoadingIndicator()
                         UserDefaults.standard.removeObject(forKey: REFRESH_ON)
                         return
                     }
@@ -81,7 +84,7 @@ class FeedTableViewController: UIViewController {
                         self.comments.insert(comment, at: 0)
                         self.tableView.reloadData()
                         self.refresh.endRefreshing()
-                        self.indicator.stopAnimating()
+                        self.hideLoadingIndicator()
                         UserDefaults.standard.removeObject(forKey: REFRESH_ON)
                     }
                 }
@@ -90,6 +93,27 @@ class FeedTableViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 250, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func setupBanner() {
         
@@ -154,7 +178,7 @@ extension FeedTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         
-        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
         return NSAttributedString(string: " マッチしたお相手のひとことが\nこちらに表示されます", attributes: attributes)
     }
 }

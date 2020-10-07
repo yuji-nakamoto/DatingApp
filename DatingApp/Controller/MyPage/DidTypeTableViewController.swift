@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMobileAds
+import NVActivityIndicatorView
+import EmptyDataSet_Swift
 
 class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
@@ -17,24 +19,25 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
-    private var typeUsers = [Type]()
+    private var typeArray = [Type]()
     private var users = [User]()
     private var interstitial: GADInterstitial!
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupIndicator()
         fetchTypedUsers()
         updateUser(withValue: [NEWTYPE: false])
         
-        setupBanner()
-        interstitial = createAndLoadIntersitial()
-//        testBanner()
-//        interstitial = testIntersitial()
+//        setupBanner()
+//        interstitial = createAndLoadIntersitial()
+        testBanner()
+        interstitial = testIntersitial()
     }
 
     // MARK: - Actions
@@ -56,23 +59,23 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func fetchTypeUsers() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         segmentControl.isEnabled = false
-        typeUsers.removeAll()
+        typeArray.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Type.fetchTypeUsers { (type) in
             if type.uid == "" {
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.typeUsers.insert(type, at: 0)
+                self.typeArray.insert(type, at: 0)
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -80,23 +83,23 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     
     private func fetchTypedUsers() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         segmentControl.isEnabled = false
-        typeUsers.removeAll()
+        typeArray.removeAll()
         users.removeAll()
         tableView.reloadData()
         
         Type.fetchTypedUsers { (type) in
             if type.uid == "" {
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = type.uid else { return }
             self.fetchUser(uid: uid) {
-                self.typeUsers.insert(type, at: 0)
+                self.typeArray.insert(type, at: 0)
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -122,6 +125,27 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
     }
     
     // MARK: - Helpers
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
     
     private func createAndLoadIntersitial() -> GADInterstitial {
         
@@ -161,6 +185,8 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
         navigationItem.title = "タイプ"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
 }
 
@@ -169,15 +195,13 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
 extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return typeUsers.count
+        return typeArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DidLikeTableViewCell
         
-        let type = typeUsers[indexPath.row]
-        cell.type = type
+        cell.type = typeArray[indexPath.row]
         
         if segmentControl.selectedSegmentIndex == 0 && UserDefaults.standard.object(forKey: FEMALE) == nil {
             cell.configureCell2(users[indexPath.row])
@@ -198,7 +222,7 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
                 } else {
                     print("Error interstitial")
                 }
-                self.performSegue(withIdentifier: "DetailVC", sender: self.typeUsers[indexPath.row].uid)
+                self.performSegue(withIdentifier: "DetailVC", sender: self.typeArray[indexPath.row].uid)
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
             }
@@ -207,6 +231,15 @@ extension DidTypeTableViewController: UITableViewDelegate, UITableViewDataSource
             self.present(alert,animated: true,completion: nil)
             return
         }
-        performSegue(withIdentifier: "DetailVC", sender: typeUsers[indexPath.row].uid)
+        performSegue(withIdentifier: "DetailVC", sender: typeArray[indexPath.row].uid)
+    }
+}
+
+extension DidTypeTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
+        return NSAttributedString(string: "タイプ履歴はありません", attributes: attributes)
     }
 }

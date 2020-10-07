@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class EnterAgeViewController: UIViewController {
     
@@ -18,9 +19,9 @@ class EnterAgeViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var dataArray: [Int] = ([Int])(18...99)
+    private var hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecycle
     
@@ -37,24 +38,15 @@ class EnterAgeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        indicator.startAnimating()
+        
+        hud.show(in: view)
         nextButton.isEnabled = false
-        saveUserAge()
+        updateUser(withValue: [AGE: Int(self.ageLabel.text!) as Any])
+        toEnterProfessionVC()
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Save
-    
-    private func saveUserAge() {
-        
-        let dict = [AGE: Int(self.ageLabel.text!)]
-        updateUser(withValue: dict as [String : Any])
-        indicator.stopAnimating()
-        
-        toEnterWantToGenderVC()
     }
     
     // MARK: - Helpers
@@ -76,12 +68,13 @@ class EnterAgeViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private func toEnterWantToGenderVC() {
+    private func toEnterProfessionVC() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            hud.dismiss()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let toEnterWantToGenderVC = storyboard.instantiateViewController(withIdentifier: "EnterWantToGenderVC")
-            self.present(toEnterWantToGenderVC, animated: true, completion: nil)
+            let toEnterProfessionVC = storyboard.instantiateViewController(withIdentifier: "EnterProfessionVC")
+            self.present(toEnterProfessionVC, animated: true, completion: nil)
         }
     }
 }

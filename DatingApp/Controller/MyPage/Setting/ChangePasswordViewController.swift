@@ -18,7 +18,6 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var hud = JGProgressHUD(style: .dark)
     private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
@@ -35,17 +34,15 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Actions
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        
         doneButton.isEnabled = false
-
+        hud.textLabel.text = ""
+        hud.show(in: self.view)
         if textFieldHaveText() {
-            indicator.startAnimating()
-
             withdrawUser()
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.show(in: self.view)
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
             doneButton.isEnabled = true
         }
@@ -67,10 +64,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 print("Error reauth: \(error.localizedDescription)")
                 self.hud.textLabel.text = "メールアドレス、もしくはパスワードが間違えています"
-                self.hud.show(in: self.view)
-                self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud.dismiss(afterDelay: 2.0)
-                self.indicator.stopAnimating()
                 self.doneButton.isEnabled = true
             } else {
                 
@@ -79,15 +73,12 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                         print("Error change password: \(error.localizedDescription)")
                     } else {
                         self.hud.textLabel.text = "パスワードを変更しました"
-                        self.hud.show(in: self.view)
-                        self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         self.hud.dismiss(afterDelay: 2.0)
                         self.doneButton.isEnabled = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                             self.dismiss(animated: true)
                         }
                     }
-                    self.indicator.stopAnimating()
                 }
             }
         })

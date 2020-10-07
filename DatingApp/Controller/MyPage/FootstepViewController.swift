@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMobileAds
+import NVActivityIndicatorView
+import EmptyDataSet_Swift
 
 class FootstepTableViewController: UIViewController {
     
@@ -16,21 +18,22 @@ class FootstepTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var footsteps = [Footstep]()
     private var users = [User]()
+    private var activityIndicator: NVActivityIndicatorView?
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupIndicator()
         fetchtFootstepedUsers()
         
-        setupBanner()
-//        testBanner()
+//        setupBanner()
+        testBanner()
     }
     
     // MARK: - Actions
@@ -52,7 +55,7 @@ class FootstepTableViewController: UIViewController {
     
     private func fetchIsFootstepUsers() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         segmentControl.isEnabled = false
         footsteps.removeAll()
         users.removeAll()
@@ -61,14 +64,14 @@ class FootstepTableViewController: UIViewController {
         Footstep.fetchFootstepUsers { (footstep) in
             if footstep.uid == "" {
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = footstep.uid else { return }
             self.fetchUser(uid: uid) {
                 self.footsteps.insert(footstep, at: 0)
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -76,7 +79,7 @@ class FootstepTableViewController: UIViewController {
     
     private func fetchtFootstepedUsers() {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         segmentControl.isEnabled = false
         footsteps.removeAll()
         users.removeAll()
@@ -85,14 +88,14 @@ class FootstepTableViewController: UIViewController {
         Footstep.fetchFootstepedUsers { (footstep) in
             if footstep.uid == "" {
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 return
             }
             guard let uid = footstep.uid else { return }
             self.fetchUser(uid: uid) {
                 self.footsteps.insert(footstep, at: 0)
                 self.segmentControl.isEnabled = true
-                self.indicator.stopAnimating()
+                self.hideLoadingIndicator()
                 self.tableView.reloadData()
             }
         }
@@ -119,6 +122,27 @@ class FootstepTableViewController: UIViewController {
     
     // MARK: - Helpers
     
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 150, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
+    }
+    
     private func setupBanner() {
         
         bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
@@ -137,6 +161,8 @@ class FootstepTableViewController: UIViewController {
         navigationItem.title = "足あと"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
 }
 
@@ -160,5 +186,14 @@ extension FootstepTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailVC", sender: footsteps[indexPath.row].uid)
+    }
+}
+
+extension FootstepTableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(named: O_BLACK) as Any, .font: UIFont(name: "HiraMaruProN-W4", size: 15) as Any]
+        return NSAttributedString(string: "足跡履歴はありません", attributes: attributes)
     }
 }

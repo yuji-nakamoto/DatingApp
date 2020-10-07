@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class CreateTweetViewController: UIViewController {
     
@@ -16,13 +17,13 @@ class CreateTweetViewController: UIViewController {
     @IBOutlet weak var contentsImageView: UIImageView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var countLabel: UILabel!
     
     private var user = User()
     private var community = Community()
     private var pleaceholderLbl = UILabel()
     private var contentsImage: UIImage?
+    private var activityIndicator: NVActivityIndicatorView?
     var communityId = ""
     
     // MARK: - Lifecycle
@@ -30,6 +31,7 @@ class CreateTweetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupIndicator()
         setupTextView()
         fetchUser()
         fetchCommunity(communityId: communityId)
@@ -43,7 +45,7 @@ class CreateTweetViewController: UIViewController {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         
-        indicator.startAnimating()
+        showLoadingIndicator()
         sendButton.isEnabled = false
         saveTweet()
     }
@@ -90,31 +92,58 @@ class CreateTweetViewController: UIViewController {
                                        value: [TWEETCOUNT: self.community.tweetCount + 1])
           
             if user.communityGetPt4 != true {
-                updateUser(withValue: [MCOMMUNITY: true])
+                if user.missionClearGetItem != true {
+                    updateUser(withValue: [MCOMMUNITY: true])
+                }
             }
-            self.indicator.stopAnimating()
+            self.hideLoadingIndicator()
             UserDefaults.standard.set(true, forKey: REFRESH)
             self.navigationController?.popViewController(animated: true)
             
         } else {
-            Service.uploadImage(image: contentsImage!) { (imageUrl) in
+            Service.uploadImage(image: contentsImage!) { [self] (imageUrl) in
                 
                 let dict = [TWEETID: tweetId,
                             UID: User.currentUserId(),
                             DATE: date,
                             ISREPLY: false,
-                            COMMUNITYID: self.communityId,
+                            COMMUNITYID: communityId,
                             CONTENTSIMAGEURL: imageUrl,
-                            TEXT: self.textView.text as Any] as [String : Any]
+                            TEXT: textView.text as Any] as [String : Any]
             
-                Tweet.saveTweet(communityId: self.communityId, tweetId: tweetId, withValue: dict)
-              
-                updateUser(withValue: [MCOMMUNITY: true])
-                self.indicator.stopAnimating()
+                Tweet.saveTweet(communityId: communityId, tweetId: tweetId, withValue: dict)
+                
+                if user.communityGetPt4 != true {
+                    if user.missionClearGetItem != true {
+                        updateUser(withValue: [MCOMMUNITY: true])
+                    }
+                }
+                hideLoadingIndicator()
                 UserDefaults.standard.set(true, forKey: REFRESH)
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+    
+    private func showLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            self.view.addSubview(activityIndicator!)
+            activityIndicator!.startAnimating()
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        
+        if activityIndicator != nil {
+            activityIndicator!.removeFromSuperview()
+            activityIndicator!.stopAnimating()
+        }
+    }
+    
+    private func setupIndicator() {
+        
+        activityIndicator = NVActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 15 , y: self.view.frame.height / 2 - 200, width: 25, height: 25), type: .circleStrokeSpin, color: UIColor(named: O_BLACK), padding: nil)
     }
     
     private func setup() {

@@ -62,7 +62,7 @@ class ShopTableViewCell: UITableViewCell {
         itemImageView.image = UIImage(named: "item7")
         itemNameLabel.text = "フリマップ"
         descriptionLabel.text = "お相手との距離表示が可能になります。\n効果は永続します"
-        pointLabel.text = "20"
+        pointLabel.text = "50"
     }
 
     func shopItem8() {
