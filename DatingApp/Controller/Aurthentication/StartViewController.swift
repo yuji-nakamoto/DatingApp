@@ -30,13 +30,11 @@ class StartViewController: UIViewController, GADInterstitialDelegate {
     // MARK: - Helpers
     
     private func showLoadingIndicator() {
-        
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
     
     private func hideLoadingIndicator() {
-        
         activityIndicator.removeFromSuperview()
         activityIndicator.stopAnimating()
     }

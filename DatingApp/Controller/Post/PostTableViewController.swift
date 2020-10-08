@@ -56,9 +56,9 @@ class PostTableViewController: UIViewController {
     @objc func refreshTableView(){
         fetchPost()
     }
-    
-    @IBAction func refreshButtonPressed(_ sender: Any) {
-        fetchPost()
+
+    @IBAction func backButtonPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Fetch post

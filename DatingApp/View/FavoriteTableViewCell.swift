@@ -33,11 +33,6 @@ class FavoriteTableViewCell: UITableViewCell {
         ageLabel.text = String(user.age) + "歳"
         residenceLabel.text = user.residence
         selfIntroLabel.text = user.selfIntro
-        bloodLabel.text = user.blood
-        professionLabel.text = user.profession
-        housemateLabel.text = user.houseMate
-        holidayLabel.text = user.holiday
-        marriageLabel.text = user.marriage
         profileImageVIew.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
         
         if user.height >= 130 {
@@ -45,7 +40,36 @@ class FavoriteTableViewCell: UITableViewCell {
         } else {
             heightLabel.text = "未設定"
         }
-
+        
+        if user.marriage == "" {
+            marriageLabel.text = "未設定"
+        } else {
+            marriageLabel.text = user.marriage
+        }
+        
+        if user.holiday == "" {
+            holidayLabel.text = "未設定"
+        } else {
+            holidayLabel.text = user.holiday
+        }
+        
+        if user.houseMate == "" {
+            housemateLabel.text = "未設定"
+        } else {
+            housemateLabel.text = user.houseMate
+        }
+        
+        if user.profession == "" {
+            professionLabel.text = "未設定"
+        } else {
+            professionLabel.text = user.profession
+        }
+        
+        if user.blood == "" {
+            bloodLabel.text = "未設定"
+        } else {
+            bloodLabel.text = user.blood
+        }
         
         COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
             if let error = error {
@@ -75,7 +99,7 @@ class FavoriteTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        favoriteButton.layer.cornerRadius = 28 / 2
+        favoriteButton.layer.cornerRadius = 25 / 2
         profileImageVIew.layer.cornerRadius = 60 / 2
         onlineView.layer.cornerRadius = 15 / 2
         onlineView.layer.borderWidth = 2

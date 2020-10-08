@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E27AAFB252DF7550000F025 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E27AAFA252DF7550000F025 /* NewsItems.swift */; };
+		6E27AAFE252DF7C00000F025 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E27AAFD252DF7C00000F025 /* WebViewController.swift */; };
+		6E27AB02252DF9A80000F025 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E27AB01252DF9A80000F025 /* NewsTableViewController.swift */; };
+		6E27AB06252DFEC50000F025 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E27AB05252DFEC50000F025 /* NewsTableViewCell.swift */; };
 		6E46F66D24FBA15C000B1DAC /* Notice2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F66C24FBA15C000B1DAC /* Notice2TableViewController.swift */; };
 		6E46F66F24FBA17E000B1DAC /* Notice3TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */; };
 		6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */; };
@@ -21,6 +25,16 @@
 		6E5047C3251AA88E007B6A59 /* CreateTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5047C2251AA88E007B6A59 /* CreateTweetViewController.swift */; };
 		6E5047C5251AA8DD007B6A59 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5047C4251AA8DD007B6A59 /* TweetTableViewCell.swift */; };
 		6E5047C7251AACCE007B6A59 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5047C6251AACCE007B6A59 /* Tweet.swift */; };
+		6E54B8E0252EFD0D00A9EF03 /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B8DF252EFD0D00A9EF03 /* NewsCollectionViewCell.swift */; };
+		6E54B911252F0BBB00A9EF03 /* ParchmentNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B910252F0BBB00A9EF03 /* ParchmentNewsViewController.swift */; };
+		6E54B914252F0CF200A9EF03 /* News2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B913252F0CF200A9EF03 /* News2TableViewController.swift */; };
+		6E54B918252F0D0900A9EF03 /* News3TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B917252F0D0900A9EF03 /* News3TableViewController.swift */; };
+		6E54B91B252F23AB00A9EF03 /* News4TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B91A252F23AB00A9EF03 /* News4TableViewController.swift */; };
+		6E54B91E252F23C800A9EF03 /* News5TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B91D252F23C800A9EF03 /* News5TableViewController.swift */; };
+		6E54B921252F23EE00A9EF03 /* News6TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B920252F23EE00A9EF03 /* News6TableViewController.swift */; };
+		6E54B924252F241300A9EF03 /* News7TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B923252F241300A9EF03 /* News7TableViewController.swift */; };
+		6E54B927252F243100A9EF03 /* News8TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B926252F243100A9EF03 /* News8TableViewController.swift */; };
+		6E54B92A252F244F00A9EF03 /* News9TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B929252F244F00A9EF03 /* News9TableViewController.swift */; };
 		6E696F0D2511AFAE00B012AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E696F0C2511AFAD00B012AD /* GoogleService-Info.plist */; };
 		6E696F402513CA2A00B012AD /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F3F2513CA2A00B012AD /* Community.swift */; };
 		6E696F6D2513CFC600B012AD /* CreateCommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E696F6C2513CFC600B012AD /* CreateCommunityTableViewController.swift */; };
@@ -161,6 +175,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6E54B90D252EFD1300A9EF03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C84F45B39EAC91FED3C767F3F95B08B9;
+			remoteInfo = HTMLReader;
+		};
 		8332D7D4250A59E800C06022 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8332D7A6250A59E700C06022 /* Pods.xcodeproj */;
@@ -417,6 +438,10 @@
 
 /* Begin PBXFileReference section */
 		20119206395B34005853DB9C /* Pods-DatingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.debug.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.debug.xcconfig"; sourceTree = "<group>"; };
+		6E27AAFA252DF7550000F025 /* NewsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItems.swift; sourceTree = "<group>"; };
+		6E27AAFD252DF7C00000F025 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		6E27AB01252DF9A80000F025 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		6E27AB05252DFEC50000F025 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		6E46F66C24FBA15C000B1DAC /* Notice2TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice2TableViewController.swift; sourceTree = "<group>"; };
 		6E46F66E24FBA17E000B1DAC /* Notice3TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice3TableViewController.swift; sourceTree = "<group>"; };
 		6E46F67024FBA18D000B1DAC /* Notice4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice4TableViewController.swift; sourceTree = "<group>"; };
@@ -431,6 +456,16 @@
 		6E5047C2251AA88E007B6A59 /* CreateTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTweetViewController.swift; sourceTree = "<group>"; };
 		6E5047C4251AA8DD007B6A59 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		6E5047C6251AACCE007B6A59 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		6E54B8DF252EFD0D00A9EF03 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E54B910252F0BBB00A9EF03 /* ParchmentNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentNewsViewController.swift; sourceTree = "<group>"; };
+		6E54B913252F0CF200A9EF03 /* News2TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News2TableViewController.swift; sourceTree = "<group>"; };
+		6E54B917252F0D0900A9EF03 /* News3TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News3TableViewController.swift; sourceTree = "<group>"; };
+		6E54B91A252F23AB00A9EF03 /* News4TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News4TableViewController.swift; sourceTree = "<group>"; };
+		6E54B91D252F23C800A9EF03 /* News5TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News5TableViewController.swift; sourceTree = "<group>"; };
+		6E54B920252F23EE00A9EF03 /* News6TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News6TableViewController.swift; sourceTree = "<group>"; };
+		6E54B923252F241300A9EF03 /* News7TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News7TableViewController.swift; sourceTree = "<group>"; };
+		6E54B926252F243100A9EF03 /* News8TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News8TableViewController.swift; sourceTree = "<group>"; };
+		6E54B929252F244F00A9EF03 /* News9TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News9TableViewController.swift; sourceTree = "<group>"; };
 		6E696F0C2511AFAD00B012AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E696F3F2513CA2A00B012AD /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		6E696F6C2513CFC600B012AD /* CreateCommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommunityTableViewController.swift; sourceTree = "<group>"; };
@@ -597,6 +632,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6E54B92E252F2A6500A9EF03 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				6E54B910252F0BBB00A9EF03 /* ParchmentNewsViewController.swift */,
+				6E27AAFD252DF7C00000F025 /* WebViewController.swift */,
+				6E27AB01252DF9A80000F025 /* NewsTableViewController.swift */,
+				6E54B913252F0CF200A9EF03 /* News2TableViewController.swift */,
+				6E54B917252F0D0900A9EF03 /* News3TableViewController.swift */,
+				6E54B91A252F23AB00A9EF03 /* News4TableViewController.swift */,
+				6E54B91D252F23C800A9EF03 /* News5TableViewController.swift */,
+				6E54B920252F23EE00A9EF03 /* News6TableViewController.swift */,
+				6E54B923252F241300A9EF03 /* News7TableViewController.swift */,
+				6E54B926252F243100A9EF03 /* News8TableViewController.swift */,
+				6E54B929252F244F00A9EF03 /* News9TableViewController.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
 		6E5ADA7C24FD25A50028F23E /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +740,7 @@
 				8332D7FF250A59E800C06022 /* grpc.framework */,
 				8332D801250A59E800C06022 /* GTMAppAuth.framework */,
 				8332D803250A59E800C06022 /* GTMSessionFetcher.framework */,
+				6E54B90E252EFD1300A9EF03 /* HTMLReader.framework */,
 				8332D805250A59E800C06022 /* JGProgressHUD.framework */,
 				8332D807250A59E800C06022 /* leveldb.framework */,
 				8332D809250A59E800C06022 /* Lottie.framework */,
@@ -812,6 +866,7 @@
 				8350140824D55DF6008D1170 /* Post */,
 				83B6232424E2E1DF00363548 /* Message */,
 				6E696F732513F35100B012AD /* Community */,
+				6E54B92E252F2A6500A9EF03 /* News */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -832,6 +887,7 @@
 				6E696F3F2513CA2A00B012AD /* Community.swift */,
 				6E5047C6251AACCE007B6A59 /* Tweet.swift */,
 				6E7FB9922529D19A00DE275C /* Favorite.swift */,
+				6E27AAFA252DF7550000F025 /* NewsItems.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -864,6 +920,8 @@
 				6ED794C02523C0890019795E /* TweetCommentTableViewCell.swift */,
 				6E7FB9602529705200DE275C /* MyCommunityTableViewCell.swift */,
 				6E88BE10252B197600D90F4F /* FavoriteTableViewCell.swift */,
+				6E27AB05252DFEC50000F025 /* NewsTableViewCell.swift */,
+				6E54B8DF252EFD0D00A9EF03 /* NewsCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -958,8 +1016,8 @@
 				838071C224C608F5008BAA2C /* Sources */,
 				838071C324C608F5008BAA2C /* Frameworks */,
 				838071C424C608F5008BAA2C /* Resources */,
-				FF76B8CEF091487E47588238 /* [CP] Embed Pods Frameworks */,
-				AF2A7EC8695911DF5D2061A1 /* [CP] Copy Pods Resources */,
+				C0BC21D2A29FC94353437BF7 /* [CP] Embed Pods Frameworks */,
+				871C380853BCAA5A0EF8A21F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1010,6 +1068,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		6E54B90E252EFD1300A9EF03 /* HTMLReader.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HTMLReader.framework;
+			remoteRef = 6E54B90D252EFD1300A9EF03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8332D7D5250A59E800C06022 /* absl.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1305,7 +1370,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AF2A7EC8695911DF5D2061A1 /* [CP] Copy Pods Resources */ = {
+		871C380853BCAA5A0EF8A21F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1322,7 +1387,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingApp/Pods-DatingApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF76B8CEF091487E47588238 /* [CP] Embed Pods Frameworks */ = {
+		C0BC21D2A29FC94353437BF7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1355,10 +1420,12 @@
 				8348E3F724D0E123001D59C0 /* FootstepViewController.swift in Sources */,
 				8350E4BF24D9AE7000487DB9 /* PIckerKeyboard13.swift in Sources */,
 				838071E024C613FA008BAA2C /* LoginViewController.swift in Sources */,
+				6E27AAFB252DF7550000F025 /* NewsItems.swift in Sources */,
 				834966CA24DD098E00C9B7DD /* SelfIntroTableViewController.swift in Sources */,
 				8350E4B524D9AE1E00487DB9 /* PIckerKeyboard8.swift in Sources */,
 				834912F424C711CA002990F8 /* EnterProfileImageViewController.swift in Sources */,
 				8348E3D724CD658B001D59C0 /* DataArray.swift in Sources */,
+				6E54B911252F0BBB00A9EF03 /* ParchmentNewsViewController.swift in Sources */,
 				6E7FB9342529703600DE275C /* MyCommunityViewController.swift in Sources */,
 				8348B5DB24D1D51C0000A187 /* SelectGenderTableViewController.swift in Sources */,
 				6E7D4A8C2514D03800361FE8 /* CommunityTableViewCell.swift in Sources */,
@@ -1369,14 +1436,18 @@
 				6ED794C12523C0890019795E /* TweetCommentTableViewCell.swift in Sources */,
 				830AF02E24EEE8140043827B /* HelpViewController.swift in Sources */,
 				6E500C4A252498B400BF390F /* ItemTableViewCell.swift in Sources */,
+				6E54B927252F243100A9EF03 /* News8TableViewController.swift in Sources */,
 				6E46F66F24FBA17E000B1DAC /* Notice3TableViewController.swift in Sources */,
 				8350E4B924D9AE3000487DB9 /* PIckerKeyboard10.swift in Sources */,
 				6E46F67124FBA18D000B1DAC /* Notice4TableViewController.swift in Sources */,
+				6E54B921252F23EE00A9EF03 /* News6TableViewController.swift in Sources */,
 				8348E3D524CD3FD3001D59C0 /* PickerKeyboard4.swift in Sources */,
 				8348E76B24E7CD5D0046C6DE /* TermsTableViewCell.swift in Sources */,
 				6E500C4C252498CB00BF390F /* ItemCollectionViewCell.swift in Sources */,
+				6E54B924252F241300A9EF03 /* News7TableViewController.swift in Sources */,
 				838071EC24C62F52008BAA2C /* RegisterViewController.swift in Sources */,
 				6ED794942523C0670019795E /* TweetCommentViewController.swift in Sources */,
+				6E54B914252F0CF200A9EF03 /* News2TableViewController.swift in Sources */,
 				6E5047C3251AA88E007B6A59 /* CreateTweetViewController.swift in Sources */,
 				834912FA24C74A2D002990F8 /* EnterResidenceViewController.swift in Sources */,
 				834912FC24C75830002990F8 /* StartViewController.swift in Sources */,
@@ -1387,10 +1458,13 @@
 				6E7C0FDE2500965E00E7A7B7 /* ParchmentViewController.swift in Sources */,
 				6E500C1D2524982100BF390F /* ItemCollectionViewController.swift in Sources */,
 				8350E4BB24D9AE3800487DB9 /* PIckerKeyboard11.swift in Sources */,
+				6E54B918252F0D0900A9EF03 /* News3TableViewController.swift in Sources */,
 				834959AB24F4056000CD052E /* NoticeListTableViewCell.swift in Sources */,
+				6E54B8E0252EFD0D00A9EF03 /* NewsCollectionViewCell.swift in Sources */,
 				838071E824C627E0008BAA2C /* User.swift in Sources */,
 				83B6231F24E2BA7800363548 /* InquryInputTableViewController.swift in Sources */,
 				831E392624C9CBFE0043AA76 /* DetailTableViewCell.swift in Sources */,
+				6E27AB02252DF9A80000F025 /* NewsTableViewController.swift in Sources */,
 				6ECF471D2501A26B00735F14 /* NewUserCollectionViewController.swift in Sources */,
 				8350140024D414C4008D1170 /* MessageTableViewCell.swift in Sources */,
 				8348B5E124D2A1560000A187 /* PostTableViewCell.swift in Sources */,
@@ -1420,9 +1494,11 @@
 				6E504796251AA870007B6A59 /* TweetTableViewController.swift in Sources */,
 				6E504792251A46A3007B6A59 /* Comment.swift in Sources */,
 				838071EA24C6299D008BAA2C /* Constants.swift in Sources */,
+				6E27AB06252DFEC50000F025 /* NewsTableViewCell.swift in Sources */,
 				8350E4AF24D9ADFB00487DB9 /* PIckerKeyboard5.swift in Sources */,
 				8348E3FF24D1154D001D59C0 /* SettingTableViewController.swift in Sources */,
 				834959AD24F406C600CD052E /* Notice.swift in Sources */,
+				6E27AAFE252DF7C00000F025 /* WebViewController.swift in Sources */,
 				6EA585B12508E36700C4C586 /* MissionTableViewController.swift in Sources */,
 				8348E76D24E83BA20046C6DE /* PrivacyPolicyTableViewController.swift in Sources */,
 				834966C424DC25E200C9B7DD /* InboxTableViewController.swift in Sources */,
@@ -1449,9 +1525,11 @@
 				6E696F402513CA2A00B012AD /* Community.swift in Sources */,
 				8354409F24D7DF09001C9398 /* Config.swift in Sources */,
 				8368CD9024E16B49009C0391 /* ModalSearchTableViewController.swift in Sources */,
+				6E54B92A252F244F00A9EF03 /* News9TableViewController.swift in Sources */,
 				8348B5E724D35ADC0000A187 /* GenreTableViewController.swift in Sources */,
 				838071F524C6E541008BAA2C /* EnterNameViewController.swift in Sources */,
 				8348E3D324CD3F4A001D59C0 /* PickerKeyboard3.swift in Sources */,
+				6E54B91E252F23C800A9EF03 /* News5TableViewController.swift in Sources */,
 				8348B5E924D38C0F0000A187 /* MyPageTableViewController.swift in Sources */,
 				834966C624DCF4CD00C9B7DD /* CommentTableViewController.swift in Sources */,
 				83AD3D2924F2161200C02365 /* LikeCountSortViewController.swift in Sources */,
@@ -1469,6 +1547,7 @@
 				834C32D224E3AFCE003330B1 /* BlockListTableViewController.swift in Sources */,
 				834912F624C7283D002990F8 /* Service.swift in Sources */,
 				834959AF24F4559100CD052E /* NoticeTableViewController.swift in Sources */,
+				6E54B91B252F23AB00A9EF03 /* News4TableViewController.swift in Sources */,
 				8348E76F24E83D110046C6DE /* PrivacyPolicyTableViewCell.swift in Sources */,
 				835013FE24D41458008D1170 /* MessageTebleViewController.swift in Sources */,
 				834966CC24DD172300C9B7DD /* DetailAreaTableViewController.swift in Sources */,

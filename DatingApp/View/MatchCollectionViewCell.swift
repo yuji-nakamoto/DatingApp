@@ -16,7 +16,6 @@ class MatchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var residenceLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var onlineView: UIView!
     
     func configureCell(_ user: User) {
  
@@ -38,20 +37,14 @@ class MatchCollectionViewCell: UICollectionViewCell {
     func configureMacthCell(_ user: User) {
         
         profileImageView.layer.cornerRadius = 60 / 2
-        onlineView.layer.cornerRadius = 15 / 2
-        onlineView.layer.borderWidth = 2
-        onlineView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
-        
-        COLLECTION_USERS.document(user.uid).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                print("Error fetch is online: \(error.localizedDescription)")
-            }
-            if let dict = snapshot?.data() {
-                if let active = dict[STATUS] as? String {
-                    self.onlineView.backgroundColor = active == "online" ? .systemGreen : .systemOrange
-                }
-            }
+        profileImageView.layer.borderWidth = 3
+        if user.gender == "女性" {
+            profileImageView.layer.borderColor = UIColor(named: O_RED)?.cgColor
+        } else {
+            profileImageView.layer.borderColor = UIColor(named: O_GREEN)?.cgColor
         }
+        
+        nameLabel.text = user.username
+        profileImageView.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
     }
 }
