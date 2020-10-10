@@ -70,6 +70,7 @@ struct AuthService {
             UserDefaults.standard.removeObject(forKey: FACEBOOK)
             UserDefaults.standard.removeObject(forKey: APPLE)
             UserDefaults.standard.removeObject(forKey: ISREAD_ON)
+            UserDefaults.standard.removeObject(forKey: DISTANCE_ON)
 
             do {
                 if let providerData = Auth.auth().currentUser?.providerData {
@@ -123,6 +124,7 @@ struct AuthService {
                                     UserDefaults.standard.removeObject(forKey: MALE)
                                     UserDefaults.standard.removeObject(forKey: FEMALE)
                                     UserDefaults.standard.removeObject(forKey: ISREAD_ON)
+                                    UserDefaults.standard.removeObject(forKey: DISTANCE_ON)
                                     UserDefaults.standard.removeObject(forKey: SEARCH_MINI_ON)
                                     completion(error)
                                 }

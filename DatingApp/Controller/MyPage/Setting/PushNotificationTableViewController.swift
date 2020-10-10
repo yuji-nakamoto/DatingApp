@@ -150,6 +150,8 @@ class PushNotificationTableViewController: UITableViewController {
     
     private func setupUI() {
         
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "プッシュ通知設定"
         tableView.tableFooterView = UIView()
         

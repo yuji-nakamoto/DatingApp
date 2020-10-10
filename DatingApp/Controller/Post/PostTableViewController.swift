@@ -216,12 +216,14 @@ class PostTableViewController: UIViewController {
     
     private func setupUI() {
         
+        UserDefaults.standard.removeObject(forKey: CARDVC)
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        UserDefaults.standard.removeObject(forKey: CARDVC)
         tableView.separatorStyle = .none
         tableView.refreshControl = refresh
         tableView.tableFooterView = UIView()
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "投稿"
         refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }

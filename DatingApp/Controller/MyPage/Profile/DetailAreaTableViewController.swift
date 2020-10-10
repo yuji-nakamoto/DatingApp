@@ -26,6 +26,7 @@ class DetailAreaTableViewController: UITableViewController, UITextFieldDelegate 
         super.viewDidLoad()
         navigationItem.title = "詳細エリア"
         tableView.separatorStyle = .none
+        saveButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!], for: .normal)
         setupKeyboard()
         fetchUser()
     }

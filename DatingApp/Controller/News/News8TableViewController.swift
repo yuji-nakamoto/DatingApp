@@ -15,15 +15,25 @@ class News8TableViewController: UIViewController, XMLParserDelegate {
     var parser = XMLParser()
     var currentElementName: String!
     var newsItems = [NewsItems]()
+    private let refresh = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         tableView.tableFooterView = UIView()
         setupParser()
     }
     
     @objc var scrollView: UIScrollView {
         return tableView
+    }
+    
+    @objc func refreshTableView() {
+        newsItems.removeAll()
+        tableView.reloadData()
+        setupParser()
+        refresh.endRefreshing()
     }
 
     // MARK: - Partser
@@ -80,7 +90,7 @@ class News8TableViewController: UIViewController, XMLParserDelegate {
 extension News8TableViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 414, height: 205)
+        return CGSize(width: 414, height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -90,7 +100,7 @@ extension News8TableViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! NewsCollectionViewCell
         let newsItem = newsItems[indexPath.row]
-
+        
         cell.configureCell(imageUrl: newsItem.url!, newsItems: newsItem)
         return cell
     }
@@ -102,27 +112,38 @@ extension News8TableViewController: UICollectionViewDataSource, UICollectionView
     }
 }
 
-// MARK: - Table view data source
+// MARK: - Table view
 
 extension News8TableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsItems.count
     }
-
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 0
+        }
+        return 60
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsTableViewCell
-        let newsItem = self.newsItems[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.configureCell(imageUrl: newsItem.url!, newsItems: newsItem)
+        if indexPath.row != 0 {
+            let label = cell.viewWithTag(1) as! UILabel
+            label.text = newsItems[indexPath.row].title
+            return cell
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         let newsItem = newsItems[indexPath.row]
         UserDefaults.standard.set(newsItem.url, forKey: "url")
         UserDefaults.standard.set(newsItem.title, forKey: "title")
     }
 }
+

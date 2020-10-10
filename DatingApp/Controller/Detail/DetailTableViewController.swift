@@ -701,6 +701,7 @@ extension DetailTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell.detailVC = self
         cell.user = self.user
+        cell.currentUser = self.currentUser
         cell.configureCell(self.user)
         cell.currentLocation(self.user, self.currentLocation)
         cell.configureCommunity1(self.user, self.community1)

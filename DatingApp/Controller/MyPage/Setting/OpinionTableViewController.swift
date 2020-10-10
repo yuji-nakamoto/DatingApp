@@ -85,6 +85,8 @@ class OpinionTableViewController: UITableViewController {
     }
     
     private func setupUI() {
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "ご意見・ご要望・改善等"
         sendButton.layer.cornerRadius = 15
     }

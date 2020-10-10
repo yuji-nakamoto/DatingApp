@@ -18,6 +18,8 @@ class WebViewController: UIViewController, WKUIDelegate {
         webVIew.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height - 50)
         view.addSubview(webVIew)
         
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         let title = UserDefaults.standard.object(forKey: "title")
         navigationItem.title = title as? String
         

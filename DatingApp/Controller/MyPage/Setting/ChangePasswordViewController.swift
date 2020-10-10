@@ -20,9 +20,9 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIButton!
     
     private var hud = JGProgressHUD(style: .dark)
-    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 230, width: 300, height: 60))
-    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 290, width: 300, height: 60))
-    private let newPasswordTextField = HoshiTextField(frame: CGRect(x: 40, y: 350, width: 300, height: 60))
+    private let emailTextField = HoshiTextField(frame: CGRect(x: 40, y: 210, width: 300, height: 60))
+    private let passwordTextField = HoshiTextField(frame: CGRect(x: 40, y: 270, width: 300, height: 60))
+    private let newPasswordTextField = HoshiTextField(frame: CGRect(x: 40, y: 330, width: 300, height: 60))
     
     // MARK: - Lifecycle
     

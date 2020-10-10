@@ -270,6 +270,8 @@ class MyPageTableViewController: UIViewController {
     
     private func setupUI() {
         
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         tableView.separatorStyle = .none
         hintView.alpha = 0
         visualEffectView.alpha = 0

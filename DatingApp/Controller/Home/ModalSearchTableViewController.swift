@@ -182,6 +182,8 @@ class ModalSearchTableViewController: UITableViewController {
         pickerKeyBoard6.delegate = self
         pickerKeyBoard16.delegate = self
         tableView.tableFooterView = UIView()
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "検索条件"
         doneButton.layer.cornerRadius = 44 / 2
     }

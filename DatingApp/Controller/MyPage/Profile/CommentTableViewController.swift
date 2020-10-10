@@ -25,6 +25,7 @@ class CommentTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         navigationItem.title = "ひとこと"
         tableView.separatorStyle = .none
+        saveButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!], for: .normal)
         setupKeyboard()
         fetchUser()
     }

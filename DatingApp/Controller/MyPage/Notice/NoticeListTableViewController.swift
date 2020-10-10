@@ -45,6 +45,8 @@ class NoticeListTableViewController: UIViewController {
     
     private func setupUI() {
         tableView.tableFooterView = UIView()
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "お知らせ"
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self

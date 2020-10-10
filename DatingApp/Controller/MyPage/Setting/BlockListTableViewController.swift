@@ -95,6 +95,8 @@ class BlockListTableViewController: UIViewController {
         
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "ブロック"
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none

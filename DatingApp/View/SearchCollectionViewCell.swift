@@ -95,7 +95,11 @@ class SearchCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        guard miniNewLabel != nil else { return }
+        guard miniNewLabel != nil else {
+            miniNumberLabel.layer.cornerRadius = 10
+            miniNumberLabel.backgroundColor = .white
+            return
+        }
         if user.newUser == true {
             miniNewLabel.isHidden = false
             miniNewLabel.layer.cornerRadius = 18 / 2

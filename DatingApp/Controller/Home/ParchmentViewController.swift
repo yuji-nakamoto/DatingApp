@@ -23,7 +23,12 @@ class ParchmentViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Actions
@@ -42,7 +47,7 @@ class ParchmentViewController: UIViewController {
     }
     
     @IBAction func cardButtonPressed(_ sender: Any) {
-        toCardVC()
+//        toCardVC()
     }
     
     // MARK: - Helpers
@@ -75,8 +80,8 @@ class ParchmentViewController: UIViewController {
             pagingVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 75)
         ])
         
-        pagingVC.font = UIFont.systemFont(ofSize: 11, weight: .medium)
-        pagingVC.selectedFont = UIFont.systemFont(ofSize: 13, weight: .medium)
+        pagingVC.font = UIFont(name: "HiraMaruProN-W4", size: 11)!
+        pagingVC.selectedFont = UIFont(name: "HiraMaruProN-W4", size: 13)!
         pagingVC.selectedTextColor = .black
         pagingVC.indicatorColor = UIColor(named: O_RED)!
         pagingVC.menuItemSize = .fixed(width: 110, height: 40)

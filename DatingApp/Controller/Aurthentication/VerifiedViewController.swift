@@ -56,7 +56,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         } else {
             generator.notificationOccurred(.error)
             hud.textLabel.text = "入力欄を全て埋めてください"
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.dismiss(afterDelay: 2.0)
         }
     }
@@ -68,7 +67,6 @@ class VerifiedViewController: UIViewController, UITextFieldDelegate {
         }
         hud.textLabel.text = "認証のメールを再送信しました"
         hud.show(in: self.view)
-        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         hud.dismiss(afterDelay: 2.0)
     }
     

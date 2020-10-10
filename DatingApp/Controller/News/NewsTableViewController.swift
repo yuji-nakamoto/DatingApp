@@ -15,15 +15,25 @@ class NewsTableViewController: UIViewController, XMLParserDelegate {
     var parser = XMLParser()
     var currentElementName: String!
     var newsItems = [NewsItems]()
+    private let refresh = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         tableView.tableFooterView = UIView()
         setupParser()
     }
     
     @objc var scrollView: UIScrollView {
         return tableView
+    }
+    
+    @objc func refreshTableView() {
+        newsItems.removeAll()
+        tableView.reloadData()
+        setupParser()
+        refresh.endRefreshing()
     }
     
     // MARK: - Partser
@@ -80,7 +90,7 @@ class NewsTableViewController: UIViewController, XMLParserDelegate {
 extension NewsTableViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 414, height: 205)
+        return CGSize(width: 414, height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -102,7 +112,7 @@ extension NewsTableViewController: UICollectionViewDataSource, UICollectionViewD
     }
 }
 
-// MARK: - Table view data source
+// MARK: - Table view
 
 extension NewsTableViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -110,11 +120,21 @@ extension NewsTableViewController: UITableViewDelegate, UITableViewDataSource {
         return newsItems.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 0
+        }
+        return 60
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewsTableViewCell
-        let newsItem = self.newsItems[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.configureCell(imageUrl: newsItem.url!, newsItems: newsItem)
+        if indexPath.row != 0 {
+            let label = cell.viewWithTag(1) as! UILabel
+            label.text = newsItems[indexPath.row].title
+            return cell
+        }
         return cell
     }
     

@@ -19,7 +19,8 @@ class HobbyTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var hobbyCountLabel1: UILabel!
     @IBOutlet weak var hobbyCountLabel2: UILabel!
     @IBOutlet weak var hobbyCountLabel3: UILabel!
-
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     private var hud = JGProgressHUD(style: .dark)
     private var user: User!
     
@@ -27,6 +28,7 @@ class HobbyTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!], for: .normal)
         navigationItem.title = "趣味"
         tableView.separatorStyle = .none
         setupKeyboard()

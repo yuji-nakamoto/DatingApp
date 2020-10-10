@@ -42,11 +42,11 @@ class ParchmentMessageViewController: UIViewController {
             pagingVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pagingVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pagingVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            pagingVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 75)
+            pagingVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 40)
         ])
         
-        pagingVC.font = UIFont.systemFont(ofSize: 11, weight: .medium)
-        pagingVC.selectedFont = UIFont.systemFont(ofSize: 13, weight: .medium)
+        pagingVC.font = UIFont(name: "HiraMaruProN-W4", size: 11)!
+        pagingVC.selectedFont = UIFont(name: "HiraMaruProN-W4", size: 13)!
         pagingVC.selectedTextColor = .black
         pagingVC.indicatorColor = UIColor(named: O_RED)!
         pagingVC.menuItemSize = .fixed(width: 110, height: 40)

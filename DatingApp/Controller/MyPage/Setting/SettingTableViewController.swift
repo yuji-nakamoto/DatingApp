@@ -23,6 +23,13 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var pickerKeyboard: PickerKeyboard3!
     @IBOutlet weak var footstepSwitch: UISwitch!
     @IBOutlet weak var footstepLabel: UILabel!
+    @IBOutlet weak var readLabel: UILabel!
+    @IBOutlet weak var readSwitch: UISwitch!
+    @IBOutlet weak var keyImaegView: UIImageView!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var distanceSwitch: UISwitch!
+    @IBOutlet weak var keyImageView2: UIImageView!
     
     private var user = User()
     
@@ -64,7 +71,34 @@ class SettingTableViewController: UITableViewController {
             footstepLabel.text = "足あとを残さない"
         }
     }
-
+    
+    
+    @IBAction func readSwitched(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            generator.notificationOccurred(.success)
+            UserDefaults.standard.set(true, forKey: ISREAD_ON)
+            readLabel.text = "既読表示をする"
+        } else {
+            generator.notificationOccurred(.success)
+            UserDefaults.standard.removeObject(forKey: ISREAD_ON)
+            readLabel.text = "既読表示をしない"
+        }
+    }
+    
+    @IBAction func distanceSwitched(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            generator.notificationOccurred(.success)
+            UserDefaults.standard.set(true, forKey: DISTANCE_ON)
+            distanceLabel.text = "距離表示をする"
+        } else {
+            generator.notificationOccurred(.success)
+            UserDefaults.standard.removeObject(forKey: DISTANCE_ON)
+            distanceLabel.text = "距離表示をしない"
+        }
+    }
+    
     @IBAction func completionButtonPressed(_ sender: Any) {
         
         let dict = [MINAGE: Int(minLabel.text!)!,
@@ -79,6 +113,22 @@ class SettingTableViewController: UITableViewController {
         
         updateUser(withValue: dict as [String : Any])
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func tapKeyImageView() {
+        
+        let alert = UIAlertController(title: "", message: "ショップのアイテム(透視)を使用することで機能解放できます", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "確認", style: .cancel)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func tapKeyImageView2() {
+        
+        let alert = UIAlertController(title: "", message: "全てのミッションクリアで機能解放できます", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "確認", style: .cancel)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Fetch
@@ -137,12 +187,36 @@ class SettingTableViewController: UITableViewController {
         minSlider.value = Float(user.minAge)
         maxSlider.value = Float(user.maxAge)
         residenceLabel.text = user.sResidence
+        
+        if user.usedItem8 == 1 {
+            keyImaegView.isHidden = true
+            readSwitch.isHidden = false
+        } else {
+            keyImaegView.isHidden = false
+            readSwitch.isHidden = true
+        }
+        
+        if user.usedItem7 == 1 {
+            keyImageView2.isHidden = true
+            distanceSwitch.isHidden = false
+        } else {
+            keyImageView2.isHidden = false
+            distanceSwitch.isHidden = true
+        }
     }
     
     private func setupUI() {
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapKeyImageView))
+        keyImaegView.addGestureRecognizer(tap)
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapKeyImageView2))
+        keyImageView2.addGestureRecognizer(tap2)
+        
         pickerKeyboard.delegate = self
+        doneButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!], for: .normal)
         genderLabel.text = ""
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "設定"
         
         if UserDefaults.standard.object(forKey: FOOTSTEP_ON) != nil {
@@ -151,6 +225,22 @@ class SettingTableViewController: UITableViewController {
         } else {
             footstepSwitch.isOn = false
             footstepLabel.text = "足あとを残さない"
+        }
+        
+        if UserDefaults.standard.object(forKey: ISREAD_ON) != nil {
+            readSwitch.isOn = true
+            readLabel.text = "既読表示をする"
+        } else {
+            readSwitch.isOn = false
+            readLabel.text = "既読表示をしない"
+        }
+        
+        if UserDefaults.standard.object(forKey: DISTANCE_ON) != nil {
+            distanceSwitch.isOn = true
+            distanceLabel.text = "距離表示をする"
+        } else {
+            distanceSwitch.isOn = false
+            distanceLabel.text = "距離表示をしない"
         }
         
         if UserDefaults.standard.object(forKey: MALE) != nil {
@@ -194,13 +284,13 @@ class SettingTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if indexPath.section == 4 && indexPath.row == 0 {
+        if indexPath.section == 6 && indexPath.row == 0 {
             toChangeEmailVC()
-        } else if indexPath.section == 4 && indexPath.row == 1 {
+        } else if indexPath.section == 6 && indexPath.row == 1 {
             toChangePasswordVC()
-        } else if indexPath.section == 5 && indexPath.row == 4 {
+        } else if indexPath.section == 7 && indexPath.row == 4 {
             withdraw()
-        } else if indexPath.section == 6 {
+        } else if indexPath.section == 8 {
             logoutUser()
         }
     }

@@ -16,8 +16,6 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var usedLabel5: UILabel!
     @IBOutlet weak var usedLabel6: UILabel!
     @IBOutlet weak var usedLabel7: UILabel!
-    @IBOutlet weak var isReadSwitch: UISwitch!
-    @IBOutlet weak var isReadLabel: UILabel!
     
     var itemVC: ItemCollectionViewController?
     
@@ -65,43 +63,12 @@ class ItemTableViewCell: UITableViewCell {
         }
         
         if user.usedItem8 > 0 {
-            self.usedLabel7.isHidden = true
+            self.usedLabel7.text = "使用中"
+            self.usedLabel7.textColor = UIColor(named: O_GREEN)
         } else {
             self.usedLabel7.isHidden = false
             self.usedLabel7.text = "未使用"
             self.usedLabel7.textColor = .systemGray
-        }
-    }
-    
-    func setupIsRead(_ user: User) {
-        
-        if user.usedItem8 == 1 {
-            self.isReadSwitch.isHidden = false
-            self.isReadLabel.text = "既読表示をする"
-            
-            if UserDefaults.standard.object(forKey: ISREAD_ON) != nil {
-                self.isReadSwitch.isOn = true
-                self.isReadLabel.text = "既読表示をする"
-            } else {
-                self.isReadSwitch.isOn = false
-                self.isReadLabel.text = "既読表示をしない"
-            }
-            
-        } else {
-            self.isReadSwitch.isHidden = true
-            self.isReadLabel.text = "透視"
-        }
-    }
-    
-    @IBAction func isReadSwitched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            UserDefaults.standard.set(true, forKey: ISREAD_ON)
-            self.isReadLabel.text = "既読表示をする"
-
-        } else {
-            UserDefaults.standard.removeObject(forKey: ISREAD_ON)
-            self.isReadLabel.text = "既読表示をしない"
         }
     }
 }

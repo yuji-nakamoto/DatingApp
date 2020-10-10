@@ -23,8 +23,10 @@ class NicknameTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.title = "ニックネーム"
         tableView.separatorStyle = .none
+        saveButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!], for: .normal)
         setupKeyboard()
         fetchUser()
     }

@@ -25,7 +25,6 @@ class OpinionInputTableViewController: UITableViewController, UITextViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "ご意見・ご要望・改善等"
         setupUI()
         fetchUser()
     }
@@ -75,6 +74,9 @@ class OpinionInputTableViewController: UITableViewController, UITextViewDelegate
     
     private func setupUI() {
         
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
+        navigationItem.title = "ご意見・ご要望・改善等"
         saveButton.layer.cornerRadius = 15
         backView.backgroundColor = .clear
         backView.layer .cornerRadius = 5

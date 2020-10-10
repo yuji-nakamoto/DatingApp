@@ -25,7 +25,7 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "お問い合わせ内容"
+        
         setupUI()
         fetchUser()
     }
@@ -74,6 +74,9 @@ class InquryInputTableViewController: UITableViewController, UITextViewDelegate 
     
     private func setupUI() {
         
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
+        navigationItem.title = "お問い合わせ内容"
         saveButton.layer.cornerRadius = 15
         backView.backgroundColor = .clear
         backView.layer .cornerRadius = 5

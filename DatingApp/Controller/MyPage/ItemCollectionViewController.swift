@@ -84,7 +84,6 @@ extension ItemCollectionViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! ItemTableViewCell
         cell.itemVC = self
         cell.usedItems(self.user)
-        cell.setupIsRead(self.user)
         return cell
     }
 }
@@ -256,8 +255,8 @@ extension ItemCollectionViewController: UICollectionViewDataSource, UICollection
                 hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                 hud.dismiss(afterDelay: 1.5)
                 updateUser(withValue: [ITEM7: self.user.item7 - 1,
-                                       USEDITEM7: self.user.usedItem7 + 1,
-                                       MFURIMAP: true])
+                                       USEDITEM7: self.user.usedItem7 + 1])
+                UserDefaults.standard.set(true, forKey: DISTANCE_ON)
             }
             let cancel = UIAlertAction(title: "キャンセル", style: .cancel)
             

@@ -95,6 +95,8 @@ class InquiryTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     private func setupUI() {
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "お問い合わせ"
         sendButton.layer.cornerRadius = 15
         emailTextField.delegate = self

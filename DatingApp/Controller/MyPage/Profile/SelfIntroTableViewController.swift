@@ -14,6 +14,7 @@ class SelfIntroTableViewController: UITableViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     private var user: User!
     
@@ -22,6 +23,7 @@ class SelfIntroTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "自己紹介"
+        saveButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!], for: .normal)
         setupUI()
         fetchUser()
     }

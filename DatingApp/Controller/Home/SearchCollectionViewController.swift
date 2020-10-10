@@ -182,25 +182,7 @@ class SearchCollectionViewController: UIViewController {
             activityIndicator!.stopAnimating()
         }
     }
-    
-    //    private func findUser() {
-    //
-    //        guard let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String,
-    //            let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String else { return }
-    //
-    //        let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
-    //
-    //        myQuery = geofirestroe.query(withCenter: location, radius: distance)
-    //        myQuery.observe(.documentEntered) { (key, location) in
-    //
-    //            if key != User.currentUserId() {
-    //                User.fetchUser(key!) { (user) in
-    //
-    //                }
-    //            }
-    //        }
-    //    }
-    
+
     private func messagingUnsubscribe() {
         
         Messaging.messaging().unsubscribe(fromTopic: "message\(Auth.auth().currentUser!.uid)")
@@ -438,13 +420,6 @@ extension SearchCollectionViewController: CLLocationManagerDelegate {
             let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
             
             updateUser(withValue: [LATITUDE: userLat, LONGITUDE: userLong])
-            
-            let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
-            self.geofirestroe.setLocation(location: location, forDocumentWithID: User.currentUserId()) { (error) in
-                if error == nil {
-                    //                    self.findUser()
-                }
-            }
         }
     }
 }

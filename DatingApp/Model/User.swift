@@ -110,7 +110,6 @@ class User {
     var mProfile: Bool!
     var mKaigan: Bool!
     var mToshi: Bool!
-    var mFurimap: Bool!
     var mMissionClear: Bool!
     var loginGetPt1: Bool!
     var loginGetPt2: Bool!
@@ -137,6 +136,7 @@ class User {
     var community2: String!
     var community3: String!
     var createCommunityCount: Int!
+    var administrator: Bool!
     
     init() {
     }
@@ -241,7 +241,6 @@ class User {
         mProfile = dict[MPROFILE] as? Bool ?? false
         mKaigan = dict[MKAIGAN] as? Bool ?? false
         mToshi = dict[MTOSHI] as? Bool ?? false
-        mFurimap = dict[MFURIMAP] as? Bool ?? false
         mMissionClear = dict[MMISSIONCLEAR] as? Bool ?? false
         loginGetPt1 = dict[LOGINGETPT1]as? Bool ?? false
         loginGetPt2 = dict[LOGINGETPT2]as? Bool ?? false
@@ -268,6 +267,7 @@ class User {
         community2 = dict[COMMUNITY2] as? String ?? ""
         community3 = dict[COMMUNITY3] as? String ?? ""
         createCommunityCount = dict[CREATECOMMUNITYCOUNT] as? Int ?? 0
+        administrator = dict["administrator"] as? Bool ?? false
     }
     
     // MARK: - Return user

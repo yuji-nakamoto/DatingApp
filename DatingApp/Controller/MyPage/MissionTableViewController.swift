@@ -293,7 +293,7 @@ class MissionTableViewController: UITableViewController {
     }
     @IBAction func missionClearButtonPressed(_ sender: Any) {
         
-        if user.loginGetPt1 && user.loginGetPt2 && user.typeGetPt1 && user.typeGetPt2 && user.messageGetPt1 && user.messageGetPt2 && user.matchGetPt1 && user.matchGetPt2 && user.footGetPt1 && user.footGetPt2 && user.communityGetPt1 && user.communityGetPt2 && user.communityGetPt3 && user.communityGetPt4 && user.profileGetPt1 && user.toshiGetPt && user.kaiganGetPt {
+        if user.loginGetPt1 && user.loginGetPt2 && user.likeGetPt1 && user.likeGetPt2 && user.typeGetPt1 && user.typeGetPt2 && user.messageGetPt1 && user.messageGetPt2 && user.matchGetPt1 && user.matchGetPt2 && user.footGetPt1 && user.footGetPt2 && user.communityGetPt1 && user.communityGetPt2 && user.communityGetPt3 && user.communityGetPt4 && user.profileGetPt1 && user.toshiGetPt && user.kaiganGetPt {
             missionClearButton.setTitle("  受け取り済み  ", for: .normal)
             missionClearButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: 13)
             missionClearButton.setTitleColor(UIColor(named: O_RED), for: .normal)

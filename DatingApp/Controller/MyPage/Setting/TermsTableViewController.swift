@@ -18,6 +18,8 @@ class TermsTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "利用規約"
         tableView.delegate = self
         tableView.dataSource = self

@@ -170,7 +170,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         settingPhoto(didSelect: sender.tag)
     }
     
-    // MARK: - Fetch user
+    // MARK: - Fetch
     
     private func fetchUser() {
         
@@ -181,7 +181,7 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: Save data
+    // MARK: Save
     
     private func saveUploadImage1() {
         guard profileImage1 != nil else { return }
@@ -291,6 +291,9 @@ class EditTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     private func setupUI() {
+        
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "プロフィール編集"
         picker.delegate = self
         pickerKeyboardView1.delegate = self

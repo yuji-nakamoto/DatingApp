@@ -26,6 +26,8 @@ class SelectGenderTableViewController: UITableViewController {
     // MARK: - Helpers
     
     private func setupUI() {
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "出会いたい人の性別"
 
         if UserDefaults.standard.object(forKey: MALE) != nil {

@@ -39,7 +39,7 @@ class ParchmentNewsViewController: UIViewController {
         let news8VC = storyboard.instantiateViewController(withIdentifier: "News8VC")
         let news9VC = storyboard.instantiateViewController(withIdentifier: "News9VC")
         
-        news1VC.title = "主要"
+        news1VC.title = "トレンド"
         news2VC.title = "エンタメ"
         news3VC.title = "スポーツ"
         news4VC.title = "IT"
@@ -59,14 +59,14 @@ class ParchmentNewsViewController: UIViewController {
             pagingVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pagingVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             pagingVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            pagingVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 75)
+            pagingVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 40)
         ])
         
-        pagingVC.font = UIFont.systemFont(ofSize: 11, weight: .medium)
-        pagingVC.selectedFont = UIFont.systemFont(ofSize: 13, weight: .medium)
+        pagingVC.font = UIFont(name: "HiraMaruProN-W4", size: 11)!
+        pagingVC.selectedFont = UIFont(name: "HiraMaruProN-W4", size: 13)!
         pagingVC.selectedTextColor = .black
         pagingVC.indicatorColor = UIColor(named: O_RED)!
-        pagingVC.menuItemSize = .fixed(width: 90, height: 40)
+        pagingVC.menuItemSize = .fixed(width: 100, height: 40)
         pagingVC.menuHorizontalAlignment = .left
     }
 }

@@ -16,6 +16,8 @@ class MyUINavigationViewController: UINavigationController {
     }
 
     public func setupColor() {
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationBar.shadowImage = UIImage()
         navigationBar.barTintColor = UIColor.white
     }

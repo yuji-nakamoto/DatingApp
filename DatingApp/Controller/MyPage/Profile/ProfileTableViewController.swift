@@ -125,6 +125,7 @@ extension ProfileTableViewController: UITableViewDelegate, UITableViewDataSource
  
         cell.profileVC = self
         cell.user = self.user
+        cell.currentUser = self.user
         cell.configureCell(self.user)
         cell.configureCommunity1(self.user, self.community1)
         cell.configureCommunity2(self.user, self.community2)

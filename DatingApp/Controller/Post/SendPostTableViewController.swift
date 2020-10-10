@@ -149,7 +149,6 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     }
     
     private func setupGenre() {
-        navigationItem.title = "投稿内容"
         
         if userDefaults.object(forKey: LOVER) != nil {
             selectLabel.text = "恋人募集"
@@ -186,6 +185,9 @@ class SendPostTableViewController: UITableViewController, GADInterstitialDelegat
     
     private func setupUI() {
         sendButton.isEnabled = true
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
+        navigationItem.title = "投稿内容"
     }
 }
 

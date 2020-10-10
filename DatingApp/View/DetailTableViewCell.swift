@@ -91,6 +91,8 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var numberLabel2: UILabel!
     @IBOutlet weak var numberLabel3: UILabel!
     @IBOutlet weak var crown: UIImageView!
+    @IBOutlet weak var userIdLabel: UILabel!
+    @IBOutlet weak var idLabel: UILabel!
     
     // MARK: - User
     
@@ -164,6 +166,12 @@ class DetailTableViewCell: UITableViewCell {
         nameLabel2.text = user?.username
         residenceLabel.text = user?.residence
         residenceLabel2.text = user?.residence
+        userIdLabel.text = user?.uid
+        
+        if currentUser.administrator != true {
+            userIdLabel.isHidden = true
+            idLabel.isHidden = true
+        }
         
         if user?.profession == "" {
             professionLabel.text = "未設定"
@@ -404,7 +412,7 @@ class DetailTableViewCell: UITableViewCell {
     
     func configureCommunity2(_ user: User, _ community2: Community) {
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapCommunityLbl2))
-
+        
         if user.community2 == "" {
             self.communityLabel2.isUserInteractionEnabled = false
             self.communityLabel2.textColor = UIColor(named: O_BLACK)
@@ -424,7 +432,7 @@ class DetailTableViewCell: UITableViewCell {
     
     func configureCommunity3(_ user: User, _ community3: Community) {
         let tap3 = UITapGestureRecognizer(target: self, action: #selector(tapCommunityLbl3))
-
+        
         if user.community3 == "" {
             self.communityLabel3.isUserInteractionEnabled = false
             self.communityLabel3.textColor = UIColor(named: O_BLACK)
@@ -442,22 +450,21 @@ class DetailTableViewCell: UITableViewCell {
         }
     }
     
-    func currentLocation(_ user: User?, _ currentLocation: CLLocation?) {
+    // MARK: - Location
+    
+    func currentLocation(_ user: User, _ currentLocation: CLLocation?) {
         
         guard let _ = currentLocation else { return }
         
-        if user?.latitude != "" && user?.longitude != "" {
-            let userLocation = CLLocation(latitude: Double(user!.latitude)!, longitude: Double(user!.longitude)!)
+        if user.latitude != "" && user.longitude != "" {
+            let userLocation = CLLocation(latitude: Double(user.latitude)!, longitude: Double(user.longitude)!)
             let distanceInKM: CLLocationDistance = userLocation.distance(from: currentLocation!) / 1000
             
-            User.fetchUser(User.currentUserId()) { (user) in
-                self.currentUser = user
-                if self.currentUser.usedItem7 == 1 {
-                    self.distanceLabel.text = String(format: "%.f Km", distanceInKM)
-                    self.distanceLabel.isHidden = false
-                } else {
-                    self.distanceLabel.isHidden = true
-                }
+            if UserDefaults.standard.object(forKey: DISTANCE_ON) != nil {
+                self.distanceLabel.text = String(format: "%.f Km", distanceInKM)
+                self.distanceLabel.isHidden = false
+            } else {
+                self.distanceLabel.isHidden = true
             }
             
         } else {
@@ -476,7 +483,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     @objc func tapCommunityLbl2() {
-
+        
         if let communityId2 = user.community2 {
             profileVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId2)
             detailVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId2)
@@ -484,7 +491,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     @objc func tapCommunityLbl3() {
-
+        
         if let communityId3 = user.community3 {
             profileVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId3)
             detailVC?.performSegue(withIdentifier: "CommunityUsersVC", sender: communityId3)

@@ -147,6 +147,8 @@ class CommunityTableCollectionViewController: UITableViewController {
     }
     
     private func setup() {
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "コミュニティ"
         communityButton.layer.cornerRadius = 10
         createButton.layer.cornerRadius = 10

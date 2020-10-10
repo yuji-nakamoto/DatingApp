@@ -36,6 +36,8 @@ class GenreTableViewController: UITableViewController {
     // MARK: - Helpers
     
     private func selectedGenre() {
+        navigationController?.navigationBar.titleTextAttributes
+            = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
         navigationItem.title = "ジャンル"
         loverButton.isHidden = true
         friendButton.isHidden = true
