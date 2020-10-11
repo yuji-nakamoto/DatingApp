@@ -30,8 +30,8 @@ class MyCommunityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         if UserDefaults.standard.object(forKey: REFRESH2) == nil {
             fetchUser()
         }
@@ -45,6 +45,7 @@ class MyCommunityViewController: UIViewController {
             commuArray.removeAll()
             self.fetchUser()
         }
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Actions

@@ -18,12 +18,15 @@
 		6E500C1D2524982100BF390F /* ItemCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E500C1C2524982100BF390F /* ItemCollectionViewController.swift */; };
 		6E500C4A252498B400BF390F /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E500C49252498B400BF390F /* ItemTableViewCell.swift */; };
 		6E500C4C252498CB00BF390F /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E500C4B252498CB00BF390F /* ItemCollectionViewCell.swift */; };
+		6E50333B253214CB00EACA4A /* ReplyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50333A253214CB00EACA4A /* ReplyListTableViewController.swift */; };
+		6E50333E25322BDD00EACA4A /* ParchmentCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50333D25322BDD00EACA4A /* ParchmentCommunityViewController.swift */; };
 		6E5043DA251509A500049E14 /* CommunityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5043D9251509A500049E14 /* CommunityListViewController.swift */; };
 		6E504792251A46A3007B6A59 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E504791251A46A3007B6A59 /* Comment.swift */; };
 		6E504796251AA870007B6A59 /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E504795251AA870007B6A59 /* TweetTableViewController.swift */; };
 		6E5047C3251AA88E007B6A59 /* CreateTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5047C2251AA88E007B6A59 /* CreateTweetViewController.swift */; };
 		6E5047C5251AA8DD007B6A59 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5047C4251AA8DD007B6A59 /* TweetTableViewCell.swift */; };
 		6E5047C7251AACCE007B6A59 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5047C6251AACCE007B6A59 /* Tweet.swift */; };
+		6E510C202532EF8A00CDD8BE /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E510C1F2532EF8A00CDD8BE /* ImageViewController.swift */; };
 		6E54B8E0252EFD0D00A9EF03 /* NewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B8DF252EFD0D00A9EF03 /* NewsCollectionViewCell.swift */; };
 		6E54B911252F0BBB00A9EF03 /* ParchmentNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B910252F0BBB00A9EF03 /* ParchmentNewsViewController.swift */; };
 		6E54B914252F0CF200A9EF03 /* News2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E54B913252F0CF200A9EF03 /* News2TableViewController.swift */; };
@@ -448,12 +451,15 @@
 		6E500C1C2524982100BF390F /* ItemCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewController.swift; sourceTree = "<group>"; };
 		6E500C49252498B400BF390F /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		6E500C4B252498CB00BF390F /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E50333A253214CB00EACA4A /* ReplyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyListTableViewController.swift; sourceTree = "<group>"; };
+		6E50333D25322BDD00EACA4A /* ParchmentCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentCommunityViewController.swift; sourceTree = "<group>"; };
 		6E5043D9251509A500049E14 /* CommunityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityListViewController.swift; sourceTree = "<group>"; };
 		6E504791251A46A3007B6A59 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		6E504795251AA870007B6A59 /* TweetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
 		6E5047C2251AA88E007B6A59 /* CreateTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTweetViewController.swift; sourceTree = "<group>"; };
 		6E5047C4251AA8DD007B6A59 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		6E5047C6251AACCE007B6A59 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		6E510C1F2532EF8A00CDD8BE /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		6E54B8DF252EFD0D00A9EF03 /* NewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E54B910252F0BBB00A9EF03 /* ParchmentNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentNewsViewController.swift; sourceTree = "<group>"; };
 		6E54B913252F0CF200A9EF03 /* News2TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News2TableViewController.swift; sourceTree = "<group>"; };
@@ -698,6 +704,7 @@
 		6E696F732513F35100B012AD /* Community */ = {
 			isa = PBXGroup;
 			children = (
+				6E50333D25322BDD00EACA4A /* ParchmentCommunityViewController.swift */,
 				6E7FB9632529A56800DE275C /* CommunityTableCollectionViewController.swift */,
 				6E696F6C2513CFC600B012AD /* CreateCommunityTableViewController.swift */,
 				6E696F6E2513F0F600B012AD /* CommunityUsersViewController.swift */,
@@ -707,6 +714,8 @@
 				6ED794932523C0670019795E /* TweetCommentViewController.swift */,
 				6E7764A32526C4E5008FD424 /* ReplyViewController.swift */,
 				6E7FB9332529703600DE275C /* MyCommunityViewController.swift */,
+				6E50333A253214CB00EACA4A /* ReplyListTableViewController.swift */,
+				6E510C1F2532EF8A00CDD8BE /* ImageViewController.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1432,7 +1441,9 @@
 				6E74739F24F8254D00D14945 /* VideoViewController.swift in Sources */,
 				6ED794C12523C0890019795E /* TweetCommentTableViewCell.swift in Sources */,
 				830AF02E24EEE8140043827B /* HelpViewController.swift in Sources */,
+				6E510C202532EF8A00CDD8BE /* ImageViewController.swift in Sources */,
 				6E500C4A252498B400BF390F /* ItemTableViewCell.swift in Sources */,
+				6E50333E25322BDD00EACA4A /* ParchmentCommunityViewController.swift in Sources */,
 				6E54B927252F243100A9EF03 /* News8TableViewController.swift in Sources */,
 				6E46F66F24FBA17E000B1DAC /* Notice3TableViewController.swift in Sources */,
 				8350E4B924D9AE3000487DB9 /* PIckerKeyboard10.swift in Sources */,
@@ -1469,6 +1480,7 @@
 				6E5047C5251AA8DD007B6A59 /* TweetTableViewCell.swift in Sources */,
 				6E7FB9932529D19A00DE275C /* Favorite.swift in Sources */,
 				8348E3CF24CD3694001D59C0 /* PIckerKeyboard1.swift in Sources */,
+				6E50333B253214CB00EACA4A /* ReplyListTableViewController.swift in Sources */,
 				837C563124F078B400956FDC /* OpinionTableViewController.swift in Sources */,
 				834959B524F46DB500CD052E /* ShopTableViewCell.swift in Sources */,
 				6E46F67324FBA199000B1DAC /* Notice5TableViewController.swift in Sources */,
@@ -1711,7 +1723,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1733,7 +1745,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DatingApp/DatingApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2FZHPQ299M;
 				INFOPLIST_FILE = DatingApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

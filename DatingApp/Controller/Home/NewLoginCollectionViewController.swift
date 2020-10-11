@@ -27,8 +27,8 @@ class NewLoginCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupIndicator()
         addSnapshotListener()

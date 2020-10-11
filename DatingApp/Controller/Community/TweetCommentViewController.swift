@@ -39,13 +39,18 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setup()
         setupIndicator()
         fetchTweet()
         fetchCurrentUser()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Actions
@@ -70,7 +75,10 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         Tweet.updateCommentCount(communityId: tweet.communityId,
                                  tweetId: tweetId,
                                  withValue: [COMMENTCOUNT: tweet2.commentCount + 1])
-        
+        Tweet.saveCommentReply(commentId: commentId, userId: user.uid, withValue: [UID: User.currentUserId(),
+                                                                                   COMMENT: textField.text as Any,
+                                                                                   TWEETID: tweetId,
+                                                                                   DATE: date])
         textField.resignFirstResponder()
         textField.text = ""
         incrementAppBadgeCount()
@@ -91,6 +99,10 @@ class TweetCommentViewController: UIViewController, UITextFieldDelegate {
         
         showLoadingIndicator()
         Tweet.fetchTweet(tweetId: tweetId) { (tweet) in
+            if tweet.tweetId == "" {
+                self.hideLoadingIndicator()
+                return
+            }
             self.tweet = tweet
             self.fetchUser(self.tweet)
             self.fetchTweetComment(self.tweet)

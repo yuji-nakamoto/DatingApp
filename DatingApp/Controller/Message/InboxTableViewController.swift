@@ -38,8 +38,8 @@ class InboxTableViewController: UIViewController {
         fetchMatchUsers()
         updateUser(withValue: [NEWMESSAGE: false])
         
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
     }
     
     @objc func refreshCollectionView(){

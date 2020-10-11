@@ -28,8 +28,8 @@ class DidLikeTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupUI()
         setupIndicator()

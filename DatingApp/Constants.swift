@@ -32,7 +32,7 @@ public let COLLECTION_NOTICE = Firestore.firestore().collection("notice")
 public let COLLECTION_GEO = Firestore.firestore().collection("geography")
 public let COLLECTION_COMMUNITY = Firestore.firestore().collection("community")
 public let COLLECTION_TWEET = Firestore.firestore().collection("tweet")
-public let COLLECTION_REPLY = Firestore.firestore().collection("reply")
+public let COLLECTION_COMMENT_REPLY = Firestore.firestore().collection("comment_reply")
 public let COLLECTION_TWEET_COMMENT = Firestore.firestore().collection("tweet_comment")
 public let COLLECTION_FAVORITE = Firestore.firestore().collection("favorite")
 

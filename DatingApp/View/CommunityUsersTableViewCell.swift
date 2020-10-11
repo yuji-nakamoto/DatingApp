@@ -53,7 +53,7 @@ class CommunityUsersTableViewCell: UITableViewCell {
         visualEffectView.frame = self.backContentsImageView.frame
         self.backContentsImageView.addSubview(visualEffectView)
         contentsImageView.layer.cornerRadius = 15
-        communityButton.layer.cornerRadius = 30 / 2
+        communityButton.layer.cornerRadius = 35 / 2
         communityButton.isHidden = true
         titlteLabel.text = ""
         numberLabel1.text = ""

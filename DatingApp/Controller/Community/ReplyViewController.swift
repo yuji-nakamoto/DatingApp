@@ -61,6 +61,11 @@ class ReplyViewController: UIViewController, UITextFieldDelegate {
                     ISREPLY: true] as [String : Any]
         
         Tweet.updateTweetComment(tweetId: tweet.tweetId, commentId: commentId, withValue: dict)
+        Tweet.saveCommentReply(commentId: commentId, userId: user.uid, withValue: [UID: User.currentUserId(),
+                                                                                   COMMENT: textField.text as Any,
+                                                                                   TWEETID: tweet.tweetId as Any,
+                                                                                   DATE: date])
+        
         incrementAppBadgeCount()
         UserDefaults.standard.set(true, forKey: REFRESH2)
         textField.text = ""

@@ -32,8 +32,8 @@ class FootstepTableViewController: UIViewController {
         setupIndicator()
         fetchtFootstepedUsers()
         
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
     }
     
     // MARK: - Actions

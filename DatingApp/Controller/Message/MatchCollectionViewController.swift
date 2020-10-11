@@ -30,8 +30,8 @@ class MatchCollectionViewController: UIViewController {
         super.viewDidLoad()
         setupIndicator()
         setupUI()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {

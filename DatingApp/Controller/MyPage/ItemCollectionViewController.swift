@@ -25,8 +25,8 @@ class ItemCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         fetchUser()
         navigationItem.title = "所持アイテム"

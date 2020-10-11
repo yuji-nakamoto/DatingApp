@@ -34,10 +34,10 @@ class DidTypeTableViewController: UIViewController, GADInterstitialDelegate {
         fetchTypedUsers()
         updateUser(withValue: [NEWTYPE: false])
         
-//        setupBanner()
-//        interstitial = createAndLoadIntersitial()
-        testBanner()
-        interstitial = testIntersitial()
+        setupBanner()
+        interstitial = createAndLoadIntersitial()
+//        testBanner()
+//        interstitial = testIntersitial()
     }
 
     // MARK: - Actions

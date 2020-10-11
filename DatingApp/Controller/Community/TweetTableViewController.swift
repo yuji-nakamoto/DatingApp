@@ -30,8 +30,8 @@ class TweetTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupIndicator()
         fetchTweet()
@@ -41,6 +41,8 @@ class TweetTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
         UserDefaults.standard.removeObject(forKey: RESIZE)
         if UserDefaults.standard.object(forKey: REFRESH) != nil {
             fetchTweet()
@@ -74,6 +76,7 @@ class TweetTableViewController: UIViewController {
         tweets.removeAll()
         users.removeAll()
         tableView.reloadData()
+        UserDefaults.standard.removeObject(forKey: REFRESH_ON)
         
         Tweet.fetchTweets(communityId: communityId) { (tweet) in
             if tweet.uid == "" {
@@ -146,6 +149,12 @@ class TweetTableViewController: UIViewController {
             let tweetCommentVC = segue.destination as! TweetCommentViewController
             let tweetId = sender as! String
             tweetCommentVC.tweetId = tweetId
+        }
+        
+        if segue.identifier == "ImageVC" {
+            let imageVC = segue.destination as! ImageViewController
+            let tweetId = sender as! String
+            imageVC.tweetId = tweetId
         }
     }
     

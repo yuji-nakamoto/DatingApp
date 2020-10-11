@@ -76,6 +76,9 @@ class Tweet {
             if let error = error {
                 print("Error fetch tweet: \(error.localizedDescription)")
             }
+            if snapshot?.data() == nil {
+                completion(Tweet(dict: [TWEETID: ""]))
+            }
             guard let dict = snapshot?.data() else { return }
             let tweet = Tweet(dict: dict)
             completion(tweet)
@@ -123,16 +126,19 @@ class Tweet {
         }
     }
     
-    class func fetchReply(tweetId: String, commentId: String, completion: @escaping(Tweet) -> Void) {
+    class func fetchCommentReplys(completion: @escaping(Tweet) ->Void) {
         
-        COLLECTION_TWEET.document(tweetId).collection("comments").document(commentId).collection("reply").getDocuments { (snapshot, error) in
+        COLLECTION_COMMENT_REPLY.document(User.currentUserId()).collection("comment_reply").order(by: DATE).getDocuments { (snapshot, error) in
             if let error = error {
-                print("Error fetch reply: \(error.localizedDescription)")
+                print("Error fetch comment reply: \(error.localizedDescription)")
+            }
+            if snapshot?.documents == [] {
+                completion(Tweet(dict: [UID: ""]))
             }
             snapshot?.documents.forEach({ (documents) in
                 let dict = documents.data()
-                let reply = Tweet(dict: dict)
-                completion(reply)
+                let commentReply = Tweet(dict: dict)
+                completion(commentReply)
             })
         }
     }
@@ -169,15 +175,15 @@ class Tweet {
             completion(data)
         }
     }
-    
-    class func saveCommentReply(tweetId: String, commentId: String, replyId: String, withValue: [String: Any]) {
-        COLLECTION_TWEET.document(tweetId).collection("comments").document(commentId).collection("reply").document(replyId).setData(withValue)
-    }
-    
+        
     class func saveTweetComment(tweetId: String, commentId: String, withValue: [String: Any]) {
         COLLECTION_TWEET.document(tweetId).collection("comments").document(commentId).setData(withValue)
         
         COLLECTION_TWEET_COMMENT.document(commentId).setData(withValue)
+    }
+    
+    class func saveCommentReply(commentId: String, userId: String, withValue: [String: Any]) {
+        COLLECTION_COMMENT_REPLY.document(userId).collection("comment_reply").document(commentId).setData(withValue)
     }
     
     class func saveTweet(communityId: String, tweetId: String, withValue: [String: Any]) {

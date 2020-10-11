@@ -27,8 +27,8 @@ class FavoriteTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupIndicator()
         setupUI()

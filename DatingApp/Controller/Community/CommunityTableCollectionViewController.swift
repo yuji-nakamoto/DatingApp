@@ -8,15 +8,15 @@
 
 import UIKit
 import JGProgressHUD
+import GoogleMobileAds
 
 class CommunityTableCollectionViewController: UITableViewController {
 
     @IBOutlet weak var collectionView1: UICollectionView!
     @IBOutlet weak var collectionView2: UICollectionView!
     @IBOutlet weak var collectionView3: UICollectionView!
-    @IBOutlet weak var communityButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
-    @IBOutlet weak var newLabel: UILabel!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var communityArray1 = [Community]()
     private var communityArray2 = [Community]()
@@ -26,6 +26,8 @@ class CommunityTableCollectionViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBanner()
+//        testBanner()
         setup()
     }
     
@@ -74,12 +76,6 @@ class CommunityTableCollectionViewController: UITableViewController {
         
         User.fetchUser(User.currentUserId()) { (user) in
             self.user = user
-            
-            if self.user.newReply == true {
-                self.newLabel.isHidden = false
-            } else {
-                self.newLabel.isHidden = true
-            }
         }
     }
     
@@ -146,13 +142,24 @@ class CommunityTableCollectionViewController: UITableViewController {
         performSegue(withIdentifier: "CreateComVC", sender: nil)
     }
     
+    private func setupBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    private func testBanner() {
+        
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
     private func setup() {
         navigationController?.navigationBar.titleTextAttributes
             = [NSAttributedString.Key.font: UIFont(name: "HiraMaruProN-W4", size: 15)!]
-        navigationItem.title = "コミュニティ"
-        communityButton.layer.cornerRadius = 10
-        createButton.layer.cornerRadius = 10
-        newLabel.layer.cornerRadius = 9
+        createButton.layer.cornerRadius = 35 / 2
     }
 }
 

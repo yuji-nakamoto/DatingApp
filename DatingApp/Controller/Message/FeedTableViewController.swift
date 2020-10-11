@@ -30,8 +30,8 @@ class FeedTableViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupIndicator()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
     }
     
     override func viewWillAppear(_ animated: Bool) {

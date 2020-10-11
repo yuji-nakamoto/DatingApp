@@ -75,8 +75,8 @@ class DetailTableViewController: UIViewController, GADInterstitialDelegate, GADB
         super.viewDidLoad()
         setupUI()
         confifureLocationManager()
-//        interstitial = createAndLoadIntersitial()
-        interstitial = testIntersitial()
+        interstitial = createAndLoadIntersitial()
+//        interstitial = testIntersitial()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class News2TableViewController: UIViewController, XMLParserDelegate {
     
@@ -117,31 +118,29 @@ extension News2TableViewController: UICollectionViewDataSource, UICollectionView
 extension News2TableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsItems.count
+        return 1 + newsItems.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 0
-        }
-        return 60
-    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let bannerCell = tableView.dequeueReusableCell(withIdentifier: "BannerCell")
         
-        if indexPath.row != 0 {
-            let label = cell.viewWithTag(1) as! UILabel
-            label.text = newsItems[indexPath.row].title
-            return cell
+        if indexPath.row == 0 {
+            let bannerView = bannerCell!.viewWithTag(2) as! GADBannerView
+            bannerView.adUnitID = "ca-app-pub-4750883229624981/8230449518"
+            bannerView.rootViewController = self
+            bannerView.load(GADRequest())
+            return bannerCell!
         }
+        let label = cell.viewWithTag(1) as! UILabel
+        label.text = newsItems[indexPath.row - 1].title
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let newsItem = newsItems[indexPath.row]
+        let newsItem = newsItems[indexPath.row - 1]
         UserDefaults.standard.set(newsItem.url, forKey: "url")
         UserDefaults.standard.set(newsItem.title, forKey: "title")
     }

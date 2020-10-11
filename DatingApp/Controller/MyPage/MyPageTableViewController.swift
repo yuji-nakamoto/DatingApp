@@ -32,8 +32,8 @@ class MyPageTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         showHintView()
     }
     

@@ -28,6 +28,7 @@ class TweetTableViewCell: UITableViewCell {
     
     var tweetVC: TweetTableViewController?
     var tweetCommentVC: TweetCommentViewController?
+    var replyListVC: ReplyListTableViewController?
     var user = User()
     var tweet = Tweet()
     var community = Community()
@@ -81,6 +82,19 @@ class TweetTableViewCell: UITableViewCell {
             deleteButton.isHidden = false
         } else {
             deleteButton.isHidden = true
+        }
+    }
+    
+    func configureTweetListCell(_ tweet: Tweet, _ user: User) {
+        
+        tweetLabel.text = tweet.comment
+        nameLabel.text = user.username
+        profileImageVIew.sd_setImage(with: URL(string: user.profileImageUrl1), completed: nil)
+        
+        if tweet.date != nil {
+            let date = Date(timeIntervalSince1970: tweet.date)
+            let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
+            timeLabel.text = dateString
         }
     }
     
@@ -143,14 +157,14 @@ class TweetTableViewCell: UITableViewCell {
             if uid == User.currentUserId() { return }
             tweetVC?.performSegue(withIdentifier: "DetailVC", sender: uid)
             tweetCommentVC?.performSegue(withIdentifier: "DetailVC", sender: uid)
+            replyListVC?.performSegue(withIdentifier: "DetailVC", sender: uid)
         }
     }
     
     @objc func tapContentsImageView() {
         
         if let uid = tweet.tweetId {
-            UserDefaults.standard.set(true, forKey: RESIZE)
-            tweetVC?.performSegue(withIdentifier: "TweetCommentVC", sender: uid)
+            tweetVC?.performSegue(withIdentifier: "ImageVC", sender: uid)
         }
     }
     
@@ -170,20 +184,23 @@ class TweetTableViewCell: UITableViewCell {
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(tapContentsImageView))
         let tap3 = UITapGestureRecognizer(target: self, action: #selector(tapTweetLabel))
         profileImageVIew.addGestureRecognizer(tap1)
-        contentsImageView.addGestureRecognizer(tap2)
+        if contentsImageView != nil {
+            contentsImageView.addGestureRecognizer(tap2)
+            contentsImageView.layer.cornerRadius = 15
+        }
         tweetLabel.addGestureRecognizer(tap3)
         profileImageVIew.layer.cornerRadius = 60 / 2
-        contentsImageView.layer.cornerRadius = 15
         
-        backView.layer.cornerRadius = 10
-        backView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        backView.layer.shadowColor = UIColor.black.cgColor
-        backView.layer.shadowOpacity = 0.3
-        backView.layer.shadowRadius = 4
+        if backView != nil {
+            backView.layer.cornerRadius = 10
+            backView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+            backView.layer.shadowColor = UIColor.black.cgColor
+            backView.layer.shadowOpacity = 0.3
+            backView.layer.shadowRadius = 4
+        }
+        
         timeLabel.text = ""
         tweetLabel.text = ""
         nameLabel.text = ""
-        profileImageVIew.image = nil
-        contentsImageView.image = nil
     }
 }

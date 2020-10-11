@@ -26,14 +26,19 @@ class CommunityListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupBanner()
-        testBanner()
+        setupBanner()
+//        testBanner()
         
         setupIndicator()
         setSearchBar()
         fetchCommunities()
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Actions
